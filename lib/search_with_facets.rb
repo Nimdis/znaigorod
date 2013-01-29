@@ -29,7 +29,10 @@ module SearchWithFacets
         integer(:organization_ids, multiple: true) { [organization_id] }
 
         # dirty ;(
-        string(:entertainment_type) { self.type } if klass == Entertainment
+        if klass == Entertainment
+          string(:entertainment_type) { self.type }
+          boolean(:with_sauna_halls) { self.with_sauna_halls? }
+        end
       end
     end
   end

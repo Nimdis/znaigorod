@@ -119,12 +119,29 @@ class SaunaHallsPresenter
     }
   end
 
+  def sauna_without_halls_ids
+    Entertainment.search_ids {
+      with(:entertainment_category, ['сауны'])
+      with(:with_sauna_halls, false)
+
+      with(:location).in_radius(lat, lon, radius) if lat && lon && radius
+    }
+  end
+
+  def organization_for_saunas_without_halls
+    OrganizationDecorator.decorate(Organization.where(:id => Sauna.where(:id => sauna_without_halls_ids).pluck(:organization_id)))
+  end
+
   def collection
     search.results
   end
 
   def total_count
     search.total
+  end
+
+  def last_page?
+    collection.total_pages == page.to_i
   end
 
   def faceted_rows(facet)
@@ -173,7 +190,7 @@ class SaunaHallsPresenter
 
   def distance_sort_link
     html_options = {}
-    html_options = { class: 'disabled distance', :title => 'Не активно, если не определено ваше местоположение.' } unless geo_filter_used?
+    html_options = { class: 'disabled distance', title: 'Не активно, если не определено ваше местоположение.' } unless geo_filter_used?
     html_options = { class: 'selected distance' } if order_by_distance? && geo_filter_used?
 
     content_tag :li, link_to( I18n.t('sauna.sort.distance'), saunas_path(params.merge(order_by: 'distance')), html_options)

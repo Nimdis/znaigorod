@@ -3,3 +3,31 @@
     <%= render :partial => 'list_item', :locals => { :sauna => OrganizationDecorator.decorate(sauna_hall.organization), :sauna_hall => sauna_hall } %>
   </li>
 <% end %>
+
+<% if @presenter.last_page? %>
+  <li class='loosers'>
+    <h3>А вот эти сауны не предоставили информацию:</h3>
+    <ul>
+      <% @presenter.organization_for_saunas_without_halls.each do |organization| %>
+        <li class="sauna_item">
+          <div class="organization_attributes">
+            <div class="poster">
+              <%= organization.logo_link %>
+            </div>
+            <div class="attributes">
+              <%= link_to organization.title.split(',').first, organization_path(organization) %>
+              <div class="phone">
+                <%= organization.phone %>
+              </div>
+              <% if organization.address_link.present? %>
+                <div class="address">
+                  <%= organization.address_link %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+<% end %>

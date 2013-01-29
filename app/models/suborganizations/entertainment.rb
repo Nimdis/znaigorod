@@ -45,6 +45,10 @@ class Entertainment < ActiveRecord::Base
   include SearchWithFacets
 
   search_with_facets :category, :payment, :feature, :offer, :stuff
+
+  def with_sauna_halls?
+    true
+  end
 end
 
 # == Schema Information

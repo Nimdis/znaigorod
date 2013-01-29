@@ -72,6 +72,10 @@ class Sauna < ActiveRecord::Base
   include SearchWithFacets
 
   search_with_facets :category, :payment, :feature, :offer, :stuff
+
+  def with_sauna_halls?
+    sauna_halls.any?
+  end
 end
 
 # == Schema Information
