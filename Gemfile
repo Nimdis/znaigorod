@@ -15,6 +15,7 @@ group :default do
   gem 'active_attr'
   gem 'attribute_normalizer'
   gem 'auto_html'
+  gem 'cancan'
   gem 'curb',                       :require => false
   gem 'daemons'
   gem 'default_value_for'
@@ -23,6 +24,7 @@ group :default do
   gem 'el_vfs_client'
   gem 'esp-ckeditor'
   gem 'fastimage'
+  gem 'formtastic'
   gem 'formtastic'
   gem 'friendly_id'
   gem 'gilenson'
@@ -33,6 +35,8 @@ group :default do
   gem 'inherited_resources',        :git => 'git://github.com/DouweM/inherited_resources', :branch => 'nested-singletons' # NOTE: https://github.com/josevalim/inherited_resources/pull/194
   gem 'kaminari'
   gem 'nested_form'
+  gem 'omniauth-twitter'
+  gem 'omniauth-vkontakte'
   gem 'openteam-commons'
   gem 'paperclip-elvfs'
   gem 'pg',                         :require => false

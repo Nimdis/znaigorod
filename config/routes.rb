@@ -6,6 +6,8 @@ Znaigorod::Application.routes.draw do
   namespace :manage do
     post 'red_cloth' => 'red_cloth#show'
 
+    resources :sessions, :only => [:new, :create, :destroy]
+
     Affiche.descendants.each do |type|
       resources type.name.underscore.pluralize
     end
@@ -131,6 +133,8 @@ Znaigorod::Application.routes.draw do
   end
 
   root :to => 'application#main_page'
+
+  match "/auth/:provider/callback" => "manage/sessions#create"
 
   mount ElVfsClient::Engine => '/'
 
