@@ -10,7 +10,6 @@ $ ->
     init_vk_group_thick() if $('#vk_group_thick').length
     init_vk_group_news() if $('#vk_group_news').length
     init_vk_group_subscribers() if $('#vk_group_subscribers').length
-    init_contest() if $('.content_wrapper .contest .works ul li').length
 
   if typeof DG != 'undefined'
     init_affiches_map() if $('.show_map_link').length
