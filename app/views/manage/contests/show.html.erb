@@ -32,6 +32,11 @@
   </div>
 
   <div>
+    <span class="label">Опубликован:</span>
+    <span class="value"><%= resource.published? ? 'Да' : 'Нет' %></span>
+  </div>
+
+  <div>
     <span class="label">
       Работы
       <%= link_to "Добавить работу", new_manage_contest_work_path(resource), :class => 'edit_link' %>

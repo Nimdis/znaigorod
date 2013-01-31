@@ -126,7 +126,7 @@ Znaigorod::Application.routes.draw do
     get :draft, :on => :collection, :as => :draft
   end
 
-  resources :contests, :only => [:show] do
+  resources :contests, :only => :show do
     resources :works, :only => :show
   end
 
