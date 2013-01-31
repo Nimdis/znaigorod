@@ -105,6 +105,17 @@ initialize_vk_likes = () ->
   true
 
   if typeof VK != 'undefined'
+    if $('.contest_work_vk_like_on_list').length
+      $('.contest_work_vk_like_on_list').each (index, item) ->
+        VK.Widgets.Like "#{$('div', $(item)).attr('id')}",
+          type: 'mini'
+          height: '18'
+          pageUrl: $(item).attr('data-url')
+          pageTitle: $(item).attr('data-title')
+          pageImage: $(item).attr('data-image')
+          pageDescription: $(item).attr('data-description')
+          text: $(item).attr('data-description')
+        true
     if $('#vk_contest_work_like').length
       page_title = $('h1', $('#vk_contest_work_like').closest('.content_wrapper')).text().compact() +
         '. ' + $('h2', $('#vk_contest_work_like').closest('.contest .work')).text().compact()
@@ -122,10 +133,8 @@ initialize_vk_likes = () ->
         pageImage: page_image
         pageDescription: page_description
         text: page_description
-      true
     if $('#vk_contest_work_comments').length
       VK.Widgets.Comments 'vk_contest_work_comments'
         limit: '10'
         width: '980'
         attach: '*'
-      true
