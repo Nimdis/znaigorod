@@ -108,7 +108,7 @@ initialize_vk_likes = () ->
     if $('#vk_contest_work_like').length
       page_title = $('h1', $('#vk_contest_work_like').closest('.content_wrapper')).text().compact() +
         '. ' + $('h2', $('#vk_contest_work_like').closest('.contest .work')).text().compact()
-      page_image = $('.image img', $('#vk_contest_work_like').closest('.contest .work')).attr('src')
+      page_image = $('.image img', $('#vk_contest_work_like').closest('.contest .work')).attr('src').replace(/\/\d+-\d+\//, '/100-63!n/')
       page_description = $('.author', $('#vk_contest_work_like').closest('.contest .work')).text().compact()
       if $('.description', $('#vk_contest_work_like').closest('.contest .work')).length
         page_description += '. ' + $('.description', $('#vk_contest_work_like').closest('.contest .work')).text().compact()
