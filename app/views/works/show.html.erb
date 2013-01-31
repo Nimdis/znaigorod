@@ -26,7 +26,7 @@
       <div class='author'>
         <% if Rails.env.production? && @work.contest.ends_on >= Date.today %>
           <div class='contest_work_vk_like'>
-            <div id='vk_contest_work_like_on_list'></div>
+            <div id='vk_contest_work_like'></div>
           </div>
         <% end %>
         <%= "<strong>Автор работы:</strong> #{@work.author_info}".html_safe if @work.author_info.present? %>
