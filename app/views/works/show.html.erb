@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <% content_for :extra_meta do %>
   <% full_content = @work.author_info
      full_content += '. ' + @work.description.squish if @work.description.present?
@@ -38,5 +39,16 @@
     <% if Rails.env.production? && @work.contest.ends_on >= Date.today %>
       <div id='vk_contest_work_comments'></div>
     <% end %>
+=======
+<div class='content_wrapper'>
+  <h1><%= @work.contest.title.excerpt %></h1>
+  <div class='contest'>
+    <div class="description">
+      <%= @work.contest.description.as_html %>
+    </div>
+    <div class='works'>
+      <h2><%= @work.title %></h2>
+    </div>
+>>>>>>> rf contest: remove published, add slug. add slug to work
   </div>
 </div>
