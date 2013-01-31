@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20130318075216) do
     t.datetime "updated_at",  :null => false
     t.string   "vfs_path"
     t.string   "slug"
+    t.boolean  "published"
   end
 
   add_index "contests", ["slug"], :name => "index_contests_on_slug", :unique => true
