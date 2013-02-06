@@ -126,7 +126,8 @@ Znaigorod::Application.routes.draw do
     get :draft, :on => :collection, :as => :draft
   end
 
-  resources :contests, :only => :show do
+  get '/contests/fotokonkurs-par-goroda-polovinki-loventinki' => 'works#index', :as => :first_contest
+  resources :contests, :only => [] do
     resources :works, :only => :show
   end
 
