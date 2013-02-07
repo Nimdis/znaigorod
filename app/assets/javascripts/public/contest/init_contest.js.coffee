@@ -103,38 +103,3 @@ initialize_vk_likes = () ->
       true
       $(this).addClass('vk_like_initialized')
   true
-
-  if typeof VK != 'undefined'
-    if $('.contest_work_vk_like_on_list').length
-      $('.contest_work_vk_like_on_list').each (index, item) ->
-        VK.Widgets.Like "#{$('div', $(item)).attr('id')}",
-          type: 'mini'
-          height: '18'
-          pageUrl: $(item).attr('data-url')
-          pageTitle: $(item).attr('data-title')
-          pageImage: $(item).attr('data-image')
-          pageDescription: $(item).attr('data-description')
-          text: $(item).attr('data-description')
-        true
-    if $('#vk_contest_work_like').length
-      page_title = $('h1', $('#vk_contest_work_like').closest('.content_wrapper')).text().compact() +
-        '. ' + $('h2', $('#vk_contest_work_like').closest('.contest .work')).text().compact()
-      page_image = $('.image img', $('#vk_contest_work_like').closest('.contest .work')).attr('src').replace(/\/\d+-\d+\//, '/100-63!n/')
-      page_description = $('.author', $('#vk_contest_work_like').closest('.contest .work')).text().compact()
-      if $('.description', $('#vk_contest_work_like').closest('.contest .work')).length
-        page_description += '. ' + $('.description', $('#vk_contest_work_like').closest('.contest .work')).text().compact()
-        page_description = page_description.first(137) + '...'
-      else
-        page_description = page_description.first(140)
-      VK.Widgets.Like 'vk_contest_work_like',
-        type: 'button'
-        height: '20'
-        pageTitle: page_title
-        pageImage: page_image
-        pageDescription: page_description
-        text: page_description
-    if $('#vk_contest_work_comments').length
-      VK.Widgets.Comments 'vk_contest_work_comments'
-        limit: '10'
-        width: '980'
-        attach: '*'
