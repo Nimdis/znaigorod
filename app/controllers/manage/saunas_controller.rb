@@ -3,7 +3,7 @@ class Manage::SaunasController < Manage::ApplicationController
 
   actions :all, :except => :show
 
-  belongs_to :organization
+  belongs_to :organization, :optional => true
 
   before_filter :redirect_to_edit, :only => :new, :if => :sauna_exists?
 

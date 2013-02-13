@@ -1,5 +1,6 @@
 class Manage::OrganizationsController < Manage::ApplicationController
-  skip_load_and_authorize_resource
+  skip_load_and_authorize_resource :only => :index
+
   has_scope :ordered_by_updated_at, :default => true, :type => :boolean
   has_scope :page, :default => 1
   has_scope :parental, :default => true, :type => :boolean, :only => :index
