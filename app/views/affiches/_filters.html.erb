@@ -1,60 +1,73 @@
-<%= render :partial => 'commons/filter_by_date' %>
+<div class='filters_wrapper'>
+  <div class="filters">
+    <h1>Подбор мероприятия</h1>
 
-<%= render :partial => 'commons/filter_by_time' %>
+    <%= form_tag '#', :method => :get do %>
 
-<div class="filter by_affiche_category">
-  <h6 <%= is_active_filter?('affiche_category') ? 'class=open' : '' %>><a href='#' class='dashed_dark_gray'>Категория</a></h6>
-  <div class="filter_wrapper <%= is_active_filter?('affiche_category') ? '' : 'hide' %>">
-    <a href="#" class='reset dashed_dark_gray'>Сбросить</a>
-    <ul>
-      <% Affiche.ordered_descendants.each do |category_class| %>
-        <li>
-          <a href="#"
-             data-value='<%= transliterate(category_class.model_name.human) %>'
-             class='<%= transliterate(category_class.model_name.human) %> <%= is_active_variant?('affiche_category', transliterate(category_class.model_name.human))%>'>
-            <%= category_class.model_name.human %>
-          </a>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
+      <div class="filter <%= @presenter.price_filter_used? ? 'used' : 'not_used' %>" id='amount'>
+        <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <div class="filter_label wide">Цена</div>
+        <div class="filter_inputs">
+          <div class="input">
+            <%= label_tag :price_min, 'от' %>
+            <%= text_field_tag :price_min, @presenter.price.selected.minimum, :class => 'min' %>
+          </div>
+          <div class="input">
+            <%= label_tag :price_max, 'до' %>
+            <%= text_field_tag :price_max, @presenter.price.selected.maximum, :class => 'max' %>
+          </div>
+        </div>
+        <div class='filter_input_label'>руб.</div>
 
-<div class="filter by_amount">
-  <h6 <%= is_active_range?('amount') ? 'class=open' : '' %>><a href='#' class='dashed_dark_gray'>Стоимость (руб)</a></h6>
-  <div class="filter_wrapper <%= is_active_range?('amount') ? '' : 'hide' %>">
-    <a href="#" class='reset dashed_dark_gray'>Сбросить</a>
-    <div class="range_wrapper">
-      <div class="range">
-        <div class="amounts">
-          <ul>
-            <% values = ['0', '50', '100', '150', '200', '250', '300', '350', '400', '450', '500', '600', '700', '800', '900', '1000', '1500', '>1500'] %>
-            <% values.each_with_index do |amount, i| %>
-              <li class='<%= "item_#{i}" %>' data-value='<%= amount %>'><%= amount %></li>
-            <% end %>
-          </ul>
+        <div class="filter_slider_wrapper">
+          <div class="filter_slider" data-range='true' data-min='<%= @presenter.price.available.minimum %>' data-max='<%= @presenter.price.available.maximum %>' data-step='50'></div>
         </div>
       </div>
-      <% if params['search'] && params['search']['price_less_than'] %>
-        <div class="range_slider" id='by_amount' data-count='18' <%= "data-selected='#{values.index(params['search']['price_greater_than'])}, #{values.index(params['search']['price_less_than'])+1}'" %>></div>
-      <% else %>
-        <div class="range_slider" id='by_amount' data-count='18' <%= "data-selected='0,18'" %>></div>
-      <% end %>
-    </div>
-  </div>
-</div>
 
-<div class="filter by_tag">
-  <h6 <%= is_active_filter?('tags') ? 'class=open' : '' %>><a href='#' class='dashed_dark_gray'>Тег</a></h6>
-  <div class="filter_wrapper <%= is_active_filter?('tags') ? '' : 'hide'%>">
-    <a href="#" class='reset dashed_dark_gray'>Сбросить</a>
-    <ul>
-      <% Showing.tags.each do |tag| %>
-        <li>
-          <a href='#' data-value='<%= tag %>' class='<%= is_active_variant?('tags', tag) %>'><%= tag %></a>
-        </li>
-      <% end %>
-    </ul>
+      <div class="filter <%= @presenter.time_filter_used? ? 'used' : 'not_used' %>" id='time'>
+        <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <div class="filter_label wide">Время</div>
+        <div class="filter_inputs">
+          <div class="input">
+            <%= label_tag :time_min, 'от' %>
+            <%= text_field_tag :time_min, @presenter.time.selected.minimum, :class => 'min' %>
+          </div>
+          <div class="input">
+            <%= label_tag :time_max, 'до' %>
+            <%= text_field_tag :time_max, @presenter.time.selected.maximum, :class => 'max' %>
+          </div>
+        </div>
+
+        <div class="filter_slider_wrapper">
+          <div class="filter_slider" data-range='true' data-min='<%= @presenter.time.available.minimum %>' data-max='<%= @presenter.time.available.maximum %>' data-step='50'></div>
+        </div>
+      </div>
+
+      <div class="filter <%= @presenter.tags_filter_used? ? 'show' : 'hide' %>" id='tags'>
+        <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <div class="filter_label">Теги</div>
+        <div class="filter_checkboxes">
+          <% @presenter.available_tags.each_with_index do |tag_title, index| %>
+            <div class="checkbox">
+              <%= check_box_tag 'tags[]', tag_title, (@presenter.selected_tags.include?(tag_title)), :id => "tag_#{index}" %>
+              <%= label_tag "tags_#{index}", tag_title.gsub(/^(.)/){$1.mb_chars.capitalize} %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="submit_action">
+        <div class="submit_wrapper">
+          <input type="submit" value="Применить фильтр" class='submit' />
+        </div>
+        <div class="results_counter">
+          Найдено мероприятий: <span class='counter'><%= @presenter.total_count %></span>
+        </div>
+        <div class="clear_wrapper">
+          <%= link_to "Очистить", '#' %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 

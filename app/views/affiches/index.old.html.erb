@@ -1,0 +1,102 @@
+<% content_for :subtitle do %>
+  <%= @affiche_collection.human_kind %>
+  <%= @affiche_collection.human_period.mb_chars.downcase %> в Томске
+<% end %>
+
+<% content_for :extra_meta do %>
+  <%= @affiche_collection.meta_tags %>
+  <%= @affiche_collection.meta_keywords %>
+<% end %>
+
+<div class="content_wrapper">
+
+  <div class="affiches_list">
+    <h1><span class="strong"><%= @affiche_collection.human_kind %></span> <%= @affiche_collection.human_period.mb_chars.downcase %> в Томске</h1>
+    <div class="list_settings">
+      <div class="presentation">
+        <p>Настройка списка:</p>
+        <ul>
+          <li><a class="list<%= ' selected' if @affiche_collection.presentation_mode == 'list' %>" title="подробный список" href="">список</a></li>
+          <li><span class="separator">&nbsp;</span></li>
+          <li><a class="posters<%= ' selected' if @affiche_collection.presentation_mode == 'posters' %>" title="краткий список" href="">постеры</a></li>
+        </ul>
+      </div>
+      <div class="sort">
+        <p>Сортировка:</p>
+        <ul>
+          <%= @affiche_collection.sort_links %>
+        </ul>
+      </div>
+    </div>
+    <% unless @affiche_collection.affiches.blank? %>
+      <ul class="items_list <%= @affiche_collection.presentation_mode %>">
+        <%= render partial: @affiche_collection.view_partial %>
+      </ul>
+    <% else %>
+      <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
+    <% end %>
+  </div>
+
+  <div class="affiches_filter">
+    <ul class="categories">
+      <% @affiche_collection.kind_links.each do |link| %>
+        <li class="<%= link.html_options[:class] %>">
+          <% unless link.current? %>
+            <%= link_to link.title, link.url %>
+          <% else %>
+            <div class="title"><%= link.title %></div>
+            <ul class="periods">
+              <% @affiche_collection.period_links.each do |period_link| %>
+                <li class="<%= period_link.html_options[:class] %>">
+                  <%= period_link.current? ? content_tag(:span, period_link.title) : link_to(period_link.title, period_link.url) %>
+                </li>
+              <% end %>
+            </ul>
+            <% if @affiche_collection.all_kinds? %>
+              <ul class="tags">
+                <li class="title">Мероприятия</li>
+                <% @affiche_collection.categories_links.each do |category_link| %>
+                  <li class="<%= category_link.html_options[:class] %>">
+                    <%= category_link %>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+            <% unless @affiche_collection.tag_links.blank? %>
+              <ul class="tags need_toggler">
+                <li class="title">Теги</li>
+                <% @affiche_collection.tag_links.each do |tag_link| %>
+                  <li class="<%= tag_link.html_options[:class] %>">
+                    <%= tag_link %>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+    <div class="adv">
+      <div class="item">
+        <%= link_to image_tag("public/prokachkov.png", size: "200x100", alt: "Prokachkov.ru"),
+                    "http://prokachkov.ru/",
+                    target: :_blank,
+                    rel: :nofollow,
+                    class: Rails.env.production? ? "prokachkov" : "prokachkov development" %>
+      </div>
+    </div>
+    <div class="vk_group_wrapper">
+      <div id="vk_group_thin"></div>
+    </div>
+    <% if Rails.env.production? %>
+      <div class="vk_recommended_wrapper">
+        <div id="vk_recommended"></div>
+      </div>
+    <% end %>
+  </div>
+
+  <a href="#" class="move_to_top">наверх</a>
+
+</div>
+
+<%= paginate @affiche_collection.paginated_affiches %>

@@ -1,18 +1,8 @@
 # encoding: utf-8
 
 class AffichesController < ApplicationController
-
   def index
-    if request.xhr?
-      if params[:page]
-        @affiche_collection = AfficheCollection.new(params.merge(list_settings: cookies['znaigorod_affiches_list_settings']))
-        render partial: @affiche_collection.view_partial, layout: false and return
-      end
-      @affiche_today = AfficheToday.new(params[:kind])
-      render :partial => 'affiche_today', :layout => false and return
-    else
-      @affiche_collection = AfficheCollection.new(params.merge(list_settings: cookies['znaigorod_affiches_list_settings']))
-    end
+    @presenter = AffichesPresenter.new(params)
   end
 
   def show
