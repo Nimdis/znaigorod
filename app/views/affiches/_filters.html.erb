@@ -28,12 +28,12 @@
         <div class="filter_label wide">Время</div>
         <div class="filter_inputs">
           <div class="input">
-            <%= label_tag :time_min, 'от' %>
-            <%= text_field_tag :time_min, @presenter.time.selected.from, :class => 'min' %>
+            <%= label_tag :time_from, 'от' %>
+            <%= text_field_tag :time_from, @presenter.time.selected.from, :class => 'min' %>
           </div>
           <div class="input">
-            <%= label_tag :time_max, 'до' %>
-            <%= text_field_tag :time_max, @presenter.time.selected.to, :class => 'max' %>
+            <%= label_tag :time_to, 'до' %>
+            <%= text_field_tag :time_to, @presenter.time.selected.to, :class => 'max' %>
           </div>
         </div>
         <div class='filter_input_label'>руб.</div>
