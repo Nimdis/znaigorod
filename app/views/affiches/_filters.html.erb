@@ -2,7 +2,7 @@
   <div class="filters">
     <h1>Подбор мероприятия</h1>
 
-    <%= form_tag '#', :method => :get do %>
+    <%= form_tag affiches_path, :method => :get do %>
 
       <div class="filter <%= @presenter.price_filter_used? ? 'used' : 'not_used' %>" id='amount'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>

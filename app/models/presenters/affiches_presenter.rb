@@ -1,10 +1,14 @@
 # encoding: utf-8
 
 class AffichesPresenter
+  include ActiveAttr::MassAssignment
+
   attr_accessor :price_min, :price_max,
                 :time_from, :time_to
 
   def initialize(args = {})
+    super(args)
+
     self.price_min = self.price_min.blank? ? available_price_min : self.price_min
     self.price_max = self.price_max.blank? ? available_price_max : self.price_max
 
