@@ -50,7 +50,7 @@ class AffichesPresenter
   def time
     Hashie::Mash.new(
       available: { from: 0, to: 23 },
-      selected: { from: 10, to: 20 }
+      selected: { from: time_from, to: time_to }
     )
   end
 
