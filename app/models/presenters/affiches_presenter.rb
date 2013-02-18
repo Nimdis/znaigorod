@@ -69,4 +69,12 @@ class AffichesPresenter
   def tags_filter_used?
     true
   end
+
+  def available_categories
+    ['кино', 'концерты']
+  end
+
+  def selected_categories
+    []
+  end
 end
