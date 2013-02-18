@@ -5,61 +5,68 @@
     <%= form_tag affiches_path, :method => :get do %>
       <div class='filter show' id='categories'>
         <div class="filter_checkboxes">
-          <% @presenter.available_categories.each_with_index do |category_title, index| %>
+          <% @presenter.categories_filter.available.each_with_index do |category, index| %>
             <div class="checkbox">
-              <%= check_box_tag 'categories[]', category_title, (@presenter.selected_categories.include?(category_title)), :id => "tag_#{index}" %>
-              <%= label_tag "category_#{index}", category_title.mb_chars.capitalize %>
+              <%= check_box_tag 'categories[]', category, (@presenter.categories_filter.selected.include?(category)), :id => "category_#{index}" %>
+              <%= label_tag "category_#{index}", @presenter.categories_filter.human_names[index] %>
             </div>
           <% end %>
         </div>
       </div>
 
-      <div class="filter <%= @presenter.price_filter_used? ? 'used show' : 'not_used hide' %>" id='amount'>
+      <div class="filter <%= @presenter.price_filter.used? ? 'used show' : 'not_used hide' %>" id='amount'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
         <div class="filter_label wide">Стоимость</div>
         <div class="filter_inputs">
           <div class="input">
             <%= label_tag :price_min, 'от' %>
-            <%= text_field_tag :price_min, @presenter.price.selected.minimum, :class => 'min' %>
+            <%= text_field_tag :price_min, @presenter.price_filter.selected.minimum, :class => 'min' %>
           </div>
           <div class="input">
             <%= label_tag :price_max, 'до' %>
-            <%= text_field_tag :price_max, @presenter.price.selected.maximum, :class => 'max' %>
+            <%= text_field_tag :price_max, @presenter.price_filter.selected.maximum, :class => 'max' %>
           </div>
         </div>
         <div class='filter_input_label'>руб.</div>
 
         <div class="filter_slider_wrapper">
-          <div class="filter_slider" data-range='true' data-min='<%= @presenter.price.available.minimum %>' data-max='<%= @presenter.price.available.maximum %>' data-step='50'></div>
+          <div class="filter_slider"
+            data-range='true'
+            data-min='<%= @presenter.price_filter.available.minimum %>'
+            data-max='<%= @presenter.price_filter.available.maximum %>' data-step='50'>
+          </div>
         </div>
       </div>
-      <div class="filter <%= @presenter.time_filter_used? ? 'used show' : 'not_used hide' %>" id='time'>
+      <div class="filter <%= @presenter.time_filter.used? ? 'used show' : 'not_used hide' %>" id='time'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
         <div class="filter_label wide">Время</div>
         <div class="filter_inputs">
           <div class="input">
             <%= label_tag :time_from, 'от' %>
-            <%= text_field_tag :time_from, @presenter.time.selected.from, :class => 'min' %>
+            <%= text_field_tag :time_from, @presenter.time_filter.selected.from, :class => 'min' %>
           </div>
           <div class="input">
             <%= label_tag :time_to, 'до' %>
-            <%= text_field_tag :time_to, @presenter.time.selected.to, :class => 'max' %>
+            <%= text_field_tag :time_to, @presenter.time_filter.selected.to, :class => 'max' %>
           </div>
         </div>
         <div class='filter_input_label'>руб.</div>
 
         <div class="filter_slider_wrapper">
-          <div class="filter_slider" data-range='true' data-min='<%= @presenter.time.available.from %>' data-max='<%= @presenter.time.available.to %>' data-step='1'></div>
+          <div class="filter_slider"
+            data-range='true'
+            data-min='<%= @presenter.time_filter.available.from %>'
+            data-max='<%= @presenter.time_filter.available.to %>' data-step='1'></div>
         </div>
       </div>
 
-      <div class="filter <%= @presenter.tags_filter_used? ? 'show' : 'hide' %>" id='tags'>
+      <div class="filter <%= @presenter.tags_filter.used? ? 'show' : 'hide' %>" id='tags'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
         <div class="filter_label">Теги</div>
         <div class="filter_checkboxes">
-          <% @presenter.available_tags.each_with_index do |tag_title, index| %>
+          <% @presenter.tags_filter.available.each_with_index do |tag_title, index| %>
             <div class="checkbox">
-              <%= check_box_tag 'tags[]', tag_title, (@presenter.selected_tags.include?(tag_title)), :id => "tag_#{index}" %>
+              <%= check_box_tag 'tags[]', tag_title, (@presenter.tags_filter.selected.include?(tag_title)), :id => "tag_#{index}" %>
               <%= label_tag "tag_#{index}", tag_title.mb_chars.capitalize %>
             </div>
           <% end %>

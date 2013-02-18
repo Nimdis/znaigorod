@@ -2,7 +2,7 @@
 
 class AffichesController < ApplicationController
   def index
-    @presenter = AffichesPresenter.new(params)
+    @presenter = ShowingsPresenter.new(params)
   end
 
   def show
