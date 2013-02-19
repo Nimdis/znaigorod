@@ -144,6 +144,8 @@ Znaigorod::Application.routes.draw do
 
   mount ElVfsClient::Engine => '/'
 
+  match "/auth/:provider/callback" => "manage/sessions#create"
+
   # legacy urls
 
   get 'affiches' =>  redirect('/affiches/all')
