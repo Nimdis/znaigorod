@@ -97,6 +97,9 @@ class ShowingsPresenter
       without(:price_max).less_than(price_min)    if price_min
       without(:price_min).greater_than(price_max) if price_max
 
+      without(:ends_at_hour).less_than(time_from) if time_from
+      without(:starts_at_hour).greater_than(time_to) if time_to
+
       facet(:tags)
 
       group :affiche_id_str do
