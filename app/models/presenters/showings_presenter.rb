@@ -6,6 +6,7 @@ class ShowingsPresenter
   attr_accessor :categories,
                 :price_min, :price_max,
                 :time_from, :time_to,
+                :organization_ids,
                 :tags,
                 :page, :per_page
 
@@ -27,11 +28,21 @@ class ShowingsPresenter
   end
 
   def collection
-    search_with_params.results
+    search.group(:affiche_id_str).groups.map do |group|
+      affiche = Affiche.find(group.value)
+      showings = group.hits.map(&:result)
+
+      AfficheDecorator.new(affiche, ShowingDecorator.decorate(showings))
+    end
+  end
+
+  def paginated_collection
+    search.group(:affiche_id_str).groups
   end
 
   def total_count
-    search_with_params.total
+    search.total
+    '+100500'
   end
 
   def categories_filter
@@ -65,41 +76,34 @@ class ShowingsPresenter
 
   def tags_filter
     @tags_filter ||= Hashie::Mash.new(
-      available: searcher.faceted.facet(:tags).rows.map(&:value),
+      available: search.facet(:tags).rows.map(&:value),
       selected: tags,
       used?: tags.any? ? true : false
     )
   end
 
-  def affiches
-    search_with_params.paginate(:page => page, :per_page => 5).affiches.group(:affiche_id_str).groups.map do |group|
-      affiche = Affiche.find(group.value)
-      showings = group.hits.map(&:result)
-
-      AfficheDecorator.new(affiche, ShowingDecorator.decorate(showings))
-    end
-  end
-
   private
 
-  def search_params
-    @search_params ||= {}.tap { |params|
-      params[:affiche_category] = categories_filter.selected if categories_filter.used?
-      params[:tags] = tags_filter.selected if tags_filter.used?
-    }
-  end
+  def search
+    Showing.search {
+      any_of do
+        with(:starts_at).greater_than DateTime.now.beginning_of_day
+        with(:ends_at).greater_than DateTime.now.beginning_of_day
+      end
 
-  def searcher_scopes
-    [:actual]
-  end
+      with(:affiche_category, categories) if categories.any?
+      with(:tags, tags) if tags.any?
 
-  def searcher(params = {})
-    HasSearcher.searcher(:affiche, params)
-  end
+      without(:price_max).less_than(price_min)    if price_min
+      without(:price_min).greater_than(price_max) if price_max
 
-  def search_with_params
-    searcher(search_params).tap { |s|
-      searcher_scopes.each { |scope| s.send(scope) }
+      facet(:tags)
+
+      group :affiche_id_str do
+        limit 1000
+      end
+
+      paginate(:page => page, :per_page => 30)
     }
   end
 end
