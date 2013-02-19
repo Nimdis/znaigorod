@@ -14,9 +14,7 @@
 
   <% if @presenter.collection.any? %>
     <ul class='affiche_list'>
-      <% @presenter.collection.each do |showing| %>
-        <li><%= showing.affiche.title %></li>
-      <% end %>
+      <%= render :partial => 'affiche_list' %>
     </ul>
   <% else %>
     <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>

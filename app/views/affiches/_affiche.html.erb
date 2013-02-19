@@ -3,9 +3,9 @@
 </div>
 <div class="info">
   <% if @affiche_collection %>
-    <%= content_tag(:div, link_to(affiche.human_kind, affiches_path(affiche.pluralized_kind, @affiche_collection.period, @affiche_collection.on)), :class => 'kind') if @affiche_collection.all_kinds? %>
+    <%= content_tag(:div, link_to(affiche.human_kind, '#'), :class => 'kind') if @affiche_collection.all_kinds? %>
   <% else %>
-    <%= content_tag(:div, link_to(affiche.human_kind, affiches_path(affiche.pluralized_kind, 'all')), :class => 'kind') %>
+    <%= content_tag(:div, link_to(affiche.human_kind, '#'), :class => 'kind') %>
   <% end %>
   <h2><%= affiche.link %></h2>
   <div class="closest">

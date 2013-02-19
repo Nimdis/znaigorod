@@ -1,1 +1,6 @@
-AFFICHE LIST
+<% @presenter.affiches.each do |affiche| %>
+  <li>
+    <%= affiche.has_ribbon %>
+    <%= render :partial => 'affiches/affiche', locals: { affiche: affiche } %>
+  </li>
+<% end %>

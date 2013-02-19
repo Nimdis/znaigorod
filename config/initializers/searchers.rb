@@ -19,7 +19,10 @@ HasSearcher.create_searcher :affiche do
     end if search_object.starts_on
   end
 
-  property :tags
+  property :tags do |search|
+    search.with(:tags, search_object.tags) if search_object.tags.present?
+  end
+
   property :affiche_id
   property :organization_id
 

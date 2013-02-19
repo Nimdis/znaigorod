@@ -28,7 +28,7 @@ class Showing < ActiveRecord::Base
     integer :price_min
     integer(:ends_at_hour) { ends_at.try(:hour) }
     integer(:starts_at_hour) { starts_at.hour }
-    string(:affiche_category) { affiche.class.model_name.downcase }
+    string(:affiche_category, :multiple => true) { affiche.class.model_name.downcase }
     string(:affiche_id_str) { affiche_id.to_s }
     string(:tags, :multiple => true) { affiche_tags }
     text :affiche_title
