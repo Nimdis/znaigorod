@@ -16,6 +16,8 @@ class ShowingsPresenter
     self.categories ||= []
     self.tags       ||= []
 
+    self.organization_ids = (self.organization_ids || []).map(&:to_i)
+
     self.price_min = self.price_min.blank? ? price_filter.available.minimum : self.price_min
     self.price_max = self.price_max.blank? ? price_filter.available.maximum : self.price_max
 
@@ -80,6 +82,14 @@ class ShowingsPresenter
       selected: tags,
       used?: tags.any? ? true : false
     )
+  end
+
+  def place_filter
+    @place_filter ||= Hashie::Mash.new.tap { |h|
+      h[:available] = Organization.where(:id => Organization.joins(:showings).pluck('DISTINCT organizations.id')).map { |o| { :label => o.title, :value => o.id } }
+      h[:selected] = h.available.select { |e| organization_ids.include?(e) }
+      h[:used?] = h.selected.any? ? true : false
+    }
   end
 
   private

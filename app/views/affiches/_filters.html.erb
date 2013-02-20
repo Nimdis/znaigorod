@@ -60,6 +60,15 @@
         </div>
       </div>
 
+      <div class="filter <%= @presenter.place_filter.used? ? 'show' : 'hide' %>" id='place'>
+        <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <div class="filter_label">Место</div>
+        <div class="filter_completion">
+          <div class="completion_data" style='display: none;'><%= @presenter.place_filter.available.map(&:to_hash) %></div>
+          <%= text_field_tag 'organization_ids[]', '', :class => 'completion_input' %>
+        </div>
+      </div>
+
       <div class="filter <%= @presenter.tags_filter.used? ? 'show' : 'hide' %>" id='tags'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
         <div class="filter_label">Теги</div>

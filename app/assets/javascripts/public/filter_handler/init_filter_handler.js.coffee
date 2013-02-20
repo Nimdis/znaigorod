@@ -267,10 +267,17 @@ $.fn.add_handler = () ->
         value = filter_slider.slider('value')
         inputs.val(value)
 
+filter_completion_handler = () ->
+  console.log $('.completion_data').text()
+  $('.completion_input').autocomplete(
+    #source:
+  )
+
 @init_filter_handler = () ->
   set_previous_state()
   remove_filter_handler()
   criteria_handler()
   filter_slider_handler()
+  filter_completion_handler()
   clear_form_handler()
   initialize_map() if $('#geo', '.filters_wrapper').is(':visible')
