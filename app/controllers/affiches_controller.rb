@@ -3,6 +3,19 @@
 class AffichesController < ApplicationController
   def index
     @presenter = ShowingsPresenter.new(params)
+
+    if request.xhr?
+      if params[:page]
+        @presenter = ShowingsPresenter.new(params)
+        render partial: @presenter.partial, layout: false and return
+      end
+
+      @affiche_today = AfficheToday.new(params[:kind])
+      render :partial => 'affiche_today', :layout => false and return
+    else
+
+      @presenter = ShowingsPresenter.new(params)
+    end
   end
 
   def show

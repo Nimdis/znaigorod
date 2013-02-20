@@ -37,8 +37,7 @@ class ShowingsPresenter
   end
 
   def total_count
-    #search.total
-    '100500'
+    search.group(:affiche_id_str).total
   end
 
   def categories_filter
@@ -70,12 +69,17 @@ class ShowingsPresenter
     @tags_filter ||= TagsFilter.new(tags)
   end
 
+  def partial
+    #'affiches/affiches_posters'
+    'affiches/affiches_list'
+  end
+
   private
 
   def search
     @search ||= Showing.search {
       group(:affiche_id_str) { limit 1000 }
-      paginate(:page => page, :per_page => 30)
+      paginate(:page => page, :per_page => 10)
 
       any_of do
         with(:starts_at).greater_than DateTime.now.beginning_of_day
