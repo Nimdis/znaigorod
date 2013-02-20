@@ -1,26 +1,24 @@
 <div class="content_wrapper">
-  <div class="affiches_list">
-    <%= render :partial => 'filters' %>
+  <%= render :partial => 'filters' %>
 
-    <div class="list_settings">
-      <div class="presentation">
-      </div>
-      <div class="sort affiches">
-        <p>Сортировка:</p>
-        <ul>
-          <%= @presenter.sort_links %>
-        </ul>
-      </div>
+  <div class="list_settings">
+    <div class="presentation">
     </div>
-
-    <% if @presenter.collection.any? %>
-      <ul class="items_list list">
-        <%= render :partial => 'affiche_list' %>
+    <div class="sort affiches">
+      <p>Сортировка:</p>
+      <ul>
+        <%= @presenter.sort_links %>
       </ul>
-    <% else %>
-      <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
-    <% end %>
+    </div>
   </div>
+
+  <% if @presenter.collection.any? %>
+    <ul class="items_list list">
+      <%= render :partial => 'affiche_list' %>
+    </ul>
+  <% else %>
+    <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
+  <% end %>
 </div>
 
 <%= paginate @presenter.paginated_collection %>

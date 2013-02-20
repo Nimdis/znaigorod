@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'showings_presenter_filter'
+
 class ShowingsPresenter
   include ActiveAttr::MassAssignment
 
@@ -14,19 +16,7 @@ class ShowingsPresenter
   def initialize(args = {})
     super(args)
 
-    self.categories ||= []
-    self.tags       ||= []
-
     self.organization_ids = (self.organization_ids || []).map(&:to_i)
-
-    self.price_min = self.price_min.blank? ? price_filter.available.minimum : self.price_min
-    self.price_max = self.price_max.blank? ? price_filter.available.maximum : self.price_max
-
-    self.age_min = self.age_min.blank? ? age_filter.available.minimum : self.age_min
-    self.age_max = self.age_max.blank? ? age_filter.available.maximum : self.age_max
-
-    self.time_from = self.time_from.blank? ? time_filter.available.from : self.time_from
-    self.time_to   = self.time_to.blank?   ? time_filter.available.to   : self.time_to
   end
 
   def sort_links
@@ -48,51 +38,24 @@ class ShowingsPresenter
 
   def total_count
     #search.total
-    '+100500'
+    '100500'
   end
 
   def categories_filter
-    @categories_filter ||= Hashie::Mash.new.tap { |h|
-      h[:available]   = Affiche.ordered_descendants.map(&:name).map(&:downcase)
-      h[:selected]    = categories
-      h[:human_names] = Affiche.ordered_descendants.map(&:model_name).map(&:human)
-    }
+    @categories_filter ||= CategoriesFilter.new(categories)
   end
 
   def price_filter
-    @price_filter ||= Hashie::Mash.new.tap { |h|
-      h[:available] = {
-        minimum: Affiche.with_showings.joins(:showings).minimum(:price_min),
-        maximum: Affiche.with_showings.joins(:showings).maximum(:price_max)
-      }
-
-      h[:selected] = { minimum: price_min, maximum: price_max }
-      h[:used?]    = true
-    }
+    @price_filter ||= PriceFilter.new(price_min, price_max)
   end
 
+
   def age_filter
-    @age_filter ||= Hashie::Mash.new.tap { |h|
-      h[:available] = { minimum: 0, maximum: 100 }
-      h[:selected] = { minimum: price_min, maximum: price_max }
-      h[:used?]    = true
-    }
+    @age_filter ||= AgeFilter.new(age_min, age_max)
   end
 
   def time_filter
-    @time_filter ||= Hashie::Mash.new(
-      available: { from: 0, to: 23 },
-      selected: { from: time_from, to: time_to },
-      used?: true
-    )
-  end
-
-  def tags_filter
-    @tags_filter ||= Hashie::Mash.new(
-      available: search.facet(:tags).rows.map(&:value),
-      selected: tags,
-      used?: tags.any? ? true : false
-    )
+    @time_filter ||= TimeFilter.new(time_from, time_to)
   end
 
   def place_filter
@@ -103,31 +66,35 @@ class ShowingsPresenter
     }
   end
 
+  def tags_filter
+    @tags_filter ||= TagsFilter.new(tags)
+  end
+
   private
 
   def search
-    Showing.search {
+    @search ||= Showing.search {
+      group(:affiche_id_str) { limit 1000 }
+      paginate(:page => page, :per_page => 30)
+
       any_of do
         with(:starts_at).greater_than DateTime.now.beginning_of_day
         with(:ends_at).greater_than DateTime.now.beginning_of_day
       end
 
-      with(:affiche_category, categories) if categories.any?
-      with(:tags, tags) if tags.any?
+      with(:affiche_category, categories_filter.selected) if categories_filter.selected.any?
 
-      without(:price_max).less_than(price_min)    if price_min
-      without(:price_min).greater_than(price_max) if price_max
+      without(:price_max).less_than(price_filter.selected.minimum) if price_filter.minimum.present?
+      without(:price_min).greater_than(price_filter.selected.maximum) if price_filter.maximum.present?
 
-      without(:ends_at_hour).less_than(time_from) if time_from
-      without(:starts_at_hour).greater_than(time_to) if time_to
+      #age
 
-      facet(:tags)
+      without(:ends_at_hour).less_than(time_filter.selected.from) if time_filter.from.present?
+      without(:starts_at_hour).greater_than(time_filter.selected.to) if time_filter.to.present?
 
-      group :affiche_id_str do
-        limit 1000
-      end
+      #place
 
-      paginate(:page => page, :per_page => 30)
+      with(:tags, tags_filter.selected) if tags_filter.selected.any?
     }
   end
 end

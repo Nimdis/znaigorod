@@ -14,17 +14,17 @@
         </div>
       </div>
 
-      <div class="filter <%= @presenter.age_filter.used? ? 'used show' : 'not_used hide' %>" id='amount'>
+      <div class="filter <%= @presenter.age_filter.used? ? 'used show' : 'not_used hide' %>" id='age'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
         <div class="filter_label wide">Возраст</div>
         <div class="filter_inputs">
           <div class="input">
             <%= label_tag :age_min, 'от' %>
-            <%= text_field_tag :age_min, @presenter.age_min, :class => 'min' %>
+            <%= text_field_tag :age_min, @presenter.age_filter.selected.minimum, :class => 'min' %>
           </div>
           <div class="input">
             <%= label_tag :age_max, 'до' %>
-            <%= text_field_tag :age_max, @presenter.age_max, :class => 'max' %>
+            <%= text_field_tag :age_max, @presenter.age_filter.selected.maximum, :class => 'max' %>
           </div>
         </div>
 
@@ -43,11 +43,11 @@
         <div class="filter_inputs">
           <div class="input">
             <%= label_tag :price_min, 'от' %>
-            <%= text_field_tag :price_min, @presenter.price_min, :class => 'min' %>
+            <%= text_field_tag :price_min, @presenter.price_filter.selected.minimum, :class => 'min' %>
           </div>
           <div class="input">
             <%= label_tag :price_max, 'до' %>
-            <%= text_field_tag :price_max, @presenter.price_max, :class => 'max' %>
+            <%= text_field_tag :price_max, @presenter.price_filter.selected.maximum, :class => 'max' %>
           </div>
         </div>
         <div class='filter_input_label'>руб.</div>
@@ -67,11 +67,11 @@
         <div class="filter_inputs">
           <div class="input">
             <%= label_tag :time_from, 'от' %>
-            <%= text_field_tag :time_from, @presenter.time_from, :class => 'min' %>
+            <%= text_field_tag :time_from, @presenter.time_filter.selected.from, :class => 'min' %>
           </div>
           <div class="input">
             <%= label_tag :time_to, 'до' %>
-            <%= text_field_tag :time_to, @presenter.time_to, :class => 'max' %>
+            <%= text_field_tag :time_to, @presenter.time_filter.selected.to, :class => 'max' %>
           </div>
         </div>
         <div class='filter_input_label'>руб.</div>
