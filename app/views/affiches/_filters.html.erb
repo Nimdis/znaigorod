@@ -91,7 +91,10 @@
           <%= text_field_tag '',
                              '',
                              :class => 'completion_input',
-                             :data => { :source => @presenter.organizations_filter.available } %>
+                             :data => {
+                               :source => @presenter.organizations_filter.available,
+                               :selected => @presenter.organizations_filter.selected
+                             } %>
         </div>
       </div>
 

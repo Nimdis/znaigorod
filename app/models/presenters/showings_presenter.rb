@@ -84,7 +84,7 @@ class ShowingsPresenter
   private
 
   def search
-    @search ||= Showing.search(:include => :affiche) {
+    @search ||= Showing.search {
       group(:affiche_id_str) { limit 1000 }
       paginate(:page => page, :per_page => 10)
 
@@ -103,7 +103,7 @@ class ShowingsPresenter
       without(:ends_at_hour).less_than(time_filter.selected.from) if time_filter.from.present?
       without(:starts_at_hour).greater_than(time_filter.selected.to) if time_filter.to.present?
 
-      with(:organization_ids, organizations_filter.selected) if organizations_filter.used?
+      with(:organization_ids, organizations_filter.ids) if organizations_filter.used?
 
       with(:tags, tags_filter.selected) if tags_filter.selected.any?
     }

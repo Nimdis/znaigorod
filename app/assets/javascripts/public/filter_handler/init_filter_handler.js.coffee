@@ -280,6 +280,7 @@ filter_completion_handler = () ->
       selectionPosition: 'right'
       useTabKey: true
       width: 280
+      value: $(this).data('selected')
     })
 
 @init_filter_handler = () ->
