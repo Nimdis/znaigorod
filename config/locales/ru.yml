@@ -568,6 +568,8 @@
         vk_aid: Код альбома события ВКонтакте
         yandex_fotki_url: URL альбома из Фотки.Яндекс
         constant: Постоянная экспозиция
+        age_min: Минимальный возраст
+        age_max: Максимальный возраст
 
       affiche_schedule:
         starts_on: Дата начала

@@ -14,6 +14,29 @@
         </div>
       </div>
 
+      <div class="filter <%= @presenter.age_filter.used? ? 'used show' : 'not_used hide' %>" id='amount'>
+        <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <div class="filter_label wide">Возраст</div>
+        <div class="filter_inputs">
+          <div class="input">
+            <%= label_tag :age_min, 'от' %>
+            <%= text_field_tag :age_min, @presenter.age_min, :class => 'min' %>
+          </div>
+          <div class="input">
+            <%= label_tag :age_max, 'до' %>
+            <%= text_field_tag :age_max, @presenter.age_max, :class => 'max' %>
+          </div>
+        </div>
+
+        <div class="filter_slider_wrapper">
+          <div class="filter_slider"
+            data-range='true'
+            data-min='<%= @presenter.age_filter.available.minimum %>'
+            data-max='<%= @presenter.age_filter.available.maximum %>' data-step='50'>
+          </div>
+        </div>
+      </div>
+
       <div class="filter <%= @presenter.price_filter.used? ? 'used show' : 'not_used hide' %>" id='amount'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
         <div class="filter_label wide">Стоимость</div>
@@ -37,6 +60,7 @@
           </div>
         </div>
       </div>
+
       <div class="filter <%= @presenter.time_filter.used? ? 'used show' : 'not_used hide' %>" id='time'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
         <div class="filter_label wide">Время</div>

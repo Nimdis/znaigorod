@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(:version => 20130221031242) do
     t.string   "vk_aid"
     t.string   "yandex_fotki_url"
     t.float    "popularity"
+    t.integer  "age_min"
+    t.integer  "age_max"
   end
 
   add_index "affiches", ["slug"], :name => "index_affiches_on_slug", :unique => true

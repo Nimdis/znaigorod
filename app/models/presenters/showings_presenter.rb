@@ -5,6 +5,7 @@ class ShowingsPresenter
 
   attr_accessor :categories,
                 :price_min, :price_max,
+                :age_min, :age_max,
                 :time_from, :time_to,
                 :organization_ids,
                 :tags,
@@ -20,6 +21,9 @@ class ShowingsPresenter
 
     self.price_min = self.price_min.blank? ? price_filter.available.minimum : self.price_min
     self.price_max = self.price_max.blank? ? price_filter.available.maximum : self.price_max
+
+    self.age_min = self.age_min.blank? ? age_filter.available.minimum : self.age_min
+    self.age_max = self.age_max.blank? ? age_filter.available.maximum : self.age_max
 
     self.time_from = self.time_from.blank? ? time_filter.available.from : self.time_from
     self.time_to   = self.time_to.blank?   ? time_filter.available.to   : self.time_to
@@ -43,7 +47,7 @@ class ShowingsPresenter
   end
 
   def total_count
-    search.total
+    #search.total
     '+100500'
   end
 
@@ -52,7 +56,6 @@ class ShowingsPresenter
       h[:available]   = Affiche.ordered_descendants.map(&:name).map(&:downcase)
       h[:selected]    = categories
       h[:human_names] = Affiche.ordered_descendants.map(&:model_name).map(&:human)
-      h[:used?]       = h.selected.any?
     }
   end
 
@@ -64,7 +67,15 @@ class ShowingsPresenter
       }
 
       h[:selected] = { minimum: price_min, maximum: price_max }
-      h[:used?]    = h.selected.any?
+      h[:used?]    = true
+    }
+  end
+
+  def age_filter
+    @age_filter ||= Hashie::Mash.new.tap { |h|
+      h[:available] = { minimum: 0, maximum: 100 }
+      h[:selected] = { minimum: price_min, maximum: price_max }
+      h[:used?]    = true
     }
   end
 

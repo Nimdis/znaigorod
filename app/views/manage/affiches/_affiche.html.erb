@@ -69,6 +69,24 @@
       <span class="blank">Нет</span>
     <% end %>
   </div>
+
+  <div>
+    <span class="label">Минимальный возраст:</span>
+    <% if resource.age_min? %>
+      <span class="value"><%= resource.age_min %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Максимальный возраст:</span>
+    <% if resource.age_max? %>
+      <span class="value"><%= resource.age_max %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
 </div>
 
 <div style='clear:both;'>

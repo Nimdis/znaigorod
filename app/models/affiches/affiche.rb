@@ -10,7 +10,8 @@ class Affiche < ActiveRecord::Base
                   :tag, :title, :vfs_path, :affiche_schedule_attributes,
                   :images_attributes, :attachments_attributes,
                   :distribution_starts_on, :distribution_ends_on,
-                  :original_title, :trailer_code, :vk_aid, :yandex_fotki_url, :constant
+                  :original_title, :trailer_code, :vk_aid, :yandex_fotki_url, :constant,
+                  :age_min, :age_max
 
 
   has_many :images,      :as => :imageable, :dependent => :destroy
@@ -53,6 +54,9 @@ class Affiche < ActiveRecord::Base
   alias_attribute :title_translit,  :title
 
   searchable do
+    integer :age_min
+    integer :age_max
+
     text :title,                :boost => 1.0 * 1.2
     text :title_ru,             :boost => 1.0,        :more_like_this => true
     text :title_translit,       :boost => 0.0,                                  :stored => true
