@@ -86,7 +86,22 @@ class TimeFilter
   end
 end
 
-#place
+class OrganizationsFilter
+  attr_accessor :selected, :available
+
+  def initialize(ids)
+    @selected = ids || []
+  end
+
+  def available
+    Organization.where(:id => Organization.joins(:showings).pluck('DISTINCT organizations.id')).
+      map { |o| { label: o.title, value: o.id } }
+  end
+
+  def used?
+    selected.any?
+  end
+end
 
 class TagsFilter
   attr_accessor :selected, :available

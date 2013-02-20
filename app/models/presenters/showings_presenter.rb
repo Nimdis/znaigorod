@@ -3,7 +3,9 @@
 require 'showings_presenter_filter'
 
 class ShowingsPresenter
+  include ActionView::Helpers
   include ActiveAttr::MassAssignment
+  #include Rails.application.routes.url_helpers
 
   attr_accessor :categories,
                 :price_min, :price_max,
@@ -13,14 +15,23 @@ class ShowingsPresenter
                 :tags,
                 :page, :per_page
 
-  def initialize(args = {})
+  def initialize(args)
     super(args)
-
-    self.organization_ids = (self.organization_ids || []).map(&:to_i)
   end
 
   def sort_links
-    '=== SORT LINKS ==='
+    links = []
+
+    %w[popular newest closest].each do |order|
+      links << content_tag(:li,
+                           Link.new(
+                                    :title => I18n.t("affiche.sort.#{order}"),
+                                    :html_options => { class: order },
+                                    :url => '#')
+      )
+    end
+
+    (links.join(content_tag(:li, content_tag(:span, '&nbsp;'.html_safe, class: 'separator')))).html_safe
   end
 
   def collection
@@ -57,12 +68,8 @@ class ShowingsPresenter
     @time_filter ||= TimeFilter.new(time_from, time_to)
   end
 
-  def place_filter
-    @place_filter ||= Hashie::Mash.new.tap { |h|
-      h[:available] = Organization.where(:id => Organization.joins(:showings).pluck('DISTINCT organizations.id')).map { |o| { :label => o.title, :value => o.id } }
-      h[:selected] = h.available.select { |e| organization_ids.include?(e) }
-      h[:used?] = h.selected.any? ? true : false
-    }
+  def organizations_filter
+    @organizations_filter ||= OrganizationsFilter.new(organization_ids)
   end
 
   def tags_filter
@@ -86,7 +93,7 @@ class ShowingsPresenter
         with(:ends_at).greater_than DateTime.now.beginning_of_day
       end
 
-      with(:affiche_category, categories_filter.selected) if categories_filter.selected.any?
+      with(:affiche_category, categories_filter.selected) if categories_filter.used?
 
       without(:price_max).less_than(price_filter.selected.minimum) if price_filter.minimum.present?
       without(:price_min).greater_than(price_filter.selected.maximum) if price_filter.maximum.present?
@@ -96,7 +103,7 @@ class ShowingsPresenter
       without(:ends_at_hour).less_than(time_filter.selected.from) if time_filter.from.present?
       without(:starts_at_hour).greater_than(time_filter.selected.to) if time_filter.to.present?
 
-      #place
+      with(:organization_ids, organizations_filter.selected) if organizations_filter.used?
 
       with(:tags, tags_filter.selected) if tags_filter.selected.any?
     }
