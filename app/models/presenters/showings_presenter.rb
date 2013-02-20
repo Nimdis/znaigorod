@@ -84,7 +84,7 @@ class ShowingsPresenter
   private
 
   def search
-    @search ||= Showing.search {
+    @search ||= Showing.search(:include => :affiche) {
       group(:affiche_id_str) { limit 1000 }
       paginate(:page => page, :per_page => 10)
 

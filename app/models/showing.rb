@@ -21,19 +21,25 @@ class Showing < ActiveRecord::Base
 
   searchable do
     date :starts_on
-    integer :affiche_id
+
     float :affiche_popularity
+
+    integer :affiche_id
     integer :organization_id
     integer :price_max
     integer :price_min
     integer(:ends_at_hour) { ends_at.try(:hour) }
+    integer(:organization_ids, :multiple => true) { [organization_id] if organization_id? }
     integer(:starts_at_hour) { starts_at.hour }
+
     string(:affiche_category, :multiple => true) { affiche.class.model_name.downcase }
     string(:affiche_id_str) { affiche_id.to_s }
     string(:tags, :multiple => true) { affiche_tags }
+
     text :affiche_title
     text :organization_title
     text :place
+
     time :affiche_created_at, :trie => true
     time :affiche_distribution_starts_on, :trie => true
     time :ends_at
