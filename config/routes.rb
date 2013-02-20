@@ -136,6 +136,8 @@ Znaigorod::Application.routes.draw do
 
   # legacy urls
 
+  get 'affiches' =>  redirect('/affiches/all')
+
   get 'affiches/:id' => redirect { |params, req|
     a = Affiche.find(params[:id])
     "/#{a.class.model_name.downcase}/#{a.slug}"
