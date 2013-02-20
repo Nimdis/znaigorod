@@ -268,10 +268,19 @@ $.fn.add_handler = () ->
         inputs.val(value)
 
 filter_completion_handler = () ->
-  console.log $('.completion_data').text()
-  $('.completion_input').autocomplete(
-    #source:
-  )
+  $('.completion_input').each ->
+    new MagicSuggest({
+      data: $(this).data('source')
+      emptyText: 'Введите название'
+      maxSelectionRenderer: (v) ->
+        "Вы не можете выбрать больше " + v + " вариантов"
+      noSuggestionText: 'Ничего не найдено'
+      renderTo: $(this)
+      inputName: 'organization_ids[]'
+      selectionPosition: 'right'
+      useTabKey: true
+      width: 280
+    })
 
 @init_filter_handler = () ->
   set_previous_state()

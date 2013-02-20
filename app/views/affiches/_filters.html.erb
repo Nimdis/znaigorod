@@ -84,12 +84,14 @@
         </div>
       </div>
 
-      <div class="filter <%= @presenter.organizations_filter.used? ? 'show' : 'hide' %>" id='place'>
+      <div class="filter completion_wrapper <%= @presenter.organizations_filter.used? ? 'show' : 'hide' %>" id='place'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
         <div class="filter_label">Место</div>
         <div class="filter_completion">
-          <div class="completion_data" style='display: none;'><%= @presenter.organizations_filter.available %></div>
-          <%= text_field_tag 'organization_ids[]', '', :class => 'completion_input' %>
+          <%= text_field_tag '',
+                             '',
+                             :class => 'completion_input',
+                             :data => { :source => @presenter.organizations_filter.available } %>
         </div>
       </div>
 

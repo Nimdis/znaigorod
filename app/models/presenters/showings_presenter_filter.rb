@@ -95,7 +95,7 @@ class OrganizationsFilter
 
   def available
     Organization.where(:id => Organization.joins(:showings).pluck('DISTINCT organizations.id')).
-      map { |o| { label: o.title, value: o.id } }
+      map { |o| { name: o.title, id: o.id } }
   end
 
   def used?
