@@ -2,31 +2,6 @@
 
 require 'showings_presenter_filter'
 
-class PeriodFilter
-  attr_accessor :date
-
-  def initialize(period)
-    @date = period.to_date rescue nil
-    @period = period
-  end
-
-  def period
-    available_period_values.include?(@period) ? @period : available_period_values.first
-  end
-
-  def date?
-    !!date
-  end
-
-  def used?
-    date || period
-  end
-
-  def available_period_values
-    %w[today week weekend]
-  end
-end
-
 class ShowingsPresenter
   include ActionView::Helpers
   include ActiveAttr::MassAssignment

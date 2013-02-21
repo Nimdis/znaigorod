@@ -14,6 +14,37 @@ class CategoriesFilter
   end
 end
 
+class PeriodFilter
+  attr_accessor :date
+
+  def initialize(period)
+    @date = period.to_date rescue nil
+    @period = period
+  end
+
+  def period
+    self.class.available_period_values.include?(@period) ? @period : self.class.available_period_values.first
+  end
+
+  def date?
+    !!date
+  end
+
+  def used?
+    date || period
+  end
+
+  def self.available_period_values
+    %w[all today week weekend]
+  end
+
+  available_period_values.each do |name|
+    define_method "#{name}?" do
+      name == period
+    end
+  end
+end
+
 class PriceFilter
   attr_accessor :minimum, :maximum
 
