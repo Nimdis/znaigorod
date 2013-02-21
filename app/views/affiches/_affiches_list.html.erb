@@ -1,4 +1,4 @@
-<% @affiche_collection.affiches.each do |affiche| %>
+<% @presenter.collection.each do |affiche| %>
   <li>
     <%= affiche.has_ribbon %>
     <%= render :partial => 'affiches/affiche', locals: { affiche: affiche } %>

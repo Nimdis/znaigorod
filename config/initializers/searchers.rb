@@ -1,3 +1,73 @@
+HasSearcher.create_searcher :showings do
+  models :showing
+
+  scope :facets do
+    facet(:tags, limit: 500, sort: :index)
+    facet(:organization_ids, limit: 500)
+  end
+
+  scope :groups do
+    group :affiche_id_str do
+      limit 1000
+    end
+  end
+
+  [:categories, :tags, :organization_ids].each do |field|
+    property field do |search|
+      search.with(field, search_object.send(field)) if search_object.send(field).try(:any?)
+    end
+  end
+
+  scope :actual do |search|
+    search.any_of do
+      with(:starts_at).greater_than DateTime.now.beginning_of_day
+      with(:ends_at).greater_than DateTime.now.beginning_of_day
+    end
+  end
+
+  scope :today do
+    with(:starts_at).less_than DateTime.now.end_of_day
+  end
+
+  scope :week do |search|
+    search.any_of do
+      all_of do
+        with(:starts_at).greater_than DateTime.now.beginning_of_week
+        with(:starts_at).less_than DateTime.now.end_of_week
+        with(:ends_at, nil)
+      end
+
+      all_of do
+        with(:starts_at).less_than DateTime.now.end_of_week
+        with(:ends_at).greater_than DateTime.now.beginning_of_week
+      end
+    end
+  end
+
+  scope :weekend do |search|
+    search.any_of do
+      all_of do
+        with(:starts_at).greater_than DateTime.now.end_of_week - 2.days + 1.second
+        with(:starts_at).less_than DateTime.now.end_of_week
+        with(:ends_at, nil)
+      end
+
+      all_of do
+        with(:starts_at).less_than DateTime.now.end_of_week
+        with(:ends_at).greater_than DateTime.now.end_of_week - 2.days + 1.second
+      end
+    end
+  end
+
+  scope :order_by_starts_at do
+    order_by(:starts_at, :asc)
+  end
+
+  scope :order_by_popularity do
+    order_by(:affiche_popularity, :desc)
+  end
+end
+
 HasSearcher.create_searcher :affiche do
   models :showing
 
@@ -263,14 +333,14 @@ HasSearcher.create_searcher :organizations do
   end
 end
 
-HasSearcher.create_searcher :showings do
-  models :showing
-  keywords :q
+#HasSearcher.create_searcher :showings do
+  #models :showing
+  #keywords :q
 
-  scope :affiche_groups do
-    group(:affiche_id_str)
-  end
-end
+  #scope :affiche_groups do
+    #group(:affiche_id_str)
+  #end
+#end
 
 HasSearcher.create_searcher :showing do
   models :showing

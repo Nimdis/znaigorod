@@ -32,10 +32,10 @@ class Showing < ActiveRecord::Base
     integer(:organization_ids, :multiple => true) { [organization_id] if organization_id? }
     integer(:starts_at_hour) { starts_at.hour }
 
-    string(:affiche_categories, :multiple => true) { [affiche.class.model_name.downcase] }
     string(:affiche_category) { affiche.class.model_name.downcase }
     string(:affiche_id_str) { affiche_id.to_s }
-    string(:tags, :multiple => true) { affiche_tags }
+    string(:categories, :multiple => true) { [affiche.class.model_name.downcase] }
+    string(:tags, :multiple => true) { affiche_tags.delete_if(&:blank?) }
 
     text :affiche_title
     text :organization_title

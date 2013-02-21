@@ -2,6 +2,24 @@
 
 require 'showings_presenter_filter'
 
+class PeriodFilter
+  attr_accessor :period
+
+  def initialize(period)
+    @period = begin
+                period.to_date
+              rescue
+                available_period_values.include?(period) ? period : available_period_values.first
+              end
+  end
+
+  private
+
+  def available_period_values
+    %w[today week weekend all]
+  end
+end
+
 class ShowingsPresenter
   include ActionView::Helpers
   include ActiveAttr::MassAssignment
@@ -17,6 +35,9 @@ class ShowingsPresenter
 
   def initialize(args)
     super(args)
+
+    @page ||= 1
+    @per_page = 10
   end
 
   def sort_links
@@ -35,7 +56,7 @@ class ShowingsPresenter
   end
 
   def collection
-    search.group(:affiche_id_str).groups.map do |group|
+    searcher.group(:affiche_id_str).groups.map do |group|
       affiche = Affiche.find(group.value)
       showings = group.hits.map(&:result)
 
@@ -44,11 +65,11 @@ class ShowingsPresenter
   end
 
   def paginated_collection
-    search.group(:affiche_id_str).groups
+    searcher.group(:affiche_id_str).groups
   end
 
   def total_count
-    search.group(:affiche_id_str).total
+    searcher.group(:affiche_id_str).total
   end
 
   def categories_filter
@@ -83,29 +104,16 @@ class ShowingsPresenter
 
   private
 
-  def search
-    @search ||= Showing.search {
-      group(:affiche_id_str) { limit 1000 }
-      paginate(:page => page, :per_page => 10)
-
-      any_of do
-        with(:starts_at).greater_than DateTime.now.beginning_of_day
-        with(:ends_at).greater_than DateTime.now.beginning_of_day
-      end
-
-      with(:affiche_categories, categories_filter.selected) if categories_filter.used?
-
-      without(:price_max).less_than(price_filter.selected.minimum) if price_filter.minimum.present?
-      without(:price_min).greater_than(price_filter.selected.maximum) if price_filter.maximum.present?
-
-      #age
-
-      without(:ends_at_hour).less_than(time_filter.selected.from) if time_filter.from.present?
-      without(:starts_at_hour).greater_than(time_filter.selected.to) if time_filter.to.present?
-
-      with(:organization_ids, organizations_filter.ids) if organizations_filter.used?
-
-      with(:tags, tags_filter.selected) if tags_filter.selected.any?
+  def searcher_params
+    {
+      categories: categories_filter.selected,
+      organization_ids: organizations_filter.ids,
+      tags: tags_filter.selected
     }
+  end
+
+  def searcher
+    @searcher ||= HasSearcher.searcher(:showings, searcher_params).
+      paginate(page: page, per_page: per_page).actual.groups
   end
 end

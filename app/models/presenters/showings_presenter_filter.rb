@@ -109,7 +109,7 @@ class TagsFilter
 
   def initialize(tags)
     @selected = tags || []
-    @available = Showing.search { facet(:tags) }.facet(:tags).rows.map(&:value)
+    @available = HasSearcher.searcher(:showings).facets.facet(:tags).rows.map(&:value)
   end
 
   def used?
