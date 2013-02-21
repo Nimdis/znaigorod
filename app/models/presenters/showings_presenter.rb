@@ -93,7 +93,7 @@ class ShowingsPresenter
         with(:ends_at).greater_than DateTime.now.beginning_of_day
       end
 
-      with(:affiche_category, categories_filter.selected) if categories_filter.used?
+      with(:affiche_categories, categories_filter.selected) if categories_filter.used?
 
       without(:price_max).less_than(price_filter.selected.minimum) if price_filter.minimum.present?
       without(:price_min).greater_than(price_filter.selected.maximum) if price_filter.maximum.present?

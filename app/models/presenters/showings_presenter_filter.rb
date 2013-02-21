@@ -89,17 +89,14 @@ end
 class OrganizationsFilter
   attr_accessor :selected, :available
 
-  def initialize(ids=nil)
-    @selected = Organization.where(id: ids).map(&:id)
+  def initialize(ids)
+    @selected = (ids || []).map(&:to_i)
   end
+  alias_method :ids, :selected
 
   def available
     Organization.where(id: Organization.joins(:showings).pluck('DISTINCT organizations.id')).
       map { |o| { name: o.title, id: o.id } }
-  end
-
-  def ids
-    selected
   end
 
   def used?
