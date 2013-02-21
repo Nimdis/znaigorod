@@ -177,6 +177,13 @@ remove_filter_handler = () ->
     $('.'+filter.removeClass('used').toggle().attr('id'), '.filters_wrapper').toggle()
     false
 
+clear_filter_handler = () ->
+  $('.clear_filter_link').on 'click', ->
+    filter = $(this).parent()
+    filter.find('input').val('').attr('checked', false).change()
+    filter.find('.ms-sel-ctn').html('')
+    false
+
 clear_form_handler = () ->
   $('.clear_wrapper a').on 'click', ->
     $('.filters_wrapper .filter_inputs input').val('').change()
@@ -294,4 +301,5 @@ filter_completion_handler = () ->
   filter_slider_handler()
   filter_completion_handler()
   clear_form_handler()
+  clear_filter_handler()
   initialize_map() if $('#geo', '.filters_wrapper').is(':visible')

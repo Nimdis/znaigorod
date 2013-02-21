@@ -3,7 +3,8 @@
     <h1>Афиша мероприятий города</h1>
 
     <%= form_tag affiches_path, :method => :get do %>
-      <div class='filter show' id='categories'>
+      <div class='filter show categories_filter' id='categories'>
+        <%= link_to "очистить", '#', :class => 'clear_filter_link' %>
         <div class="filter_checkboxes">
           <% @presenter.categories_filter.available.each_with_index do |category, index| %>
             <div class="checkbox">
@@ -87,6 +88,7 @@
 
       <div class="filter completion_wrapper <%= @presenter.organizations_filter.used? ? 'show' : 'hide' %>" id='place'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <%= link_to "очистить", '#', :class => 'clear_filter_link' %>
         <div class="filter_label">Место</div>
         <div class="filter_completion">
           <%= text_field_tag '',
@@ -101,6 +103,7 @@
 
       <div class="filter <%= @presenter.tags_filter.used? ? 'show' : 'hide' %>" id='tags'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <%= link_to "очистить", '#', :class => 'clear_filter_link' %>
         <div class="filter_label">Теги</div>
         <div class="filter_checkboxes">
           <% @presenter.tags_filter.available.each_with_index do |tag_title, index| %>

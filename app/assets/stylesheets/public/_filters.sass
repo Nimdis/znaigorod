@@ -56,6 +56,7 @@
       .filter_checkboxes
         +clearfix
         padding: 5px 0
+        line-height: 16px
         margin: 0 0 0 115px
         width: 785px
 
@@ -63,6 +64,7 @@
           +clearfix
           float: left
           height: 16px
+          line-height: 16px
           margin: 0 20px 5px 0
           width: 175px
 
@@ -72,17 +74,34 @@
             float: left
             margin: 0 5px 0 0
 
+      &.categories_filter
+        +min-height(26px)
+        background: #efe7f4
+
+        .filter_checkboxes
+          margin: 0
+
+          div.checkbox
+            width: auto
+            margin: 0 10px 0 0
+
       .filter_input_label
         float: left
         line-height: 35px
         margin: 0 10px 0 0
+
+      .clear_filter_link
+        color: #e50000
+        position: absolute
+        bottom: 13px
+        right: 49px
 
       .remove_filter_link
         background: image_url('remove.png') no-repeat center center
         display: block
         float: right
         height: 16px
-        margin: 10px 0 0 0
+        margin: 13px 0 0 0
         position: relative
         text-indent: -9999px
         width: 16px
