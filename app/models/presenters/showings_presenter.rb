@@ -3,20 +3,27 @@
 require 'showings_presenter_filter'
 
 class PeriodFilter
-  attr_accessor :period
+  attr_accessor :date
 
   def initialize(period)
-    @period = begin
-                period.to_date
-              rescue
-                available_period_values.include?(period) ? period : available_period_values.first
-              end
+    @date = period.to_date rescue nil
+    @period = period
   end
 
-  private
+  def period
+    available_period_values.include?(@period) ? @period : available_period_values.first
+  end
+
+  def date?
+    !!date
+  end
+
+  def used?
+    date || period
+  end
 
   def available_period_values
-    %w[today week weekend all]
+    %w[today week weekend]
   end
 end
 
@@ -26,6 +33,7 @@ class ShowingsPresenter
   #include Rails.application.routes.url_helpers
 
   attr_accessor :categories,
+                :period,
                 :price_min, :price_max,
                 :age_min, :age_max,
                 :time_from, :time_to,
@@ -43,7 +51,7 @@ class ShowingsPresenter
   def sort_links
     links = []
 
-    %w[popular newest closest].each do |order|
+    %w[popular closest].each do |order|
       links << content_tag(:li,
                            Link.new(
                                     :title => I18n.t("affiche.sort.#{order}"),
@@ -74,6 +82,10 @@ class ShowingsPresenter
 
   def categories_filter
     @categories_filter ||= CategoriesFilter.new(categories)
+  end
+
+  def period_filter
+    @period_filter ||= PeriodFilter.new(period)
   end
 
   def price_filter

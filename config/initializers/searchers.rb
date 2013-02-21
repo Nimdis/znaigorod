@@ -59,6 +59,21 @@ HasSearcher.create_searcher :showings do
     end
   end
 
+  property :starts_on do |search|
+    search.any_of do
+      all_of do
+        with(:starts_at).greater_than search_object.starts_on.beginning_of_day
+        with(:starts_at).less_than search_object.starts_on.end_of_day
+        with(:ends_at, nil)
+      end
+
+      all_of do
+        with(:starts_at).less_than search_object.starts_on.end_of_day
+        with(:ends_at).greater_than search_object.starts_on.beginning_of_day
+      end
+    end if search_object.starts_on
+  end
+
   scope :order_by_starts_at do
     order_by(:starts_at, :asc)
   end
