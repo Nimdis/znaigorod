@@ -51,12 +51,13 @@
             <%= text_field_tag :age_max, @presenter.age_filter.selected.maximum, :class => 'max' %>
           </div>
         </div>
+        <div class='filter_input_label'>лет</div>
 
         <div class="filter_slider_wrapper">
           <div class="filter_slider"
             data-range='true'
             data-min='<%= @presenter.age_filter.available.minimum %>'
-            data-max='<%= @presenter.age_filter.available.maximum %>' data-step='50'>
+            data-max='<%= @presenter.age_filter.available.maximum %>' data-step='1'>
           </div>
         </div>
       </div>

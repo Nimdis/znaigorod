@@ -158,18 +158,22 @@ criteria_handler = () ->
   $('.criteria_list ul li a').on 'click', ->
     target = $('#'+$(this).attr('class'))
     $(this).add(target).toggle()
+    target.find('input').removeAttr('disabled')
     initialize_map() if $(this).hasClass('geo')
     false
 
 set_previous_state = () ->
-  $('.filters_wrapper .hide').hide()
+  $('.filters_wrapper .hide').each (index, item) ->
+    $(item).hide().find('input').attr('disabled', 'disabled')
+
   $('.filters_wrapper .show').each (index, item) ->
     $('.'+$(item).attr('id'), '.filters_wrapper').hide()
 
 remove_filter_handler = () ->
   $('.remove_filter_link').on 'click', ->
     filter = $(this).parent()
-    filter.find('input').val('').attr('checked', false).change()
+    filter.find('input').val('').attr('checked', false).attr('disabled','disabled').change()
+    filter.find('.ms-sel-ctn').html('')
     $('.'+filter.removeClass('used').toggle().attr('id'), '.filters_wrapper').toggle()
     false
 
