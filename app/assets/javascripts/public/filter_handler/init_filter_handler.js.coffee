@@ -294,12 +294,23 @@ filter_completion_handler = () ->
       value: $(this).data('selected')
     })
 
+filter_date_handler = () ->
+  filter = $('.date_filter')
+  $('ul li.selected input', filter).removeAttr('disabled')
+  $('ul li a', filter).on 'click', ->
+    $(this).parent().siblings().removeClass('selected').find('input').attr('disabled', 'disabled')
+    $(this).parent().addClass('selected')
+    $(this).siblings('input').removeAttr('disabled')
+    false
+
+
 @init_filter_handler = () ->
   set_previous_state()
   remove_filter_handler()
   criteria_handler()
   filter_slider_handler()
   filter_completion_handler()
+  filter_date_handler()
   clear_form_handler()
   clear_filter_handler()
   initialize_map() if $('#geo', '.filters_wrapper').is(':visible')

@@ -15,6 +15,26 @@
         </div>
       </div>
 
+      <div class="filter show date_filter" id='calendar'>
+        <ul>
+          <li class='selected'>
+            <a href='#'>Сегодня</a>
+            <input name="period" type="hidden" value='today' disabled='disabled' />
+          </li>
+          <li>
+            <a href='#'>На этой неделе</a>
+            <input name="period" type="hidden" value='week' disabled='disabled' />
+          </li>
+          <li>
+            <a href='#'>На этих выходных</a>
+            <input name="period" type="hidden" value='weekend' disabled='disabled' />
+          </li>
+          <li>
+            <a href='#'>Все</a>
+          </li>
+        </ul>
+      </div>
+
       <div class="filter <%= @presenter.price_filter.used? ? 'used show' : 'not_used hide' %>" id='amount'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
         <div class="filter_label wide">Стоимость</div>
