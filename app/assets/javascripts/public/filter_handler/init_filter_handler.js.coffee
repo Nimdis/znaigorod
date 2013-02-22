@@ -186,6 +186,7 @@ clear_filter_handler = () ->
 
 clear_form_handler = () ->
   $('.clear_wrapper a').on 'click', ->
+    $('.filters_wrapper .date_filter li:last a').click()
     $('.filters_wrapper .filter_inputs input').val('').change()
     $('.filters_wrapper .filter_checkboxes input').attr('checked', false).change()
     $('.filters_wrapper .remove_filter_link:visible').click()
