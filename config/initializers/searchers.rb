@@ -7,9 +7,7 @@ HasSearcher.create_searcher :showings do
   end
 
   scope :groups do
-    group :affiche_id_str do
-      limit 1000
-    end
+    group(:affiche_id_str) { limit 1000 }
   end
 
   [:categories, :tags, :organization_ids].each do |field|
@@ -74,13 +72,8 @@ HasSearcher.create_searcher :showings do
     end if search_object.starts_on
   end
 
-  scope :order_by_starts_at do
-    order_by(:starts_at, :asc)
-  end
-
-  scope :order_by_popularity do
-    order_by(:affiche_popularity, :desc)
-  end
+  scope(:order_by_nearness)   { order_by(:starts_at, :asc) }
+  scope(:order_by_popularity) { order_by(:affiche_popularity, :desc) }
 end
 
 HasSearcher.create_searcher :affiche do

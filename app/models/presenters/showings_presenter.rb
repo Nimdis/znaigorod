@@ -14,6 +14,7 @@ class ShowingsPresenter
                 :time_from, :time_to,
                 :organization_ids,
                 :tags,
+                :order_by,
                 :page, :per_page
 
   def initialize(args)
@@ -21,6 +22,11 @@ class ShowingsPresenter
 
     @page ||= 1
     @per_page = 10
+    @order_by = %w[nearness popularity].include?(order_by) ? order_by : 'popularity'
+  end
+
+  def order_by_popularity?
+    order_by == 'popularity'
   end
 
   def sort_links
@@ -89,23 +95,26 @@ class ShowingsPresenter
     'affiches/affiches_list'
   end
 
+  def query
+    searcher_params
+  end
+
   private
 
   def searcher_params
-    {
-      categories: categories_filter.selected,
-      organization_ids: organizations_filter.ids,
-      tags: tags_filter.selected
-    }
+    {}.tap do |params|
+      params[:categories]       = categories_filter.selected if categories_filter.selected.any?
+      params[:organization_ids] = organizations_filter.ids   if organizations_filter.ids.any?
+      params[:starts_on]        = period_filter.date         if period_filter.date?
+      params[:tags]             = tags_filter.selected       if tags_filter.selected.any?
+    end
   end
 
   def searcher
-    params = searcher_params
-
-    params.merge!(starts_on: period_filter.date) if period_filter.date?
-
-    @searcher ||= HasSearcher.searcher(:showings, params).tap { |s|
+    @searcher ||= HasSearcher.searcher(:showings, searcher_params).tap { |s|
       s.paginate(page: page, per_page: per_page).groups
+
+      order_by_popularity? ? s.order_by_popularity : s.order_by_nearness
 
       if period_filter.used? && !period_filter.date?
         case period_filter.period

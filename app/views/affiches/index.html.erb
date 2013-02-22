@@ -7,7 +7,12 @@
       <div class="sort affiches">
         <p>Сортировка:</p>
         <ul>
-          <%= @presenter.sort_links %>
+          <li class='<%= @presenter.order_by_popularity? ? 'selected' : 'not_selected' %>'>
+            <%= link_to 'По популярности', affiches_path(@presenter.query.merge(order_by: 'popularity')) %>
+          </li>
+          <li class='<%= @presenter.order_by_popularity? ? 'not_selected' : 'selected' %>'>
+            <%= link_to 'По ближайшему сеансу', affiches_path(@presenter.query.merge(order_by: 'nearness')) %>
+          </li>
         </ul>
       </div>
     </div>
