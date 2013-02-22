@@ -15,11 +15,13 @@ class CategoriesFilter
 end
 
 class PeriodFilter
-  attr_accessor :date
-
   def initialize(period)
     @date = period.to_date rescue nil
     @period = period
+  end
+
+  def date
+    @date || (->{ Date.today }.call)
   end
 
   def period
@@ -27,11 +29,11 @@ class PeriodFilter
   end
 
   def date?
-    !!date
+    !!@date
   end
 
   def used?
-    !!@date || !!@period
+    date? || !!@period
   end
 
   def self.available_period_values
@@ -42,6 +44,10 @@ class PeriodFilter
     define_method "#{name}?" do
       name == @period
     end
+  end
+
+  def all?
+    @period == 'all' || @period.nil?
   end
 end
 
