@@ -100,7 +100,25 @@ class ShowingsPresenter
   end
 
   def searcher
-    @searcher ||= HasSearcher.searcher(:showings, searcher_params).
-      paginate(page: page, per_page: per_page).actual.groups
+    params = searcher_params
+
+    params.merge!(starts_on: period_filter.date) if period_filter.date?
+
+    @searcher ||= HasSearcher.searcher(:showings, params).tap { |s|
+      s.paginate(page: page, per_page: per_page).groups
+
+      if period_filter.used? && !period_filter.date?
+        case period_filter.period
+        when 'today'
+          s.today.actual
+        when 'week'
+          s.week.actual
+        when 'weekend'
+          s.weekend.actual
+        end
+      else
+        s.actual
+      end
+    }
   end
 end

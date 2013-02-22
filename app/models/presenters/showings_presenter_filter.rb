@@ -31,7 +31,7 @@ class PeriodFilter
   end
 
   def used?
-    date || period
+    !!@date || !!@period
   end
 
   def self.available_period_values
@@ -126,7 +126,9 @@ class OrganizationsFilter
   alias_method :ids, :selected
 
   def available
-    Organization.where(id: Organization.joins(:showings).pluck('DISTINCT organizations.id')).
+    #Organization.where(id: Organization.joins(:showings).pluck('DISTINCT organizations.id')).
+    Organization.where(id: HasSearcher.searcher(:showings).facets.facet(:organization_ids).rows.map(&:value)).
+      order(:title).
       map { |o| { name: o.title, id: o.id } }
   end
 
