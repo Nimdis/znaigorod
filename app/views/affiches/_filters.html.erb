@@ -17,7 +17,7 @@
 
       <div class="filter show date_filter" id='calendar'>
         <ul>
-          <li class='date_picker_wrapper'>
+          <li class='<%= @presenter.period_filter.date? ? 'date_picker_wrapper selected' : 'date_picker_wrapper' %>'>
             <input name='period' type="text" disabled='disabled' value='<%= l Date.today %>'/>
           </li>
           <li class='<%= @presenter.period_filter.today? ? 'selected' : 'not_selected' %>'>

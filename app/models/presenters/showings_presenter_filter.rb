@@ -40,7 +40,7 @@ class PeriodFilter
 
   available_period_values.each do |name|
     define_method "#{name}?" do
-      name == period
+      name == @period
     end
   end
 end
