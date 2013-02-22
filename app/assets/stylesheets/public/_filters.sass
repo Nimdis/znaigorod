@@ -87,6 +87,30 @@
 
       &.date_filter
         +min-height(26px)
+        +clearfix
+
+        .date_picker_wrapper
+          +border-radius
+          background: #82b4cc
+          border: 1px solid #639eba
+          float: left
+          margin: 0px 15px 0 0
+          padding: 0 5px
+
+          input
+            background: none
+            border: none
+            color: #fff
+            float: left
+            line-height: 17px
+            height: 19px
+            margin: 0
+            padding: 0
+            width: 70px
+
+          img
+            &:hover
+              cursor: pointer
 
         ul
           +clearfix
@@ -116,9 +140,11 @@
               height: 17px
               width: 1px
 
-            &:first-child
+            &:nth-child(2)
               +border-left-radius
               border-left: 1px solid #639eba
+
+            &:first-child, &:nth-child(2)
 
               &:before
                 display: none
