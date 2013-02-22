@@ -55,7 +55,7 @@ GEM
     backports (2.6.5)
     builder (3.0.4)
     cancan (1.6.8)
-    capistrano (2.14.1)
+    capistrano (2.14.2)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -346,12 +346,8 @@ DEPENDENCIES
   annotate
   attribute_normalizer
   auto_html
-<<<<<<< HEAD
-  capistrano-ext
-=======
   cancan
-  capistrano
->>>>>>> Add vk authorization and cancan roles
+  capistrano-ext
   coffee-rails
   compass-rails
   curb
