@@ -6,7 +6,7 @@ class Showing < ActiveRecord::Base
 
   validates_presence_of :place, :starts_at
 
-  delegate :created_at, :distribution_starts_on, :popularity, :tags, :title, :to => :affiche, :prefix => true
+  delegate :created_at, :distribution_starts_on, :popularity, :tags, :title, :age_min, :age_max, :to => :affiche, :prefix => true
   delegate :address, :title, :to => :organization, :prefix => true, :allow_nil => true
 
   after_create  :index_affiche
@@ -16,8 +16,8 @@ class Showing < ActiveRecord::Base
 
   scope :with_organization, where('organization_id IS NOT NULL')
 
-  default_value_for :price_max, 0
-  default_value_for :price_min, 0
+  default_value_for :price_max, nil
+  default_value_for :price_min, nil
 
   searchable do
     date :starts_on
@@ -28,6 +28,8 @@ class Showing < ActiveRecord::Base
     integer :organization_id
     integer :price_max
     integer :price_min
+    integer(:age_max) { affiche_age_max }
+    integer(:age_min) { affiche_age_min }
     integer(:ends_at_hour) { ends_at.try(:hour) }
     integer(:organization_ids, :multiple => true) { [organization_id] if organization_id? }
     integer(:starts_at_hour) { starts_at.hour }

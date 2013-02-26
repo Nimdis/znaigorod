@@ -21,7 +21,21 @@ class ShowingsPresenter
     @page ||= 1
     @per_page = 10
     @order_by = %w[nearness popularity].include?(order_by) ? order_by : 'popularity'
+
+    initialize_filters
   end
+
+  def initialize_filters
+    @categories_filter    ||= CategoriesFilter.new(categories)
+    @period_filter        ||= PeriodFilter.new(period)
+    @price_filter         ||= PriceFilter.new(price_min, price_max)
+    @age_filter           ||= AgeFilter.new(age_min, age_max)
+    @time_filter          ||= TimeFilter.new(time_from, time_to)
+    @organizations_filter ||= OrganizationsFilter.new(organization_ids)
+    @tags_filter          ||= TagsFilter.new(tags)
+  end
+  attr_reader :age_filter, :categories_filter, :organizations_filter, :period_filter,
+    :price_filter, :tags_filter, :time_filter
 
   def order_by_popularity?
     order_by == 'popularity'
@@ -44,54 +58,25 @@ class ShowingsPresenter
     searcher.group(:affiche_id_str).total
   end
 
-  def categories_filter
-    @categories_filter ||= CategoriesFilter.new(categories)
-  end
-
-  def period_filter
-    @period_filter ||= PeriodFilter.new(period)
-  end
-
-  def price_filter
-    @price_filter ||= PriceFilter.new(price_min, price_max)
-  end
-
-
-  def age_filter
-    @age_filter ||= AgeFilter.new(age_min, age_max)
-  end
-
-  def time_filter
-    @time_filter ||= TimeFilter.new(time_from, time_to)
-  end
-
-  def organizations_filter
-    @organizations_filter ||= OrganizationsFilter.new(organization_ids)
-  end
-
-  def tags_filter
-    @tags_filter ||= TagsFilter.new(tags)
-  end
-
   def partial
     #'affiches/affiches_posters'
     'affiches/affiches_list'
   end
 
-  def query
-    searcher_params
-  end
-
-  private
-
   def searcher_params
-    {}.tap do |params|
+    @searcher_params ||= {}.tap do |params|
+      params[:age_max]          = age_filter.maximum         if age_filter.maximum.present?
+      params[:age_min]          = age_filter.minimum         if age_filter.minimum.present?
       params[:categories]       = categories_filter.selected if categories_filter.selected.any?
       params[:organization_ids] = organizations_filter.ids   if organizations_filter.ids.any?
+      params[:price_max]        = price_filter.maximum       if price_filter.maximum.present?
+      params[:price_min]        = price_filter.minimum       if price_filter.minimum.present?
       params[:starts_on]        = period_filter.date         if period_filter.date?
       params[:tags]             = tags_filter.selected       if tags_filter.selected.any?
     end
   end
+
+  private
 
   def searcher
     @searcher ||= HasSearcher.searcher(:showings, searcher_params).tap { |s|

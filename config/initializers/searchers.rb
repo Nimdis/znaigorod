@@ -1,21 +1,49 @@
 HasSearcher.create_searcher :showings do
   models :showing
 
+  # facets
   scope :facets do
     facet(:tags, limit: 500, sort: :index)
     facet(:organization_ids, limit: 500)
   end
 
+  # groups
   scope :groups do
     group(:affiche_id_str) { limit 1000 }
   end
 
+  # order
+  scope(:order_by_nearness)   { order_by(:starts_at, :asc) }
+  scope(:order_by_popularity) { order_by(:affiche_popularity, :desc) }
+
+  # categories tags organizations
   [:categories, :tags, :organization_ids].each do |field|
     property field do |search|
       search.with(field, search_object.send(field)) if search_object.send(field).try(:any?)
     end
   end
 
+  # price
+  property :price_max do |search|
+    without(:price_max).less_than(search_object.price_min) if search_object.price_min.present?
+  end
+
+  property :price_min do |search|
+    without(:price_min).greater_than(search_object.price_max) if search_object.price_max.present?
+  end
+
+  # age
+  property :age_max do |search|
+    without(:age_max).less_than(search_object.age_min) if search_object.age_min.present?
+  end
+
+  property :age_min do |search|
+    without(:age_min).greater_than(search_object.age_max) if search_object.age_max.present?
+  end
+
+  #time
+
+  # period
   scope :actual do |search|
     search.any_of do
       with(:starts_at).greater_than DateTime.now.beginning_of_day
@@ -71,9 +99,6 @@ HasSearcher.create_searcher :showings do
       end
     end if search_object.starts_on
   end
-
-  scope(:order_by_nearness)   { order_by(:starts_at, :asc) }
-  scope(:order_by_popularity) { order_by(:affiche_popularity, :desc) }
 end
 
 HasSearcher.create_searcher :affiche do

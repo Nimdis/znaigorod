@@ -9,12 +9,12 @@
         <ul>
           <li>
             <%= link_to t('affiche.sort.popular'),
-              affiches_path(@presenter.query.merge(order_by: 'popularity')),
+              affiches_path(@presenter.searcher_params.merge(order_by: 'popularity')),
               @presenter.order_by_popularity? ? { class: 'selected' } : {} %>
           </li>
           <li>
             <%= link_to t('affiche.sort.closest'),
-              affiches_path(@presenter.query.merge(order_by: 'nearness')),
+              affiches_path(@presenter.searcher_params.merge(order_by: 'nearness')),
               @presenter.order_by_popularity? ? {} : { class: 'selected' } %>
           </li>
         </ul>
