@@ -161,3 +161,15 @@ class TagsFilter
   end
 end
 
+class GeoFilter
+  attr_accessor :lat, :lon, :radius
+
+  def initialize(lat, lon, radius)
+    @lat, @lon, @radius = lat, lon, radius
+  end
+
+  def used?
+    lat.present? && lon.present? && radius.present?
+  end
+end
+

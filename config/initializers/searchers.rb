@@ -51,6 +51,10 @@ HasSearcher.create_searcher :showings do
     end
   end
 
+  property :location do |search|
+    search.with(:location).in_radius(search_object.location[:lat], search_object.location[:lon], search_object.location[:radius]) if search_object.location
+  end
+
   scope :today do
     with(:starts_at).less_than DateTime.now.end_of_day
   end

@@ -12,6 +12,7 @@ class ShowingsPresenter
                 :time_from, :time_to,
                 :organization_ids,
                 :tags,
+                :lat, :lon, :radius,
                 :order_by,
                 :page, :per_page
 
@@ -33,9 +34,10 @@ class ShowingsPresenter
     @time_filter          ||= TimeFilter.new(time_from, time_to)
     @organizations_filter ||= OrganizationsFilter.new(organization_ids)
     @tags_filter          ||= TagsFilter.new(tags)
+    @geo_filter           ||= GeoFilter.new(lat, lon, radius)
   end
   attr_reader :age_filter, :categories_filter, :organizations_filter, :period_filter,
-    :price_filter, :tags_filter, :time_filter
+    :price_filter, :tags_filter, :time_filter, :geo_filter
 
   def order_by_popularity?
     order_by == 'popularity'
@@ -73,6 +75,8 @@ class ShowingsPresenter
       params[:price_min]        = price_filter.minimum       if price_filter.minimum.present?
       params[:starts_on]        = period_filter.date         if period_filter.date?
       params[:tags]             = tags_filter.selected       if tags_filter.selected.any?
+
+      params[:location]         = { lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius } if geo_filter.used?
     end
   end
 

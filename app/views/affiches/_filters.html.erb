@@ -140,6 +140,28 @@
         </div>
       </div>
 
+      <div class="filter <%= @presenter.geo_filter.used? ? 'used show' : 'hide' %>" id='geo'>
+        <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <div class="filter_label">Местоположение</div>
+        <div class="filter_geo">
+          <div class="map_wrapper">
+          </div>
+          <div class="hidden_inputs">
+            <%= hidden_field_tag :lat,    @presenter.geo_filter.lat, :class => 'lat' %>
+            <%= hidden_field_tag :lon,    @presenter.geo_filter.lon, :class => 'lon' %>
+            <%= hidden_field_tag :radius, @presenter.geo_filter.radius, :class => 'radius' %>
+          </div>
+        </div>
+        <div class="radius_slider_wrapper">
+          <div class="info_radius"><span class='bold'>Радиус:</span> <span class='rad'><%= "%.0f" % (@presenter.geo_filter.radius.to_f*1000) %></span> м (<span class='time'><%= "%.1f" % (@presenter.geo_filter.radius.to_f*1000/54.6) %></span> мин пешком)</div>
+          <div class="wrapper_box">
+            <div class="min_radius">100 м</div>
+            <div class="radius_slider"></div>
+            <div class="max_radius">11 км</div>
+          </div>
+        </div>
+      </div>
+
       <div class="criteria_list">
         <div class="criteria_label">Добавить критерии:</div>
         <ul>
@@ -157,6 +179,9 @@
           </li>
           <li>
             <%= link_to "Тэги", '#', :class => 'tags' %>
+          </li>
+          <li>
+            <%= link_to "Местоположение", '#', :class => 'geo' %>
           </li>
         </ul>
       </div>

@@ -34,6 +34,8 @@ class Showing < ActiveRecord::Base
     integer(:organization_ids, :multiple => true) { [organization_id] if organization_id? }
     integer(:starts_at_hour) { starts_at.hour }
 
+    latlon(:location) { Sunspot::Util::Coordinates.new(get_latitude, get_longitude) }
+
     string(:affiche_category) { affiche.class.model_name.downcase }
     string(:affiche_id_str) { affiche_id.to_s }
     string(:categories, :multiple => true) { [affiche.class.model_name.downcase] }
@@ -71,11 +73,11 @@ class Showing < ActiveRecord::Base
   end
 
   def get_longitude
-    organization_address.try(:longitude) || longitude
+    longitude? ? longitude : organization_address.try(:longitude)
   end
 
   def get_latitude
-    organization_address.try(:latitude) || latitude
+    latitude? ? latitude : organization_address.try(:latitude)
   end
 
   private
