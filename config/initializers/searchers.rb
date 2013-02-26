@@ -25,20 +25,20 @@ HasSearcher.create_searcher :showings do
 
   # price
   property :price_max do |search|
-    without(:price_max).less_than(search_object.price_min) if search_object.price_min.present?
+    search.without(:price_max).less_than(search_object.price_min) if search_object.price_min.present?
   end
 
   property :price_min do |search|
-    without(:price_min).greater_than(search_object.price_max) if search_object.price_max.present?
+    search.without(:price_min).greater_than(search_object.price_max) if search_object.price_max.present?
   end
 
   # age
   property :age_max do |search|
-    without(:age_max).less_than(search_object.age_min) if search_object.age_min.present?
+    search.without(:age_max).less_than(search_object.age_min) if search_object.age_min.present?
   end
 
   property :age_min do |search|
-    without(:age_min).greater_than(search_object.age_max) if search_object.age_max.present?
+    search.without(:age_min).greater_than(search_object.age_max) if search_object.age_max.present?
   end
 
   #time
