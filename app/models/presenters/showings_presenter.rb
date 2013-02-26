@@ -3,9 +3,7 @@
 require 'showings_presenter_filter'
 
 class ShowingsPresenter
-  include ActionView::Helpers
   include ActiveAttr::MassAssignment
-  #include Rails.application.routes.url_helpers
 
   attr_accessor :categories,
                 :period,
@@ -27,21 +25,6 @@ class ShowingsPresenter
 
   def order_by_popularity?
     order_by == 'popularity'
-  end
-
-  def sort_links
-    links = []
-
-    %w[popular closest].each do |order|
-      links << content_tag(:li,
-                           Link.new(
-                                    :title => I18n.t("affiche.sort.#{order}"),
-                                    :html_options => { class: order },
-                                    :url => '#')
-      )
-    end
-
-    (links.join(content_tag(:li, content_tag(:span, '&nbsp;'.html_safe, class: 'separator')))).html_safe
   end
 
   def collection
