@@ -86,8 +86,9 @@ class AgeFilter
 
   def available
     Hashie::Mash.new(
-      minimum: Affiche.with_showings.joins(:showings).minimum(:age_min),
-      maximum: Affiche.with_showings.joins(:showings).maximum(:age_max)
+      #minimum: Affiche.with_showings.joins(:showings).minimum(:age_min),
+      #maximum: Affiche.with_showings.joins(:showings).maximum(:age_max)
+      minimum: 0, maximum: 99
     )
   end
 
@@ -136,6 +137,7 @@ class OrganizationsFilter
 
   def available
     @available ||= Organization.where(id: Showing.search { facet(:organization_ids, limit: 500) }.facet(:organization_ids).rows.map(&:value)).
+    #@available ||= Organization.where(id: HasSearcher.searcher(:showings).actual.facets.facet(:organization_ids).rows.map(&:value)).
       order(:title).
       map { |o| { name: o.title, id: o.id } }
   end
@@ -150,7 +152,8 @@ class TagsFilter
 
   def initialize(tags)
     @selected = tags || []
-    @available = Showing.search { facet(:tags, limit: 500, sort: :index) }.facet(:tags).rows.map(&:value)
+    #@available = Showing.search { facet(:tags, limit: 500, sort: :index) }.facet(:tags).rows.map(&:value)
+    @available = HasSearcher.searcher(:showings).actual.facets.facet(:tags).rows.map(&:value)
   end
 
   def used?
