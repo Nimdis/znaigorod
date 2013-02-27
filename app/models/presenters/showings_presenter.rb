@@ -21,7 +21,7 @@ class ShowingsPresenter
     super(args)
 
     @page ||= 1
-    @per_page = 10
+    @per_page = 12
     @order_by = %w[nearness popularity].include?(order_by) ? order_by : 'popularity'
     @view     = %w[list posters].include?(view) ? view : 'posters'
 
