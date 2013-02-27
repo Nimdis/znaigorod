@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   layout 'contests/spring_mood'
 
   def main_page
-    @affiche_today = AfficheToday.new 'movies'
+    @showings_presenter = ShowingsPresenter.new(categories: ['movie'])
     @photoreport = Photogallery.new
     @actual_organizations = ActualOrganizations.new
   end

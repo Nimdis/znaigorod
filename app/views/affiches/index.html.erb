@@ -5,9 +5,9 @@
       <div class="presentation">
         <p>Настройка списка:</p>
         <ul>
-          <li><a class="list <%= 'selected' if @presenter.view_list? %>" title="подробный список" href="">список</a></li>
+          <li><a class="list <%= 'selected' if @showings_presenter.view_list? %>" title="подробный список" href="">список</a></li>
           <li><span class="separator">&nbsp;</span></li>
-          <li><a class="posters <%= 'selected' unless @presenter.view_list? %>" title="краткий список" href="">постеры</a></li>
+          <li><a class="posters <%= 'selected' unless @showings_presenter.view_list? %>" title="краткий список" href="">постеры</a></li>
         </ul>
       </div>
       <div class="sort affiches">
@@ -15,21 +15,21 @@
         <ul>
           <li>
             <%= link_to t('affiche.sort.popular'),
-              affiches_path(@presenter.searcher_params.merge(order_by: 'popularity')),
-              @presenter.order_by_popularity? ? { class: 'selected' } : {} %>
+              affiches_path(@showings_presenter.searcher_params.merge(order_by: 'popularity')),
+              @showings_presenter.order_by_popularity? ? { class: 'selected' } : {} %>
           </li>
           <li>
             <%= link_to t('affiche.sort.closest'),
-              affiches_path(@presenter.searcher_params.merge(order_by: 'nearness')),
-              @presenter.order_by_popularity? ? {} : { class: 'selected' } %>
+              affiches_path(@showings_presenter.searcher_params.merge(order_by: 'nearness')),
+              @showings_presenter.order_by_popularity? ? {} : { class: 'selected' } %>
           </li>
         </ul>
       </div>
     </div>
 
-    <% if @presenter.collection.any? %>
-      <ul class="items_list <%= @presenter.view %>">
-        <%= render :partial => @presenter.partial %>
+    <% if @showings_presenter.collection.any? %>
+      <ul class="items_list <%= @showings_presenter.view %>">
+        <%= render :partial => @showings_presenter.partial %>
       </ul>
     <% else %>
       <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
@@ -37,4 +37,4 @@
   </div>
 </div>
 
-<%= paginate @presenter.paginated_collection %>
+<%= paginate @showings_presenter.paginated_collection %>

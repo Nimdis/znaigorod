@@ -1,6 +1,6 @@
 <div class="main_page_block_wrapper today_in_city_header">
   <div class="main_page_block">
-    <%= link_to "Вся афиша Томска", affiches_path(:affiches, :all), :class => "all_affiches" %>
+    <%= link_to "Вся афиша Томска", affiches_path, :class => "all_affiches" %>
     <h1><span class="strong">Сегодня</span> в городе</h1>
   </div>
 </div>
@@ -8,10 +8,13 @@
 <div class="main_page_block_wrapper today_in_city_menu">
   <div class="main_page_block">
     <ul>
-      <% @affiche_today.links.each do |link| %>
-        <li<%= raw(" class='#{link.html_options[:class]}'") unless link.html_options[:class].blank? %>>
-          <%= link_to raw("#{link.title} <span>(#{@affiche_today.counters[link.kind].today})</span>"), link.url %>
-        </li>
+      <% @showings_presenter.today_affiche_links.each do |link| %>
+        <%= content_tag :li, link[:current] ? { class: 'current' } : nil do %>
+          <%= link_to affiches_path(link[:query]) do %>
+            <%= link[:title] %>
+            <span><%= "(#{link[:count]})" %></span>
+          <% end %>
+        <% end %>
       <% end %>
     </ul>
   </div>
@@ -20,9 +23,9 @@
 <div class="main_page_block_wrapper today_in_city_affiche">
   <div class="main_page_block">
     <div class="affiche">
-      <% if @affiche_today.affiches.any? %>
+      <% if @showings_presenter.collection.any? %>
         <ul>
-          <% @affiche_today.affiches.each do |affiche| %>
+          <% @showings_presenter.collection.each do |affiche| %>
             <li>
               <div class="item">
                 <%= affiche.has_ribbon %>
@@ -35,7 +38,7 @@
         </ul>
       <% else %>
         <p class="empty_message">
-          Похоже сегодня в городе нет <%= t("affiche.empty.#{@affiche_today.current_link.kind}") %> ;(
+          Похоже сегодня в городе нет <%#= t("affiche.empty.#{@affiche_today.current_link.kind}") %> ;(
         </p>
       <% end %>
     </div>
@@ -45,10 +48,22 @@
 <div class="main_page_block_wrapper more_in_city">
   <div class="main_page_block">
     <ul>
-      <li><%= link_to "#{t('affiche_periods.today')} (#{@affiche_today.counters[@affiche_today.current_link.kind].today})", affiches_path(@affiche_today.kind, :today) %></li>
-      <li><%= link_to "#{t('affiche_periods.weekly')} (#{@affiche_today.counters[@affiche_today.current_link.kind].weekly})", affiches_path(@affiche_today.kind, :weekly) %></li>
-      <li><%= link_to "#{t('affiche_periods.weekend')} (#{@affiche_today.counters[@affiche_today.current_link.kind].weekend})", affiches_path(@affiche_today.kind, :weekend) %></li>
-      <li><%= link_to "#{t("affiche_periods.all.#{@affiche_today.current_link.kind}")} (#{@affiche_today.counters[@affiche_today.current_link.kind].all})", affiches_path(@affiche_today.kind, :all) %></li>
+      <li>
+        <%#= link_to "#{t('affiche_periods.today')} (#{@affiche_today.counters[@affiche_today.current_link.kind].today})",
+          @affiche_today.affiches_path_with_params(@affiche_today.kind, :today) %>
+      </li>
+      <li>
+        <%#= link_to "#{t('affiche_periods.weekly')} (#{@affiche_today.counters[@affiche_today.current_link.kind].weekly})",
+          @affiche_today.affiches_path_with_params(@affiche_today.kind, :week) %>
+      </li>
+      <li>
+        <%#= link_to "#{t('affiche_periods.weekend')} (#{@affiche_today.counters[@affiche_today.current_link.kind].weekend})",
+          @affiche_today.affiches_path_with_params(@affiche_today.kind, :weekend) %>
+        </li>
+        <li>
+          <%#= link_to "#{t("affiche_periods.all.#{@affiche_today.current_link.kind}")} (#{@affiche_today.counters[@affiche_today.current_link.kind].all})",
+          @affiche_today.affiches_path_with_params(@affiche_today.kind, nil)%>
+      </li>
     </ul>
   </div>
 </div>

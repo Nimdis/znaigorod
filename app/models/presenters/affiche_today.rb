@@ -26,11 +26,22 @@ class AfficheToday
     Affiche.ordered_descendants
   end
 
+  def affiches_path_with_params(kind, period)
+    categories = [kind.to_s.singularize]
+
+    query = {}.tap do |hash|
+      hash[:categories] = categories
+      hash[:period] = period if period.present?
+    end
+
+    affiches_path(query)
+  end
+
   def links
     links = []
     affiche_descendants_for_main_page.each do |affiche_kind|
       kind = affiche_kind.model_name.downcase.pluralize
-      links << Link.new(:title => affiche_kind.model_name.human, :current => kind == self.kind, :kind => kind, :html_options => {}, :url => affiches_path(kind, :today))
+      links << Link.new(:title => affiche_kind.model_name.human, :current => kind == self.kind, :kind => kind, :html_options => {}, :url => affiches_path_with_params(kind, :today))
     end
     current_index = links.index { |link| link.current? }
     links[current_index - 1].html_options[:class] = :before_current if current_index > 0

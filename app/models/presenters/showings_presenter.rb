@@ -70,6 +70,17 @@ class ShowingsPresenter
     "affiches/affiches_#{view}"
   end
 
+  def today_affiche_links
+    @today_affiche_links ||= Affiche.ordered_descendants.map { |descendant|
+      {
+        title: "#{descendant.model_name.human}",
+        query: { categories: [descendant.name.downcase], period: 'today' },
+        current: categories.include?(descendant.name.downcase),
+        count: Counter.new(kind: descendant.name.downcase).today
+      }
+    }
+  end
+
   def searcher_params
     @searcher_params ||= {}.tap do |params|
       params[:age_max]          = age_filter.maximum         if age_filter.maximum.present?
