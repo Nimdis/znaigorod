@@ -14,7 +14,8 @@ class ShowingsPresenter
                 :tags,
                 :lat, :lon, :radius,
                 :order_by,
-                :page, :per_page
+                :page, :per_page,
+                :view
 
   def initialize(args)
     super(args)
@@ -22,6 +23,7 @@ class ShowingsPresenter
     @page ||= 1
     @per_page = 10
     @order_by = %w[nearness popularity].include?(order_by) ? order_by : 'popularity'
+    @view     = %w[list posters].include?(view) ? view : 'posters'
 
     initialize_filters
   end
@@ -60,9 +62,12 @@ class ShowingsPresenter
     searcher.group(:affiche_id_str).total
   end
 
+  def view_list?
+    view == 'list'
+  end
+
   def partial
-    #'affiches/affiches_posters'
-    'affiches/affiches_list'
+    "affiches/affiches_#{view}"
   end
 
   def searcher_params

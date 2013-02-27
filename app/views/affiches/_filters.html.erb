@@ -4,6 +4,7 @@
 
     <%= form_tag affiches_path, :method => :get do %>
       <%= hidden_field_tag :order_by, @presenter.order_by %>
+      <%= hidden_field_tag :view, @presenter.view %>
 
       <div class='filter show categories_filter' id='categories'>
         <%= link_to "очистить", '#', :class => 'clear_filter_link' %>
@@ -114,7 +115,7 @@
       <div class="filter completion_wrapper <%= @presenter.organizations_filter.used? ? 'show' : 'hide' %>" id='place'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
         <%= link_to "очистить", '#', :class => 'clear_filter_link' %>
-        <div class="filter_label">Место</div>
+        <div class="filter_label">Заведение</div>
         <div class="filter_completion">
           <%= text_field_tag '',
                              '',
@@ -175,7 +176,7 @@
             <%= link_to "Время", '#', :class => 'time' %>
           </li>
           <li>
-            <%= link_to "Место", '#', :class => 'place' %>
+            <%= link_to "Заведение", '#', :class => 'place' %>
           </li>
           <li>
             <%= link_to "Тэги", '#', :class => 'tags' %>

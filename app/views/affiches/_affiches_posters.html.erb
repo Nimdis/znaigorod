@@ -1,4 +1,4 @@
-<% @affiche_collection.affiches.each do |affiche| %>
+<% @presenter.collection.each do |affiche| %>
   <li class="<%= cycle('first', 'second', 'third', 'fourth') %>">
     <%= render partial: 'affiches/affiche_poster', locals: { affiche: affiche } %>
   </li>
