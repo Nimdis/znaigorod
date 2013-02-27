@@ -25,7 +25,7 @@ class PeriodFilter
   end
 
   def period
-    self.class.available_period_values.include?(@period) ? @period : self.class.available_period_values.first
+    available_period_values.include?(@period) ? @period : available_period_values.last
   end
 
   def date?
@@ -37,7 +37,11 @@ class PeriodFilter
   end
 
   def self.available_period_values
-    %w[all today week weekend]
+    %w[today week weekend all]
+  end
+
+  def available_period_values
+    self.class.available_period_values
   end
 
   available_period_values.each do |name|
@@ -137,7 +141,6 @@ class OrganizationsFilter
 
   def available
     @available ||= Organization.where(id: Showing.search { facet(:organization_ids, limit: 500) }.facet(:organization_ids).rows.map(&:value)).
-    #@available ||= Organization.where(id: HasSearcher.searcher(:showings).actual.facets.facet(:organization_ids).rows.map(&:value)).
       order(:title).
       map { |o| { name: o.title, id: o.id } }
   end
@@ -152,7 +155,6 @@ class TagsFilter
 
   def initialize(tags)
     @selected = tags || []
-    #@available = Showing.search { facet(:tags, limit: 500, sort: :index) }.facet(:tags).rows.map(&:value)
     @available = HasSearcher.searcher(:showings).actual.facets.facet(:tags).rows.map(&:value)
   end
 

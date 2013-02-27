@@ -81,6 +81,26 @@ class ShowingsPresenter
     }
   end
 
+  def kind
+    'movie'
+  end
+
+  def category_affiche_links
+    @category_affiche_links ||= [].tap { |array|
+      (period_filter.available_period_values - ['all']).each { |period|
+        array << {
+          title: "#{I18n.t("affiche_periods.#{period}")} (#{Counter.new(kind: kind).today})",
+          query: { categories: [kind], period: period }
+        }
+      }
+
+      array << {
+        title: "#{I18n.t("affiche_periods.all.#{kind.pluralize}")} (#{Counter.new(kind: kind).all})",
+        query: { categories: [kind] }
+      }
+    }
+  end
+
   def searcher_params
     @searcher_params ||= {}.tap do |params|
       params[:age_max]          = age_filter.maximum         if age_filter.maximum.present?

@@ -134,6 +134,7 @@
   affiche_periods:
     today: Сегодня
     weekly: На этой неделе
+    week: На этой неделе
     weekend: На этих выходных
     daily: Выбрать дату
     all:
