@@ -81,6 +81,7 @@ class ShowingsPresenter
     }
   end
 
+  # TODO: наверное должно быть что-то похожее на AfficheToday#default_kind
   def kind
     'movie'
   end
