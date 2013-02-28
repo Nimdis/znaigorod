@@ -25,23 +25,36 @@ HasSearcher.create_searcher :showings do
 
   # price
   property :price_max do |search|
-    search.without(:price_max).less_than(search_object.price_min) if search_object.price_min.present?
+    search.any_of do
+      with(:price_max).greater_than_or_equal_to(search_object.price_min)
+      with(:price_max, nil)
+    end if search_object.price_min.present?
   end
 
   property :price_min do |search|
-    search.without(:price_min).greater_than(search_object.price_max) if search_object.price_max.present?
+    search.with(:price_min).less_than_or_equal_to(search_object.price_max) if search_object.price_max.present?
   end
 
   # age
   property :age_max do |search|
-    search.without(:age_max).less_than(search_object.age_min) if search_object.age_min.present?
+    search.any_of do
+      with(:age_max).greater_than_or_equal_to(search_object.age_min)
+      with(:age_max, nil)
+    end if search_object.age_min.present?
   end
 
   property :age_min do |search|
-    search.without(:age_min).greater_than(search_object.age_max) if search_object.age_max.present?
+    search.with(:age_min).less_than_or_equal_to(search_object.age_max) if search_object.age_max.present?
   end
 
   #time
+  property :to do |search|
+    search.with(:ends_at_hour).greater_than_or_equal_to(search_object.from) if search_object.from.present?
+  end
+
+  property :from do |search|
+    search.with(:starts_at_hour).less_than_or_equal_to(search_object.to) if search_object.to.present?
+  end
 
   # period
   scope :actual do |search|
