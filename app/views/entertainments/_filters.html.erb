@@ -47,11 +47,6 @@
 
       <div class="filter <%= @presenter.geo_filter.used? ? 'used show' : 'hide' %>" id='geo'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
-        <div class="filter_label">Местоположение</div>
-        <div class="filter_geo">
-          <div class="map_wrapper">
-          </div>
-          <div class="hidden_inputs">
             <%= hidden_field_tag :lat,    @presenter.geo_filter.lat, :class => 'lat' %>
             <%= hidden_field_tag :lon,    @presenter.geo_filter.lon, :class => 'lon' %>
             <%= hidden_field_tag :radius, @presenter.geo_filter.radius, :class => 'radius' %>

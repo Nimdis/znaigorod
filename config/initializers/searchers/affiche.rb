@@ -174,6 +174,17 @@ HasSearcher.create_searcher :meal do
   end
 end
 
+HasSearcher.create_searcher :entertainments do
+  models :entertainment
+
+  # categories tags organizations
+  [:categories, :tags, :organization_ids].each do |field|
+    property field do |search|
+      search.with(field, search_object.send(field)) if search_object.send(field).try(:any?)
+    end
+  end
+end
+
 HasSearcher.create_searcher :entertainment do
   models :entertainment
 
