@@ -26,6 +26,8 @@ module SearchWithFacets
 
         float :organization_rating
 
+        integer(:organization_ids, multiple: true) { [organization_id] }
+
         # dirty ;(
         string(:entertainment_type) { self.type } if klass == Entertainment
       end

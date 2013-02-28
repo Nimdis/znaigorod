@@ -1,0 +1,203 @@
+<div class='filters_wrapper'>
+  <div class="filters">
+    <h1>Развлечения города</h1>
+
+    <%#= form_tag affiches_path, :method => :get do %>
+      <%#= hidden_field_tag :order_by, @showings_presenter.order_by %>
+      <%#= hidden_field_tag :view, @showings_presenter.view %>
+
+      <div class='filter show categories_filter' id='categories'>
+        <%#= link_to "очистить", '#', :class => 'clear_filter_link' %>
+        <div class="filter_checkboxes">
+          <%# @showings_presenter.categories_filter.available.each_with_index do |category, index| %>
+            <div class="checkbox">
+              <%#= check_box_tag 'categories[]', category, (@showings_presenter.categories_filter.selected.include?(category)), :id => "category_#{index}" %>
+              <%#= label_tag "category_#{index}", @showings_presenter.categories_filter.human_names[index] %>
+            </div>
+          <%# end %>
+        </div>
+      </div>
+
+      <div class="filter show date_filter" id='calendar'>
+        <ul>
+          <li class='<%#= @showings_presenter.period_filter.date? ? 'date_picker_wrapper selected' : 'date_picker_wrapper' %>'>
+            <input name='period' type="text" disabled='disabled' value='<%#= @showings_presenter.period_filter.date? ? l(@showings_presenter.period_filter.date) : l(Date.today) %>'/>
+          </li>
+          <li class='<%#= @showings_presenter.period_filter.today? ? 'selected' : 'not_selected' %>'>
+            <a href='#'>Сегодня</a>
+            <input name="period" type="hidden" value='today' disabled='disabled' />
+          </li>
+          <li class='<%#= @showings_presenter.period_filter.week? ? 'selected' : 'not_selected' %>'>
+            <a href='#'>На этой неделе</a>
+            <input name="period" type="hidden" value='week' disabled='disabled' />
+          </li>
+          <li class='<%#= @showings_presenter.period_filter.weekend? ? 'selected' : 'not_selected' %>'>
+            <a href='#'>На этих выходных</a>
+            <input name="period" type="hidden" value='weekend' disabled='disabled' />
+          </li>
+          <li class='<%#= @showings_presenter.period_filter.all? ? 'selected' : 'not_selected' %>'>
+            <a href='#'>Все</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="filter <%#= @showings_presenter.price_filter.used? ? 'used show' : 'not_used hide' %>" id='amount'>
+        <%#= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <div class="filter_label wide">Стоимость</div>
+        <div class="filter_inputs">
+          <div class="input">
+            <%#= label_tag :price_min, 'от' %>
+            <%#= text_field_tag :price_min, @showings_presenter.price_filter.selected.minimum, :class => 'min' %>
+          </div>
+          <div class="input">
+            <%#= label_tag :price_max, 'до' %>
+            <%#= text_field_tag :price_max, @showings_presenter.price_filter.selected.maximum, :class => 'max' %>
+          </div>
+        </div>
+        <div class='filter_input_label'>руб.</div>
+
+        <div class="filter_slider_wrapper">
+          <div class="filter_slider"
+            data-range='true'
+            data-min='<%#= @showings_presenter.price_filter.available.minimum %>'
+            data-max='<%#= @showings_presenter.price_filter.available.maximum %>' data-step='50'>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter <%#= @showings_presenter.age_filter.used? ? 'used show' : 'not_used hide' %>" id='age'>
+        <%#= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <div class="filter_label wide">Возраст</div>
+        <div class="filter_inputs">
+          <div class="input">
+            <%#= label_tag :age_min, 'от' %>
+            <%#= text_field_tag :age_min, @showings_presenter.age_filter.selected.minimum, :class => 'min' %>
+          </div>
+          <div class="input">
+            <%#= label_tag :age_max, 'до' %>
+            <%#= text_field_tag :age_max, @showings_presenter.age_filter.selected.maximum, :class => 'max' %>
+          </div>
+        </div>
+        <div class='filter_input_label'>лет</div>
+
+        <div class="filter_slider_wrapper">
+          <div class="filter_slider"
+            data-range='true'
+            data-min='<%#= @showings_presenter.age_filter.available.minimum %>'
+            data-max='<%#= @showings_presenter.age_filter.available.maximum %>' data-step='1'>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter <%#= @showings_presenter.time_filter.used? ? 'used show' : 'not_used hide' %>" id='time'>
+        <%#= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <div class="filter_label wide">Время</div>
+        <div class="filter_inputs">
+          <div class="input">
+            <%#= label_tag :time_from, 'от' %>
+            <%#= text_field_tag :time_from, @showings_presenter.time_filter.selected.from, :class => 'min' %>
+          </div>
+          <div class="input">
+            <%#= label_tag :time_to, 'до' %>
+            <%#= text_field_tag :time_to, @showings_presenter.time_filter.selected.to, :class => 'max' %>
+          </div>
+        </div>
+        <div class='filter_input_label'>часов</div>
+
+        <div class="filter_slider_wrapper">
+          <div class="filter_slider"
+            data-range='true'
+            data-min='<%#= @showings_presenter.time_filter.available.from %>'
+            data-max='<%#= @showings_presenter.time_filter.available.to %>' data-step='1'></div>
+        </div>
+      </div>
+
+      <div class="filter completion_wrapper <%#= @showings_presenter.organizations_filter.used? ? 'show' : 'hide' %>" id='place'>
+        <%#= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <%#= link_to "очистить", '#', :class => 'clear_filter_link' %>
+        <div class="filter_label">Заведение</div>
+        <div class="filter_completion">
+          <%#= text_field_tag '',
+                             '',
+                             :class => 'completion_input',
+                             :data => {
+                               :source => @showings_presenter.organizations_filter.available,
+                               :selected => @showings_presenter.organizations_filter.selected
+                             } %>
+        </div>
+      </div>
+
+      <div class="filter <%#= @showings_presenter.tags_filter.used? ? 'show' : 'hide' %>" id='tags'>
+        <%#= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <%#= link_to "очистить", '#', :class => 'clear_filter_link' %>
+        <div class="filter_label">Теги</div>
+        <div class="filter_checkboxes">
+          <%# @showings_presenter.tags_filter.available.each_with_index do |tag_title, index| %>
+            <div class="checkbox">
+              <%#= check_box_tag 'tags[]', tag_title, (@showings_presenter.tags_filter.selected.include?(tag_title)), :id => "tag_#{index}" %>
+              <%#= label_tag "tag_#{index}", tag_title.mb_chars.capitalize %>
+            </div>
+          <%# end %>
+        </div>
+      </div>
+
+      <div class="filter <%#= @showings_presenter.geo_filter.used? ? 'used show' : 'hide' %>" id='geo'>
+        <%#= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <div class="filter_label">Местоположение</div>
+        <div class="filter_geo">
+          <div class="map_wrapper">
+          </div>
+          <div class="hidden_inputs">
+            <%#= hidden_field_tag :lat,    @showings_presenter.geo_filter.lat, :class => 'lat' %>
+            <%#= hidden_field_tag :lon,    @showings_presenter.geo_filter.lon, :class => 'lon' %>
+            <%#= hidden_field_tag :radius, @showings_presenter.geo_filter.radius, :class => 'radius' %>
+          </div>
+        </div>
+        <div class="radius_slider_wrapper">
+          <div class="info_radius"><span class='bold'>Радиус:</span> <span class='rad'><%#= "%.0f" % (@showings_presenter.geo_filter.radius.to_f*1000) %></span> м (<span class='time'><%#= "%.1f" % (@showings_presenter.geo_filter.radius.to_f*1000/54.6) %></span> мин пешком)</div>
+          <div class="wrapper_box">
+            <div class="min_radius">100 м</div>
+            <div class="radius_slider"></div>
+            <div class="max_radius">11 км</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="criteria_list">
+        <div class="criteria_label">Добавить критерии:</div>
+        <ul>
+          <li>
+            <%#= link_to "Стоимость", '#', :class => 'amount' %>
+          </li>
+          <li>
+            <%#= link_to "Возраст", '#', :class => 'age' %>
+          </li>
+          <li>
+            <%#= link_to "Время", '#', :class => 'time' %>
+          </li>
+          <li>
+            <%#= link_to "Заведение", '#', :class => 'place' %>
+          </li>
+          <li>
+            <%#= link_to "Тэги", '#', :class => 'tags' %>
+          </li>
+          <li>
+            <%#= link_to "Местоположение", '#', :class => 'geo' %>
+          </li>
+        </ul>
+      </div>
+      <div class="submit_action">
+        <div class="submit_wrapper">
+          <input type="submit" value="Применить фильтр" class='submit' />
+        </div>
+        <div class="results_counter">
+          Найдено мероприятий: <span class='counter'><%#= @showings_presenter.total_count %></span>
+        </div>
+        <div class="clear_wrapper">
+          <%#= link_to "Очистить", '#' %>
+        </div>
+      </div>
+    <%# end %>
+  </div>
+</div>
+

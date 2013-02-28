@@ -112,8 +112,8 @@ class ShowingsPresenter
       params[:price_min]        = price_filter.minimum       if price_filter.minimum.present?
       params[:starts_on]        = period_filter.date         if period_filter.date?
       params[:tags]             = tags_filter.selected       if tags_filter.selected.any?
-      params[:from]        = time_filter.from           if time_filter.from.present?
-      params[:to]          = time_filter.to             if time_filter.to.present?
+      params[:from]             = time_filter.from           if time_filter.from.present?
+      params[:to]               = time_filter.to             if time_filter.to.present?
 
       params[:location]         = { lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius } if geo_filter.used?
     end

@@ -1,0 +1,39 @@
+<div class="content_wrapper">
+  <%= render :partial => 'filters' %>
+  <div class="organizations_list">
+    <div class="list_settings">
+      <div class="presentation">
+        <p>Настройка списка:</p>
+        <ul>
+          <li><a class="list <%#= 'selected' if @showings_presenter.view_list? %>" title="подробный список" href="">список</a></li>
+          <li><span class="separator">&nbsp;</span></li>
+          <li><a class="posters <%#= 'selected' unless @showings_presenter.view_list? %>" title="краткий список" href="">постеры</a></li>
+        </ul>
+      </div>
+      <div class="sort affiches">
+        <p>Сортировка:</p>
+        <ul>
+          <li>
+            <%#= link_to t('affiche.sort.popular'),
+              affiches_path(@showings_presenter.searcher_params.merge(order_by: 'popularity')),
+              @showings_presenter.order_by_popularity? ? { class: 'selected' } : {} %>
+          </li>
+          <li>
+            <%#= link_to t('affiche.sort.closest'),
+              affiches_path(@showings_presenter.searcher_params.merge(order_by: 'nearness')),
+              @showings_presenter.order_by_popularity? ? {} : { class: 'selected' } %>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <% if @entertainments_presenter.collection.any? %>
+      <ul class="items_list <%#= @showings_presenter.view %>">
+        <%= render :partial => "organizations/organizations_list" %>
+      </ul>
+    <% else %>
+      <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
+    <% end %>
+  </div>
+</div>
+

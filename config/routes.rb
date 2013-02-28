@@ -110,8 +110,10 @@ Znaigorod::Application.routes.draw do
       :period => /today|weekly|weekend|all|daily/, :on => :member, :as => :affiche
   end
 
-  get ':organization_class/(:category)/(*query)' => 'organizations#index',
-      :organization_class => /organizations|meals|entertainments|cultures|sports|creations|saunas/, :as => :organizations
+  #get ':organization_class/(:category)/(*query)' => 'organizations#index',
+      #:organization_class => /organizations|meals|entertainments|cultures|sports|creations|saunas/, :as => :organizations
+  resources :organizations, :only => :index
+  resources :entertainments, :only => :index
 
   resources :posts, :only => [:index, :show] do
     get :draft, :on => :collection, :as => :draft
