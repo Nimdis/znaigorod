@@ -5,9 +5,16 @@
       <div class="presentation">
         <p>Настройка списка:</p>
         <ul>
-          <li><a class="list <%= 'selected' if @showings_presenter.view_list? %>" title="подробный список" href="">список</a></li>
-          <li><span class="separator">&nbsp;</span></li>
-          <li><a class="posters <%= 'selected' unless @showings_presenter.view_list? %>" title="краткий список" href="">постеры</a></li>
+          <li>
+            <%= link_to 'список',
+              affiches_path(@showings_presenter.query.merge(view: 'list')),
+              { title: 'подробный список', data: 'list' }.merge(@showings_presenter.view_list? ? { class: 'list selected' } : { class: 'list' }) %>
+          </li>
+          <li>
+            <%= link_to 'постеры',
+              affiches_path(@showings_presenter.query.merge(view: 'posters')),
+              { title: 'краткий список', data: 'posters' }.merge(@showings_presenter.view_list? ? { class: 'posters' } : { class: 'posters selected' }) %>
+          </li>
         </ul>
       </div>
       <div class="sort affiches">
@@ -15,13 +22,13 @@
         <ul>
           <li>
             <%= link_to t('affiche.sort.popular'),
-              affiches_path(@showings_presenter.searcher_params.merge(order_by: 'popularity')),
-              @showings_presenter.order_by_popularity? ? { class: 'selected' } : {} %>
+              affiches_path(@showings_presenter.query.merge(order_by: 'popularity')),
+              { data: 'popularity' }.merge(@showings_presenter.order_by_popularity? ? { class: 'selected' } : {}) %>
           </li>
           <li>
             <%= link_to t('affiche.sort.closest'),
-              affiches_path(@showings_presenter.searcher_params.merge(order_by: 'nearness')),
-              @showings_presenter.order_by_popularity? ? {} : { class: 'selected' } %>
+              affiches_path(@showings_presenter.query.merge(order_by: 'nearness')),
+              { data: 'nearness' }.merge(@showings_presenter.order_by_popularity? ? {} : { class: 'selected' }) %>
           </li>
         </ul>
       </div>

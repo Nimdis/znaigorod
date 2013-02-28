@@ -2,7 +2,11 @@
 
 class AffichesController < ApplicationController
   def index
-    @showings_presenter = ShowingsPresenter.new(params)
+    cookie = cookies['znaigorod_affiches_list_settings'].to_s
+    settings = {}
+    settings = JSON.parse(cookie) if cookie.present? && cookie.length > 1
+
+    @showings_presenter = ShowingsPresenter.new(params.merge(settings))
 
     if request.xhr?
       if params[:page]

@@ -1,4 +1,5 @@
 @init_list_settings = () ->
+  return false ## THIS SCRIP IS DEPRICATED !
   unless $.cookie
     console.error "$.cookie() is not a function. please include it" if console && console.error
     return false

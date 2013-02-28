@@ -119,6 +119,16 @@ class ShowingsPresenter
     end
   end
 
+  def query
+    searcher_params.tap { |hash|
+      hash.delete(:starts_on)
+      hash.delete(:location)
+
+      hash[:utf8] = '✓'
+      %w[order_by view period lat lon radius].each { |p| hash[p] = send(p) }
+    }
+  end
+
   private
 
   def searcher
