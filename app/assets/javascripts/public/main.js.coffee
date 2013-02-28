@@ -1,7 +1,7 @@
 $ ->
   init_common()
 
-  if typeof VK != 'undefined'
+  if typeof VK != 'undefined' && window.location.href.match(/http:\/\/znaigorod.ru/)
     init_vk_like() if $('#vk_like').length
     init_vk_recommended() if $('#vk_recommended').length
     init_vk_comments() if $('#vk_comments').length
