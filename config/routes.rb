@@ -82,10 +82,6 @@ Znaigorod::Application.routes.draw do
 
   resources :affiches, :only => :index
 
-  #get ':kind/:period/(:on)/(categories/*categories)/(tags/*tags)' => 'affiches#index',
-      #:kind => /movies|concerts|parties|spectacles|exhibitions|sportsevents|others|affiches|masterclasses/,
-      #:period => /today|weekly|weekend|all|daily/, :as => :affiches
-
   get 'photogalleries/:period/(*query)' => 'photogalleries#index',
     period: /all|month|week/,
     :as => :photogalleries

@@ -1,12 +1,12 @@
 <div class="main_menu_wrapper">
   <ul class="main_menu">
     <li class="has_submenu">
-      <a href="/affiches/all">Афиша</a>
+      <a href="/affiches">Афиша</a>
       <ul class="submenu">
-        <li><a href="/affiches/all">Все мероприятия</a></li>
-        <% Affiche.ordered_descendants.each do |name| %>
+        <li><a href="/affiches">Все мероприятия</a></li>
+        <% Affiche.ordered_descendants.each do |klass| %>
           <li>
-            <%= link_to name.model_name.human, "/#{name.model_name.pluralize.downcase}/all" %>
+            <%= link_to klass.model_name.human, affiches_path(categories: [klass.name.downcase]) %>
           </li>
         <% end %>
       </ul>
