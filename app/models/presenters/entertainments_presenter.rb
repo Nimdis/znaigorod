@@ -2,11 +2,8 @@ class EntertainmentsPresenter
   include ActiveAttr::MassAssignment
 
   attr_accessor :categories,
-                :price_min, :price_max,
-                :age_min, :age_max,
-                :time_from, :time_to,
-                :organization_ids,
-                :tags,
+                :features,
+                :offers,
                 :lat, :lon, :radius,
                 :order_by,
                 :page, :per_page
@@ -20,30 +17,48 @@ class EntertainmentsPresenter
   end
 
   def collection
+    EntertainmentDecorator.decorate searcher.results
+  end
+
+  def paginated_collection
     searcher.results
   end
 
+  [:categories, :features, :offers].each do |field|
+    define_method "#{field}_filter" do
+      Hashie::Mash.new.tap { |h|
+        h[:selected] = send(field) || []
+        h[:available] = HasSearcher.searcher(:entertainment).facet("entertainment_#{field.to_s.singularize}").rows.map(&:value)
+        h['used?'] = send(field).present? && send(field).any?
+      }
+    end
+  end
+
+  def geo_filter
+    Hashie::Mash.new.tap { |h|
+      h[:lat] = lat
+      h[:lon] = lon
+      h[:radius] = radius
+      h['used?'] = lat.present? && lon.present? && radius.present?
+    }
+  end
+
+
   def searcher_params
     @searcher_params ||= {}.tap do |params|
-      #params[:age_max]          = age_filter.maximum         if age_filter.maximum.present?
-      #params[:age_min]          = age_filter.minimum         if age_filter.minimum.present?
-      #params[:categories]       = categories_filter.selected if categories_filter.selected.any?
-      #params[:organization_ids] = organizations_filter.ids   if organizations_filter.ids.any?
-      #params[:price_max]        = price_filter.maximum       if price_filter.maximum.present?
-      #params[:price_min]        = price_filter.minimum       if price_filter.minimum.present?
-      #params[:tags]             = tags_filter.selected       if tags_filter.selected.any?
-      #params[:from]             = time_filter.from           if time_filter.from.present?
-      #params[:to]               = time_filter.to             if time_filter.to.present?
+      [:category, :feature, :offer].map(&:to_s).each do |field|
+        params["entertainment_#{field}".to_sym]  = send("#{field.pluralize}_filter").selected if send("#{field.pluralize}_filter").used?
+      end
 
-      #params[:location]         = { lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius } if geo_filter.used?
+      params[:location] = { lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius } if geo_filter.used?
     end
   end
 
   private
 
   def searcher
-    @searcher ||= HasSearcher.searcher(:entertainments).tap { |s|
-      #s.paginate(page: page, per_page: per_page).groups
+    @searcher ||= HasSearcher.searcher(:entertainments, searcher_params).tap { |s|
+      s.paginate(page: page, per_page: per_page)
 
       #order_by_popularity? ? s.order_by_popularity : s.order_by_nearness
     }

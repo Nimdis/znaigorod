@@ -298,11 +298,20 @@ end
 HasSearcher.create_searcher :entertainments do
   models :entertainment
 
-  # categories tags organizations
-  [:categories, :tags, :organization_ids].each do |field|
+  [:entertainment_category, :entertainment_feature, :entertainment_offer].each do |field|
     property field do |search|
       search.with(field, search_object.send(field)) if search_object.send(field).try(:any?)
     end
+  end
+
+  scope do
+    [:entertainment_category, :entertainment_feature, :entertainment_offer].each do |field|
+      facet(field)
+    end
+  end
+
+  property :location do |search|
+    search.with(:location).in_radius(search_object.location[:lat], search_object.location[:lon], search_object.location[:radius]) if search_object.location
   end
 end
 

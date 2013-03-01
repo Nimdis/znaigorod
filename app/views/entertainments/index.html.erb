@@ -2,14 +2,6 @@
   <%= render :partial => 'filters' %>
   <div class="organizations_list">
     <div class="list_settings">
-      <div class="presentation">
-        <p>Настройка списка:</p>
-        <ul>
-          <li><a class="list <%#= 'selected' if @showings_presenter.view_list? %>" title="подробный список" href="">список</a></li>
-          <li><span class="separator">&nbsp;</span></li>
-          <li><a class="posters <%#= 'selected' unless @showings_presenter.view_list? %>" title="краткий список" href="">постеры</a></li>
-        </ul>
-      </div>
       <div class="sort affiches">
         <p>Сортировка:</p>
         <ul>
@@ -37,3 +29,4 @@
   </div>
 </div>
 
+<%= paginate @entertainments_presenter.paginated_collection %>

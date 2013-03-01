@@ -1,13 +1,5 @@
-<% if false %>
-  <% @organizations_collection.suborganizations.each do |suborganization| %>
-    <li>
-      <%= render partial: 'organizations/suborganization', locals: { suborganization: suborganization } %>
-    </li>
-  <% end %>
-<% end %>
-
-<% @entertainments_presenter.collection.each do |organization| %>
+<% @entertainments_presenter.collection.each do |suborganization| %>
   <li>
-    <%= organization %>
+    <%= render partial: 'organizations/suborganization', locals: { suborganization: suborganization } %>
   </li>
 <% end %>

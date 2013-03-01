@@ -174,4 +174,3 @@ class GeoFilter
     lat.present? && lon.present? && radius.present?
   end
 end
-
