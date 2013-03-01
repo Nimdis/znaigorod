@@ -22,7 +22,6 @@ class ShowingsPresenter
 
     @page ||= 1
     @per_page = 12
-    @order_by = available_sortings.include?(order_by) ? order_by : available_sortings.first
     @view     = %w[list posters].include?(view) ? view : 'posters'
 
     initialize_filters
@@ -47,12 +46,19 @@ class ShowingsPresenter
 
   available_sortings.each do |sorting|
     define_method "sort_by_#{sorting}?" do
-      order_by == sorting
+      @order_by == sorting
     end
   end
 
   def available_sortings
     self.class.available_sortings
+  end
+
+  def order_by
+    @order_by = available_sortings.include?(@order_by) ? @order_by : available_sortings.first
+    @order_by = available_sortings.first if !geo_filter.used? && sort_by_nearness?
+
+    @order_by
   end
 
   def collection
