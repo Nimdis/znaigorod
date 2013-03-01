@@ -22,7 +22,7 @@ class ShowingsPresenter
 
     @page ||= 1
     @per_page = 12
-    @order_by = %w[nearness popularity].include?(order_by) ? order_by : 'popularity'
+    @order_by = available_sortings.include?(order_by) ? order_by : available_sortings.first
     @view     = %w[list posters].include?(view) ? view : 'posters'
 
     initialize_filters
@@ -41,8 +41,18 @@ class ShowingsPresenter
   attr_reader :age_filter, :categories_filter, :organizations_filter, :period_filter,
     :price_filter, :tags_filter, :time_filter, :geo_filter
 
-  def order_by_popularity?
-    order_by == 'popularity'
+  def self.available_sortings
+    %w[popularity creation nearness]
+  end
+
+  available_sortings.each do |sorting|
+    define_method "sort_by_#{sorting}?" do
+      order_by == sorting
+    end
+  end
+
+  def available_sortings
+    self.class.available_sortings
   end
 
   def collection
@@ -115,7 +125,7 @@ class ShowingsPresenter
       params[:from]             = time_filter.from           if time_filter.from.present?
       params[:to]               = time_filter.to             if time_filter.to.present?
 
-      params[:location]         = { lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius } if geo_filter.used?
+      params[:location]         = Hashie::Mash.new(lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius)  if geo_filter.used?
     end
   end
 
@@ -133,9 +143,9 @@ class ShowingsPresenter
 
   def searcher
     @searcher ||= HasSearcher.searcher(:showings, searcher_params).tap { |s|
-      s.paginate(page: page, per_page: per_page).groups
-
-      order_by_popularity? ? s.order_by_popularity : s.order_by_nearness
+      s.paginate(page: page, per_page: per_page)
+      s.groups
+      s.send("order_by_#{order_by}")
 
       if period_filter.used? && !period_filter.date?
         case period_filter.period

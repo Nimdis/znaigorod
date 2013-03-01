@@ -13,8 +13,15 @@ HasSearcher.create_searcher :showings do
   end
 
   # order
-  scope(:order_by_nearness)   { order_by(:starts_at, :asc) }
   scope(:order_by_popularity) { order_by(:affiche_popularity, :desc) }
+  scope(:order_by_creation)   { order_by(:affiche_created_at, :desc) }
+
+  scope :order_by_nearness do |search|
+    if search_object.location
+      search.with(:location).in_radius(search_object.location.lat, search_object.location.lon, search_object.location.radius)
+      search.order_by_geodist(:location, search_object.location.lat, search_object.location.lon)
+    end
+  end
 
   # categories tags organizations
   [:categories, :tags, :organization_ids].each do |field|

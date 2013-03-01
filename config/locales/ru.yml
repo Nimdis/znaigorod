@@ -136,6 +136,11 @@
       newest: По новизне
       popular: По популярности
 
+      popularity: По популярности
+      creation: По ближайшему сеансу
+      nearness: По отдаленности
+
+
   affiche_periods:
     today: Сегодня
     weekly: На этой неделе

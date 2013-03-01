@@ -21,14 +21,22 @@
         <p>Сортировка:</p>
         <ul>
           <li>
-            <%= link_to t('affiche.sort.popular'),
-              affiches_path(@showings_presenter.query.merge(order_by: 'popularity')),
-              { data: 'popularity' }.merge(@showings_presenter.order_by_popularity? ? { class: 'selected' } : {}) %>
+              <%= link_to t('affiche.sort.popularity'),
+              affiches_path(@showings_presenter.query.merge('order_by' => 'popularity')),
+              { data: 'popularity' }.merge(@showings_presenter.sort_by_popularity? ? { class: 'selected' } : {}) %>
           </li>
           <li>
-            <%= link_to t('affiche.sort.closest'),
-              affiches_path(@showings_presenter.query.merge(order_by: 'nearness')),
-              { data: 'nearness' }.merge(@showings_presenter.order_by_popularity? ? {} : { class: 'selected' }) %>
+              <%= link_to t('affiche.sort.creation'),
+              affiches_path(@showings_presenter.query.merge('order_by' => 'creation')),
+              { data: 'creation' }.merge(@showings_presenter.sort_by_creation? ? { class: 'selected' } : {}) %>
+          </li>
+          <li>
+              <%= link_to t('affiche.sort.nearness'),
+              affiches_path(@showings_presenter.query.merge('order_by' => 'nearness')),
+              { data: 'nearness' }.merge({}.tap { |h|
+                                                  h['class'] = @showings_presenter.sort_by_nearness? ? 'selected' : '';
+                                                  h['class'] += ' disabled' unless @showings_presenter.geo_filter.used? }
+                                        ) %>
           </li>
         </ul>
       </div>
