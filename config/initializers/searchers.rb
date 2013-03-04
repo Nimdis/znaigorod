@@ -302,23 +302,27 @@ HasSearcher.create_searcher :meal do
   end
 end
 
-HasSearcher.create_searcher :entertainments do
-  models :entertainment
+Organization.available_suborganization_kinds.each do |kind|
+  HasSearcher.create_searcher kind.pluralize.to_sym do
+    models kind.to_sym
 
-  [:entertainment_category, :entertainment_feature, :entertainment_offer].each do |field|
-    property field do |search|
-      search.with(field, search_object.send(field)) if search_object.send(field).try(:any?)
+    ["#{kind}_category", "#{kind}_feature", "#{kind}_offer"].each do |field|
+      property field do |search|
+        search.with(field, search_object.send(field)) if search_object.send(field).try(:any?)
+      end
     end
-  end
 
-  scope do
-    [:entertainment_category, :entertainment_feature, :entertainment_offer].each do |field|
-      facet(field)
+    scope do
+      ["#{kind}_category", "#{kind}_feature", "#{kind}_offer"].each do |field|
+        facet field
+      end
+
+      order_by :organization_rating, :desc
     end
-  end
 
-  property :location do |search|
-    search.with(:location).in_radius(search_object.location[:lat], search_object.location[:lon], search_object.location[:radius]) if search_object.location
+    property :location do |search|
+      search.with(:location).in_radius(search_object.location[:lat], search_object.location[:lon], search_object.location[:radius]) if search_object.location
+    end
   end
 end
 
@@ -419,65 +423,65 @@ end
   #end
 #end
 
-HasSearcher.create_searcher :showing do
-  models :showing
+#HasSearcher.create_searcher :showing do
+  #models :showing
 
-  property :affiche_id
-  property :affiche_category
-  property :starts_on, :modificator => :less_than
-  property :starts_at, :modificator => :greater_than
-  property :starts_at_hour, :modificators => [:greater_than, :less_than]
-  property :price, :modificators => [:greater_than, :less_than] do |search|
-    if search_object.price_greater_than || search_object.price_less_than
-      price_gt = [0, search_object.price_greater_than.to_i].max
-      price_lt = search_object.price_less_than.to_i.zero? ? 10_000_000 : search_object.price_less_than.to_i
+  #property :affiche_id
+  #property :affiche_category
+  #property :starts_on, :modificator => :less_than
+  #property :starts_at, :modificator => :greater_than
+  #property :starts_at_hour, :modificators => [:greater_than, :less_than]
+  #property :price, :modificators => [:greater_than, :less_than] do |search|
+    #if search_object.price_greater_than || search_object.price_less_than
+      #price_gt = [0, search_object.price_greater_than.to_i].max
+      #price_lt = search_object.price_less_than.to_i.zero? ? 10_000_000 : search_object.price_less_than.to_i
 
-      search.with(:price_min).greater_than(price_gt)
-      search.with(:price_min).less_than(price_lt)
+      #search.with(:price_min).greater_than(price_gt)
+      #search.with(:price_min).less_than(price_lt)
 
-      search.any_of do
-        all_of do
-          with(:price_min).greater_than(price_gt)
-          with(:price_max).less_than(price_lt)
-        end
+      #search.any_of do
+        #all_of do
+          #with(:price_min).greater_than(price_gt)
+          #with(:price_max).less_than(price_lt)
+        #end
 
-        all_of do
-          with(:price_min).less_than(price_gt)
-          with(:price_max).greater_than(price_gt)
-        end
+        #all_of do
+          #with(:price_min).less_than(price_gt)
+          #with(:price_max).greater_than(price_gt)
+        #end
 
-        all_of do
-          with(:price_min).less_than(price_lt)
-          with(:price_max).greater_than(price_lt)
-        end
-      end
-    end
-  end
-  property :tags
-  property :affiche_category
+        #all_of do
+          #with(:price_min).less_than(price_lt)
+          #with(:price_max).greater_than(price_lt)
+        #end
+      #end
+    #end
+  #end
+  #property :tags
+  #property :affiche_category
 
-  property :starts_on, :modificator => :greater_than do |search|
-    starts_on_gt = search_object.starts_on_greater_than || Date.today
-    ends_at_gt = search_object.starts_on_less_than || 1.week.since.to_date
+  #property :starts_on, :modificator => :greater_than do |search|
+    #starts_on_gt = search_object.starts_on_greater_than || Date.today
+    #ends_at_gt = search_object.starts_on_less_than || 1.week.since.to_date
 
-    search.any_of do
-      with(:starts_on).greater_than(starts_on_gt)
-      with(:ends_at).greater_than(ends_at_gt)
-    end
-  end
+    #search.any_of do
+      #with(:starts_on).greater_than(starts_on_gt)
+      #with(:ends_at).greater_than(ends_at_gt)
+    #end
+  #end
 
-  scope :actual do
-    with(:starts_at).greater_than HasSearcher.cacheable_now
-  end
+  #scope :actual do
+    #with(:starts_at).greater_than HasSearcher.cacheable_now
+  #end
 
-  scope :today do
-    with(:starts_at).less_than DateTime.now.end_of_day
-  end
+  #scope :today do
+    #with(:starts_at).less_than DateTime.now.end_of_day
+  #end
 
-  scope :faceted do
-    facet(:tags)
-  end
-end
+  #scope :faceted do
+    #facet(:tags)
+  #end
+#end
 
 HasSearcher.create_searcher :manage_organization do
   models :organization
