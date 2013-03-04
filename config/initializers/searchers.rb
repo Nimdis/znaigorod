@@ -303,17 +303,19 @@ HasSearcher.create_searcher :meal do
 end
 
 Organization.available_suborganization_kinds.each do |kind|
+  klass = kind.classify.constantize
+
   HasSearcher.create_searcher kind.pluralize.to_sym do
     models kind.to_sym
 
-    ["#{kind}_category", "#{kind}_feature", "#{kind}_offer"].each do |field|
+    klass.facets.map { |facet| "#{kind}_#{facet}" }.each do |field|
       property field do |search|
         search.with(field, search_object.send(field)) if search_object.send(field).try(:any?)
       end
     end
 
     scope do
-      ["#{kind}_category", "#{kind}_feature", "#{kind}_offer"].each do |field|
+      klass.facets.map { |facet| "#{kind}_#{facet}" }.each do |field|
         facet field
       end
 
@@ -326,78 +328,78 @@ Organization.available_suborganization_kinds.each do |kind|
   end
 end
 
-HasSearcher.create_searcher :entertainment do
-  models :entertainment
+#HasSearcher.create_searcher :entertainment do
+  #models :entertainment
 
-  property :entertainment_category
-  property :entertainment_feature
-  property :entertainment_offer
-  property :entertainment_type
-  property :entertainment_stuff
+  #property :entertainment_category
+  #property :entertainment_feature
+  #property :entertainment_offer
+  #property :entertainment_type
+  #property :entertainment_stuff
 
-  scope do
-    #adjust_solr_params { |params| params[:q] = "{!boost b=organization_rating_f}*:*" }
-    order_by(:organization_rating, :desc)
+  #scope do
+    ##adjust_solr_params { |params| params[:q] = "{!boost b=organization_rating_f}*:*" }
+    #order_by(:organization_rating, :desc)
 
-    facet(:entertainment_category)
-    facet(:entertainment_feature)
-    facet(:entertainment_offer)
-    facet(:entertainment_stuff)
-  end
-end
+    #facet(:entertainment_category)
+    #facet(:entertainment_feature)
+    #facet(:entertainment_offer)
+    #facet(:entertainment_stuff)
+  #end
+#end
 
-HasSearcher.create_searcher :culture do
-  models :culture
+#HasSearcher.create_searcher :culture do
+  #models :culture
 
-  property :culture_category
-  property :culture_feature
-  property :culture_offer
-  property :culture_stuff
+  #property :culture_category
+  #property :culture_feature
+  #property :culture_offer
+  #property :culture_stuff
 
-  scope do
-    #adjust_solr_params { |params| params[:q] = "{!boost b=organization_rating_fs}*:*" }
-    order_by(:organization_rating, :desc)
+  #scope do
+    ##adjust_solr_params { |params| params[:q] = "{!boost b=organization_rating_fs}*:*" }
+    #order_by(:organization_rating, :desc)
 
-    facet(:culture_category)
-    facet(:culture_feature)
-    facet(:culture_offer)
-    facet(:culture_stuff)
-  end
-end
+    #facet(:culture_category)
+    #facet(:culture_feature)
+    #facet(:culture_offer)
+    #facet(:culture_stuff)
+  #end
+#end
 
-HasSearcher.create_searcher :sport do
-  models :sport
+#HasSearcher.create_searcher :sport do
+  #models :sport
 
-  property :sport_category
-  property :sport_feature
-  property :sport_stuff
+  #property :sport_category
+  #property :sport_feature
+  #property :sport_stuff
 
-  scope do
-    #adjust_solr_params { |params| params[:q] = "{!boost b=organization_rating_f}*:*" }
-    order_by(:organization_rating, :desc)
+  #scope do
+    ##adjust_solr_params { |params| params[:q] = "{!boost b=organization_rating_f}*:*" }
+    #order_by(:organization_rating, :desc)
 
-    facet(:sport_category)
-    facet(:sport_feature)
-    facet(:sport_stuff)
-  end
-end
+    #facet(:sport_category)
+    #facet(:sport_feature)
+    #facet(:sport_stuff)
+  #end
+#end
 
-HasSearcher.create_searcher :creation do
-  models :creation
+#HasSearcher.create_searcher :creation do
+  #models :creation
 
-  property :creation_category
-  property :creation_feature
-  property :creation_stuff
+  #property :creation_category
+  #property :creation_feature
+  #property :creation_stuff
 
-  scope do
-    #adjust_solr_params { |params| params[:q] = "{!boost b=organization_rating_f}*:*" }
-    order_by(:organization_rating, :desc)
+  #scope do
+    ##adjust_solr_params { |params| params[:q] = "{!boost b=organization_rating_f}*:*" }
+    #order_by(:organization_rating, :desc)
 
-    facet(:creation_category)
-    facet(:creation_feature)
-    facet(:creation_stuff)
-  end
-end
+    #facet(:creation_category)
+    #facet(:creation_feature)
+    #facet(:creation_stuff)
+  #end
+#end
 
 HasSearcher.create_searcher :organizations do
   models :organization

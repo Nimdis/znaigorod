@@ -1,4 +1,4 @@
-<% @entertainments_presenter.collection.each do |suborganization| %>
+<% @presenter.collection.each do |suborganization| %>
   <li>
     <%= render partial: 'organizations/suborganization', locals: { suborganization: suborganization } %>
   </li>

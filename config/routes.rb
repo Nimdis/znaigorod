@@ -6,14 +6,13 @@ Znaigorod::Application.routes.draw do
   namespace :manage do
     post 'red_cloth' => 'red_cloth#show'
 
+    resources :search, :only => :index
+
     resources :sessions, :only => [:new, :create, :destroy]
 
     Affiche.descendants.each do |type|
       resources type.name.underscore.pluralize
     end
-
-    resources :contests
-    resources :search, :only => :index
 
     resources :contests do
       resources :works, :except => [:index, :show]
@@ -120,7 +119,10 @@ Znaigorod::Application.routes.draw do
   #get ':organization_class/(:category)/(*query)' => 'organizations#index',
       #:organization_class => /organizations|meals|entertainments|cultures|sports|creations|saunas/, :as => :organizations
   resources :organizations, :only => :index
-  resources :entertainments, :only => :index
+
+  Organization.available_suborganization_kinds.each do |kind|
+    resources kind.pluralize, :only => :index
+  end
 
   resources :posts, :only => [:index, :show] do
     get :draft, :on => :collection, :as => :draft

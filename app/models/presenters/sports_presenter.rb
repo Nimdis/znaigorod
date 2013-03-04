@@ -1,9 +1,8 @@
-class EntertainmentsPresenter
+class SportsPresenter
   include ActiveAttr::MassAssignment
 
   attr_accessor :categories,
                 :features,
-                :offers,
                 :lat, :lon, :radius,
                 :order_by,
                 :page, :per_page
@@ -18,5 +17,5 @@ class EntertainmentsPresenter
 
   include OrganizationsPresenter
 
-  acts_as_organizations_presenter kind: :entertainment, filters: [:categories, :features, :offers]
+  acts_as_organizations_presenter kind: :sport, filters: [:categories, :features]
 end
