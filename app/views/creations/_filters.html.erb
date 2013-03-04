@@ -2,7 +2,7 @@
   <div class="filters">
     <h1><%= t("organization.list_title.#{@presenter.kind}") %> в Томске</h1>
 
-    <%= form_tag entertainments_path, :method => :get do %>
+    <%= form_tag creations_path, :method => :get do %>
       <%#= hidden_field_tag :order_by, @presenter.order_by %>
       <%#= hidden_field_tag :view,     @presenter.view %>
 
@@ -27,20 +27,6 @@
             <div class="checkbox">
               <%= check_box_tag 'features[]', category, (@presenter.features_filter.selected.include?(category)), :id => "feature_#{index}" %>
               <%= label_tag "feature_#{index}", @presenter.features_filter.available[index] %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-
-      <div class='filter  <%= @presenter.offers_filter.used? ? 'show' : 'hide' %>' id='offers'>
-        <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
-        <%= link_to "очистить", '#', :class => 'clear_filter_link' %>
-        <div class="filter_label wide">Предложения</div>
-        <div class="filter_checkboxes">
-          <% @presenter.offers_filter.available.each_with_index do |category, index| %>
-            <div class="checkbox">
-              <%= check_box_tag 'offers[]', category, (@presenter.offers_filter.selected.include?(category)), :id => "offer_#{index}" %>
-              <%= label_tag "offer_#{index}", @presenter.offers_filter.available[index] %>
             </div>
           <% end %>
         </div>
@@ -75,9 +61,6 @@
             <%= link_to "Особенности", '#', :class => 'features' %>
           </li>
           <li>
-            <%= link_to "Предложения", '#', :class => 'offers' %>
-          </li>
-          <li>
             <%= link_to "Местоположение", '#', :class => 'geo' %>
           </li>
         </ul>
@@ -90,7 +73,7 @@
           Найдено мероприятий: <span class='counter'><%= @presenter.total_count %></span>
         </div>
         <div class="clear_wrapper">
-          <%= link_to "Очистить", '#' %>
+          <%#= link_to "Очистить", '#' %>
         </div>
       </div>
     <% end %>

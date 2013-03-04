@@ -1,6 +1,6 @@
 <div class='filters_wrapper'>
   <div class="filters">
-    <h1>Развлечения города</h1>
+    <h1><%= t("organization.list_title.#{@presenter.kind}") %> в Томске</h1>
 
     <%= form_tag sports_path, :method => :get do %>
       <%#= hidden_field_tag :order_by, @presenter.order_by %>
@@ -70,7 +70,7 @@
           <input type="submit" value="Применить фильтр" class='submit' />
         </div>
         <div class="results_counter">
-          Найдено мероприятий: <span class='counter'><%#= @showings_presenter.total_count %></span>
+          Найдено мероприятий: <span class='counter'><%= @presenter.total_count %></span>
         </div>
         <div class="clear_wrapper">
           <%#= link_to "Очистить", '#' %>

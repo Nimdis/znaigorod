@@ -16,7 +16,7 @@ module OrganizationsPresenter
           instance_variable_get("@#{filter}_filter") ||
             instance_variable_set("@#{filter}_filter", Hashie::Mash.new.tap { |h|
             h[:selected] = send(filter) || []
-            h[:available] = HasSearcher.searcher(pluralized_kind.to_sym).facet("#{self.class.kind}_#{filter.singularize}").rows.map(&:value)
+            h[:available] = HasSearcher.searcher(pluralized_kind.to_sym).facet("#{kind}_#{filter.singularize}").rows.map(&:value)
             h['used?'] = send(filter).present? && send(filter).any?
           })
         end
@@ -24,8 +24,12 @@ module OrganizationsPresenter
     end
   end
 
+  def kind
+    self.class.kind
+  end
+
   def pluralized_kind
-    self.class.kind.pluralize
+    kind.pluralize
   end
 
   def decorator_class
@@ -40,6 +44,10 @@ module OrganizationsPresenter
     searcher.results
   end
 
+  def total_count
+    searcher.total
+  end
+
   def geo_filter
     @geo_filter ||= Hashie::Mash.new.tap { |h|
       h[:lat] = lat
@@ -52,7 +60,7 @@ module OrganizationsPresenter
   def searcher_params
     {}.tap do |params|
       self.class.filters.map(&:to_s).map(&:singularize).each do |filter|
-        params["#{self.class.kind}_#{filter}".to_sym] = send("#{filter.pluralize}_filter").selected if send("#{filter.pluralize}_filter").used?
+        params["#{kind}_#{filter}".to_sym] = send("#{filter.pluralize}_filter").selected if send("#{filter.pluralize}_filter").used?
       end
 
       params[:location] = { lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius } if geo_filter.used?
@@ -62,7 +70,6 @@ module OrganizationsPresenter
   private
 
   def searcher
-    p searcher_params
     @searcher ||= HasSearcher.searcher(pluralized_kind.to_sym, searcher_params).tap { |s|
       s.paginate(page: page, per_page: per_page)
 

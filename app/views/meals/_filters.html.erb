@@ -2,7 +2,7 @@
   <div class="filters">
     <h1><%= t("organization.list_title.#{@presenter.kind}") %> в Томске</h1>
 
-    <%= form_tag entertainments_path, :method => :get do %>
+    <%= form_tag meals_path, :method => :get do %>
       <%#= hidden_field_tag :order_by, @presenter.order_by %>
       <%#= hidden_field_tag :view,     @presenter.view %>
 
@@ -46,6 +46,20 @@
         </div>
       </div>
 
+      <div class='filter <%= @presenter.cuisines_filter.used? ? 'show' : 'hide' %>' id='cuisines'>
+        <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <%= link_to "очистить", '#', :class => 'clear_filter_link' %>
+        <div class="filter_label wide">Кухня</div>
+        <div class="filter_checkboxes">
+          <% @presenter.cuisines_filter.available.each_with_index do |category, index| %>
+            <div class="checkbox">
+              <%= check_box_tag 'cuisines[]', category, (@presenter.cuisines_filter.selected.include?(category)), :id => "cuisine_#{index}" %>
+              <%= label_tag "cuisine_#{index}", @presenter.cuisines_filter.available[index] %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
       <div class="filter <%= @presenter.geo_filter.used? ? 'used show' : 'hide' %>" id='geo'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
         <div class="filter_label">Местоположение</div>
@@ -76,6 +90,9 @@
           </li>
           <li>
             <%= link_to "Предложения", '#', :class => 'offers' %>
+          </li>
+          <li>
+            <%= link_to "Кухня", '#', :class => 'cuisines' %>
           </li>
           <li>
             <%= link_to "Местоположение", '#', :class => 'geo' %>
