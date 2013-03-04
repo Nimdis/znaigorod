@@ -4,7 +4,6 @@
 
     <%= form_tag entertainments_path, :method => :get do %>
       <%#= hidden_field_tag :order_by, @entertainments_presenter.order_by %>
-      <%#= hidden_field_tag :view,     @entertainments_presenter.view %>
 
       <div class='filter show categories_filter' id='categories'>
         <%= link_to "очистить", '#', :class => 'clear_filter_link' %>

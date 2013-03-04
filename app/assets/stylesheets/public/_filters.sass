@@ -71,7 +71,7 @@
             background: #fff
             border: 1px solid #835999
             float: left
-            margin: 0 5px 0 0
+            margin: 2px 5px 0 0
 
       &.categories_filter
         +min-height(26px)
@@ -79,10 +79,13 @@
 
         .filter_checkboxes
           margin: 0
+          width: 1000px
 
           div.checkbox
-            width: auto
-            margin: 0 10px 0 0
+            +min-width(20px)
+            //width: auto
+            line-height: 16px
+            margin: 5px 10px 5px 0
 
       &.date_filter
         +min-height(26px)
@@ -198,7 +201,7 @@
 
         .map_wrapper
           height: 228px
-          width: 808px
+          width: 996px
 
           .dg-callout
             color: #fcffff

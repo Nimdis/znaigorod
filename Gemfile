@@ -56,6 +56,7 @@ end
 
 group :development do
   gem 'annotate',                   :require => false
+  gem 'brakeman'
   gem 'capistrano-ext'
   gem 'hirb'
   gem 'quiet_assets'
