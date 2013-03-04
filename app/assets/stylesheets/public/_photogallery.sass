@@ -2,16 +2,18 @@
   .affiches_list
     .was_in_city_photos
       +clearfix
+      float: left
+      width: 930px
       li
         background: none
         float: left
         height: 355px
-        width: 360px
+        width: 445px
         &.odd
           //clear: left
         .relative
-          position: relative
           height: 273px
+          position: relative
           .counter
             top: 2px
             right: 2px
@@ -34,11 +36,11 @@
               +box-shadow(#777 0 0 2px)
         .link
           font-size: 15px
-          text-align: center
           line-height: 1.4
+          text-align: center
         .date
           color: #626262
           font-size: 11px
-          text-align: center
           line-height: 1.4
           margin-top: 5px
+          text-align: center

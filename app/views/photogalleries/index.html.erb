@@ -11,44 +11,47 @@
     <ul class="was_in_city_photos">
       <%= render :partial => "photogalleries_list" %>
     </ul>
-  </div>
 
-  <div class="affiches_filter">
-    <ul class="categories">
-      <li class='current'>
-        <div class="title">Фотогалареи</div>
-        <ul class="periods">
-          <% @photogallery.period_links.each do |link| %>
-            <%= link %>
-          <% end %>
-        </ul>
+    <div class="right_wrapper">
+      <div class="affiches_filter">
+        <ul class="categories">
+          <li class='current' style='background: none;'>
+            <div class="title">Фотогалареи</div>
+            <ul class="periods">
+              <% @photogallery.period_links.each do |link| %>
+                <%= link %>
+              <% end %>
+            </ul>
 
-        <ul class="tags">
-          <li class="title">Мероприятия</li>
-          <% @photogallery.category_links.each do |link| %>
-            <%= link %>
-          <% end %>
-        </ul>
+            <ul class="tags">
+              <li class="title">Мероприятия</li>
+              <% @photogallery.category_links.each do |link| %>
+                <%= link %>
+              <% end %>
+            </ul>
 
-        <ul class="tags">
-          <li class="title">Теги</li>
-          <% @photogallery.tag_links.each do |link| %>
-            <%= link %>
-          <% end %>
+            <ul class="tags">
+              <li class="title">Теги</li>
+              <% @photogallery.tag_links.each do |link| %>
+                <%= link %>
+              <% end %>
+            </ul>
+          </li>
         </ul>
-      </li>
-    </ul>
-    <div class="vk_group_wrapper">
-      <div id="vk_group_thin"></div>
-    </div>
-    <% if Rails.env.production? %>
-      <div class="vk_recommended_wrapper">
-        <div id="vk_recommended"></div>
+        <div class="vk_group_wrapper">
+          <div id="vk_group_thin"></div>
+        </div>
+        <% if Rails.env.production? %>
+          <div class="vk_recommended_wrapper">
+            <div id="vk_recommended"></div>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+
+      <a href="#" class="move_to_top">наверх</a>
+    </div>
   </div>
 
-  <a href="#" class="move_to_top">наверх</a>
 
 </div>
 
