@@ -4,9 +4,9 @@ class OrganizationsController < ApplicationController
   has_scope :page, :default => 1
 
   def index
-    @organizations_collection = OrganizationsCollection.new params
-    render partial: 'organizations_list', layout: false and return if request.xhr?
-    render @organizations_collection.view
+    @organizations_catalog_presenter = OrganizationsCatalogPresenter.new
+    #render partial: 'organizations_list', layout: false and return if request.xhr?
+    #render 'catalog'
   end
 
   def show

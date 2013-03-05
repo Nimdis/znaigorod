@@ -1,62 +1,25 @@
 <% content_for :subtitle do %>
-  <%= @organizations_collection.subtitle.capitalize %> в Томске
+  Заведения города Томска
 <% end %>
 
 <% content_for :extra_meta do %>
-  <%= @organizations_collection.meta_description_organizations %>
-  <%= @organizations_collection.meta_keywords %>
+  <%= @organizations_catalog_presenter.meta_description %>
 <% end %>
 
 <div class="content_wrapper">
-  <div class="organizations_list">
-    <h1><span class="strong"><%= @organizations_collection.subtitle.capitalize %></span> в Томске</h1>
-    <ul class="items_list">
-      <%= render :partial => "organizations_list" %>
-    </ul>
-  </div>
-
-  <div class="organizations_filter">
-    <ul class="categories">
-      <% @organizations_collection.class_categories_links.each do |link| %>
-        <li class="<%= link.html_options[:class] %>">
-          <% unless link.current? %>
-            <%= link_to link.title, link.url %>
-          <% else %>
-            <div class="title"><%= link.title %></div>
-            <% @organizations_collection.filters.each do |filter, filter_links| %>
-              <% next if filter_links.empty? %>
-              <ul class="tags need_toggler">
-                <li class="title"><%= t("organization.filters.#{filter}") %></li>
-                <% filter_links.each do |filter_link| %>
-                  <li class="<%= filter_link.html_options[:class] %>">
-                    <%= filter_link %>
-                  </li>
-                <% end %>
-              </ul>
+  <div class="organizations_catalog">
+    <h1><span class="strong">Заведения</span> города Томска</h1>
+    <% @organizations_catalog_presenter.catalog.each do |kind_link, category_links| %>
+      <% unless category_links.blank? %>
+        <fieldset class="<%= cycle("odd", "even") %>">
+          <legend><%= kind_link %></legend>
+          <ul>
+            <% category_links.each do |category_link| %>
+              <li><%= category_link %></li>
             <% end %>
-          <% end %>
-        </li>
+          </ul>
+        </fieldset>
       <% end %>
-    </ul>
-    <div class="adv">
-      <div class="item">
-        <%= link_to image_tag("public/avtovokzal.jpg", size: "200x200", alt: "Online продажа автобусных билетов"),
-                    "http://avtovokzal.tomsk.ru/",
-                    target: :_blank,
-                    rel: :nofollow %>
-      </div>
-    </div>
-    <div class="vk_group_wrapper">
-      <div id="vk_group_thick"></div>
-    </div>
-    <% if Rails.env.production? %>
-      <div class="vk_recommended_wrapper">
-        <div id="vk_recommended"></div>
-      </div>
     <% end %>
   </div>
-
-  <a href="#" class="move_to_top">наверх</a>
 </div>
-
-<%= paginate @organizations_collection.paginated_suborganizations %>
