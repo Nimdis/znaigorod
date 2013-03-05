@@ -23,7 +23,7 @@ class OrganizationsCollection
 
   self.kinds.map(&:name).map(&:downcase).each do |klass|
     define_method "#{klass}_searcher" do |params = {}|
-      HasSearcher.searcher(klass.to_sym, params)
+      HasSearcher.searcher(klass.pluralize.to_sym, params)
     end
 
     define_method "#{klass}_categories_links" do

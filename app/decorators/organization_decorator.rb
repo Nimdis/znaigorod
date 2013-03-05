@@ -270,7 +270,8 @@ class OrganizationDecorator < ApplicationDecorator
   end
 
   def actual_affiches_count
-    HasSearcher.searcher(:affiche, organization_id: organization.id).actual.order_by_starts_at.affiches.group(:affiche_id_str).total
+    #HasSearcher.searcher(:affiche, organization_id: organization.id).actual.order_by_starts_at.affiches.group(:affiche_id_str).total
+    HasSearcher.searcher(:showings, organization_ids: [organization.id]).actual.order_by_starts_at.groups.group(:affiche_id_str).total
   end
 
   def truncated_description

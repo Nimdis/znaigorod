@@ -15,6 +15,7 @@ HasSearcher.create_searcher :showings do
   # order
   scope(:order_by_popularity) { order_by(:affiche_popularity, :desc) }
   scope(:order_by_creation)   { order_by(:affiche_created_at, :desc) }
+  scope(:order_by_starts_at)  { order_by(:starts_at, :asc) }
 
   scope :order_by_nearness do |search|
     if search_object.location
