@@ -34,8 +34,8 @@
 
       <div class="filter <%= @presenter.geo_filter.used? ? 'used show' : 'hide' %>" id='geo'>
         <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
+        <div class="filter_label">Местоположение</div>
         <div class="filter_geo" data-collection='<%= @presenter.collection_geo_info %>'>
-        <div class="filter_geo">
           <div class="map_wrapper">
           </div>
           <div class="hidden_inputs">
