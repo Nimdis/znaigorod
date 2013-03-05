@@ -2,29 +2,34 @@
 
 class Counter
   include ActiveAttr::MassAssignment
-  attr_accessor :kind, :organization
+
+  attr_accessor :category, :organization
 
   def today
-    @today ||= searcher.today.actual.affiches.group(:affiche_id_str).total
+    @today ||= searcher.today.actual.groups.group(:affiche_id_str).total
   end
 
   def weekend
-    @weekend ||= searcher.weekend.actual.affiches.group(:affiche_id_str).total
+    @weekend ||= searcher.weekend.actual.groups.group(:affiche_id_str).total
   end
 
-  def weekly
-    @weekly ||= searcher.weekly.actual.affiches.group(:affiche_id_str).total
+  def week
+    @week ||= searcher.week.actual.groups.group(:affiche_id_str).total
   end
 
   def all
-    @all ||= searcher.actual.affiches.group(:affiche_id_str).total
+    @all ||= searcher.actual.groups.group(:affiche_id_str).total
   end
 
+  private
+
+  def searcher_params
+    {}.tap {|hash|
+      hash[:categories] = [category] if category.present?
+    }
+  end
 
   def searcher
-    search_params = {}
-    search_params[:affiche_category] = kind.singularize unless kind == 'affiche'
-    search_params[:organization_id] = organization.id if organization
-    HasSearcher.searcher(:affiche, search_params)
+    @searcher ||= HasSearcher.searcher(:showings, searcher_params)
   end
 end

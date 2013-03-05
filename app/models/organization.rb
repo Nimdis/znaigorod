@@ -166,6 +166,14 @@ class Organization < ActiveRecord::Base
     }
   end
 
+  def self.inherited_suborganization_kinds
+    available_suborganization_kinds.map(&:classify).map(&:constantize).flat_map(&:descendants).map(&:name).map(&:downcase)
+  end
+
+  def self.basic_suborganization_kinds
+    available_suborganization_kinds - inherited_suborganization_kinds
+  end
+
   def available_suborganization_kinds
     self.class.available_suborganization_kinds
   end

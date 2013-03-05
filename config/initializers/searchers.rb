@@ -125,99 +125,99 @@ HasSearcher.create_searcher :showings do
   end
 end
 
-HasSearcher.create_searcher :affiche do
-  models :showing
+#HasSearcher.create_searcher :affiche do
+  #models :showing
 
-  property :affiche_category do |search|
-    search.with(:affiche_category, search_object.affiche_category) if search_object.affiche_category.present?
-  end
+  #property :affiche_category do |search|
+    #search.with(:affiche_category, search_object.affiche_category) if search_object.affiche_category.present?
+  #end
 
-  property :starts_on do |search|
-    search.any_of do
-      all_of do
-        with(:starts_at).greater_than search_object.starts_on.beginning_of_day
-        with(:starts_at).less_than search_object.starts_on.end_of_day
-        with(:ends_at, nil)
-      end
-      all_of do
-        with(:starts_at).less_than search_object.starts_on.end_of_day
-        with(:ends_at).greater_than search_object.starts_on.beginning_of_day
-      end
-    end if search_object.starts_on
-  end
+  #property :starts_on do |search|
+    #search.any_of do
+      #all_of do
+        #with(:starts_at).greater_than search_object.starts_on.beginning_of_day
+        #with(:starts_at).less_than search_object.starts_on.end_of_day
+        #with(:ends_at, nil)
+      #end
+      #all_of do
+        #with(:starts_at).less_than search_object.starts_on.end_of_day
+        #with(:ends_at).greater_than search_object.starts_on.beginning_of_day
+      #end
+    #end if search_object.starts_on
+  #end
 
-  property :tags do |search|
-    search.with(:tags, search_object.tags) if search_object.tags.present?
-  end
+  #property :tags do |search|
+    #search.with(:tags, search_object.tags) if search_object.tags.present?
+  #end
 
-  property :affiche_id
-  property :organization_id
+  #property :affiche_id
+  #property :organization_id
 
-  scope :today do
-    with(:starts_at).less_than DateTime.now.end_of_day
-  end
+  #scope :today do
+    #with(:starts_at).less_than DateTime.now.end_of_day
+  #end
 
-  scope :weekend do |search|
-    search.any_of do
-      all_of do
-        with(:starts_at).greater_than DateTime.now.end_of_week - 2.days + 1.second
-        with(:starts_at).less_than DateTime.now.end_of_week
-        with(:ends_at, nil)
-      end
-      all_of do
-        with(:starts_at).less_than DateTime.now.end_of_week
-        with(:ends_at).greater_than DateTime.now.end_of_week - 2.days + 1.second
-      end
-    end
-  end
+  #scope :weekend do |search|
+    #search.any_of do
+      #all_of do
+        #with(:starts_at).greater_than DateTime.now.end_of_week - 2.days + 1.second
+        #with(:starts_at).less_than DateTime.now.end_of_week
+        #with(:ends_at, nil)
+      #end
+      #all_of do
+        #with(:starts_at).less_than DateTime.now.end_of_week
+        #with(:ends_at).greater_than DateTime.now.end_of_week - 2.days + 1.second
+      #end
+    #end
+  #end
 
-  scope :weekly do |search|
-    search.any_of do
-      all_of do
-        with(:starts_at).greater_than DateTime.now.beginning_of_week
-        with(:starts_at).less_than DateTime.now.end_of_week
-        with(:ends_at, nil)
-      end
-      all_of do
-        with(:starts_at).less_than DateTime.now.end_of_week
-        with(:ends_at).greater_than DateTime.now.beginning_of_week
-      end
-    end
-  end
+  #scope :weekly do |search|
+    #search.any_of do
+      #all_of do
+        #with(:starts_at).greater_than DateTime.now.beginning_of_week
+        #with(:starts_at).less_than DateTime.now.end_of_week
+        #with(:ends_at, nil)
+      #end
+      #all_of do
+        #with(:starts_at).less_than DateTime.now.end_of_week
+        #with(:ends_at).greater_than DateTime.now.beginning_of_week
+      #end
+    #end
+  #end
 
-  scope :actual do |search|
-    search.any_of do
-      with(:starts_at).greater_than DateTime.now.beginning_of_day
-      with(:ends_at).greater_than DateTime.now.beginning_of_day
-    end
-  end
+  #scope :actual do |search|
+    #search.any_of do
+      #with(:starts_at).greater_than DateTime.now.beginning_of_day
+      #with(:ends_at).greater_than DateTime.now.beginning_of_day
+    #end
+  #end
 
-  scope :affiches do
-    group :affiche_id_str do
-      limit 1000
-    end
-  end
+  #scope :affiches do
+    #group :affiche_id_str do
+      #limit 1000
+    #end
+  #end
 
-  scope :categories do
-    group :affiche_category
-  end
+  #scope :categories do
+    #group :affiche_category
+  #end
 
-  scope :order_by_starts_at do
-    order_by(:starts_at, :asc)
-  end
+  #scope :order_by_starts_at do
+    #order_by(:starts_at, :asc)
+  #end
 
-  scope :order_by_affiche_created_at do
-    order_by(:affiche_created_at, :desc)
-  end
+  #scope :order_by_affiche_created_at do
+    #order_by(:affiche_created_at, :desc)
+  #end
 
-  scope :order_by_affiche_popularity do
-    order_by(:affiche_popularity, :desc)
-  end
+  #scope :order_by_affiche_popularity do
+    #order_by(:affiche_popularity, :desc)
+  #end
 
-  scope :faceted do
-    facet(:tags)
-  end
-end
+  #scope :faceted do
+    #facet(:tags)
+  #end
+#end
 
 HasSearcher.create_searcher :similar_affiches do
   models :affiche
@@ -281,26 +281,26 @@ HasSearcher.create_searcher :actual_organization do
   end
 end
 
-HasSearcher.create_searcher :meal do
-  models :meal
+#HasSearcher.create_searcher :meal do
+  #models :meal
 
-  property :meal_category
-  property :meal_feature
-  property :meal_offer
-  property :meal_cuisine
-  property :meal_stuff
+  #property :meal_category
+  #property :meal_feature
+  #property :meal_offer
+  #property :meal_cuisine
+  #property :meal_stuff
 
-  scope do
-    #adjust_solr_params { |params| params[:q] = "{!boost b=organization_rating_f}*:*" }
-    order_by(:organization_rating, :desc)
+  #scope do
+    ##adjust_solr_params { |params| params[:q] = "{!boost b=organization_rating_f}*:*" }
+    #order_by(:organization_rating, :desc)
 
-    facet(:meal_category)
-    facet(:meal_feature)
-    facet(:meal_offer)
-    facet(:meal_cuisine)
-    facet(:meal_stuff)
-  end
-end
+    #facet(:meal_category)
+    #facet(:meal_feature)
+    #facet(:meal_offer)
+    #facet(:meal_cuisine)
+    #facet(:meal_stuff)
+  #end
+#end
 
 Organization.available_suborganization_kinds.each do |kind|
   klass = kind.classify.constantize

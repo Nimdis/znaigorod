@@ -23,15 +23,15 @@ class ActualOrganizations
   end
 
   def total_entertainments
-    HasSearcher.searcher(:entertainment).total
+    HasSearcher.searcher(:entertainments).total
   end
 
   def total_meals
-    HasSearcher.searcher(:meal).total
+    HasSearcher.searcher(:meals).total
   end
 
   def total_cultures
-    HasSearcher.searcher(:culture).total
+    HasSearcher.searcher(:cultures).total
   end
 
   class ActualOrganizationGroup

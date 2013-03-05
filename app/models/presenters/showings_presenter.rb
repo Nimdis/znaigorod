@@ -92,7 +92,7 @@ class ShowingsPresenter
         title: "#{descendant.model_name.human}",
         query: { categories: [descendant.name.downcase], period: 'today' },
         current: categories.include?(descendant.name.downcase),
-        count: Counter.new(kind: descendant.name.downcase).today
+        count: Counter.new(category: descendant.name.downcase).today
       }
     }
   end
@@ -106,13 +106,13 @@ class ShowingsPresenter
     @category_affiche_links ||= [].tap { |array|
       (period_filter.available_period_values - ['all']).each { |period|
         array << {
-          title: "#{I18n.t("affiche_periods.#{period}")} (#{Counter.new(kind: kind).today})",
+          title: "#{I18n.t("affiche_periods.#{period}")} (#{Counter.new(category: kind).send(period)})",
           query: { categories: [kind], period: period }
         }
       }
 
       array << {
-        title: "#{I18n.t("affiche_periods.all.#{kind.pluralize}")} (#{Counter.new(kind: kind).all})",
+        title: "#{I18n.t("affiche_periods.all.#{kind.pluralize}")} (#{Counter.new(category: kind).all})",
         query: { categories: [kind] }
       }
     }
