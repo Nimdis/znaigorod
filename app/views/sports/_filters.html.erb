@@ -3,7 +3,7 @@
     <h1><%= t("organization.list_title.#{@presenter.kind}") %> в Томске</h1>
 
     <%= form_tag sports_path, :method => :get do %>
-      <%#= hidden_field_tag :order_by, @presenter.order_by %>
+      <%= hidden_field_tag :order_by, @presenter.order_by %>
       <%#= hidden_field_tag :view,     @presenter.view %>
 
       <div class='filter show categories_filter' id='categories'>

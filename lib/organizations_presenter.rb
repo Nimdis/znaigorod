@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module OrganizationsPresenter
   extend ActiveSupport::Concern
 
@@ -65,6 +67,18 @@ module OrganizationsPresenter
 
       params[:location] = Hashie::Mash.new(lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius) if geo_filter.used?
     end
+  end
+
+  def query
+    {}.tap { |hash|
+      hash[:utf8] = '✓'
+
+      %w[order_by lat lon radius].each { |p| hash[p] = send(p) }
+
+      self.class.filters.map(&:to_s).each do |filter|
+        hash[filter] = send("#{filter}_filter").selected if send("#{filter}_filter").used?
+      end
+    }
   end
 
   private

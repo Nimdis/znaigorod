@@ -6,21 +6,17 @@
         <p>Сортировка:</p>
         <ul>
           <li>
-            <%#= link_to t('affiche.sort.popular'),
-              affiches_path(@showings_presenter.searcher_params.merge(order_by: 'popularity')),
-              @showings_presenter.order_by_popularity? ? { class: 'selected' } : {} %>
+            <%= link_to t('affiche.sort.popularity'), sports_path(@presenter.query.merge('order_by' => 'popularity')) %>
           </li>
           <li>
-            <%#= link_to t('affiche.sort.closest'),
-              affiches_path(@showings_presenter.searcher_params.merge(order_by: 'nearness')),
-              @showings_presenter.order_by_popularity? ? {} : { class: 'selected' } %>
+            <%= link_to t('affiche.sort.nearness'), sports_path(@presenter.query.merge('order_by' => 'nearness')) %>
           </li>
         </ul>
       </div>
     </div>
 
     <% if @presenter.collection.any? %>
-      <ul class="items_list <%#= @showings_presenter.view %>">
+      <ul class="items_list">
         <%= render :partial => "organizations/organizations_list" %>
       </ul>
     <% else %>
