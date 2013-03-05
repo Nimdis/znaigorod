@@ -12,7 +12,7 @@ Organization.available_suborganization_kinds.each do |kind|
 
     scope do
       klass.facets.map { |facet| "#{kind}_#{facet}" }.each do |field|
-        facet field
+        facet field, sort: :index
       end
 
     end
