@@ -142,17 +142,7 @@ radius_slider_handler = (coords) ->
       $('.filter_geo input.radius').val(ui.value).change()
 
 get_items_locations = () ->
-  items_coords = []
-  $('.organization_attributes .attributes').each (index, item) ->
-    $item = $(item)
-    item_coords = {}
-    item_coords['title'] = $item.children('a')[0].outerHTML
-    item_coords['address'] = $item.children('.address').find('a').text()
-    item_coords['lat']   = $item.children('.address').find('a').attr('latitude')
-    item_coords['lon']   = $item.children('.address').find('a').attr('longitude')
-    items_coords.push(item_coords)
-
-  return items_coords
+  $('.filter_geo').data('collection')
 
 criteria_handler = () ->
   $('.criteria_list ul li a').on 'click', ->

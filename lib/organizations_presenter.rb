@@ -3,7 +3,11 @@
 module OrganizationsPresenter
   extend ActiveSupport::Concern
 
+  include ActionView::Helpers
+  include Rails.application.routes.url_helpers
+
   module ClassMethods
+    include Rails.application.routes.url_helpers
     attr_accessor :kind, :filters
 
     def acts_as_organizations_presenter(*args)
@@ -40,6 +44,17 @@ module OrganizationsPresenter
 
   def collection
     decorator_class.decorate(searcher.results)
+  end
+
+  def collection_geo_info
+    searcher(1_000).results.map do |organization|
+      {
+        'title'   => link_to(organization.organization_title, organization.organization),
+        'address' => organization.address.to_s,
+        'lat'     => organization.latitude,
+        'lon'     => organization.longitude
+      }
+    end.uniq.to_json
   end
 
   def paginated_collection
@@ -83,9 +98,9 @@ module OrganizationsPresenter
 
   private
 
-  def searcher
+  def searcher(per_page_count = per_page)
     @searcher ||= HasSearcher.searcher(pluralized_kind.to_sym, searcher_params).tap { |s|
-      s.paginate(page: page, per_page: per_page)
+      s.paginate(page: page, per_page: per_page_count)
       s.send("order_by_#{order_by}")
     }
   end
