@@ -1,0 +1,24 @@
+<div class="suborganization_info culture">
+  <table>
+    <tr>
+      <td class='border'>
+        <%= culture.htmlise_title_on_show %>
+      </td>
+      <td>
+        <%= culture.iconize_info %>
+        <div class="details">
+          <%= culture.htmlise_offers_and_features_on_show %>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <% if culture.has_photogallery? %>
+    <div class="photogallery">
+      <ul>
+        <% culture.images.each do |image| %>
+          <li><%= link_to(image_tag_for(image.url, 124, 94, true, 'n'), image.url, rel: :culture_gallery) %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

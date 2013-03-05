@@ -1,24 +1,55 @@
-<div class="suborganization_info entertainment">
+<div class="suborganization_info creation">
   <table>
     <tr>
       <td class='border'>
-        <%= entertainment.htmlise_title_on_show %>
+        <%= creation.htmlise_title_on_show %>
       </td>
       <td>
-        <%= entertainment.iconize_info %>
+        <%= creation.iconize_info %>
         <div class="details">
-          <%= entertainment.htmlise_offers_and_features_on_show %>
+          <%= creation.htmlise_features_on_show %>
         </div>
       </td>
     </tr>
   </table>
-  <% if entertainment.has_photogallery? %>
+  <% if creation.has_photogallery? %>
     <div class="photogallery">
       <ul>
-        <% entertainment.images.each do |image| %>
-          <li><%= link_to(image_tag_for(image.url, 124, 94, true, 'n'), image.url, rel: :entertainmen_gallery) %></li>
+        <% creation.images.each do |image| %>
+          <li><%= link_to(image_tag_for(image.url, 124, 94, true, 'n'), image.url, rel: :creation_gallery) %></li>
         <% end %>
       </ul>
+    </div>
+  <% end %>
+  <% if creation.services.any? %>
+    <div class="services_tables">
+      <% creation.grouped_decorated_services.each do |kind, services| %>
+        <ul class="services_table">
+          <li>
+            <h2><%= kind %></h2>
+            <div class="services">
+              <% services.each do |service| %>
+                <div class="services_details">
+                  <div class='service_title'>
+                    <div class='title'><%= service.title %></div>
+                    <% if service.description? %>
+                      <ul class="iconize_info">
+                        <li>
+                          <a href="#" class="description_icon" data-link="service_text" title='информация'>информация</a>
+                          <div class="description_text">
+                            <p><%= service.description %></p>
+                          </div>
+                        </li>
+                      </ul>
+                    <% end %>
+                  </div>
+                  <div class='ages'><%= service.age %></div>
+                </div>
+              <% end %>
+            </div>
+          </li>
+        </ul>
+      <% end %>
     </div>
   <% end %>
 </div>

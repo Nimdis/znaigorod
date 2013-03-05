@@ -1,0 +1,30 @@
+<div class="suborganization_info meal">
+  <table>
+    <tr>
+      <td class='border'>
+        <%= meal.htmlise_title_on_show %>
+      </td>
+      <td>
+        <%= meal.iconize_info %>
+        <div class="details">
+          <% if meal.htmlise_cuisines_on_show.present? %>
+            <div class="cuisines">
+              <strong>Кухня:</strong>
+              <%= meal.htmlise_cuisines_on_show %>
+            </div>
+          <% end %>
+          <%= meal.htmlise_offers_and_features_on_show %>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <% if meal.has_photogallery? %>
+    <div class="photogallery">
+      <ul>
+        <% meal.images.each do |image| %>
+          <li><%= link_to(image_tag_for(image.url, 124, 94, true, 'n'), image.url, rel: :meal_gallery) %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
