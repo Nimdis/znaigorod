@@ -63,7 +63,7 @@ module OrganizationsPresenter
         params["#{kind}_#{filter}".to_sym] = send("#{filter.pluralize}_filter").selected if send("#{filter.pluralize}_filter").used?
       end
 
-      params[:location] = { lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius } if geo_filter.used?
+      params[:location] = Hashie::Mash.new(lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius) if geo_filter.used?
     end
   end
 
@@ -72,8 +72,7 @@ module OrganizationsPresenter
   def searcher
     @searcher ||= HasSearcher.searcher(pluralized_kind.to_sym, searcher_params).tap { |s|
       s.paginate(page: page, per_page: per_page)
-
-      #order_by_popularity? ? s.order_by_popularity : s.order_by_nearness
+      s.send("order_by_#{order_by}")
     }
   end
 end
