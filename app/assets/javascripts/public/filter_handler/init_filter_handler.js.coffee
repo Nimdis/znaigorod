@@ -142,7 +142,7 @@ radius_slider_handler = (coords) ->
       $('.filter_geo input.radius').val(ui.value).change()
 
 get_items_locations = () ->
-  $('.filter_geo').data('collection')
+  $('.filter_geo').data('collection') || []
 
 criteria_handler = () ->
   $('.criteria_list ul li a').on 'click', ->
