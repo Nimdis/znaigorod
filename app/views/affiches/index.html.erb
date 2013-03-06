@@ -31,12 +31,15 @@
               { data: 'creation' }.merge(@showings_presenter.sort_by_creation? ? { class: 'selected' } : {}) %>
           </li>
           <li>
+            <% if @showings_presenter.geo_filter.used? %>
               <%= link_to t('affiche.sort.nearness'),
-              affiches_path(@showings_presenter.query.merge('order_by' => 'nearness')),
-              { data: 'nearness' }.merge({}.tap { |h|
-                                                  h['class'] = @showings_presenter.sort_by_nearness? ? 'selected' : '';
-                                                  h['class'] += ' disabled' unless @showings_presenter.geo_filter.used? }
-                                        ) %>
+                affiches_path(@showings_presenter.query.merge('order_by' => 'nearness')),
+                { data: 'nearness' }.merge(@showings_presenter.sort_by_popularity? ? { class: 'selected' } : {}) %>
+            <% else %>
+              <%= link_to t('affiche.sort.nearness'),
+                affiches_path(@showings_presenter.query.merge('order_by' => 'nearness')),
+                { data: 'nearness' }.merge(@showings_presenter.sort_by_popularity? ? { class: 'disabled' } : {}) %>
+            <% end %>
           </li>
         </ul>
       </div>
