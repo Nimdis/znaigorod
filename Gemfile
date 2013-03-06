@@ -30,7 +30,7 @@ group :default do
   gem 'gilenson'
   gem 'grape'
   gem 'has_scope'
-  gem 'has_searcher',               :git => 'git://github.com/evserykh/has_searcher'
+  gem 'has_searcher'
   gem 'hashie'
   gem 'inherited_resources',        :git => 'git://github.com/DouweM/inherited_resources', :branch => 'nested-singletons' # NOTE: https://github.com/josevalim/inherited_resources/pull/194
   gem 'kaminari'
