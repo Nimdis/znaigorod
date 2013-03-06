@@ -6,11 +6,11 @@ class AffichesController < ApplicationController
     settings = {}
     settings = JSON.parse(cookie) if cookie.present? && cookie.length > 1
 
-    @showings_presenter = ShowingsPresenter.new(params.merge(settings))
+    @presenter = ShowingsPresenter.new(params.merge(settings))
 
     if request.xhr?
       if params[:page]
-        render partial: @showings_presenter.partial, layout: false and return
+        render partial: @presenter.partial, layout: false and return
       end
 
       render :partial => 'affiche_today', :layout => false and return

@@ -158,6 +158,7 @@ class AfficheCollection
       AfficheDecorator.new(affiche, ShowingDecorator.decorate(showings))
     end
   end
+  alias_method :collection, :affiches
 
   def paginated_affiches
     searcher(search_params).paginate(:page => page, :per_page => per_page).affiches.group(:affiche_id_str).groups

@@ -56,7 +56,7 @@ class ShowingsPresenter
 
   def order_by
     @order_by = available_sortings.include?(@order_by) ? @order_by : available_sortings.first
-    @order_by = available_sortings.first if !geo_filter.used?
+    @order_by = (available_sortings & [@order_by]).any? ? @order_by : available_sortings.first if !geo_filter.used?
 
     @order_by
   end

@@ -5,21 +5,21 @@
       <div class="presentation">
         <p>Настройка списка:</p>
         <ul>
-          <li><a class="list<%= ' selected' if @affiche_collection.presentation_mode == 'list' %>" title="подробный список" href="">список</a></li>
+          <li><a class="list<%= ' selected' if @presenter.presentation_mode == 'list' %>" title="подробный список" href="">список</a></li>
           <li><span class="separator">&nbsp;</span></li>
-          <li><a class="posters<%= ' selected' if @affiche_collection.presentation_mode == 'posters' %>" title="краткий список" href="">постеры</a></li>
+          <li><a class="posters<%= ' selected' if @presenter.presentation_mode == 'posters' %>" title="краткий список" href="">постеры</a></li>
         </ul>
       </div>
       <div class="sort">
         <p>Сортировка:</p>
         <ul>
-          <%= @affiche_collection.sort_links %>
+          <%= @presenter.sort_links %>
         </ul>
       </div>
     </div>
-    <% unless @affiche_collection.affiches.blank? %>
-      <ul class="items_list <%= @affiche_collection.presentation_mode %>">
-        <%= render partial: @affiche_collection.view_partial %>
+    <% unless @presenter.affiches.blank? %>
+      <ul class="items_list <%= @presenter.presentation_mode %>">
+        <%= render partial: @presenter.view_partial %>
       </ul>
     <% else %>
       <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>

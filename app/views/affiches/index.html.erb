@@ -7,13 +7,13 @@
         <ul>
           <li>
             <%= link_to 'список',
-              affiches_path(@showings_presenter.query.merge(view: 'list')),
-              { title: 'подробный список', data: 'list' }.merge(@showings_presenter.view_list? ? { class: 'list selected' } : { class: 'list' }) %>
+              affiches_path(@presenter.query.merge(view: 'list')),
+              { title: 'подробный список', data: 'list' }.merge(@presenter.view_list? ? { class: 'list selected' } : { class: 'list' }) %>
           </li>
           <li>
             <%= link_to 'постеры',
-              affiches_path(@showings_presenter.query.merge(view: 'posters')),
-              { title: 'краткий список', data: 'posters' }.merge(@showings_presenter.view_list? ? { class: 'posters' } : { class: 'posters selected' }) %>
+              affiches_path(@presenter.query.merge(view: 'posters')),
+              { title: 'краткий список', data: 'posters' }.merge(@presenter.view_list? ? { class: 'posters' } : { class: 'posters selected' }) %>
           </li>
         </ul>
       </div>
@@ -22,32 +22,32 @@
         <ul>
           <li>
               <%= link_to t('affiche.sort.popularity'),
-              affiches_path(@showings_presenter.query.merge('order_by' => 'popularity')),
-              { data: 'popularity' }.merge(@showings_presenter.sort_by_popularity? ? { class: 'selected' } : {}) %>
+              affiches_path(@presenter.query.merge('order_by' => 'popularity')),
+              { data: 'popularity' }.merge(@presenter.sort_by_popularity? ? { class: 'selected' } : {}) %>
           </li>
           <li>
               <%= link_to t('affiche.sort.creation'),
-              affiches_path(@showings_presenter.query.merge('order_by' => 'creation')),
-              { data: 'creation' }.merge(@showings_presenter.sort_by_creation? ? { class: 'selected' } : {}) %>
+              affiches_path(@presenter.query.merge('order_by' => 'creation')),
+              { data: 'creation' }.merge(@presenter.sort_by_creation? ? { class: 'selected' } : {}) %>
           </li>
           <li>
-            <% if @showings_presenter.geo_filter.used? %>
+            <% if @presenter.geo_filter.used? %>
               <%= link_to t('affiche.sort.nearness'),
-                affiches_path(@showings_presenter.query.merge('order_by' => 'nearness')),
-                { data: 'nearness' }.merge(@showings_presenter.sort_by_popularity? ? { class: 'selected' } : {}) %>
+                affiches_path(@presenter.query.merge('order_by' => 'nearness')),
+                { data: 'nearness' }.merge(@presenter.sort_by_popularity? ? { class: 'selected' } : {}) %>
             <% else %>
               <%= link_to t('affiche.sort.nearness'),
-                affiches_path(@showings_presenter.query.merge('order_by' => 'nearness')),
-                { data: 'nearness' }.merge(@showings_presenter.sort_by_popularity? ? { class: 'disabled' } : {}) %>
+                affiches_path(@presenter.query.merge('order_by' => 'nearness')),
+                { data: 'nearness' }.merge(@presenter.sort_by_popularity? ? { class: 'disabled' } : {}) %>
             <% end %>
           </li>
         </ul>
       </div>
     </div>
 
-    <% if @showings_presenter.collection.any? %>
-      <ul class="items_list <%= @showings_presenter.view %>">
-        <%= render :partial => @showings_presenter.partial %>
+    <% if @presenter.collection.any? %>
+      <ul class="items_list <%= @presenter.view %>">
+        <%= render :partial => @presenter.partial %>
       </ul>
     <% else %>
       <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
@@ -55,4 +55,4 @@
   </div>
 </div>
 
-<%= paginate @showings_presenter.paginated_collection %>
+<%= paginate @presenter.paginated_collection %>
