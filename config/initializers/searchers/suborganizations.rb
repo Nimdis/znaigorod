@@ -4,6 +4,8 @@ Organization.available_suborganization_kinds.each do |kind|
   HasSearcher.create_searcher kind.pluralize.to_sym do
     models kind.to_sym
 
+    includes :organization => [:address, :showings => [:affiche]]
+
     klass.facets.map { |facet| "#{kind}_#{facet}" }.each do |field|
       property field do |search|
         search.with(field, search_object.send(field)) if search_object.send(field).try(:any?)

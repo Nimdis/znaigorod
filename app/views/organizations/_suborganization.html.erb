@@ -1,16 +1,13 @@
 <%= content_tag :div, suborganization.logo_link, :class => "image" unless suborganization.logo_link.blank? %>
+
 <div class="info">
-  <% if false %>
-    <% if @organizations_collection.category_all? %>
-      <ul class="categories">
-        <% suborganization.categories.each do |category| %>
-          <li>
-            <%= link_to category.hyphenate, organizations_path(organization_class: @organizations_collection.organization_class.pluralize, category: category.mb_chars.downcase) %>
-          </li>
-        <% end %>
-      </ul>
+  <ul class="categories">
+    <% suborganization.categories.each do |category| %>
+      <li>
+        <%= link_to category.hyphenate, send("#{@presenter.kind.pluralize}_path", :categories => [category.mb_chars.downcase]) %>
+      </li>
     <% end %>
-  <% end %>
+  </ul>
 
   <h2><%= suborganization.title_link %></h2>
 

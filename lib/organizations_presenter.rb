@@ -64,7 +64,7 @@ module OrganizationsPresenter
   end
 
   def collection_geo_info
-    searcher(1_000).results.map do |organization|
+    searcher(per_page * 3).results.map do |organization|
       {
         'title'   => link_to(organization.organization_title, organization.organization),
         'address' => organization.address.to_s,

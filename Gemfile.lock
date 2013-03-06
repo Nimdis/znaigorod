@@ -7,6 +7,13 @@ GIT
       has_scope (~> 0.5.0)
       responders (~> 0.6.0)
 
+GIT
+  remote: git://github.com/evserykh/has_searcher
+  revision: 201ff239d357aa9d5368cdfb2d81db79ba3c0162
+  specs:
+    has_searcher (0.0.96)
+      rails (~> 3.2.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -144,8 +151,6 @@ GEM
       virtus
     haml (3.1.8)
     has_scope (0.5.1)
-    has_searcher (0.0.96)
-      rails (~> 3.2.3)
     hashie (1.2.0)
     highline (1.6.15)
     hike (1.2.1)
@@ -385,7 +390,7 @@ DEPENDENCIES
   gilenson
   grape
   has_scope
-  has_searcher
+  has_searcher!
   hashie
   hirb
   inherited_resources!
