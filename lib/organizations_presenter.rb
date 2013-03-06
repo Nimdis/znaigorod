@@ -6,6 +6,8 @@ module OrganizationsPresenter
   include ActionView::Helpers
   include Rails.application.routes.url_helpers
 
+  attr_accessor :order_by
+
   module ClassMethods
     include Rails.application.routes.url_helpers
     attr_accessor :kind, :filters
@@ -28,6 +30,21 @@ module OrganizationsPresenter
         end
       end
     end
+  end
+
+  def order_by
+    @order_by ||= %w[nearness popularity].include?(@order_by) ? @order_by : 'popularity'
+    @order_by = 'popularity' unless geo_filter.used?
+
+    @order_by
+  end
+
+  def sort_by_popularity?
+    order_by == 'popularity'
+  end
+
+  def sort_by_nearness?
+    order_by == 'nearness'
   end
 
   def kind

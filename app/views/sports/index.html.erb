@@ -4,14 +4,7 @@
     <div class="list_settings">
       <div class="sort affiches">
         <p>Сортировка:</p>
-        <ul>
-          <li>
-            <%= link_to t('affiche.sort.popularity'), sports_path(@presenter.query.merge('order_by' => 'popularity')) %>
-          </li>
-          <li>
-            <%= link_to t('affiche.sort.nearness'), sports_path(@presenter.query.merge('order_by' => 'nearness')) %>
-          </li>
-        </ul>
+        <%= render 'commons/suborganization_sorting_links' %>
       </div>
     </div>
 
