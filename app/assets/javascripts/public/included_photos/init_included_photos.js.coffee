@@ -1,7 +1,7 @@
 @init_included_photos = () ->
   $('.photogallery ul').jcarousel
-    scroll: 5
-    visible: 6
+    scroll: 6
+    visible: 7
   $('.photogallery a').colorbox
     'maxWidth': '90%'
     'maxHeight': '98%'
