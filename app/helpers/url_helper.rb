@@ -11,6 +11,6 @@ module UrlHelper
       options[:host] = with_subdomain(options.delete(:subdomain))
     end
     # super(:host => request.host, :port => request.port) # fix error when visit by direct ip
-    super({})
+    super
   end
 end
