@@ -65,12 +65,32 @@ class OrganizationDecorator < ApplicationDecorator
     [Billiard, Sauna].include?(suborganization.class) ? Entertainment : suborganization.class
   end
 
+  #def breadcrumbs
+    #links = []
+    #links << h.content_tag(:li, h.link_to("Знай\u00ADГород", h.root_path), :class => "crumb")
+    #links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
+
+    #links << h.content_tag(:li, h.link_to(I18n.t("organization.list_title.#{fake_kind}"), h.organizations_path(:organization_class => fake_kind.pluralize)), :class => "crumb")
+    #links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
+    #links << h.content_tag(:li, link_to_priority_category, :class => "crumb")
+    #links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
+    #links << h.content_tag(:li, h.link_to(title, organization_url), :class => "crumb")
+    #%w(photogallery tour affiche).each do |method|
+      #if h.controller.action_name == method
+        #links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
+        #links << h.content_tag(:li, h.link_to(I18n.t("organization.#{method}"), h.send("#{method}_organization_path"), :class => "crumb"))
+      #end
+    #end
+
+    #h.content_tag :ul, links.join("\n").html_safe, :class => "breadcrumbs"
+  #end
+
   def breadcrumbs
     links = []
     links << h.content_tag(:li, h.link_to("Знай\u00ADГород", h.root_path), :class => "crumb")
     links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
 
-    links << h.content_tag(:li, h.link_to(I18n.t("organization.list_title.#{fake_kind}"), h.organizations_path(:organization_class => fake_kind.pluralize)), :class => "crumb")
+    links << h.content_tag(:li, h.link_to(I18n.t("organization.list_title.#{fake_kind}"), h.send("#{fake_kind.pluralize}_path"), :class => "crumb"))
     links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
     links << h.content_tag(:li, link_to_priority_category, :class => "crumb")
     links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
@@ -177,8 +197,12 @@ class OrganizationDecorator < ApplicationDecorator
     h.content_tag(:div, content, class: klass) unless content.blank?
   end
 
+  #def link_to_priority_category
+    #h.link_to(priority_category, h.organizations_path(organization_class: fake_kind.pluralize, category: priority_category.mb_chars.downcase))
+  #end
+
   def link_to_priority_category
-    h.link_to(priority_category, h.organizations_path(organization_class: fake_kind.pluralize, category: priority_category.mb_chars.downcase))
+    h.link_to(priority_category, h.send("#{fake_kind.pluralize}_path", categories: [priority_category.mb_chars.downcase]))
   end
 
   def categories_links
