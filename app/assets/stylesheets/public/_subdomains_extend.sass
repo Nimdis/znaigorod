@@ -3,13 +3,16 @@ body
   .paradise_wrapper
     background: #333 image_url('public/paradise/bg.png') repeat
     +background-image(image_url('public/paradise/bg.png'), linear-gradient(#000, #fff))
+    .paradise_logo
+      width: 1200px
+      height: 150px
+      background: transparent image_url('public/paradise/logo.png') no-repeat center center
+      margin: 0 auto
     .paradise
       width: 1200px
+      +border-top-left-radius(10px)
+      +border-top-right-radius(10px)
       margin: 0 auto
-      .paradise_logo
-        height: 1200px
-        height: 150px
-        background: transparent image_url('public/paradise_logo.png') no-repeat center center
       .header_wrapper
         +border-top-left-radius(10px)
         +border-top-right-radius(10px)
@@ -22,12 +25,12 @@ body
     background-color: #daedfe
     +background-image(linear-gradient(#d5eaff, #fff))
     .globus_logo
-      height: 1040px
+      height: 1160px
       height: 150px
       background: transparent image_url('public/globus/logo.png') no-repeat center center
       margin: 0 auto
     .globus
-      width: 1040px
+      width: 1160px
       +box-shadow(#777 0 0 5px)
       +border-top-left-radius(10px)
       +border-top-right-radius(10px)
