@@ -136,9 +136,10 @@
       newest: По новизне
       popular: По популярности
 
-      popularity: По популярности
-      creation: По ближайшему сеансу
+      creation: По новизне
       nearness: По отдаленности
+      popularity: По популярности
+      starts_at: По ближайшему сеансу
 
 
   affiche_periods:

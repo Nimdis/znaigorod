@@ -195,18 +195,15 @@ class AfficheCollection
   end
 
   def sort_links
-    links = []
-
-    %w[popular newest closest].each do |order|
-      links << content_tag(:li,
-                           Link.new(
-                                    :title => I18n.t("affiche.sort.#{order}"),
-                                    :html_options => sort.include?(order) ? { class: "#{order} selected"} : { class: order },
-                                    :url => (organization ? affiche_organization_path(organization, period: period) : affiches_path(kind: kind, period: period, on: on))
-      ))
-    end
-
-    (links.join(content_tag(:li, content_tag(:span, '&nbsp;'.html_safe, class: 'separator')))).html_safe
+    [].tap  { |links|
+      %w[popularity creation starts_at].each do |sorting|
+        links << content_tag(:li,
+                             Link.new(
+                               title: I18n.t("affiche.sort.#{sorting}"),
+                               url: affiches_path(order_by: sorting, organization_ids: [organization.id]))
+                            )
+      end
+    }.join(content_tag(:li, content_tag(:span, '&nbsp;'.html_safe, class: 'separator'))).html_safe
   end
 
   private
