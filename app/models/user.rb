@@ -42,14 +42,16 @@ class User < ActiveRecord::Base
     roles.include?(role.to_s)
   end
 end
-
 # == Schema Information
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  email           :string(255)
-#  oauth_key       :string(255)      unique
-#  roles_mask      :integer
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  email      :string(255)
+#  oauth_key  :string(255)
+#  roles_mask :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
+
