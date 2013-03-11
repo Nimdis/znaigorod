@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include UrlHelper
   helper_method :banners, :hot_offers, :page, :per_page
 
-  layout 'contests/spring_mood'
+  layout 'public'
 
   def main_page
     @showings_presenter = ShowingsPresenter.new(categories: ['movie'])
