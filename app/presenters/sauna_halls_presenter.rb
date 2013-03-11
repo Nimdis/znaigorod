@@ -184,4 +184,10 @@ class SaunaHallsPresenter
 
     [popularity_sort_link, price_sort_link, distance_sort_link].join(separator).html_safe
   end
+
+  def meta_description
+    desc = "Подбор сауны в Томске."
+
+    "<meta name='description' content='#{desc.squish}' />".html_safe
+  end
 end
