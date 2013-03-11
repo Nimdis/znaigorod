@@ -16,6 +16,8 @@
           data-url='<%= "#{request.protocol}#{request.host_with_port}#{contest_work_path(@contest, work)}" %>'>
           <div id='vk_contest_work_like_<%= work.slug.gsub('-', '_') %>'></div>
         </div>
+      <% else %>
+        <div class='contest_work_vk_like_on_list'><%= t 'contest.votes', :count => work.vk_likes.to_i %></div>
       <% end %>
       <%= link_to(work.title, contest_work_path(@contest, work)) %>
     </div>

@@ -176,6 +176,14 @@
     billiard: Бильярдные залы
     theatre: Театры
 
+  contest:
+    votes:
+      zero: "нет голосов"
+      one: "%{count} голос"
+      few: "%{count} голоса"
+      many: "%{count} голосов"
+      other: "%{count} голоса"
+
   photoreport_periods:
     weekly: Фотогалереи этой недели
     monthly: Фотогалереи этого месяца

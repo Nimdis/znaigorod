@@ -28,6 +28,8 @@
           <div class='contest_work_vk_like'>
             <div id='vk_contest_work_like'></div>
           </div>
+        <% else %>
+          <div class='contest_work_vk_like'><%= t 'contest.votes', :count => @work.vk_likes.to_i %></div>
         <% end %>
         <%= "<strong>Автор работы:</strong> #{@work.author_info}".html_safe if @work.author_info.present? %>
       </div>
