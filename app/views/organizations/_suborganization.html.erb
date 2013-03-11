@@ -11,8 +11,6 @@
 
   <h2><%= suborganization.title_link %></h2>
 
-  <%= suborganization.snipped_links %>
-
   <%= content_tag :div, suborganization.address_link, :class => "place" unless suborganization.address_link.blank? %>
 
   <%= suborganization.schedule_today %>
