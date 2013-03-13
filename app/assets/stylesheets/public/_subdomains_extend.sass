@@ -145,3 +145,30 @@ body
         padding-top: 15px
         padding-left: 20px
         padding-right: 20px
+
+  .rassvet_wrapper
+    background: #fcc6aa image_url('public/rassvet/bg.png') repeat
+    +background-image(image_url('public/rassvet/bg.png'), linear-gradient(#fff6b5, #fa94a2))
+    .rassvet_logo_wrapper
+      height: 150px
+      background: transparent image_url('public/rassvet/logo_bg.png') no-repeat center top
+      .rassvet_logo
+        height: 1040px
+        height: 150px
+        background: transparent image_url('public/rassvet/logo.png') no-repeat center center
+        margin: 0 auto
+    .rassvet
+      width: 1040px
+      +box-shadow(#777 0 0 5px)
+      +border-top-left-radius(10px)
+      +border-top-right-radius(10px)
+      margin: 0 auto
+      .header_wrapper
+        +border-top-left-radius(10px)
+        +border-top-right-radius(10px)
+      .content_wrapper
+        background-color: #fff
+        margin-top: 0
+        padding-top: 15px
+        padding-left: 20px
+        padding-right: 20px
