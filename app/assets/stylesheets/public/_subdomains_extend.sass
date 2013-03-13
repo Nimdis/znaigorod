@@ -1,24 +1,30 @@
+=subdomain_common_style
+  width: 1040px
+  +box-shadow(#777 0 0 5px)
+  +border-top-left-radius(10px)
+  +border-top-right-radius(10px)
+  margin: 0 auto
+  .header_wrapper
+    +border-top-left-radius(10px)
+    +border-top-right-radius(10px)
+  .content_wrapper
+    background-color: #fff
+    margin-top: 0
+    padding-top: 15px
+    padding-left: 20px
+    padding-right: 20px
+
 body
 
   .paradise_wrapper
     background: #333 image_url('public/paradise/bg.png') repeat
     +background-image(image_url('public/paradise/bg.png'), linear-gradient(#000, #fff))
+    .paradise_logo
+      height: 1040px
+      height: 150px
+      background: transparent image_url('public/paradise/logo.png') no-repeat center center
     .paradise
-      width: 1200px
-      +border-top-left-radius(10px)
-      +border-top-right-radius(10px)
-      margin: 0 auto
-      .paradise_logo
-        height: 1000px
-        height: 150px
-        background: transparent image_url('public/paradise/logo.png') no-repeat center center
-      .header_wrapper
-        +border-top-left-radius(10px)
-        +border-top-right-radius(10px)
-      .content_wrapper
-        background-color: #fff
-        margin-top: 0
-        padding-top: 15px
+      +subdomain_common_style
 
   .globus_wrapper
     background-color: #daedfe
@@ -29,18 +35,7 @@ body
       background: transparent image_url('public/globus/logo.png') no-repeat center center
       margin: 0 auto
     .globus
-      width: 1200px
-      +box-shadow(#777 0 0 5px)
-      +border-top-left-radius(10px)
-      +border-top-right-radius(10px)
-      margin: 0 auto
-      .header_wrapper
-        +border-top-left-radius(10px)
-        +border-top-right-radius(10px)
-      .content_wrapper
-        background-color: #fff
-        margin-top: 0
-        padding-top: 15px
+      +subdomain_common_style
 
   .paris_wrapper
     background: #ffe3c5 image_url('public/paris/bg.png') repeat
@@ -54,18 +49,7 @@ body
         background: transparent image_url('public/paris/logo.png') no-repeat center center
         margin: 0 auto
     .paris
-      width: 1200px
-      +box-shadow(#777 0 0 5px)
-      +border-top-left-radius(10px)
-      +border-top-right-radius(10px)
-      margin: 0 auto
-      .header_wrapper
-        +border-top-left-radius(10px)
-        +border-top-right-radius(10px)
-      .content_wrapper
-        background-color: #fff
-        margin-top: 0
-        padding-top: 15px
+      +subdomain_common_style
 
   .lovekafe_wrapper
     background-color: #fff
@@ -76,20 +60,7 @@ body
       background: transparent image_url('public/lovekafe/logo.png') no-repeat center center
       margin: 0 auto
     .lovekafe
-      width: 1200px
-      +box-shadow(#777 0 0 5px)
-      +border-top-left-radius(10px)
-      +border-top-right-radius(10px)
-      margin: 0 auto
-      .header_wrapper
-        +border-top-left-radius(10px)
-        +border-top-right-radius(10px)
-      .content_wrapper
-        background-color: #fff
-        margin-top: 0
-        padding-top: 15px
-        padding-left: 20px
-        padding-right: 20px
+      +subdomain_common_style
 
   .anapa_wrapper
     background: #b7efd6 image_url('public/anapa/bg.png') repeat
@@ -103,20 +74,7 @@ body
         background: transparent image_url('public/anapa/logo.png') no-repeat center center
         margin: 0 auto
     .anapa
-      width: 1040px
-      +box-shadow(#777 0 0 5px)
-      +border-top-left-radius(10px)
-      +border-top-right-radius(10px)
-      margin: 0 auto
-      .header_wrapper
-        +border-top-left-radius(10px)
-        +border-top-right-radius(10px)
-      .content_wrapper
-        background-color: #fff
-        margin-top: 0
-        padding-top: 15px
-        padding-left: 20px
-        padding-right: 20px
+      +subdomain_common_style
 
   .nezabudka_wrapper
     background: #81a3d3 image_url('public/nezabudka/bg.png') repeat
@@ -130,20 +88,7 @@ body
         background: transparent image_url('public/nezabudka/logo.png') no-repeat center center
         margin: 0 auto
     .nezabudka
-      width: 1040px
-      +box-shadow(#777 0 0 5px)
-      +border-top-left-radius(10px)
-      +border-top-right-radius(10px)
-      margin: 0 auto
-      .header_wrapper
-        +border-top-left-radius(10px)
-        +border-top-right-radius(10px)
-      .content_wrapper
-        background-color: #fff
-        margin-top: 0
-        padding-top: 15px
-        padding-left: 20px
-        padding-right: 20px
+      +subdomain_common_style
 
   .rassvet_wrapper
     background: #fcc6aa image_url('public/rassvet/bg.png') repeat
@@ -157,17 +102,14 @@ body
         background: transparent image_url('public/rassvet/logo.png') no-repeat center center
         margin: 0 auto
     .rassvet
-      width: 1040px
-      +box-shadow(#777 0 0 5px)
-      +border-top-left-radius(10px)
-      +border-top-right-radius(10px)
-      margin: 0 auto
-      .header_wrapper
-        +border-top-left-radius(10px)
-        +border-top-right-radius(10px)
-      .content_wrapper
-        background-color: #fff
-        margin-top: 0
-        padding-top: 15px
-        padding-left: 20px
-        padding-right: 20px
+      +subdomain_common_style
+
+  .forum_wrapper
+    background-color: #333
+    +background-image(linear-gradient(#000, #623c8f))
+    .forum_logo
+      height: 1040px
+      height: 150px
+      background: transparent image_url('public/forum/logo.png') no-repeat center center
+    .forum
+      +subdomain_common_style
