@@ -28,7 +28,7 @@
       <ul>
         <% resource.post_images.each do |image| %>
           <li>
-            <%= image_tag image.attachment_url, :alt => image.title, :title => image.title %>
+            <%= link_to(image_tag(image.attachment_url.gsub(/\/\d+-\d+\//, '/200-200/'), :alt => image.title, :title => image.title), image.attachment_url, :target => '_blank') %>
           </li>
           <li>
             <%= link_to "Удалить", manage_post_post_image_path(resource, image), :method => :delete, :confirm => 'Вы уверены?' %>
