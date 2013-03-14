@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130221031242) do
+ActiveRecord::Schema.define(:version => 20130314102149) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -511,6 +511,7 @@ ActiveRecord::Schema.define(:version => 20130221031242) do
     t.integer  "roles_mask"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "uid"
   end
 
   add_index "users", ["oauth_key"], :name => "index_users_on_oauth_key", :unique => true

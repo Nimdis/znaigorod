@@ -1,4 +1,4 @@
-<%= form_for(@user, :url => manage_admin_user_path(@user)) do |f| %>
+<%= form_for(@user, :url => manage_admin_users_path, :method => :post ) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this note from being saved:</h2>
@@ -10,11 +10,6 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name, I18n.t("name") %><br />
-    <%= f.text_field :name %>
-  </div>
 
   <div class="field">
     <%= f.label :uid, I18n.t("uid") %><br />

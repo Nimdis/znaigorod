@@ -14,6 +14,7 @@
       <%= check_box_tag("users[]", user.id) %>
       <%= user.id %>:
       <%= user.name.nil? ? " - " : user.name %>
+      <%= user.uid %>
       <span class="user_menu">
         <%= link_to I18n.t("show"), manage_admin_user_path(user) %>
         <%= link_to I18n.t("edit"), edit_manage_admin_user_path(user) %>

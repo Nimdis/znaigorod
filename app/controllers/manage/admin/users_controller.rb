@@ -18,6 +18,17 @@ class Manage::Admin::UsersController < Manage::ApplicationController
     @user = User.find(params[:id])
   end
 
+  def create
+    @user = User.new(params[:user])
+    if @user.save!
+      redirect_to manage_admin_users_path
+    end
+  end
+
+  def new
+    @user = User.new
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update_attributes!(params[:user])

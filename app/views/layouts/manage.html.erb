@@ -30,6 +30,7 @@
     <%= yield %>
   </div>
 
+    <%= link_to 'Выход', manage_session_path(current_user), :method => :delete %>
 <% end %>
 
 <% @body_class = "noisy" if Rails.env.production? %>

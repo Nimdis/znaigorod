@@ -60,7 +60,7 @@ Znaigorod::Application.routes.draw do
     get 'statistics' => 'statistics#index'
 
     namespace :admin do
-      resources :users, :except => [:create, :new]
+      resources :users
       post "users/mass_update" => 'users#mass_update', :as => 'user/mass_update'
     end
 
