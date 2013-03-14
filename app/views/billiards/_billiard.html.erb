@@ -12,6 +12,15 @@
       </td>
     </tr>
   </table>
+  <% if billiard.has_photogallery? %>
+    <div class="photogallery">
+      <ul>
+        <% billiard.images.each do |image| %>
+          <li><%= link_to(image_tag_for(image.url, 124, 94, true, 'n'), image.url, rel: :billiard_gallery) %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="pool_tables">
     <% billiard.grouped_decorated_pool_tables.each do |kind, pool_tables| %>
       <ul class="pool_table">
@@ -31,13 +40,4 @@
       </ul>
     <% end %>
   </div>
-  <% if billiard.has_photogallery? %>
-    <div class="photogallery">
-      <ul>
-        <% billiard.images.each do |image| %>
-          <li><%= link_to(image_tag_for(image.url, 124, 94, true, 'n'), image.url, rel: :billiard_gallery) %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 </div>
