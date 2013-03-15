@@ -1,0 +1,12 @@
+<div class='form_view'>
+  <%= semantic_form_for [:crm, resource], html: { novalidate: true }  do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :manager, as: :select, collection: User.sales_managers, selected: @organization.manager ? @organization.user_id : current_user.id %>
+    <% end %>
+
+    <div class="actions">
+      <%= link_to "Отмена", :back %>
+      <%= button_tag 'Сохранить' %>
+    </div>
+  <% end %>
+</div>

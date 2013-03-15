@@ -46,6 +46,8 @@ class User < ActiveRecord::Base
   def is?(role)
     roles.include?(role.to_s)
   end
+
+  alias_attribute :to_s, :name
 end
 # == Schema Information
 #

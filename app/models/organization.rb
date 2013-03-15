@@ -6,7 +6,8 @@ class Organization < ActiveRecord::Base
                   :site, :subdomain, :title, :vfs_path, :attachments_attributes,
                   :logotype_url, :tour_link, :non_cash, :priority_suborganization_kind,
                   :comment, :organization_stand_attributes, :additional_rating,
-                  :social_links_attributes
+                  :social_links_attributes,
+                  :user_id
 
   # <=== CRM
 

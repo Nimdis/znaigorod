@@ -1,5 +1,8 @@
 <h1><%= @organization.title %></h1>
 
+<%= @organization.manager ? @organization.manager : 'не назначен' %>
+<%= link_to "изменить", edit_crm_organization_path(@organization) %>
+
 <%= render @organization.contacts %>
 <%= link_to "Добавить контакт", new_crm_organization_contact_url(@organization) %>
 

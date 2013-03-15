@@ -14,7 +14,7 @@
   <div>
     <%= label_tag :user_id, 'Менеджер' %>
     <%= select_tag :user_id,
-      options_from_collection_for_select(User.all, :id, :name, params[:user_id]),
+      options_from_collection_for_select(User.sales_managers, :id, :name, params[:user_id]),
       include_blank: true %>
   </div>
 
