@@ -103,6 +103,10 @@ class Organization < ActiveRecord::Base
 
     latlon(:location) { Sunspot::Util::Coordinates.new(latitude, longitude) }
 
+    string :status
+    integer :user_id
+    string(:suborganizations, :multiple => true) { suborganizations.map(&:class).map(&:name).map(&:downcase) }
+
     string(:kind) { 'organization' }
 
     text :title,                :boost => 1.0 * 1.2

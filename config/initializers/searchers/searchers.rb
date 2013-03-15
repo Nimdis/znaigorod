@@ -78,7 +78,12 @@ end
 
 HasSearcher.create_searcher :manage_organization do
   models :organization
+
   keywords :q
+
+  property :status
+  property :user_id
+  property :suborganizations
 end
 
 HasSearcher.create_searcher :global do

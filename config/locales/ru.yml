@@ -551,6 +551,14 @@
       sauna_child_stuff: Для детей
       sauna_stuff: Разное
 
+      billiard: Бильярд
+      creation: Творчество
+      culture: Культура
+      entertainment: Развлечения
+      meal: Еда
+      sauna: Сауна
+      sport: Спорт
+
     attributes:
       address:
         house: Дом
