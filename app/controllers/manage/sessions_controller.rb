@@ -8,16 +8,20 @@ class Manage::SessionsController < ApplicationController
     user = User.find_by_oauth_key(auth.credentials.token)
     if user = User.find_by_uid(auth.uid)
       user.oauth_key = auth.credentials.token
-      user.name = auth.info.nickname
+      user.name = auth.info.name
       user.save!
     end
-    session[:oauth_key] = user.oauth_key unless user.nil?
 
-    if user.roles.any?
-      redirect_to [:manage, :root] and return if user.is? :admin
-      redirect_to [:manage, user.roles.first.split("_").first]
+    if user.nil?
+      redirect_to new_manage_session_path, notice: "Вы не являетесь пользователем данной системы"
     else
-      render :new, :notice => "У вас нет прав доступа в систему"
+      if user.roles.any?
+        session[:oauth_key] = user.oauth_key
+        redirect_to [:manage, :root] and return if user.is? :admin
+        redirect_to [:manage, user.roles.first.split("_").first]
+      else
+        redirect_to new_manage_session_path, :notice => "У вас нет прав доступа в систему"
+      end
     end
   end
 

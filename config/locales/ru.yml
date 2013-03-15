@@ -7,6 +7,7 @@
   add_showing: Добавить сеанс
   add_social_links: Добавить ссылку
   affiche: Афиша
+  back: Назад
   choose_file: Выбрать файл
   clear_filters: Очистить фильтры
   confirm_ask: Вы уверены?
@@ -54,6 +55,7 @@
   site_title: "Знай\u00ADГород - афиша, заведения Томска"
   twitter_timeline: Эфир
   name: Имя
+  uid: UID
   email: Почта
   save: Сохранить
 
@@ -880,6 +882,7 @@
       all_users: Все пользователи
       without_role: Без роли
       admin: Администратор
+      new: Создать нового пользователя
       editor:
         affiche: Редактор афиш
         post: Редактор публикаций

@@ -2,6 +2,11 @@
 
 SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
+
+    primary.item :posts, 'Админ', manage_admin_users_path,
+      :highlights_on => ->(){ controller_name == 'users' || resource_class.try(:superclass) == User },
+      :unless => -> { (current_user.roles & ["admin"]).empty? }
+
     primary.item :organisations, 'Заведения города', manage_organizations_path,
       :highlights_on => ->(){ controller_name == 'organizations' || resource_class.try(:superclass) == Organization },
       :unless => -> { (current_user.roles & ["admin", "organizations_editor"]).empty? }

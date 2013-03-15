@@ -7,3 +7,4 @@
 <%= link_to I18n.t("edit"), edit_manage_admin_user_path(@user) %>
 <%= link_to I18n.t("delete"), manage_admin_user_path(@user),
     :method => :delete, data: { confirm: I18n.t("confirm_ask") }%>
+<%= link_to I18n.t("back"), manage_admin_users_path %>

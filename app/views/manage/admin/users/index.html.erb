@@ -8,6 +8,7 @@
 
 <%= form_tag(manage_admin_user_mass_update_path, :method => :post) do %>
 
+  <%= link_to I18n.t("manage.admin.new"), new_manage_admin_user_path %>
   <div class="users">
     <% @users.each_with_index do |user,i| %>
     <p class="<%= "odd" if i.odd?%>">
