@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  scope :sales_managers,  with_role("sales_manager")
+
   def roles=(roles)
     self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.inject(0, :+)
   end
