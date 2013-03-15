@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang='ru'>
   <head>
-    <meta charset="UTF-8">
+    <meta charset='UTF-8'>
     <title>CRM</title>
     <%= favicon_link_tag %>
-    <%= stylesheet_link_tag    "crm/application", :media => "all" %>
-    <%= javascript_include_tag "crm/application" %>
+    <%= stylesheet_link_tag    'crm/application', :media => 'all' %>
+    <%= javascript_include_tag 'crm/application' %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class='header'>
+    </div>
+    <div class='content'>
+      <%= yield %>
+    </div>
   </body>
 </html>
