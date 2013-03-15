@@ -165,6 +165,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.7.4)
+    libv8 (3.11.8.13)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -268,6 +269,7 @@ GEM
       json (~> 1.4)
     recaptcha (0.3.4)
     redcarpet (2.2.2)
+    ref (1.0.2)
     responders (0.6.5)
     rinku (1.5.1)
     rsolr (1.0.8)
@@ -322,6 +324,9 @@ GEM
     sunspot_solr (2.0.0.pre.120925)
     terminal-table (1.4.5)
     text-hyphen (1.4.1)
+    therubyracer (0.11.3)
+      libv8 (~> 3.11.8.12)
+      ref
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -392,6 +397,7 @@ DEPENDENCIES
   inherited_resources!
   jquery-rails (= 2.0.3)
   kaminari
+  libv8 (~> 3.11.8)
   nested_form
   omniauth-twitter
   omniauth-vkontakte
@@ -415,6 +421,7 @@ DEPENDENCIES
   sunspot_rails
   sunspot_solr (= 2.0.0.pre.120925)
   text-hyphen
+  therubyracer
   thin
   timecop
   turbo-sprockets-rails3
