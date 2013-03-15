@@ -64,10 +64,12 @@ Znaigorod::Application.routes.draw do
       post "users/mass_update" => 'users#mass_update', :as => 'user/mass_update'
     end
 
-    namespace :crm do
-      resources :activities
+    root :to => 'organizations#index'
+  end
 
-      root :to => 'activities#index'
+  namespace :crm do
+    resources :organizations, :only => [:index, :show] do
+      resources :activities
     end
 
     root :to => 'organizations#index'
