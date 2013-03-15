@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315070802) do
+ActiveRecord::Schema.define(:version => 20130315082637) do
 
   create_table "activities", :force => true do |t|
     t.string   "title"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20130315070802) do
     t.integer  "user_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "status"
   end
 
   add_index "activities", ["organization_id"], :name => "index_activities_on_organization_id"
@@ -254,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20130315070802) do
     t.integer  "vkontakte_likes"
     t.string   "subdomain"
     t.integer  "user_id"
+    t.string   "status"
   end
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true

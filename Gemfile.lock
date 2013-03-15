@@ -109,6 +109,8 @@ GEM
       configliere
       curb
       rails
+    enumerize (0.5.1)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     esp-ckeditor (0.1.3)
       formtastic
@@ -376,6 +378,7 @@ DEPENDENCIES
   delayed_job_active_record
   draper
   el_vfs_client
+  enumerize
   esp-ckeditor
   fabrication
   fastimage

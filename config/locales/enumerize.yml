@@ -1,0 +1,8 @@
+ru:
+  enumerize:
+    status:
+      fresh:               Новый
+      talks:               Ведутся переговоры
+      waiting_for_payment: Ожидание оплаты
+      client:              Клиент
+      non_cooperation:     Отказ в сотрудничестве

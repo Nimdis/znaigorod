@@ -8,10 +8,19 @@ class Organization < ActiveRecord::Base
                   :comment, :organization_stand_attributes, :additional_rating,
                   :social_links_attributes
 
+  # <=== CRM
+
   belongs_to :manager, :class_name => 'User', :foreign_key => 'user_id'
   belongs_to :organization
   has_many :activities, :dependent => :destroy
   has_many :contacts,   :dependent => :destroy
+
+  extend Enumerize
+  enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation]
+
+  default_value_for :status, :fresh
+
+  # CRM ===>
 
   has_many :affiches,       :through => :showings, :uniq => true
   has_many :halls,          :dependent => :destroy
