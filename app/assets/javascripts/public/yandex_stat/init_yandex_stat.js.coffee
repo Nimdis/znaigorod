@@ -25,3 +25,10 @@
     yaCounter14923525.reachGoal('dobrynin') unless link.hasClass('development')
     true
   true
+
+@init_skoda_stat = () ->
+  link = $('a.skoda')
+  link.click (event) ->
+    yaCounter14923525.reachGoal('skoda') unless link.hasClass('development')
+    true
+  true
