@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 
   FIELDS = Hash[FILTER.to_a[2..-1]]
 
+  has_many :activities, :dependent => :destroy
   has_many :organizations
 
   validates_presence_of :uid, :oauth_key

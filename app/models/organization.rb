@@ -8,8 +8,9 @@ class Organization < ActiveRecord::Base
                   :comment, :organization_stand_attributes, :additional_rating,
                   :social_links_attributes
 
-  belongs_to :organization
   belongs_to :manager, :class_name => 'User', :foreign_key => 'user_id'
+  belongs_to :organization
+  has_many :activities, :dependent => :destroy
 
   has_many :affiches,       :through => :showings, :uniq => true
   has_many :halls,          :dependent => :destroy
