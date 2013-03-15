@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314102149) do
+ActiveRecord::Schema.define(:version => 20130315054708) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -226,9 +226,11 @@ ActiveRecord::Schema.define(:version => 20130314102149) do
     t.integer  "yandex_metrika_page_views"
     t.integer  "vkontakte_likes"
     t.string   "subdomain"
+    t.integer  "user_id"
   end
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true
+  add_index "organizations", ["user_id"], :name => "index_organizations_on_user_id"
 
   create_table "pool_table_prices", :force => true do |t|
     t.integer  "pool_table_id"

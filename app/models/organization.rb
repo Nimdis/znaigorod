@@ -9,6 +9,7 @@ class Organization < ActiveRecord::Base
                   :social_links_attributes
 
   belongs_to :organization
+  belongs_to :manager, :class_name => 'User', :foreign_key => 'user_id'
 
   has_many :affiches,       :through => :showings, :uniq => true
   has_many :halls,          :dependent => :destroy

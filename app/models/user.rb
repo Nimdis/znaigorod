@@ -16,7 +16,9 @@ class User < ActiveRecord::Base
 
   FIELDS = Hash[FILTER.to_a[2..-1]]
 
-  validates :uid, :presence => true
+  has_many :organizations
+
+  validates_presence_of :uid, :oauth_key
 
   scope :with_role, ->(role) do
     if role.nil? || role == "nil"
