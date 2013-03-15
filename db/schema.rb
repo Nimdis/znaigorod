@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315060519) do
+ActiveRecord::Schema.define(:version => 20130315070802) do
 
   create_table "activities", :force => true do |t|
     t.string   "title"
@@ -91,6 +91,22 @@ ActiveRecord::Schema.define(:version => 20130315060519) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  create_table "contacts", :force => true do |t|
+    t.string   "full_name"
+    t.string   "post"
+    t.string   "phone"
+    t.string   "mobile_phone"
+    t.string   "email"
+    t.string   "skype"
+    t.string   "vkontakte"
+    t.string   "facebook"
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "contacts", ["organization_id"], :name => "index_contacts_on_organization_id"
 
   create_table "contests", :force => true do |t|
     t.string   "title"

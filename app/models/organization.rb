@@ -11,6 +11,7 @@ class Organization < ActiveRecord::Base
   belongs_to :manager, :class_name => 'User', :foreign_key => 'user_id'
   belongs_to :organization
   has_many :activities, :dependent => :destroy
+  has_many :contacts,   :dependent => :destroy
 
   has_many :affiches,       :through => :showings, :uniq => true
   has_many :halls,          :dependent => :destroy

@@ -26,6 +26,7 @@ module Znaigorod
                                 #{config.root}/app/models/affiches
                                 #{config.root}/app/models/billiards
                                 #{config.root}/app/models/contests
+                                #{config.root}/app/models/crm
                                 #{config.root}/app/models/saunas
                                 #{config.root}/app/models/suborganizations
                                 #{config.root}/app/presenters
