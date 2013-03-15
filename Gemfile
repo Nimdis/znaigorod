@@ -7,6 +7,7 @@ group :assets do
   gem 'libv8',                      '~> 3.11.8' unless RUBY_PLATFORM =~ /freebsd/
   gem 'sass-rails'
   gem 'therubyracer',               :platforms => :ruby, :require => 'v8'
+  gem 'turbo-sprockets-rails3'
   gem 'uglifier'
 end
 
