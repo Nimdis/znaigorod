@@ -11,15 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315082637) do
+ActiveRecord::Schema.define(:version => 20130315092229) do
 
   create_table "activities", :force => true do |t|
-    t.string   "title"
+    t.text     "title"
     t.integer  "organization_id"
     t.integer  "user_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "status"
+    t.string   "state"
+    t.datetime "activity_at"
+    t.integer  "contact_id"
   end
 
   add_index "activities", ["organization_id"], :name => "index_activities_on_organization_id"

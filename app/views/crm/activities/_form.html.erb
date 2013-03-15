@@ -1,0 +1,18 @@
+<div class="form_view">
+  <%= semantic_form_for [:crm, parent, resource], :html => { :novalidate => true }  do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :title, as: :string%>
+      <%= f.input :status %>
+      <%= f.input :state %>
+      <%= f.input :activity_at, as: :date %>
+      <%= f.input :user_id %>
+      <%= f.input :contact_id %>
+    <% end %>
+
+    <div class="actions">
+      <%= link_to "Отмена", :back %>
+      <%= button_tag 'Сохранить' %>
+      <%= link_to 'Удалить', resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
+    </div>
+  <% end %>
+</div>

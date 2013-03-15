@@ -4,6 +4,20 @@
 <%= link_to "изменить", edit_crm_organization_path(@organization) %>
 
 <%= render @organization.contacts %>
+<h2>Запланированная</h2>
+<ul>
+<% @organization.activities.find_by_state(:planned) do |activity| %>
+  <li><%= activity.title %></li>
+<% end %>
+</ul>
+<h2>Совершённая</h2>
+<ul>
+  <% @organization.activities.find_by_state(:completed) do |activity| %>
+    <li><%= activity.title %></li>
+  <% end %>
+</ul>
+
 <%= link_to "Добавить контакт", new_crm_organization_contact_url(@organization) %>
+<%= link_to "Добавить активность", new_crm_organization_activity_url(@organization) %>
 
 <%= link_to 'Список заведений', crm_organizations_path %>
