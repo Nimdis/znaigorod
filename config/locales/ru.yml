@@ -528,6 +528,7 @@
     models:
       affiche: Вся афиша
       concert: Концерты
+      contact: Контакт
       contest: Конкурс
       meal: Заведение питания
       exhibition: Выставки
@@ -556,6 +557,16 @@
         latitude: Широта
         longitude: Долгота
         street: Улица
+
+      contact:
+        email: Email
+        facebook: facebook
+        full_name: Фамилия Имя
+        mobile_phone: Сотовый
+        phone: Телефон
+        post: Должность
+        skype: skype
+        vkontakte: ВКонтакте
 
       contest:
         title: Название

@@ -1,3 +1,6 @@
 <h1><%= @organization.title %></h1>
 
+<%= render @organization.contacts %>
+<%= link_to "Добавить контакт", new_crm_organization_contact_url(@organization) %>
+
 <%= link_to 'Список заведений', crm_organizations_path %>

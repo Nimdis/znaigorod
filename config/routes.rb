@@ -70,6 +70,7 @@ Znaigorod::Application.routes.draw do
   namespace :crm do
     resources :organizations, :only => [:index, :show] do
       resources :activities
+      resources :contacts, :except => [:show, :index]
     end
 
     root :to => 'organizations#index'
