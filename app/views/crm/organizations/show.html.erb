@@ -1,4 +1,5 @@
 <h1><%= @organization.title %></h1>
+<p class="status_<%= @organization.status %>"><%= @organization.status_text %></p>
 
 <%= @organization.manager ? @organization.manager : 'не назначен' %>
 <%= link_to "изменить", edit_crm_organization_path(@organization) %>

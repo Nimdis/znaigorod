@@ -21,6 +21,7 @@ class Activity < ActiveRecord::Base
   belongs_to :manager, :class_name => 'User', :foreign_key => 'user_id'
   belongs_to :contact
   validates_presence_of :title, :state, :status, :activity_at, :manager
+  after_save :set_organization_status, if: :state_completed?
 
   searchable do
     string   :state
@@ -31,7 +32,13 @@ class Activity < ActiveRecord::Base
 
   extend Enumerize
   enumerize :status, in: [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation], default: :fresh
-  enumerize :state, in: [:planned, :completed], default: :planned
+  enumerize :state, in: [:planned, :completed], default: :planned, predicates: { prefix: true }
 
   scope :with_state, ->(state) {where(state: state)}
+
+  private
+    def set_organization_status
+      organization.status = status
+      organization.save
+    end
 end
