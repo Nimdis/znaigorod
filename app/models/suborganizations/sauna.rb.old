@@ -1,32 +1,6 @@
-class Sauna < ActiveRecord::Base
-  attr_accessible :category, :feature, :offer, :payment, :title, :description
+# encoding: utf-8
 
-  belongs_to :organization
-
-  delegate :address, :phone, :schedules, :halls,
-           :site?, :site, :email?, :email, :affiches,
-           :latitude, :longitude, :nearest_affiches, :to => :organization
-
-  delegate :title, :description, :description?, to: :organization, prefix: true
-
-  validates_presence_of :organization_id
-
-  delegate :save, to: :organization, prefix: true
-  after_save :organization_save
-
-  # OPTIMIZE: <--- similar code
-  attr_accessor :vfs_path
-  attr_accessible :vfs_path
-  def vfs_path
-    "#{organization.vfs_path}/#{self.class.name.underscore}"
-  end
-  has_many :images, :as => :imageable, :dependent => :destroy
-  # similar code --->
-
-  def sunspot_index
-    index and sauna_halls.map(&:index)
-  end
-
+class Sauna < Entertainment
   attr_accessible :sauna_accessory_attributes, :sauna_alcohol_attributes,
     :sauna_broom_attributes, :sauna_massage_attributes,
     :sauna_oil_attributes, :sauna_stuff_attributes,
@@ -50,11 +24,13 @@ class Sauna < ActiveRecord::Base
   accepts_nested_attributes_for :sauna_stuff
   accepts_nested_attributes_for :sauna_massage
 
-  include Rating
+  delegate :title, :to => :organization, :prefix => true
+
+  def sunspot_index
+    index and sauna_halls.map(&:index)
+  end
 
   use_for_rating :sauna_halls, :sauna_accessory, :sauna_broom, :sauna_alcohol, :sauna_oil, :sauna_child_stuff, :sauna_stuff, :sauna_massage
-
-  include PresentsAsCheckboxes
 
   presents_as_checkboxes :category,
     :available_values => -> { HasSearcher.searcher(:entertainment, :entertainment_type => 'Sauna').facet(:entertainment_category).rows.map(&:value).map(&:mb_chars).map(&:capitalize).map(&:to_s) },
@@ -68,10 +44,6 @@ class Sauna < ActiveRecord::Base
   presents_as_checkboxes :offer, :available_values => -> {
     HasSearcher.searcher(:entertainment, :entertainment_type => 'Sauna').facet(:entertainment_offer).rows.map(&:value)
   }
-
-  include SearchWithFacets
-
-  search_with_facets :category, :payment, :feature, :offer, :stuff
 end
 
 # == Schema Information
