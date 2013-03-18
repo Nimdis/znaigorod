@@ -1,11 +1,7 @@
 source 'http://rubygems.org'
 
 group :assets do
-  gem 'coffee-rails'
-  gem 'compass-rails'
-  gem 'jquery-rails',               '2.0.3'
   gem 'libv8',                      '~> 3.11.8' unless RUBY_PLATFORM =~ /freebsd/
-  gem 'sass-rails'
   gem 'therubyracer',               :platforms => :ruby, :require => 'v8'
   gem 'turbo-sprockets-rails3'
   gem 'uglifier'
@@ -17,6 +13,8 @@ group :default do
   gem 'attribute_normalizer'
   gem 'auto_html'
   gem 'cancan'
+  gem 'coffee-rails'
+  gem 'compass-rails'
   gem 'curb',                       :require => false
   gem 'daemons'
   gem 'default_value_for'
@@ -35,6 +33,7 @@ group :default do
   gem 'has_searcher'
   gem 'hashie'
   gem 'inherited_resources',        :git => 'git://github.com/DouweM/inherited_resources', :branch => 'nested-singletons' # NOTE: https://github.com/josevalim/inherited_resources/pull/194
+  gem 'jquery-rails',               '2.0.3'
   gem 'kaminari'
   gem 'nested_form'
   gem 'omniauth-twitter'
@@ -46,6 +45,7 @@ group :default do
   gem 'rails'
   gem 'recaptcha',                  :require => 'recaptcha/rails'
   gem 'russian'
+  gem 'sass-rails'
   gem 'simple-navigation'
   gem 'simple_form'
   gem 'sitemap_generator'
