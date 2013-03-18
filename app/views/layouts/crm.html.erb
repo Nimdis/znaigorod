@@ -32,8 +32,8 @@
                 <%= submit_tag 'Поиск', class: :button %>
               </div>
               <div class="include_gone">
-                <%= label_tag 'include_gone', 'Включая прошедшие' %>
                 <%= check_box_tag 'include_gone', '1', params[:include_gone] %>
+                <%= label_tag 'include_gone', 'Включая прошедшие' %>
               </div>
             <% end %>
           <% end %>

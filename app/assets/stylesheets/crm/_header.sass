@@ -24,15 +24,20 @@
     .wrapper
       +clearfix
 
-    #q
-      float: left
-      border: 1px solid #ccc
-      +border-radius
-      padding: 3px
-      margin: 0
+      #q
+        float: left
+        border: 1px solid #ccc
+        +border-top-left-radius
+        +border-bottom-left-radius
+        padding: 5px 4px 4px 5px
+        border-right: none
+        margin: 0
 
-    .button
-      float: left
+      .button
+        float: left
+        +border-top-left-radius(0)
+        +border-bottom-left-radius(0)
+
 
   .user_box
     float: right
