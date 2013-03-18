@@ -1,12 +1,12 @@
 <div class="form_view">
   <%= semantic_form_for [:crm, parent, resource], :html => { :novalidate => true }  do |f| %>
     <%= f.inputs do %>
-      <%= f.input :title, as: :string%>
+      <%= f.input :title %>
       <%= f.input :status %>
       <%= f.input :state %>
-      <%= f.input :activity_at, as: :date %>
-      <%= f.input :user_id %>
-      <%= f.input :contact_id %>
+      <%= f.input :activity_at %>
+      <%= f.input :manager, as: :select, collection: User.sales_managers, selected: @organization.manager ? @organization.user_id : current_user.id %>
+      <%= f.input :contact, as: :select, collection: @organization.contacts %>
     <% end %>
 
     <div class="actions">

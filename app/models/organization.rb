@@ -1,3 +1,32 @@
+# == Schema Information
+#
+# Table name: organizations
+#
+#  id                            :integer          not null, primary key
+#  title                         :text
+#  site                          :text
+#  email                         :text
+#  description                   :text
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
+#  phone                         :text
+#  vfs_path                      :string(255)
+#  organization_id               :integer
+#  logotype_url                  :text
+#  slug                          :string(255)
+#  tour_link                     :text
+#  rating                        :float
+#  non_cash                      :boolean
+#  priority_suborganization_kind :string(255)
+#  comment                       :text
+#  additional_rating             :integer
+#  yandex_metrika_page_views     :integer
+#  vkontakte_likes               :integer
+#  subdomain                     :string(255)
+#  user_id                       :integer
+#  status                        :string(255)
+#
+
 class Organization < ActiveRecord::Base
   extend FriendlyId
 
@@ -228,31 +257,3 @@ class Organization < ActiveRecord::Base
   include Rating
   use_for_rating :culture, :entertainment, :meal, :sauna, :sport, :billiard, :creation, :organization_stand
 end
-
-# == Schema Information
-#
-# Table name: organizations
-#
-#  id                            :integer          not null, primary key
-#  title                         :text
-#  site                          :text
-#  email                         :text
-#  description                   :text
-#  created_at                    :datetime         not null
-#  updated_at                    :datetime         not null
-#  phone                         :text
-#  vfs_path                      :string(255)
-#  organization_id               :integer
-#  logotype_url                  :text
-#  slug                          :string(255)
-#  tour_link                     :text
-#  rating                        :float
-#  non_cash                      :boolean
-#  priority_suborganization_kind :string(255)
-#  comment                       :text
-#  additional_rating             :integer
-#  yandex_metrika_page_views     :integer
-#  vkontakte_likes               :integer
-#  subdomain                     :string(255)
-#
-

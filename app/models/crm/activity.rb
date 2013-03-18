@@ -1,10 +1,28 @@
+# == Schema Information
+#
+# Table name: activities
+#
+#  id              :integer          not null, primary key
+#  title           :text
+#  organization_id :integer
+#  user_id         :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  status          :string(255)
+#  state           :string(255)
+#  activity_at     :datetime
+#  contact_id      :integer
+#
+
 class Activity < ActiveRecord::Base
   attr_accessible :title, :state, :activity_at, :user_id, :contact_id, :status
 
   belongs_to :organization
-  belongs_to :user
+  belongs_to :manager, :class_name => 'User', :foreign_key => 'user_id'
+  belongs_to :contact
+  validates_presence_of :title, :state, :status, :activity_at, :manager
 
-  searcheble do
+  searchable do
     string   :state
     string   :status
     integer  :user_id
@@ -12,12 +30,8 @@ class Activity < ActiveRecord::Base
   end
 
   extend Enumerize
-  enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation]
+  enumerize :status, in: [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation], default: :fresh
+  enumerize :state, in: [:planned, :completed], default: :planned
 
-  default_value_for :status, :fresh
-
-  enumerize :state, :in => [:planned, :completed]
-
-  default_value_for :status, :planned
-
+  scope :with_state, ->(state) {where(state: state)}
 end
