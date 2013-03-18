@@ -1,9 +1,18 @@
 <h1><%= @organization.title %></h1>
-<p class="status_<%= @organization.status %>"><%= @organization.status_text %></p>
+<%= image_tag @organization.logotype_url %>
+<ul>
+  <li>Категории: <%= @organization.category_ru %> </li>
+  <li>Адрес: <%= @organization.address %></li>
+  <li>Телефон: <%= @organization.phone %></li>
+  <li>Сайт: <%= @organization.site %></li>
+  <li>Менеджер:
+    <%= @organization.manager ? @organization.manager : 'не назначен' %>
+    <%= link_to "изменить", edit_crm_organization_path(@organization) %>
+  </li>
+  <li><p class="status_<%= @organization.status %>"><%= @organization.status_text %></p></li>
+</ul>
 
-<%= @organization.manager ? @organization.manager : 'не назначен' %>
-<%= link_to "изменить", edit_crm_organization_path(@organization) %>
-
+<h2>Контакты</h2>
 <%= render @organization.contacts %>
 <%= link_to "Добавить контакт", new_crm_organization_contact_url(@organization) %>
 <h2>Активность</h2>
