@@ -1,8 +1,10 @@
 .header
-  +clearfix
+  +arial_font
   width: 1200px
+  height: 90px
   margin: 20px auto 0
   border-bottom: 5px solid #323232
+  position: relative
 
   .crm_logo
     float: left
@@ -14,16 +16,35 @@
     background: transparent image_url('crm/logo.png') no-repeat
     margin: 0 20px 20px 20px
 
+  .search
+    float: right
+    font-size: 12px
+    margin: 0 20px 0 0
+
+    .wrapper
+      +clearfix
+
+    #q
+      float: left
+      border: 1px solid #ccc
+      +border-radius
+      padding: 3px
+      margin: 0
+
+    .button
+      float: left
+
   .user_box
     float: right
     margin: 0 20px 0 0
+    a
+      color: #222
 
   .navigation
-    float: right
-    clear: right
     font-size: 18px
-    +clearfix
-    margin: 35px 20px 0 0
+    position: absolute
+    bottom: 0
+    right: 20px
     li
       float: left
       margin: 0 10px
