@@ -73,6 +73,8 @@ Znaigorod::Application.routes.draw do
       resources :contacts, :except => [:show, :index]
     end
 
+    resources :activities, :only => :index
+
     root :to => 'organizations#index'
   end
   get 'crm/organizations' => 'crm/organizations#index', as: :manage_sales
