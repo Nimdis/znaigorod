@@ -1,5 +1,8 @@
 #encoding:utf-8
 class Manage::SessionsController < ApplicationController
+
+  layout 'crm'
+
   def new
   end
 

@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :organizations
 
-  validates_presence_of :uid, :oauth_key
+  validates_presence_of :uid
 
   scope :with_role, ->(role) do
     if role.nil? || role == "nil"
