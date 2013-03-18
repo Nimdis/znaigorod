@@ -75,6 +75,7 @@ Znaigorod::Application.routes.draw do
 
     root :to => 'organizations#index'
   end
+  get 'crm/organizations' => 'crm/organizations#index', as: :manage_sales
 
   # legacy urls
 

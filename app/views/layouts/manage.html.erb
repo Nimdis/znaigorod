@@ -24,13 +24,14 @@
       <% end %>
     </div>
     <%= render_navigation :context => 'manage' %>
+    <%= current_user.name %>
+    <%= link_to "Выход", manage_session_path(current_user), method: :delete %>
   </div>
 
   <div class="main_container">
     <%= yield %>
   </div>
 
-    <%= link_to 'Выход', manage_session_path(current_user), :method => :delete %>
 <% end %>
 
 <% @body_class = "noisy" if Rails.env.production? %>
