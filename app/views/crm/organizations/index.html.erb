@@ -1,34 +1,36 @@
-<%= form_tag crm_organizations_path, method: :get do %>
-  <div>
-    <%= label_tag :q, 'Поиск' %>
-    <%= text_field_tag :q, params[:q] %>
-  </div>
+<%= simple_form_for :search, method: :get do |f| %>
+  <%= f.input :q,
+    label: 'Поиск',
+    as: :string,
+    input_html: { value: params[:search].try(:[], :q) },
+    required: false %>
 
-  <div>
-    <%= label_tag :status, 'Статус' %>
-    <%= select_tag :status,
-      options_for_select(Organization.status.options, params[:status]),
-      include_blank: true %>
-  </div>
+  <%= f.input :status,
+    label: 'Статус',
+    as: :select,
+    collection: Organization.status.options,
+    selected: params[:search].try(:[], :status),
+    include_blank: true,
+    required: false %>
 
-  <div>
-    <%= label_tag :user_id, 'Менеджер' %>
-    <%= select_tag :user_id,
-      options_from_collection_for_select(User.sales_managers, :id, :name, params[:user_id]),
-      include_blank: true %>
-  </div>
+  <%= f.input :user_id,
+    label: 'Менеджер',
+    as: :select,
+    collection: User.sales_managers,
+    selected: params[:search].try(:[], :user_id),
+    include_blank: true,
+    required: false %>
 
-  <div>
-    <%= label_tag :suborganizations, 'Категории' %>
-    <%= select_tag 'suborganizations[]',
-      options_for_select(Organization.available_suborganization_kinds.map { |kind| [kind.classify.constantize.model_name.human, kind] }, params[:suborganizations].try(:first)),
-      id: 'suborganizations',
-      include_blank: true %>
-  </div>
 
-  <div>
-    <%= submit_tag 'Найти' %>
-  </div>
+  <%= f.input :suborganizations,
+    label: 'Категории',
+    as: :select,
+    collection: Organization.available_suborganization_kinds.map { |kind| [kind.classify.constantize.model_name.human, kind] },
+    selected: params[:search].try(:[], :suborganizations),
+    include_blank: true,
+    required: false %>
+
+  <%= f.submit 'Найти' %>
 <% end %>
 
 <ul>

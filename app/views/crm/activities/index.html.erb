@@ -4,24 +4,28 @@
     as: :select,
     collection: Activity.state.options,
     selected: params[:search].try(:[], :state),
-    include_blank: true %>
+    include_blank: true,
+    required: false %>
 
   <%= f.input 'activity[from]',
     label: 'от',
     as: :string,
-    input_html: { value: params[:search].try(:[], :activity).try(:[], :from) } %>
+    input_html: { value: params[:search].try(:[], :activity).try(:[], :from) },
+    required: false %>
 
   <%= f.input 'activity[to]',
     label: 'до',
     as: :string,
-    input_html: { value: params[:search].try(:[], :activity).try(:[], :to) } %>
+    input_html: { value: params[:search].try(:[], :activity).try(:[], :to) },
+    required: false %>
 
   <%= f.input :user_id,
     label: 'Менеджер',
     as: :select,
     collection: User.sales_managers,
     selected: params[:search].try(:[], :user_id),
-    include_blank: true %>
+    include_blank: true,
+    required: false %>
 
   <%= f.submit 'Найти' %>
 <% end %>
