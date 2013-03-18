@@ -1,3 +1,33 @@
 .header
+  +clearfix
   width: 1200px
   margin: 20px auto 0
+  border-bottom: 5px solid #323232
+
+  .crm_logo
+    float: left
+    display: block
+    +clearfix
+    width: 130px
+    height: 70px
+    text-indent: -9999em
+    background: transparent image_url('crm/logo.png') no-repeat
+    margin: 0 20px 20px 20px
+
+  .user_box
+    float: right
+    margin: 0 20px 0 0
+
+  .navigation
+    float: right
+    clear: right
+    font-size: 18px
+    +clearfix
+    margin: 35px 20px 0 0
+    li
+      float: left
+      margin: 0 10px
+      &:first-child
+        margin-left: 0
+      &:last-child
+        margin-right: 0

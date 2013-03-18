@@ -10,6 +10,14 @@
   </head>
   <body>
     <div class='header'>
+      <%= link_to 'Система управления взаимоотношениями с клиентами', crm_root_path, class: :crm_logo %>
+      <% unless @current_user.blank? %>
+        <div class='user_box'>
+          <%= @current_user.name %>
+          <%= link_to 'Выход', manage_session_path(current_user), method: :delete, class: :sign_out %>
+        </div>
+        <%= render_navigation :context => 'manage' %>
+      <% end %>
     </div>
     <div class='content'>
       <%= yield %>

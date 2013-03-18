@@ -3,7 +3,7 @@
 class Manage::ApplicationController < InheritedResources::Base
   helper_method :per_page, :current_user
 
-  layout 'manage'
+  layout 'crm'
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to new_manage_session_path, :notice => "У вас не хватает прав для выполнения этого действия"
