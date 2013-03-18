@@ -48,17 +48,35 @@
   .navigation
     font-size: 18px
     position: absolute
-    bottom: 0
+    bottom: -5px
     right: 20px
-    li
+    > li
       float: left
-      a
+      border-bottom: 5px solid transparent
+      > a
         color: #222
         text-decoration: none
         padding: 0 10px 4px
         &.selected
           border-bottom: 5px solid #ffb400
-        &:hover
-          border-bottom: 5px solid #ffb400
       &:last-child a
         padding-right: 0
+      ul
+        display: none
+        position: absolute
+        border: 1px solid #ffb400
+        border-top-width: 5px
+        font-size: 14px
+        padding: 10px
+        background-color: #fff
+        li a
+          color: #222
+          text-decoration: none
+          &:hover
+            color: #555
+      &:hover
+        border-bottom: 5px solid #ffb400
+        > a
+          color: #555
+        ul
+          display: block

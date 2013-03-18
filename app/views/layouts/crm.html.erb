@@ -17,7 +17,7 @@
           <%= link_to 'Выход', manage_session_path(current_user), method: :delete, class: :sign_out %>
         </div>
         <div class="search">
-          <% if resource_class == Organization %>
+          <% if [Organization, Meal, Entertainment, Culture, Sauna, Sport, Creation].include?(resource_class)  %>
             <%= form_tag manage_organizations_path, :method => :get do %>
               <div class='wrapper'>
                 <%= text_field_tag 'q', params[:q], :placeholder => 'Поиск' %>
@@ -25,7 +25,7 @@
               </div>
             <% end %>
           <% end %>
-          <% if resource_class == Affiche %>
+          <% if resource_class == Affiche || resource_class.try(:superclass) == Affiche %>
             <%= form_tag manage_affiches_path, :method => :get do %>
               <div class='wrapper'>
                 <%= text_field_tag 'q', params[:q], :placeholder => 'Поиск' %>
@@ -38,7 +38,7 @@
             <% end %>
           <% end %>
         </div>
-        <%= render_navigation :context => 'manage' %>
+        <%= render_navigation context: 'manage', expand_all: true %>
       <% end %>
     </div>
     <div class='content'>
