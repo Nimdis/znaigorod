@@ -4,8 +4,12 @@ class Activity < ActiveRecord::Base
   belongs_to :organization
   belongs_to :user
 
-
-  # <=== CRM
+  searcheble do
+    string   :state
+    string   :status
+    integer  :user_id
+    date     :activity_at
+  end
 
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation]
@@ -16,5 +20,4 @@ class Activity < ActiveRecord::Base
 
   default_value_for :status, :planned
 
-  # CRM ===>
 end
