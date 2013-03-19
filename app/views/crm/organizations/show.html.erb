@@ -20,9 +20,13 @@
 <h2>Активность</h2>
 <%= link_to "Добавить активность", new_crm_organization_activity_url(@organization) %>
 <h2>Запланированная</h2>
-<%= render @organization.activities.with_state(:planned) %>
+<ul>
+  <%= render @organization.activities.with_state(:planned) %>
+</ul>
 <h2>Совершённая</h2>
-<%= render @organization.activities.with_state(:completed) %>
+<ul>
+  <%= render @organization.activities.with_state(:completed) %>
+</ul>
 
 
 <%= link_to 'Список заведений', crm_organizations_path %>

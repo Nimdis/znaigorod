@@ -3,10 +3,17 @@
 <div class="search_activity_form">
   <%= simple_form_for :search, method: :get do |f| %>
     <%= f.input :state,
-      label: 'Статус',
+      label: 'Состояние',
       collection: Activity.state.options,
       prompt: 'Все',
       selected: params[:search].try(:[], :state),
+      required: false %>
+
+    <%= f.input :state,
+      label: 'Статус',
+      collection: Activity.status.options,
+      prompt: 'Все',
+      selected: params[:search].try(:[], :status),
       required: false %>
 
     <%= f.input 'activity[from]',

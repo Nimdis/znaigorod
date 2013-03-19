@@ -22,6 +22,7 @@ class Activity < ActiveRecord::Base
   belongs_to :contact
   validates_presence_of :title, :state, :status, :activity_at, :manager
   after_save :set_organization_status, if: :state_completed?
+  default_scope order('activity_at desc')
 
   searchable do
     string   :state

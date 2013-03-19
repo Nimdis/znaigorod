@@ -1,7 +1,9 @@
-<%= l(activity.activity_at.to_date, :format => '%e %B %Y') %>
-<%= activity.title %>
-<%= activity.status_text %>
-<%= activity.contact %>
-<%= link_to "Редактировать", edit_crm_organization_activity_path(@organization, activity) %>
-<%= link_to "Удалить", crm_organization_activity_path(@organization, activity),
-  :method => :delete, data: { confirm: I18n.t("confirm_ask") } %>
+<li>
+  <%= l(activity.activity_at, :format => :long) %>
+  <%= activity.title %>
+  <%= link_to activity.organization.title, [:crm, activity.organization] %>
+  <%= activity.manager unless params[:search].try(:[], :user_id) %>
+  <%= activity.status_text %>
+  <%= activity.contact %>
+  <%= link_to "Редактировать", edit_crm_organization_activity_path(activity.organization, activity) %>
+</li>
