@@ -3,6 +3,7 @@
 <%= image_tag @organization.logotype_url %>
 
 <ul>
+  <li>Текущий статус: <%= @organization.status.text %> </li>
   <li>Категории: <%= @organization.category_ru %> </li>
   <li>Адрес: <%= @organization.address %></li>
   <li>Телефон: <%= @organization.phone %></li>
@@ -27,6 +28,3 @@
 <ul>
   <%= render @organization.activities.with_state(:completed) %>
 </ul>
-
-
-<%= link_to 'Список заведений', crm_organizations_path %>
