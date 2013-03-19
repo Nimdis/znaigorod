@@ -49,3 +49,82 @@
           color: #707070
           font-size: 12px
           text-transform: lowercase
+
+  .organization_show
+    +clearfix
+
+    .left
+      float: left
+      width: 830px
+      margin-right: 20px
+
+      .info
+        +clearfix
+        margin-bottom: 20px
+        .image
+          float: left
+          width: 150px
+          height: 150px
+        .details
+          margin-left: 160px
+
+      .activities
+        h2 a
+          font-size: 14px
+          margin-left: 20px
+        table
+          width: 100%
+          font-size: 12px
+          margin-bottom: 15px
+          thead
+            .activity_at
+              width: 125px
+            .title
+              width: 269px
+            .status
+              width: 130px
+            .manager
+              width: 130px
+            .contacts
+              width: 130px
+            .edit
+              width: 16px
+          th
+            color: #707070
+          th, td
+            padding: 3px
+            &:first-child
+              padding-left: 0
+            &:last-child
+              padding-right: 0
+          td
+            vertical-align: top
+            &.edit a
+              display: block
+              +clearfix
+              width: 16px
+              height: 16px
+              text-indent: -9999em
+              background: transparent image_url('crm/icon_edit.png') no-repeat center center
+          tr:hover
+            td
+              background-color: #efefef
+
+    .right
+      float: left
+      width: 348px
+      background-color: #ededed
+      border: 1px solid #bfbfbf
+      h2
+        font-size: 24px
+        padding: 10px
+        a
+          font-size: 14px
+          margin-left: 20px
+      .contacts
+        border-top: 1px solid #bfbfbf
+        li
+          border-bottom: 1px solid #bfbfbf
+          padding: 10px
+          &:last-child
+            border-bottom: none

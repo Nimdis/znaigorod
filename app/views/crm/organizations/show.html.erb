@@ -1,30 +1,64 @@
-<h1><%= @organization.title %></h1>
+<div class='organization_show'>
 
-<%= image_tag @organization.logotype_url %>
+  <div class='left'>
+    <h1><%= @organization.title %></h1>
 
-<ul>
-  <li>Текущий статус: <%= @organization.status.text %> </li>
-  <li>Категории: <%= @organization.category_ru %> </li>
-  <li>Адрес: <%= @organization.address %></li>
-  <li>Телефон: <%= @organization.phone %></li>
-  <li>Сайт: <%= @organization.site %></li>
-  <li>Менеджер:
-    <%= @organization.manager ? @organization.manager : 'не назначен' %>
-    <%= link_to "изменить", edit_crm_organization_path(@organization) %>
-  </li>
-  <li><p class="status_<%= @organization.status %>"><%= @organization.status_text %></p></li>
-</ul>
+    <div class='info'>
+      <div class='image'>
+        <%= image_tag @organization.logotype_url.gsub(/\/\d+-\d+\//, '/150-150!/') %>
+      </div>
+      <div class='details'>
+        <ul>
+          <li><strong>Текущий статус:</strong> <span class='<%= @organization.status %>'><%= @organization.status.text %></span></li>
+          <li><strong>Категории:</strong> <%= @organization.category_ru %> </li>
+          <li><strong>Адрес:</strong> <%= @organization.address %></li>
+          <li><strong>Телефон:</strong> <%= @organization.phone %></li>
+          <li><strong>Сайт:</strong> <%= link_to @organization.site, @organization.site, target: '_blank' %></li>
+          <li><strong>Менеджер:</strong>
+            <%= @organization.manager ? @organization.manager : 'не назначен' %>
+            <%= link_to 'изменить', edit_crm_organization_path(@organization) %>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-<h2>Контакты</h2>
-<%= render @organization.contacts %>
-<%= link_to "Добавить контакт", new_crm_organization_contact_url(@organization) %>
-<h2>Активность</h2>
-<%= link_to "Добавить активность", new_crm_organization_activity_url(@organization) %>
-<h2>Запланированная</h2>
-<ul>
-  <%= render @organization.activities.with_state(:planned) %>
-</ul>
-<h2>Совершённая</h2>
-<ul>
-  <%= render @organization.activities.with_state(:completed) %>
-</ul>
+    <div class="activities">
+      <h2>
+        Активность
+        <%= link_to 'Добавить', new_crm_organization_activity_url(@organization) %>
+      </h2>
+      <% %w[planned completed].each do |state| %>
+        <h3><%= t("crm.activities.#{state}") %></h3>
+        <table>
+          <thead>
+            <tr>
+              <th class='activity_at'>Дата</th>
+              <th class='title'>Описание</th>
+              <th class='status'>Статус</th>
+              <th class='manager'>Менеджер</th>
+              <th class='contacts'>Контакты</th>
+              <th class='edit'></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render @organization.activities.with_state(state) %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+
+  </div>
+
+  <div class='right'>
+    <h2>
+      Контакты
+      <%= link_to 'Добавить', new_crm_organization_contact_url(@organization) %>
+    </h2>
+    <% if @organization.contacts.present? %>
+      <ul class='contacts'>
+        <%= render @organization.contacts %>
+      </ul>
+    <% end %>
+  </div>
+
+</div>

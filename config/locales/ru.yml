@@ -863,6 +863,11 @@
         feature: Особенности
         offer: Предложения
 
+  crm:
+    activities:
+      planned: Запланированная
+      completed: Совершённая
+
   manage:
     add_affiche: Добавление события
     add_attachment: Добавить файл
