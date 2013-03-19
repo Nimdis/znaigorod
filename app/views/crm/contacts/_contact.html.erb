@@ -1,2 +1,2 @@
-<%= contact %>
-<%= link_to "Редактировать", edit_crm_organization_contact_url(@organization, contact) %>
+<%= link_to contact.full_name, edit_crm_organization_contact_url(@organization, contact) %>
+<%= contact.post %>
