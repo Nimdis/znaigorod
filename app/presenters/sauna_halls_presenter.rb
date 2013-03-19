@@ -120,8 +120,7 @@ class SaunaHallsPresenter
   end
 
   def sauna_without_halls_ids
-    Entertainment.search_ids {
-      with(:entertainment_category, ['сауны'])
+    Sauna.search_ids {
       with(:with_sauna_halls, false)
 
       with(:location).in_radius(lat, lon, radius) if lat && lon && radius
