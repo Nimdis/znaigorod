@@ -66,7 +66,7 @@ Znaigorod::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.to_prepare do
-    %w[affiches organizations].each do |dir|
+    %w[affiches organizations billiards contests saunas suborganizations crm].each do |dir|
       Dir[Rails.root.join("app/models/#{dir}/*")].each do |model_path|
         require_or_load model_path.to_s
       end
