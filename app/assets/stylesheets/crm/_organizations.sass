@@ -1,0 +1,33 @@
+.content
+  .organization_list
+    border: 1px solid #bfbfbf
+
+    li
+      +clearfix
+      border-bottom: 1px solid #bfbfbf
+      padding: 10px
+      &:last-child
+        border-bottom: none
+
+      .status
+        +clearfix
+        float: left
+        abbr
+          widht: 10px
+          height: 10px
+          text-indent: -9999em
+        &.fresh
+          background-color: #059404
+        &.talks
+        &.waiting_for_payment
+        &.client
+        &.non_cooperation
+
+      .left
+        float: left
+        width: 589px
+
+      .right
+        float: right
+        width: 589
+

@@ -1,0 +1,28 @@
+=default_input_style($padding: '3px')
+  +arial_font
+  font-size: 12px
+  border: 1px solid #bfbfbf
+  background-color: #fff
+  padding: unquote($padding)
+
+.search_organization_form
+  +clearfix
+  background-color: #ededed
+  border: 1px solid #bfbfbf
+  padding: 10px
+  margin-bottom: 10px
+
+  .input
+    float: left
+    margin-right: 20px
+    label
+      display: block
+      font-size: 12px
+    input
+      +default_input_style
+    select
+      +default_input_style('2px 3px')
+
+  .submit
+    float: left
+    margin-top: 17px

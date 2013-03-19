@@ -1,44 +1,46 @@
-<%= simple_form_for :search, method: :get do |f| %>
-  <%= f.input :q,
-    label: 'Поиск',
-    as: :string,
-    input_html: { value: params[:search].try(:[], :q) },
-    required: false %>
+<h1>Список заведений</h1>
 
-  <%= f.input :status,
-    label: 'Статус',
-    as: :select,
-    collection: Organization.status.options,
-    selected: params[:search].try(:[], :status),
-    include_blank: true,
-    required: false %>
+<div class="search_organization_form">
+  <%= simple_form_for :search, method: :get do |f| %>
+    <%= f.input :q,
+      label: 'Поиск',
+      as: :string,
+      input_html: { value: params[:search].try(:[], :q) },
+      required: false %>
 
-  <%= f.input :user_id,
-    label: 'Менеджер',
-    as: :select,
-    collection: User.sales_managers,
-    selected: params[:search].try(:[], :user_id),
-    include_blank: true,
-    required: false %>
+    <%= f.input :status,
+      label: 'Статус',
+      as: :select,
+      collection: Organization.status.options,
+      selected: params[:search].try(:[], :status),
+      include_blank: true,
+      required: false %>
+
+    <%= f.input :user_id,
+      label: 'Менеджер',
+      as: :select,
+      collection: User.sales_managers,
+      selected: params[:search].try(:[], :user_id),
+      include_blank: true,
+      required: false %>
 
 
-  <%= f.input :suborganizations,
-    label: 'Категории',
-    as: :select,
-    collection: Organization.available_suborganization_kinds.map { |kind| [kind.classify.constantize.model_name.human, kind] },
-    selected: params[:search].try(:[], :suborganizations),
-    include_blank: true,
-    required: false %>
+    <%= f.input :suborganizations,
+      label: 'Категории',
+      as: :select,
+      collection: Organization.available_suborganization_kinds.map { |kind| [kind.classify.constantize.model_name.human, kind] },
+      selected: params[:search].try(:[], :suborganizations),
+      include_blank: true,
+      required: false %>
 
-  <%= f.submit 'Найти' %>
-<% end %>
-
-<ul>
-  <% @organizations.each do |organization| %>
-    <li>
-      <%= link_to organization.title, crm_organization_path(organization) %>
-    </li>
+    <div class="submit">
+      <%= f.submit 'Найти', class: :button %>
+    </div>
   <% end %>
+</div>
+
+<ul class="organization_list">
+  <%= render @organizations %>
 </ul>
 
 <div>
