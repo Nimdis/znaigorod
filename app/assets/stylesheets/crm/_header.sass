@@ -45,9 +45,16 @@ body .header
   .user_box
     float: right
     font-size: 14px
-    margin: 0 20px 0 0
+    margin: -20px 20px 0 0
+    background-color: #bfbfbf
+    padding: 12px 10px
+    +border-bottom-left-radius
+    +border-bottom-right-radius
     a
       color: #222
+      text-decoration: none
+      font-weight: bold
+      margin-left: 20px
 
   .navigation
     font-size: 18px
@@ -66,7 +73,6 @@ body .header
       &:last-child a
         padding-right: 0
       ul
-        z-index: 10
         display: none
         position: absolute
         border: 1px solid #ffb400
