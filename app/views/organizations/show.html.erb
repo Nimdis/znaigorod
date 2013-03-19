@@ -18,7 +18,7 @@
 
     <ul class="categories">
       <li class='title'>Категории:</li>
-      <%= @organization.categories_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
+      <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
     </ul>
     <% if @organization.has_photogallery? %>
       <div class="photogallery">

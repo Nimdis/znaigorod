@@ -215,6 +215,7 @@
       sport: Спортивные заведения
       billiard: Бильярдные клубы
       creation: Творчество и развитие
+      sauna: Сауны
     singularize_title:
       organization: Заведение города
       meal: Заведение общественного питания
