@@ -4,8 +4,8 @@
     <%= f.input :status %>
     <%= f.input :state %>
     <%= f.input :activity_at, as: :datetime_picker %>
-    <%= f.input :manager, as: :select, collection: User.sales_managers, selected: @organization.manager ? @organization.user_id : current_user.id %>
-    <%= f.input :contact, as: :select, collection: @organization.contacts %>
+    <%= f.input :user_id, as: :select, collection: User.sales_managers, selected: @organization.manager ? @organization.user_id : current_user.id %>
+    <%= f.input :contact_id, as: :select, collection: @organization.contacts %>
 
     <div class="actions">
       <%= f.button :submit, 'Сохранить' %>

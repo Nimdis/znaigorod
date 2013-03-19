@@ -564,11 +564,13 @@
     attributes:
       activity:
         title: Описание
-        status: Планируемый статус заведения после активности
+        status: Результат (статус заведения)
         state: Статус активности
         activity_at: Когда
         manager: Менеджер
+        user_id: Менеджер
         contact: Контактное лицо организации
+        contact_id: Контактное лицо
       address:
         house: Дом
         latitude: Широта
@@ -679,6 +681,7 @@
         updated_at: Обновлено
         non_cash: Безналичный расчет
         priority_suborganization_kind: Приоритетная подорганизация
+        user_id: Менеджер
 
       organization_stand:
         places:             Количество мест
