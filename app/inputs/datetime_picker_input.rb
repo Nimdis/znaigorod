@@ -4,10 +4,11 @@ class DatetimePickerInput < SimpleForm::Inputs::StringInput
   end
 
   def input
-    @builder.text_field(attribute_name, input_html_options.merge(datetime_picker_options(object.send(attribute_name))))
+    @builder.text_field(attribute_name, input_html_options.merge(datetime_picker_value(object, attribute_name)))
   end
 
-  def datetime_picker_options(value = nil)
-    datetime_picker_options = {:value => value.nil?? nil : I18n.localize(value)}
+  def datetime_picker_value(object, attribute_name)
+    return {} if object.nil? || object.try(attribute_name).nil?
+    {value: I18n.localize(object.send(attribute_name))}
   end
 end
