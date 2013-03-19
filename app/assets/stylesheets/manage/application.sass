@@ -4,15 +4,16 @@
 
 @import "jquery-ui/jquery-ui"
 @import 'form'
+@import '../crm/header'
+@import '../crm/buttons'
 @import url(http://fonts.googleapis.com/css?family=Jura|Ruslan+Display&subset=latin,cyrillic)
 
 html, body, input, a, p, select, textarea, button
-  font-family: Jura, sans-serif
   font-weight: normal
 
 body
   +min-width(1000px)
-  line-height: 1.2em
+  line-height: 1.6
   background-color: #fff
 
 p
@@ -58,67 +59,8 @@ a
 .nobr
   white-space: nowrap
 
-.header
-  +clearfix
-  background: rgba(54, 47, 36, 0.17)
-  padding: 15px 20px 0
-
-
-  .navigation
-    +clearfix
-    margin: 0 10%
-
-    li
-      display: block
-      float: left
-      padding: 0 0 15px 0
-      margin: 0 0 0 20px
-
-      a
-        display: block
-        text-align: center
-        text-decoration: none
-
-      &.selected
-        border-bottom: 5px solid #F37447
-
-    #organisations, #affiches
-      width: 105px
-    #posts
-      width: 80px
-
-    #main_page
-      line-height: 40px
-      margin: 0 100px
-
-      a
-        font-family: 'Ruslan Display', cursive
-        font-size: 28px
-
-  .search
-    float: right
-
-    input
-      +border-radius(5px)
-      border: 1px solid #A2A2A2
-      padding: 5px 10px
-      width: 250px
-
-    .include_gone
-      +clearfix
-      color: #464646
-      font-size: 14px
-      margin: 0 0 0 110px
-
-      input
-        float: left
-        width: 15px
-
-      label
-        line-height: 20px
-        margin: 3px 0 0 0
-
 .main_container
+  font-family: Jura, sans-serif
   margin: 0 auto
   width: 95%
 
