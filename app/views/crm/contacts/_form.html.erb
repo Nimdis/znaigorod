@@ -1,18 +1,15 @@
 <div class='form_view'>
-  <%= semantic_form_for [:crm, parent, resource], :html => { :novalidate => true }  do |f| %>
-    <%= f.inputs do %>
-      <%= f.input :full_name %>
-      <%= f.input :post %>
-      <%= f.input :phone %>
-      <%= f.input :mobile_phone %>
-      <%= f.input :email %>
-      <%= f.input :skype %>
-      <%= f.input :vkontakte %>
-      <%= f.input :facebook %>
-    <% end %>
+  <%= simple_form_for [:crm, parent, resource], :html => { :novalidate => true }  do |f| %>
+    <%= f.input :full_name %>
+    <%= f.input :post %>
+    <%= f.input :phone %>
+    <%= f.input :mobile_phone %>
+    <%= f.input :email %>
+    <%= f.input :skype %>
+    <%= f.input :vkontakte %>
+    <%= f.input :facebook %>
 
     <div class="actions">
-      <%= link_to "Отмена", :back %>
       <%= button_tag 'Сохранить' %>
       <%= link_to 'Удалить', resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
     </div>
