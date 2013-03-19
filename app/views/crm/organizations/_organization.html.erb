@@ -10,10 +10,12 @@
   </div>
   <div class="details">
     <div class="suborganization_kinds">
-      Еда Развлечения
+      <% organization.suborganizations.each do |suborganization| %>
+        <%= link_to suborganization.class.model_name.human, crm_organizations_path('search[suborganizations]' => suborganization.class.model_name.underscore) %>
+      <% end %>
     </div>
     <div class="categories">
-      кафе, бары, рестораны
+      <%= organization.categories.join(', ') %>
     </div>
   </div>
 </li>

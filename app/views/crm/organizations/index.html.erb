@@ -41,7 +41,7 @@
 
 <% if @organizations.present? %>
   <ul class="organization_list">
-    <%= render @organizations %>
+    <%= render OrganizationDecorator.decorate(@organizations) %>
   </ul>
 <% else %>
   <p>Ничего не найдено</p>
