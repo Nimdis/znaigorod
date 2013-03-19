@@ -4,10 +4,9 @@
   <%= simple_form_for :search, method: :get do |f| %>
     <%= f.input :state,
       label: 'Статус',
-      as: :select,
       collection: Activity.state.options,
+      prompt: 'Все',
       selected: params[:search].try(:[], :state),
-      include_blank: true,
       required: false %>
 
     <%= f.input 'activity[from]',
