@@ -6,12 +6,14 @@
       label: 'Состояние',
       collection: Activity.state.options,
       selected: params[:search].try(:[], :state),
+      include_blank: true,
       required: false %>
 
     <%= f.input :status,
       label: 'Статус',
       collection: Activity.status.options,
       selected: params[:search].try(:[], :status),
+      include_blank: true,
       required: false %>
 
     <%= f.input 'activity[from]',

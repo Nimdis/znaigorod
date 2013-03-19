@@ -1,6 +1,11 @@
 <div class='form_view'>
   <%= simple_form_for [:crm, resource], html: { novalidate: true }  do |f| %>
-      <%= f.input :user_id, as: :select, collection: User.sales_managers, selected: @organization.manager ? @organization.user_id : current_user.id %>
+    <%= f.input :user_id,
+      as: :select,
+      collection: User.sales_managers,
+      selected: @organization.manager ? @organization.user_id : current_user.id,
+      include_blank: true
+    %>
 
     <div class="actions">
       <%= f.button :submit, 'Сохранить' %>
