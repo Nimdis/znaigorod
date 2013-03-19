@@ -57,7 +57,7 @@ body .header
       margin-left: 20px
 
   .navigation
-    font-size: 18px
+    font-size: 17px
     position: absolute
     bottom: -5px
     right: 20px
@@ -70,8 +70,6 @@ body .header
         padding: 0 10px 4px
         &.selected
           border-bottom: 5px solid #ffb400
-      &:last-child a
-        padding-right: 0
       ul
         display: none
         position: absolute
@@ -80,6 +78,7 @@ body .header
         font-size: 14px
         padding: 10px
         background-color: #fff
+        z-index: 0
         li a
           color: #222
           text-decoration: none
@@ -91,3 +90,4 @@ body .header
           color: #555
         ul
           display: block
+          z-index: 1

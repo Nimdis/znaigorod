@@ -1,6 +1,8 @@
 .content
+
   .organization_list
     border: 1px solid #bfbfbf
+    margin-bottom: 10px
 
     li
       +clearfix
@@ -9,25 +11,40 @@
       &:last-child
         border-bottom: none
 
-      .status
-        +clearfix
+      abbr
         float: left
-        abbr
-          widht: 10px
-          height: 10px
-          text-indent: -9999em
+        display: block
+        +clearfix
+        cursor: help
+        width: 10px
+        height: 10px
+        +border-radius(10px)
+        text-indent: -9999em
+        margin: 7px 10px 0 0
         &.fresh
           background-color: #059404
         &.talks
+          background-color: #01499d
         &.waiting_for_payment
+          background-color: #ff7e00
         &.client
+          background-color: #d00000
         &.non_cooperation
+          background-color: #000
 
-      .left
+      .info
         float: left
-        width: 589px
+        width: 588px
+        .title
+          font-size: 16px
+        .address
+          color: #707070
+          font-size: 12px
 
-      .right
-        float: right
-        width: 589
-
+      .details
+        float: left
+        width: 570px
+        text-align: right
+        .categories
+          color: #707070
+          font-size: 12px

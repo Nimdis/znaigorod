@@ -34,15 +34,17 @@
       required: false %>
 
     <div class="submit">
-      <%= f.submit 'Найти', class: :button %>
+      <%= f.button :submit, 'Найти', class: :button %>
     </div>
   <% end %>
 </div>
 
-<ul class="organization_list">
-  <%= render @organizations %>
-</ul>
+<% if @organizations.present? %>
+  <ul class="organization_list">
+    <%= render @organizations %>
+  </ul>
+<% else %>
+  <p>Ничего не найдено</p>
+<% end %>
 
-<div>
-  <%= paginate @organizations  %>
-</div>
+<%= paginate @organizations  %>

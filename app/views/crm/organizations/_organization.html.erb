@@ -1,16 +1,14 @@
 <li>
-  <div class="status <%= organization.status %>">
-    <abbr title="<%= organization.status.text %>"><%= organization.status.text %></abbr>
-  </div>
-  <div class="left">
+  <abbr class="<%= organization.status %>" title="<%= organization.status.text %>"><%= organization.status.text %></abbr>
+  <div class="info">
     <div class="title">
-      <%= organization.title %>
+      <%= link_to organization.title, crm_organization_path(organization) %>
     </div>
     <div class="address">
       <%= organization.address %>
     </div>
   </div>
-  <div class="right">
+  <div class="details">
     <div class="suborganization_kinds">
       Еда Развлечения
     </div>
