@@ -36,9 +36,5 @@
 </div>
 
 <ul>
-  <% @activities.each do |activity| %>
-    <li>
-      <%= link_to activity.organization.title, edit_crm_organization_activity_path(activity.organization, activity) %>
-    </li>
-  <% end %>
+  <%= render  @activities %>
 </ul>
