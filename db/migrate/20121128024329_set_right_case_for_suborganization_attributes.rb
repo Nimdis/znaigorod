@@ -5,6 +5,7 @@ class SetRightCaseForSuborganizationAttributes < ActiveRecord::Migration
 
   def up
     models.each do |model|
+      next if model == Sauna # model added in the future, table does't exist
       puts model.name
       pb = ProgressBar.new(model.count)
 
