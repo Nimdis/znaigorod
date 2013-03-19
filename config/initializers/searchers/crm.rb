@@ -9,5 +9,6 @@ HasSearcher.create_searcher(:activities) do
   end
 
   property :state
+  property :status
   property :user_id
 end

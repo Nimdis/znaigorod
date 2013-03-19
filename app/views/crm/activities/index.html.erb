@@ -5,14 +5,12 @@
     <%= f.input :state,
       label: 'Состояние',
       collection: Activity.state.options,
-      prompt: 'Все',
       selected: params[:search].try(:[], :state),
       required: false %>
 
-    <%= f.input :state,
+    <%= f.input :status,
       label: 'Статус',
       collection: Activity.status.options,
-      prompt: 'Все',
       selected: params[:search].try(:[], :status),
       required: false %>
 
