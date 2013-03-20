@@ -66,8 +66,12 @@ class SaunaHallsPresenter
     )
   end
 
-  def search
-    @search ||= SaunaHall.search(:include => [
+  def search(args = {})
+    args[:group_by_sauna_id] ||= false
+    args[:page]              ||= page
+    args[:per_page]          ||= 10
+
+    SaunaHall.search(:include => [
         :organization,
         :address,
         :schedules,
@@ -115,7 +119,9 @@ class SaunaHallsPresenter
       facet :features,      sort: :index, zeros: true
       facet :pool_features, sort: :index, zeros: true
 
-      paginate(:page => page, :per_page => 10)
+      group :sauna_id if args[:group_by_sauna_id]
+
+      paginate(:page => args[:page], :per_page => args[:per_page])
     }
   end
 
@@ -131,16 +137,34 @@ class SaunaHallsPresenter
     OrganizationDecorator.decorate(Organization.where(:id => Sauna.where(:id => sauna_without_halls_ids).pluck(:organization_id)))
   end
 
-  def collection
-    search.results
+  def search_with_groups
+    @search_with_groups ||= search(group_by_sauna_id: true)
+  end
+
+  def paginatable_collection
+    search_with_groups.group(:sauna_id).groups
+  end
+
+  def saunas
+    search_with_groups.group(:sauna_id).groups.map(&:value).map { |sauna_id|
+      Sauna.find(sauna_id)
+    }
+  end
+
+  def sauna_halls_search
+    @sauna_halls_search ||= search(page: 1, per_page: 500)
+  end
+
+  def sauna_hall_ids
+    @sauna_hall_ids ||= sauna_halls_search.hits.map(&:primary_key).map(&:to_i)
   end
 
   def total_count
-    search.total
+    search_with_groups.group(:sauna_id).total
   end
 
   def last_page?
-    collection.total_pages == page.to_i
+    search_with_groups.group(:sauna_id).groups.total_pages == page.to_i
   end
 
   def faceted_rows(facet)

@@ -3,7 +3,7 @@ class SaunaHallSchedule < ActiveRecord::Base
 
   belongs_to :sauna_hall
 
-  default_scope order('day, sauna_hall_schedules.from')
+  scope :ordered, -> { order('day, sauna_hall_schedules.from') }
 
   default_value_for :day, 1
 end

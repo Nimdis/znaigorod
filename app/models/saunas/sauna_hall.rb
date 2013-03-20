@@ -41,6 +41,7 @@ class SaunaHall < ActiveRecord::Base
     string :baths,          :multiple => true
     string :features,       :multiple => true
     string :pool_features,  :multiple => true
+    string :sauna_id
   end
 
   include Rating

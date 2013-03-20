@@ -1,6 +1,20 @@
-<% @presenter.collection.each do |sauna_hall| %>
+<% @presenter.saunas.each do |sauna| %>
   <li class='sauna_item'>
-    <%= render :partial => 'list_item', :locals => { :sauna => OrganizationDecorator.decorate(sauna_hall.organization), :sauna_hall => sauna_hall } %>
+    <h3><%= sauna.organization_title %></h3>
+
+    <ul>
+      <% sauna.ordered_sauna_halls.each do |sauna_hall| %>
+        <% if @presenter.sauna_hall_ids.include?(sauna_hall.id) %>
+          <li>
+            <%= render :partial => 'list_item', :locals => { :sauna => OrganizationDecorator.decorate(sauna_hall.organization), :sauna_hall => sauna_hall } %>
+          </li>
+        <% else %>
+          <li class="non-suitable">
+            <%= render :partial => 'list_item', :locals => { :sauna => OrganizationDecorator.decorate(sauna_hall.organization), :sauna_hall => sauna_hall } %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
   </li>
 <% end %>
 

@@ -34,6 +34,10 @@ class Sauna < ActiveRecord::Base
 
   has_many :sauna_halls, :dependent => :destroy
 
+  def ordered_sauna_halls
+    sauna_halls.sort_by(&:min_sauna_hall_schedules_price)
+  end
+
   has_one :sauna_accessory,   :dependent => :destroy
   has_one :sauna_broom,       :dependent => :destroy
   has_one :sauna_alcohol,     :dependent => :destroy

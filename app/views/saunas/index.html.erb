@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <% if @presenter.collection.any? %>
+  <% if @presenter.saunas.any? %>
     <ul class='sauna_list'>
       <%= render :partial => 'sauna_list' %>
     </ul>
@@ -29,4 +29,4 @@
   <% end %>
 </div>
 
-<%= paginate @presenter.collection %>
+<%= paginate @presenter.paginatable_collection %>

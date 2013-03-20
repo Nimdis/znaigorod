@@ -43,7 +43,7 @@
       <fieldset class="sauna_hall_schedules">
         <legend>Стоимость</legend>
         <% if @sauna_hall.sauna_hall_schedules.any? %>
-          <% @sauna_hall.sauna_hall_schedules.each do |schedule| %>
+          <% @sauna_hall.sauna_hall_schedules.ordered.each do |schedule| %>
             <div>
               <strong><%= Schedule.days_for_select[schedule.day - 1].first %>:</strong>
               с <%= l schedule.from, :format => "%H:%M" if schedule.from? %>
