@@ -747,8 +747,11 @@
         price: Цена
 
       sauna:
+        category_list: Категория
         feature: Особенности
+        feature_list: Особенности
         offer: Предложение
+        offer_list: Предложения
 
       sauna_accessory:
         sheets: Простыни
