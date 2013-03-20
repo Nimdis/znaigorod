@@ -13,7 +13,9 @@
           <li><strong>Категории:</strong> <%= @organization.category_ru %> </li>
           <li><strong>Адрес:</strong> <%= @organization.address %></li>
           <li><strong>Телефон:</strong> <%= @organization.phone %></li>
-          <li><strong>Сайт:</strong> <%= link_to @organization.site, @organization.site, target: '_blank' %></li>
+          <% if @organization.site.present? %>
+            <li><strong>Сайт:</strong> <%= link_to @organization.site, @organization.site, target: '_blank' %></li>
+          <% end %>
           <li><strong>Менеджер:</strong>
             <%= @organization.manager ? @organization.manager : 'не назначен' %>
             <%= link_to 'изменить', edit_crm_organization_path(@organization) %>
@@ -29,21 +31,25 @@
       </h2>
       <% %w[planned completed].each do |state| %>
         <h3><%= t("crm.activities.#{state}") %></h3>
-        <table>
-          <thead>
-            <tr>
-              <th class='activity_at'>Дата</th>
-              <th class='title'>Описание</th>
-              <th class='status'>Статус</th>
-              <th class='manager'>Менеджер</th>
-              <th class='contacts'>Контакты</th>
-              <th class='edit'></th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render @organization.activities.with_state(state) %>
-          </tbody>
-        </table>
+        <% if @organization.activities.with_state(state).present? %>
+          <table>
+            <thead>
+              <tr>
+                <th class='activity_at'>Дата</th>
+                <th class='title'>Описание</th>
+                <th class='status'>Статус</th>
+                <th class='manager'>Менеджер</th>
+                <th class='contacts'>Контакты</th>
+                <th class='edit'></th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render @organization.activities.with_state(state) %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>отсутствует</p>
+        <% end %>
       <% end %>
     </div>
 
@@ -52,13 +58,9 @@
   <div class='right'>
     <h2>
       Контакты
-      <%= link_to 'Добавить', new_crm_organization_contact_url(@organization) %>
+      <%= link_to 'Добавить', new_crm_organization_contact_url(@organization), class: :new_contact %>
     </h2>
-    <% if @organization.contacts.present? %>
-      <ul class='contacts'>
-        <%= render @organization.contacts %>
-      </ul>
-    <% end %>
+    <%= render :file => "crm/contacts/index" %>
   </div>
 
 </div>

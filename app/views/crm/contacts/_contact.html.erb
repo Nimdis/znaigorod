@@ -1,4 +1,30 @@
 <li>
-  <%= link_to contact.full_name, edit_crm_organization_contact_url(@organization, contact) %>
-  <%= contact.post %>
+  <p class='name'><%= link_to contact.full_name, edit_crm_organization_contact_url(@organization, contact), class: :closed %></p>
+  <p class='post'><%= contact.post %></p>
+  <div class="details">
+    <p class='phone'>
+      <strong>Телефон</strong>:
+      <%= contact.phone.present? ? contact.phone : content_tag(:span, 'не указан', class: :empty) %>
+    </p>
+    <p class='mobile_phone'>
+      <strong>Сотовый</strong>:
+      <%= contact.mobile_phone.present? ? contact.mobile_phone : content_tag(:span, 'не указан', class: :empty) %>
+    </p>
+    <p class='email'>
+      <strong>email</strong>:
+      <%= contact.email.present? ? mail_to(contact.email) : content_tag(:span, 'не указан', class: :empty) %>
+    </p>
+    <p class='skype'>
+      <strong>skype</strong>:
+      <%= contact.skype.present? ? contact.skype : content_tag(:span, 'не указан', class: :empty) %>
+    </p>
+    <p class='vkontakte'>
+      <strong>vkontakte</strong>:
+      <%= contact.vkontakte.present? ? link_to("vk.com/#{contact.vkontakte}", "http://vk.com/#{contact.vkontakte}") : content_tag(:span, 'не указан', class: :empty) %>
+    </p>
+    <p class='facebook'>
+      <strong>facebook</strong>:
+      <%= contact.facebook.present? ? link_to("facebook.com/#{contact.facebook}", "http://facebook.com/#{contact.facebook}") : content_tag(:span, 'не указан', class: :empty) %>
+    </p>
+  </div>
 </li>

@@ -10,8 +10,9 @@
     <%= f.input :facebook %>
 
     <div class="actions">
-      <%= f.button :submit, 'Сохранить' %>
+      <%= f.button :submit, 'Сохранить', class: 'button submit' %>
       <%= link_to 'Удалить', resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
+      <%= link_to 'Отмена', '#', class: 'button cancel' if resource.new_record? %>
     </div>
   <% end %>
 </div>

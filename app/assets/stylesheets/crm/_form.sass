@@ -33,7 +33,29 @@
     text-decoration: none
     color: #555
 
+.new_contact_form_wrapper
+  margin: 0 10px 10px
+  .input
+    label
+      display: block
+      font-size: 12px
+    input
+      width: 320px
+      +default_input_style
+    span.error
+      display: block
+      color: #880000
+      font-size: 11px
+    &.field_with_errors
+      input
+        border-color: #aa0000
+
+  .actions
+    margin-top: 10px
+
 .simple_form
+  label abbr
+    color: #880000
   .date_picker
     input
       width: 65px
