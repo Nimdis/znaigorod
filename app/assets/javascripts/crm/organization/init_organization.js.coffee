@@ -91,6 +91,12 @@
 
     false
 
+  $('.organization_show .contacts .info .form_view .actions .destroy').live 'ajax:success', (event, data, textStatus, jqXHR) ->
+    right_block = $(this).closest('.right')
+    $('ul.contacts', right_block).remove()
+    right_block.append(data)
+    true
+
   $(document).ajaxError (event, jqXHR, ajaxSettings, thrownError) ->
     console.error jqXHR.responseText.stripTags().trim() if console && console.error
     true
