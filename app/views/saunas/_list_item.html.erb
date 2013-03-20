@@ -1,23 +1,3 @@
-<div class="organization_attributes">
-  <div class="poster">
-    <%= sauna.logo_link %>
-  </div>
-  <div class="attributes">
-    <%= link_to sauna.title.split(',').first, organization_path(sauna) %>
-    <div class="phone">
-      <%= sauna.phone %>
-    </div>
-    <% if sauna.address_link.present? %>
-      <div class="address">
-        <%= sauna.address_link %>
-        <%#<span>(15 минут пешком)</span>%>
-      </div>
-    <% end %>
-    <div class="schedule">
-      <%= sauna.schedule_today %>
-    </div>
-  </div>
-</div>
 <div class="top_info_block">
   <div class="hall_title">
     <% if sauna_hall.title.present? %>
@@ -26,13 +6,6 @@
       Зал без названия
     <% end %>
   </div>
-  <div class="features">
-    <% sauna_hall.features.each do |feature|%>
-      <div class='<%= I18n.transliterate(feature).gsub(/\W+/,'_') %>' title='<%= feature %>'></div>
-    <% end %>
-  </div>
-</div>
-<div class="middle_info_block">
   <div class="prices">
     <% price_min = sauna_hall.sauna_hall_schedules.map(&:price).min %>
     <% price_max = sauna_hall.sauna_hall_schedules.map(&:price).max %>
@@ -47,6 +20,11 @@
       <span class='bold'><%= sauna_hall.sauna_hall_capacity.default %></span> чел.</span>
     <% else %>
       <span class='bold'><%= sauna_hall.sauna_hall_capacity.default %></span> чел. <span class='light'>Максимум <%= sauna_hall.sauna_hall_capacity.maximal %> чел. Дополнительная плата &mdash; <%= sauna_hall.sauna_hall_capacity.extra_guest_cost %> руб./чел.</span>
+    <% end %>
+  </div>
+  <div class="features">
+    <% sauna_hall.features.each do |feature|%>
+      <div class='<%= I18n.transliterate(feature).gsub(/\W+/,'_') %>' title='<%= feature %>'></div>
     <% end %>
   </div>
 </div>

@@ -12,9 +12,17 @@
       opacity: 0.4
 
     .organization_attributes
-      background: #f4eff6 image_url('organization_attributes_rs.png') no-repeat right center
-      float: left
-      width: 360px
+      background: #f4eff6
+      display: inline-block
+      height: 60px
+      width: 100%
+
+      .organization_title
+        float: left
+        margin: 20px 0 0 10px
+
+        a
+          font-size: 18px
 
       .poster
         float: left
@@ -24,46 +32,36 @@
 
           img
             display: block
-            height: 80px
-            width: 80px
+            height: 60px
+            width: 60px
 
       .attributes
+        +border-left-radius(5px)
         +clearfix
-        float: left
-        height: 68px
-        padding: 6px 9px
-        position: relative
-        width: 250px
+        border-bottom: 1px dotted #a49fa5
+        float: right
+        line-height: 30px
+        padding: 0 10px 0 0
+
+
+        .phone, .address, .schedule
+          border-left: 1px dotted #a49fa5
+          float: right
+          font-size: 10px
+          height: 30px
+          padding: 0 10px 0 25px
 
         .phone
-          background: image_url('phone.png') no-repeat left center
-          font-size: 10px
-          height: 16px
-          line-height: 16px
-          padding: 0 0 0 18px
-          position: absolute
-          top: 26px
+          background: image_url('phone.png') no-repeat 6px 50%
 
         .address
-          background: image_url('address_marker.png') no-repeat left top
-          font-size: 10px
-          height: 13px
-          padding: 0 0 0 15px
-          position: absolute
-          top: 45px
+          background: image_url('address_marker.png') no-repeat 10px 48%
 
           span
             color: #6f6f6d
 
         .schedule
-          background: image_url('schedule_marker.png') no-repeat left top
-          color: #000
-          font-size: 10px
-          height: 13px
-          line-height: 13px
-          padding: 0 0 0 17px
-          position: absolute
-          top: 63px
+          background: image_url('schedule_marker.png') no-repeat 8px 47%
 
     .top_info_block
       +clearfix
@@ -78,8 +76,31 @@
         float: left
         height: 27px
         line-height: 27px
-        padding: 0 20px 0 0
-        text-align: center
+        padding: 0 20px 0 10px
+        text-align: left
+        width: 200px
+
+      .prices
+        color: #b40822
+        float: left
+        height: 27px
+        line-height: 27px
+        margin: 0 5px 0 10px
+
+        span
+          font-weight: bold
+
+      .capacity
+        float: left
+        height: 27px
+        line-height: 27px
+
+        .bold
+          font-weight: bold
+
+        .light
+          color: #6f6f6f
+          font-size: 10px
 
       .features
         +clearfix
@@ -140,21 +161,6 @@
       height: 27px
       line-height: 27px
 
-      .prices
-        color: #b40822
-        float: left
-        margin: 0 5px 0 0
-
-        span
-          font-weight: bold
-
-      .capacity
-        .bold
-          font-weight: bold
-
-        .light
-          color: #6f6f6f
-          font-size: 10px
 
     .bottom_info_block
       +clearfix
@@ -166,12 +172,13 @@
 
       .baths
         background: #ffeded
-        border: 1px dashed #e5dbda
         border-left: none
+        border: 1px dashed #e5dbda
         float: left
         height: 24px
         line-height: 24px
         margin: 0 3px 0 0
+        padding: 0 0 0 8px
         width: 199px
 
       .pool
@@ -181,7 +188,8 @@
         height: 24px
         line-height: 24px
         margin: 0 3px 0 0
-        text-align: center
+        padding: 0 0 0 8px
+        text-align: left
         //width: 200px
         width: 402px
 
@@ -199,6 +207,48 @@
     background: none
     padding: 15px 29px
 
+    ul
+      li.sauna_item
+        height: 60px
+
+        .looser_organization_attributes
+          background: #f4eff6
+          height: 60px
+          float: left
+          width: 270px
+
+          .poster
+            float: left
+
+            a
+              display: block
+
+            img
+              display: block
+              height: 60px
+              width: 60px
+
+          .looser_attributes
+            +clearfix
+            float: left
+            height: 50px
+            padding: 5px 0
+            margin: 0 0 0 70px
+            position: absolute
+            width: 200px
+
+            .phone
+              background: image_url('phone.png') no-repeat 0 3px
+              font-size: 11px
+              padding: 7px 0 0 20px
+              width: 300px
+
+            .address
+              background: image_url('address_marker.png') no-repeat 0 5px
+              font-size: 11px
+              height: 13px
+              padding: 7px 0 0 15px
+
     h3
       font-size: 18px
       text-align: center
@@ -210,8 +260,3 @@
       margin: 5px
       width: 270px
 
-      .phone
-        width: 200px
-
-      .address
-        top: 60px !important

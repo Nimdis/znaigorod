@@ -11,9 +11,9 @@ class OrganizationDecorator < ApplicationDecorator
     end
   end
 
-  def logo_link
+  def logo_link(width = 80, height = 80)
     if organization.logotype_url?
-      h.link_to image_tag(organization.logotype_url, 80, 80, organization.title.text_gilensize), organization_url
+      h.link_to image_tag(organization.logotype_url, width, height, organization.title.text_gilensize), organization_url
     end
   end
 

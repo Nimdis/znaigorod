@@ -151,6 +151,12 @@ class SaunaHallsPresenter
     }
   end
 
+  def organizations
+    search_with_groups.group(:sauna_id).groups.map(&:value).map { |sauna_id|
+      OrganizationDecorator.decorate(Sauna.find(sauna_id).organization)
+    }
+  end
+
   def sauna_halls_search
     @sauna_halls_search ||= search(page: 1, per_page: 500)
   end

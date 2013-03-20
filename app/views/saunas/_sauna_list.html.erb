@@ -1,9 +1,30 @@
-<% @presenter.saunas.each do |sauna| %>
+<% @presenter.organizations.each do |organization| %>
   <li class='sauna_item'>
-    <h3><%= sauna.organization_title %></h3>
+    <div class="organization_attributes">
+      <div class="poster">
+        <%= organization.logo_link(60,60) %>
+      </div>
+      <div class="organization_title">
+        <%= link_to organization.title.split(',').first, organization_path(organization) %>
+      </div>
+      <div class="attributes">
+        <% if organization.address_link.present? %>
+          <div class="address">
+            <%= organization.address_link %>
+            <%#<span>(15 минут пешком)</span>%>
+          </div>
+        <% end %>
+        <div class="schedule">
+          <%= organization.schedule_today %>
+        </div>
+        <div class="phone">
+          <%= organization.phone %>
+        </div>
+      </div>
+    </div>
 
     <ul>
-      <% sauna.ordered_sauna_halls.each do |sauna_hall| %>
+      <% organization.sauna.ordered_sauna_halls.each do |sauna_hall| %>
         <% if @presenter.sauna_hall_ids.include?(sauna_hall.id) %>
           <li>
             <%= render :partial => 'list_item', :locals => { :sauna => OrganizationDecorator.decorate(sauna_hall.organization), :sauna_hall => sauna_hall } %>
@@ -24,11 +45,11 @@
     <ul>
       <% @presenter.organization_for_saunas_without_halls.each do |organization| %>
         <li class="sauna_item">
-          <div class="organization_attributes">
+          <div class="looser_organization_attributes">
             <div class="poster">
               <%= organization.logo_link %>
             </div>
-            <div class="attributes">
+            <div class="looser_attributes">
               <%= link_to organization.title.split(',').first, organization_path(organization) %>
               <div class="phone">
                 <%= organization.phone %>
