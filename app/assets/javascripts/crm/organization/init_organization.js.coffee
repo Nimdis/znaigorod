@@ -54,7 +54,6 @@
       type: 'GET'
       url: link.attr('href')
       success: (data, textStatus, jqXHR) ->
-        console.log data
         details = link.closest('.details').slideUp('fast')
         link.closest('.info').append(data)
         form = $('.form_view', link.closest('.info')).hide()
@@ -68,6 +67,28 @@
       $(this).remove()
       true
     $('.details', $(this).closest('.info')).slideDown('fast')
+    false
+
+  $('.organization_show .contacts .info .form_view form').live 'submit', ->
+    form = $(this)
+    edit_url = $('.details .edit a', form.closest('.info')).attr('href')
+    $.ajax
+      type: 'POST',
+      url: form.attr('action')
+      data: form.serialize()
+      success: (data, textStatus, jqXHR) ->
+        if data.trim().startsWith('<div class=\'form_view\'>')
+          info = form.closest('.info')
+          $('.form_view', info).remove()
+          info.append(data)
+        if data.trim().startsWith('<ul class=\'contacts\'>')
+          right_block = form.closest('.right')
+          $('ul.contacts', right_block).remove()
+          right_block.append(data)
+          info = $(".contacts .info .details a[href='#{edit_url}']", right_block).closest('.info')
+          $('.name a', info).click()
+        true
+
     false
 
   $(document).ajaxError (event, jqXHR, ajaxSettings, thrownError) ->
