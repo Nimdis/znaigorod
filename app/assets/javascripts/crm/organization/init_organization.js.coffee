@@ -42,10 +42,32 @@
       true
     false
 
-  $('.organization_show .contacts .name a').live 'click', ->
+  $('.organization_show .contacts .info .name a').live 'click', ->
     link = $(this)
     link.toggleClass('opened').toggleClass('closed')
     $('.details', link.closest('li')).slideToggle('fast')
+    false
+
+  $('.organization_show .contacts .info .edit a').live 'click', ->
+    link = $(this)
+    $.ajax
+      type: 'GET'
+      url: link.attr('href')
+      success: (data, textStatus, jqXHR) ->
+        console.log data
+        details = link.closest('.details').slideUp('fast')
+        link.closest('.info').append(data)
+        form = $('.form_view', link.closest('.info')).hide()
+        form.slideDown 'fast', ->
+          $('input:visible:first', form).focus().select()
+        true
+    false
+
+  $('.organization_show .contacts .info .form_view .actions .cancel').live 'click', ->
+    $('.form_view', $(this).closest('.info')).slideUp 'fast', ->
+      $(this).remove()
+      true
+    $('.details', $(this).closest('.info')).slideDown('fast')
     false
 
   $(document).ajaxError (event, jqXHR, ajaxSettings, thrownError) ->
