@@ -14,7 +14,7 @@
   <ul class="gallery_container">
     <% @affiche.images.each_slice(4) do |slice| %>
       <% slice.each do |image| %>
-        <li class="<%= cycle('first', 'second', 'third', 'fourth') %>">
+        <li class="<%= cycle('first', 'second', 'third', 'fourth', 'five') %>">
           <% if image.thumbnail_url? %>
             <% if image.width.present? && !image.width.zero? &&
                   image.height.present? && !image.height.zero? %>

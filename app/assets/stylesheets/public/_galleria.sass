@@ -1,18 +1,20 @@
 .gallery_container
   +clearfix
-  width: 740px
   border-top: 1px dotted #948f95
   padding-top: 10px
+  width: 930px
+
   li
+    +border-radius
+    +box-shadow(#777 0 0 2px)
     +clearfix
+    border: 5px solid #fff
     float: left
-    width: 130px
     height: 97px
+    margin: 2px 56px 30px 2px
     text-align: center
     vertical-align: middle
-    border: 5px solid #fff
-    +border-radius
-    margin: 2px 56px 30px 2px
-    +box-shadow(#777 0 0 2px)
-    &.fourth
+    width: 128px
+
+    &.five
       margin-right: 2px
