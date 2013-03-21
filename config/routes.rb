@@ -121,15 +121,22 @@ Znaigorod::Application.routes.draw do
     }
   end
 
+  get 'organizations/:id/tour' => redirect { |params, req|
+    o = Organization.find(params[:id])
+    "/organizations/#{o.slug}"
+  }
+
+  get 'organizations/:id/photogallery' => redirect { |params, req|
+    o = Organization.find(params[:id])
+    "/organizations/#{o.slug}"
+  }
+
   resources :organizations, :only => :show do
-    get :photogallery, :tour, :on => :member
     get 'affiche/:period/(:on)/(tags/*tags)' => 'organizations#affiche',
       :defaults => {period: :all},
       :period => /today|weekly|weekend|all|daily/, :on => :member, :as => :affiche
   end
 
-  #get ':organization_class/(:category)/(*query)' => 'organizations#index',
-      #:organization_class => /organizations|meals|entertainments|cultures|sports|creations|saunas/, :as => :organizations
   resources :organizations, :only => :index
 
   Organization.available_suborganization_kinds.each do |kind|
