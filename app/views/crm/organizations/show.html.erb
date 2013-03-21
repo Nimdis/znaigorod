@@ -9,22 +9,40 @@
       </div>
       <div class='details'>
         <ul>
-          <li><strong>Текущий статус:</strong> <span class='<%= @organization.status %>'><%= @organization.status.text %></span></li>
-          <li><strong>Категории:</strong> <%= @organization.category_ru %> </li>
-          <li><strong>Адрес:</strong> <%= @organization.address %></li>
-          <li><strong>Телефон:</strong> <%= @organization.phone %></li>
+          <li class='status'>
+            <strong>Текущий статус:</strong>
+            <span class='<%= @organization.status %>'><%= @organization.status.text %></span>
+          </li>
+          <li class='category'>
+            <strong>Категории:</strong>
+            <%= @organization.category_ru %>
+          </li>
+          <li class='address'>
+            <strong>Адрес:</strong>
+            <%= @organization.address %>
+          </li>
+          <li class='phone'>
+            <strong>Телефон:</strong>
+            <%= @organization.phone %>
+          </li>
           <% if @organization.site.present? %>
-            <li><strong>Сайт:</strong> <%= link_to @organization.site, @organization.site, target: '_blank' %></li>
+            <li class='site'>
+              <strong>Сайт:</strong>
+              <%= link_to @organization.site, @organization.site, target: '_blank' %>
+            </li>
           <% end %>
-          <li><strong>Менеджер:</strong>
-            <%= @organization.manager ? @organization.manager : 'не назначен' %>
-            <%= link_to 'изменить', edit_crm_organization_path(@organization) %>
+          <li class='manager'>
+            <strong>Менеджер:</strong>
+            <div class='view'>
+              <%= @organization.manager ? @organization.manager : 'не назначен' %>
+              <%= link_to 'изменить', edit_crm_organization_path(@organization) %>
+            </div>
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="activities">
+    <div class='activities'>
       <h2>
         Активность
         <%= link_to 'Добавить', new_crm_organization_activity_url(@organization) %>
@@ -60,7 +78,7 @@
       Контакты
       <%= link_to 'Добавить', new_crm_organization_contact_url(@organization), class: :new_contact %>
     </h2>
-    <%= render :file => "crm/contacts/index" %>
+    <%= render :file => 'crm/contacts/index' %>
   </div>
 
 </div>
