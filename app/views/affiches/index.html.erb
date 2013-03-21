@@ -23,22 +23,22 @@
           <li>
               <%= link_to t('affiche.sort.popularity'),
               affiches_path(@presenter.query.merge('order_by' => 'popularity')),
-              { data: 'popularity' }.merge(@presenter.sort_by_popularity? ? { class: 'selected' } : {}) %>
+              @presenter.sort_by_popularity? ? { class: 'selected' } : {} %>
           </li>
           <li>
               <%= link_to t('affiche.sort.starts_at'),
               affiches_path(@presenter.query.merge('order_by' => 'starts_at')),
-              { data: 'creation' }.merge(@presenter.sort_by_starts_at? ? { class: 'selected' } : {}) %>
+              @presenter.sort_by_starts_at? ? { class: 'selected' } : {} %>
           </li>
           <li>
             <% if @presenter.geo_filter.used? %>
               <%= link_to t('affiche.sort.nearness'),
                 affiches_path(@presenter.query.merge('order_by' => 'nearness')),
-                { data: 'nearness' }.merge(@presenter.sort_by_popularity? ? { class: 'selected' } : {}) %>
+                class: 'selected' %>
             <% else %>
               <%= link_to t('affiche.sort.nearness'),
                 affiches_path(@presenter.query.merge('order_by' => 'nearness')),
-                { data: 'nearness' }.merge(@presenter.sort_by_popularity? ? { class: 'disabled' } : {}) %>
+                class: 'disabled' %>
             <% end %>
           </li>
         </ul>
