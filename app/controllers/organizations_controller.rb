@@ -13,7 +13,9 @@ class OrganizationsController < ApplicationController
     else
       @organization = OrganizationDecorator.find(params[:id])
     end
-    @presenter = AfficheCollection.new(params.merge(list_settings: cookies['znaigorod_affiches_list_settings']).merge(organization: @organization))
+
+    @presenter = ShowingsPresenter.new(organization_ids: [@organization.id], order_by: params[:order_by])
+
     render partial: @presenter.view_partial, layout: false and return if request.xhr?
     render layout: "organization_layouts/#{@organization.subdomain}" if @organization.subdomain? && template_exists?(@organization.subdomain, 'layouts/organization_layouts')
   end

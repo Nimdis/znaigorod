@@ -35,7 +35,7 @@
     <%= render suborganization if suborganization.viewable? %>
   <% end %>
 
-  <% if @presenter.affiches.any? %>
+  <% if @presenter.collection.any? %>
     <div class='suborganization_info affiches_details'>
       <table>
         <tr>
@@ -51,22 +51,24 @@
       </table>
       <div class="affiches_list">
         <div class="list_settings">
-          <div class="presentation">
-            <p>Настройка списка:</p>
-            <ul>
-              <li><a class="list<%= ' selected' if @presenter.presentation_mode == 'list' %>" title='подробный список' href=''>список</a></li>
-              <li><a class="posters<%= ' selected' if @presenter.presentation_mode == 'posters' %>" title='краткий список' href=''>постеры</a></li>
-            </ul>
-          </div>
           <div class="sort">
             <p>Сортировка:</p>
             <ul>
-              <%= @presenter.sort_links %>
+              <li>
+                <%= link_to t('affiche.sort.popularity'),
+                  organization_path(@organization, { :order_by => 'popularity' }),
+                  @presenter.sort_by_popularity? ? { class: 'selected' } : {} %>
+              </li>
+              <li>
+                <%= link_to t('affiche.sort.starts_at'),
+                  organization_path(@organization, { :order_by => 'starts_at' }),
+                  @presenter.sort_by_starts_at? ? { class: 'selected' } : {} %>
+              </li>
             </ul>
           </div>
         </div>
-        <ul class="items_list <%= @presenter.presentation_mode %>">
-          <%= render partial: @presenter.view_partial %>
+        <ul class="items_list posters">
+          <%= render partial: @presenter.partial %>
         </ul>
       </div>
     </div>
