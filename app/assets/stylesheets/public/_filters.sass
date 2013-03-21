@@ -402,8 +402,13 @@
 
         .submit
           +border-radius(3px)
-          background: #81b5cb
-          border: 1px solid #649dba
+          +background-image(linear-gradient(#df475e, #bc2a41))
+          +single-text-shadow
+          border: 1px solid #a62538
+          border-top-color: #f56076
+          border-bottom-color: #a72338
+          border-left-color: #d0455a
+          border-right-color: #d0455a
           color: #fff
           display: block
           font-size: 12px
@@ -415,10 +420,10 @@
 
           &:hover
             cursor: pointer
-            background: #6eb0cd
+            background: #cf3a50
 
           &:active
-            background: #5caacd
+            background: #cf3a50
             top: 1px
             left: 1px
 
