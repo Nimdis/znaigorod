@@ -121,6 +121,11 @@ Znaigorod::Application.routes.draw do
     }
   end
 
+  get 'organizations/:id/affiche/all' => redirect { |params, req|
+    o = Organization.find(params[:id])
+    "/organizations/#{o.slug}"
+  }
+
   get 'organizations/:id/tour' => redirect { |params, req|
     o = Organization.find(params[:id])
     "/organizations/#{o.slug}"

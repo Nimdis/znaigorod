@@ -91,14 +91,7 @@ class HitDecorator < ApplicationDecorator
 
   def snipped_links
     links = []
-    if organization?
-      %w(photogallery tour affiche).each do |method|
-        links << Link.new(
-          title: I18n.t("organization.#{method}"),
-          url: h.send("#{method}_organization_path", result)
-        ) if result_decorator.send("has_#{method}?")
-      end
-    else
+    unless organization?
       %w(photogallery trailer).each do |method|
         links << Link.new(
           title: result_decorator.navigation_title(method),
