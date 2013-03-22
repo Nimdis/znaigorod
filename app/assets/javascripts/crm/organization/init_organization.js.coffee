@@ -199,6 +199,9 @@
   $('.edit a', activities_list_block).live 'click', ->
     link = $(this)
     link_tr = link.closest('tr')
+    if link_tr.next('tr').hasClass('edit_block')
+      $('.form_view form .cancel', link_tr.next('tr')).click()
+      return false
     $.ajax
       type: 'GET'
       url: link.attr('href')
@@ -217,6 +220,12 @@
         $('.form_view', edit_block).slideDown('fast')
         true
 
+    false
+
+  $('tr.edit_block .form_view form .cancel', activities_list_block).live 'click', ->
+    $(this).closest('.form_view').slideUp 'fast', ->
+      $(this).closest('tr.edit_block').remove()
+      true
     false
 
   true

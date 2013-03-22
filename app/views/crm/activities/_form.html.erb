@@ -2,8 +2,8 @@
   <%= simple_form_for [:crm, parent, resource], :html => { :novalidate => true }  do |f| %>
     <div class='line'>
       <%= f.input :activity_at, as: :datetime_picker %>
-      <%= f.input :status %>
       <%= f.input :state %>
+      <%= f.input :status %>
       <%= f.input :user_id, as: :select, collection: User.sales_managers, selected: @organization.manager ? @organization.user_id : current_user.id, include_blank: true %>
       <%= f.input :contact_id, as: :select, collection: @organization.contacts %>
     </div>
