@@ -42,10 +42,12 @@
     </div>
 
     <div class='activities'>
-      <h2>
-        Активность
-        <%= link_to 'добавить', new_crm_organization_activity_url(@organization) %>
-      </h2>
+      <div class='activities_head'>
+        <h2>
+          Активность
+          <%= link_to 'добавить', new_crm_organization_activity_url(@organization) %>
+        </h2>
+      </div>
       <% %w[planned completed].each do |state| %>
         <h3><%= t("crm.activities.#{state}") %></h3>
         <% if @organization.activities.with_state(state).present? %>

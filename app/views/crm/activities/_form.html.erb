@@ -1,11 +1,11 @@
 <div class="form_view">
   <%= simple_form_for [:crm, parent, resource], :html => { :novalidate => true }  do |f| %>
-    <%= f.input :title %>
+    <%= f.input :activity_at, as: :datetime_picker %>
     <%= f.input :status %>
     <%= f.input :state %>
-    <%= f.input :activity_at, as: :datetime_picker %>
     <%= f.input :user_id, as: :select, collection: User.sales_managers, selected: @organization.manager ? @organization.user_id : current_user.id %>
     <%= f.input :contact_id, as: :select, collection: @organization.contacts %>
+    <%= f.input :title %>
 
     <div class="actions">
       <%= f.button :submit, 'Сохранить' %>
