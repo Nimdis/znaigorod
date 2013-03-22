@@ -4,6 +4,7 @@
       send("#{@presenter.pluralized_kind}_path", @presenter.query.merge('order_by' => 'popularity')),
       { data: 'popularity' }.merge(@presenter.sort_by_popularity? ? { class: 'selected' } : {}) %>
   </li>
+  <li><span class="separator">&nbsp;</span></li>
   <li>
     <% if @presenter.geo_filter.used? %>
       <%= link_to t('affiche.sort.nearness'),

@@ -59,11 +59,13 @@
                   organization_path(@organization, { :order_by => 'popularity' }),
                   @presenter.sort_by_popularity? ? { class: 'selected' } : {} %>
               </li>
+              <li><span class="separator">&nbsp;</span></li>
               <li>
                 <%= link_to t('affiche.sort.creation'),
                   organization_path(@organization, { :order_by => 'creation' }),
                   @presenter.sort_by_creation? ? { class: 'selected' } : {} %>
               </li>
+              <li><span class="separator">&nbsp;</span></li>
               <li>
                 <%= link_to t('affiche.sort.starts_at'),
                   organization_path(@organization, { :order_by => 'starts_at' }),

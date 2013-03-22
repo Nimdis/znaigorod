@@ -10,16 +10,19 @@
               affiches_path(@presenter.query.merge('order_by' => 'popularity')),
               @presenter.sort_by_popularity? ? { class: 'selected' } : {} %>
           </li>
+          <li><span class="separator">&nbsp;</span></li>
           <li>
               <%= link_to t('affiche.sort.creation'),
               affiches_path(@presenter.query.merge('order_by' => 'creation')),
               @presenter.sort_by_creation? ? { class: 'selected' } : {} %>
           </li>
+          <li><span class="separator">&nbsp;</span></li>
           <li>
               <%= link_to t('affiche.sort.starts_at'),
               affiches_path(@presenter.query.merge('order_by' => 'starts_at')),
               @presenter.sort_by_starts_at? ? { class: 'selected' } : {} %>
           </li>
+          <li><span class="separator">&nbsp;</span></li>
           <li>
             <% if @presenter.geo_filter.used? %>
               <%= link_to t('affiche.sort.nearness'),
