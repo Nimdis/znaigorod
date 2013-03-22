@@ -123,9 +123,9 @@ class OrganizationDecorator < ApplicationDecorator
 
   def work_schedule
     content = ""
-    from = schedules.map(&:from).uniq.compact
-    to = schedules.map(&:to).uniq.compact
-    if from.one? && to.one?
+    from = schedules.map(&:from).uniq
+    to = schedules.map(&:to).uniq
+    if from.size == 1 && to.size == 1
       from = from.first
       to = to.first
       if from.eql?(to)
