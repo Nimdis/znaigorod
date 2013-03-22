@@ -1,15 +1,20 @@
-<div class="form_view">
+<div class='form_view'>
   <%= simple_form_for [:crm, parent, resource], :html => { :novalidate => true }  do |f| %>
-    <%= f.input :activity_at, as: :datetime_picker %>
-    <%= f.input :status %>
-    <%= f.input :state %>
-    <%= f.input :user_id, as: :select, collection: User.sales_managers, selected: @organization.manager ? @organization.user_id : current_user.id %>
-    <%= f.input :contact_id, as: :select, collection: @organization.contacts %>
-    <%= f.input :title %>
+    <div class='line'>
+      <%= f.input :activity_at, as: :datetime_picker %>
+      <%= f.input :status %>
+      <%= f.input :state %>
+      <%= f.input :user_id, as: :select, collection: User.sales_managers, selected: @organization.manager ? @organization.user_id : current_user.id, include_blank: true %>
+      <%= f.input :contact_id, as: :select, collection: @organization.contacts %>
+    </div>
+    <div class='line'>
+      <%= f.input :title %>
+    </div>
 
-    <div class="actions">
-      <%= f.button :submit, 'Сохранить' %>
-      <%= link_to 'Удалить', resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
+    <div class='actions'>
+      <%= f.button :submit, 'Сохранить', class: 'button submit' %>
+      <%= link_to 'Удалить', resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: 'button danger destroy' unless resource.new_record? %>
+      <%= link_to 'Отмена', '#', class: 'button cancel' %>
     </div>
   <% end %>
 </div>

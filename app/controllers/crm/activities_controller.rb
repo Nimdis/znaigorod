@@ -1,4 +1,5 @@
 class Crm::ActivitiesController < Crm::ApplicationController
+
   actions :all, except: :show
 
   belongs_to :organization, optional: true
@@ -11,7 +12,9 @@ class Crm::ActivitiesController < Crm::ApplicationController
   end
 
   def create
-    create! { parent_path }
+    create! do |success, failure|
+      success.html { render file: 'crm/activities/list' and return }
+    end
   end
 
   def update
@@ -21,4 +24,5 @@ class Crm::ActivitiesController < Crm::ApplicationController
   def destroy
     destroy! { parent_path }
   end
+
 end

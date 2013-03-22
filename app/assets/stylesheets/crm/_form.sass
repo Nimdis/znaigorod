@@ -5,6 +5,33 @@
   background-color: #fff
   padding: unquote($padding)
 
+.simple_form
+  label abbr
+    color: #880000
+  .date_picker
+    input
+      width: 65px
+  .datetime_picker
+    input
+      width: 100px
+  .date_picker,
+  .datetime_picker
+    img
+      +inline-block
+      cursor: pointer
+      margin-left: 2px
+  .input
+    span.error
+      display: block
+      color: #880000
+      font-size: 11px
+    &.field_with_errors
+      input,
+      textarea
+        border-color: #aa0000 !important
+
+/* customize */
+
 .search_organization_form,
 .search_activity_form
   +clearfix
@@ -43,13 +70,6 @@
     input
       width: 320px
       +default_input_style
-    span.error
-      display: block
-      color: #880000
-      font-size: 11px
-    &.field_with_errors
-      input
-        border-color: #aa0000
   .actions
     margin-top: 10px
 
@@ -58,7 +78,6 @@
 
 .organization_show .contacts .form_view
   margin: 0
-
 
 .organization_show .left .info .details .manager .form_view
   .input
@@ -70,18 +89,31 @@
   .actions
     margin-top: 2px
 
-.simple_form
-  label abbr
-    color: #880000
-  .date_picker
+.organization_show .left .activities .form_view
+  background-color: #ededed
+  border: 1px solid #bfbfbf
+  padding: 10px
+  margin-bottom: 10px
+  .line
+    +clearfix
+    .input
+      float: left
+      margin-right: 6px
+      &:last-child
+        margin-right: 0
+  .input
+    label
+      display: block
     input
-      width: 65px
-  .datetime_picker
-    input
-      width: 100px
-  .date_picker,
-  .datetime_picker
-    img
-      +inline-block
-      cursor: pointer
-      margin-left: 2px
+      +default_input_style
+    select
+      width: 150px
+      +default_input_style('2px 3px')
+    #activity_status
+      width: 206px
+    textarea
+      +default_input_style
+      width: 798px
+      height: 100px
+  .actions
+    margin-top: 5px

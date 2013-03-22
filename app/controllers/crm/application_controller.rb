@@ -1,5 +1,11 @@
 class Crm::ApplicationController < Manage::ApplicationController
 
-  layout 'crm'
+  layout :determine_layout
+
+  private
+
+    def determine_layout
+      request.xhr? ? false : 'crm'
+    end
 
 end

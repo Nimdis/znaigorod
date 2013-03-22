@@ -45,31 +45,10 @@
       <div class='activities_head'>
         <h2>
           Активность
-          <%= link_to 'добавить', new_crm_organization_activity_url(@organization) %>
+          <%= link_to 'добавить', new_crm_organization_activity_url(@organization), class: :new_activity %>
         </h2>
       </div>
-      <% %w[planned completed].each do |state| %>
-        <h3><%= t("crm.activities.#{state}") %></h3>
-        <% if @organization.activities.with_state(state).present? %>
-          <table>
-            <thead>
-              <tr>
-                <th class='activity_at'>Дата</th>
-                <th class='title'>Описание</th>
-                <th class='status'>Статус</th>
-                <th class='manager'>Менеджер</th>
-                <th class='contacts'>Контакты</th>
-                <th class='edit'></th>
-              </tr>
-            </thead>
-            <tbody>
-              <%= render @organization.activities.with_state(state) %>
-            </tbody>
-          </table>
-        <% else %>
-          <p>отсутствует</p>
-        <% end %>
-      <% end %>
+      <%= render file: 'crm/activities/list' %>
     </div>
 
   </div>

@@ -132,3 +132,65 @@
     false
 
   true
+
+
+@init_manipulate_activities = () ->
+  activities_block = $('.organization_show .left .activities')
+
+  activities_head_block = $('.activities_head', activities_block)
+
+  $('.new_activity', activities_block).click ->
+    link = $(this)
+    if $('.form_view', activities_head_block).length
+      $('.form_view form .cancel', activities_head_block).click()
+      return false
+    $.ajax
+      type: 'GET'
+      url: link.attr('href')
+      success: (data, textStatus, jqXHR) ->
+        wrapped = $("<div>#{data}</div>")
+        $('h1', wrapped).remove()
+        activities_head_block.append(wrapped.html())
+        wrapped.remove()
+        $('.form_view', activities_head_block).hide().slideDown('fast')
+        init_datetime_picker()
+        true
+    false
+
+  $('.new_activity', activities_block).click()
+
+  $('.form_view form .cancel', activities_head_block).live 'click', ->
+    $('.form_view', activities_head_block).slideUp 'fast', ->
+      $(this).remove()
+      true
+    false
+
+  $('.form_view form', activities_head_block).live 'submit', ->
+    form = $(this)
+    $.ajax
+      type: 'POST'
+      url: form.attr('action')
+      data: form.serialize()
+      success: (data, textStatus, jqXHR) ->
+        if data.isBlank()
+          console.error 'Response is empty!' if console && console.error
+          return false
+        wrapped = $("<div>#{data}</div>")
+        $('h1', wrapped).remove()
+        data = wrapped.html().trim()
+        if data.startsWith('<div class="form_view">')
+          $('.form_view', activities_head_block).remove()
+          activities_head_block.append(data)
+          init_datetime_picker()
+        if data.startsWith('<div class="activities_list">')
+          $('.activities_list', activities_block).remove()
+          activities_block.append(data)
+          $('.form_view', activities_head_block).slideUp 'fast', ->
+            $(this).remove()
+            $('.activities_list', activities_block).effect 'highlight',
+              color: '#ffb400'
+            , 1000
+        true
+    false
+
+  true

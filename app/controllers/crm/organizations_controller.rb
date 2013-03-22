@@ -1,9 +1,8 @@
 class Crm::OrganizationsController < Crm::ApplicationController
+
   actions :index, :show, :edit, :update
 
   has_scope :page, default: 1
-
-  layout :determine_layout
 
   def index
     @organizations = HasSearcher.searcher(:manage_organization, params[:search]).
@@ -14,9 +13,4 @@ class Crm::OrganizationsController < Crm::ApplicationController
     update! { render partial: 'manager' and return }
   end
 
-  private
-
-    def determine_layout
-      request.xhr? ? false : 'crm'
-    end
 end
