@@ -194,4 +194,28 @@
         true
     false
 
+  activities_list_block = $('.activities_list', activities_block)
+
+  $('.edit a', activities_list_block).live 'click', ->
+    link = $(this)
+    link_tr = link.closest('tr')
+    $('tr.edit_block', activities_list_block).slideUp 'fast', ->
+      $(this).remove()
+      true
+    $("<tr class='edit_block'><td colspan='#{$('td', link_tr).size()}'></td></tr>").insertAfter(link_tr)
+    edit_block = $('tr.edit_block td', activities_list_block)
+    $.ajax
+      type: 'GET'
+      url: link.attr('href')
+      success: (data, textStatus, jqXHR) ->
+        wrapped = $("<div>#{data}</div>")
+        $('h1', wrapped).remove()
+        $('.form_view', wrapped).hide()
+        data = wrapped.html().trim()
+        edit_block.append(data)
+        $('.form_view', edit_block).slideDown('fast')
+        true
+
+    false
+
   true
