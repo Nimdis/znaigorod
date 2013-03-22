@@ -32,11 +32,10 @@
             </li>
           <% end %>
           <li class='manager'>
-            <strong>Менеджер:</strong>
-            <div class='view'>
-              <%= @organization.manager ? @organization.manager : 'не назначен' %>
-              <%= link_to 'изменить', edit_crm_organization_path(@organization) %>
+            <div class='label'>
+              <strong>Менеджер:</strong>
             </div>
+            <%= render :partial => 'manager' %>
           </li>
         </ul>
       </div>
