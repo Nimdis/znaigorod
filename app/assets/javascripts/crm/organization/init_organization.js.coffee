@@ -249,4 +249,14 @@
         true
     false
 
+  $('.activities_list tr.edit_block .form_view .actions .destroy').live 'ajax:success', (event, data, textStatus, jqXHR) ->
+    wrapped = $("<div>#{data}</div>")
+    $('h1', wrapped).remove()
+    $(this).closest('.activities_list')
+      .html($('.activities_list', wrapped).html())
+      .effect 'highlight',
+        color: '#ffb400'
+      , 1000
+    true
+
   true
