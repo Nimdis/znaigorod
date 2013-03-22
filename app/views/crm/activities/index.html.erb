@@ -44,6 +44,21 @@
   <% end %>
 </div>
 
-<ul>
-  <%= render  @activities %>
-</ul>
+<div class='all_activities_list'>
+  <table>
+    <thead>
+      <tr>
+        <th class='organization'>Организация</th>
+        <th class='activity_at'>Дата</th>
+        <th class='title'>Описание</th>
+        <th class='status'>Статус</th>
+        <th class='manager'>Менеджер</th>
+        <th class='contacts'>Контакты</th>
+        <th class='edit'></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @activities %>
+    </tbody>
+  </table>
+</div>

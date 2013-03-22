@@ -1,8 +1,9 @@
 <tr>
-  <td><%= l(activity.activity_at, :format => :long) %></td>
-  <td><%= activity.title %></td>
-  <td class='<%= activity.status %>'><%= activity.status_text %></td>
-  <td><%= activity.manager unless params[:search].try(:[], :user_id) %></td>
-  <td><%= activity.contact %></td>
+  <td class='organization'><%= link_to activity.organization, crm_organization_path(activity.organization) %></td>
+  <td class='activity_at'><%= l(activity.activity_at, :format => :long) %></td>
+  <td class='title'><%= activity.title %></td>
+  <td class='status <%= activity.status %>'><%= activity.status_text %></td>
+  <td class='manager'><%= activity.manager unless params[:search].try(:[], :user_id) %></td>
+  <td class='contacts'><%= activity.contact %></td>
   <td class='edit'><%= link_to "Редактировать", edit_crm_organization_activity_path(activity.organization, activity) %></td>
 </tr>

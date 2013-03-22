@@ -1,0 +1,44 @@
+.content
+  .all_activities_list
+    table
+      width: 100%
+      font-size: 12px
+      margin-bottom: 15px
+      thead
+        .organization
+          width: 301px
+        .activity_at
+          width: 125px
+        .title
+          width: 339px
+        .status
+          width: 145px
+        .manager
+          width: 130px
+        .contacts
+          width: 130px
+      th
+        color: #707070
+      th, td
+        padding: 3px
+        &:first-child
+          padding-left: 0
+        &:last-child
+          padding-right: 0
+        &.edit
+          display: none
+      td
+        vertical-align: top
+        &.fresh
+          color: #059404
+        &.talks
+          color: #01499d
+        &.waiting_for_payment
+          color: #ff7e00
+        &.client
+          color: #d00000
+        &.non_cooperation
+          color: #000
+      tr:hover
+        td
+          background-color: #efefef
