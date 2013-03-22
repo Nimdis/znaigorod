@@ -13,26 +13,68 @@
     padding-top: 15px
 
 body
-
-  .paradise_wrapper
-    background: #333 image_url('public/paradise/bg.png') repeat
-    +background-image(image_url('public/paradise/bg.png'), linear-gradient(#000, #fff))
-    .paradise_logo
-      height: 1040px
+  .anapa_wrapper
+    background: #b7efd6 image_url('public/anapa/bg.png') repeat
+    +background-image(image_url('public/anapa/bg.png'), linear-gradient(#dcfeb4, #90ddf7))
+    .anapa_logo_wrapper
       height: 150px
-      background: transparent image_url('public/paradise/logo.png') no-repeat center center
-    .paradise
+      background: transparent image_url('public/anapa/logo_bg.png') no-repeat center top
+      .anapa_logo
+        height: 150px
+        background: transparent image_url('public/anapa/logo.png') no-repeat center center
+        margin: 0 auto
+    .anapa
+      +subdomain_common_style
+
+  .forum_wrapper
+    background-color: #333
+    +background-image(linear-gradient(#000, #623c8f))
+    .forum_logo
+      height: 150px
+      background: transparent image_url('public/forum/logo.png') no-repeat center center
+    .forum
       +subdomain_common_style
 
   .globus_wrapper
     background-color: #daedfe
     +background-image(linear-gradient(#d5eaff, #fff))
     .globus_logo
-      width: 1200px
       height: 150px
       background: transparent image_url('public/globus/logo.png') no-repeat center center
       margin: 0 auto
     .globus
+      +subdomain_common_style
+
+  .lovekafe_wrapper
+    background-color: #fff
+    +background-image(linear-gradient(#fff, #ffb2b2))
+    .lovekafe_logo
+      height: 150px
+      background: transparent image_url('public/lovekafe/logo.png') no-repeat center center
+      margin: 0 auto
+    .lovekafe
+      +subdomain_common_style
+
+  .nezabudka_wrapper
+    background: #81a3d3 image_url('public/nezabudka/bg.png') repeat
+    +background-image(image_url('public/nezabudka/bg.png'), linear-gradient(#94e6fe, #674d96))
+    .nezabudka_logo_wrapper
+      height: 150px
+      background: transparent image_url('public/nezabudka/logo_bg.png') no-repeat center top
+      .nezabudka_logo
+        height: 150px
+        background: transparent image_url('public/nezabudka/logo.png') no-repeat center center
+        margin: 0 auto
+    .nezabudka
+      +subdomain_common_style
+
+  .paradise_wrapper
+    background: #333 image_url('public/paradise/bg.png') repeat
+    +background-image(image_url('public/paradise/bg.png'), linear-gradient(#000, #fff))
+    .paradise_logo
+      height: 150px
+      background: transparent image_url('public/paradise/logo.png') no-repeat center center
+    .paradise
       +subdomain_common_style
 
   .paris_wrapper
@@ -49,45 +91,6 @@ body
     .paris
       +subdomain_common_style
 
-  .lovekafe_wrapper
-    background-color: #fff
-    +background-image(linear-gradient(#fff, #ffb2b2))
-    .lovekafe_logo
-      width: 1200px
-      height: 150px
-      background: transparent image_url('public/lovekafe/logo.png') no-repeat center center
-      margin: 0 auto
-    .lovekafe
-      +subdomain_common_style
-
-  .anapa_wrapper
-    background: #b7efd6 image_url('public/anapa/bg.png') repeat
-    +background-image(image_url('public/anapa/bg.png'), linear-gradient(#dcfeb4, #90ddf7))
-    .anapa_logo_wrapper
-      height: 150px
-      background: transparent image_url('public/anapa/logo_bg.png') no-repeat center top
-      .anapa_logo
-        height: 1040px
-        height: 150px
-        background: transparent image_url('public/anapa/logo.png') no-repeat center center
-        margin: 0 auto
-    .anapa
-      +subdomain_common_style
-
-  .nezabudka_wrapper
-    background: #81a3d3 image_url('public/nezabudka/bg.png') repeat
-    +background-image(image_url('public/nezabudka/bg.png'), linear-gradient(#94e6fe, #674d96))
-    .nezabudka_logo_wrapper
-      height: 150px
-      background: transparent image_url('public/nezabudka/logo_bg.png') no-repeat center top
-      .nezabudka_logo
-        height: 1040px
-        height: 150px
-        background: transparent image_url('public/nezabudka/logo.png') no-repeat center center
-        margin: 0 auto
-    .nezabudka
-      +subdomain_common_style
-
   .rassvet_wrapper
     background: #fcc6aa image_url('public/rassvet/bg.png') repeat
     +background-image(image_url('public/rassvet/bg.png'), linear-gradient(#fff6b5, #fa94a2))
@@ -95,27 +98,16 @@ body
       height: 150px
       background: transparent image_url('public/rassvet/logo_bg.png') no-repeat center top
       .rassvet_logo
-        height: 1040px
         height: 150px
         background: transparent image_url('public/rassvet/logo.png') no-repeat center center
         margin: 0 auto
     .rassvet
       +subdomain_common_style
 
-  .forum_wrapper
-    background-color: #333
-    +background-image(linear-gradient(#000, #623c8f))
-    .forum_logo
-      height: 150px
-      background: transparent image_url('public/forum/logo.png') no-repeat center center
-    .forum
-      +subdomain_common_style
-
   .zastolie_wrapper
     background: #edcf9b image_url('public/zastolie/bg.png') repeat
     +background-image(image_url('public/zastolie/bg.png'), linear-gradient(#ebdebe, #e9c682))
     .zastolie_logo
-      height: 1040px
       height: 150px
       background: transparent image_url('public/zastolie/logo.png') no-repeat center center
     .zastolie
