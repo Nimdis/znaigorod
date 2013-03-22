@@ -21,9 +21,6 @@
               <%= link_to t('affiche.sort.starts_at'),
               affiches_path(@presenter.query.merge('order_by' => 'starts_at')),
               @presenter.sort_by_starts_at? ? { class: 'selected' } : {} %>
-            <%= link_to t('affiche.sort.popular'),
-              affiches_path(@showings_presenter.searcher_params.merge(order_by: 'popularity')),
-              @showings_presenter.order_by_popularity? ? { class: 'selected' } : {} %>
           </li>
           <li><span class="separator">&nbsp;</span></li>
           <li>
@@ -53,4 +50,4 @@
   </div>
 </div>
 
-<%= paginate @showings_presenter.paginated_collection %>
+<%= paginate @presenter.paginated_collection %>
