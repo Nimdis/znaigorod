@@ -199,20 +199,21 @@
   $('.edit a', activities_list_block).live 'click', ->
     link = $(this)
     link_tr = link.closest('tr')
-    $('tr.edit_block', activities_list_block).slideUp 'fast', ->
-      $(this).remove()
-      true
-    $("<tr class='edit_block'><td colspan='#{$('td', link_tr).size()}'></td></tr>").insertAfter(link_tr)
-    edit_block = $('tr.edit_block td', activities_list_block)
     $.ajax
       type: 'GET'
       url: link.attr('href')
       success: (data, textStatus, jqXHR) ->
+        $('tr.edit_block .form_view', activities_list_block).slideUp 'fast', ->
+          $(this).closest('tr.edit_block').remove()
+          true
+        $("<tr class='edit_block'><td colspan='#{$('td', link_tr).size()}'></td></tr>").insertAfter(link_tr)
+        edit_block = $('tr.edit_block td', activities_list_block)
         wrapped = $("<div>#{data}</div>")
         $('h1', wrapped).remove()
         $('.form_view', wrapped).hide()
         data = wrapped.html().trim()
         edit_block.append(data)
+        init_datetime_picker()
         $('.form_view', edit_block).slideDown('fast')
         true
 
