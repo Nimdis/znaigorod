@@ -157,8 +157,6 @@
         true
     false
 
-  $('.new_activity', activities_block).click()
-
   $('.form_view form .cancel', activities_head_block).live 'click', ->
     $('.form_view', activities_head_block).slideUp 'fast', ->
       $(this).remove()
