@@ -155,6 +155,8 @@ class ShowingsPresenter
 
       if period_filter.used? && !period_filter.date?
         case period_filter.period
+        when 'all'
+          s.actual
         when 'today'
           s.today.actual
         when 'week'
