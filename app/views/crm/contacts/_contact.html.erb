@@ -27,7 +27,7 @@
         <strong>facebook</strong>:
         <%= contact.facebook.present? ? link_to("facebook.com/#{contact.facebook}", "http://facebook.com/#{contact.facebook}") : content_tag(:span, 'не указан', class: :empty) %>
       </p>
-      <p class='edit'><%= link_to 'Редактировать', edit_crm_organization_contact_url(@organization, contact) %></p>
+      <p class='edit'><%= link_to 'Редактировать', edit_crm_organization_contact_url(@organization, contact), class: :button %></p>
     </div>
   </div>
 </li>
