@@ -44,7 +44,7 @@
     <div class='activities'>
       <h2>
         Активность
-        <%= link_to 'Добавить', new_crm_organization_activity_url(@organization) %>
+        <%= link_to 'добавить', new_crm_organization_activity_url(@organization) %>
       </h2>
       <% %w[planned completed].each do |state| %>
         <h3><%= t("crm.activities.#{state}") %></h3>
@@ -75,7 +75,7 @@
   <div class='right'>
     <h2>
       Контакты
-      <%= link_to 'Добавить', new_crm_organization_contact_url(@organization), class: :new_contact %>
+      <%= link_to 'добавить', new_crm_organization_contact_url(@organization), class: :new_contact %>
     </h2>
     <%= render :file => 'crm/contacts/index' %>
   </div>
