@@ -18,7 +18,9 @@ class Crm::ActivitiesController < Crm::ApplicationController
   end
 
   def update
-    update! { parent_path }
+    update! do |success, failure|
+      success.html { render file: 'crm/activities/list' and return }
+    end
   end
 
   def destroy

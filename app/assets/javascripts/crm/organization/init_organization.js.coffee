@@ -194,10 +194,9 @@
         true
     false
 
-  activities_list_block = $('.activities_list', activities_block)
-
-  $('.edit a', activities_list_block).live 'click', ->
+  $('.activities_list .edit a').live 'click', ->
     link = $(this)
+    activities_list_block = link.closest('.activities_list')
     link_tr = link.closest('tr')
     if link_tr.next('tr').hasClass('edit_block')
       $('.form_view form .cancel', link_tr.next('tr')).click()
@@ -219,13 +218,35 @@
         init_datetime_picker()
         $('.form_view', edit_block).slideDown('fast')
         true
-
     false
 
-  $('tr.edit_block .form_view form .cancel', activities_list_block).live 'click', ->
+  $('.activities_list tr.edit_block .form_view form .cancel', activities_block).live 'click', ->
     $(this).closest('.form_view').slideUp 'fast', ->
       $(this).closest('tr.edit_block').remove()
       true
+    false
+
+  $('.activities_list tr.edit_block .form_view form', activities_block).live 'submit', ->
+    form = $(this)
+    edit_block = form.closest('tr.edit_block td')
+    activities_list_block = form.closest('.activities_list')
+    $.ajax
+      type: 'POST'
+      url: form.attr('action')
+      data: form.serialize()
+      success: (data, textStatus, jqXHR) ->
+        wrapped = $("<div>#{data}</div>")
+        $('h1', wrapped).remove()
+        data = wrapped.html().trim()
+        if data.startsWith('<div class="form_view">')
+          edit_block.html(data)
+          init_datetime_picker()
+        if data.startsWith('<div class="activities_list">')
+          activities_list_block.html($('.activities_list', wrapped).html())
+          activities_list_block.effect 'highlight',
+            color: '#ffb400'
+          , 1000
+        true
     false
 
   true
