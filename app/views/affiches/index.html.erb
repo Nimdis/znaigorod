@@ -2,21 +2,6 @@
   <%= render :partial => 'filters' %>
   <div class="affiches_list">
     <div class="list_settings">
-      <div class="presentation">
-        <p>Настройка списка:</p>
-        <ul>
-          <li>
-            <%= link_to 'список',
-              affiches_path(@presenter.query.merge(view: 'list')),
-              { title: 'подробный список', data: 'list' }.merge(@presenter.view_list? ? { class: 'list selected' } : { class: 'list' }) %>
-          </li>
-          <li>
-            <%= link_to 'постеры',
-              affiches_path(@presenter.query.merge(view: 'posters')),
-              { title: 'краткий список', data: 'posters' }.merge(@presenter.view_list? ? { class: 'posters' } : { class: 'posters selected' }) %>
-          </li>
-        </ul>
-      </div>
       <div class="sort affiches">
         <p>Сортировка:</p>
         <ul>
@@ -24,6 +9,11 @@
               <%= link_to t('affiche.sort.popularity'),
               affiches_path(@presenter.query.merge('order_by' => 'popularity')),
               @presenter.sort_by_popularity? ? { class: 'selected' } : {} %>
+          </li>
+          <li>
+              <%= link_to t('affiche.sort.creation'),
+              affiches_path(@presenter.query.merge('order_by' => 'creation')),
+              @presenter.sort_by_creation? ? { class: 'selected' } : {} %>
           </li>
           <li>
               <%= link_to t('affiche.sort.starts_at'),
@@ -34,7 +24,7 @@
             <% if @presenter.geo_filter.used? %>
               <%= link_to t('affiche.sort.nearness'),
                 affiches_path(@presenter.query.merge('order_by' => 'nearness')),
-                class: 'selected' %>
+                @presenter.sort_by_nearness? ? { class: 'selected' } : {} %>
             <% else %>
               <%= link_to t('affiche.sort.nearness'),
                 affiches_path(@presenter.query.merge('order_by' => 'nearness')),

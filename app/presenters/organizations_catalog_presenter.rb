@@ -4,7 +4,7 @@ class OrganizationsCatalogPresenter
   include Rails.application.routes.url_helpers
 
   def self.suborganization_models
-    [Meal, Entertainment, Culture, Sport, Creation]
+    [Meal, Entertainment, Sauna, Culture, Sport, Creation]
   end
 
   self.suborganization_models.map(&:name).map(&:downcase).each do |kind|

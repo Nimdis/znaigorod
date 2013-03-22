@@ -60,6 +60,11 @@
                   @presenter.sort_by_popularity? ? { class: 'selected' } : {} %>
               </li>
               <li>
+                <%= link_to t('affiche.sort.creation'),
+                  organization_path(@organization, { :order_by => 'creation' }),
+                  @presenter.sort_by_creation? ? { class: 'selected' } : {} %>
+              </li>
+              <li>
                 <%= link_to t('affiche.sort.starts_at'),
                   organization_path(@organization, { :order_by => 'starts_at' }),
                   @presenter.sort_by_starts_at? ? { class: 'selected' } : {} %>
