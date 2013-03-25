@@ -3,6 +3,20 @@
 Znaigorod::Application.routes.draw do
   mount Affiches::API => '/'
 
+  # legacy v2 urls
+  get ':kind/:period/(:on)/(categories/*categories)/(tags/*tags)',
+       :kind => /movies|concerts|parties|spectacles|exhibitions|sportsevents|others|affiches|masterclasses/,
+       :period => /today|weekly|weekend|all|daily/, :to => redirect { |params, req|
+         affiche_collection = AfficheCollection.new(params)
+         url = "/affiches?order_by=popularity&view=posters"
+         url += "&period=#{affiche_collection.period}"
+         affiche_collection.categories.each do |cat|
+           url += "&categories[]=#{cat.singularize}"
+         end
+      URI.encode(url)
+  }
+  # <= legacy v2 urls
+
   namespace :manage do
     post 'red_cloth' => 'red_cloth#show'
 
@@ -79,15 +93,6 @@ Znaigorod::Application.routes.draw do
   end
   get 'crm/organizations' => 'crm/organizations#index', as: :manage_sales
 
-  # legacy urls
-
-  match URI.encode("/meals/доставка готовых блюд"), :to => redirect(URI.encode("/meals/доставка еды"))
-  match URI.encode("/meals/доставка готовых блюд/(*query)"), :to => redirect { |params, req|
-    URI.encode("/meals/доставка еды/#{params[:query]}")
-  }
-
-  # / legacy urls
-
   get 'search' => 'search#search', :as => :search
 
   get 'geocoder' => 'geocoder#get_coordinates'
@@ -111,14 +116,6 @@ Znaigorod::Application.routes.draw do
     get "#{type.name.downcase}/:id" => 'affiches#show', :as => "#{type.name.downcase}"
     get "#{type.name.downcase}/:id/photogallery" => 'affiches#photogallery', :as => "#{type.name.downcase}_photogallery"
     get "#{type.name.downcase}/:id/trailer" => 'affiches#trailer', :as => "#{type.name.downcase}_trailer"
-  end
-
-  # legacy organization urls
-  constraints(:id => /\d+/) do
-    get 'organizations/:id' => redirect { |params, req|
-      o = Organization.find(params[:id])
-      "/organizations/#{o.slug}"
-    }
   end
 
   get 'organizations/:id/affiche/all' => redirect { |params, req|
@@ -169,14 +166,4 @@ Znaigorod::Application.routes.draw do
 
   mount ElVfsClient::Engine => '/'
 
-  # legacy urls
-
-  get 'affiches' =>  redirect('/affiches/all')
-
-  get 'affiches/:id' => redirect { |params, req|
-    a = Affiche.find(params[:id])
-    "/#{a.class.model_name.downcase}/#{a.slug}"
-  }
-
-  # / legacy urls
 end
