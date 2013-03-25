@@ -154,7 +154,7 @@ Znaigorod::Application.routes.draw do
         keyword = ''
         params[:query].split('/').each do |word|
           keyword = word and hash[keyword] ||= [] and next if ['categories'].include?(word)
-          hash[keyword] << word
+          hash[keyword] << word if hash[keyword]
         end
       end
       parameters['categories'] ||= []
