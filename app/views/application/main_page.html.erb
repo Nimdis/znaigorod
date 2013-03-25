@@ -61,9 +61,9 @@
 <div class="main_page_block_wrapper more_in_city">
   <div class="main_page_block">
     <ul>
-      <li><a href="<%= organizations_path(organization_class: 'meals') %>">Все заведения питания (<%= @actual_organizations.total_meals %>)</a></li>
-      <li><a href="<%= organizations_path(organization_class: 'entertainments') %>">Все развлекательные заведения (<%= @actual_organizations.total_entertainments %>)</a></li>
-      <li><a href="<%= organizations_path(organization_class: 'cultures') %>">Все заведения культуры (<%= @actual_organizations.total_cultures %>)</a></li>
+      <li><a href="<%= meals_path %>">Все заведения питания (<%= @actual_organizations.total_meals %>)</a></li>
+      <li><a href="<%= entertainments_path %>">Все развлекательные заведения (<%= @actual_organizations.total_entertainments %>)</a></li>
+      <li><a href="<%= cultures_path %>">Все заведения культуры (<%= @actual_organizations.total_cultures %>)</a></li>
     </ul>
   </div>
 </div>
