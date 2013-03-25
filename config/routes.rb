@@ -144,6 +144,37 @@ Znaigorod::Application.routes.draw do
   Organization.available_suborganization_kinds.each do |kind|
     resources kind.pluralize, :only => :index
   end
+  # legacy v2 url
+  get ':organization_class/(:category)/(*query)',
+          :organization_class => /meals|entertainments|cultures|sports|creations|saunas/, :to => redirect { |params, req|
+    url = "/#{params[:organization_class]}?order_by=popularity"
+    if params[:category] == 'all'
+      parameters = {}
+      parameters.tap do |hash|
+        keyword = ''
+        params[:query].split('/').each do |word|
+          keyword = word and hash[keyword] ||= [] and next if ['categories'].include?(word)
+          hash[keyword] << word
+        end
+      end
+      parameters['categories'] ||= []
+      if parameters['categories'] == ['сауны']
+        url = '/saunas'
+      else
+        parameters['categories'].each do |cat|
+          url += "&categories[]=#{cat}"
+        end
+      end
+    else
+      if params[:category] == 'сауны'
+        url = '/saunas'
+      else
+        url += "&categories[]=#{params[:category]}"
+      end
+    end
+    URI.encode(url)
+  }
+  # <= legacy v2 urls
 
   resources :posts, :only => [:index, :show] do
     get :draft, :on => :collection, :as => :draft
