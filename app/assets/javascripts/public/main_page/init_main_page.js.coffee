@@ -33,7 +33,11 @@
           true
         true
       error: (jqXHR, textStatus, errorThrown) ->
-        console.log jqXHR.responseText.strip_tags() if console && console.log
+        wrapped = $("<div>" + jqXHR.responseText + "</div>")
+        wrapped.find('title').remove()
+        wrapped.find('style').remove()
+        wrapped.find('head').remove()
+        console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
         true
     false
 
