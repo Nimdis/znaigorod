@@ -19,6 +19,7 @@ class ShowingsPresenter
 
   def initialize(args)
     super(args)
+    self.categories ||= []
 
     @page ||= 1
     @per_page = 12
