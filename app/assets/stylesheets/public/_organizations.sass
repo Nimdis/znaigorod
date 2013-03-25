@@ -368,8 +368,13 @@
       .affiches_list
         margin: 10px
         .posters li
-          margin-left: 29px
-          margin-right: 29px
+          $margin: 9px
+          margin-left: $margin
+          margin-right: $margin
+          &.first
+            margin-left: 4px
+          &.sixth
+            margin-right: 0
 
   .organization_info
     .share_organization
