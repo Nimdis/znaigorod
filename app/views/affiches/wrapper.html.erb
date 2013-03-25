@@ -22,7 +22,7 @@
       <div class="tags_and_share">
         <ul class="tags">
           <% @affiche.tags.each do |tag| %>
-            <li><%= link_to(tag, affiches_path(kind: @affiche.pluralized_kind, period: :all, tags: tag)) %></li>
+            <li><%= link_to(tag, affiches_path(kind: @affiche.pluralized_kind, period: :all, tags: [tag])) %></li>
           <%end%>
         </ul>
         <div class="share">
