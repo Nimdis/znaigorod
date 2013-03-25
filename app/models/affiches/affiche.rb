@@ -54,8 +54,8 @@ class Affiche < ActiveRecord::Base
   alias_attribute :title_translit,  :title
 
   searchable do
-    integer :age_min
-    integer :age_max
+    float :age_min
+    float :age_max
 
     text :title,                :boost => 1.0 * 1.2
     text :title_ru,             :boost => 1.0,        :more_like_this => true
@@ -239,7 +239,7 @@ end
 #  vk_aid                    :string(255)
 #  yandex_fotki_url          :string(255)
 #  popularity                :float
-#  age_min                   :integer
-#  age_max                   :integer
+#  age_min                   :float
+#  age_max                   :float
 #
 

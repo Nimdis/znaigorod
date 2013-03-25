@@ -38,7 +38,7 @@ end
 #  vk_aid                    :string(255)
 #  yandex_fotki_url          :string(255)
 #  popularity                :float
-#  age_min                   :integer
-#  age_max                   :integer
+#  age_min                   :float
+#  age_max                   :float
 #
 

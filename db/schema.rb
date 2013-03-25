@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130318075216) do
+ActiveRecord::Schema.define(:version => 20130325060242) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -81,8 +81,8 @@ ActiveRecord::Schema.define(:version => 20130318075216) do
     t.string   "vk_aid"
     t.string   "yandex_fotki_url"
     t.float    "popularity"
-    t.integer  "age_min"
-    t.integer  "age_max"
+    t.float    "age_min"
+    t.float    "age_max"
   end
 
   add_index "affiches", ["slug"], :name => "index_affiches_on_slug", :unique => true

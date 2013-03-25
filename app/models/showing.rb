@@ -28,8 +28,8 @@ class Showing < ActiveRecord::Base
     integer :organization_id
     integer :price_max
     integer :price_min
-    integer(:age_max) { affiche_age_max }
-    integer(:age_min) { affiche_age_min }
+    float(:age_max) { affiche_age_max }
+    float(:age_min) { affiche_age_min }
     integer(:ends_at_hour) { ends_at.try(:hour) }
     integer(:organization_ids, :multiple => true) { [organization_id] if organization_id? }
     integer(:starts_at_hour) { starts_at.hour }
