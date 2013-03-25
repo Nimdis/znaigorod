@@ -47,7 +47,8 @@ class ActualOrganizations
       url_params = options.dup
       url_category = 'all'
       url_category = url_params.delete(:category) if url_params[:category]
-      organizations_path(organization_class: category.pluralize, category: url_category, query: url_params.any? ? Hash[options.map do |key, value| ["#{key.to_s.pluralize}", value] end ].to_a.flatten.join("/") : nil)
+
+      url_category ? send("#{category.pluralize}_path", categories: [url_category]) : send("#{category.pluralize}_path")
     end
 
     def searcher
