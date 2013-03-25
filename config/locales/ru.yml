@@ -511,9 +511,9 @@
       lounges:
         zero: "нет комнат отдыха"
         one: "%{count} комната отдыха"
-        few: "%{count} комнаты отдаха"
+        few: "%{count} комнаты отдыха"
         many: "%{count} комнят отдыха"
-        other: "%{count} комнаты отдаха"
+        other: "%{count} комнаты отдыха"
       pit:
         "true": "Есть танцпол"
       pylon:
