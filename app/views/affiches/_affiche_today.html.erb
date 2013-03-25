@@ -38,7 +38,7 @@
         </ul>
       <% else %>
         <p class="empty_message">
-          Похоже сегодня в городе нет <%#= t("affiche.empty.#{@affiche_today.current_link.kind}") %> ;(
+          Похоже сегодня в городе нет <%= t("affiche.empty.#{@showings_presenter.categories.first.underscore.pluralize}") %> ;(
         </p>
       <% end %>
     </div>
