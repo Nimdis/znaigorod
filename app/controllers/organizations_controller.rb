@@ -14,9 +14,9 @@ class OrganizationsController < ApplicationController
       @organization = OrganizationDecorator.find(params[:id])
     end
 
-    @presenter = ShowingsPresenter.new(organization_ids: [@organization.id], order_by: params[:order_by])
+    @presenter = ShowingsPresenter.new(organization_ids: [@organization.id], order_by: params[:order_by], page: params[:page])
 
-    render partial: @presenter.view_partial, layout: false and return if request.xhr?
+    render partial: @presenter.partial, layout: false and return if request.xhr?
     render layout: "organization_layouts/#{@organization.subdomain}" if @organization.subdomain? && template_exists?(@organization.subdomain, 'layouts/organization_layouts')
   end
 
