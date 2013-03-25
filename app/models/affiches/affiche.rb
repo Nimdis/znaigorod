@@ -185,9 +185,13 @@ class Affiche < ActiveRecord::Base
   end
 
   def prepare_url_4_vk(options)
-    params = { api_id: Settings['vk.app_id'], format: 'JSON', method: 'photos.get' }.merge(options).sort
+    vk_use = Settings["vk.use"]
+    vk_app_id = Settings["vk.#{vk_use}.app_id"]
+    vk_app_secret = Settings["vk.#{vk_use}.app_secret"]
 
-    sig = Digest::MD5.hexdigest(params.map{|k,v| "#{k}=#{v}"}.join + Settings['vk.app_secret'])
+    params = { api_id: vk_app_id, format: 'JSON', method: 'photos.get' }.merge(options).sort
+
+    sig = Digest::MD5.hexdigest(params.map{|k,v| "#{k}=#{v}"}.join + vk_app_secret)
 
     return "http://api.vk.com/api.php?#{params.map{|k,v| "#{k}=#{v}"}.join('&')}&sig=#{sig}"
   end
