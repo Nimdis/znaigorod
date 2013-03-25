@@ -8,8 +8,7 @@
 <% end %>
 
 <% content_for :affiche_content do %>
-  <%#= content_tag(:div, link_to(@affiche.human_kind, affiches_path(@affiche.pluralized_kind, 'all')), :class => 'kind') %>
-  <%= content_tag(:div, link_to(@affiche.human_kind, '#'), :class => 'kind') %>
+  <%= content_tag(:div, link_to(@affiche.human_kind, affiches_path(period: 'all', categories: [@affiche.kind])), class: 'kind') %>
   <div class="head">
     <%= content_tag :h1, @affiche.title.text_gilensize %>
     <%= content_tag :h2, @affiche.original_title.text_gilensize if @affiche.original_title? %>
