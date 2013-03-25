@@ -39,13 +39,15 @@ class MovieSyncer
           Timecop.freeze(MovieSyncer.now) do
             if showing = showings.find_by_hall_and_starts_at_and_price_min(seance[:hall],
                                                                            seance[:starts_at],
-                                                                           seance[:price_min])
+                                                                           seance[:price_min],
+                                                                           seance[:price_max])
               showing.update_attributes! seance
               showing.touch
             else
               showing = Showing.new(:hall => seance[:hall],
                                     :starts_at => seance[:starts_at],
                                     :price_min => seance[:price_min],
+                                    :price_max => seance[:price_max],
                                     :affiche_id => movie.id).tap do |s|
 
                 if place =~ /Факел/
@@ -122,7 +124,7 @@ namespace :sync do
         title = columns[1].gsub('(обычный формат)', '')
         price_min = columns[2].to_i
         movies[title] ||= []
-        movies[title] << {starts_at: starts_at, price_min: price_min}
+        movies[title] << {starts_at: starts_at, price_min: price_min, price_max: price_min }
       end
       bar.increment!
     end
@@ -207,7 +209,7 @@ namespace :sync do
               else
                 Time.parse(time)
               end
-              movies[title] << {:starts_at => Time.zone.parse("#{date} #{time}"), :hall => [hall, three_d].join(' ').squish, :price_min => amount.to_i }
+              movies[title] << {:starts_at => Time.zone.parse("#{date} #{time}"), :hall => [hall, three_d].join(' ').squish, :price_min => amount.to_i, :price_max => amount.to_i }
             end
           end
         end
