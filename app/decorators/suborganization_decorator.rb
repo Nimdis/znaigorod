@@ -36,7 +36,15 @@ class SuborganizationDecorator < ApplicationDecorator
   end
 
   def categories
-    model.organization.suborganizations.flat_map(&:categories).map(&:mb_chars).sort
+    model.organization.suborganizations.flat_map(&:categories).map(&:mb_chars).map(&:downcase).map(&:to_s).sort
+  end
+
+  def category_links
+    @category_links ||= Hash[
+      model.organization.suborganizations.map(&:class).map(&:name).
+      map { |class_name| "#{class_name.pluralize}Presenter" }.map(&:constantize).map(&:new).
+      map { |presenter| [presenter.pluralized_kind, presenter.categories_filter.available & categories] }
+    ]
   end
 
   def snipped_links

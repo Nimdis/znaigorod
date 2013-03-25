@@ -2,10 +2,12 @@
 
 <div class="info">
   <ul class="categories">
-    <% suborganization.categories.each do |category| %>
-      <li>
-        <%= link_to category.hyphenate, send("#{@presenter.kind.pluralize}_path", :categories => [category.mb_chars.downcase]) %>
-      </li>
+    <% suborganization.category_links.each do |pluralized_kind, categories| %>
+      <% categories.each do |category| %>
+        <li>
+          <%= link_to category.mb_chars.capitalize.hyphenate, send("#{pluralized_kind}_path", :categories => [category.mb_chars.downcase]) %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 

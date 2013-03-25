@@ -1,5 +1,7 @@
 <%= content_tag :div, link_to(hit.image_item, hit.show_url), class: "image" if hit.image? %>
+
 <%= content_tag :ul, hit.kind_links, class: "kind" unless hit.kind_links.blank? %>
+
 <div class="title">
   <%= hit.title_link %>
   <% if hit.result_decorator.class.name == 'AfficheDecorator' && hit.result_decorator.model.original_title.present? %>
