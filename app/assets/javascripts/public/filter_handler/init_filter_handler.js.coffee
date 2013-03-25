@@ -287,18 +287,26 @@ filter_completion_handler = () ->
 
 filter_date_handler = () ->
   filter = $('.date_filter')
-  #$('.date_picker_wrapper input', filter).datepicker({
-    #showOn: "button",
-    #buttonImage: "assets/public/calendar.png",
-    #buttonImageOnly: true
-  #})
-  $('ul li.selected input', filter).removeAttr('disabled')
-  $('ul li a, img', filter).on 'click', ->
-    $(this).parent().siblings().removeClass('selected').find('input').attr('disabled', 'disabled')
-    $(this).parent().addClass('selected')
-    $(this).siblings('input').removeAttr('disabled')
-    false
-
+  $('.date_picker_wrapper input', filter).datepicker
+    showOn: "button",
+    buttonImage: "assets/public/calendar.png",
+    buttonImageOnly: true
+    onSelect: (dateText, inst) ->
+      $('#period_date', filter).val(dateText)
+  if $('#period_date').is(':checked')
+    $('.date_picker_wrapper', filter).show()
+    $('.date_picker_wrapper input', filter).removeAttr('disabled')
+  else
+    $('.date_picker_wrapper', filter).hide()
+    $('.date_picker_wrapper input', filter).attr('disabled', 'disabled')
+  $('input[type=radio]', filter).change ->
+    if $(this).attr('id') == 'period_date'
+      $('.date_picker_wrapper', filter).show()
+      $('.date_picker_wrapper input', filter).removeAttr('disabled').focus().select()
+    else
+      $('.date_picker_wrapper', filter).hide()
+      $('.date_picker_wrapper input', filter).attr('disabled', 'disabled')
+    true
 
 @init_filter_handler = () ->
   set_previous_state()

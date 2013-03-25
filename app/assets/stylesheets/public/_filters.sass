@@ -86,7 +86,7 @@
             margin: 5px 10px 5px 0
 
       &.date_filter
-        +min-height(20px)
+        +min-height(26px)
         ul
           +clearfix
           li
@@ -95,6 +95,18 @@
             label
               +inline-block
               margin-bottom: 4px
+            .date_picker_wrapper
+              +inline-block
+              input
+                width: 65px
+                font-size: 11px
+                border: 1px solid #b492c5
+                margin-bottom: 5px
+                padding: 2px
+              img
+                cursor: pointer
+                +inline-block
+                margin: 0 0 4px 3px
 
       .filter_input_label
         float: left
