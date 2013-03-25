@@ -32,6 +32,13 @@ module OrganizationsPresenter
     end
   end
 
+  def initialize(args = {})
+    super(args)
+
+    @page ||= 1
+    @per_page = 12
+  end
+
   def order_by
     @order_by ||= %w[nearness popularity].include?(@order_by) ? @order_by : 'popularity'
     @order_by = 'popularity' unless geo_filter.used?

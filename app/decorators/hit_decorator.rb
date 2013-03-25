@@ -41,19 +41,30 @@ class HitDecorator < ApplicationDecorator
     ""
   end
 
-  # FIXME: грязный хак ;(
+  # FIXME: грязный хак
   def fake_kind
       kind = suborganization.class.name.underscore.gsub(/_decorator/, '')
     %w[billiard sauna].include?(kind) ? 'entertainment' : kind
   end
 
+  def suborganization_categories_hash
+    @suborganization_categories_hash ||= suborganization.organization.suborganizations.
+      map(&:class).map(&:name).
+      map { |class_name| "#{class_name.pluralize.downcase}_presenter" }.
+      map(&:classify).map(&:constantize).map(&:new).map { |presenter| [presenter.pluralized_kind, presenter.categories_filter.available] }
+
+    Hash[@suborganization_categories_hash]
+  end
+
+  # FIXME: херовый какой-то метод получился
   def kind_links
     kind = ""
     if organization?
-      suborganization.categories.each do |category|
-        kind << h.content_tag(:li,
-                              h.link_to(category, h.organizations_path(organization_class: fake_kind.pluralize,
-                                                                       category: category.mb_chars.downcase)))
+      suborganization.categories.map(&:mb_chars).map(&:downcase).each do |category|
+        hash = suborganization_categories_hash.select { |_, categories| categories.include?(category) }
+        pluralized_kind = hash.keys.first
+        options = pluralized_kind == 'saunas' ? {} : { categories: [category] }
+        kind << h.content_tag(:li, h.link_to(category.mb_chars.capitalize, h.send("#{pluralized_kind}_path", options)))
       end
     else
       kind << h.content_tag(:li, h.link_to(self.human_kind, h.affiches_path(kind: self.kind.pluralize, period: :all)))

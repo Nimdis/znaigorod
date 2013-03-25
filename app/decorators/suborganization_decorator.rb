@@ -35,6 +35,10 @@ class SuborganizationDecorator < ApplicationDecorator
     h.content_tag(:div, content.join(", ").html_safe, class: :contacts) unless content.blank?
   end
 
+  def categories
+    model.organization.suborganizations.flat_map(&:categories).map(&:mb_chars).sort
+  end
+
   def snipped_links
     links = []
     %w(photogallery tour affiche).each do |method|
