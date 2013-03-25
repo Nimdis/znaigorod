@@ -1,5 +1,4 @@
 .filters_wrapper
-  //+clearfix
   font-size: 11px
   padding: 4px
   margin: 0 0 20px 0
@@ -83,91 +82,19 @@
 
           div.checkbox
             +min-width(20px)
-            //width: auto
             line-height: 16px
             margin: 5px 10px 5px 0
 
       &.date_filter
-        +min-height(26px)
-        +clearfix
-
-        .date_picker_wrapper
-          +border-radius
-          background: #82b4cc
-          border: 1px solid #639eba
-          float: left
-          margin: 0px 15px 0 0
-          padding: 0 5px
-
-          input
-            background: none
-            border: none
-            color: #fff
-            font-size: 11px
-            float: left
-            line-height: 17px
-            height: 19px
-            margin: 0
-            padding: 0
-            width: 70px
-
-          img
-            &:hover
-              cursor: pointer
-
+        +min-height(20px)
         ul
           +clearfix
-          margin: 3px 0 0 0
-
           li
-            +clearfix
-            background: #82b4cc
-            border-top: 1px solid #639eba
-            border-bottom: 1px solid #639eba
             float: left
-
-            a
-              color: #fff
-              display: block
-              float: left
-              padding: 4px 5px
-              text-decoration: none
-
-            &:before
-              background: #639eba
-              border-bottom: 1px solid #639eba
-              border-top: 1px solid #639eba
-              content: ''
-              display: block
-              float: left
-              height: 17px
-              width: 1px
-
-            &:nth-child(2)
-              +border-left-radius
-              border-left: 1px solid #639eba
-
-            &:first-child, &:nth-child(2)
-
-              &:before
-                display: none
-
-            &:last-child
-              +border-right-radius
-              border-right: 1px solid #639eba
-
-            &.selected
-              +box-shadow(#6d4a7e 0 1px 3px inset)
-              background-color: #b492c5
-              border-color: #845999
-              color: #ebebeb
-
-              a
-                &:hover
-                  cursor: default
-
-                &:active
-                  pointer-events: none
+            margin-right: 10px
+            label
+              +inline-block
+              margin-bottom: 4px
 
       .filter_input_label
         float: left

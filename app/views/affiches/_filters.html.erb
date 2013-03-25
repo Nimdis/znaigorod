@@ -20,9 +20,9 @@
 
       <div class="filter show date_filter" id='calendar'>
         <ul>
-          <li class='<%= @presenter.period_filter.date? ? 'date_picker_wrapper selected' : 'date_picker_wrapper' %>'>
-            <%= radio_button_tag :period, @presenter.period_filter.date, @presenter.period_filter.date? %>
-            <%= label_tag :period_date, 'Дата' %>
+          <li class='<%= @presenter.period_filter.all? ? 'selected' : 'not_selected' %>'>
+            <%= radio_button_tag :period, 'all', @presenter.period_filter.all? %>
+            <%= label_tag :period_all, 'Все' %>
           </li>
           <li class='<%= @presenter.period_filter.today? ? 'selected' : 'not_selected' %>'>
             <%= radio_button_tag :period, 'today', @presenter.period_filter.today? %>
@@ -36,9 +36,9 @@
             <%= radio_button_tag :period, 'weekend', @presenter.period_filter.weekend? %>
             <%= label_tag :period_weekend, 'На этих выходных' %>
           </li>
-          <li class='<%= @presenter.period_filter.all? ? 'selected' : 'not_selected' %>'>
-            <%= radio_button_tag :period, 'all', @presenter.period_filter.all? %>
-            <%= label_tag :period_all, 'Все' %>
+          <li class='<%= @presenter.period_filter.date? ? 'date_picker_wrapper selected' : 'date_picker_wrapper' %>'>
+            <%= radio_button_tag :period, @presenter.period_filter.date, @presenter.period_filter.date? %>
+            <%= label_tag :period_date, 'Дата' %>
           </li>
         </ul>
       </div>

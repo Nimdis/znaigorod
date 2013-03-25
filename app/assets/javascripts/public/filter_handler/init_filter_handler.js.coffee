@@ -287,11 +287,11 @@ filter_completion_handler = () ->
 
 filter_date_handler = () ->
   filter = $('.date_filter')
-  $('.date_picker_wrapper input', filter).datepicker({
-    showOn: "button",
-    buttonImage: "assets/public/calendar.png",
-    buttonImageOnly: true
-  })
+  #$('.date_picker_wrapper input', filter).datepicker({
+    #showOn: "button",
+    #buttonImage: "assets/public/calendar.png",
+    #buttonImageOnly: true
+  #})
   $('ul li.selected input', filter).removeAttr('disabled')
   $('ul li a, img', filter).on 'click', ->
     $(this).parent().siblings().removeClass('selected').find('input').attr('disabled', 'disabled')
