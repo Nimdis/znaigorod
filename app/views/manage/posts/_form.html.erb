@@ -1,16 +1,13 @@
 <%= javascript_include_tag 'esp-ckeditor/application' %>
 <%= javascript_include_tag 'manage/info_plugin/info_plugin' %>
 
-<%= semantic_form_for [:manage, @post] do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :vfs_path, :as => :hidden %>
-    <%= f.input :title %>
-    <%= f.input :annotation, :as => :ckeditor, :label => false %>
-    <%= f.input :content, :as => :ckeditor, :label => false %>
-    <%= f.input :status, :as => :boolean, :label => false %>
-  <% end %>
-
-  <%= f.actions do %>
+<%= simple_form_for [:manage, @post] do |f| %>
+  <%= f.input :vfs_path, :as => :hidden %>
+  <%= f.input :title %>
+  <%= f.input :annotation, :as => :ckeditor, :label => false %>
+  <%= f.input :content, :as => :ckeditor, :label => false %>
+  <%= f.input :status, :as => :boolean %>
+  <div class='actions'>
     <%= f.submit "Сохранить" %>
-  <% end %>
+  </div>
 <% end %>
