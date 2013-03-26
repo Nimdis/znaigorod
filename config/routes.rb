@@ -7,13 +7,25 @@ Znaigorod::Application.routes.draw do
   get ':kind/:period/(:on)/(categories/*categories)/(tags/*tags)',
        :kind => /movies|concerts|parties|spectacles|exhibitions|sportsevents|others|affiches|masterclasses/,
        :period => /today|weekly|weekend|all|daily/, :to => redirect { |params, req|
-         affiche_collection = AfficheCollection.new(params)
+         parameters = {}
+         parameters['categories'] = []
+         (params[:categories] || "").split('/').each do |word|
+           parameters['categories'] << word
+         end
+         period = case params[:period]
+                  when 'weekly'
+                    'week'
+                  when 'daly'
+                    'all'
+                  else
+                    params[:period]
+                  end
          url = "/affiches?order_by=popularity&view=posters"
-         url += "&period=#{affiche_collection.period}"
-         affiche_collection.categories.each do |cat|
+         url += "&period=#{period}"
+         parameters['categories'].each do |cat|
            url += "&categories[]=#{cat.singularize}"
          end
-      URI.encode(url)
+         URI.encode(url)
   }
   # <= legacy v2 urls
 
