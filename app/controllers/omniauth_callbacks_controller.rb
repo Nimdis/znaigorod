@@ -10,6 +10,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def yandex
   end
 
+  def after_sign_in_path_for(resource_or_scope)
+    request.env['omniauth.origin'] if request.env['omniauth.origin']
+  end
+
   private
 
   def authenticate
