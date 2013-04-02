@@ -8,15 +8,8 @@ solr:
   api_key:              api_key
 
 vk:
-  use: production
-
-  development:
-    app_id:               app_id
-    app_secret:           app_secret
-
-  production:
-    app_id:               app_id
-    app_secret:           app_secret
+  app_id:               app_id
+  app_secret:           app_secret
 
 yandex:
   oauth_token:          token

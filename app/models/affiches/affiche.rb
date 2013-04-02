@@ -185,9 +185,8 @@ class Affiche < ActiveRecord::Base
   end
 
   def prepare_url_4_vk(options)
-    vk_use = Settings["vk.use"]
-    vk_app_id = Settings["vk.#{vk_use}.app_id"]
-    vk_app_secret = Settings["vk.#{vk_use}.app_secret"]
+    vk_app_id = Settings['vk.app_id']
+    vk_app_secret = Settings['vk.app_secret']
 
     params = { api_id: vk_app_id, format: 'JSON', method: 'photos.get' }.merge(options).sort
 
