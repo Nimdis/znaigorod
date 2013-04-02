@@ -12,6 +12,8 @@ class AddDeviseToUsers < ActiveRecord::Migration
     add_column :users, :provider, :string
     add_column :users, :auth_raw_info, :text
 
+    change_column :users, :uid, :string
+
     remove_column :users, :email
     remove_column :users, :name
     remove_column :users, :oauth_key
@@ -27,8 +29,10 @@ class AddDeviseToUsers < ActiveRecord::Migration
     remove_column :users, :provider
     remove_column :users, :auth_raw_info
 
-    add_column :users, :email
-    add_column :users, :name
-    add_column :users, :oauth_key
+    change_column :users, :uid, :integer
+
+    add_column :users, :email, :string
+    add_column :users, :name, :string
+    add_column :users, :oauth_key, :string
   end
 end

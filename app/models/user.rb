@@ -1,13 +1,16 @@
 class User < ActiveRecord::Base
-  devise :trackable, :omniauthable, omniauth_providers: [:vkontakte]
+  devise :trackable, :omniauthable,
+    omniauth_providers: [:vkontakte, :google_oauth2, :yandex]
 
   attr_accessible :uid, :roles_mask, :roles, :provider, :auth_raw_info
 
   serialize :auth_raw_info
 
-  def self.find_or_create_by_vkontakte_oauth(auth_raw_info)
-    find_or_initialize_by_provider_and_uid(provider: auth_raw_info.provider, uid: auth_raw_info.uid).tap { |user|
-      user.update_attributes provider: auth_raw_info.provider, uid: auth_raw_info.uid, auth_raw_info: auth_raw_info
+  def self.find_or_create_by_oauth(auth_raw_info)
+    provider, uid = auth_raw_info.provider, auth_raw_info.uid.to_s
+
+    find_or_initialize_by_provider_and_uid(provider: provider, uid: uid).tap { |user|
+      user.update_attributes provider: provider, uid: uid, auth_raw_info: auth_raw_info
     }
   end
 

@@ -1,5 +1,7 @@
 <% unless user_signed_in? %>
   <%= link_to 'Войти через VK', user_omniauth_authorize_path(:vkontakte) %>
+  <%= link_to 'Войти через Google', user_omniauth_authorize_path(:google_oauth2) %>
+  <%= link_to 'Войти через Yandex', user_omniauth_authorize_path(:yandex) %>
 <% else %>
   Вы вошли как <%= current_user.name %>
   <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
