@@ -1,3 +1,10 @@
+<% unless user_signed_in? %>
+  <%= link_to 'Войти через VK', user_omniauth_authorize_path(:vkontakte) %>
+<% else %>
+  Вы вошли как <%= current_user.name %>
+  <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+<% end %>
+
 <div class="main_page_affiche">
 
   <%= render :partial => 'affiches/affiche_today' %>

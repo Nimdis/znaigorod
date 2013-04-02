@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328084250) do
+ActiveRecord::Schema.define(:version => 20130402040305) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -577,16 +577,18 @@ ActiveRecord::Schema.define(:version => 20130328084250) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "oauth_key"
     t.integer  "roles_mask"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "uid"
+    t.integer  "sign_in_count",      :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "provider"
+    t.text     "auth_raw_info"
   end
-
-  add_index "users", ["oauth_key"], :name => "index_users_on_oauth_key", :unique => true
 
   create_table "works", :force => true do |t|
     t.text     "image_url"

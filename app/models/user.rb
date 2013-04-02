@@ -1,5 +1,19 @@
 class User < ActiveRecord::Base
-  attr_accessible :uid, :name, :oauth_key, :roles_mask, :roles
+  devise :trackable, :omniauthable, omniauth_providers: [:vkontakte]
+
+  attr_accessible :uid, :roles_mask, :roles, :provider, :auth_raw_info
+
+  serialize :auth_raw_info
+
+  def self.find_or_create_by_vkontakte_oauth(auth_raw_info)
+    find_or_initialize_by_provider_and_uid(provider: auth_raw_info.provider, uid: auth_raw_info.uid).tap { |user|
+      user.update_attributes provider: auth_raw_info.provider, uid: auth_raw_info.uid, auth_raw_info: auth_raw_info
+    }
+  end
+
+  def name
+    auth_raw_info.info.name
+  end
 
   # If production, do not change existing roles. You can only add new one to the end
   ROLES = %w[admin affiches_editor organizations_editor posts_editor sales_manager]

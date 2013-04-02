@@ -3,6 +3,12 @@
 Znaigorod::Application.routes.draw do
   mount Affiches::API => '/'
 
+  devise_for :users, :controllers => { :omniauth_callbacks =>  'omniauth_callbacks' }
+
+  devise_scope :user do
+    delete '/users/sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
   # legacy v2 urls
   get ':kind/:period/(:on)/(categories/*categories)/(tags/*tags)',
        :kind => /movies|concerts|parties|spectacles|exhibitions|sportsevents|others|affiches|masterclasses/,

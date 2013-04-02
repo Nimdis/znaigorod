@@ -1,6 +1,7 @@
 /*
  * = require jquery
  * = require jquery-ui
+ * = require jquery_ujs
  * = require magicsuggest
  * = require public/md5
  * = require public/twitter

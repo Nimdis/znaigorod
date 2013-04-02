@@ -20,6 +20,8 @@ group :default do
   gem 'default_value_for'
   gem 'delayed_job_active_record'
   gem 'draper'
+  gem 'devise'
+  gem 'devise-russian'
   gem 'el_vfs_client'
   gem 'enumerize'
   gem 'esp-ckeditor'
