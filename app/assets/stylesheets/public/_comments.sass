@@ -1,0 +1,67 @@
+.comments
+  h3
+    color: #aaa
+    font-size: 18px
+    font-weight: normal
+
+  ul
+    margin: 0
+
+    li
+      margin: 5px 0
+
+      ul
+        margin: 0 0 0 20px
+
+    .comment_item
+      .user_name
+        +inline-block
+        color: #555
+        font-size: 11px
+        line-height: 20px
+        height: 20px
+
+        img
+          +inline-block
+
+      .date
+        color: #888
+        font-size: 11px
+
+      .body
+        display: block
+        padding: 3px
+
+      .comment_wrapper
+        padding: 2px
+
+        &:hover
+          background: #eef4f7
+
+  a.new_comment
+    border-bottom: 1px dashed #6DA3BD
+    color: #6DA3BD
+    font-size: 11px
+    line-height: 12px
+    margin: 0 3px
+    text-decoration: none
+
+    &:hover
+      border: none
+
+    &.large
+      +inline-block
+      font-size: 16px
+      margin: 15px 0 0 0
+
+  .comment_form
+    textarea
+      border: 1px solid #ddd
+      color: #555
+      margin: 0
+      padding: 5px
+      width: 95%
+
+    .buttons
+      input
+      a

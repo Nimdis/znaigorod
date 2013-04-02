@@ -43,6 +43,7 @@ $ ->
   init_swfkrpano() if $('#krpano').length
   init_webcam_axis() if $('.webcams_list .webcam_axis').length
   init_webcam_swfobject() if $('.webcams_list .webcam_swfobject').length
+  init_comments() if $('.comments').length
   true
 
 $(window).load ->

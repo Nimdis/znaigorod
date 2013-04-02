@@ -1,0 +1,27 @@
+<li class='comment_item'>
+  <div class='comment_wrapper'>
+    <span class="user_name">
+      <%#= gravatar_tag comment.user.name, :size => 20 %>
+      <%#= comment.user_name %>,
+    </span>
+    <span class="date">
+      <%= l comment.created_at, :format => :short %>
+    </span>
+    <span class="body">
+      <%= comment.body %>
+    </span>
+  </div>
+
+  <% if true %>
+    <%= link_to "ответить", new_post_comment_path(@post, :comment => {:parent_id => comment.id}), :remote => true, :class => 'new_record new_comment' %>
+  <% end %>
+
+  <ul>
+    <% if comment.has_children? %>
+      <% comment.children.each do |child| %>
+        <%= render child %>
+      <% end %>
+    <% end %>
+  </ul>
+</li>
+

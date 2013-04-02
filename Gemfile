@@ -10,6 +10,7 @@ end
 group :default do
   gem 'RedCloth'
   gem 'active_attr'
+  gem 'ancestry'
   gem 'attribute_normalizer'
   gem 'auto_html'
   gem 'cancan'
@@ -31,6 +32,7 @@ group :default do
   gem 'friendly_id'
   gem 'gilenson'
   gem 'grape'
+  gem 'gravatarify', '~> 3.0.0'
   gem 'has_scope'
   gem 'has_searcher'
   gem 'hashie'

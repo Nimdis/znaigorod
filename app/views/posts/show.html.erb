@@ -37,6 +37,22 @@
         </div>
 
       </div>
+
+      <div class="comments ajaxed">
+        <h3>Комментарии</h3>
+        <ul>
+          <% @post.comments.roots.order('created_at ASC').each do |comment| %>
+            <li><%= render comment %></li>
+          <% end %>
+        </ul>
+
+        <% if true %>
+          <%= link_to "Оставить комментарий", new_post_comment_path(@post), :remote => true, :class => 'new_record new_comment large' %>
+        <% else %>
+          <h3>Оставлять комментарии могут только авторизованные пользователи</h3>
+        <% end %>
+      </div>
+
       <% if Rails.env.production? %>
         <div id="vk_comments"></div>
         <%= render :partial => "commons/fb_comments" %>

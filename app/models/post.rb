@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   attr_accessible :annotation, :content, :poster_url, :status, :title, :vfs_path
 
   has_many :post_images, :order => 'post_images.created_at'
+  has_many :comments, :as => :commentable, :dependent => :destroy
 
   validates_presence_of :annotation, :content, :title
 

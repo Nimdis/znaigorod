@@ -196,6 +196,7 @@ Znaigorod::Application.routes.draw do
   # <= legacy v2 urls
 
   resources :posts, :only => [:index, :show] do
+    resources :comments, :only => [:new, :create, :show]
     get :draft, :on => :collection, :as => :draft
   end
 

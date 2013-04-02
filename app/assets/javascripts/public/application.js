@@ -1,5 +1,6 @@
 /*
  * = require jquery
+ * = require jquery_ujs
  * = require jquery-ui
  * = require jquery_ujs
  * = require magicsuggest
@@ -15,6 +16,7 @@
  *
  * = require public/yandex_stat
  * = require public/common
+ * = require public/comments
  * = require public/jscrollpane
  * = require public/main_page
  * = require public/affiches_filter
