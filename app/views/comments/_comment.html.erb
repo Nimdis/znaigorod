@@ -1,20 +1,21 @@
 <li class='comment_item'>
   <div class='comment_wrapper'>
-    <span class="user_name">
-      <%#= gravatar_tag comment.user.name, :size => 20 %>
-      <%#= comment.user_name %>,
-    </span>
-    <span class="date">
-      <%= l comment.created_at, :format => :short %>
-    </span>
-    <span class="body">
-      <%= comment.body %>
-    </span>
+    <div class="avatar">
+      <%= image_tag comment.user_avatar %>
+    </div>
+    <div class="user_info">
+      <%= link_to comment.user_name, comment.user_profile, :target => '_blank', :class => 'profile_link' %>,
+      <span class="date">
+        <%= l comment.created_at, :format => :long %>
+      </span>
+      <% if can?(:create, comment.children.new) %>
+        <%= link_to "ответить", new_post_comment_path(@post, :comment => {:parent_id => comment.id}), :remote => true, :class => 'new_record new_comment' %>
+      <% end %>
+    </div>
+    <div class="body">
+      <%= strip_tags comment.body %>
+    </div>
   </div>
-
-  <% if true %>
-    <%= link_to "ответить", new_post_comment_path(@post, :comment => {:parent_id => comment.id}), :remote => true, :class => 'new_record new_comment' %>
-  <% end %>
 
   <ul>
     <% if comment.has_children? %>

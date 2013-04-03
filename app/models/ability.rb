@@ -1,10 +1,11 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user, namespace)
+  def initialize(user, namespace=nil)
     user ||= User.new
     can :manage, :all         if user.is? :admin
     can :manage, :crm         if user.is?(:admin) || user.is?(:sales_manager)
+    can :create, Comment      if user.persisted?
 
     case namespace
     when 'manage'

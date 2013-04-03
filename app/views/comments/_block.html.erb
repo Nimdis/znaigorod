@@ -1,0 +1,37 @@
+<div class="comments ajaxed">
+  <h3>
+    Комментарии
+    <% if user_signed_in? %>
+      <div class="logged">
+        Вы вошли как <%= link_to current_user.name, current_user.profile %>
+        <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+    </div>
+    <% end %>
+  </h3>
+
+  <ul>
+    <% parent_obj.comments.roots.order('created_at ASC').each do |comment| %>
+      <%= render comment %>
+    <% end %>
+  </ul>
+
+
+  <% if can?(:create, parent_obj.comments.new) %>
+    <%= link_to "Оставить комментарий", [:new, parent_obj, :comment].flatten, :remote => true, :class => 'new_record new_comment large' %>
+  <% else %>
+    <h4>Оставлять комментарии могут только зарегистрированные пользователи. Пожалуйста, войдите с помощью одной из социальных сетей:</h4>
+    <% unless user_signed_in? %>
+      <ul class='social_signin_links'>
+        <li class='vkontakte'>
+          <%= link_to 'Войти через VK', user_omniauth_authorize_path(:vkontakte) %>
+        </li>
+        <li class='google'>
+          <%= link_to 'Войти через Google', user_omniauth_authorize_path(:google_oauth2) %>
+        </li>
+        <li class='yandex'>
+          <%= link_to 'Войти через Yandex', user_omniauth_authorize_path(:yandex) %>
+        </li>
+      </ul>
+    <% end %>
+  <% end %>
+</div>

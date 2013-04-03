@@ -7,5 +7,5 @@ class Comment < ActiveRecord::Base
   normalize_attribute :body, :ancestry
   validates_presence_of :body
 
-  delegate :name, :to => :user, :prefix => true
+  delegate :name, :avatar, :profile, :to => :user, :prefix => true
 end

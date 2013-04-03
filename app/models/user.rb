@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   devise :trackable, :omniauthable,
     omniauth_providers: [:vkontakte, :google_oauth2, :yandex]
 
+  has_many :comments
   attr_accessible :uid, :roles_mask, :roles, :provider, :auth_raw_info
 
   serialize :auth_raw_info
@@ -69,6 +70,24 @@ class User < ActiveRecord::Base
   end
 
   alias_attribute :to_s, :name
+
+  def avatar
+    case provider
+    when 'vkontakte'
+      return auth_raw_info[:info][:image]
+    else
+      return 'http://placekitten.com/g/50/50'
+    end
+  end
+
+  def profile
+    case provider
+    when 'vkontakte'
+      return auth_raw_info[:info][:urls][:Vkontakte]
+    else
+      return 'http://google.ru'
+    end
+  end
 end
 
 # == Schema Information

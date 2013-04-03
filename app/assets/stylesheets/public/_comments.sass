@@ -1,44 +1,104 @@
 .comments
-  h3
-    color: #aaa
-    font-size: 18px
+  @include background(image_url('divider.png') no-repeat center top, image_url('divider.png') no-repeat center bottom)
+  margin: 25px 20px
+  padding: 25px 0
+
+  h3, h4
+    color: #575656
     font-weight: normal
 
+  h3
+    font-size: 18px
+    line-height: 20px
+    margin: 0 0 25px
+
+    .logged
+      font-size: 12px
+      float: right
+
+  h4
+    font-size: 14px
+    line-height: 18px
+    margin: 25px 0 0
+
+  .social_signin_links
+    +clearfix
+    margin: 25px 0
+
+    li
+      float: left
+      margin: 0 15px 0 0
+
+      a
+        display: block
+        text-indent: -9999px
+        height: 64px
+        width: 64px
+
+      &.vkontakte
+        a
+          background: image_url('')
+
+      &.google
+        a
+          background: image_url('')
+
+      &.yandex
+        a
+          background: image_url('')
+
   ul
+    +clearfix
     margin: 0
 
     li
-      margin: 5px 0
+      margin: 10px 0
 
       ul
         margin: 0 0 0 20px
 
     .comment_item
-      .user_name
-        +inline-block
-        color: #555
-        font-size: 11px
-        line-height: 20px
-        height: 20px
+      .avatar
+        float: left
+        margin: 0 15px 0 0
 
         img
+          +border-radius(50px)
+          display: block
+          height: 50px
+          width: 50px
+
+      .user_info
+        +clearfix
+        line-height: 13px
+        margin: 0 0 5px 0
+
+        a
           +inline-block
 
-      .date
-        color: #888
-        font-size: 11px
+        .profile_link
+          color: #555
+          font-size: 11px
+
+        .date
+          +inline-block
+          color: #888
+          font-size: 11px
 
       .body
-        display: block
+        font-size: 12px
+        line-height: 16px
         padding: 3px
 
       .comment_wrapper
+        +clearfix
         padding: 2px
 
         &:hover
           background: #eef4f7
 
   a.new_comment
+    +inline-block
     border-bottom: 1px dashed #6DA3BD
     color: #6DA3BD
     font-size: 11px
@@ -48,19 +108,25 @@
 
     &:hover
       border: none
+      padding: 0 0 1px 0
 
     &.large
       +inline-block
       font-size: 16px
+      line-height: 18px
       margin: 15px 0 0 0
 
   .comment_form
+    margin: 15px 0
+
     textarea
       border: 1px solid #ddd
       color: #555
-      margin: 0
+      margin: 0 0 10px 0
       padding: 5px
-      width: 95%
+      height: 60px
+      //width: 890px
+      width: 98%
 
     .buttons
       input
