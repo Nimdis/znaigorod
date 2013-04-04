@@ -17,10 +17,6 @@ class Manage::ApplicationController < InheritedResources::Base
     @per_page ||= Settings['pagination.per_page'] || 10
   end
 
-  def current_user
-    @current_user ||= User.find_by_oauth_key(session[:oauth_key]) if session[:oauth_key]
-  end
-
   def namespace
     params[:controller].split('/').first
   end
