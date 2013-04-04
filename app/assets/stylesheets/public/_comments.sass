@@ -24,35 +24,55 @@
   .social_signin_links
     +clearfix
     margin: 25px 0
+    text-align: center
 
     li
-      float: left
+      +inline-block
       margin: 0 15px 0 0
 
       a
         display: block
         text-indent: -9999px
-        height: 64px
-        width: 64px
+        height: 68px
+        width: 68px
+
+        &:hover
+          background-position-y: -68px !important
 
       &.vkontakte
         a
-          background: image_url('')
-
-      &.google
-        a
-          background: image_url('')
+          background: image_url('social_icons_big.png') no-repeat 0 0
 
       &.yandex
         a
-          background: image_url('')
+          background: image_url('social_icons_big.png') no-repeat -68px 0
+
+      &.facebook
+        a
+          background: image_url('social_icons_big.png') no-repeat -136px 0
+
+      &.twitter
+        a
+          background: image_url('social_icons_big.png') no-repeat -204px 0
+
+      &.google
+        a
+          background: image_url('social_icons_big.png') no-repeat -272px 0
+
+      &.mail_ru
+        a
+          background: image_url('social_icons_big.png') no-repeat -340px 0
+
+      &.odnoklassniki
+        a
+          background: image_url('social_icons_big.png') no-repeat -408px 0
 
   ul
     +clearfix
     margin: 0
 
     li
-      margin: 10px 0
+      margin: 20px 0 0
 
       ul
         margin: 0 0 0 20px
@@ -94,10 +114,10 @@
         +clearfix
         padding: 2px
 
-        &:hover
+        &:hover, &.active
           background: #eef4f7
 
-  a.new_comment
+  a.new_comment, a.new_answer
     +inline-block
     border-bottom: 1px dashed #6DA3BD
     color: #6DA3BD
@@ -110,14 +130,22 @@
       border: none
       padding: 0 0 1px 0
 
-    &.large
-      +inline-block
-      font-size: 16px
-      line-height: 18px
-      margin: 15px 0 0 0
+  a.new_comment
+    +inline-block
+    font-size: 16px
+    line-height: 18px
+    margin: 15px 0 0 0
 
   .comment_form
     margin: 15px 0
+
+    .error
+      color: #fba29e
+      display: block
+      font-size: 11px
+      margin: 5px 0 0 0
+      position: absolute
+      left: 275px
 
     textarea
       border: 1px solid #ddd
@@ -125,8 +153,9 @@
       margin: 0 0 10px 0
       padding: 5px
       height: 60px
+      resize: none
       //width: 890px
-      width: 98%
+      width: 97%
 
     .buttons
       input

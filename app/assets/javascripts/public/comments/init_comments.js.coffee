@@ -1,28 +1,47 @@
 cancel_handler = () ->
-  $('.cancel').on 'click', ->
-    link = $(this)
-    if link.hasClass('new_record')
-      link.closest('ul').siblings('.new_comment').show()
-      link.closest('ul').siblings('.comment_wrapper').css('background', '#ffffff').find('.new_record').show()
-      link.closest('.ajaxed_item').remove()
+  $('.cancel', '.comments').on 'click', ->
+    remove_comment_form()
+    show_link()
     false
+
+show_link = () ->
+  $('.new_answer:hidden, .new_comment:hidden', '.comments').show()
+
+remove_comment_form = () ->
+  remove_highlight()
+  show_link()
+  $('.ajaxed_item', '.comments').remove()
+
+scroll = () ->
+  target = $('.ajaxed_item', '.comments')
+  y_coord = Math.abs($(window).height() - target.offset().top - target.height())
+  $("html, body").animate({ scrollTop: y_coord})
+
+remove_highlight = () ->
+  $('.active', '.comments').removeClass('active')
+  false
+
+$.fn.new_comment = (response) ->
+  remove_comment_form()
+  $(this).hide().siblings('ul').append(response)
+  scroll()
+
+$.fn.new_answer = (response) ->
+  remove_comment_form()
+  $(this).hide().closest('.comment_wrapper').addClass('active').siblings('ul').append(response)
+  scroll()
+
+$.fn.submit_form = (response) ->
+  $(this).closest('.ajaxed_item').replaceWith(response)
+  show_link()
 
 @init_comments = () ->
   $(".ajaxed").on "ajax:success", (evt, response, status, jqXHR) ->
     target = $(evt.target)
-    ul = target.siblings("ul")
 
-    if target.hasClass('new_record')
-      if ul.length
-        ul.append(jqXHR.responseText)
-      else
-        window.scrollTo 0, target.closest('.comment_wrapper').css('background', '#eef4f7').siblings('ul').append(jqXHR.responseText).offset().top
-
-      if target.hasClass('new_comment')
-        $('form.new_comment .cancel').click()
-        target.hide()
-    else
-      target.closest('ul').siblings('.comment_wrapper').css('background', '#fff').find('.new_comment').show() unless $(jqXHR.responseText).find('.error').length
-      target.closest('.ajaxed_item').replaceWith(jqXHR.responseText)
+    switch target.attr('class')
+      when 'new_comment' then target.new_comment(jqXHR.responseText)
+      when 'new_answer'  then target.new_answer(jqXHR.responseText)
+      else target.submit_form(jqXHR.responseText)
 
     cancel_handler()
