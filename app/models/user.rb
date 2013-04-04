@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :uid, :roles_mask, :roles, :provider, :auth_raw_info
+  attr_accessible :uid, :provider, :auth_raw_info, :roles_attributes
 
   devise :trackable, :omniauthable, omniauth_providers: [:vkontakte, :google_oauth2, :yandex]
 
@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   serialize :auth_raw_info
 
   validates_presence_of :provider, :uid
+
+  accepts_nested_attributes_for :roles, allow_destroy: true, reject_if: :all_blank
 
   scope :with_role,      ->(role) { joins(:roles).where('roles.role = ?', role) }
   scope :sales_managers, -> { with_role(:sales_manager) }

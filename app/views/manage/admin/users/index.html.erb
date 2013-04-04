@@ -1,35 +1,10 @@
-<div class="filter">
-  <%= form_tag("", :method => :get) do %>
-    <%= I18n.t("manage.admin.filter") %>:
-    <%= select_tag("filter", options_for_select(User::FILTER)) %>
-    <%= submit_tag(I18n.t("manage.admin.apply")) %>
-  <% end %>
-</div>
-
-<%= form_tag(manage_admin_user_mass_update_path, :method => :post) do %>
-
-  <%= link_to I18n.t("manage.admin.new"), new_manage_admin_user_path %>
-  <div class="users">
-    <% @users.each_with_index do |user,i| %>
-    <p class="<%= "odd" if i.odd?%>">
-      <%= check_box_tag("users[]", user.id) %>
-      <%= user.id %>:
-      <%= user.name.nil? ? " - " : user.name %>
-      <%= user.uid %>
-      <span class="user_menu">
-        <%= link_to I18n.t("show"), manage_admin_user_path(user) %>
-        <%= link_to I18n.t("edit"), edit_manage_admin_user_path(user) %>
-        <%= link_to I18n.t("delete"), manage_admin_user_path(user),
-            :method => :delete, data: { confirm: I18n.t("confirm_ask") }%>
-      </span>
-    </p>
-    <% end %>
-  </div>
-
-  <div class="menu">
-    <%= I18n.t("manage.admin.mass_assign") %>:
-    <%= select_tag("role", options_for_select(User::FIELDS)) %>
-    <%= submit_tag(I18n.t("manage.admin.apply")) %>
-  </div>
+<%= form_tag manage_admin_users_path, method: :get do %>
+  <%= text_field_tag :q %>
+  <%= submit_tag 'Поиск' %>
 <% end %>
 
+<ul>
+  <% @users.each do |user| %>
+    <li><%= link_to user, edit_manage_admin_user_path(user) %></li>
+  <% end %>
+</ul>

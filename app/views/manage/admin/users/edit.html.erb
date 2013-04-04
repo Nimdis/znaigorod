@@ -1,32 +1,12 @@
-<%= form_for(@user, :url => manage_admin_user_path(@user)) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this note from being saved:</h2>
+<h1><%= @user %></h1>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+<%= simple_nested_form_for [:manage, :admin, @user] do |f| %>
+  <%= f.simple_fields_for :roles do |role_form| %>
+    <%= role_form.input :role %>
+    <%= role_form.link_to_remove 'Удалить' %>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name, I18n.t("name") %><br />
-    <%= f.text_field :name %>
-  </div>
+  <%= f.link_to_add 'Добавить роль', :roles, :data => { :target => '#roles' } %>
 
-  <div class="field">
-    <%= f.label :uid, I18n.t("uid") %><br />
-    <%= f.text_field :uid %>
-  </div>
-
-  <div class="field">
-    <%= f.label :roles, I18n.t("manage.admin.roles") %><br />
-    <%= f.select :roles, User::FIELDS, { :prompt => "Please select"}, { :multiple => true, :size => 5 } %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit I18n.t("save") %>
-  </div>
+  <%= f.submit 'Применить' %>
 <% end %>

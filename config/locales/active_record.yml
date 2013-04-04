@@ -64,6 +64,9 @@ ru:
         title: Описание
         user_id: Менеджер
 
+      role:
+        role: Роль
+
       address:
         house: Дом
         latitude: Широта

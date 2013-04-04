@@ -1,11 +1,19 @@
 ru:
   enumerize:
+    role:
+      admin:              Администратор
+      affiches_editor:    Редактор афиши
+      organizations_editor: Редактор организаций
+      posts_editor:         Редактор статей
+      sales_manager:        Менеджер продаж
+
     status:
       fresh:               Новый
       talks:               Ведутся переговоры
       waiting_for_payment: Ожидание оплаты
       client:              Клиент
       non_cooperation:     Отказ в сотрудничестве
+
     state:
       planned:             Запланированное
       completed:           Завершено

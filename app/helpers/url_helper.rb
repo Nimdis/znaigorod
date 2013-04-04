@@ -10,7 +10,7 @@ module UrlHelper
     if options.kind_of?(Hash) && options.has_key?(:subdomain)
       options[:host] = with_subdomain(options.delete(:subdomain))
     end
-    # super(:host => request.host, :port => request.port) # fix error when visit by direct ip
+    #super(:host => request.host, :port => request.port) # fix error when visit by direct ip
     super
   end
 end
