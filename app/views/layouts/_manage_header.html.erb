@@ -3,7 +3,7 @@
   <% unless @current_user.blank? %>
     <div class='user_box'>
       <%= @current_user.name %>
-      <%= link_to 'Выход', manage_session_path(current_user), method: :delete, class: :sign_out %>
+      <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, class: 'sign_out' %>
     </div>
     <div class="search">
       <% if [Organization, Meal, Entertainment, Culture, Sauna, Sport, Creation].include?(resource_class)  %>

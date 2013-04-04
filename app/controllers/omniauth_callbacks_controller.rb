@@ -12,6 +12,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_sign_in_path_for(resource_or_scope)
     request.env['omniauth.origin'] if request.env['omniauth.origin']
+
+    return '/crm' if current_user.is_sales_manager?
+    return '/manage' if current_user.is_admin?
   end
 
   private
