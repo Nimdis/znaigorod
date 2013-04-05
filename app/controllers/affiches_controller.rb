@@ -9,7 +9,6 @@ class AffichesController < ApplicationController
     @presenter = ShowingsPresenter.new(params.merge(settings))
 
     if request.xhr?
-      @showings_presenter = @presenter # for main_page
       if params[:page]
         render partial: @presenter.partial, layout: false and return
       end
