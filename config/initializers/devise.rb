@@ -216,6 +216,7 @@ Devise.setup do |config|
   config.omniauth :vkontakte, Settings['vk.app_id'], Settings['vk.app_secret'], :scope => ''
   config.omniauth :google_oauth2, Settings['google.app_id'], Settings['google.app_secret'], :scope => 'https://www.googleapis.com/auth/userinfo.profile'
   config.omniauth :yandex, Settings['yandex.app_id'], Settings['yandex.app_secret']
+  config.omniauth :facebook, Settings['facebook.app_id'], Settings['facebook.app_secret']
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

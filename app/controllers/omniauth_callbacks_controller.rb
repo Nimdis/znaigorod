@@ -10,11 +10,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def yandex
   end
 
-  def after_sign_in_path_for(resource_or_scope)
-    request.env['omniauth.origin'] if request.env['omniauth.origin']
+  def facebook
+  end
 
-    return '/crm' if current_user.is_sales_manager?
-    return '/manage' if current_user.is_admin?
+  def after_sign_in_path_for(resource_or_scope)
+    return crm_root_path    if current_user.is_sales_manager?
+    return manage_root_path if current_user.is_admin?
+
+    request.env['omniauth.origin'] if request.env['omniauth.origin']
   end
 
   private

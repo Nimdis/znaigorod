@@ -42,6 +42,7 @@ group :default do
   gem 'omniauth-google-oauth2'
   gem 'omniauth-vkontakte'
   gem 'omniauth-yandex'
+  gem 'omniauth-facebook'
   gem 'openteam-commons'
   gem 'paperclip-elvfs'
   gem 'pg',                         :require => false
