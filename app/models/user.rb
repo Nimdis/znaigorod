@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessible :uid, :provider, :auth_raw_info, :roles_attributes
 
-  devise :trackable, :omniauthable, omniauth_providers: [:vkontakte, :google_oauth2, :yandex, :facebook]
+  devise :trackable, :omniauthable,
+    omniauth_providers: [:vkontakte, :google_oauth2, :yandex, :facebook, :twitter]
 
   has_many :activities,     dependent:  :destroy
   has_many :comments
@@ -33,7 +34,7 @@ class User < ActiveRecord::Base
 
   def avatar
     case provider
-    when 'vkontakte', 'google_oauth2', 'facebook'
+    when 'vkontakte', 'google_oauth2', 'facebook', 'twitter'
       auth_raw_info[:info][:image]
     else
       'http://placekitten.com/g/50/50'
@@ -46,6 +47,8 @@ class User < ActiveRecord::Base
       auth_raw_info[:info][:urls][:Vkontakte]
     when 'facebook'
       auth_raw_info[:info][:urls][:Facebook]
+    when 'twitter'
+      auth_raw_info[:info][:urls][:Twitter]
     when 'google_oauth2'
       auth_raw_info[:extra][:raw_info][:link]
     else

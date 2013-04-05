@@ -39,10 +39,11 @@ group :default do
   gem 'jquery-rails',               '2.0.3'
   gem 'kaminari'
   gem 'nested_form'
+  gem 'omniauth-facebook'
   gem 'omniauth-google-oauth2'
+  gem 'omniauth-twitter'
   gem 'omniauth-vkontakte'
   gem 'omniauth-yandex'
-  gem 'omniauth-facebook'
   gem 'openteam-commons'
   gem 'paperclip-elvfs'
   gem 'pg',                         :require => false

@@ -13,6 +13,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
   end
 
+  def twitter
+  end
+
   def after_sign_in_path_for(resource_or_scope)
     return crm_root_path    if current_user.is_sales_manager?
     return manage_root_path if current_user.is_admin?
