@@ -15,6 +15,7 @@ class Organization < ActiveRecord::Base
   belongs_to :organization
   has_many :activities, :dependent => :destroy
   has_many :contacts,   :dependent => :destroy
+  has_many :comments, :as => :commentable, :dependent => :destroy
 
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation], default: :fresh

@@ -92,10 +92,7 @@
     <%= render :partial => "commons/share_this" %>
   </div>
 
-  <% if Rails.env.production? %>
-    <div id="vk_organization_comments"></div>
-    <%= render :partial => "commons/fb_organization_comments" %>
-  <% end %>
+  <%= render :partial => 'comments/block', :locals => { :parent_obj => @organization } %>
 
 <% end %>
 <%= render :file => "organizations/wrapper" %>

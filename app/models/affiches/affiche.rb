@@ -20,6 +20,7 @@ class Affiche < ActiveRecord::Base
 
   has_many :organizations, :through => :showings, :uniq => true
   has_many :addresses, :through => :organizations, :uniq => true, :source => :address
+  has_many :comments, :as => :commentable, :dependent => :destroy
 
   has_one :affiche_schedule, :dependent => :destroy
 

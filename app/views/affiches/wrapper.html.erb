@@ -113,10 +113,8 @@
           <% end %>
         <% end %>
       <% end %>
-      <% if Rails.env.production? %>
-        <div id="vk_comments"></div>
-        <%= render :partial => "commons/fb_comments" %>
-      <% end %>
+
+      <%= render :partial => 'comments/block', :locals => { :parent_obj => @affiche } %>
     </div>
 
     <div class="right_side">
