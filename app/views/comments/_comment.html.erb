@@ -4,7 +4,11 @@
       <%= image_tag comment.user_avatar %>
     </div>
     <div class="user_info">
-      <%= link_to comment.user_name, comment.user_profile, :target => '_blank', :class => 'profile_link' %>,
+      <% if  comment.user_profile %>
+        <%= link_to comment.user_name, comment.user_profile, :target => '_blank', :class => 'profile_link' %>,
+      <% else %>
+        <span class='profile_link'><%= comment.user_name %></span>,
+      <% end %>
       <span class="date">
         <%= l comment.created_at, :format => :long %>
       </span>

@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
     case provider
     when 'vkontakte'
       return auth_raw_info[:info][:image]
+    when 'google_oauth2'
+      return auth_raw_info[:info][:image]
     else
       return 'http://placekitten.com/g/50/50'
     end
@@ -45,7 +47,7 @@ class User < ActiveRecord::Base
     when 'vkontakte'
       return auth_raw_info[:info][:urls][:Vkontakte]
     else
-      return 'http://google.ru'
+      return nil
     end
   end
 
