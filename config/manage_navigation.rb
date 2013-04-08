@@ -3,6 +3,8 @@
 SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
 
+    primary.item :comments, 'Комментарии', manage_comments_path, :if => -> { can?(:manage, Comment) }
+
     primary.item :users, 'Пользователи', manage_admin_users_path,
       :highlights_on => ->(){ controller_name == 'users' || resource_class.try(:superclass) == User },
       :if => -> { can?(:manage, User) }

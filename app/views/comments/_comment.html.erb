@@ -13,7 +13,7 @@
         <%= l comment.created_at, :format => :long %>
       </span>
       <% if can?(:create, comment.children.new) %>
-        <%= link_to "ответить", new_post_comment_path(@post, :comment => {:parent_id => comment.id}), :remote => true, :class => 'new_answer' %>
+        <%= link_to "ответить", polymorphic_path([:new, comment.commentable, :comment], :comment => {:parent_id => comment.id}), :remote => true, :class => 'new_answer' %>
       <% end %>
     </div>
     <div class="body">

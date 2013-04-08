@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404080718) do
+ActiveRecord::Schema.define(:version => 20130405044819) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20130404080718) do
     t.datetime "updated_at",      :null => false
     t.string   "latitude"
     t.string   "longitude"
+    t.string   "office"
   end
 
   add_index "addresses", ["organization_id"], :name => "index_addresses_on_organization_id"
@@ -83,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20130404080718) do
     t.float    "popularity"
     t.float    "age_min"
     t.float    "age_max"
+    t.float    "total_rating"
   end
 
   add_index "affiches", ["slug"], :name => "index_affiches_on_slug", :unique => true
@@ -108,6 +110,19 @@ ActiveRecord::Schema.define(:version => 20130404080718) do
   end
 
   add_index "car_sales_centers", ["organization_id"], :name => "index_car_sales_centers_on_organization_id"
+
+  create_table "car_service_centers", :force => true do |t|
+    t.text     "category"
+    t.text     "description"
+    t.text     "feature"
+    t.string   "title"
+    t.text     "offer"
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "car_service_centers", ["organization_id"], :name => "index_car_service_centers_on_organization_id"
 
   create_table "car_washes", :force => true do |t|
     t.text     "category"
@@ -235,6 +250,19 @@ ActiveRecord::Schema.define(:version => 20130404080718) do
 
   add_index "halls", ["organization_id"], :name => "index_halls_on_organization_id"
 
+  create_table "hotels", :force => true do |t|
+    t.text     "category"
+    t.text     "description"
+    t.text     "feature"
+    t.string   "title"
+    t.text     "offer"
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "hotels", ["organization_id"], :name => "index_hotels_on_organization_id"
+
   create_table "images", :force => true do |t|
     t.text     "url"
     t.integer  "imageable_id"
@@ -298,6 +326,7 @@ ActiveRecord::Schema.define(:version => 20130404080718) do
     t.string   "subdomain"
     t.integer  "user_id"
     t.string   "status"
+    t.float    "total_rating"
   end
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true
@@ -360,6 +389,19 @@ ActiveRecord::Schema.define(:version => 20130404080718) do
   end
 
   add_index "roles", ["user_id"], :name => "index_roles_on_user_id"
+
+  create_table "salon_centers", :force => true do |t|
+    t.text     "category"
+    t.text     "description"
+    t.text     "feature"
+    t.string   "title"
+    t.text     "offer"
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "salon_centers", ["organization_id"], :name => "index_salon_centers_on_organization_id"
 
   create_table "sauna_accessories", :force => true do |t|
     t.integer  "sauna_id"
@@ -597,6 +639,18 @@ ActiveRecord::Schema.define(:version => 20130404080718) do
     t.string   "title"
     t.text     "description"
   end
+
+  create_table "user_ratings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.integer  "value"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "user_ratings", ["rateable_id", "rateable_type"], :name => "index_user_ratings_on_rateable_id_and_rateable_type"
+  add_index "user_ratings", ["user_id"], :name => "index_user_ratings_on_user_id"
 
   create_table "users", :force => true do |t|
     t.integer  "roles_mask"

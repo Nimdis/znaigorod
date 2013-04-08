@@ -1,0 +1,18 @@
+<%= render :partial => 'kind_links' %>
+
+<ul class='collection comments'>
+  <% if collection.any? %>
+    <% collection.each do |item| %>
+      <li>
+        <span class='author'><%= item.user_name %>, <%= l item.created_at, :format => :long %></span>
+        <%= link_to "удалить", manage_comment_path(item), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete' %>
+        <span class='commentable'>Комментарий для страницы <%= link_to item.commentable.title, item.commentable %></span>
+        <span class='message'><%= item.body %></span>
+      </li>
+    <% end %>
+  <% else %>
+    <li class='empty'>Нет ни одного коммента</li>
+  <% end %>
+</ul>
+
+<%= paginate collection %>

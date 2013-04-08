@@ -35,6 +35,7 @@
       </div>
       <%= content_tag :div, @work.description.as_html.hyphenate, :class => :description if @work.description.present? %>
     </div>
+
     <% if Rails.env.production? && @work.contest.ends_on >= Date.today %>
       <div id='vk_contest_work_comments'></div>
     <% end %>

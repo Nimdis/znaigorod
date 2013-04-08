@@ -38,6 +38,8 @@ Znaigorod::Application.routes.draw do
   namespace :manage do
     post 'red_cloth' => 'red_cloth#show'
 
+    resources :comments, :only => [:index, :destroy]
+
     resources :search, :only => :index
 
     resources :sessions, :only => [:new, :create, :destroy]
@@ -125,13 +127,15 @@ Znaigorod::Application.routes.draw do
     period: /all|month|week/,
     :as => :photogalleries
 
-  get 'sportsevent/:id' => 'affiches#show', :as => :sports_event
-  get 'masterclass/:id' => 'affiches#show', :as => :master_class
+  Affiche.descendants.map{|d| d.name.underscore}.each do |type|
+    get  "#{type}/:#{type}_id/comments/new" => 'comments#new',    :as => "new_#{type}_comment"
+    get  "#{type}/:#{type}_id/comments/:id" => 'comments#show',   :as => "#{type}_comment"
+    post "#{type}/:#{type}_id/comments"     => 'comments#create', :as => "#{type}_comments"
 
-  Affiche.descendants.each do |type|
-    get "#{type.name.downcase}/:id" => 'affiches#show', :as => "#{type.name.downcase}"
-    get "#{type.name.downcase}/:id/photogallery" => 'affiches#photogallery', :as => "#{type.name.downcase}_photogallery"
-    get "#{type.name.downcase}/:id/trailer" => 'affiches#trailer', :as => "#{type.name.downcase}_trailer"
+    get "#{type}/:id"                           => 'affiches#show',         :as => "#{type}"
+    get "#{type.gsub('_','')}/:id"              => 'affiches#show',         :as => "#{type.gsub('_','')}"
+    get "#{type.gsub('_','')}/:id/photogallery" => 'affiches#photogallery', :as => "#{type.gsub('_','')}_photogallery"
+    get "#{type.gsub('_','')}/:id/trailer"      => 'affiches#trailer',      :as => "#{type.gsub('_','')}_trailer"
   end
 
   get 'organizations/:id/affiche/all' => redirect { |params, req|
@@ -155,7 +159,9 @@ Znaigorod::Application.routes.draw do
     #get "organizations/#{organization.slug}" => redirect("http://#{organization.subdomain}.znaigorod.ru")
   #end
   # <= legacy view uniq subdomain organization url
-  resources :organizations, :only => [:index, :show]
+  resources :organizations, :only => [:index, :show] do
+    resources :comments, :only => [:new, :create, :show]
+  end
 
   Organization.basic_suborganization_kinds.each do |kind|
     get "/#{kind.pluralize}" => 'suborganizations#index', :as => kind.pluralize, :constraints => { :kind => kind }, :defaults => { :kind => kind }

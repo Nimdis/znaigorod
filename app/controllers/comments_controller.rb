@@ -6,7 +6,13 @@ class CommentsController < ApplicationController
 
   actions :show, :new, :create
 
-  belongs_to :post, :polymorphic => true
+  Affiche.descendants.each do |type|
+    belongs_to type.name.underscore, :polymorphic => true, :optional => :true
+  end
+
+  belongs_to :affiche, :polymorphic => true, :optional => true
+  belongs_to :organization, :polymorphic => true, :optional => true
+  belongs_to :post, :polymorphic => true, :optional => true
 
   layout false
 
