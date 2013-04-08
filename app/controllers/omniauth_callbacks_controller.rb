@@ -17,9 +17,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    return crm_root_path    if current_user.is_sales_manager?
-    return manage_root_path if current_user.is_admin?
-
     request.env['omniauth.origin'] if request.env['omniauth.origin']
   end
 
@@ -28,6 +25,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def authenticate
     @user = User.find_or_create_by_oauth(request.env['omniauth.auth'])
 
-    sign_in_and_redirect @user, :event => :authentication
+    sign_in @user, :event => :authentication
+
+    @after_sign_in_url = after_sign_in_path_for(@user)
+
+    render 'callback', :layout => false
   end
 end

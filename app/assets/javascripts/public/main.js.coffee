@@ -44,6 +44,7 @@ $ ->
   init_webcam_axis() if $('.webcams_list .webcam_axis').length
   init_webcam_swfobject() if $('.webcams_list .webcam_swfobject').length
   init_comments() if $('.comments').length
+  init_auth() if ('.auth_links').length
   true
 
 $(window).load ->

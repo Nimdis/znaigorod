@@ -21,7 +21,7 @@
   <% else %>
     <h4>Оставлять комментарии могут только зарегистрированные пользователи. Пожалуйста, войдите с помощью одной из социальных сетей:</h4>
     <% unless user_signed_in? %>
-      <ul class='social_signin_links'>
+      <ul class='social_signin_links auth_links'>
         <li class='vkontakte'>
           <%= link_to 'ВКонтакте', user_omniauth_authorize_path(:vkontakte), :title => 'ВКонтакте' %>
         </li>
