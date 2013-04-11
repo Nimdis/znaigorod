@@ -15,6 +15,7 @@ class Service < ActiveRecord::Base
   accepts_nested_attributes_for :prices, allow_destroy: true
 
   delegate :index, to: :context, prefix: true
+
   after_save :context_index
 
   validates_presence_of :kind

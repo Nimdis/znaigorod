@@ -358,7 +358,7 @@ ru:
 
       price:
         description: Описание
-        kind:    Тип
-        count:   Количество
-        period:  Срок
-        value:   Цена
+        kind:        Тип
+        count:       Количество
+        period:      Срок
+        value:       Цена
