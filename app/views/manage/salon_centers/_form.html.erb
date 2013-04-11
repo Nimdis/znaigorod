@@ -4,4 +4,10 @@
 <%= f.input :feature_list, :as => :check_boxes, :collection => f.object.available_features, :checked => f.object.features %>
 <%= f.input :offer_list, :as => :check_boxes, :collection => f.object.available_offers, :checked => f.object.offers %>
 
+<fieldset id="sport_services">
+  <legend>Услуги</legend>
+  <%= f.simple_fields_for :services %>
+  <p class="add"><%= f.link_to_add 'Добавить услугу', :services %></p>
+</div>
+
 <%= render :partial => 'virtual_tour_form_fields', :locals => { :f => f } %>
