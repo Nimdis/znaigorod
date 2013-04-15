@@ -33,6 +33,11 @@ ru:
         visiting:              посещение
         washing:               автомобильная мойка
 
+    service:
+      kind:
+        class:                 Занятие
+        visit:                 Посещение
+
     price:
       kind:
         certificate:           Подарочный сертификат
