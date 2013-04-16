@@ -2,16 +2,12 @@ class SalonCenter < ActiveRecord::Base
   include HasVirtualTour
   include HasServices
 
-  attr_accessible :category, :description, :feature, :offer, :title, :services_attributes
+  attr_accessible :category, :description, :feature, :offer, :title
 
   belongs_to :organization
 
   delegate :address, :phone, :latitude, :longitude, :to => :organization
   delegate :title, :to => :organization, :prefix => true
-
-  has_many :services, :as => :context, :dependent => :destroy, :order => 'id'
-  validates_associated :services
-  accepts_nested_attributes_for :services, :reject_if => :all_blank, :allow_destroy =>  true
 
   # OPTIMIZE: <--- similar code
   attr_accessor :vfs_path
