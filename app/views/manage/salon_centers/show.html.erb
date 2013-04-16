@@ -38,10 +38,10 @@
               <div class='info'>
                 <span class="label"><%= service.title %></span>
                 <span class="value">
-                  от <%= service.prices.minimum("value") %> руб. <%= link_to 'Подробнее', '#', class: :closed %>
-                <%= link_to t('edit'), [:edit, :manage, resource.organization, resource.class.name.underscore, service] %>
-                <%= link_to t('delete'), [:manage, resource.organization, resource.class.name.underscore, service], :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_link' %>
+                  от <%= service.min_price %> руб. <%= link_to 'Подробнее', '#', class: :closed %>
               </span>
+              <%= link_to t('edit'), [:edit, :manage, resource.organization, resource.class.name.underscore, service] %>
+              <%= link_to t('delete'), [:manage, resource.organization, resource.class.name.underscore, service], :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_link' %>
 
               <div class="details">
                 <span class="value"><%= service.description %></span>

@@ -35,8 +35,8 @@ ru:
 
     service:
       kind:
-        class:                 Занятие
-        visit:                 Посещение
+        lesson:                занятие
+        visiting:              посещение
 
     price:
       kind:

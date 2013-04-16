@@ -83,4 +83,3 @@ ru:
       few:   "%{count} мойки"
       many:  "%{count} моек"
       other: "%{count} моек"
-
