@@ -27,6 +27,10 @@ SimpleNavigation::Configuration.run do |navigation|
         end
     end
 
+    primary.item :coupons, 'Купоны', manage_coupons_path,
+      :highlights_on => ->(){ resource_class == Coupon },
+      :if => -> { can?(:manage, Coupon) }
+
     primary.item :posts, 'Конкурсы', manage_contests_path,
       :highlights_on => ->(){ resource_class == Contest },
       :if => -> { can?(:manage, Contest) }

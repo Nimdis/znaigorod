@@ -113,6 +113,12 @@ ru:
         <<: *common_attributes
         author_info: Информация об авторе
 
+      coupon:
+        title: Название
+        description: Описание
+        organization_id: Организация
+        discount: Скидка
+
       affiche:
         <<: *common_attributes
         age_max: Максимальный возраст

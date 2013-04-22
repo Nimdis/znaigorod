@@ -1,0 +1,14 @@
+<%= render :partial => 'kind_links' %>
+
+<div class="new_link">
+  <%= link_to t('new_coupon'), new_manage_coupon_path, :class => 'new_resource' %>
+</div>
+
+<ul class='collection'>
+  <% collection.each do |item| %>
+    <li>
+      <%= link_to item.title, [:manage, item] %>
+    </li>
+  <% end %>
+</ul>
+

@@ -18,6 +18,8 @@ Znaigorod::Application.routes.draw do
       resources :works, :except => [:index, :show]
     end
 
+    resources :coupons
+
     resources :affiches do
       resources :attachments, :only => [:new, :create, :destroy, :edit, :update]
       resources :images, :only => [:new, :create, :destroy, :edit, :update]
@@ -43,6 +45,7 @@ Znaigorod::Application.routes.draw do
       resource :billiard, :only => [] do
         resources :pool_tables, :except => [:index, :show]
       end
+
 
       resource :sauna, :except => [] do
         resources :sauna_halls, :except => :index
