@@ -7,6 +7,18 @@
     <%= f.input :organization_id, :collection => Organization.grouped_collection_for_select, :selected => f.object.organization_id  %>
     <%= f.input :description, :as => :ckeditor, :label => false %>
     <%= f.input :discount, :as => :string %>
+
+    <div>
+    <%= f.simple_fields_for :offers do |offer| %>
+      <%= offer.input :description %>
+      <%= offer.input :price %>
+      <%= offer.input :number %>
+      <%= offer.link_to_remove t('remove_offer'), :class => 'remove_offer' %>
+    <% end %>
+    <%#= f.link_to_add t('add_offer'), :offers, :class => 'add_offer' %>
+    </div>
+
+
     <div class="actions">
       <%= link_to "&larr; Назад".html_safe, :back %>
       <%= button_tag 'Сохранить'.html_safe %>
