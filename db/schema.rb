@@ -180,6 +180,14 @@ ActiveRecord::Schema.define(:version => 20130516045042) do
 
   add_index "contests", ["slug"], :name => "index_contests_on_slug", :unique => true
 
+  create_table "coupons", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "discount"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "creations", :force => true do |t|
     t.integer  "organization_id"
     t.string   "title"
@@ -321,6 +329,17 @@ ActiveRecord::Schema.define(:version => 20130516045042) do
   end
 
   add_index "menus", ["meal_id"], :name => "index_menus_on_meal_id"
+
+  create_table "offers", :force => true do |t|
+    t.integer  "coupon_id"
+    t.integer  "price"
+    t.integer  "number"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "offers", ["coupon_id"], :name => "index_offers_on_coupon_id"
 
   create_table "organization_stands", :force => true do |t|
     t.integer  "organization_id"
