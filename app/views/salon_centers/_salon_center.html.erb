@@ -26,9 +26,10 @@
   <div class="services">
     <% salon_center.services.group_by(&:category).each do |category, services| %>
       <div class="service_header">
-        <h2><%= Values.instance.salon_center.singularized_categories[category] || category %></h2>
+        <h2><%= category %></h2>
         <%= render :partial => 'organizations/services', :locals => { :services => services } %>
       </div>
     <% end %>
   </div>
+
 </div>
