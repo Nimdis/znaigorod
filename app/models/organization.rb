@@ -38,7 +38,7 @@ class Organization < ActiveRecord::Base
   has_many :halls,          :dependent => :destroy
   has_many :images,         :as => :imageable,  :dependent => :destroy
   has_many :attachments,    :as => :attachable, :dependent => :destroy
-  has_many :organizations,  :dependent => :destroy
+  has_many :organizations
   has_many :schedules,      :dependent => :destroy
   has_many :sauna_halls,    :through => :sauna
   has_many :showings,       :dependent => :destroy
