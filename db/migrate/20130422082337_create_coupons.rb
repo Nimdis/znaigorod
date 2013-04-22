@@ -4,8 +4,10 @@ class CreateCoupons < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.integer :discount
+      t.references :organization
 
       t.timestamps
     end
+    add_index :coupons, :organization_id
   end
 end

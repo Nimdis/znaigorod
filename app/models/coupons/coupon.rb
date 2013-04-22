@@ -1,5 +1,5 @@
 class Coupon < ActiveRecord::Base
-  attr_accessible :description, :discount, :title
+  attr_accessible :description, :discount, :title, :organization_id
 
   has_many :offers, dependent: :destroy
 end

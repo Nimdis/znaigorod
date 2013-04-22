@@ -184,9 +184,12 @@ ActiveRecord::Schema.define(:version => 20130516045042) do
     t.string   "title"
     t.text     "description"
     t.integer  "discount"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
+
+  add_index "coupons", ["organization_id"], :name => "index_coupons_on_organization_id"
 
   create_table "creations", :force => true do |t|
     t.integer  "organization_id"

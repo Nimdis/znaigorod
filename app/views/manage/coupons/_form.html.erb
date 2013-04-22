@@ -1,0 +1,16 @@
+<%= javascript_include_tag 'esp-ckeditor/application' %>
+<%= javascript_include_tag 'manage/info_plugin/info_plugin' %>
+
+<div class='form_view'>
+  <%= simple_form_for @coupon, :url => [:manage, @coupon], :html => { :novalidate => true }  do |f| %>
+    <%= f.input :title %>
+    <%= f.input :organization_id, :collection => Organization.grouped_collection_for_select, :selected => f.object.organization_id  %>
+    <%= f.input :description, :as => :ckeditor, :label => false %>
+    <%= f.input :discount, :as => :string %>
+    <div class="actions">
+      <%= link_to "&larr; Назад".html_safe, :back %>
+      <%= button_tag 'Сохранить'.html_safe %>
+      <%= link_to 'Удалить'.html_safe, resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
+    </div>
+  <% end %>
+</div>
