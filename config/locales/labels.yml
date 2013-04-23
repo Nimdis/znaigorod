@@ -6,6 +6,7 @@ ru:
   add_menu: Добавить меню
   add_menu_position: Добавить позицию
   add_organization: "&plus;&nbsp;заведение"
+  add_offer: Добавить
   add_showing: Добавить сеанс
   add_service: Добавить услугу
   add_social_links: Добавить ссылку
@@ -57,6 +58,7 @@ ru:
   remove_link: Удалить файл
   remove_menu_position: Удалить позицию
   remove_showing: Удалить сеанс
+  remove_offer: Удалить
   remove_price: Удалить
   remove_this_attachment: Удалить этот файл
   remove_this_hall: Удалить этот зал

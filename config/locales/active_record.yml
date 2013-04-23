@@ -119,6 +119,11 @@ ru:
         organization_id: Организация
         discount: Скидка
 
+      offer:
+        description: Описание
+        price: Цена
+        number: Количество
+
       affiche:
         <<: *common_attributes
         age_max: Максимальный возраст
