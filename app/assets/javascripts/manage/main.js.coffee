@@ -7,4 +7,5 @@ $ ->
   init_vk_token() if $('.form_view.vk_token').length
   init_saunas() if $('#sauna_tabs').length
   init_has_virtual_tour() if $('.virtual_tour_fields')
+  init_address() if $('.address_fields')
   init_services() if $('.services')

@@ -1,5 +1,8 @@
-<div class="address_fields">
-  <%= f.simple_fields_for :address %>
+<div class="addres_form">
+  <div class="address_fields">
+    <%= f.simple_fields_for :address %>
+    <%= f.link_to_add 'Добавить адрес', :address, :class => 'add_address' %>
+  </div>
 </div>
 
 <%= f.input :title %>

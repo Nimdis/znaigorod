@@ -43,7 +43,7 @@ $.fn.handler = (form, map_container, context) ->
     map_container.draw_map(organization, context)
     false
 
-$ ->
+@init_organization_map = () ->
   form = $('.edit_organization, .new_organization')
   if form.length
     organization = form.get_object()
@@ -51,3 +51,6 @@ $ ->
     context = form.attr('id').replace(/(new|edit)_/, '').replace(/_\d+/, '')
     map_container.draw_map(organization, context)
     $('.get_coordinates').handler(form, map_container, context)
+
+$ ->
+  init_organization_map()
