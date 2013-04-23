@@ -135,24 +135,6 @@ HasSearcher.create_searcher :photoreport do
   end
 end
 
-HasSearcher.create_searcher :actual_organization do
-  models :meal, :entertainment, :culture
-
-  property :meal_offer
-  property :meal_category
-
-  property :entertainment_category
-  property :entertainment_offer
-
-  property :culture_category
-  property :culture_offer
-
-  scope do
-    #adjust_solr_params { |params| params[:q] = "{!boost b=organization_rating_f}*:*" }
-    order_by(:organization_rating, :desc)
-  end
-end
-
 HasSearcher.create_searcher :organizations do
   models :organization
   keywords :q

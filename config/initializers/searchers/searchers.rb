@@ -43,7 +43,7 @@ HasSearcher.create_searcher :photoreport do
 end
 
 HasSearcher.create_searcher :actual_organization do
-  models :meal, :entertainment, :culture
+  models :meal, :entertainment, :culture, :sauna
 
   property :meal_offer
   property :meal_category
@@ -53,6 +53,9 @@ HasSearcher.create_searcher :actual_organization do
 
   property :culture_category
   property :culture_offer
+
+  property :sauna_category
+  property :sauna_offer
 
   scope do
     #adjust_solr_params { |params| params[:q] = "{!boost b=organization_rating_f}*:*" }

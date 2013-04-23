@@ -23,7 +23,7 @@ app:
     monday: &day
       '00-07':
         sauna:
-          category: entertainment
+          category: sauna
           options:
             category: сауны
         night_club:
@@ -79,7 +79,7 @@ app:
           options:
             category: доставка еды
         sauna:
-          category: entertainment
+          category: sauna
           options:
             category: сауны
         night_club:
