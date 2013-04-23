@@ -63,9 +63,7 @@ Znaigorod::Application.routes.draw do
   get 'feedback' => 'feedback#new', :as => :new_feedback
   post 'feedback' => 'feedback#create', :as => :create_feedback
 
-  constraints(Subdomain) do
-    match '/' => 'organizations#show'
-  end
+  match '/' => redirect{|p, req| "#{req.url.sub(req.subdomain+'.', '')}organizations/#{Organization.find_by_subdomain(req.subdomain).slug}"}, :constraints => lambda{|r| r.subdomain.present? && Organization.pluck(:subdomain).uniq.delete_if{|s| s.nil? || s.blank?}.include?(r.subdomain) }
 
   match "/auth/:provider/callback" => "manage/sessions#create"
 
