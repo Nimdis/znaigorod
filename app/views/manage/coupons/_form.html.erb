@@ -4,6 +4,7 @@
 <div class='form_view'>
   <%= simple_nested_form_for @coupon, :url => [:manage, @coupon], :html => { :novalidate => true }  do |f| %>
     <%= f.input :title %>
+    <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path' } %>
     <%= f.input :organization_id, :collection => Organization.grouped_collection_for_select, :selected => f.object.organization_id  %>
     <%= f.input :discount, :as => :string %>
     <%= f.input :description, :as => :ckeditor, :label => false %>

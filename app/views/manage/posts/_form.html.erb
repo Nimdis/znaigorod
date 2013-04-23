@@ -2,7 +2,7 @@
 <%= javascript_include_tag 'manage/info_plugin/info_plugin' %>
 
 <%= simple_form_for [:manage, @post] do |f| %>
-  <%= f.input :vfs_path, :as => :hidden %>
+  <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path' } %>
   <%= f.input :title %>
   <%= f.input :annotation, :as => :ckeditor, :label => false %>
   <%= f.input :content, :as => :ckeditor, :label => false %>
