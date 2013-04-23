@@ -6,7 +6,7 @@
 
   <div>
     <span class="label">Организация:</span>
-    <span class="value"><%= resource.organization_id %></span>
+    <span class="value"><%= resource.organization %></span>
   </div>
 
 
@@ -28,4 +28,16 @@
     <% end %>
   </div>
 
+  <div>
+    <span class="label">Купоны:</span>
+    <ul>
+      <% resource.offers.each do |offer| %>
+        <li>
+          <%= offer.description %>:
+          <%= offer.number %> шт,
+          <%= offer.price %> руб.
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
