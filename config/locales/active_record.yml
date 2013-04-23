@@ -177,6 +177,7 @@ ru:
         non_cash: Безналичный расчет
         organization: Родительская организация
         organization_id: Родительская организация
+        primary_organization_id: Родительская организация
         payment: Способы оплаты
         phone: Телефоны
         priority_suborganization_kind: Приоритетная подорганизация
