@@ -4,6 +4,7 @@ class CreateCoupons < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.integer :discount
+      t.string :vfs_path
       t.references :organization
 
       t.timestamps

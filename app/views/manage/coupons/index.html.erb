@@ -1,7 +1,7 @@
 <%= render :partial => 'kind_links' %>
 
 <div class="new_link">
-  <%= link_to t('new_coupon'), new_manage_coupon_path, :class => 'new_resource' %>
+  <%= link_to t('new_coupon'), new_manage_coupon_path('coupon[vfs_path]' => Coupon.generate_vfs_path), :class => 'new_resource' %>
 </div>
 
 <ul class='collection'>

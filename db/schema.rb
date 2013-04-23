@@ -184,6 +184,7 @@ ActiveRecord::Schema.define(:version => 20130516045042) do
     t.string   "title"
     t.text     "description"
     t.integer  "discount"
+    t.string   "vfs_path"
     t.integer  "organization_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false

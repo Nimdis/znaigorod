@@ -3,7 +3,7 @@ Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
-var vfs_path = $('#post_vfs_path').val();
+var vfs_path = $('#vfs_path').val();
 
 if (vfs_path == undefined) {
   alert('Entry ID is undefined!\nCheck esp-ckeditor/config.js');
