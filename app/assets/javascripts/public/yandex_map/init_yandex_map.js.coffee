@@ -204,17 +204,79 @@ render_organizations = (map, without_organization_id) ->
 
 build_placemark = (item) ->
 
-  switch item.suborganization
-    when 'billiard'         then item_preset = 'twirl#darkgreenDotIcon'
-    when 'car_sales_center' then item_preset = 'twirl#darkblueDotIcon'
-    when 'car_wash'         then item_preset = 'twirl#blueDotIcon'
-    when 'creation'         then item_preset = 'twirl#greenDotIcon'
-    when 'culture'          then item_preset = 'twirl#greyDotIcon'
-    when 'entertainment'    then item_preset = 'twirl#blackDotIcon'
-    when 'meal'             then item_preset = 'twirl#darkorangeDotIcon'
-    when 'salon_center'     then item_preset = 'twirl#yellowDotIcon'
-    when 'sauna'            then item_preset = 'twirl#orangeDotIcon'
-    when 'sport'            then item_preset = 'twirl#nightDotIcon'
+  switch item.category
+    when 'aviatsionnye_kluby'
+      icon = 'aviatsionnye_kluby'
+    when 'antikafe', 'detskie_kafe', 'dostavka_edy', 'kafe', 'keytering', 'pitstserii', 'restorany', 'stolovye', 'sushi_bary', 'zavedeniya_bystrogo_pitaniya'
+      icon = 'kafe'
+    when 'attraktsiony', 'nochnye_kluby', 'razvlekatelnye_kompleksy', 'striptiz_bary', 'karaoke'
+      icon = 'attraktsiony'
+    when 'avtomoyki', 'legkovye_avtomobili'
+      icon = 'avto'
+    when 'banketnye_zaly', 'bary'
+      icon = 'bary'
+    when 'basseyny'
+      icon = 'basseyny'
+    when 'biblioteki'
+      icon = 'biblioteki'
+    when 'bilyardnye_zaly'
+      icon = 'bilyard'
+    when 'boevye_iskusstva'
+      icon = 'boevye_iskusstva'
+    when 'bouling'
+      icon = 'bouling'
+    when 'dvortsy_kultury', 'folklor', 'teatry', 'teatralnye_studii', 'literaturnye_studii', 'tsirkovye_studii', 'shkoly_animatorov'
+      icon ='teatry'
+    when 'gruzovye_i_spetstehnika'
+      icon = 'gruzovye'
+    when 'filarmonii', 'muzykalnye_studii'
+      icon = 'filarmonii'
+    when 'fitnes', 'fitnes_kluby', 'ozdorovitelnyy_tsentr', 'spa_salony', 'studii_zagara'
+      icon = 'fitnes'
+    when 'futbol', 'stadiony'
+      icon = 'futbol'
+    when 'ippodromy', 'konnye_kluby'
+      icon = 'ippodromy'
+    when 'gornolyzhnye_kompleksy'
+      icon = 'lyzhy'
+    when 'katki', 'ledovye_dvortsy', 'lyzhnye_bazy', 'zakalivanie'
+      icon = 'snow'
+    when 'massazhnye_salony', 'uslugi_massazhista'
+      icon = 'massazh'
+    when 'mototehnika'
+      icon = 'mototehnika'
+    when 'muzei'
+      icon = 'muzei'
+    when 'hudozhestvennaya_gimnastika', 'shkoly_tantsev', 'tantsevalnye_shkoly', 'tsentry_yogi', 'yoga'
+      icon = 'yoga'
+    when 'inostrannye_yazyki', 'korporativnye_predlozheniya_obrazovaniya', 'personalnye_predlozheniya_obrazovaniya', 'kluby_po_interesam'
+      icon = 'inostrannye_yazyki'
+    when 'parikmaherskie', 'nogtevye_studii', 'tatu_salony', 'velnes_zaly', 'vizazh_studii'
+      icon = 'parikmaherskie'
+    when 'peyntbol', 'sportivno_takticheskie_kluby', 'straykbol'
+      icon = 'peyntbol'
+    when 'igrovye_vidy_sporta', 'professionalnye_sportivnye_kluby', 'sportivnye_sektsii', 'sportivnye_shkoly'
+      icon = 'sport'
+    when 'izo_studii', 'konstruirovanie', 'masterilki', 'razvivayuschie_zanyatiya'
+      icon = 'tvorchestvo'
+    when 'sauny'
+      icon = 'sauny'
+    when 'shahmatnye_shkoly'
+      icon = 'shahmaty'
+    when 'trenazhyornye_zaly'
+      icon = 'trenazhyory'
+    when 'kinostudii', 'kinoteatry', 'fotoshkoly'
+      icon = 'kino'
+    when 'karting'
+      icon = 'karting'
+    when 'kofeyni', 'chaynaya', 'konditerskie'
+      icon = 'kofeyni'
+    when 'planetarii'
+      icon = 'planetarii'
+    when 'vodnyy_transport'
+      icon = 'vodnyy_transport'
+    else
+      icon = 'default'
 
   point = new ymaps.GeoObject
     geometry:
@@ -224,8 +286,8 @@ build_placemark = (item) ->
       id: "id_#{item.id}"
       hintContent: item.title
   ,
+    iconImageHref: "/assets/public/map_icons/#{icon}.png"
     hasBalloon: true
-    preset: item_preset
 
   point.events.add 'click', (event) ->
     return false if point.options.get('freeze')

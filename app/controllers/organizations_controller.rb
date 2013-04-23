@@ -47,7 +47,7 @@ class OrganizationsController < ApplicationController
         id: organization.id,
         latitude: organization.address.latitude,
         longitude: organization.address.longitude,
-        suborganization: organization.priority_suborganization_kind,
+        category: Russian.translit(organization.category.split(',')[0].to_s.squish.gsub(' ', '_').gsub('-', '_')).downcase,
         title: organization.title,
       }
     end
