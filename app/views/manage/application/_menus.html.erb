@@ -1,0 +1,38 @@
+<div class="curtail">
+  <ul>
+    <% resource.menus.group_by(&:category).each do |category, menus| %>
+      <li>
+        <span class="label"><%= category %></span>
+        <div class="info">
+          <% menus.each do |menu| %>
+            <%#=  menu.menu_positions.minimum(:price) %>
+            <ul>
+              <% menu.menu_positions.group_by(&:position).each do |position, menu_positions| %>
+                <li>
+                  <span class="value">
+                    <%= position %>
+                    <%= link_to 'Подробнее', '#', class: :closed %>
+                  </span>
+                  <%= link_to t('edit'), [:edit, :manage, resource.organization, resource.class.name.underscore, menu] %>
+                  <%= link_to t('delete'), [:manage, resource.organization, resource.class.name.underscore, menu], :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_link' %>
+
+                  <div class="details">
+                    <ul>
+                      <% menu_positions.each do |position|  %>
+                        <li>
+                          <%= position.title %> -
+                          <%= position.price %> р.
+                        </li>
+                      <% end  %>
+                    </ul>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to t('add_menu'), [:new, :manage, resource.organization, resource.class.name.underscore, :menu], :class => 'edit_link' %>
+</div>

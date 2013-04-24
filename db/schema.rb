@@ -180,18 +180,6 @@ ActiveRecord::Schema.define(:version => 20130506102137) do
 
   add_index "contests", ["slug"], :name => "index_contests_on_slug", :unique => true
 
-  create_table "coupons", :force => true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "discount"
-    t.string   "vfs_path"
-    t.integer  "organization_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "coupons", ["organization_id"], :name => "index_coupons_on_organization_id"
-
   create_table "creations", :force => true do |t|
     t.integer  "organization_id"
     t.string   "title"
@@ -304,6 +292,29 @@ ActiveRecord::Schema.define(:version => 20130506102137) do
   end
 
   add_index "meals", ["organization_id"], :name => "index_meals_on_organization_id"
+
+  create_table "menu_positions", :force => true do |t|
+    t.integer  "menu_id"
+    t.string   "position"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "price"
+    t.string   "count"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "menu_positions", ["menu_id"], :name => "index_menu_positions_on_menu_id"
+
+  create_table "menus", :force => true do |t|
+    t.integer  "meal_id"
+    t.string   "category"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "menus", ["meal_id"], :name => "index_menus_on_meal_id"
 
   create_table "organization_stands", :force => true do |t|
     t.integer  "organization_id"

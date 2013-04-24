@@ -17,6 +17,6 @@
  * = require ./saunas
  * = require ./has_virtual_tour
  * = require ./address
- * = require ./services
+ * = require ./curtail
  * = require ./main
  */

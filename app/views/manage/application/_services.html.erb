@@ -1,0 +1,37 @@
+<div class="curtail">
+  <% resource.services.group_by(&:category).each do |category, services| %>
+    <ul>
+      <% services.group_by(&:offer).each do |offer, services| %>
+        <% services.each do |service| %>
+          <li>
+            <div class='info'>
+              <span class="label"><%= service.title %></span>
+
+              <span class="value">
+                <% if service.min_value? %>
+                  от <%=  service.min_value %> руб.
+                <% end %>
+                <%= link_to 'Подробнее', '#', class: :closed %>
+              </span>
+
+              <%= link_to t('edit'), [:edit, :manage, resource.organization, resource.class.name.underscore, service] %>
+              <%= link_to t('delete'), [:manage, resource.organization, resource.class.name.underscore, service], :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_link' %>
+
+              <div class="details">
+                <span class="value"><%= service.description %></span>
+                <ul>
+                  <% service.prices.each do |price| %>
+                    <li>
+                      <%= price %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= link_to t('add_service'), [:new, :manage, resource.organization, resource.class.name.underscore, :service], :class => 'edit_link' %>
+</div>
