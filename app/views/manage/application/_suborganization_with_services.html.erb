@@ -17,7 +17,6 @@
       </div>
     <% end %>
   <% end %>
-
   <div class="gallery">
     <% resource.images.each do |image| %>
       <%= image_tag(resized_image_url(image.url, 100, 100, false), :alt => image.description, :title => image.description) %>
@@ -62,4 +61,40 @@
     <% end %>
     <%= link_to t('add_service'), [:new, :manage, resource.organization, resource.class.name.underscore, :service], :class => 'edit_link' %>
   </div>
+
+  <div class="services">
+    <% resource.menus.group_by(&:category).each do |category, menus| %>
+      <ul>
+        <li>
+          <span class="label"><%= category %></span>
+          <div class="info">
+            <% menus.each do |menu| %>
+              <%#= menu.description %>
+              <% menu.menu_positions.group_by(&:position).each do |position, menu_positions| %>
+                <span class="value">
+                  <%= position %>
+                  <%= link_to 'Подробнее', '#', class: :closed %>
+                </span>
+                <%= link_to t('edit'), [:edit, :manage, resource.organization, resource.class.name.underscore, menu] %>
+                <%= link_to t('delete'), [:manage, resource.organization, resource.class.name.underscore, menu], :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_link' %>
+
+                <div class="details">
+                  <ul>
+                    <% menu_positions.each do |position|  %>
+                      <li>
+                        <%= position.title %>
+                        <%= position.price %>
+                      </li>
+                    <% end  %>
+                  </ul>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+    <%= link_to t('add_menu'), [:new, :manage, resource.organization, resource.class.name.underscore, :menu], :class => 'edit_link' %>
+  </div>
+
 </div>

@@ -1,0 +1,23 @@
+<%= simple_nested_form_for [:manage, @organization, parent, resource],
+  :url => manage_organization_meal_menus_path,
+  :html => { :novalidate => true } do |f| %>
+
+  <%= f.input :category%>
+
+  <%= f.input :description, :input_html => { :class => 'service_description' } %>
+
+  <div>
+    <%= f.simple_fields_for :menu_positions do |mpf| %>
+      <%= mpf.input :position %>
+      <%= mpf.input :title %>
+      <%= mpf.input :description %>
+      <%= mpf.input :count %>
+      <%= mpf.input :price %>
+      <%= mpf.link_to_remove t('remove_menu_position'), :class => 'remove_price' %>
+    <% end %>
+    <%= f.link_to_add t('add_menu_position'), :menu_positions, :class => 'add_price' %>
+  </div>
+
+
+  <%= f.submit "Сохранить" %>
+<% end %>

@@ -20,10 +20,13 @@ class Meal < ActiveRecord::Base
   # OPTIMIZE: < --- similar code
   attr_accessor :vfs_path
   attr_accessible :vfs_path
+
   def vfs_path
     "#{organization.vfs_path}/#{self.class.name.underscore}"
   end
+
   has_many :images, :as => :imageable, :dependent => :destroy
+  has_many :menus, :dependent => :destroy
 
   def sunspot_index
     index

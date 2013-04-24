@@ -33,6 +33,10 @@ Znaigorod::Application.routes.draw do
         end
       end
 
+      resource :meal do
+        resources :menus, :except => [:index, :show]
+      end
+
       resource :billiard, :only => [] do
         resources :pool_tables, :except => [:index, :show]
       end
