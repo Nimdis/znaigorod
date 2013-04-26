@@ -208,6 +208,15 @@ ru:
         cuisine: Кухня
         cuisine_list: Кухня
 
+      menu:
+        <<: *common_attributes
+      menu_position:
+        <<: *common_attributes
+        position: Позиция
+        title: Наименование
+        count: Вес\объем
+        price: Цена, руб
+
       entertainment:
         <<: *common_attributes
 

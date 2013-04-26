@@ -5,11 +5,7 @@ class Manage::MenusController < Manage::ApplicationController
     belongs_to :meal, singleton: true
   end
 
-  def destroy
-    destroy! { request.referer }
-  end
-
-  def create
-    create! { parent_url }
+  def smart_collection_url
+    [:manage, @organization, :meal]
   end
 end

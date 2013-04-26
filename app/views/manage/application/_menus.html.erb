@@ -3,9 +3,10 @@
     <% resource.menus.group_by(&:category).each do |category, menus| %>
       <li>
         <span class="label"><%= category %></span>
-        <div class="info">
           <% menus.each do |menu| %>
-            <%#=  menu.menu_positions.minimum(:price) %>
+            <%= link_to t('edit'), [:edit, :manage, resource.organization, resource.class.name.underscore, menu] %>
+            <%= link_to t('delete'), [:manage, resource.organization, resource.class.name.underscore, menu], :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_link' %>
+            <div class="info">
             <ul>
               <% menu.menu_positions.group_by(&:position).each do |position, menu_positions| %>
                 <li>
@@ -13,15 +14,14 @@
                     <%= position %>
                     <%= link_to 'Подробнее', '#', class: :closed %>
                   </span>
-                  <%= link_to t('edit'), [:edit, :manage, resource.organization, resource.class.name.underscore, menu] %>
-                  <%= link_to t('delete'), [:manage, resource.organization, resource.class.name.underscore, menu], :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_link' %>
 
                   <div class="details">
                     <ul>
                       <% menu_positions.each do |position|  %>
                         <li>
-                          <%= position.title %> -
-                          <%= position.price %> р.
+                        <%= position.title %> (
+                        <%= position.count %> ) -
+                        <%= position.price %> р.
                         </li>
                       <% end  %>
                     </ul>

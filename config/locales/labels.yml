@@ -3,6 +3,8 @@ ru:
   add_event: "&plus;&nbsp;событие"
   add_hall: Добавить зал
   add_image: Добавить изображение
+  add_menu: Добавить меню
+  add_menu_position: Добавить позицию
   add_organization: "&plus;&nbsp;заведение"
   add_showing: Добавить сеанс
   add_service: Добавить услугу
@@ -51,6 +53,7 @@ ru:
   our_social_link: Контакты
   remove_affiche_schedule: Удалить расписание
   remove_link: Удалить файл
+  remove_menu_position: Удалить позицию
   remove_showing: Удалить сеанс
   remove_price: Удалить
   remove_this_attachment: Удалить этот файл
