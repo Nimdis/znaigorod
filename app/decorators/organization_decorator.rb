@@ -113,7 +113,7 @@ class OrganizationDecorator < ApplicationDecorator
     week_day = Time.zone.today.cwday
     content = week_day
     schedule = organization.schedules.find_by_day(week_day)
-    if from.one? && to.one?
+    if from.size == to.size && from.size == 1
       if from == to
         content = 'Работает круглосуточно'
       else
