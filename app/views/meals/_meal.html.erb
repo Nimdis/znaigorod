@@ -27,4 +27,58 @@
       </ul>
     </div>
   <% end %>
+
+  <div class="menus">
+    <% meal.menus.group_by(&:category).sort.each do |category, menus| %>
+      <div class="menu_header">
+        <h2><%= category %></h2>
+        <% menus.each do |menu| %>
+          <% if menu.description? %>
+            <ul class="iconize_info">
+              <li>
+                <a href="#" class="description_icon" data-link="service_text" title='информация'>информация</a>
+                <div class="description_text">
+                  <p><%= menu.description %></p>
+                </div>
+              </li>
+            </ul>
+          <% end %>
+        <% end %>
+      </div>
+
+      <% menus.each do |menu| %>
+        <div class="info">
+          <ul>
+            <% menu.menu_positions.group_by(&:position).each do |position, menu_positions| %>
+              <li>
+                <div class="value">
+                  <h3> <%= position %></h3>
+                  <%= link_to 'Подробнее', '#', class: :closed %>
+                </div>
+                <div class="details">
+                  <ul>
+                    <% menu_positions.each do |position|  %>
+                      <li>
+                        <%= position.title %> (
+                        <%= position.count %> ) -
+                        <%= position.price %> р.
+                        <ul>
+                          <li>
+                            <%= position.description %>
+                            <% if position.cooking_time? %>
+                              Время приготовления до <%= position.cooking_time %> мин.
+                            <% end %>
+                          </li>
+                        </ul>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

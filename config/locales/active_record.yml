@@ -214,7 +214,8 @@ ru:
         <<: *common_attributes
         position: Позиция
         title: Наименование
-        count: Вес\объем
+        cooking_time: Время приготовления
+        count: Выход
         price: Цена, руб
 
       entertainment:

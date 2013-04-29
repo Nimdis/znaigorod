@@ -48,6 +48,7 @@
  * = require public/move_to_top
  * = require public/webcams
  * = require public/contest
+ * = require public/menus
  * = require public/stream_drifting
  * = require public/services
  * = require public/visitors

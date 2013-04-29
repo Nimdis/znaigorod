@@ -1,0 +1,66 @@
+.organization_info
+  .meal
+
+    .menus
+      border-top: 1px dotted #cfcfd1
+
+      .menu_header
+        +clearfix
+        background: image_url('public/menu_header_bg.png') repeat-x top
+
+        .iconize_info
+          float: right
+          margin: 4px 30px 0
+
+
+
+      h2
+        font-size: 17px
+        color: #fff
+        width: 260px
+        position: relative
+        background-color: #894195
+        padding: 7px 10px
+        margin: 0
+        float: left
+
+        &:after
+          content: ' '
+          position: absolute
+          width: 0
+          height: 0
+          left: 100%
+          top: 0
+          border-top: 15px solid transparent
+          border-right: 15px solid transparent
+          border-left: 15px solid #894195
+          border-bottom: 16px solid transparent
+
+      h3
+        font-size: 14px
+        font-weight: bold
+        color: #8302A5
+        padding: 7px 10px 7px 2px
+
+
+      .info
+        margin: 5px 0 5px 15px
+
+        .value
+          +clearfix
+          h3, a
+            float: left
+          a
+            margin: 9px 0 0
+
+        .details
+          +border-radius(3px)
+          background-color: #f6eff7
+          display: none
+          padding: 15px
+          margin: 0 15px 0 0
+
+          li
+            margin: 0 0 15px 0
+            li
+              margin: 3px 0 0

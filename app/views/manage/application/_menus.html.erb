@@ -22,6 +22,14 @@
                         <%= position.title %> (
                         <%= position.count %> ) -
                         <%= position.price %> р.
+                        <ul>
+                          <li>
+                            <%= position.description %>
+                            <% if position.cooking_time? %>
+                               Время приготовления до <%= position.cooking_time %> мин.
+                            <% end %>
+                          </li>
+                        </ul>
                         </li>
                       <% end  %>
                     </ul>

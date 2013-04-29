@@ -298,10 +298,11 @@ ActiveRecord::Schema.define(:version => 20130506102137) do
     t.string   "position"
     t.string   "title"
     t.text     "description"
-    t.integer  "price"
+    t.string   "price"
     t.string   "count"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "cooking_time"
   end
 
   add_index "menu_positions", ["menu_id"], :name => "index_menu_positions_on_menu_id"

@@ -66,6 +66,7 @@ $(window).load ->
   init_comments() if $('.comments').length
   init_auth() if ('.auth_links').length
   init_services() if $('.services')
+  init_menus() if $('.menus')
 
   init_move_to_top() if $('a.move_to_top').length
 
