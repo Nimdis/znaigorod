@@ -10,6 +10,7 @@ Znaigorod::Application.routes.draw do
 
   get 'cooperation'       => 'cooperation#index'
   get 'geocoder'          => 'geocoder#get_coordinates'
+  get 'yamp_geocoder'     => 'geocoder#get_yamp_coordinates'
   get 'search'            => 'search#search',              :as => :search
   get 'webcams'           => 'webcams#index'
 

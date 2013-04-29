@@ -18,7 +18,7 @@ $.fn.draw_map = (organization, context) ->
   map.markers.add(marker)
 
 update_coordinates = (organization, context) ->
-  $.ajax '/geocoder',
+  $.ajax '/yamp_geocoder',
     async:    false
     dataType: 'json'
     data:     'street='+organization[context+'[address_attributes][street]']+'&house='+organization[context+'[address_attributes][house]']
