@@ -9,3 +9,6 @@ $ ->
   init_has_virtual_tour() if $('.virtual_tour_fields')
   init_address() if $('.address_fields')
   init_services() if $('.services')
+
+$(window).load ->
+  init_organization_map() if $('.edit_organization, .new_organization').length

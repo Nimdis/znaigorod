@@ -1,3 +1,5 @@
+<% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0-stable/?load=package.full&lang=ru-RU') %>
+
 <div class="addres_form">
   <div class="address_fields">
     <%= f.simple_fields_for :address %>
