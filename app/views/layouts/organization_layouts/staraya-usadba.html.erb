@@ -1,0 +1,29 @@
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'public/application', :media => 'all' %>
+<% end %>
+
+<% content_for :javascripts do %>
+  <%= javascript_include_tag 'http://maps.api.2gis.ru/1.0' %>
+  <%= javascript_include_tag 'http://userapi.com/js/api/openapi.js?52' %>
+  <%= javascript_include_tag 'public/application' %>
+<% end %>
+
+<% content_for :metrics do %>
+  <%= render :partial => 'commons/google_analytics' if Rails.env.production? %>
+<% end %>
+
+<%= content_for :content do %>
+  <div class='staraya_usadba_wrapper'>
+    <div class='staraya_usadba_logo'></div>
+    <div class='staraya_usadba'>
+      <%= render :partial => 'commons/public_header' %>
+      <%= render :partial => 'commons/public_menu' %>
+      <%= render :partial => 'commons/public_content' %>
+    </div>
+  </div>
+  <%= render :partial => 'commons/public_footer' %>
+  <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
+  <%= yield :yandex_map_scripts %>
+<% end %>
+
+<%= render :template => 'layouts/base' %>
