@@ -17,8 +17,13 @@
         if json.response_code == '500'
           alert "Cервис временно не доступен"
           return false
-        longitude_field.val(json.longitude)
         latitude_field.val(json.latitude)
+        longitude_field.val(json.longitude)
+        map.setCenter [json.latitude, json.longitude]
+        map.geoObjects.each (geoObject) ->
+          if (geoObject.properties.get('id') == 'placemark')
+            geoObject.geometry.setCoordinates [json.latitude, json.longitude]
+          true
         if json.response_code == '404'
           alert "Координаты по указанному адресу не найдены!\nПожалуйста уточните адрес\nИли сохраняйте без указания координат"
         true
@@ -39,7 +44,7 @@ $.fn.draw_map = () ->
 
   map = new ymaps.Map $map[0],
     center: [latitude, longitude]
-    zoom: 15
+    zoom: 16
     behaviors: ['drag', 'scrollZoom']
   ,
     maxZoom: 23
@@ -53,9 +58,16 @@ $.fn.draw_map = () ->
       id: 'placemark'
       hintContent: address
   ,
+    draggable: true
     iconImageHref: '/assets/public/affiche_placemark.png'
     iconImageOffset: [-15, -40]
     iconImageSize: [37, 42]
+
+  placemark.events.add 'dragend', (event) ->
+    coordinates = placemark.geometry.getCoordinates()
+    latitude_field.val (coordinates[0] + '').substring(0, 9)
+    longitude_field.val (coordinates[1] + '').substring(0, 9)
+    true
 
   map.geoObjects.add(placemark)
 
