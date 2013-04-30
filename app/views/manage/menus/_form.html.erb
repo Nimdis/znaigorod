@@ -20,7 +20,7 @@
         :include_blank => false %>
 
       <%= mpf.input :title %>
-      <%= mpf.input :description %>
+      <%= mpf.input :description, :input_html => { :class => 'menu_description'} %>
       <%= mpf.input :cooking_time %>
       <%= mpf.input :count %>
       <%= mpf.input :price %>

@@ -2,43 +2,36 @@
   <ul>
     <% resource.menus.group_by(&:category).each do |category, menus| %>
       <li>
-        <span class="label"><%= category %></span>
-          <% menus.each do |menu| %>
-            <%= link_to t('edit'), [:edit, :manage, resource.organization, resource.class.name.underscore, menu] %>
-            <%= link_to t('delete'), [:manage, resource.organization, resource.class.name.underscore, menu], :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_link' %>
-            <div class="info">
-            <ul>
-              <% menu.menu_positions.group_by(&:position).each do |position, menu_positions| %>
-                <li>
-                  <span class="value">
-                    <%= position %>
-                    <%= link_to 'Подробнее', '#', class: :closed %>
-                  </span>
-
-                  <div class="details">
-                    <ul>
-                      <% menu_positions.each do |position|  %>
-                        <li>
-                        <%= position.title %> (
-                        <%= position.count %> ) -
-                        <%= position.price %> р.
-                        <ul>
-                          <li>
-                            <%= position.description %>
-                            <% if position.cooking_time? %>
-                               Время приготовления до <%= position.cooking_time %> мин.
-                            <% end %>
-                          </li>
-                        </ul>
-                        </li>
-                      <% end  %>
-                    </ul>
-                  </div>
-                </li>
-              <% end %>
-            </ul>
-          <% end %>
+      <span class="label"><%= category %></span>
+      <% menus.each do |menu| %>
+        <%= link_to t('edit'), [:edit, :manage, resource.organization, resource.class.name.underscore, menu] %>
+        <%= link_to t('delete'), [:manage, resource.organization, resource.class.name.underscore, menu], :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_link' %>
+        <div class="info">
+          <ul>
+            <% menu.menu_positions.group_by(&:position).each do |position, menu_positions| %>
+              <li>
+              <div class="value">
+                <%= position %>
+                <%= link_to 'Подробнее', '#', class: :closed %>
+              </div>
+              <div class="details">
+                <ul>
+                  <% menu_positions.each do |position|  %>
+                    <li>
+                    <%= "#{position.title} (#{position.count}) &ndash; #{position.price}р.".html_safe %>
+                    <div>
+                      <%= position.description %>
+                      <%= I18n.t("cooking_time_kind", count: position.cooking_time) if position.cooking_time? %>
+                    </div>
+                    </li>
+                  <% end  %>
+                </ul>
+              </div>
+              </li>
+            <% end %>
+          </ul>
         </div>
+      <% end %>
       </li>
     <% end %>
   </ul>
