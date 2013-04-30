@@ -50,6 +50,16 @@ $.fn.draw_map = () ->
     maxZoom: 23
     minZoom: 12
 
+  map.events.add 'dblclick', (event) ->
+    coordinates = event.get('coordPosition')
+    latitude_field.val (coordinates[0] + '').substring(0, 9)
+    longitude_field.val (coordinates[1] + '').substring(0, 9)
+    map.geoObjects.each (geoObject) ->
+      if (geoObject.properties.get('id') == 'placemark')
+        geoObject.geometry.setCoordinates [coordinates[0], coordinates[1]]
+      true
+    true
+
   placemark = new ymaps.GeoObject
     geometry:
       type: 'Point'
