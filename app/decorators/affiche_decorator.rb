@@ -261,7 +261,7 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def viewable_showings?
-    return false if affiche.is_a?(Other) && affiche_distribution?
+    return false if (affiche.is_a?(Other) || affiche.is_a?(SportsEvent)) && affiche_distribution?
     affiche_actual? && other_showings.any?
   end
 
