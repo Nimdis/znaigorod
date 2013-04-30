@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :uid, :provider, :auth_raw_info, :roles_attributes
 
-  devise :trackable, :omniauthable,
+  devise :trackable, :omniauthable, :rememberable,
     omniauth_providers: [:vkontakte, :google_oauth2, :yandex, :facebook, :twitter, :odnoklassniki, :mailru]
 
   has_many :activities,     dependent:  :destroy
@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
   end
 
   alias_attribute :to_s, :name
+
+  def remember_me
+    true
+  end
 
   def vote_for(voteable)
     voteable.votes.where(:user_id => self.id)

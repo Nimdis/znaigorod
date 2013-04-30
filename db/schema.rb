@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419084055) do
+ActiveRecord::Schema.define(:version => 20130430020152) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -698,16 +698,18 @@ ActiveRecord::Schema.define(:version => 20130419084055) do
 
   create_table "users", :force => true do |t|
     t.integer  "roles_mask"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "uid"
-    t.integer  "sign_in_count",      :default => 0
+    t.integer  "sign_in_count",       :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "provider"
     t.text     "auth_raw_info"
+    t.datetime "remember_created_at"
+    t.string   "remember_token"
   end
 
   create_table "virtual_tours", :force => true do |t|
