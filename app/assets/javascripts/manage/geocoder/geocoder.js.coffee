@@ -34,9 +34,6 @@ $.fn.draw_map = () ->
   $map = $(this)
   street_field = $('#organization_address_attributes_street')
   house_field = $('#organization_address_attributes_house')
-  address = street_field.val()
-  address += ', ' if address.length
-  address += house_field.val()
   latitude_field = $('#organization_address_attributes_latitude')
   longitude_field = $('#organization_address_attributes_longitude')
   latitude = latitude_field.val() || '56.488611121111'
@@ -66,7 +63,6 @@ $.fn.draw_map = () ->
       coordinates: [latitude, longitude]
     properties:
       id: 'placemark'
-      hintContent: address
   ,
     draggable: true
     iconImageHref: '/assets/public/affiche_placemark.png'
