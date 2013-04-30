@@ -59,17 +59,11 @@
                   <ul>
                     <% menu_positions.each do |position|  %>
                       <li>
-                        <%= position.title %> (
-                        <%= position.count %> ) -
-                        <%= position.price %> р.
-                        <ul>
-                          <li>
-                            <%= position.description %>
-                            <% if position.cooking_time? %>
-                              Время приготовления до <%= position.cooking_time %> мин.
-                            <% end %>
-                          </li>
-                        </ul>
+                        <%= "#{position.title} (#{position.count}) &ndash; #{position.price}р.".html_safe %>
+                        <div>
+                          <%= position.description %>
+                          <%= I18n.t("cooking_time_kind", count: position.cooking_time) if position.cooking_time? %>
+                        </div>
                       </li>
                     <% end %>
                   </ul>
