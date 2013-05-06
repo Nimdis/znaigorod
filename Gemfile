@@ -10,6 +10,7 @@ end
 group :default do
   gem 'RedCloth'
   gem 'active_attr'
+  gem 'activemerchant', :require => 'active_merchant'
   gem 'ancestry'
   gem 'attribute_normalizer'
   gem 'auto_html'
