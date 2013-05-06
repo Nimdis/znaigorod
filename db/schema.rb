@@ -701,6 +701,17 @@ ActiveRecord::Schema.define(:version => 20130506102137) do
     t.text     "description"
   end
 
+  create_table "tickets", :force => true do |t|
+    t.integer  "affiche_id"
+    t.integer  "number"
+    t.float    "original_price"
+    t.float    "price"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "tickets", ["affiche_id"], :name => "index_tickets_on_affiche_id"
+
   create_table "travels", :force => true do |t|
     t.text     "category"
     t.text     "description"

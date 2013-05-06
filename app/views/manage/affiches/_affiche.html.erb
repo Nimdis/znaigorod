@@ -8,6 +8,21 @@
 
 <div class="right_side">
   <div>
+    <span class="label">
+      Билеты
+      <%= link_to 'Добавить', new_manage_affiche_ticket_path(resource) %>
+    </span>
+    <span class="value">
+      <ul>
+        <% resource.tickets.each do |ticket| %>
+          <li>
+            Цена <%= "#{ticket.original_price}/#{ticket.price}" %>, осталось <%= ticket.number %>
+          </li>
+        <% end %>
+      </ul>
+    </span>
+  </div>
+  <div>
     <span class="label">Оригинальное название:</span>
     <% if resource.original_title.present? %>
       <span class="value"><%= resource.original_title %></span>

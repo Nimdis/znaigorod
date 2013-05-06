@@ -10,6 +10,9 @@ Znaigorod::Application.routes.draw do
     Affiche.descendants.each do |type|
       resources type.name.underscore.pluralize
     end
+    resources :affiches, only: [] do
+      resources :tickets
+    end
 
     resources :contests do
       resources :works, :except => [:index, :show]

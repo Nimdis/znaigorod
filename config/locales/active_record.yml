@@ -376,3 +376,8 @@ ru:
         count:   Количество
         period:  Срок
         value:   Цена
+
+      ticket:
+        number: Количество
+        original_price: Цена заведения
+        price: Цена со скидкой
