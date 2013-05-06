@@ -4,7 +4,8 @@ class Menu < ActiveRecord::Base
 
   belongs_to :meal
 
-  has_many :menu_positions, dependent: :destroy
+  has_many :menu_positions, autosave: true, dependent: :destroy
+
   accepts_nested_attributes_for :menu_positions, allow_destroy: true
 
 end

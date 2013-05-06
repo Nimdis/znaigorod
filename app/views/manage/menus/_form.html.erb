@@ -1,5 +1,5 @@
 <%= simple_nested_form_for [:manage, @organization, :meal, resource].flatten,
-  :html => { :novalidate => true } do |f| %>
+  :html => { :novalidate => true, multipart: true } do |f| %>
 
   <%= f.input :category,
     :as => :select,
@@ -24,7 +24,16 @@
       <%= mpf.input :cooking_time %>
       <%= mpf.input :count %>
       <%= mpf.input :price %>
-      <%= mpf.input :image %>
+      <%  unless mpf.object.image_url? %>
+        <%= mpf.input :image %>
+      <% else %>
+        <div class='input_with_image'>
+          <%= image_tag mpf.object.image_url %>
+          <%= link_to "удалить изображение", '#', class: :remove %>
+          <%= mpf.input :image, wrapper_html: { class: :hidden } %>
+        </div>
+      <% end %>
+
       <%= mpf.link_to_remove t('remove_menu_position'), :class => 'remove_price' %>
     <% end %>
     <%= f.link_to_add t('add_menu_position'), :menu_positions, :class => 'add_price' %>
