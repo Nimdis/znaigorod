@@ -61,6 +61,10 @@
                       <li>
                         <%= "#{position.title} (#{position.count}) &ndash; #{position.price}р.".html_safe %>
                         <div>
+                          <%= image_tag_for(position.image_url, 200, 95, true, 'n') if position.image_url %>
+                        </div>
+
+                        <div>
                           <%= position.description %>
                           <%= I18n.t("cooking_time_kind", count: position.cooking_time) if position.cooking_time? %>
                         </div>

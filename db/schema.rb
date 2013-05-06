@@ -300,9 +300,14 @@ ActiveRecord::Schema.define(:version => 20130506102137) do
     t.text     "description"
     t.string   "price"
     t.string   "count"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "cooking_time"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.text     "image_url"
   end
 
   add_index "menu_positions", ["menu_id"], :name => "index_menu_positions_on_menu_id"

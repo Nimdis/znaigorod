@@ -6,7 +6,7 @@ class Manage::ImagesController < Manage::ApplicationController
 
   belongs_to :affiche, :organization, :sauna_hall,
     :polymorphic => true, :optional => true
-
+  
   def create
     create! { collection_path }
   end

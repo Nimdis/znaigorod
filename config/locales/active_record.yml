@@ -217,6 +217,7 @@ ru:
         cooking_time: Время приготовления
         count: Выход
         price: Цена, руб
+        image: Изображение
 
       entertainment:
         <<: *common_attributes
