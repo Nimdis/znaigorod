@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130430020152) do
+ActiveRecord::Schema.define(:version => 20130506102137) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -309,8 +309,8 @@ ActiveRecord::Schema.define(:version => 20130430020152) do
     t.text     "site"
     t.text     "email"
     t.text     "description"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.text     "phone"
     t.string   "vfs_path"
     t.integer  "organization_id"
@@ -328,6 +328,7 @@ ActiveRecord::Schema.define(:version => 20130430020152) do
     t.string   "status"
     t.float    "total_rating"
     t.integer  "primary_organization_id"
+    t.boolean  "ability_to_comment",            :default => true
   end
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true

@@ -167,6 +167,7 @@ ru:
 
       organization:
         <<: *common_attributes
+        ability_to_comment: Возможность комментирования
         additional_rating: Дополнительный рейтинг
         address: Адрес организации
         category: Категория

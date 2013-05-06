@@ -77,6 +77,15 @@
   </div>
 
   <div>
+    <span class="label">Возможность комментирования:</span>
+    <% if resource.ability_to_comment? %>
+      <span class="value">Комментирование разрешено</span>
+    <% else %>
+      <span class="blank">Комментирование запрещено</span>
+    <% end %>
+  </div>
+
+  <div>
     <span class="label">Залы заведения:</span>
     <% if resource.halls.any? %>
       <span class="value">

@@ -106,7 +106,7 @@
     <%= render :partial => "commons/share_this" %>
   </div>
 
-  <%= render :partial => 'comments/block', :locals => { :parent_obj => @organization } %>
+  <%= render :partial => 'comments/block', :locals => { :parent_obj => @organization } if @organization.ability_to_comment? %>
 
 <% end %>
 <%= render :file => "organizations/wrapper" %>
