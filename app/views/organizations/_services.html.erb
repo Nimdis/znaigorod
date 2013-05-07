@@ -1,8 +1,8 @@
-<% services.group_by(&:offer).each do |offer, services| %>
+<% services.group_by(&:offer).sort.each do |offer, services| %>
   <div class='info'>
     <h3>
       <%= link_to '#', class: :closed do %>
-        <%= offer %> от <%= services.map(&:min_value).min %> руб.
+        <%= "#{offer} #{I18n.t("service_min_price.#{services.first.kind}", count: services.map(&:min_value).compact.min)}" %>
       <% end %>
     </h3>
 
@@ -12,14 +12,14 @@
           <div class="service_description wide">
             <span class="label"><%= service.title %></span>
             <span class="value"><%= service.description %></span>
-            <ul>
+            <% if service.prices.any? %>
               <% service.prices.each do |price| %>
-                <li>
+                <div class="service_price_value">
                   <%= price.description %>
-                  <span class="service_price_value"><%= price %></span>
-                </li>
+                  <%= price %>
+                </div>
               <% end %>
-            </ul>
+            <% end %>
           </div>
         <% else %>
           <% if service.prices.many? %>
@@ -38,7 +38,7 @@
           <% else %>
             <div class="service_description one_price">
               <%= service.title %>
-              <span class="service_price_value"><%= service.prices.first.value %></span>
+              <span class="service_price_value"><%= service.prices.first.value if service.prices.any?%></span>
             </div>
           <% end %>
         <% end %>

@@ -83,3 +83,6 @@ ru:
       few:   "%{count} мойки"
       many:  "%{count} моек"
       other: "%{count} моек"
+  service_min_price:
+    visiting: "от %{count} руб. за посещение"
+    lesson: "от %{count} руб. за занятие"

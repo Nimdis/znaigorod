@@ -15,6 +15,7 @@
 
   <%= f.input :offer_list,
     :as => :select,
+    :selected => f.object.offers,
     :collection => Values.instance.send(context_type).offers,
     :wrapper_html => { :class => :category_list },
     :include_blank => false %>

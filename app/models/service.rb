@@ -38,7 +38,7 @@ class Service < ActiveRecord::Base
   private
 
   def set_min_value
-    self.min_value = prices.map { |p| p.single? ? p.value : p.value / p.count }.min
+    self.min_value = prices.map { |p| p.single? ? p.value : p.value / p.count }.min if prices.any?
   end
 end
 
