@@ -41,6 +41,12 @@
           <div class='image'>
             <%= @affiche.item_poster %>
           </div>
+          <div class='social_actions ajaxed'>
+            <div class="visits">
+              <%#= render :partial => 'visits/visit_wrapper', :locals => { :visitable => @affiche.model } %>
+            </div>
+            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @affiche.model } %>
+          </div>
           <div class='description'>
             <%= render :partial => 'user_ratings/block', :locals => { :parent_obj => @affiche.model } %>
             <div class='closest'>

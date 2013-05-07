@@ -24,6 +24,9 @@ class Affiche < ActiveRecord::Base
   has_many :addresses, :through => :organizations, :uniq => true, :source => :address
   has_many :comments, :as => :commentable, :dependent => :destroy
 
+  has_many :visits, :as => :visitable, :dependent => :destroy
+  has_many :votes, :as => :voteable, :dependent => :destroy
+
   has_one :affiche_schedule, :dependent => :destroy
 
   validates_presence_of :description, :poster_url, :title
