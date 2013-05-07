@@ -11,7 +11,7 @@ class Organization < ActiveRecord::Base
                   :logotype_url, :non_cash, :priority_suborganization_kind,
                   :comment, :organization_stand_attributes, :additional_rating,
                   :social_links_attributes,
-                  :user_id
+                  :user_id, :ability_to_comment
 
   # <=== CRM
   attr_accessible :primary_organization_id
