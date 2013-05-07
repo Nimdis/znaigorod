@@ -4,6 +4,7 @@ class VotesController < ApplicationController
   custom_actions :collection => :change_vote
 
   belongs_to :comment, :polymorphic => true, :optional => true
+  belongs_to :organization, :polymorphic => true, :optional => true
 
   layout false
 

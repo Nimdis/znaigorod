@@ -41,6 +41,7 @@
         <div class="visits">
           <%= render :partial => 'visits/visit_wrapper', :locals => { :visitable => @organization.model } %>
         </div>
+        <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @organization.model } %>
       </div>
     </div>
     <% if @organization.description.present? %>
