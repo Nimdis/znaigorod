@@ -60,3 +60,8 @@ mail:
 recaptcha:
   public:               token
   private:              token
+
+robokassa:
+  login:                login
+  secret_1:             secret1
+  secret_2:             secret2
