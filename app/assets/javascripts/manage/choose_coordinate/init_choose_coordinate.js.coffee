@@ -2,10 +2,12 @@
   link = $('.choose_coordinate')
   link.add_click_handler()
   $('form').on 'nested:fieldAdded', (event) ->
-    $(event.field).find('.choose_coordinate').filter(':visible').last().add_click_handler()
+    $('.choose_coordinate', event.field).add_click_handler()
 
 $.fn.add_click_handler = () ->
+  @link = $(this)
   $this = $(this)
+  $this.prepare_affiche_coordenates()
   $this.click ->
     if $('.map_wrapper').length
       container = $('.map_wrapper')
@@ -14,6 +16,7 @@ $.fn.add_click_handler = () ->
     latitude = $('.latitude', $(this).parent())
     longitude = $('.longitude', $(this).parent())
     coordinates = { 'latitude': latitude.val(), 'longitude': longitude.val() }
+    map = null
 
     container.dialog
       draggable: false
@@ -24,7 +27,9 @@ $.fn.add_click_handler = () ->
       width: 640
       zIndex: 700
       open: ->
-        @map = container.draw_affiche_map($this, coordinates) unless @map?
+        map = container.draw_affiche_map($this, coordinates)
+      close: ->
+        map.destroy()
     false
 
   true
@@ -81,10 +86,10 @@ $.fn.draw_affiche_map = (link, coordinates) ->
   map
 
 $.fn.prepare_affiche_coordenates = () ->
-  return false if $('.latitude', $(this).parent()).val()? && $('.longitude', $(this).parent()).val()?
-  prev = $(this).parent().prev('.fields')
-  if prev.length && $('.latitude', prev).val()? && $('.longitude', prev).val()?
-    $('.latitude', $(this).parent()).val $('.latitude', prev).val()
-    $('.longitude', $(this).parent()).val $('.longitude', prev).val()
+  return true if $('.latitude', $(this).parent()).val().length && $('.longitude', $(this).parent()).val().length
+  prev_fields = $(this).parent().prev('.fields:visible')
+  if prev_fields.length && $('.latitude', prev_fields).val().length && $('.longitude', prev_fields).val().length
+    $('.latitude', $(this).parent()).val $('.latitude', prev_fields).val()
+    $('.longitude', $(this).parent()).val $('.longitude', prev_fields).val()
     $(this).addClass('with_coordinates')
   true

@@ -287,6 +287,8 @@ build_placemark = (item) ->
       hintContent: item.title
   ,
     iconImageHref: "/assets/public/map_icons/#{icon}.png"
+    iconImageOffset: [-15, -40]
+    iconImageSize: [37, 42]
     hasBalloon: true
 
   point.events.add 'click', (event) ->
