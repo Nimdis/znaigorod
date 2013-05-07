@@ -180,6 +180,18 @@ ActiveRecord::Schema.define(:version => 20130506102137) do
 
   add_index "contests", ["slug"], :name => "index_contests_on_slug", :unique => true
 
+  create_table "coupons", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "discount"
+    t.string   "vfs_path"
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "coupons", ["organization_id"], :name => "index_coupons_on_organization_id"
+
   create_table "creations", :force => true do |t|
     t.integer  "organization_id"
     t.string   "title"
@@ -751,6 +763,18 @@ ActiveRecord::Schema.define(:version => 20130506102137) do
   end
 
   add_index "virtual_tours", ["tourable_id", "tourable_type"], :name => "index_virtual_tours_on_tourable_id_and_tourable_type"
+
+  create_table "visits", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "visitable_id"
+    t.string   "visitable_type"
+    t.boolean  "voted"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "visits", ["user_id"], :name => "index_visits_on_user_id"
+  add_index "visits", ["visitable_id"], :name => "index_visits_on_visitable_id"
 
   create_table "votes", :force => true do |t|
     t.integer  "user_id"

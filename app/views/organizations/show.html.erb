@@ -25,16 +25,23 @@
       <%= content_tag(:div, @organization.contact_links, class: :links) if @organization.contact_links.present? %>
 
       <% if @organization.social_links.present? %>
-        <ul class='social_links'>
+        <ul class="social_links">
           <% @organization.social_links.each do |link| %>
             <li><%= link_to link.title, link.url, :target => '_blank' %></li>
           <% end %>
         </ul>
       <% end %>
+
       <ul class="categories">
         <li class='title'>Категории:</li>
         <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
       </ul>
+
+      <div class="social_actions">
+        <div class="visits">
+          <%= render :partial => 'visits/visit_wrapper', :locals => { :visitable => @organization.model } %>
+        </div>
+      </div>
     </div>
     <% if @organization.description.present? %>
       <div class='description'>

@@ -54,3 +54,10 @@
       previous: "&lt;&lt; Предыдущая"
       next: "Следующая &gt;&gt;"
       truncate: "&hellip;"
+
+  visitors:
+    one: "%{count} участник"
+    few: "%{count} участника"
+    many: "%{count} участников"
+    other: "еще нет участников, станьте первым"
+

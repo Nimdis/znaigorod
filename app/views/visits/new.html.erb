@@ -1,0 +1,4 @@
+<%= simple_form_for [association_chain, @visit].flatten, :url => polymorphic_url([association_chain, @visit].flatten, :subdomain => request.subdomain), :html => { :remote => true } do |f| %>
+  <%= f.input :voted, :input_html => { :class => 'checkable', :checked => true } %>
+  <%= f.submit :style => 'display:none' %>
+<% end %>

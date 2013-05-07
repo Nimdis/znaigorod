@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :organizations
   has_many :roles,          dependent: :destroy
   has_many :votes
+  has_many :visits
 
   serialize :auth_raw_info
 

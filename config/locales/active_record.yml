@@ -67,6 +67,9 @@ ru:
       vote:
         like: Оценка
 
+      visit:
+        voted: Присоединиться
+
       activity:
         activity_at: Когда
         contact: Контактное лицо организации

@@ -1,0 +1,5 @@
+<% if @visit.visitable.visits.any? %>
+  <div class="visitors">
+    <%= t :visitors, :count => @visit.visitable.visits.voted.count %>
+  </div>
+<% end %>

@@ -50,5 +50,6 @@
  * = require public/contest
  * = require public/stream_drifting
  * = require public/services
+ * = require public/visits
  * = require public/main
  */

@@ -26,6 +26,8 @@ Znaigorod::Application.routes.draw do
     get :details_for_balloon, :on => :member
 
     resources :comments, :only => [:new, :create, :show]
+    resources :visits, :only => [:new, :create, :show, :update]
+
     resources :user_ratings, :only => [:new, :create, :edit, :update, :show]
   end
 
