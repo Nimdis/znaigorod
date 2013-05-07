@@ -35,16 +35,9 @@ class PlaceDecorator
     return link_to(organization.address, '#', :title => 'Показать на карте',
                     :'data-latitude' => organization.latitude,
                     :'data-longitude' => organization.longitude,
-                    :'data-hint' => organization.title.text_gilensize,
-                    :'data-id' => organization.id,
-                    :class => 'show_map_link') if organization?
-    unless latitude.blank? && longitude.blank?
-      return link_to('показать на карте', '#', :title => "Показать на карте",
-                      :'data-latitude' => latitude,
-                      :'data-longitude' => longitude,
-                      :'data-hint' => title.text_gilensize,
-                      :class => 'show_map_link')
-    end
+                    :'data-hint' => title.text_gilensize,
+                    :'data-id' => organization.try(:id),
+                    :class => 'show_map_link') if latitude? && longitude?
   end
 
   def link_to_organization(gsub = nil)

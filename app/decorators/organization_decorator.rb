@@ -22,14 +22,15 @@ class OrganizationDecorator < ApplicationDecorator
   end
 
   def address_link(address = organization.address)
-    return "" if organization.address.to_s.blank?
-    h.link_to address.to_s,
-      organization_url,
-      :'data-latitude' => organization.address.latitude,
-      :'data-longitude' => organization.address.longitude,
-      :'data-hint' => organization.title.text_gilensize,
-      :'data-id' => organization.id,
-      :class => 'show_map_link'
+    return "" if address.to_s.blank?
+    return h.link_to address.to_s,
+        organization_url,
+        :'data-latitude' => organization.address.latitude,
+        :'data-longitude' => organization.address.longitude,
+        :'data-hint' => organization.title.text_gilensize,
+        :'data-id' => organization.id,
+        :class => 'show_map_link' if address.latitude? && address.longitude?
+    address.to_s
   end
 
   def office
