@@ -25,6 +25,7 @@ class OrganizationDecorator < ApplicationDecorator
     return "" if address.to_s.blank?
     return h.link_to address.to_s,
         organization_url,
+        :title => 'Показать на карте',
         :'data-latitude' => organization.address.latitude,
         :'data-longitude' => organization.address.longitude,
         :'data-hint' => organization.title.text_gilensize,
