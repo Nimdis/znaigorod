@@ -1,5 +1,30 @@
-<% if @visit.visitable.visits.any? %>
-  <div class="visitors">
-    <%= t :visitors, :count => @visit.visitable.visits.voted.count %>
+<% if visitable.visits.visited.any? %>
+  <div class="visits_counter" title='<%= t :like, :count => visitable.visits.count %>'>
+    <%= link_to 'Участники', '#' %> <span class="counter"><%= visitable.visits.visited.count %></span>
+
+    <div class="avatars">
+      <% visitable.visits.last(6).map(&:user).each do |user| %>
+        <%= image_tag user.avatar, :size => "24x24" %>
+      <% end %>
+    </div>
   </div>
 <% end %>
+
+<div class="user_like">
+  <% if current_user && current_user.visited?(visitable) %>
+    Вы участник. <%= link_to "Отказаться",
+      polymorphic_url([visitable, :change_visit], :subdomain => request.subdomain), :method => :put, :remote => true %>
+  <% else %>
+    <%= link_to "Присоединиться", polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true %>
+  <% end %>
+</div>
+
+<% if @visit && @visit.errors.any? %>
+  <div class="cloud_wrapper">
+    <div class="cloud_inner_wrapper">
+      <h4>Только зарегистрированные пользователи. Пожалуйста, войдите с помощью одной из социальных сетей:</h4>
+      <%= render :partial => 'commons/social_auth' %>
+    </div>
+  </div>
+<% end %>
+

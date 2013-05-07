@@ -3,7 +3,7 @@ class CreateVisits < ActiveRecord::Migration
     create_table :visits do |t|
       t.references :user
       t.references :visitable, :polymorphic => true
-      t.boolean :voted
+      t.boolean :visited
 
       t.timestamps
     end

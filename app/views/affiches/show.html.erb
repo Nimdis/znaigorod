@@ -37,16 +37,19 @@
         </div>
 
         <div class='info'>
-          <%= @affiche.has_ribbon %>
-          <div class='image'>
-            <%= @affiche.item_poster %>
-          </div>
-          <div class='social_actions ajaxed'>
-            <div class="visits">
-              <%#= render :partial => 'visits/visit_wrapper', :locals => { :visitable => @affiche.model } %>
+          <div class='left_part'>
+            <%= @affiche.has_ribbon %>
+            <div class='image'>
+              <%= @affiche.item_poster %>
             </div>
-            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @affiche.model } %>
+
+            <div class='social_actions'>
+              <div class="visits">
+                <%= render :partial => 'visits/visit_wrapper', :locals => { :visitable => @affiche.model } %>
+              </div>
+            </div>
           </div>
+
           <div class='description'>
             <%= render :partial => 'user_ratings/block', :locals => { :parent_obj => @affiche.model } %>
             <div class='closest'>
@@ -72,6 +75,9 @@
               <li><%= link_to(tag, affiches_path('tags[]' => tag)) %></li>
             <%end%>
           </ul>
+          <div class="votes">
+            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @affiche.model, :button => true } %>
+          </div>
           <div class='share'>
             <%= render :partial => 'commons/share_this' %>
           </div>

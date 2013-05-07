@@ -49,6 +49,7 @@ Znaigorod::Application.routes.draw do
     get "#{type.gsub('_','')}/:id"              => 'affiches#show',         :as => "#{type.gsub('_','')}"
 
     put "#{type}/:#{type}_id/change_vote" => "votes#change_vote", :as => "#{type}_change_vote"
+    put "#{type}/:#{type}_id/change_visit" => "visits#change_visit", :as => "#{type}_change_visit"
   end
 
   Organization.basic_suborganization_kinds.each do |kind|

@@ -768,7 +768,7 @@ ActiveRecord::Schema.define(:version => 20130506102137) do
     t.integer  "user_id"
     t.integer  "visitable_id"
     t.string   "visitable_type"
-    t.boolean  "voted"
+    t.boolean  "visited"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end

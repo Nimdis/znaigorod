@@ -1,12 +1,3 @@
-<div class="visit_wrapper ajaxed">
-  <h4>Участники</h4>
-  <div class="visitors">
-    <%#= t :visitors, :count => visitable.visits.voted.count %>
-  </div>
-
-  <%= simple_form_for @visit, :url => polymorphic_url([visitable, @visit], :subdomain => request.subdomain), :html => { :remote => true } do |f| %>
-    <%= f.input :voted, :input_html => { :class => 'checkable' } %>
-    <%= f.submit :style => 'display:none' %>
-  <% end %>
+<div class="votes_wrapper">
+  <%= render :partial => "visits/visit", :locals => { :visitable => visitable } %>
 </div>
-
