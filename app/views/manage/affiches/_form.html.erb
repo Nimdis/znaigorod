@@ -1,3 +1,5 @@
+<% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0-stable/?load=package.full&lang=ru-RU') %>
+
 <%= f.input :title %>
 <%= f.input :original_title %>
 <%= f.input :description, :input_html => { :class => 'description' } %>
@@ -36,7 +38,7 @@
       <%= showing.input :longitude, :as => :hidden, :input_html => { :class => 'longitude', :value => showing.object.get_longitude } %>
       <%= showing.input :place, :input_html => { :class => 'autosuggest' } %>
       <% unless showing.object.organization %>
-        <a href='#' class='choose_coordinate <%= "with_coordinates" if showing.object.latitude.present? %>'>Показать координаты</a>
+        <a href='#' class='choose_coordinate <%= "with_coordinates" if showing.object.latitude.present? %>'>Указать координаты</a>
       <% end %>
       <%= showing.input :hall %>
       <%= showing.link_to_remove t('remove_showing') %>
@@ -62,7 +64,7 @@
         <%= schedule.input :longitude, :as => :hidden, :input_html => { :class => 'longitude', :value => schedule.object.get_longitude } %>
         <%= schedule.input :place, :input_html => { :class => 'autosuggest' } %>
         <% unless schedule.object.organization_id %>
-          <a href='#' class='choose_coordinate <%= "with_coordinates" if schedule.object.latitude.present? %>'>Показать координаты</a>
+          <a href='#' class='choose_coordinate <%= "with_coordinates" if schedule.object.latitude.present? %>'>Указать координаты</a>
         <% end %>
         <%= schedule.input :hall %>
         <%= schedule.input :price_min %>

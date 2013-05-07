@@ -1,7 +1,7 @@
 @init_organization_map = () ->
   form = $('.edit_organization, .new_organization')
   $map = $('#map')
-  map = $map.draw_map()
+  map = $map.draw_organization_map()
   street_field = $('#organization_address_attributes_street')
   house_field = $('#organization_address_attributes_house')
   latitude_field = $('#organization_address_attributes_latitude')
@@ -30,7 +30,7 @@
     false
   true
 
-$.fn.draw_map = () ->
+$.fn.draw_organization_map = () ->
   $map = $(this)
   street_field = $('#organization_address_attributes_street')
   house_field = $('#organization_address_attributes_house')
@@ -47,15 +47,9 @@ $.fn.draw_map = () ->
     maxZoom: 23
     minZoom: 12
 
-  map.events.add 'dblclick', (event) ->
-    coordinates = event.get('coordPosition')
-    latitude_field.val (coordinates[0] + '').substring(0, 9)
-    longitude_field.val (coordinates[1] + '').substring(0, 9)
-    map.geoObjects.each (geoObject) ->
-      if (geoObject.properties.get('id') == 'placemark')
-        geoObject.geometry.setCoordinates [coordinates[0], coordinates[1]]
-      true
-    true
+  map.controls.add 'zoomControl',
+    top: 5
+    left: 5
 
   placemark = new ymaps.GeoObject
     geometry:
@@ -69,16 +63,22 @@ $.fn.draw_map = () ->
     iconImageOffset: [-15, -40]
     iconImageSize: [37, 42]
 
+  map.geoObjects.add(placemark)
+
   placemark.events.add 'dragend', (event) ->
     coordinates = placemark.geometry.getCoordinates()
     latitude_field.val (coordinates[0] + '').substring(0, 9)
     longitude_field.val (coordinates[1] + '').substring(0, 9)
     true
 
-  map.geoObjects.add(placemark)
-
-  map.controls.add 'zoomControl',
-    top: 5
-    left: 5
+  map.events.add 'click', (event) ->
+    coordinates = event.get('coordPosition')
+    latitude_field.val (coordinates[0] + '').substring(0, 9)
+    longitude_field.val (coordinates[1] + '').substring(0, 9)
+    map.geoObjects.each (geoObject) ->
+      if (geoObject.properties.get('id') == 'placemark')
+        geoObject.geometry.setCoordinates [coordinates[0], coordinates[1]]
+      true
+    true
 
   map
