@@ -1,6 +1,6 @@
 <div class="curtail">
   <ul>
-    <% resource.menus.group_by(&:category).each do |category, menus| %>
+    <% resource.menus.group_by(&:category).sort.each do |category, menus| %>
       <li>
       <span class="label"><%= category %></span>
       <% menus.each do |menu| %>
