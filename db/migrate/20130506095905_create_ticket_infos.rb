@@ -1,6 +1,6 @@
-class CreateTickets < ActiveRecord::Migration
+class CreateTicketInfos < ActiveRecord::Migration
   def change
-    create_table :tickets do |t|
+    create_table :ticket_infos do |t|
       t.references :affiche
       t.integer :number
       t.float :original_price
@@ -8,6 +8,6 @@ class CreateTickets < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :tickets, :affiche_id
+    add_index :ticket_infos, :affiche_id
   end
 end

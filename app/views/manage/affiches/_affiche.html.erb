@@ -10,16 +10,16 @@
   <div>
     <span class="label">
       Билеты
-      <%= link_to 'Добавить', new_manage_affiche_ticket_path(resource) %>
+      <%= link_to 'Добавить', new_manage_affiche_ticket_info_path(resource) %>
     </span>
     <span class="value">
       <ul>
-        <% resource.tickets.each do |ticket| %>
+        <% resource.ticket_infos.each do |ticket_info| %>
           <li>
-            Цена <%= "#{ticket.original_price}/#{ticket.price}" %>, осталось <%= ticket.number %>
-          </li>
-        <% end %>
-      </ul>
+            Цена <%= "#{ticket_info.original_price}/#{ticket_info.price}" %>
+        </li>
+      <% end %>
+    </ul>
     </span>
   </div>
   <div>

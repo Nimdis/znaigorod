@@ -23,7 +23,7 @@ class Affiche < ActiveRecord::Base
   has_many :organizations, :through => :showings, :uniq => true
   has_many :addresses, :through => :organizations, :uniq => true, :source => :address
   has_many :comments, :as => :commentable, :dependent => :destroy
-  has_many :tickets, :dependent => :destroy
+  has_many :ticket_infos, :dependent => :destroy
 
   has_many :visits, :as => :visitable, :dependent => :destroy
   has_many :votes, :as => :voteable, :dependent => :destroy

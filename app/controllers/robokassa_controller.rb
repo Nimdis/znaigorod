@@ -6,6 +6,13 @@ class RobokassaController < ApplicationController
   before_filter :create_notification
   #before_filter :find_payment
 
+  def new
+    integration_module = ActiveMerchant::Billing::Integrations::Robokassa
+    integration_helper = integration_module::Helper.new(42, Settings['robokassa.login'], secret: Settings['robokassa.secret_1'], amount: 100)
+
+    redirect_to "#{integration_module.service_url}?#{integration_helper.form_fields.to_query}"
+  end
+
   # Robokassa call this action after transaction
   def paid
     if @notification.acknowledge # check if it’s genuine Robokassa request

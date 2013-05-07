@@ -377,7 +377,7 @@ ru:
         period:  Срок
         value:   Цена
 
-      ticket:
+      ticket_info:
         number: Количество
         original_price: Цена заведения
         price: Цена со скидкой

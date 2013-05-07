@@ -701,7 +701,7 @@ ActiveRecord::Schema.define(:version => 20130506102137) do
     t.text     "description"
   end
 
-  create_table "tickets", :force => true do |t|
+  create_table "ticket_infos", :force => true do |t|
     t.integer  "affiche_id"
     t.integer  "number"
     t.float    "original_price"
@@ -710,7 +710,18 @@ ActiveRecord::Schema.define(:version => 20130506102137) do
     t.datetime "updated_at",     :null => false
   end
 
-  add_index "tickets", ["affiche_id"], :name => "index_tickets_on_affiche_id"
+  add_index "ticket_infos", ["affiche_id"], :name => "index_ticket_infos_on_affiche_id"
+
+  create_table "tickets", :force => true do |t|
+    t.integer  "ticket_info_id"
+    t.string   "state"
+    t.string   "phone"
+    t.string   "code"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "tickets", ["ticket_info_id"], :name => "index_tickets_on_ticket_info_id"
 
   create_table "travels", :force => true do |t|
     t.text     "category"

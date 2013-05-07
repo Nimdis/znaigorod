@@ -12,12 +12,20 @@
         <p>тел. (3822) 94-22-03</p>
       </div>
 
-      <%= payment_service_for Affiche.first.id, Settings['robokassa.login'],
-        :amount =>  100,
-        :service => :robokassa,
-        :secret => Settings['robokassa.secret_1'] do |s| %>
-        <%= submit_tag "Submit" %>
-  <% end %>
+      <% if false %>
+        <%= payment_service_for Affiche.first.id, Settings['robokassa.login'],
+          :amount =>  100,
+          :service => :robokassa,
+          :html => { :method => :get },
+          :secret => Settings['robokassa.secret_1'] do |s| %>
+          <%= s.shp_foo '1' %>
+          <%= submit_tag "Submit" %>
+        <% end %>
+      <% end %>
+
+      <%= form_tag robokassa_new_path do %>
+        <%= submit_tag 'submit' %>
+      <% end %>
     </div>
 
     <h1>Обратная связь</h1>
