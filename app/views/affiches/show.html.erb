@@ -38,6 +38,16 @@
         <div class='info'>
           <div class='left_part'>
             <%= @affiche.has_ribbon %>
+            <ul>
+              <% @affiche.ticket_infos.each do |ticket_info| %>
+                <li>
+                  Цена <strike><%= ticket_info.original_price %></strike><%= ticket_info.price %>,
+                  уже куплено <%= ticket_info.tickets_sold.count %>,
+                  осталось <%= ticket_info.tickets_for_sale.count %>,
+                  <%= link_to 'Купить', new_ticket_info_payment_path(ticket_info) %>
+                </li>
+              <% end %>
+            </ul>
             <div class='image'>
               <div class="rating like_a_line">
                 <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => @affiche.model } %>

@@ -1,0 +1,5 @@
+<%= simple_form_for [@ticket_info, @payment] do |f| %>
+  <%= f.input :number, as: :select, collection: 1..@ticket_info.tickets_for_sale.count, include_blank: false %>
+  <%= f.input :phone %>
+  <%= f.submit 'Купить' %>
+<% end %>

@@ -16,7 +16,10 @@
       <ul>
         <% resource.ticket_infos.each do |ticket_info| %>
           <li>
-            Цена <%= "#{ticket_info.original_price}/#{ticket_info.price}" %>
+            Цена <%= "#{ticket_info.original_price}/#{ticket_info.price}" %>,
+            всего <%= ticket_info.tickets.count %>,
+            куплено <%= ticket_info.tickets_sold.count %>,
+            забронировано <%= ticket_info.tickets_reserved.count %>
         </li>
       <% end %>
     </ul>
