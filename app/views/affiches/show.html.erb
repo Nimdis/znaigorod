@@ -74,6 +74,18 @@
                 </div>
               <% end %>
             <% end %>
+            <ul class='tickets'>
+              <% @affiche.ticket_infos.each do |ticket_info| %>
+                <li>
+                  Цена
+                  <strike><%= ticket_info.original_price %></strike>
+                  <%= ticket_info.price %>,
+                  уже куплено <%= ticket_info.tickets_sold.count %>,
+                  осталось <%= ticket_info.tickets_for_sale.count %>,
+                  <%= link_to 'Купить', new_ticket_info_payment_path(ticket_info), class: :pay_ticket %>
+                </li>
+              <% end %>
+            </ul>
             <div class='text'>
               <%= @affiche.html_description %>
               <%= @affiche.html_attachments %>

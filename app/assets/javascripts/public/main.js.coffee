@@ -16,6 +16,7 @@ $ ->
   init_affiches_extend() if $('.content .affiche .trailer')
   init_affiches_filter() if $('.affiches_filter .periods .daily').length
   init_affiches_filter() if $('.navigation .periods .daily').length
+  init_pay_ticket() if $('a.pay_ticket').length
   init_tabs() if $('.content .tabs').length
   init_poster() if $('.content .image a img, .organization_info .image a img').length
   init_distribution() if $('.content .distribution').length

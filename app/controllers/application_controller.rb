@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include UrlHelper
   helper_method :banners, :hot_offers, :page, :per_page
 
-  layout 'public'
+  layout :resolve_layout
 
   def main_page
     @presenter = ShowingsPresenter.new(categories: ['movie'], period: 'today')
@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def resolve_layout
+    request.xhr? ? false : 'public'
+  end
 
   def page
     params[:page].blank? ? 1 : params[:page].to_i
