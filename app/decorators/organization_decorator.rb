@@ -43,7 +43,8 @@ class OrganizationDecorator < ApplicationDecorator
   end
 
   def organization_url
-    organization.subdomain? ? h.root_url(subdomain: organization.subdomain) : h.organization_url(organization)
+    #organization.subdomain? ? h.root_url(subdomain: organization.subdomain) :
+    h.organization_url(organization)
   end
 
   def email_link

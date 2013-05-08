@@ -67,7 +67,7 @@ class HitDecorator < ApplicationDecorator
         kind << h.content_tag(:li, h.link_to(category.mb_chars.capitalize, h.send("#{pluralized_kind}_path", options)))
       end
     else
-      kind << h.content_tag(:li, h.link_to(self.human_kind, h.affiches_path(kind: self.kind.pluralize, period: :all)))
+      kind << h.content_tag(:li, h.link_to(self.human_kind, h.affiches_path('categories[]' => self.kind)))
     end
     kind.html_safe
   end
@@ -138,9 +138,9 @@ class HitDecorator < ApplicationDecorator
     highlighted(field).to_s.split(",").each do |piece|
       link = ""
       if organization?
-        link = "/#{raw_suborganization.class.name.underscore.pluralize}/all/#{field.pluralize}/#{piece.squish.as_text.mb_chars.downcase}"
+        link = "/#{raw_suborganization.class.name.underscore.pluralize}/?#{field.pluralize}[]=#{piece.squish.as_text.mb_chars.downcase}"
       else
-        link = "/#{kind.pluralize}/all/#{field.pluralize}/#{piece.squish.as_text}"
+        link = h.affiches_path("#{field.pluralize}[]" => piece.squish.as_text)
       end
       res << h.content_tag(:li, h.link_to(piece.squish.html_safe, link))
     end
