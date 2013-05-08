@@ -29,8 +29,6 @@
 
       <div class='affiche'>
         <%= content_tag(:div, link_to(@affiche.human_kind, affiches_path(period: 'all', categories: [@affiche.kind])), class: 'kind') %>
-        <%= content_tag :div, "#{@affiche.age_min.to_i}+", class: :age if @affiche.age_min.present? %>
-
         <div class='head'>
           <%= content_tag :h1, @affiche.title.text_gilensize %>
           <%= content_tag :h2, @affiche.original_title.text_gilensize if @affiche.original_title? %>
@@ -40,6 +38,10 @@
           <div class='left_part'>
             <%= @affiche.has_ribbon %>
             <div class='image'>
+              <div class="rating like_a_line">
+                <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => @affiche.model } %>
+              </div>
+              <%= content_tag :div, "#{@affiche.age_min.to_i}+", class: :age if @affiche.age_min.present? %>
               <%= @affiche.item_poster %>
             </div>
 
@@ -51,7 +53,6 @@
           </div>
 
           <div class='description'>
-            <%= render :partial => 'user_ratings/block', :locals => { :parent_obj => @affiche.model } %>
             <div class='closest'>
               <%= @affiche.when_with_price %>
             </div>
@@ -220,6 +221,9 @@
                 <div class='title'><%= link_to affiche.title.text_gilensize, affiche.kind_affiche_path %></div>
                 <div class='image'>
                   <%= affiche.has_ribbon %>
+                  <div class="rating like_a_line mlt">
+                    <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => @affiche.model } %>
+                  </div>
                   <%= content_tag :div, "#{affiche.age_min.to_i}+", class: :age if affiche.age_min.present? %>
                   <%= affiche.more_like_this_poster %>
                 </div>

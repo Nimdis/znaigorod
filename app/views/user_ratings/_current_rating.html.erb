@@ -1,5 +1,5 @@
 <div class="current_rating">
-  <span class='title'><span class='title_label'>Рейтинг: </span><%= rating = (parent_obj.total_rating*5*2).round/2.0 %>/5</span>
+  <% rating = (parent_obj.total_rating*5*2).round/2.0 %>
   <% n,m = rating.to_s.split('.') %>
   <div class="star_wrapper" title='Пользовательских голосов: <%= parent_obj.user_ratings.count %>'>
     <% 5.times do |i| %>

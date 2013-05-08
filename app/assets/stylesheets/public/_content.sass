@@ -316,9 +316,9 @@
         color: #fff
 
     .age
-      +has_age(50px, 18px)
-      right: 10px
-      top: 50px
+      +has_age
+      right: -5px
+      top: 215px
 
     .head
       margin-bottom: 15px
@@ -344,6 +344,7 @@
         .left_part
           float: left
           margin-right: 10px
+          position: relative
           width: 180px
 
           .image
@@ -354,6 +355,10 @@
 
               img
                 display: block
+
+            .rating
+              margin: 221px 0 0 0
+              width: 170px
 
         .description
           +clearfix
