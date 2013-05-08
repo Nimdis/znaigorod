@@ -31,3 +31,19 @@ class Travel < ActiveRecord::Base
 
   search_with_facets :category, :feature, :offer
 end
+
+# == Schema Information
+#
+# Table name: travels
+#
+#  id              :integer          not null, primary key
+#  category        :text
+#  description     :text
+#  feature         :text
+#  title           :string(255)
+#  offer           :text
+#  organization_id :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+

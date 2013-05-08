@@ -261,7 +261,6 @@ end
 #  organization_id               :integer
 #  logotype_url                  :text
 #  slug                          :string(255)
-#  virtual_tour_link             :text
 #  rating                        :float
 #  non_cash                      :boolean
 #  priority_suborganization_kind :string(255)
@@ -272,5 +271,8 @@ end
 #  subdomain                     :string(255)
 #  user_id                       :integer
 #  status                        :string(255)
+#  total_rating                  :float
+#  primary_organization_id       :integer
+#  ability_to_comment            :boolean          default(TRUE)
 #
 

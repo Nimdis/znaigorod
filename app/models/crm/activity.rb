@@ -51,5 +51,6 @@ end
 #  state           :string(255)
 #  activity_at     :datetime
 #  contact_id      :integer
+#  kind            :string(255)
 #
 

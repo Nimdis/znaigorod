@@ -28,5 +28,6 @@ end
 #  popularity                :float
 #  age_min                   :float
 #  age_max                   :float
+#  total_rating              :float
 #
 

@@ -19,3 +19,17 @@ class Vote < ActiveRecord::Base
       errors.add :like, 'может быть оставлена только зарегистрированным пользователем' if user.nil?
     end
 end
+
+# == Schema Information
+#
+# Table name: votes
+#
+#  id            :integer          not null, primary key
+#  user_id       :integer
+#  like          :boolean          default(FALSE)
+#  voteable_id   :integer
+#  voteable_type :string(255)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+

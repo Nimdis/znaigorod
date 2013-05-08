@@ -131,7 +131,6 @@ end
 #  title       :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  virtual_tour_link   :string(255)
 #  vfs_path    :text
 #  description :text
 #

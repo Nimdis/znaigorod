@@ -27,3 +27,18 @@ class Comment < ActiveRecord::Base
       errors.add :body, 'Комментарии могут оставлять только зарегистрированные пользователи' if user.nil?
     end
 end
+
+# == Schema Information
+#
+# Table name: comments
+#
+#  id               :integer          not null, primary key
+#  user_id          :integer
+#  commentable_id   :integer
+#  commentable_type :string(255)
+#  body             :text
+#  ancestry         :string(255)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+

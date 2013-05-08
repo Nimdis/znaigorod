@@ -37,3 +37,16 @@ class Payment < ActiveRecord::Base
     ticket.reserve!
   end
 end
+
+# == Schema Information
+#
+# Table name: payments
+#
+#  id             :integer          not null, primary key
+#  ticket_info_id :integer
+#  number         :integer
+#  phone          :string(255)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+

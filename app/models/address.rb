@@ -25,5 +25,6 @@ end
 #  updated_at      :datetime         not null
 #  latitude        :string(255)
 #  longitude       :string(255)
+#  office          :string(255)
 #
 

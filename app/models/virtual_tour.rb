@@ -17,3 +17,16 @@ class VirtualTour < ActiveRecord::Base
     super || build_image
   end
 end
+
+# == Schema Information
+#
+# Table name: virtual_tours
+#
+#  id            :integer          not null, primary key
+#  link          :string(255)
+#  tourable_id   :integer
+#  tourable_type :string(255)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+

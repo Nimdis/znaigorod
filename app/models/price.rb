@@ -28,13 +28,14 @@ end
 #
 # Table name: prices
 #
-#  id         :integer          not null, primary key
-#  kind       :string(255)
-#  value      :integer
-#  count      :integer
-#  period     :string(255)
-#  service_id :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  kind        :string(255)
+#  value       :integer
+#  count       :integer
+#  period      :string(255)
+#  service_id  :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  description :string(255)
 #
 

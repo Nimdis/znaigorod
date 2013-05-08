@@ -110,13 +110,19 @@ end
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  oauth_key  :string(255)
-#  roles_mask :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  uid        :integer
+#  id                  :integer          not null, primary key
+#  roles_mask          :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  uid                 :string(255)
+#  sign_in_count       :integer          default(0)
+#  current_sign_in_at  :datetime
+#  last_sign_in_at     :datetime
+#  current_sign_in_ip  :string(255)
+#  last_sign_in_ip     :string(255)
+#  provider            :string(255)
+#  auth_raw_info       :text
+#  remember_created_at :datetime
+#  remember_token      :string(255)
 #
 

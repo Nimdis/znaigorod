@@ -56,5 +56,8 @@ end
 #  updated_at   :datetime         not null
 #  category     :text
 #  description  :text
+#  offer        :text
+#  kind         :string(255)
+#  min_value    :integer
 #
 

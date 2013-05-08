@@ -21,3 +21,17 @@ class UserRating < ActiveRecord::Base
       errors.add :value, 'Оценивать могут только зарегистрированные пользователи.' if user.nil?
     end
 end
+
+# == Schema Information
+#
+# Table name: user_ratings
+#
+#  id            :integer          not null, primary key
+#  user_id       :integer
+#  rateable_id   :integer
+#  rateable_type :string(255)
+#  value         :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
