@@ -12,6 +12,9 @@
           title: 'Форма заказа билета'
           modal: true
           resizable: false
+          open: ->
+            $('#payment_phone', $(this)).inputmask 'mask',
+              'mask': '+7-(999)-999-9999'
           close: ->
             $(this).dialog('destroy')
             $(this).remove()
