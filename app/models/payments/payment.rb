@@ -15,8 +15,12 @@ class Payment < ActiveRecord::Base
     ticket_info.price * number
   end
 
-  def approve!
+  def approve
     tickets.map(&:sell!)
+  end
+
+  def cancel
+    tickets.map(&:release!)
   end
 
   private

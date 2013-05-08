@@ -18,6 +18,10 @@ class Ticket < ActiveRecord::Base
     update_attributes state: 'sold'
   end
 
+  def release!
+    update_attributes state: 'for_sale'
+  end
+
   private
 
   def set_code_and_state
