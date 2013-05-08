@@ -9,6 +9,31 @@
     .visits
       +clearfix
 
+      .button
+        +border-radius(3px)
+        +background-image(linear-gradient(#df475e, #bc2a41))
+        +single-text-shadow
+        border: 1px solid #a62538
+        border-top-color: #f56076
+        border-bottom-color: #a72338
+        border-left-color: #d0455a
+        border-right-color: #d0455a
+        color: #fff
+        display: block
+        font-size: 12px
+        line-height: 12px
+        margin: 10px auto
+        padding: 5px 10px
+        position: relative
+        text-decoration: none
+
+        &:hover
+          cursor: pointer
+          background: #cf3a50
+
+        &:active
+          +box-shadow(inset 0 1px 1px #b21f35)
+
       .visits_counter
         .counter
           float: right
@@ -21,6 +46,7 @@
           margin: 0 1px
 
       .cloud_wrapper
+        margin-top: 47px
         margin-left: -5px
 
         .cloud_inner_wrapper
@@ -40,7 +66,7 @@
     border: 1px solid #cfb6dd
     float: left
     margin: 10px 0 0 0
-    width: 135px
+    width: 145px
 
     &:hover
       cursor: pointer
@@ -49,28 +75,30 @@
       +clearfix
       background: image_url('public/counter_bg.png') no-repeat right center
       float: none !important
-      height: 12px
-      line-height: 12px
-      padding: 3px 33px 3px 5px
+      padding: 0 33px 0 0
 
       .cloud_wrapper
         margin-top: 28px
 
       a
-        color: #794391
         border: none
+        color: #794391
+        height: 18px
+        line-height: 18px
+        padding: 0 0 0 5px
 
         &:hover
-          padding: 0
+          padding: 0 0 0 5px
 
       .votes_counter
         color: #fff
-        margin: 0
+        height: 18px
+        left: 118px
+        line-height: 18px
+        margin: 0 -28px 0 0
         padding: 0
         position: relative
-        left: 103px
         text-align: center
-        margin: 0 -28px 0 0
         width: 28px
 
       .user_like

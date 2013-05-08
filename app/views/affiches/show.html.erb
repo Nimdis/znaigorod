@@ -77,7 +77,7 @@
             <%end%>
           </ul>
           <div class="votes">
-            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @affiche.model, :button => true } %>
+            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @affiche.model } %>
           </div>
           <div class='share'>
             <%= render :partial => 'commons/share_this' %>
