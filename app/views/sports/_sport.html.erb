@@ -21,7 +21,17 @@
       </ul>
     </div>
   <% end %>
-  <% if sport.services.any? %>
+  <% if sport.services.first.offer? %>
+
+    <div class="services">
+      <% sport.services.group_by(&:category).each do |category, services| %>
+        <div class="service_header">
+          <h2><%= category %></h2>
+          <%= render :partial => 'organizations/services', :locals => { :services => services } %>
+        </div>
+      <% end %>
+    </div>
+  <% elsif sport.services.any? %>
     <div class="services_tables">
       <% sport.grouped_decorated_services.each do |kind, services| %>
         <ul class="services_table">
