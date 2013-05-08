@@ -121,8 +121,8 @@ class HitDecorator < ApplicationDecorator
 
   def places
     if organization?
-      address = highlighted('address')
-      link = address ? result_decorator.address_link(address) : result_decorator.address_link
+      #address = highlighted('address')
+      link = result_decorator.address_link
       h.content_tag(:div, h.content_tag(:span, link, class: :address), class: :places)
     else
       result_places = ""
