@@ -11,6 +11,7 @@ class Price < ActiveRecord::Base
 
   validates_presence_of :kind, :value
   validates_presence_of :count, :period, :if => :multiple?
+  validates_presence_of :count, :if => :certificate?
 
   default_scope order('value ASC')
 
