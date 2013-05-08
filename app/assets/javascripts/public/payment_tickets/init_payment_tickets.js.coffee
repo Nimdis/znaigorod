@@ -12,6 +12,9 @@
           title: 'Форма заказа билета'
           modal: true
           resizable: false
+          close: ->
+            $(this).dialog('destroy')
+            $(this).remove()
         true
       error: (jqXHR, textStatus, errorThrown) ->
         wrapped = $("<div>" + jqXHR.responseText + "</div>")
@@ -20,6 +23,5 @@
         wrapped.find('head').remove()
         console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
         true
-
     false
   true
