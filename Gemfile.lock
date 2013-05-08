@@ -30,7 +30,7 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
-    active_attr (0.6.0)
+    active_attr (0.8.0)
       activemodel (>= 3.0.2, < 4.1)
       activesupport (>= 3.0.2, < 4.1)
     active_utils (1.0.5)
@@ -190,6 +190,9 @@ GEM
     highline (1.6.16)
     hike (1.2.1)
     hirb (0.7.0)
+    httparty (0.10.0)
+      multi_json (~> 1.0)
+      multi_xml
     httpauth (0.2.0)
     i18n (0.6.1)
     journey (1.0.4)
@@ -208,6 +211,11 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mainsms_api (0.0.2)
+      active_attr (~> 0.7)
+      activesupport (~> 3.1)
+      hashie (~> 1.2)
+      httparty (~> 0.10)
     mime-types (1.22)
     money (5.1.1)
       i18n (~> 0.6.0)
@@ -469,6 +477,7 @@ DEPENDENCIES
   jquery-rails (= 2.0.3)
   kaminari
   libv8 (~> 3.11.8)
+  mainsms_api
   nested_form
   omniauth-facebook
   omniauth-google-oauth2

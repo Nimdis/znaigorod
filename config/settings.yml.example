@@ -65,3 +65,7 @@ robokassa:
   login:                login
   secret_1:             secret1
   secret_2:             secret2
+
+mainsms:
+  project:              project
+  api_key:              api_key

@@ -37,6 +37,7 @@ group :default do
   gem 'inherited_resources',        :git => 'git://github.com/DouweM/inherited_resources', :branch => 'nested-singletons' # NOTE: https://github.com/josevalim/inherited_resources/pull/194
   gem 'jquery-rails',               '2.0.3'
   gem 'kaminari'
+  gem 'mainsms_api'
   gem 'nested_form'
   gem 'omniauth-facebook'
   gem 'omniauth-google-oauth2'
