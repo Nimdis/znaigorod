@@ -1,0 +1,19 @@
+<h3>Билеты</h3>
+
+<ul>
+  <% @ticket_infos.each do |ticket_info| %>
+    <li>
+      <%= image_tag_for ticket_info.affiche.poster_url, 70, 100 %>
+      <p>Цена заведения <%= ticket_info.original_price %></p>
+      <p>Цена со скидкой <%= ticket_info.price %></p>
+      <% ticket_info.tickets.group_by(&:state_text).each do |state_text, tickets| %>
+        <h4><%= state_text %></h4>
+        <ul>
+          <% tickets.each do |ticket| %>
+            <li><%= ticket.code %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

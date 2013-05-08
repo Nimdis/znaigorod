@@ -1,5 +1,9 @@
 class Manage::TicketInfosController < Manage::ApplicationController
-  actions :new, :create, :destroy
+  actions :index, :new, :create
 
-  belongs_to :affiche
+  belongs_to :affiche, optional: true
+
+  def create
+    create! { parent_path }
+  end
 end

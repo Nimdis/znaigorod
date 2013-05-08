@@ -1,4 +1,6 @@
 class Ticket < ActiveRecord::Base
+  extend Enumerize
+
   attr_accessible :code, :phone, :state
 
   belongs_to :ticket_info
@@ -9,6 +11,8 @@ class Ticket < ActiveRecord::Base
   scope :for_sale, -> { where state: 'for_sale' }
   scope :reserved, -> { where state: 'reserved' }
   scope :sold,     -> { where state: 'sold' }
+
+  enumerize :state, in: [:for_sale, :reserved, :sold]
 
   def reserve!
     update_attributes state: 'reserved'

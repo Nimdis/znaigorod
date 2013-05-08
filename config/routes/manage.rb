@@ -63,6 +63,8 @@ Znaigorod::Application.routes.draw do
       end
     end
 
+    resources :ticket_infos, only: :index
+
     get 'statistics' => 'statistics#index'
 
     namespace :admin do

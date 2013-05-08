@@ -38,3 +38,9 @@ ru:
         certificate:           Подарочный сертификат
         single:                Разовая
         multiple:              Абонемент
+
+    ticket:
+      state:
+        for_sale: Доступные
+        reserved: Забронированные
+        sold:     Проданные
