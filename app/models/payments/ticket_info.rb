@@ -1,12 +1,12 @@
 class TicketInfo < ActiveRecord::Base
-  attr_accessible :number, :original_price, :price
+  attr_accessible :number, :original_price, :price, :description
 
   belongs_to :affiche
 
   has_many :payments, dependent: :destroy
   has_many :tickets, dependent: :destroy
 
-  validates_presence_of :number, :original_price, :price
+  validates_presence_of :number, :original_price, :price, :description
 
   after_create :create_tickets
 

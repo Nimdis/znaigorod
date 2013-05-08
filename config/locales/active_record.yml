@@ -378,6 +378,7 @@ ru:
         value:   Цена
 
       ticket_info:
-        number: Количество
+        number:         Количество
         original_price: Цена заведения
-        price: Цена со скидкой
+        price:          Цена со скидкой
+        description:    Описание
