@@ -1,3 +1,9 @@
+Fabricator(:exhibition) do
+  description 'exhibition description'
+  poster_url 'http://poster.url'
+  title 'exhibition title'
+end
+
 # == Schema Information
 #
 # Table name: affiches
@@ -25,10 +31,6 @@
 #  popularity                :float
 #  age_min                   :float
 #  age_max                   :float
+#  total_rating              :float
 #
 
-Fabricator(:exhibition) do
-  description 'exhibition description'
-  poster_url 'http://poster.url'
-  title 'exhibition title'
-end

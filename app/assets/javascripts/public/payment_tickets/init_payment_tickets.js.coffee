@@ -1,5 +1,5 @@
-@init_pay_ticket = () ->
-  link = $('a.pay_ticket')
+@init_ticket_payment = () ->
+  link = $('a.ticket_payment')
   link.click ->
     $.ajax
       type: 'GET'

@@ -37,17 +37,21 @@
 
         <div class='info'>
           <div class='left_part'>
-            <%= @affiche.has_ribbon %>
-            <ul>
+            <ul class='tickets'>
               <% @affiche.ticket_infos.each do |ticket_info| %>
-                <li>
-                  Цена <strike><%= ticket_info.original_price %></strike><%= ticket_info.price %>,
-                  уже куплено <%= ticket_info.tickets_sold.count %>,
-                  осталось <%= ticket_info.tickets_for_sale.count %>,
-                  <%= link_to 'Купить', new_ticket_info_payment_path(ticket_info) %>
-                </li>
+                <% if ticket_info.tickets_for_sale.any? %>
+                  <li>
+                    <%= link_to 'Купить билет', new_ticket_info_payment_path(ticket_info), class: :ticket_payment %>
+                    <div class='ticket_info'>
+                      <div class='ticket_header'>Распродажа билетов</div>
+                      <div class='ticket_price'><%= ticket_info.price.to_i %> руб.</div>
+                    </div>
+                    <div class='ticket_buy'>Купить</div>
+                  </li>
+                <% end %>
               <% end %>
             </ul>
+            <%= @affiche.has_ribbon %>
             <div class='image'>
               <div class="rating like_a_line">
                 <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => @affiche.model } %>
@@ -74,18 +78,6 @@
                 </div>
               <% end %>
             <% end %>
-            <ul class='tickets'>
-              <% @affiche.ticket_infos.each do |ticket_info| %>
-                <li>
-                  Цена
-                  <strike><%= ticket_info.original_price %></strike>
-                  <%= ticket_info.price %>,
-                  уже куплено <%= ticket_info.tickets_sold.count %>,
-                  осталось <%= ticket_info.tickets_for_sale.count %>,
-                  <%= link_to 'Купить', new_ticket_info_payment_path(ticket_info), class: :pay_ticket %>
-                </li>
-              <% end %>
-            </ul>
             <div class='text'>
               <%= @affiche.html_description %>
               <%= @affiche.html_attachments %>
