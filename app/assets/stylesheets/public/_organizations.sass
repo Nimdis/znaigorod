@@ -153,10 +153,42 @@
       h1
         color: #8302a5
         margin: 0 0 15px 0
-      .image
-        width: 200px
+
+      .left_part
         float: left
-        margin-right: 20px
+        margin-right: 10px
+        width: 180px
+
+        .image
+          margin: 0 0 15px 0
+
+        .social_actions
+          +clearfix
+          background-color: #fff
+          margin: 0
+          padding: 5px
+          width: 171px
+
+          .visits
+            +clearfix
+
+            .visits_counter
+              .counter
+                float: right
+
+            .avatars
+              margin: 8px 0 5px 0
+
+              img
+                +inline-block
+                margin: 0 1px
+
+          .votes
+            +clearfix
+
+          .votes_wrapper
+            float: none
+
       .place,
       .work_schedule,
       .phone,

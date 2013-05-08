@@ -376,6 +376,12 @@
                   +inline-block
                   margin: 0 1px
 
+              .cloud_wrapper
+                margin-left: -5px
+
+                .cloud_inner_wrapper
+                  background-position: 45px top
+
             .votes
               +clearfix
 
@@ -469,7 +475,9 @@
             height: 12px
             line-height: 12px
             padding: 3px 33px 3px 5px
-            position: relative
+
+            .cloud_wrapper
+              margin-top: 28px
 
             a
               color: #794391
@@ -482,9 +490,10 @@
               color: #fff
               margin: 0
               padding: 0
-              position: absolute
-              right: 0
+              position: relative
+              left: 93px
               text-align: center
+              margin: 0 -28px 0 0
               width: 28px
 
             .user_like

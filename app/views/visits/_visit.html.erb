@@ -3,8 +3,12 @@
     <%= link_to 'Участники', '#' %> <span class="counter"><%= visitable.visits.visited.count %></span>
 
     <div class="avatars">
-      <% visitable.visits.last(6).map(&:user).each do |user| %>
-        <%= image_tag user.avatar, :size => "24x24" %>
+      <% visitable.visits.visited.last(6).map(&:user).each do |user| %>
+        <% if user.profile %>
+          <a href='<%= user.profile %>' target='_blank'><%= image_tag user.avatar, :size => "24x24", :title => user.name %></a>
+        <% else %>
+          <%= image_tag user.avatar, :size => "24x24", :title => user.name %>
+        <% end %>
       <% end %>
     </div>
   </div>

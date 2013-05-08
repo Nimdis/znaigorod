@@ -17,7 +17,15 @@
 
       <%= @organization.iconize_info %>
       <h1><%= @organization.title %></h1>
-      <%= content_tag(:div, link_to(image_tag_for(@organization.logotype_url, 130, 130), @organization.logotype_url), class: :image) if @organization.logotype_url? %>
+      <div class="left_part">
+        <%= content_tag(:div, link_to(image_tag_for(@organization.logotype_url, 180, 180), @organization.logotype_url), class: :image) if @organization.logotype_url? %>
+        <div class='social_actions'>
+          <div class="visits">
+            <%= render :partial => 'visits/visit_wrapper', :locals => { :visitable => @organization.model } %>
+          </div>
+        </div>
+      </div>
+
       <%= render :partial => 'user_ratings/block', :locals => { :parent_obj => @organization } %>
       <%= content_tag(:div, @organization.address_link + @organization.office.to_s, class: :place) unless @organization.address.to_s.blank? %>
       <%= @organization.work_schedule %>
@@ -36,13 +44,6 @@
         <li class='title'>Категории:</li>
         <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
       </ul>
-
-      <div class="social_actions">
-        <div class="visits">
-          <%= render :partial => 'visits/visit_wrapper', :locals => { :visitable => @organization.model } %>
-        </div>
-        <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @organization.model } %>
-      </div>
     </div>
     <% if @organization.description.present? %>
       <div class='description'>
