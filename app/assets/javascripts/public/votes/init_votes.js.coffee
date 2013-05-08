@@ -1,4 +1,5 @@
 @init_votes = () ->
+  init_visitors()
   links = $('.votes_wrapper .user_like a').not('.charged')
   link = links.addClass('charged').on 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target).closest('.votes_wrapper')

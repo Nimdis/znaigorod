@@ -26,6 +26,7 @@ Znaigorod::Application.routes.draw do
     get :details_for_balloon, :on => :member
     put 'change_vote' => 'votes#change_vote', :as => :change_vote
     put 'change_visit' => 'visits#change_visit', :as => :change_visit
+    get 'visitors' => 'visits#visitors', :as => :visitors
 
     resources :comments, :only => [:new, :create, :show]
     resources :visits, :only => [:new, :create, :show, :update]
@@ -51,6 +52,8 @@ Znaigorod::Application.routes.draw do
 
     put "#{type}/:#{type}_id/change_vote" => "votes#change_vote", :as => "#{type}_change_vote"
     put "#{type}/:#{type}_id/change_visit" => "visits#change_visit", :as => "#{type}_change_visit"
+
+    get "#{type}/:#{type}_id/visitors" => "visits#visitors", :as => "#{type}_visitors"
   end
 
   Organization.basic_suborganization_kinds.each do |kind|

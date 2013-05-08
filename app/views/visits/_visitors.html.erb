@@ -1,0 +1,19 @@
+<% @users.each_slice(6) do |users| %>
+  <ul class="visitors">
+    <% users.each do |user| %>
+      <li>
+        <% if user.profile %>
+          <div class='user_item'>
+            <a href='<%= user.profile %>' target='_blank'><%= image_tag user.avatar, :size => "80x80", :title => user.name %></a>
+            <%= link_to user.name, user.profile, :class => 'name' %>
+          </div>
+        <% else %>
+          <div class='user_item'>
+            <%= image_tag user.avatar, :size => "24x24", :title => user.name %>
+            <span class='name'><%= user.name %></span>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

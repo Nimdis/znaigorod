@@ -1,7 +1,7 @@
 class VisitsController < ApplicationController
   inherit_resources
 
-  custom_actions :collection => :change_visit
+  custom_actions :collection => [:change_visit, :visitors]
 
   Affiche.descendants.each do |type|
     belongs_to type.name.underscore, :polymorphic => true, :optional => :true
@@ -21,6 +21,13 @@ class VisitsController < ApplicationController
 
       @visit.change_visit
       render :partial => 'visit', :locals => { :visitable => parent } and return
+    }
+  end
+
+  def visitors
+    visitors!{
+      @users = parent.visits.visited.map(&:user)
+      render :partial => 'visitors', :locals => { :visitable => parent } and return
     }
   end
 
