@@ -19,6 +19,11 @@
       <h1><%= @organization.title %></h1>
       <div class="left_part">
         <%= content_tag(:div, link_to(image_tag_for(@organization.logotype_url, 180, 180), @organization.logotype_url), class: :image) if @organization.logotype_url? %>
+        <div class='social_actions'>
+          <div class="visits">
+            <%= render :partial => 'visits/visit_wrapper', :locals => { :visitable => @organization.model } %>
+          </div>
+        </div>
       </div>
 
       <%= render :partial => 'user_ratings/block', :locals => { :parent_obj => @organization } %>
