@@ -355,39 +355,6 @@
               img
                 display: block
 
-          .social_actions
-            +clearfix
-            background-color: #fff
-            margin: 0
-            padding: 5px
-            width: 171px
-
-            .visits
-              +clearfix
-
-              .visits_counter
-                .counter
-                  float: right
-
-              .avatars
-                margin: 8px 0 5px 0
-
-                img
-                  +inline-block
-                  margin: 0 1px
-
-              .cloud_wrapper
-                margin-left: -5px
-
-                .cloud_inner_wrapper
-                  background-position: 45px top
-
-            .votes
-              +clearfix
-
-            .votes_wrapper
-              float: none
-
         .description
           +clearfix
           line-height: 1.4
@@ -455,52 +422,6 @@
             margin: 0 10px 10px 0
             a
               color: #707072
-
-        .votes
-          +clearfix
-          +border-radius(3px)
-          +background-image(linear-gradient(#dfd1e8, #cfb7db))
-          border: 1px solid #cfb6dd
-          float: left
-          margin: 10px 0 0 0
-          width: 125px
-
-          &:hover
-            cursor: pointer
-
-          .votes_wrapper
-            +clearfix
-            background: image_url('public/counter_bg.png') no-repeat right center
-            float: none
-            height: 12px
-            line-height: 12px
-            padding: 3px 33px 3px 5px
-
-            .cloud_wrapper
-              margin-top: 28px
-
-            a
-              color: #794391
-              border: none
-
-              &:hover
-                padding: 0
-
-            .votes_counter
-              color: #fff
-              margin: 0
-              padding: 0
-              position: relative
-              left: 93px
-              text-align: center
-              margin: 0 -28px 0 0
-              width: 28px
-
-            .user_like
-              float: left
-
-              span
-                display: none
 
         .share
           +clearfix

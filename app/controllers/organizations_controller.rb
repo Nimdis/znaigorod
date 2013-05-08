@@ -18,8 +18,6 @@ class OrganizationsController < ApplicationController
 
     @presenter = ShowingsPresenter.new(organization_ids: [@organization.id], order_by: params[:order_by], page: params[:page])
 
-    @visit = Visit.find_or_initialize_by_visitable_id_and_user_id(@organization.id, current_user.id)
-
     render partial: @presenter.partial, layout: false and return if request.xhr?
     render layout: "organization_layouts/#{@organization.subdomain}" if @organization.subdomain? && template_exists?(@organization.subdomain, 'layouts/organization_layouts')
   end

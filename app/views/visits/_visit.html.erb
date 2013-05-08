@@ -1,6 +1,6 @@
 <% if visitable.visits.visited.any? %>
   <div class="visits_counter" title='<%= t :like, :count => visitable.visits.count %>'>
-    <%= link_to 'Участники', '#' %> <span class="counter"><%= visitable.visits.visited.count %></span>
+    <%= link_to t(:visitors, :count => visitable.visits.visited.count), '#' %></span>
 
     <div class="avatars">
       <% visitable.visits.visited.last(6).map(&:user).each do |user| %>

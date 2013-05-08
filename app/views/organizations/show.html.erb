@@ -112,7 +112,12 @@
   <% end %>
 
   <div class="share_organization">
-    <%= render :partial => "commons/share_this" %>
+    <div class="votes">
+      <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @organization.model, :button => true } %>
+    </div>
+    <div class='share'>
+      <%= render :partial => "commons/share_this" %>
+    </div>
   </div>
 
   <%= render :partial => 'comments/block', :locals => { :parent_obj => @organization } if @organization.ability_to_comment? %>
