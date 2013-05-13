@@ -7,6 +7,14 @@
       many: "%{count} голосов"
       other: "%{count} голоса"
 
+  ticket:
+    for_sale:
+      zero: "Билетов больше нет"
+      one: "Остался %{count} билет"
+      few: "Осталось %{count} билета"
+      many: "Осталось %{count} билетов"
+      other: "Осталось %{count} билета"
+
   photoreport_periods:
     weekly: Фотогалереи этой недели
     monthly: Фотогалереи этого месяца

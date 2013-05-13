@@ -1,0 +1,63 @@
+.ui-dialog .ui-dialog-content
+  &.ticket_payment_form_wrapper
+    background-color: #fff
+    color: #000
+    .ticket_info
+      +clearfix
+      border-bottom: 1px dotted #cbcbcb
+      padding: 20px 20px 15px 20px
+      .ticket_prices
+        float: left
+        margin-right: 30px
+        .ticket_original_price
+          margin-bottom: 10px
+          color: #6c726e
+          .stroke
+            background: transparent image_url('public/ticket_stroke.png') repeat-x center
+            padding: 0 3px
+        .ticket_price
+          color: #fff
+          font-size: 20px
+          +text-shadow(#891426 0 1px 2px)
+          background-color: #e3223f
+          padding: 10px
+      .ticket_description_and_tickets
+        +clearfix
+        line-height: 1.4
+        .ticket_description
+          font-size: 14px
+          margin-bottom: 10px
+        .ticket_for_sale
+          padding-left: 21px
+          background: transparent image_url('public/ticket_for_sale.png') no-repeat left center
+    form
+      margin: 15px 20px 20px 20px
+      abbr
+        display: none
+      .input
+        margin-bottom: 5px
+        select,
+        input
+          font-size: 12px
+          font-family: Arial, Verdana, Tahoma, sans-serif
+          border: 1px solid #bfbfbf
+          background-color: #fff
+          padding: 2px 3px
+        input
+          width: 110px
+          padding: 3px
+      .submit
+        input
+          color: #fff
+          border-top: 1px solid #f55f78
+          border-right: 1px solid #db475d
+          border-bottom: 1px solid #b92940
+          border-left: 1px solid #db475d
+          +border-radius(3px)
+          background-color: #cd384e
+          +background-image(linear-gradient(#de465b, #bc2a41))
+          padding: 5px 10px
+          &.disabled
+            border: 1px solid #a9a9a9
+            background-color: #b3b3b3
+            +background-image(linear-gradient(#bfbdbe, #a9a9a9))
