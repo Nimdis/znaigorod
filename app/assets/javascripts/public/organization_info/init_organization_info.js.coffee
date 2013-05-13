@@ -1,7 +1,7 @@
 @init_organization_info = () ->
   $('.organization_info .info .description, .organization_info .sauna_hall_description').each (index, item) ->
     block = $(this)
-    block_height = block.height()
+    block_height = block.outerHeight(true)
     max_height = 26
     if block.height() > max_height
       block.height(max_height)
