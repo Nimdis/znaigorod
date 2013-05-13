@@ -53,24 +53,32 @@
               <li>
                 <div class="value">
                   <h3> <%= position %></h3>
-                  <%= link_to 'Подробнее', '#', class: :closed %>
+                  <%= link_to 'развернуть', '#', class: :closed %>
                 </div>
                 <div class="details">
-                  <ul>
-                    <% menu_positions.each do |position|  %>
-                      <li>
-                        <%= "#{position.title} (#{position.count}) &ndash; #{position.price}р.".html_safe %>
-                        <div>
-                          <%= image_tag_for(position.image_url, 200, 95, true, 'n') if position.image_url %>
+                  <% menu_positions.each do |position|  %>
+                    <div class="position">
+                      <div class="position_info">
+                        <div class="position_image">
+                          <%= link_to image_tag_for(position.image_url, 50, 50, true, 'n'), position.image_url if position.image_url %>
                         </div>
-
-                        <div>
+                        <span class="title">
+                          <%= "#{position.title.strip}" %>
+                        </span>
+                        <span class="count">
+                          <%= "#{position.count.strip}" %>
+                        </span>
+                        <div class="position_description">
                           <%= position.description %>
                           <%= I18n.t("cooking_time_kind", count: position.cooking_time) if position.cooking_time? %>
                         </div>
-                      </li>
-                    <% end %>
-                  </ul>
+                      </div>
+                      <div class="position_price">
+                        <span class="price"><%= "#{position.price} р." %></span>
+                      </div>
+
+                    </div>
+                  <% end %>
                 </div>
               </li>
             <% end %>

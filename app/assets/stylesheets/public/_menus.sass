@@ -52,15 +52,54 @@
             float: left
           a
             margin: 9px 0 0
+            &.closed:after
+              content: ' \25be'
+            &.opened:after
+              content: ' \25b4'
 
         .details
-          +border-radius(3px)
-          background-color: #f6eff7
           display: none
-          padding: 15px
-          margin: 0 15px 0 0
 
-          li
-            margin: 0 0 15px 0
-            li
-              margin: 3px 0 0
+          .position
+            +border-radius(3px)
+            background-color: #f6eff7
+            padding: 0px
+            margin: 10px 10px 10px 0
+            +min-height(50px)
+            &:hover
+              background-color: #f5e6f7
+
+            .position_price
+              +min-height(50px)
+              width: 100px
+              float: right
+              background-color: #dfc9de
+              text-align: center
+              .price
+                +inline-block
+                margin: 16px 0 0 0
+                font-size: 17px
+
+            .position_info
+              +min-height(50px)
+              width: 998px
+              float: left
+              font-size: 14px
+
+              +clearfix
+              .position_image
+                +min-height(50px)
+                float: left
+                margin-right: 10px
+
+              .title
+                +inline-block
+                margin: 10px 0 0 0
+              .count
+                +inline-block
+                margin: 10px 0 0
+                color: #707070
+              .position_description
+                margin: 7px 5px 0 0
+                color: #707070
+                font-size: 12px

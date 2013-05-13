@@ -20,6 +20,7 @@ $ ->
   init_poster() if $('.content .image a img, .organization_info .image a img').length
   init_distribution() if $('.content .distribution').length
   init_galleria() if $('.content .gallery_container').length
+  init_menu_colorbox() if $('.menus .info .details a img').length
   init_filters_toggler() if $('.need_toggler li').length
   init_filter_handler() if $('.filters_wrapper').length
   init_contest() if $('.content_wrapper .contest').length
