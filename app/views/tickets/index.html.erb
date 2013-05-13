@@ -1,0 +1,12 @@
+<ul>
+  <% @ticket_infos.each do |ticket_info| %>
+    <li>
+      <%= image_tag_for ticket_info.affiche.poster_url, 70, 100 %>
+      <p>Цена заведения <%= ticket_info.original_price %></p>
+      <p>Цена со скидкой <%= ticket_info.price %></p>
+      <p>Осталось <%= ticket_info.tickets_for_sale.count %></p>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @ticket_infos %>

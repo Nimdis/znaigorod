@@ -14,8 +14,12 @@ Znaigorod::Application.routes.draw do
   get 'search'            => 'search#search',              :as => :search
   get 'webcams'           => 'webcams#index'
 
-  resources :affiches,      :only => :index
-  resources :saunas,        :only => :index
+  resources :affiches, :only => :index
+  resources :saunas,   :only => :index
+
+  resources :tickets,  :only => :index do
+    get 'page/:page', :action => :index, :on => :collection
+  end
 
   resources :comments, :only => [] do
     put 'change_vote' => 'votes#change_vote', :as => :change_vote
