@@ -86,7 +86,7 @@ module Znaigorod
 
       generators.test_framework       :rspec
 
-      generators.fixture_replacement  :fabrication
+      generators.fixture_replacement  false
 
       generators.controller_specs     false
       generators.helper_specs         false

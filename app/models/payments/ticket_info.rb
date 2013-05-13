@@ -19,9 +19,7 @@ class TicketInfo < ActiveRecord::Base
   private
 
   def create_tickets
-    number.times do
-      tickets.create!
-    end
+    number.times { tickets.create!  }
   end
 end
 

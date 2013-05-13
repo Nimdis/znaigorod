@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513054957) do
+ActiveRecord::Schema.define(:version => 20130513075101) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -694,6 +694,15 @@ ActiveRecord::Schema.define(:version => 20130513054957) do
   end
 
   add_index "showings", ["affiche_id"], :name => "index_showings_on_affiche_id"
+
+  create_table "smses", :force => true do |t|
+    t.string   "phone"
+    t.string   "status"
+    t.integer  "smsable_id"
+    t.string   "smsable_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "social_links", :force => true do |t|
     t.integer  "organization_id"

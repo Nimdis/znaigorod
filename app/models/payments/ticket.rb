@@ -6,6 +6,8 @@ class Ticket < ActiveRecord::Base
   belongs_to :ticket_info
   belongs_to :payment
 
+  has_one :sms, :as => :smsable
+
   before_create :set_code_and_state
 
   scope :for_sale, -> { where state: 'for_sale' }
@@ -19,6 +21,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def sell!
+    create_sms!
     update_attributes state: 'sold'
   end
 
