@@ -4,7 +4,7 @@
     <p class='ticket_price'><%= @ticket_info.price.to_i %> р.</p>
   </div>
   <div class='ticket_description_and_tickets'>
-    <p class='ticket_description'><%= @ticket_info.description %></p>
+    <p class='ticket_description'><%= @ticket_info.description.gilensize %></p>
     <p class='ticket_for_sale'><%= t 'ticket.for_sale', count: @ticket_info.tickets_for_sale.count %></p>
   </div>
 </div>
