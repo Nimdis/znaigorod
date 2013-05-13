@@ -12,6 +12,10 @@ class TicketInfo < ActiveRecord::Base
 
   delegate :for_sale, :reserved, :sold, to: :tickets, prefix: true
 
+  def discount
+    ((original_price - price) * 100 / original_price).round
+  end
+
   private
 
   def create_tickets

@@ -1,15 +1,10 @@
-<% if defined?(index) %>
-  <ul class="breadcrumbs">
-    <li class="crumb"><%= link_to 'Знай Город', root_path %></li>
-    <li class="separator"><span>&nbsp;</span></li>
-    <li class="crumb"><%= link_to "Все обзоры", posts_path %></li>
-  </ul>
-<% elsif defined?(show) %>
-  <ul class="breadcrumbs">
-    <li class="crumb"><%= link_to 'Знай Город', root_path %></li>
-    <li class="separator"><span>&nbsp;</span></li>
-    <li class="crumb"><%= link_to "Все обзоры", posts_path %></li>
-    <li class="separator"><span>&nbsp;</span></li>
-    <li class="crumb"><%= link_to @post.title, @post %></li>
-  </ul>
+<ul class='breadcrumbs'>
+  <% if defined?(index) %>
+    <li class='crumb'><%= link_to 'Знай Город', root_path %></li>
+    <li class='separator'><span>&nbsp;</span></li>
+    <li class='crumb'><%= link_to 'Все обзоры', posts_path %></li>
+  <% elsif defined?(show) %>
+    <li class='separator'><span>&nbsp;</span></li>
+    <li class='crumb'><%= link_to @post.title, @post %></li>
 <% end %>
+</ul>
