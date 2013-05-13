@@ -14,7 +14,8 @@ class Organization < ActiveRecord::Base
                   :user_id, :phone_for_sms, :ability_to_comment
 
   # <=== CRM
-  attr_accessible :primary_organization_id
+  attr_accessible :primary_organization_id, :balance_delta
+  attr_accessor :balance_delta
 
   belongs_to :manager, :class_name => 'User', :foreign_key => 'user_id'
   belongs_to :organization
@@ -27,6 +28,11 @@ class Organization < ActiveRecord::Base
 
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation], default: :fresh, predicates: true
+
+  before_save :update_balance
+  def update_balance
+    self.balance = self.balance.to_f + balance_delta.to_f
+  end
 
   after_save :update_slave_organization_statuses
   def update_slave_organization_statuses

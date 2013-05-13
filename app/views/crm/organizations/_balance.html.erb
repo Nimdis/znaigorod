@@ -1,0 +1,4 @@
+<div class='view'>
+  <%= @organization.balance? ? @organization.balance : 0 %> руб.
+  <%= link_to 'изменить', edit_crm_organization_path(@organization, field: 'balance'), class: :edit %>
+</div>
