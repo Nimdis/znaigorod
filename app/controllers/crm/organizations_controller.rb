@@ -9,6 +9,6 @@ class Crm::OrganizationsController < Crm::ApplicationController
   end
 
   def update
-    update! { render partial: 'manager' and return }
+    update! { render partial: params[:field] and return }
   end
 end

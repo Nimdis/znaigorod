@@ -1,4 +1,4 @@
 <div class='view'>
   <%= @organization.manager ? @organization.manager : content_tag(:span, 'не назначен', class: :empty) %>
-  <%= link_to 'изменить', edit_crm_organization_path(@organization), class: :edit %>
+  <%= link_to 'изменить', edit_crm_organization_path(@organization, field: 'manager'), class: :edit %>
 </div>

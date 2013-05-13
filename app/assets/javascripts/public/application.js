@@ -12,7 +12,7 @@
  * = require ./cookie
  * = require ./colorbox
  * = require ./carousel
- * = require ./inputmask
+ * = require ../inputmask
  * = require ./scroll_to
  * = require ./sugar
  * = require ./swfobject

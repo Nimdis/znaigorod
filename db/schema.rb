@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130508081231) do
+ActiveRecord::Schema.define(:version => 20130513041031) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -358,6 +358,7 @@ ActiveRecord::Schema.define(:version => 20130508081231) do
     t.float    "total_rating"
     t.integer  "primary_organization_id"
     t.boolean  "ability_to_comment",            :default => true
+    t.string   "phone_for_sms"
   end
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true
