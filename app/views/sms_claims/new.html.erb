@@ -1,0 +1,7 @@
+<%= simple_form_for [parent, @sms_claim] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :phone %>
+  <%= f.input :details %>
+
+  <%= f.submit 'Оставить заявку' %>
+<% end %>

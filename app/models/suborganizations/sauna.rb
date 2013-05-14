@@ -56,6 +56,8 @@ class Sauna < ActiveRecord::Base
   accepts_nested_attributes_for :sauna_stuff
   accepts_nested_attributes_for :sauna_massage
 
+  has_many :sms_claims, :as => :claimed, :dependent => :destroy
+
   include Rating
 
   use_for_rating :sauna_halls, :sauna_accessory, :sauna_broom, :sauna_alcohol, :sauna_oil, :sauna_child_stuff, :sauna_stuff, :sauna_massage

@@ -383,3 +383,8 @@ ru:
         original_price: Цена заведения
         price:          Цена со скидкой
         description:    Описание
+
+      sms_claim:
+        name: Имя
+        phone: Телефон
+        details: Подробнее
