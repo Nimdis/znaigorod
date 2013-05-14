@@ -19,4 +19,23 @@ describe Payment do
       it { payment.should be_persisted }
     end
   end
+
+  describe 'after create reserve tickets' do
+    let(:ticket_info) { Fabricate :ticket_info, :number => 5 }
+    let(:payment) { Fabricate :payment, :number => 3, :ticket_info_id => ticket_info.id }
+
+    before { payment }
+
+    it { ticket_info.tickets_reserved.count.should == payment.number }
+  end
+
+  describe 'approve' do
+    let(:ticket_info) { Fabricate :ticket_info, :number => 5 }
+    let(:payment) { Fabricate :payment, :number => 3, :ticket_info_id => ticket_info.id }
+
+    before { payment.approve }
+
+    it { ticket_info.tickets_reserved.count.should be_zero }
+    it { ticket_info.tickets_sold.count.should == payment.number }
+  end
 end

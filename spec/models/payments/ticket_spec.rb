@@ -9,30 +9,30 @@ describe Ticket do
     its(:state) { should == 'for_sale' }
   end
 
-  describe 'states' do
-    describe '#reserve!' do
-      before { subject.reserve! }
-      its(:state) { should == 'reserved' }
-    end
+  describe '#reserve!' do
+    before { ticket.reserve! }
 
-    describe '#release!' do
-      before { subject.release! }
-      its(:state) { should == 'for_sale' }
-    end
+    its(:state) { should == 'reserved' }
+  end
 
-    describe '#sell!' do
-      before { subject.sell! }
-      its(:state) { should == 'sold' }
-    end
+  describe '#release!' do
+    before { ticket.release! }
+
+    its(:state) { should == 'for_sale' }
+  end
+
+  describe '#sell!' do
+    before { ticket.sell! }
+    its(:state) { should == 'sold' }
   end
 
   describe 'sending a message when purchasing' do
-    before { subject.sell! }
+    before { ticket.sell! }
 
     its(:sms) { should be_persisted }
 
     context 'phone of sms' do
-      it { subject.sms.phone.should == subject.phone }
+      it { ticket.sms.phone.should == ticket.payment.phone }
     end
   end
 end
