@@ -8,11 +8,25 @@ class SmsClaim < ActiveRecord::Base
   validates :phone, presence: true, :format => { :with => /\+7-\(\d{3}\)-\d{3}-\d{4}/ }
 
   has_one :sms, :as => :smsable
+
+  delegate :sms_claimable?, :to => :claimed
+
+  before_validation :check_balance
+
   after_create :send_sms
+  after_create :pay
 
   private
 
+  def check_balance
+    errors[:base] << I18n.t('activerecord.errors.messages.not_enough_money') unless claimed.enough_balance?
+  end
+
   def send_sms
     create_sms! :phone => claimed.organization.phone_for_sms
+  end
+
+  def pay
+    claimed.organization.update_attributes :balance_delta => -10
   end
 end
