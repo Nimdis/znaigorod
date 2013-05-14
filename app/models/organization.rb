@@ -11,9 +11,10 @@ class Organization < ActiveRecord::Base
                   :logotype_url, :non_cash, :priority_suborganization_kind,
                   :comment, :organization_stand_attributes, :additional_rating,
                   :social_links_attributes,
-                  :user_id, :phone_for_sms, :ability_to_comment
+                  :user_id, :ability_to_comment
 
-  # <=== CRM
+  ### <=== CRM
+
   attr_accessible :primary_organization_id, :balance_delta
   attr_accessor :balance_delta
 
@@ -29,16 +30,26 @@ class Organization < ActiveRecord::Base
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation], default: :fresh, predicates: true
 
+  after_save :update_slave_organization_statuses
+
+  def update_slave_organization_statuses
+    slave_organizations.update_all :status => status
+  end
+
+  ### CRM ===>
+
+  ### <=== Payments
+
+  attr_accessible :phone_for_sms
+  validates_format_of :phone_for_sms, :with => /\+7-\(\d{3}\)-\d{3}-\d{4}/, :if => :phone_for_sms?
+
   before_save :update_balance
+
   def update_balance
     self.balance = self.balance.to_f + balance_delta.to_f
   end
 
-  after_save :update_slave_organization_statuses
-  def update_slave_organization_statuses
-    slave_organizations.update_all :status => status
-  end
-  # CRM ===>
+  ### Payments ===>
 
   has_many :affiches,       :through => :showings, :uniq => true
   has_many :halls,          :dependent => :destroy

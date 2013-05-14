@@ -5,8 +5,8 @@ class Payment < ActiveRecord::Base
 
   has_many :tickets, after_add: :reserve_ticket
 
-  validates :number, presence: true, numericality: { greater_than: 0 }
-  validates :phone, presence: true, format: { with: /\+7-\(\d{3}\)-\d{3}-\d{4}/ }
+  validates :number, :presence => true, :numericality => { :greater_than => 0 }
+  validates :phone, :presence => true, :format => { :with => /\+7-\(\d{3}\)-\d{3}-\d{4}/ }
 
   before_validation :check_tickets_number
   after_create :reserve_tickets
