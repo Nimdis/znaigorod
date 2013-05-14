@@ -16,7 +16,6 @@ class Organization < ActiveRecord::Base
   ### <=== CRM
 
   attr_accessible :primary_organization_id, :balance_delta
-  attr_accessor :balance_delta
 
   belongs_to :manager, :class_name => 'User', :foreign_key => 'user_id'
   belongs_to :organization
@@ -31,22 +30,28 @@ class Organization < ActiveRecord::Base
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation], default: :fresh, predicates: true
 
   after_save :update_slave_organization_statuses
-
   def update_slave_organization_statuses
     slave_organizations.update_all :status => status
   end
+  private :update_slave_organization_statuses
 
   ### CRM ===>
 
   ### <=== Payments
 
-  attr_accessible :phone_for_sms
+  attr_accessible :phone_for_sms, :balance_delta
+  attr_accessor :balance_delta
+
   validates_format_of :phone_for_sms, :with => /\+7-\(\d{3}\)-\d{3}-\d{4}/, :if => :phone_for_sms?
 
-  before_save :update_balance
-
+  before_save :update_balance, :if => :balance_delta
   def update_balance
     self.balance = self.balance.to_f + balance_delta.to_f
+  end
+  private :update_balance
+
+  def sms_claimable?
+    phone_for_sms? && balance > 10
   end
 
   ### Payments ===>
