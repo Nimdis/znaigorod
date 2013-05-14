@@ -27,6 +27,6 @@ class SmsClaim < ActiveRecord::Base
   end
 
   def pay
-    claimed.organization.update_attributes :balance_delta => -10
+    claimed.organization.update_attributes :balance_delta => -Settings['sms_claim.price']
   end
 end
