@@ -15,9 +15,10 @@
         new_contact_form_wrapper.html(data)
         new_contact_form_wrapper.slideDown 'fast', ->
           $('form input:visible:first', new_contact_form_wrapper).focus()
+          $('form #contact_phone', new_contact_form_wrapper).inputmask 'mask',
+            'mask': '99-99-99'
           $('form #contact_mobile_phone', new_contact_form_wrapper).inputmask 'mask',
             'mask': '+7-(999)-999-9999'
-            'showMaskOnHover': false
           true
         true
     false
@@ -65,9 +66,10 @@
         form = $('.form_view', link.closest('.info')).hide()
         form.slideDown 'fast', ->
           $('input:visible:first', form).focus().select()
+          $('#contact_phone', form).inputmask 'mask',
+            'mask': '99-99-99'
           $('#contact_mobile_phone', form).inputmask 'mask',
             'mask': '+7-(999)-999-9999'
-            'showMaskOnHover': false
         true
     false
 
