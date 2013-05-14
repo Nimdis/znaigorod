@@ -29,6 +29,14 @@ class Sauna < ActiveRecord::Base
     index and sauna_halls.map(&:index)
   end
 
+  ### <=== Payments
+
+  has_many :sms_claims, :as => :claimed, :dependent => :destroy
+
+  delegate :sms_claimable?, :to => :organization
+
+  ### Payments ===>
+
   attr_accessible :sauna_accessory_attributes, :sauna_alcohol_attributes,
     :sauna_broom_attributes, :sauna_massage_attributes,
     :sauna_oil_attributes, :sauna_stuff_attributes,
@@ -55,8 +63,6 @@ class Sauna < ActiveRecord::Base
   accepts_nested_attributes_for :sauna_child_stuff
   accepts_nested_attributes_for :sauna_stuff
   accepts_nested_attributes_for :sauna_massage
-
-  has_many :sms_claims, :as => :claimed, :dependent => :destroy
 
   include Rating
 

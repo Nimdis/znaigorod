@@ -1,4 +1,6 @@
-<%= link_to 'Забронировать', new_sauna_sms_claim_path(sauna) %>
+<% if sauna.sms_claimable? %>
+  <%= link_to 'Забронировать', new_sauna_sms_claim_path(sauna) %>
+<% end %>
 
 <div class='suborganization_info sauna'>
   <table>
