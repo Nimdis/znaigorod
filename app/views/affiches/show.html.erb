@@ -36,21 +36,21 @@
         </div>
 
         <div class='info'>
-          <div class='left_part'>
-            <ul class='tickets'>
-              <% @affiche.ticket_infos.each do |ticket_info| %>
-                <% if ticket_info.tickets_for_sale.any? %>
-                  <li>
-                    <%= link_to 'Купить билет', new_ticket_info_payment_path(ticket_info), class: :ticket_payment %>
-                    <div class='ticket_info'>
-                      <div class='ticket_header'>Распродажа билетов</div>
-                      <div class='ticket_price'><%= ticket_info.price.to_i %> руб.</div>
-                    </div>
-                    <div class='ticket_buy'>Купить</div>
-                  </li>
-                <% end %>
+          <ul class='tickets'>
+            <% @affiche.ticket_infos.each do |ticket_info| %>
+              <% if ticket_info.tickets_for_sale.any? %>
+                <li>
+                  <%= link_to 'Купить билет', new_ticket_info_payment_path(ticket_info), class: :ticket_payment %>
+                  <div class='ticket_info'>
+                    <div class='ticket_header'>Распродажа билетов</div>
+                    <div class='ticket_price'><%= ticket_info.price.to_i %> руб.</div>
+                  </div>
+                  <div class='ticket_buy'>Купить</div>
+                </li>
               <% end %>
-            </ul>
+            <% end %>
+          </ul>
+          <div class='left_part'>
             <%= @affiche.has_ribbon %>
             <div class='image'>
               <div class="rating like_a_line">
