@@ -65,6 +65,9 @@
         form = $('.form_view', link.closest('.info')).hide()
         form.slideDown 'fast', ->
           $('input:visible:first', form).focus().select()
+          $('#contact_mobile_phone', form).inputmask 'mask',
+            'mask': '+7-(999)-999-9999'
+            'showMaskOnHover': false
         true
     false
 
