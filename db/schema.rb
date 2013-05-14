@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514044448) do
+ActiveRecord::Schema.define(:version => 20130514050940) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -698,7 +698,7 @@ ActiveRecord::Schema.define(:version => 20130514044448) do
   create_table "sms_claims", :force => true do |t|
     t.string   "name"
     t.string   "phone"
-    t.text     "description"
+    t.text     "details"
     t.integer  "claimed_id"
     t.string   "claimed_type"
     t.datetime "created_at",   :null => false
