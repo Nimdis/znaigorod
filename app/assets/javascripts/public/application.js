@@ -4,6 +4,7 @@
  * = require jquery-ui
  * = require jquery_ujs
  * = require magicsuggest
+ * = require inputmask
  * = require ./auth
  * = require ./rating
  * = require ./md5
@@ -12,7 +13,6 @@
  * = require ./cookie
  * = require ./colorbox
  * = require ./carousel
- * = require ../inputmask
  * = require ./scroll_to
  * = require ./sugar
  * = require ./swfobject
@@ -50,9 +50,9 @@
  * = require ./move_to_top
  * = require ./webcams
  * = require ./contest
- * = require public/menus
+ * = require ./menus
  * = require ./stream_drifting
  * = require ./services
- * = require public/visitors
+ * = require ./visitors
  * = require ./main
  */

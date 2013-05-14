@@ -15,6 +15,9 @@
         new_contact_form_wrapper.html(data)
         new_contact_form_wrapper.slideDown 'fast', ->
           $('form input:visible:first', new_contact_form_wrapper).focus()
+          $('form #contact_mobile_phone', new_contact_form_wrapper).inputmask 'mask',
+            'mask': '+7-(999)-999-9999'
+            'showMaskOnHover': false
           true
         true
     false
