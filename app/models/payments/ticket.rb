@@ -1,7 +1,7 @@
 class Ticket < ActiveRecord::Base
   extend Enumerize
 
-  attr_accessible :code, :phone, :state
+  attr_accessible :code, :state
 
   belongs_to :ticket_info
   belongs_to :payment
@@ -21,7 +21,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def sell!
-    create_sms! :phone => phone
+    create_sms! :phone => payment.phone
     update_attributes :state => 'sold'
   end
 

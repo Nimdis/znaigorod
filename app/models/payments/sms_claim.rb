@@ -1,7 +1,7 @@
 class SmsClaim < ActiveRecord::Base
   attr_accessible :description, :name, :phone
 
-  belongs_to :claimes, :polymorphic => true
+  belongs_to :claimed, :polymorphic => true
 
   validates_presence_of :description, :name, :phone, :clamed
 
@@ -11,6 +11,6 @@ class SmsClaim < ActiveRecord::Base
   private
 
   def send_sms
-    create_sms! :phone => phone
+    create_sms! :phone => claimed.organization.phone_for_sms
   end
 end
