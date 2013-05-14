@@ -3,7 +3,7 @@ class Sms < ActiveRecord::Base
 
   belongs_to :smsable, :polymorphic => true
 
-  validates_presence_of :smsable
+  validates_presence_of :phone, :smsable
 
   after_create :deliver
 

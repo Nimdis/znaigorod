@@ -7,6 +7,7 @@ ru:
       messages:
         invalid: имеет неверное значение
         at_least_one_value_should_be_checked: необходимо выбрать хотя бы одну категорию
+        not_enough_tickets: недостаточно билетов
 
     models:
       activity:                           Активность

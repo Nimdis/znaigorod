@@ -10,7 +10,7 @@ class TicketInfo < ActiveRecord::Base
 
   after_create :create_tickets
 
-  delegate :for_sale, :reserved, :sold, to: :tickets, prefix: true
+  delegate :count, :for_sale, :reserved, :sold, to: :tickets, prefix: true
 
   def discount
     ((original_price - price) * 100 / original_price).round
@@ -19,7 +19,7 @@ class TicketInfo < ActiveRecord::Base
   private
 
   def create_tickets
-    number.times { tickets.create!  }
+    number.times { tickets.create! }
   end
 end
 

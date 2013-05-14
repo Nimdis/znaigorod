@@ -75,6 +75,12 @@ module Znaigorod
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    config.to_prepare do
+      Dir[Rails.root.join('app/models/*/*.rb')].each do |model_path|
+        require_or_load model_path.to_s
+      end
+    end
+
     config.assets.paths << Rails.root.join("app", "assets", "docs")
     config.assets.paths << Rails.root.join("app", "assets", "flash")
     config.assets.paths << Rails.root.join("app", "assets", "fonts")

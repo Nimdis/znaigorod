@@ -8,7 +8,7 @@ class Payment < ActiveRecord::Base
   validates :number, presence: true, numericality: { greater_than: 0 }
   validates :phone, presence: true, format: { with: /\+7-\(\d{3}\)-\d{3}-\d{4}/ }
 
-  before_create :check_tickets_number
+  before_validation :check_tickets_number
   after_create :reserve_tickets
 
   def amount
@@ -26,7 +26,7 @@ class Payment < ActiveRecord::Base
   private
 
   def check_tickets_number
-    errors[:base] << 'not enough tickets' and return false if ticket_info.tickets_for_sale.count < number
+    errors[:base] << I18n.t('activerecord.errors.messages.not_enough_tickets') if ticket_info.tickets_for_sale.count < number
   end
 
   def reserve_tickets

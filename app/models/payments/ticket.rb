@@ -14,19 +14,19 @@ class Ticket < ActiveRecord::Base
   scope :reserved, -> { where state: 'reserved' }
   scope :sold,     -> { where state: 'sold' }
 
-  enumerize :state, in: [:for_sale, :reserved, :sold]
+  enumerize :state, :in => [:for_sale, :reserved, :sold]
 
   def reserve!
-    update_attributes state: 'reserved'
+    update_attributes :state => 'reserved'
   end
 
   def sell!
-    create_sms!
-    update_attributes state: 'sold'
+    create_sms! :phone => phone
+    update_attributes :state => 'sold'
   end
 
   def release!
-    update_attributes state: 'for_sale'
+    update_attributes :state => 'for_sale'
   end
 
   private
