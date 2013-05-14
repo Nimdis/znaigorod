@@ -2,7 +2,7 @@ $ ->
   init_date_picker()
   init_datetime_picker()
   init_manipulate_contacts() if $('.organization_show a.new_contact').length
-  init_manipulate_manager() if $('.organization_show .left .info .details .manager').length
+  init_manipulate_additional() if $('.organization_show .left .info .details .additional').length
   init_manipulate_activities() if $('.organization_show .left .activities a.new_activity').length
   init_manipulate_slave_organizations()
 

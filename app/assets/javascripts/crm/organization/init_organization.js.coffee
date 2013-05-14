@@ -108,45 +108,44 @@
 
   true
 
-@init_manipulate_manager = () ->
+@init_manipulate_additional = () ->
 
-  $('.organization_show .left .info .details .manager').each ->
-    manager_block = $(this)
-    $('.edit', manager_block).live 'click', ->
-      manager_edit_link = $(this)
+  $('.organization_show .left .info .details .additional').each ->
+    additional_block = $(this)
+    $('.edit', additional_block).live 'click', ->
+      additional_edit_link = $(this)
       $.ajax
         type: 'GET'
-        url: manager_edit_link.attr('href')
+        url: additional_edit_link.attr('href')
         success: (data, textStatus, jqXHR) ->
-          $('.view', manager_block).hide()
-          manager_block.append(data)
-          $('#organization_phone_for_sms', manager_block).inputmask 'mask',
+          $('.view', additional_block).hide()
+          additional_block.append(data)
+          $('#organization_phone_for_sms', additional_block).inputmask 'mask',
             'mask': '+7-(999)-999-9999'
             'showMaskOnHover': false
-          $('#organization_phone_for_sms', manager_block).focus()
+          $('#organization_phone_for_sms', additional_block).focus()
           true
       false
 
-    $('form .actions .cancel', manager_block).live 'click', ->
-      $('.form_view', manager_block).remove()
-      $('.view', manager_block).show()
+    $('form .actions .cancel', additional_block).live 'click', ->
+      $('.form_view', additional_block).remove()
+      $('.view', additional_block).show()
       false
 
-    $('form', manager_block).live 'submit', ->
-      manager_edit_form = $(this)
+    $('form', additional_block).live 'submit', ->
+      additional_edit_form = $(this)
       $.ajax
         type: 'POST'
-        url: manager_edit_form.attr('action')
-        data: manager_edit_form.serialize()
+        url: additional_edit_form.attr('action')
+        data: additional_edit_form.serialize()
         success: (data, textStatus, jqXHR) ->
-          $('.view', manager_block).remove()
-          manager_edit_form.remove()
-          manager_block.append(data)
+          $('.view', additional_block).remove()
+          additional_edit_form.remove()
+          additional_block.append(data)
           true
       false
     true
   true
-
 
 @init_manipulate_activities = () ->
   activities_block = $('.organization_show .left .activities')
