@@ -122,10 +122,10 @@
         success: (data, textStatus, jqXHR) ->
           $('.view', additional_block).hide()
           additional_block.append(data)
+          $('input:visible:first', additional_block).focus()
           $('#organization_phone_for_sms', additional_block).inputmask 'mask',
             'mask': '+7-(999)-999-9999'
             'showMaskOnHover': false
-          $('#organization_phone_for_sms', additional_block).focus()
           true
       false
 
