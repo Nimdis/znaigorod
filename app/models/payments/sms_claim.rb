@@ -3,7 +3,9 @@ class SmsClaim < ActiveRecord::Base
 
   belongs_to :claimed, :polymorphic => true
 
-  validates_presence_of :details, :name, :phone
+  validates_presence_of :details, :name
+
+  validates :phone, presence: true, :format => { :with => /\+7-\(\d{3}\)-\d{3}-\d{4}/ }
 
   has_one :sms, :as => :smsable
   after_create :send_sms
