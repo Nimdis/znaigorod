@@ -50,8 +50,12 @@ class Organization < ActiveRecord::Base
   end
   private :update_balance
 
+  def enough_balance?
+    balance? && balance > 10
+  end
+
   def sms_claimable?
-    phone_for_sms? && balance > 10
+    phone_for_sms? && enough_balance?
   end
 
   ### Payments ===>

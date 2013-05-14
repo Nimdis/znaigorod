@@ -33,7 +33,7 @@ class Sauna < ActiveRecord::Base
 
   has_many :sms_claims, :as => :claimed, :dependent => :destroy
 
-  delegate :sms_claimable?, :to => :organization
+  delegate :enough_balance?, :sms_claimable?, :to => :organization
 
   ### Payments ===>
 
