@@ -69,3 +69,6 @@ robokassa:
 mainsms:
   project:              project
   api_key:              api_key
+
+sms_claim:
+  price:                1
