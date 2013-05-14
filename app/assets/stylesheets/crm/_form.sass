@@ -83,13 +83,22 @@
 .organization_show .contacts .form_view
   margin: 0
 
-.organization_show .left .info .details .manager .form_view
+.organization_show .left .info .details .additional .form_view
   .input
     margin-right: 5px
     label
       display: none
+  .select
     select
       +default_input_style('2px 3px')
+  .tel
+    input
+      width: 110px
+      +default_input_style
+  .integer
+    input
+      width: 100px
+      +default_input_style
   .actions
     margin-top: 2px
 
