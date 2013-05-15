@@ -8,40 +8,47 @@
 
     <div class="details">
       <% services.each do |service| %>
-        <% if service.description? %>
-          <div class="service_description wide">
-            <span class="label"><%= service.title %></span>
-            <span class="value"><%= service.description %></span>
+        <div class="service_position">
+          <div class ="service_position_info">
+            <span class="title"><%= service.title %></span>
             <% if service.prices.any? %>
-              <% service.prices.each do |price| %>
-                <div class="service_price_value">
-                  <%= price.description %>
-                  <%= price %>
+              <% if service.prices.many? %>
+                <ul class="service_price">
+                  <% service.prices.each do |price| %>
+                    <li class="multi_price">
+                      <% if price.description? %>
+                        <abbr title="<%= price.description %>">
+                          <%= "#{price.value}руб." %>
+                        </abbr>
+                      <% else %>
+                        <abbr title="<%= I18n.t("price_kind.#{service.kind}", count: price.count || 1) %>">
+                          <%= "#{price.value}руб." %>
+                        </abbr>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <% price = service.prices.first %>
+                <div class="service_price">
+                  <div class="price">
+                    <%= "#{price.value}руб." %>
+                  </div>
+                  <% if price.count? %>
+                    <div class="service_price_info">
+                      <%= "#{I18n.t("price_kind.#{service.kind}", count: price.count)}, #{price.period}"  %>
+                    </div>
+                  <% end %>
                 </div>
               <% end %>
             <% end %>
           </div>
-        <% else %>
-          <% if service.prices.many? %>
+          <% if service.description? %>
             <div class="service_description">
-              <span class="label"><%= service.title %></span>
-              <span class="value"><%= service.description %></span>
-              <ul>
-                <% service.prices.each do |price| %>
-                  <li>
-                    <%= price.description %>
-                    <span class="service_price_value"><%= price %></span>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-          <% else %>
-            <div class="service_description one_price">
-              <%= service.title %>
-              <span class="service_price_value"><%= service.prices.first.value if service.prices.any?%></span>
+              <%= simple_format service.description %>
             </div>
           <% end %>
-        <% end %>
+        </div>
       <% end %>
     </div><!-- details -->
   </div>
