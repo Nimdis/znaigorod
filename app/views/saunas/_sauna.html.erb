@@ -1,5 +1,5 @@
 <% if sauna.sms_claimable? %>
-  <%= link_to 'Забронировать', new_sauna_sms_claim_path(sauna) %>
+  <%= link_to 'Забронировать', new_sauna_sms_claim_path(sauna), class: :sms_reservation %>
 <% end %>
 
 <div class='suborganization_info sauna'>
