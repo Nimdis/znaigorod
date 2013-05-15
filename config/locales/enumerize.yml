@@ -41,6 +41,6 @@ ru:
 
     ticket:
       state:
-        for_sale: Доступные
+        for_sale: Осталось
         reserved: Забронированные
         sold:     Проданные

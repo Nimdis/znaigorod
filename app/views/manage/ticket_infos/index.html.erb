@@ -4,15 +4,16 @@
   <% @ticket_infos.each do |ticket_info| %>
     <li>
       <%= image_tag_for ticket_info.affiche.poster_url, 70, 100 %>
+      <%= link_to ticket_info.affiche.title, manage_affiche_path(ticket_info.affiche) %>
+
       <p>Цена заведения <%= ticket_info.original_price %></p>
       <p>Цена со скидкой <%= ticket_info.price %></p>
+
+      <h4>Всего <%= ticket_info.tickets.count %></h4>
+
       <% ticket_info.tickets.group_by(&:state_text).each do |state_text, tickets| %>
-        <h4><%= state_text %></h4>
-        <ul>
-          <% tickets.each do |ticket| %>
-            <li><%= ticket.code %></li>
-          <% end %>
-        </ul>
+        <h4><%= "#{state_text} (#{tickets.size})" %></h4>
+        <p><%= tickets.map(&:code).join(', ') %></p>
       <% end %>
     </li>
   <% end %>
