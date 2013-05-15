@@ -9,8 +9,8 @@
     <% @ticket_infos.each do |ticket_info| %>
       <% if ticket_info.tickets_for_sale.any? %>
         <li class='<%= cycle 'first', 'second', 'third' %>'>
-          <div class='ribbon_wrapper'>
-            <div class='ribbon'>&ndash;<%= ticket_info.discount %>%</div>
+          <div class='has_tickets_for_sale'>
+            -<%= ticket_info.discount %>%
           </div>
           <div class='item_wrapper'>
             <div class='image'><%= image_tag_for ticket_info.affiche.poster_url, 120, 160 %></div>

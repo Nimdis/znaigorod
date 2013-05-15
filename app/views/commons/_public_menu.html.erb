@@ -1,9 +1,9 @@
-<div class="main_menu_wrapper">
-  <ul class="main_menu">
-    <li class="has_submenu">
-      <a href="/affiches">Афиша</a>
-      <ul class="submenu">
-        <li><a href="/affiches">Все мероприятия</a></li>
+<div class='main_menu_wrapper'>
+  <ul class='main_menu'>
+    <li class='has_submenu'>
+      <a href='/affiches'>Афиша</a>
+      <ul class='submenu'>
+        <li><a href='/affiches'>Все мероприятия</a></li>
         <% Affiche.ordered_descendants.each do |klass| %>
           <li>
             <%= link_to klass.model_name.human, send("#{klass.name.downcase.pluralize}_path") %>
@@ -11,26 +11,27 @@
         <% end %>
       </ul>
     </li>
-    <li class="has_submenu">
+    <li class='has_submenu noborder'>
       <%= link_to 'Заведения', organizations_path %>
-      <ul class="submenu">
-        <li><%= link_to "Кафе и рестораны", meals_path %></li>
-        <li><%= link_to "Развлечения", entertainments_path %></li>
-        <li><%= link_to "Сауны", saunas_path %></li>
-        <li><%= link_to "Автомойки", car_washes_path %></li>
-        <li><%= link_to "Автосалоны", car_sales_centers_path %></li>
-        <li><%= link_to "Культура", cultures_path %></li>
-        <li><%= link_to "Спорт", sports_path %></li>
-        <li><%= link_to "Творчество и развитие", creations_path %></li>
-        <li><%= link_to "Красота", salon_centers_path %></li>
+      <ul class='submenu'>
+        <li><%= link_to 'Кафе и рестораны', meals_path %></li>
+        <li><%= link_to 'Развлечения', entertainments_path %></li>
+        <li><%= link_to 'Сауны', saunas_path %></li>
+        <li><%= link_to 'Автомойки', car_washes_path %></li>
+        <li><%= link_to 'Автосалоны', car_sales_centers_path %></li>
+        <li><%= link_to 'Культура', cultures_path %></li>
+        <li><%= link_to 'Спорт', sports_path %></li>
+        <li><%= link_to 'Творчество и развитие', creations_path %></li>
+        <li><%= link_to 'Красота', salon_centers_path %></li>
       </ul>
     </li>
-    <li><%= link_to "Фотогалереи", photogalleries_path(period: "all") %></li>
-    <li><%= link_to "Обзоры", posts_path %></li>
+    <li class='tickets'><%= link_to 'Билеты со скидкой!', tickets_path %></li>
+    <li><%= link_to 'Фотогалереи', photogalleries_path(period: 'all') %></li>
+    <li><%= link_to 'Обзоры', posts_path %></li>
     <!--
-    <li><%#= link_to "Вэбкамеры", webcams_path %></li>
+    <li><%#= link_to 'Вэбкамеры', webcams_path %></li>
     -->
-    <li class="float_right"><%= link_to "Обратная связь", new_feedback_path %></li>
-    <li class="float_right"><%= link_to "Размещение информации", cooperation_path %></li>
+    <li class='float_right'><%= link_to 'Обратная связь', new_feedback_path %></li>
+    <li class='float_right'><%= link_to 'Размещение информации', cooperation_path %></li>
   </ul>
 </div>
