@@ -8,5 +8,4 @@
     if link.hasClass('closed')
       link.text('подробнее')
     false
-
   true
