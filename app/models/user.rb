@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :roles,          dependent: :destroy
   has_many :votes
   has_many :visits
+  has_many :payments
 
   serialize :auth_raw_info
 

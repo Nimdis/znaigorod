@@ -15,4 +15,13 @@ class PaymentsController < ApplicationController
       end
     end
   end
+
+  protected
+
+  def build_resource
+    super
+    @payment.user = current_user if current_user
+
+    @payment
+  end
 end
