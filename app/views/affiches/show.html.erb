@@ -36,20 +36,6 @@
         </div>
 
         <div class='info'>
-          <ul class='tickets'>
-            <% @affiche.ticket_infos.each do |ticket_info| %>
-              <% if ticket_info.tickets_for_sale.any? %>
-                <li>
-                  <%= link_to 'Купить билет', new_ticket_info_payment_path(ticket_info), class: :ticket_payment %>
-                  <div class='ticket_info'>
-                    <div class='ticket_header'>Распродажа билетов</div>
-                    <div class='ticket_price'><%= ticket_info.price.to_i %> руб.</div>
-                  </div>
-                  <div class='ticket_buy'>Купить</div>
-                </li>
-              <% end %>
-            <% end %>
-          </ul>
           <div class='left_part'>
             <%= @affiche.has_ribbon %>
             <div class='image'>
@@ -68,6 +54,20 @@
           </div>
 
           <div class='description'>
+            <ul class='tickets'>
+              <% @affiche.ticket_infos.each do |ticket_info| %>
+                <% if ticket_info.tickets_for_sale.any? %>
+                  <li>
+                    <%= link_to 'Купить билет', new_ticket_info_payment_path(ticket_info), class: :ticket_payment %>
+                    <div class='ticket_info'>
+                      <div class='ticket_header'>Распродажа билетов</div>
+                      <div class='ticket_price'><%= ticket_info.price.to_i %> руб.</div>
+                    </div>
+                    <div class='ticket_buy'>Купить</div>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
             <div class='closest'>
               <%= @affiche.when_with_price %>
             </div>

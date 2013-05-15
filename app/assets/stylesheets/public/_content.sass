@@ -355,49 +355,6 @@
               margin: 221px 0 0 0
               width: 170px
 
-        .tickets
-          float: right
-          width: 210px
-          li
-            width: 207px
-            height: 72px
-            +clearfix
-            position: relative
-            background: transparent image_url('public/ticket_bg.png')
-            margin-bottom: 5px
-            .ticket_payment
-              width: 207px
-              height: 72px
-              overflow: hidden
-              text-indent: -9999em
-              position: absolute
-              top: 0
-              left: 0
-              z-index: 10
-            .ticket_info
-              border: 1px solid #dadada
-              border-bottom: none
-              margin: 12px 12px 0 12px
-              .ticket_header
-                position: absolute
-                top: 8px
-                left: 30px
-                font-size: 11px
-                line-height: 0.8
-                font-weight: bold
-                background-color: #fff
-                padding: 0 3px
-              .ticket_price
-                color: #e3223f
-                font-size: 20px
-                text-align: center
-            .ticket_buy
-              color: #fff
-              font-size: 10px
-              text-align: center
-              background-color: #e3223f
-              padding: 1px 0 3px
-              margin: 0 12px
 
         .image
           width: 180px
@@ -411,6 +368,52 @@
         .description
           +clearfix
           line-height: 1.4
+          .tickets
+            float: right
+            width: 210px
+            li
+              width: 207px
+              height: 72px
+              +clearfix
+              position: relative
+              background: transparent image_url('public/ticket_bg.png')
+              margin-bottom: 5px
+              &:before
+                content: ''
+                padding: 0
+              .ticket_payment
+                width: 207px
+                height: 72px
+                overflow: hidden
+                text-indent: -9999em
+                position: absolute
+                top: 0
+                left: 0
+                z-index: 10
+              .ticket_info
+                border: 1px solid #dadada
+                border-bottom: none
+                margin: 12px 12px 0 12px
+                .ticket_header
+                  position: absolute
+                  top: 8px
+                  left: 30px
+                  font-size: 11px
+                  line-height: 0.8
+                  font-weight: bold
+                  background-color: #fff
+                  padding: 0 3px
+                .ticket_price
+                  color: #e3223f
+                  font-size: 20px
+                  text-align: center
+            .ticket_buy
+              color: #fff
+              font-size: 10px
+              text-align: center
+              background-color: #e3223f
+              padding: 1px 0 3px
+              margin: 0 12px
           h1, h2, h3, h4, h5, p, table, ol, ul
             margin-bottom: 10px
             line-height: 1.5
