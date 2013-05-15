@@ -11,6 +11,7 @@
         font-size: 17px
         color: #fff
         width: 260px
+        height: 17px
         position: relative
         background-color: #894195
         padding: 7px 10px
@@ -38,8 +39,20 @@
       .info
         margin: 5px 0 5px 15px
 
+        +clearfix
+        h3, a
+          float: left
+
+        a
+          margin: 9px 0 0
+          &.closed:after
+            content: ' \25be'
+          &.opened:after
+            content: ' \25b4'
+
         .details
           display: none
+          clear: left
 
           .service_position
             +border-radius(3px)
