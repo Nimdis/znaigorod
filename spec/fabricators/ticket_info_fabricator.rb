@@ -3,4 +3,5 @@ Fabricator :ticket_info do
   original_price 1000
   price 500
   description 'some concert'
+  affiche { Fabricate :exhibition }
 end

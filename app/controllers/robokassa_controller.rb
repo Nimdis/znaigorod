@@ -7,6 +7,9 @@ class RobokassaController < ApplicationController
     notification = Robokassa::Notification.new(request.raw_post, secret: Settings['robokassa.secret_2'])
 
     if notification.acknowledge
+      payment = Payment.find(notification.item_id)
+      payment.approve
+
       render text: notification.success_response
     else
       head :bad_request
@@ -17,8 +20,6 @@ class RobokassaController < ApplicationController
     notification = Robokassa::Notification.new(request.raw_post, secret: Settings['robokassa.secret_1'])
     payment = Payment.find(notification.item_id)
     affiche = payment.ticket_info.affiche
-
-    payment.approve if notification.acknowledge
 
     redirect_to affiche, notice: I18n.t('notice.robokassa.success')
   end
