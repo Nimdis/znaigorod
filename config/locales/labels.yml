@@ -90,6 +90,7 @@ ru:
   service_min_price:
     visiting: "от %{count} руб. за посещение"
     lesson: "от %{count} руб. за занятие"
+    washing: "от %{count} руб."
 
   cooking_time_kind:
     one: "Время приготовления: минута."
