@@ -5,6 +5,7 @@
  * = require jquery_ujs
  * = require magicsuggest
  * = require inputmask
+ * = require tipsy
  * = require ./auth
  * = require ./rating
  * = require ./md5
