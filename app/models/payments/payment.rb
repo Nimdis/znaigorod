@@ -4,6 +4,7 @@ class Payment < ActiveRecord::Base
   attr_accessible :number, :phone
 
   belongs_to :ticket_info
+  belongs_to :user
 
   has_one :sms, :as => :smsable
 

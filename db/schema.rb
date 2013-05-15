@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130515021110) do
+ActiveRecord::Schema.define(:version => 20130515102142) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -386,9 +386,11 @@ ActiveRecord::Schema.define(:version => 20130515021110) do
     t.string   "phone"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "user_id"
   end
 
   add_index "payments", ["ticket_info_id"], :name => "index_payments_on_ticket_info_id"
+  add_index "payments", ["user_id"], :name => "index_payments_on_user_id"
 
   create_table "pool_table_prices", :force => true do |t|
     t.integer  "pool_table_id"
