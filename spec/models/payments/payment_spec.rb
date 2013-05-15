@@ -20,7 +20,7 @@ describe Payment do
     end
   end
 
-  describe 'after create reserve tickets' do
+  describe 'reserve tickets' do
     let(:ticket_info) { Fabricate :ticket_info, :number => 5 }
     let(:payment) { Fabricate :payment, :number => 3, :ticket_info_id => ticket_info.id }
 

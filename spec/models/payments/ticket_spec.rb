@@ -4,7 +4,7 @@ describe Ticket do
   let(:ticket) { Fabricate :ticket }
   subject { ticket }
 
-  describe 'set code and state after create' do
+  describe 'set code and state' do
     its(:code) { should be_present }
     its(:state) { should == 'for_sale' }
   end

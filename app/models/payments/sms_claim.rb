@@ -13,8 +13,7 @@ class SmsClaim < ActiveRecord::Base
 
   before_validation :check_balance
 
-  after_create :send_sms
-  after_create :pay
+  after_create :send_sms, :pay
 
   private
 
@@ -27,6 +26,8 @@ class SmsClaim < ActiveRecord::Base
   end
 
   def pay
-    claimed.organization.update_attributes :balance_delta => -Settings['sms_claim.price']
+    organization = claimed.organization
+    organization.balance_delta = -Settings['sms_claim.price']
+    organization.save :validate => false
   end
 end
