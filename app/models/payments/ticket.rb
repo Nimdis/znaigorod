@@ -23,7 +23,9 @@ class Ticket < ActiveRecord::Base
   end
 
   def release!
-    update_attributes :state => 'for_sale'
+    self.state = 'for_sale'
+    self.payment_id = nil
+    self.save
   end
 
   private
