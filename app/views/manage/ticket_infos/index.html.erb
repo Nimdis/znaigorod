@@ -9,11 +9,11 @@
       <p>Цена заведения <%= ticket_info.original_price %></p>
       <p>Цена со скидкой <%= ticket_info.price %></p>
 
-      <h4>Всего <%= ticket_info.tickets.count %></h4>
+      <p>Всего билетов <%= ticket_info.tickets.count %></p>
+      <p>Коды: <%= ticket_info.tickets.map(&:code).join(', ') %></p>
 
       <% ticket_info.tickets.group_by(&:state_text).each do |state_text, tickets| %>
-        <h4><%= "#{state_text} (#{tickets.size})" %></h4>
-        <p><%= tickets.map(&:code).join(', ') %></p>
+        <p><%= "#{state_text} (#{tickets.size})" %></p>
       <% end %>
     </li>
   <% end %>
