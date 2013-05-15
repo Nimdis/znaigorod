@@ -25,14 +25,4 @@ describe Ticket do
     before { ticket.sell! }
     its(:state) { should == 'sold' }
   end
-
-  describe 'sending a message when purchasing' do
-    before { ticket.sell! }
-
-    its(:sms) { should be_persisted }
-
-    context 'phone of sms' do
-      it { ticket.sms.phone.should == ticket.payment.phone }
-    end
-  end
 end

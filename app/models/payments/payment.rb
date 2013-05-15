@@ -1,7 +1,11 @@
+# encoding: utf-8
+
 class Payment < ActiveRecord::Base
   attr_accessible :number, :phone
 
   belongs_to :ticket_info
+
+  has_one :sms, :as => :smsable
 
   has_many :tickets, after_add: :reserve_ticket
 
@@ -17,6 +21,8 @@ class Payment < ActiveRecord::Base
 
   def approve
     tickets.map(&:sell!)
+
+    create_sms! :phone => phone, :message => message
   end
 
   def cancel
@@ -35,6 +41,10 @@ class Payment < ActiveRecord::Base
 
   def reserve_ticket(ticket)
     ticket.reserve!
+  end
+
+  def message
+    "#{ticket_info.affiche.title}. " << (tickets.many? ? 'Коды билетов: ' : 'Код билета: ') << tickets.pluck(:code).join(', ')
   end
 end
 
