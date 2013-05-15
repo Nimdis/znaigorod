@@ -23,6 +23,7 @@ Znaigorod::Application.routes.draw do
 
   resources :comments, :only => [] do
     put 'change_vote' => 'votes#change_vote', :as => :change_vote
+    put 'liked' => 'votes#liked', :as => :liked
   end
 
   resources :organizations, :only => [:index, :show] do
