@@ -2,7 +2,6 @@
 
   links = $('a.ticket_payment')
 
-
   links.each ->
     link = $(this)
     link.click ->
@@ -13,7 +12,7 @@
           container = $('<div class="ticket_payment_form_wrapper" />').appendTo('body').hide().html(data)
           container.dialog
             width: 640
-            height: 255
+            height: 360
             title: 'Форма заказа билета'
             modal: true
             resizable: false
@@ -34,6 +33,7 @@
           console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
           true
       false
+
     true
 
   $('.ticket_payment_form_wrapper form').live 'submit', ->
