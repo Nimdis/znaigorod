@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514050940) do
+ActiveRecord::Schema.define(:version => 20130515021110) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -712,6 +712,7 @@ ActiveRecord::Schema.define(:version => 20130514050940) do
     t.string   "smsable_type"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.text     "message"
   end
 
   create_table "social_links", :force => true do |t|

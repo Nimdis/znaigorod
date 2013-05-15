@@ -21,7 +21,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def sell!
-    create_sms! :phone => payment.phone
+    create_sms! :phone => payment.phone, :message => code
     update_attributes :state => 'sold'
   end
 

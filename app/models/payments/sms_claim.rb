@@ -22,7 +22,7 @@ class SmsClaim < ActiveRecord::Base
   end
 
   def send_sms
-    create_sms! :phone => claimed.organization.phone_for_sms
+    create_sms! :phone => claimed.organization.phone_for_sms, :message => 'find me sms_claim.rb'
   end
 
   def pay
