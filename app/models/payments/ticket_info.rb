@@ -13,7 +13,7 @@ class TicketInfo < ActiveRecord::Base
   delegate :count, :for_sale, :reserved, :sold, to: :tickets, prefix: true
 
   def discount
-    ((original_price - price) * 100 / original_price).round
+    ((original_price - price) * 100 / original_price).round if tickets_for_sale.any?
   end
 
   private
