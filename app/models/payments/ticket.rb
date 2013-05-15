@@ -29,7 +29,7 @@ class Ticket < ActiveRecord::Base
   private
 
   def set_code_and_state
-    self.code = SecureRandom.hex(3)
+    self.code = 4.times.map { Random.rand(10) }.join
     self.state = 'for_sale'
   end
 end
