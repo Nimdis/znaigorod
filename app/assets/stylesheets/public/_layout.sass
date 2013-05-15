@@ -204,6 +204,8 @@ body
           display: block
         a
           background-color: #70398a
+      &.noborder
+        border: none
       &.has_submenu
         background: transparent image_url('public/main_menu_arrow.png') no-repeat right center
         padding-right: 38px
@@ -234,10 +236,18 @@ body
         background-color: #70398a
         &:hover
           display: block
+      &.tickets
+        font-weight: bold
+        background: transparent image_url('public/ticket_main_menu_bg.png') no-repeat
+        border: none
+        padding: 17px 11px 16px
+        margin-top: -18px
+        &:hover a
+          background-color: transparent
 
 .content_wrapper
   width: $common_width
-  margin: 15px auto 0
+  margin: 25px auto 0
 
 .footer_wrapper
   background: #523a71 image_url('public/footer_bg.png') top left
