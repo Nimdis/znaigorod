@@ -12,6 +12,8 @@ class TicketInfo < ActiveRecord::Base
 
   delegate :count, :for_sale, :reserved, :sold, to: :tickets, prefix: true
 
+  scope :ordered, -> { order('created_at DESC') }
+
   def discount
     ((original_price - price) * 100 / original_price).round if tickets_for_sale.any?
   end
