@@ -1,4 +1,22 @@
+init_dialog = () ->
+  $("<div class='liked_box'/>").dialog
+    autoOpen: false
+    draggable: false
+    height: 'auto'
+    modal: true
+    position: ['middle', 50]
+    resizable: false
+    title: 'Участники'
+    width: 'auto'
+
 @init_votes = () ->
+  init_dialog() unless $('.liked_box').length
+  $('.votes_counter a').on 'ajax:success', (evt, response, status, jqXHR) ->
+    $('.liked_box').dialog(
+      open: (event, ui) ->
+        $(event.target).html(jqXHR.responseText)
+    ).dialog('open')
+
   init_visitors()
   links = $('.votes_wrapper .user_like a').not('.charged')
   link = links.addClass('charged').on 'ajax:success', (evt, response, status, jqXHR) ->

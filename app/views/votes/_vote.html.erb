@@ -1,6 +1,6 @@
 <% if voteable.votes.liked.any? %>
   <div class="votes_counter" title='<%= t :like, :count => voteable.votes.count %>'>
-    <%= voteable.votes.liked.count %>
+    <%= link_to voteable.votes.liked.count, polymorphic_url([voteable, :liked]), :remote => true %>
   </div>
 <% end %>
 

@@ -1,7 +1,7 @@
 class VotesController < ApplicationController
   inherit_resources
 
-  custom_actions :collection => :change_vote
+  custom_actions :collection => [:change_vote, :liked]
 
   Affiche.descendants.each do |type|
     belongs_to type.name.underscore, :polymorphic => true, :optional => :true
@@ -22,6 +22,13 @@ class VotesController < ApplicationController
 
       @vote.change_vote
       render :partial => 'vote', :locals => { :voteable => parent } and return
+    }
+  end
+
+  def liked
+    liked!{
+      @users = parent.votes.liked.map(&:user)
+      render :partial => 'liked', :locals => { :visitable => parent } and return
     }
   end
 end

@@ -31,6 +31,7 @@ Znaigorod::Application.routes.draw do
     put 'change_vote' => 'votes#change_vote', :as => :change_vote
     put 'change_visit' => 'visits#change_visit', :as => :change_visit
     get 'visitors' => 'visits#visitors', :as => :visitors
+    get 'liked' => 'votes#liked', :as => :liked
 
     resources :comments, :only => [:new, :create, :show]
     resources :visits, :only => [:new, :create, :show, :update]
@@ -58,6 +59,7 @@ Znaigorod::Application.routes.draw do
     put "#{type}/:#{type}_id/change_visit" => "visits#change_visit", :as => "#{type}_change_visit"
 
     get "#{type}/:#{type}_id/visitors" => "visits#visitors", :as => "#{type}_visitors"
+    get "#{type}/:#{type}_id/liked" => "votes#liked", :as => "#{type}_liked"
   end
 
   Organization.basic_suborganization_kinds.each do |kind|
