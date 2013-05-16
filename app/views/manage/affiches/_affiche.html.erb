@@ -21,7 +21,18 @@
             осталось <%= ticket_info.tickets_for_sale.count %>
             куплено <%= ticket_info.tickets_sold.count %>,
             забронировано <%= ticket_info.tickets_reserved.count %>,
-            коды: <%= ticket_info.tickets.map { |ticket| "#{ticket.code} " << (ticket.payment ? "(#{ticket.payment.phone})" : '') }.join(', ') %>
+            <p>
+              коды: <%= ticket_info.tickets.map(&:code).join(', ') %>
+            </p>
+            <table class='tickets'>
+              <% ticket_info.tickets.each do |ticket| %>
+                <tr>
+                  <td><%= ticket.code %></td>
+                  <td><%= ticket.payment ? "(#{ticket.payment.phone})" : '' %></td>
+                  <td><%= ticket.state_text %></td>
+                </tr>
+              <% end %>
+            </table>
         </li>
       <% end %>
     </ul>
