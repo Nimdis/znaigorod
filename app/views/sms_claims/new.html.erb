@@ -1,7 +1,7 @@
 <%= simple_form_for [parent, @sms_claim] do |f| %>
   <%= f.input :name %>
   <%= f.input :phone %>
-  <%= f.input :details %>
+  <%= f.input :details, :input_html => { :placeholder => t("sms_claim.#{parent.class.name.underscore}.placeholder") } %>
 
   <%= f.submit 'Оставить заявку' %>
 <% end %>

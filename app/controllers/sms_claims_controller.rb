@@ -3,7 +3,9 @@ class SmsClaimsController < ApplicationController
 
   actions :new, :create
 
-  belongs_to :sauna
+  Organization.available_suborganization_kinds.each do |kind|
+    belongs_to kind, optional: true
+  end
 
   def create
     create! { parent.organization }

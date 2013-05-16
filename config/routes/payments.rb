@@ -9,7 +9,9 @@ Znaigorod::Application.routes.draw do
     post 'fail'    => 'robokassa#fail'
   end
 
-  resources :saunas, :only => [] do
-    resources :sms_claims, :only => [:new, :create]
+  Organization.available_suborganization_kinds.each do |kind|
+    resources kind.pluralize, :only => [:new, :create] do
+      resources :sms_claims, :only => [:new, :create]
+    end
   end
 end
