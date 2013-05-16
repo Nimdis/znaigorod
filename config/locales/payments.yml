@@ -1,0 +1,9 @@
+ru:
+  sms_claim:
+    sauna:
+      link_title: Забронировать сауну
+      placeholder: Закажите сауну
+
+    car_wash:
+      link_title: Записаться на мойку
+      placeholder: Запишитесь на мойку

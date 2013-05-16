@@ -29,13 +29,6 @@ class Sauna < ActiveRecord::Base
     index and sauna_halls.map(&:index)
   end
 
-  ### <=== Payments
-
-  has_many :sms_claims, :as => :claimed, :dependent => :destroy
-
-  delegate :enough_balance?, :sms_claimable?, :to => :organization
-
-  ### Payments ===>
 
   attr_accessible :sauna_accessory_attributes, :sauna_alcohol_attributes,
     :sauna_broom_attributes, :sauna_massage_attributes,
@@ -82,6 +75,8 @@ class Sauna < ActiveRecord::Base
   def with_sauna_halls?
     sauna_halls.any?
   end
+
+  include SmsClaims
 end
 
 # == Schema Information
