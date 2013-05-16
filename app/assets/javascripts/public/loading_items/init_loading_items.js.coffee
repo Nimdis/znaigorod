@@ -39,7 +39,7 @@
           last_item = first_item.siblings().last()
           last_item_top = last_item.position().top
           page += 1
-          busy = false unless data.length
+          busy = false if data.length
           init_photogallery() if $('.content_wrapper .was_in_city_photos li').length && data.length
           true
         error: (jqXHR, textStatus, errorThrown) ->
