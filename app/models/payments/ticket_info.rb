@@ -14,7 +14,7 @@ class TicketInfo < ActiveRecord::Base
 
   scope :ordered,   -> { order('created_at DESC') }
   scope :actual,    -> { where('stale_at > ? OR stale_at IS NULL', Time.zone.now) }
-  scope :available, -> { actual.joins(:tickets).where('tickets.state = ?', 'for_sale').uniq }
+  scope :available, -> { actual.ordered.joins(:tickets).where('tickets.state = ?', 'for_sale').uniq }
 
   def discount
     ((original_price - price) * 100 / original_price).round if tickets_for_sale.any?
