@@ -8,7 +8,8 @@
     '.content_wrapper .affiches_list ul.was_in_city_photos,' +
     '.content_wrapper .organizations_list ul.items_list,' +
     '.content_wrapper ul.sauna_list,' +
-    '.content_wrapper .search_results ul.items_list'
+    '.content_wrapper .search_results ul.items_list,' +
+    '.content_wrapper .tickets_list'
   )
   first_item = $('li:first', list)
   return true unless first_item.length
@@ -38,7 +39,7 @@
           last_item = first_item.siblings().last()
           last_item_top = last_item.position().top
           page += 1
-          busy = false if data.length
+          busy = false unless data.length
           init_photogallery() if $('.content_wrapper .was_in_city_photos li').length && data.length
           true
         error: (jqXHR, textStatus, errorThrown) ->

@@ -42,6 +42,7 @@ $ ->
   init_loading_items() if $('.content_wrapper .organizations_list ul.items_list li').length
   init_loading_items() if $('.content_wrapper .search_results ul.items_list li').length
   init_loading_items() if $('.content_wrapper ul.sauna_list li').length
+  init_loading_items() if $('.content_wrapper .tickets_list li').length
   init_affiche_list_settings() if $('.content_wrapper .affiches_list .list_settings').length
   init_swfkrpano() if $('#krpano').length
   init_webcam_axis() if $('.webcams_list .webcam_axis').length
