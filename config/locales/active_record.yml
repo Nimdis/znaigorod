@@ -384,8 +384,9 @@ ru:
         original_price: Цена заведения
         price:          Цена со скидкой
         description:    Описание
+        stale_at:       Актуально до
 
       sms_claim:
-        name: Имя
-        phone: Телефон
-        details: Подробнее
+        name:     Имя
+        phone:    Телефон
+        details:  Подробнее

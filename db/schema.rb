@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130515102142) do
+ActiveRecord::Schema.define(:version => 20130516045042) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -743,6 +743,7 @@ ActiveRecord::Schema.define(:version => 20130515102142) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.text     "description"
+    t.datetime "stale_at"
   end
 
   add_index "ticket_infos", ["affiche_id"], :name => "index_ticket_infos_on_affiche_id"
