@@ -28,7 +28,7 @@
               <% ticket_info.tickets.each do |ticket| %>
                 <tr>
                   <td><%= ticket.code %></td>
-                  <td><%= ticket.payment ? "(#{ticket.payment.phone})" : '' %></td>
+                  <td><%= ticket.payment ? ticket.payment.phone : '' %></td>
                   <td><%= ticket.state_text %></td>
                 </tr>
               <% end %>
