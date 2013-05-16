@@ -50,6 +50,12 @@
         </div>
       <% end %>
 
+      <% if @organization.sms_claimable? %>
+        <% @organization.suborganizations.each do |suborganization| %>
+          <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
+        <% end %>
+      <% end %>
+
       <% if @organization.similar_organizations.present? %>
         <div class='more_like_this'>
           <p class='title'>Другие заведения</p>
