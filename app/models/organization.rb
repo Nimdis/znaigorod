@@ -51,7 +51,7 @@ class Organization < ActiveRecord::Base
   private :update_balance
 
   def enough_balance?
-    balance? && balance >= Settings['sms_claim.price']
+    balance.present? && balance >= Settings['sms_claim.price']
   end
 
   def sms_claimable?
