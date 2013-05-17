@@ -6,7 +6,7 @@
       <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, class: 'sign_out' %>
     </div>
     <div class="search">
-      <% if [Organization, Meal, Entertainment, Culture, Sauna, Sport, Creation].include?(resource_class)  %>
+      <% if [Organization, Meal, Entertainment, Culture, Sauna, Sport, Creation, CarWash].include?(resource_class)  %>
         <%= form_tag manage_organizations_path, :method => :get do %>
           <div class='wrapper'>
             <%= text_field_tag 'q', params[:q], :placeholder => 'Поиск' %>
