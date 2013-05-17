@@ -51,5 +51,7 @@ end
 #  price          :float
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  description    :text
+#  stale_at       :datetime
 #
 

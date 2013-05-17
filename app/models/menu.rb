@@ -9,3 +9,16 @@ class Menu < ActiveRecord::Base
   accepts_nested_attributes_for :menu_positions, allow_destroy: true
 
 end
+
+# == Schema Information
+#
+# Table name: menus
+#
+#  id          :integer          not null, primary key
+#  meal_id     :integer
+#  category    :string(255)
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+

@@ -300,5 +300,7 @@ end
 #  total_rating                  :float
 #  primary_organization_id       :integer
 #  ability_to_comment            :boolean          default(TRUE)
+#  phone_for_sms                 :string(255)
+#  balance                       :float
 #
 
