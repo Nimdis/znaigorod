@@ -32,6 +32,6 @@ every :day, :at => '5am' do
   rake "refresh_sitemaps"
 end
 
-every 30.minutes do
+every 5.minutes do
   rake "release_tickets"
 end
