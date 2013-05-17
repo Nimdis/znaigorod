@@ -9,6 +9,17 @@ class Manage::TicketInfosController < Manage::ApplicationController
     scope.page(value).per(10)
   end
 
+  def index
+    if params[:utf8]
+      @ticket_infos = TicketInfo.search {
+        keywords params[:q]
+        paginate(:page => params[:page] || 1, :per_page => 19)
+      }.results
+    else
+      @ticket_infos = apply_scopes(TicketInfo)
+    end
+  end
+
   def create
     create! { parent_path }
   end

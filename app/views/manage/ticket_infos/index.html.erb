@@ -7,6 +7,11 @@
   <% end %>
 </ul>
 
+<%= form_tag manage_ticket_infos_path, :method => :get, :class => 'search_ticket_infos' do %>
+  <%= text_field_tag 'q', params[:q] %>
+  <%= submit_tag 'Найти' %>
+<% end %>
+
 <ul class='ticket_infos'>
   <% @ticket_infos.group_by(&:organization).each do |organization, ticket_infos| %>
     <li class='ticket_info'>
