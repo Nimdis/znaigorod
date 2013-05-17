@@ -9,6 +9,7 @@ class VotesController < ApplicationController
 
   belongs_to :comment, :polymorphic => true, :optional => true
   belongs_to :organization, :polymorphic => true, :optional => true
+  belongs_to :work, :polymorphic => true, :optional => true
 
   layout false
 

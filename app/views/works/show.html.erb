@@ -1,3 +1,5 @@
+<% content_for :page_title, @work.title.present? ? "#{@work.title}, #{@work.contest.title}" : @work.contest.title %>
+
 <% content_for :extra_meta do %>
   <% full_content = @work.author_info
      full_content += '. ' + @work.description.squish if @work.description.present?
@@ -23,14 +25,14 @@
       <div class='image'>
         <%= work_image_tag @work %>
       </div>
+      <% if @work.contest.ends_on >= Date.today %>
+        <div class='contest_work_like'>
+          <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @work } %>
+        </div>
+      <% else %>
+        <div class='contest_work_vk_like'><%= t 'contest.votes', :count => @work.vk_likes.to_i %></div>
+      <% end %>
       <div class='author'>
-        <% if Rails.env.production? && @work.contest.ends_on >= Date.today %>
-          <div class='contest_work_vk_like'>
-            <div id='vk_contest_work_like'></div>
-          </div>
-        <% else %>
-          <div class='contest_work_vk_like'><%= t 'contest.votes', :count => @work.vk_likes.to_i %></div>
-        <% end %>
         <%= "<strong>Автор работы:</strong> #{@work.author_info}".html_safe if @work.author_info.present? %>
       </div>
       <%= content_tag :div, @work.description.as_html, :class => :description if @work.description.present? %>

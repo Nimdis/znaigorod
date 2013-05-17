@@ -1,6 +1,7 @@
+<% object_assoc_chain = voteable.is_a?(Work) ? [voteable.contest, voteable] : [voteable] %>
 <% if voteable.votes.liked.any? %>
   <div class="votes_counter" title='<%= t :like, :count => voteable.votes.count %>'>
-    <%= link_to voteable.votes.liked.count, polymorphic_url([voteable, :liked]), :remote => true %>
+    <%= link_to voteable.votes.liked.count, polymorphic_url([object_assoc_chain, :liked].flatten), :remote => true %>
   </div>
 <% end %>
 
@@ -8,9 +9,9 @@
   <div class="user_like">
     <% if current_user && current_user.liked?(voteable) %>
       <span>Вам это нравится.</span> <%= link_to "Мне не нравится",
-                                    polymorphic_url([voteable, :change_vote], :subdomain => request.subdomain), :method => :put, :remote => true %>
+                                    polymorphic_url([object_assoc_chain, :change_vote].flatten, :subdomain => request.subdomain), :method => :put, :remote => true %>
     <% else %>
-      <%= link_to "Мне нравится", polymorphic_url([voteable, :change_vote]), :method => :put, :remote => true %>
+      <%= link_to "Мне нравится", polymorphic_url([object_assoc_chain, :change_vote].flatten), :method => :put, :remote => true %>
     <% end %>
   </div>
   <% if @vote && @vote.errors.any? %>
