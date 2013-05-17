@@ -114,15 +114,21 @@ ru:
         author_info: Информация об авторе
 
       coupon:
-        title: Название
+        <<: *common_attributes
+        complete_at: Продажа заканчивается
+        count: Количество
         description: Описание
-        organization_id: Организация
         discount: Скидка
-
-      offer:
-        description: Описание
-        price: Цена
-        number: Количество
+        image: Изображение
+        kind: Тип
+        organization_id: Организация
+        organization_quota: Доля организации
+        place: Организация
+        price: Стоимость
+        price_with_discount: Сумма услуг со скидкой
+        price_without_discount: Сумма услуг без скидки
+        stale_at: Срок действия до
+        title: Название
 
       affiche:
         <<: *common_attributes

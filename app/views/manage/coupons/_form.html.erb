@@ -1,12 +1,8 @@
 <div class='form_view'>
   <%= simple_nested_form_for @coupon, :url => [:manage, @coupon], :html => { :novalidate => true }  do |f| %>
+    <%= f.input :kind, :as => :select, :include_blank => false %>
     <%= f.input :title %>
-    <%= f.input :organization_id, :collection => Organization.grouped_collection_for_select, :selected => f.object.organization_id  %>
     <%= f.input :description %>
-    <%= f.input :price_with_discount %>
-    <%= f.input :price_without_discount %>
-    <%= f.input :price %>
-    <%= f.input :organization_quota %>
     <%  unless f.object.image_url? %>
       <%= f.input :image %>
     <% else %>
@@ -16,6 +12,15 @@
         <%= f.input :image, wrapper_html: { class: :hidden } %>
       </div>
     <% end %>
+    <%= f.input :organization_id, :as => :hidden, :input_html => { :class => 'autosuggest_target', :value => f.object.get_organization_id } %>
+    <%= f.input :place, :input_html => { :class => 'autosuggest' , :value => f.object.organization_id ? Organization.find(f.object.organization_id) : f.object.place} %>
+    <%= f.input :stale_at, :as => :date_picker %>
+    <%= f.input :complete_at, :as => :date_picker %>
+    <%= f.input :price_without_discount %>
+    <%= f.input :price_with_discount %>
+    <%= f.input :price %>
+    <%= f.input :organization_quota %>
+    <%= f.input :count %>
 
 
     <div class="actions">

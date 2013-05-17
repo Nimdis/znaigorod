@@ -27,6 +27,11 @@ ru:
         meeting_contract:  Встреча для подписания договора
         meeting_payment:   Встреча для получения денег
 
+    coupon:
+      kind:
+        coupon: Купон
+        certificate: Сертификат
+
     service:
       kind:
         lesson:                занятие
