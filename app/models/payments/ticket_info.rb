@@ -17,12 +17,20 @@ class TicketInfo < ActiveRecord::Base
   scope :available, -> { actual.ordered.joins(:tickets).where('tickets.state = ?', 'for_sale').uniq }
   scope :by_state,  ->(state) { ordered.joins(:tickets).where('tickets.state = ?', state).uniq }
 
-  def discount
-    ((original_price - price) * 100 / original_price).round if tickets_for_sale.any?
-  end
-
   def organization
     affiche(:include => { :showings => :organizatiob }).showings.first.organization
+  end
+
+  delegate :title, :to => :affiche, :prefix => true
+  delegate :title, :to => :organization, :prefix => true, :allow_nil => true
+
+  searchable do
+    text :affiche_title
+    text :organization_title
+  end
+
+  def discount
+    ((original_price - price) * 100 / original_price).round if tickets_for_sale.any?
   end
 
   private
