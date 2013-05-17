@@ -22,7 +22,8 @@
         Место проведения не указано
       <% end %>
       </h5>
-      <ul>
+
+      <ul class='manage'>
         <% ticket_infos.each do |ticket_info| %>
           <li>
             <p><%= link_to ticket_info.affiche.title, manage_affiche_path(ticket_info.affiche) %></p>
@@ -47,6 +48,19 @@
           </li>
         <% end %>
       </ul>
+
+      <% if organization %>
+        <div class="text">
+          <p>Коды мероприятий для <%= link_to organization.title, organization_path(organization) %>:</p>
+          <% ticket_infos.each do |ticket_info| %>
+            <% affiche = AfficheDecorator.new(ticket_info.affiche) %>
+            <p>
+              <%= link_to "#{affiche.human_when} #{affiche.title}".html_safe, affiche.kind_affiche_path %> -
+              <%= ticket_info.tickets.map(&:code).join(', ') %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
     </li>
   <% end %>
 </ul>
