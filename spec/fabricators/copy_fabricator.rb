@@ -1,5 +1,5 @@
-Fabricator :ticket do
-  ticket_info
+Fabricator :copy do
+  copyable { Fabricate :ticket_info }
   payment
 end
 

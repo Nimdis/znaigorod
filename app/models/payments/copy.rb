@@ -1,11 +1,11 @@
 # encoding: utf-8
 
-class Ticket < ActiveRecord::Base
+class Copy < ActiveRecord::Base
   extend Enumerize
 
   attr_accessible :code, :state
 
-  belongs_to :ticket_info
+  belongs_to :copyable, :polymorphic => true
   belongs_to :payment
 
   has_many :smses, :as => :smsable

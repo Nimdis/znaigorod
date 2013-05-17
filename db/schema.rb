@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517061825) do
+ActiveRecord::Schema.define(:version => 20130517094639) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -179,6 +179,20 @@ ActiveRecord::Schema.define(:version => 20130517061825) do
   end
 
   add_index "contests", ["slug"], :name => "index_contests_on_slug", :unique => true
+
+  create_table "copies", :force => true do |t|
+    t.string   "state"
+    t.string   "code"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "payment_id"
+    t.integer  "copyable_id"
+    t.string   "copyable_type"
+  end
+
+  add_index "copies", ["copyable_id"], :name => "index_copies_on_copyable_id"
+  add_index "copies", ["copyable_type"], :name => "index_copies_on_copyable_type"
+  add_index "copies", ["payment_id"], :name => "index_tickets_on_payment_id"
 
   create_table "coupons", :force => true do |t|
     t.string   "title"
@@ -774,18 +788,6 @@ ActiveRecord::Schema.define(:version => 20130517061825) do
   end
 
   add_index "ticket_infos", ["affiche_id"], :name => "index_ticket_infos_on_affiche_id"
-
-  create_table "tickets", :force => true do |t|
-    t.integer  "ticket_info_id"
-    t.string   "state"
-    t.string   "code"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "payment_id"
-  end
-
-  add_index "tickets", ["payment_id"], :name => "index_tickets_on_payment_id"
-  add_index "tickets", ["ticket_info_id"], :name => "index_tickets_on_ticket_info_id"
 
   create_table "travels", :force => true do |t|
     t.text     "category"

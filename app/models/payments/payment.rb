@@ -8,20 +8,20 @@ class Payment < ActiveRecord::Base
 
   has_one :sms, :as => :smsable
 
-  has_many :tickets, after_add: :reserve_ticket
+  has_many :copies, after_add: :reserve_copy
 
   validates :number, :presence => true, :numericality => { :greater_than => 0 }
   validates :phone, :presence => true, :format => { :with => /\+7-\(\d{3}\)-\d{3}-\d{4}/ }
 
   before_validation :check_tickets_number
-  after_create :reserve_tickets
+  after_create :reserve_copies
 
   def amount
     ticket_info.price * number
   end
 
   def approve
-    tickets.map(&:sell!)
+    copies.map(&:sell!)
 
     create_sms! :phone => phone, :message => message
   end
@@ -33,19 +33,19 @@ class Payment < ActiveRecord::Base
   private
 
   def check_tickets_number
-    errors[:base] << I18n.t('activerecord.errors.messages.not_enough_tickets') if number? && ticket_info.tickets_for_sale.count < number
+    errors[:base] << I18n.t('activerecord.errors.messages.not_enough_tickets') if number? && ticket_info.copies_for_sale.count < number
   end
 
-  def reserve_tickets
-    tickets << ticket_info.tickets.for_sale.limit(number)
+  def reserve_copies
+    copies << ticket_info.copies_for_sale.limit(number)
   end
 
-  def reserve_ticket(ticket)
-    ticket.reserve!
+  def reserve_copy(copy)
+    copy.reserve!
   end
 
   def message
-    "#{ticket_info.description}. " << (tickets.many? ? 'Коды билетов: ' : 'Код билета: ') << tickets.pluck(:code).join(', ')
+    "#{ticket_info.description}. " << (copies.many? ? 'Коды билетов: ' : 'Код билета: ') << copies.pluck(:code).join(', ')
   end
 end
 

@@ -4,13 +4,13 @@ class TicketInfo < ActiveRecord::Base
   belongs_to :affiche
 
   has_many :payments, dependent: :destroy
-  has_many :tickets, dependent: :destroy
+  has_many :copies, :as => :copyable, dependent: :destroy
 
   validates_presence_of :number, :original_price, :price, :description, :stale_at
 
-  after_create :create_tickets
+  after_create :create_copies
 
-  delegate :count, :for_sale, :reserved, :sold, to: :tickets, prefix: true
+  delegate :count, :for_sale, :reserved, :sold, to: :copies, prefix: true
 
   scope :ordered,   -> { order('created_at DESC') }
   scope :actual,    -> { where('stale_at > ? OR stale_at IS NULL', Time.zone.now) }
@@ -35,8 +35,8 @@ class TicketInfo < ActiveRecord::Base
 
   private
 
-  def create_tickets
-    number.times { tickets.create! }
+  def create_copies
+    number.times { copies.create! }
   end
 end
 
