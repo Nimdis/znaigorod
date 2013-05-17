@@ -1,9 +1,23 @@
 class Coupon < ActiveRecord::Base
-  attr_accessible :description, :discount, :title, :organization_id, :offers_attributes, :vfs_path
+
+  attr_accessible :description, :discount, :title, :organization_id, :price_with_discount, :price_without_discount, :price, :organization_quota, :kind, :image, :delete_image, :vfs_path
+
+  attr_accessor :delete_image
+
+  has_attached_file :image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
+
+  delegate :clear, :to => :image, :allow_nil => true, :prefix => true
+
+  before_update :image_destroy
 
   belongs_to :organization
-  has_many :offers, dependent: :destroy
-  accepts_nested_attributes_for :offers, allow_destroy: true
+
+  def image_destroy
+    if self.delete_image
+      self.image.destroy
+      self.image_url = nil
+    end
+  end
 
   def self.generate_vfs_path
     "/znaigorod/coupons/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}"
