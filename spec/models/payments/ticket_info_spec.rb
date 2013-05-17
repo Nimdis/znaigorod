@@ -6,7 +6,7 @@ describe TicketInfo do
   describe 'creates ticket' do
     subject { ticket_info }
 
-    its(:tickets_count) { should == ticket_info.number }
+    its(:copies_count) { should == ticket_info.number }
   end
 end
 

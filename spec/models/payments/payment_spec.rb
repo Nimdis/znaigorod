@@ -26,7 +26,7 @@ describe Payment do
 
     before { payment }
 
-    it { ticket_info.tickets_reserved.count.should == payment.number }
+    it { ticket_info.copies_reserved.count.should == payment.number }
   end
 
   describe 'approve' do
@@ -35,8 +35,8 @@ describe Payment do
 
     before { payment.approve }
 
-    it { ticket_info.tickets_reserved.count.should be_zero }
-    it { ticket_info.tickets_sold.count.should == payment.number }
+    it { ticket_info.copies_reserved.count.should be_zero }
+    it { ticket_info.copies_sold.count.should == payment.number }
   end
 end
 

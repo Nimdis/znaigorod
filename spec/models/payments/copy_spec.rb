@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Ticket do
-  let(:ticket) { Fabricate :ticket }
-  subject { ticket }
+describe Copy do
+  let(:copy) { Fabricate :copy }
+  subject { copy }
 
   describe 'set code and state' do
     its(:code) { should be_present }
@@ -10,19 +10,19 @@ describe Ticket do
   end
 
   describe '#reserve!' do
-    before { ticket.reserve! }
+    before { copy.reserve! }
 
     its(:state) { should == 'reserved' }
   end
 
   describe '#release!' do
-    before { ticket.release! }
+    before { copy.release! }
 
     its(:state) { should == 'for_sale' }
   end
 
   describe '#sell!' do
-    before { ticket.sell! }
+    before { copy.sell! }
     its(:state) { should == 'sold' }
   end
 end
