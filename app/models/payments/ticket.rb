@@ -8,9 +8,10 @@ class Ticket < ActiveRecord::Base
 
   before_create :set_code_and_state
 
-  scope :for_sale, -> { where state: 'for_sale' }
-  scope :reserved, -> { where state: 'reserved' }
-  scope :sold,     -> { where state: 'sold' }
+  scope :by_state, ->(state) { where :state => state }
+  scope :for_sale, -> { by_state 'for_sale' }
+  scope :reserved, -> { by_state 'reserved '}
+  scope :sold,     -> { by_state 'sold' }
 
   enumerize :state, :in => [:for_sale, :reserved, :sold]
 
