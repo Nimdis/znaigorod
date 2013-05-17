@@ -1,0 +1,66 @@
+body
+  .happy_summer_wrapper
+    +clearfix
+    background: #d0ebb3
+    +background(linear-gradient(#d0ebb3, #fff))
+    .happy_summer_header_wrapper
+      height: 105px
+      +clearfix
+      background: transparent image_url('public/happy_summer/greenland.png') no-repeat top center
+      .happy_summer_header
+        height: 95px
+        +background-image(linear-gradient(left, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2)))
+        margin: 5px 0
+        .happy_summer_header_inner
+          position: relative
+          width: $common_width
+          height: 105px
+          background: image_url('public/happy_summer/slogan.png') no-repeat 280px 2px
+          margin: 0 auto
+
+          .contest_name
+            position: absolute
+            top: 8px
+            left: 0
+            color: #000
+            font-size: 20px
+            text-decoration: none
+            .red
+              color: #b6253c
+
+          .more
+            position: absolute
+            left: 567px
+            bottom: 19px
+            color: #e52e4b
+            display: block
+            border: 1px solid #bbdb96
+            +border-radius
+            background-color: #d5edba
+            padding: 5px 8px 7px
+
+          .igromania
+            position: absolute
+            top: 5px
+            right: 0
+            display: block
+            width: 165px
+            height: 79px
+            background: transparent image_url('public/happy_summer/igromania.png') no-repeat center center
+            +clearfix
+            text-indent: -9999em
+
+    .happy_summer
+      width: $common_width
+      margin: 0 auto
+      background-color: #fff
+      +box-shadow(#777 0 0 5px)
+      +border-top-left-radius(10px)
+      +border-top-right-radius(10px)
+      .header_wrapper
+        +border-top-left-radius(10px)
+        +border-top-right-radius(10px)
+      .content_wrapper
+        background-color: #fff
+        margin-top: 0
+        padding-top: 15px
