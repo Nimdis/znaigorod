@@ -34,7 +34,7 @@
           $('li.ajax_loading_items_indicator', list).remove()
           true
         success: (data, textStatus, jqXHR) ->
-          return true if data.match(/empty_items_list/)
+          return true if data.match(/empty_items_list/) # TODO find this!
           list.append(data)
           last_item = first_item.siblings().last()
           last_item_top = last_item.position().top
