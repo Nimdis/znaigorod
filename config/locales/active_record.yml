@@ -385,10 +385,11 @@ ru:
 
       price:
         description: Описание
-        kind:    Тип
-        count:   Количество
-        period:  Срок
-        value:   Цена
+        kind:       Тип
+        count:      Количество
+        period:     Срок
+        value:      Минимальная цена
+        max_value:  Максимальная цена
 
       ticket_info:
         number:         Количество

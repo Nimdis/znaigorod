@@ -3,7 +3,7 @@
 class Price < ActiveRecord::Base
   extend Enumerize
 
-  attr_accessible :kind, :value, :count, :period, :description
+  attr_accessible :kind, :value, :max_value, :count, :period, :description
 
   belongs_to :service
 
@@ -16,10 +16,18 @@ class Price < ActiveRecord::Base
   default_scope order('value ASC')
 
   def to_s
-    if single?
-      "#{I18n.t("price_kind.#{service.kind}", count: 1)} #{value} руб."
+      "#{I18n.t("price_kind.#{service.kind}", count: count || 1)}"
+  end
+
+  def price_value
+    if self.max_value?
+      if self.value == self.max_value
+        "#{self.value}"
+      else
+        "#{self.value} - #{self.max_value}"
+      end
     else
-      "#{kind_text} на #{I18n.t("price_kind.#{service.kind}", count: count)} #{period} #{value} руб."
+      "от #{self.value}"
     end
   end
 end

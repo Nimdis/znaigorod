@@ -17,11 +17,11 @@
                     <li class="multi_price">
                       <% if price.description? %>
                         <abbr title="<%= price.description %>">
-                          <%= "#{price.value}руб." %>
+                          <%= "#{price.price_value}руб." %>
                         </abbr>
                       <% else %>
-                        <abbr title="<%= I18n.t("price_kind.#{service.kind}", count: price.count || 1) %>">
-                          <%= "#{price.value}руб." %>
+                        <abbr title="<%= price %>">
+                          <%= "#{price.price_value}руб." %>
                         </abbr>
                       <% end %>
                     </li>
@@ -31,11 +31,11 @@
                 <% price = service.prices.first %>
                 <div class="service_price">
                   <div class="price">
-                    <%= "#{price.value}руб." %>
+                    <%= "#{price.price_value}руб." %>
                   </div>
                   <% if price.count? %>
                     <div class="service_price_info">
-                      <%= "#{I18n.t("price_kind.#{service.kind}", count: price.count)}, #{price.period}"  %>
+                      <%= price %>
                     </div>
                   <% end %>
                 </div>
