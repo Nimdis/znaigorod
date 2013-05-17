@@ -4,6 +4,7 @@ Fabricator :ticket_info do
   price 500
   description 'some concert'
   affiche { Fabricate :exhibition }
+  stale_at { Time.zone.now + 2.days }
 end
 
 # == Schema Information
