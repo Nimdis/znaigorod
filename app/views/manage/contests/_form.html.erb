@@ -3,7 +3,7 @@
 
 <div class='form_view'>
   <%= simple_form_for @contest, :url => [:manage, @contest], :html => { :novalidate => true }  do |f| %>
-    <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'post_vfs_path' } %>
+    <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path' } %>
     <%= f.input :title %>
     <%= f.input :description, :as => :ckeditor, :label => false %>
     <%= f.input :starts_on, :as => :string, :as => :date_picker %>
