@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  def show
-    @work = Work.find(params[:id])
-  end
+  inherit_resources
+  actions :show
+  belongs_to :contest
 end

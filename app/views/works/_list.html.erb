@@ -8,19 +8,15 @@
        contest_description = truncate(contest_description, :length => 140)
     %>
     <div class='title'>
-      <% if Rails.env.production? && @contest.ends_on >= Date.today %>
-        <div class='contest_work_vk_like_on_list'
-          data-title='<%= @contest.title.excerpt %>. <%= work.title %>'
-          data-image='<%= work.image_url.gsub(/\/\d+-\d+\//, '/100-63!n/') %>'
-          data-description='<%= contest_description %>'
-          data-url='<%= "#{request.protocol}#{request.host_with_port}#{contest_work_path(@contest, work)}" %>'>
-          <div id='vk_contest_work_like_<%= work.slug.gsub('-', '_') %>'></div>
-        </div>
-      <% else %>
-        <div class='contest_work_vk_like_on_list'><%= t 'contest.votes', :count => work.vk_likes.to_i %></div>
-      <% end %>
       <%= link_to(work.title, contest_work_path(@contest, work)) %>
     </div>
+    <% if @contest.ends_on >= Date.today %>
+      <div class='contest_work_like'>
+        <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => work } %>
+      </div>
+    <% else %>
+      <div class='contest_work_vk_like_on_list'><%= t 'contest.votes', :count => work.vk_likes.to_i %></div>
+    <% end %>
     <div class='author'><%= work.author_info %></div>
   </li>
 <% end %>
