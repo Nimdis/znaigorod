@@ -39,3 +39,17 @@ describe Payment do
     it { ticket_info.tickets_sold.count.should == payment.number }
   end
 end
+
+# == Schema Information
+#
+# Table name: payments
+#
+#  id             :integer          not null, primary key
+#  ticket_info_id :integer
+#  number         :integer
+#  phone          :string(255)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  user_id        :integer
+#
+

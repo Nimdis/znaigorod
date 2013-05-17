@@ -28,3 +28,18 @@ describe SmsClaim do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: sms_claims
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  phone        :string(255)
+#  details      :text
+#  claimed_id   :integer
+#  claimed_type :string(255)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+

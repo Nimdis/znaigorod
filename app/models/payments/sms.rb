@@ -21,3 +21,18 @@ class Sms < ActiveRecord::Base
     sms.deliver if Rails.env.production?
   end
 end
+
+# == Schema Information
+#
+# Table name: smses
+#
+#  id           :integer          not null, primary key
+#  phone        :string(255)
+#  status       :string(255)
+#  smsable_id   :integer
+#  smsable_type :string(255)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  message      :text
+#
+

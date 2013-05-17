@@ -45,5 +45,6 @@ end
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  description :string(255)
+#  max_value   :integer
 #
 

@@ -5,3 +5,19 @@ Fabricator :ticket_info do
   description 'some concert'
   affiche { Fabricate :exhibition }
 end
+
+# == Schema Information
+#
+# Table name: ticket_infos
+#
+#  id             :integer          not null, primary key
+#  affiche_id     :integer
+#  number         :integer
+#  original_price :float
+#  price          :float
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  description    :text
+#  stale_at       :datetime
+#
+
