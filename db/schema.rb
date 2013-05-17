@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516045042) do
+ActiveRecord::Schema.define(:version => 20130516100329) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -186,8 +186,18 @@ ActiveRecord::Schema.define(:version => 20130516045042) do
     t.integer  "discount"
     t.string   "vfs_path"
     t.integer  "organization_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.text     "image_url"
+    t.integer  "price_with_discount"
+    t.integer  "price_without_discount"
+    t.integer  "organization_quota"
+    t.integer  "price"
+    t.string   "kind"
   end
 
   add_index "coupons", ["organization_id"], :name => "index_coupons_on_organization_id"
@@ -333,17 +343,6 @@ ActiveRecord::Schema.define(:version => 20130516045042) do
   end
 
   add_index "menus", ["meal_id"], :name => "index_menus_on_meal_id"
-
-  create_table "offers", :force => true do |t|
-    t.integer  "coupon_id"
-    t.integer  "price"
-    t.integer  "number"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "offers", ["coupon_id"], :name => "index_offers_on_coupon_id"
 
   create_table "organization_stands", :force => true do |t|
     t.integer  "organization_id"
