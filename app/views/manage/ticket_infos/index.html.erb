@@ -1,20 +1,47 @@
 <h3>Билеты</h3>
 
-<ul>
-  <% @ticket_infos.each do |ticket_info| %>
-    <li>
-      <%= image_tag_for ticket_info.affiche.poster_url, 70, 100 %>
-      <%= link_to ticket_info.affiche.title, manage_affiche_path(ticket_info.affiche) %>
+<ul class='ticket_info_states'>
+  <li><%= link_to "Все (#{TicketInfo.count})", manage_ticket_infos_path %></li>
+  <% Ticket.state.options.each do |option| %>
+    <li><%= link_to "#{option.first} (#{TicketInfo.by_state(option.last).count})", with_state_manage_ticket_infos_path(option.last) %></li>
+  <% end %>
+</ul>
 
-      <p>Цена заведения <%= ticket_info.original_price %></p>
-      <p>Цена со скидкой <%= ticket_info.price %></p>
-
-      <p>Всего билетов <%= ticket_info.tickets.count %></p>
-      <p>Коды: <%= ticket_info.tickets.map(&:code).join(', ') %></p>
-
-      <% ticket_info.tickets.group_by(&:state_text).each do |state_text, tickets| %>
-        <p><%= "#{state_text} (#{tickets.size})" %></p>
+<ul class='ticket_infos'>
+  <% @ticket_infos.group_by(&:organization).each do |organization, ticket_infos| %>
+    <li class='ticket_info'>
+      <h5>
+      <% if organization %>
+        <%= link_to "#{organization.title} (#{organization.address})", manage_organization_path(organization) %>
+      <% else %>
+        Место проведения не указано
       <% end %>
+      </h5>
+      <ul>
+        <% ticket_infos.each do |ticket_info| %>
+          <li>
+            <p><%= link_to ticket_info.affiche.title, manage_affiche_path(ticket_info.affiche) %></p>
+
+            <div class="poster">
+              <%= link_to image_tag_for(ticket_info.affiche.poster_url, 70, 100), manage_affiche_path(ticket_info.affiche) %>
+            </div>
+
+            <div class="details">
+              <p><%= "Цена: #{ticket_info.original_price} / #{ticket_info.price}" %></p>
+              <p>Коды: <%= ticket_info.tickets.map(&:code).join(', ') %></p>
+              <table class='tickets'>
+                <% ticket_info.tickets.each do |ticket| %>
+                  <tr>
+                    <td class='code'><%= ticket.code %></td>
+                    <td class='phone'><%= ticket.payment ? ticket.payment.phone : '' %></td>
+                    <td class='state'><%= ticket.state_text %></td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          </li>
+        <% end %>
+      </ul>
     </li>
   <% end %>
 </ul>
