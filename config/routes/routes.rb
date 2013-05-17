@@ -81,6 +81,10 @@ Znaigorod::Application.routes.draw do
     end
   end
 
+  resources :works, :only => [] do
+    resources :comments, :only => [:new, :create, :show]
+  end
+
   get 'feedback' => 'feedback#new', :as => :new_feedback
   post 'feedback' => 'feedback#create', :as => :create_feedback
 
