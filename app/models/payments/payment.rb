@@ -33,7 +33,7 @@ class Payment < ActiveRecord::Base
   private
 
   def check_tickets_number
-    errors[:base] << I18n.t('activerecord.errors.messages.not_enough_tickets') if ticket_info.tickets_for_sale.count < number
+    errors[:base] << I18n.t('activerecord.errors.messages.not_enough_tickets') if number? && ticket_info.tickets_for_sale.count < number
   end
 
   def reserve_tickets

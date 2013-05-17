@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Ticket < ActiveRecord::Base
   extend Enumerize
 
@@ -5,6 +7,8 @@ class Ticket < ActiveRecord::Base
 
   belongs_to :ticket_info
   belongs_to :payment
+
+  has_many :smses, :as => :smsable
 
   before_create :set_code_and_state
 
@@ -24,6 +28,8 @@ class Ticket < ActiveRecord::Base
   end
 
   def release!
+    inform_purchaser
+
     self.state = 'for_sale'
     self.payment_id = nil
     self.save
@@ -34,6 +40,10 @@ class Ticket < ActiveRecord::Base
   def set_code_and_state
     self.code = 4.times.map { Random.rand(10) }.join
     self.state = 'for_sale'
+  end
+
+  def inform_purchaser
+    smses.create! :phone => payment.phone, :message => 'Время ожидания платежа за билет истекло.'
   end
 end
 
