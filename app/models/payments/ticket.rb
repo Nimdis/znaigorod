@@ -10,7 +10,7 @@ class Ticket < ActiveRecord::Base
 
   scope :by_state, ->(state) { where :state => state }
   scope :for_sale, -> { by_state 'for_sale' }
-  scope :reserved, -> { by_state 'reserved '}
+  scope :reserved, -> { by_state 'reserved' }
   scope :sold,     -> { by_state 'sold' }
 
   enumerize :state, :in => [:for_sale, :reserved, :sold]
