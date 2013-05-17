@@ -1,9 +1,9 @@
 <h3>Билеты</h3>
 
 <ul class='ticket_info_states'>
-  <li><%= link_to "Все (#{TicketInfo.count})", manage_ticket_infos_path %></li>
+  <li><%= link_to "Все (#{Ticket.count})", manage_ticket_infos_path %></li>
   <% Ticket.state.options.each do |option| %>
-    <li><%= link_to "#{option.first} (#{TicketInfo.by_state(option.last).count})", with_state_manage_ticket_infos_path(option.last) %></li>
+    <li><%= link_to "#{option.first} (#{Ticket.by_state(option.last).count})", with_state_manage_ticket_infos_path(option.last) %></li>
   <% end %>
 </ul>
 
