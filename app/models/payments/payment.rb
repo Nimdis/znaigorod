@@ -45,7 +45,7 @@ class Payment < ActiveRecord::Base
   end
 
   def message
-    "#{ticket_info.affiche.title}. " << (tickets.many? ? 'Коды билетов: ' : 'Код билета: ') << tickets.pluck(:code).join(', ')
+    "#{ticket_info.description}. " << (tickets.many? ? 'Коды билетов: ' : 'Код билета: ') << tickets.pluck(:code).join(', ')
   end
 end
 
