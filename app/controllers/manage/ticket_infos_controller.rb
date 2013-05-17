@@ -5,6 +5,10 @@ class Manage::TicketInfosController < Manage::ApplicationController
 
   has_scope :by_state
 
+  has_scope :page, :default => 1 do |controller, scope, value|
+    scope.page(value).per(10)
+  end
+
   def create
     create! { parent_path }
   end
