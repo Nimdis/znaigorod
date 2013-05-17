@@ -4,11 +4,21 @@
     <%= link_to t("edit_#{resource.class.model_name.underscore}"), [:edit, :manage, resource], :class => 'edit_link' %>
   </h1>
 
+  <% if resource.image_url? %>
+    <div class="image">
+      <%= image_tag resource.image_url %>
+    </div>
+  <% end %>
+
   <div>
-    <span class="label">Организация:</span>
-    <span class="value"><%= resource.organization %></span>
+    <span class="label">Тип:</span>
+    <span class="value"><%= t(resource.kind) %></span>
   </div>
 
+  <div>
+    <span class="label">Количество:</span>
+    <span class="value"><%= resource.count %></span>
+  </div>
 
   <div>
     <span class="label">Описание:</span>
@@ -20,11 +30,57 @@
   </div>
 
   <div>
-    <span class="label">Скидка:</span>
-    <% if resource.discount? %>
-      <span class="value"><%=  resource.discount %></span>
+    <span class="label">Организация:</span>
+    <% if resource.organization_id? %>
+      <span class="value"><%= resource.organization %></span>
+    <% else %>
+      <span class="value"><%= resource.place %></span>
+    <% end %>
+  </div>
+
+
+  <div>
+    <span class="label">Сумма услуг без скидки:</span>
+    <% if resource.price_without_discount? %>
+      <span class="value"><%=  resource.price_without_discount %></span>
     <% else %>
       <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Сумма услуг со скидкой:</span>
+    <% if resource.price_with_discount? %>
+      <span class="value"><%=  resource.price_with_discount %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Доля организации:</span>
+    <% if resource.organization_quota? %>
+      <span class="value"><%=  resource.organization_quota %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Стоимость:</span>
+    <% if resource.price? %>
+      <span class="value"><%=  resource.price %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Скидка:</span>
+    <% if resource.discount? %>
+      <span class="value"><%=  "#{resource.discount}%" %></span>
+    <% else %>
+      <span class="blank">Нет</span>
     <% end %>
   </div>
 

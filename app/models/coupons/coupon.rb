@@ -1,6 +1,10 @@
 class Coupon < ActiveRecord::Base
+  extend Enumerize
 
-  attr_accessible :description, :discount, :title, :organization_id, :price_with_discount, :price_without_discount, :price, :organization_quota, :kind, :image, :delete_image, :vfs_path
+  attr_accessible :description, :discount, :title, :organization_id, :price_with_discount,
+                  :price_without_discount, :price, :organization_quota,
+                  :kind, :image, :delete_image, :place, :vfs_path,
+                  :count, :stale_at, :complete_at
 
   attr_accessor :delete_image
 
@@ -8,9 +12,24 @@ class Coupon < ActiveRecord::Base
 
   delegate :clear, :to => :image, :allow_nil => true, :prefix => true
 
+  before_save :set_discount
   before_update :image_destroy
 
   belongs_to :organization
+
+  enumerize :kind, in: [:certificate, :coupon], predicates: true
+
+  validates_presence_of :kind, :place, :stale_at, :complete_at
+
+  def self.generate_vfs_path
+    "/znaigorod/coupons/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}"
+  end
+
+  def get_organization_id
+    self.try(:organization_id)
+  end
+
+  private
 
   def image_destroy
     if self.delete_image
@@ -19,9 +38,14 @@ class Coupon < ActiveRecord::Base
     end
   end
 
-  def self.generate_vfs_path
-    "/znaigorod/coupons/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}"
+  def set_discount
+    if self.price_without_discount? & self.price_with_discount?
+      self.discount = (self.price_without_discount - self.price_with_discount) * 100 / price_without_discount 
+    else
+      self.discount = nil
+    end
   end
+
 end
 
 # == Schema Information
