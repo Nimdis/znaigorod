@@ -6,6 +6,7 @@ class Work < ActiveRecord::Base
   belongs_to :contest
 
   has_many :votes, :as => :voteable, :dependent => :destroy
+  has_many :comments, :as => :commentable, :dependent => :destroy
 
   validates_presence_of :image_url
 

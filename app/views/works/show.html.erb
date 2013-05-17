@@ -37,9 +37,6 @@
       </div>
       <%= content_tag :div, @work.description.as_html, :class => :description if @work.description.present? %>
     </div>
-
-    <% if Rails.env.production? && @work.contest.ends_on >= Date.today %>
-      <div id='vk_contest_work_comments'></div>
-    <% end %>
+    <%= render :partial => 'comments/block', :locals => { :parent_obj => @work } %>
   </div>
 </div>
