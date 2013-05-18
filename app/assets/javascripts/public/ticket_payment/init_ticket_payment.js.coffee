@@ -4,7 +4,7 @@
 
   links.each ->
     link = $(this)
-    link.click ->
+    link.unbind('click').click ->
       $.ajax
         type: 'GET'
         url: link.attr('href')
