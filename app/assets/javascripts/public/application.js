@@ -54,5 +54,6 @@
  * = require ./stream_drifting
  * = require ./services
  * = require ./visitors
+ * = require ./sms_claims
  * = require ./main
  */

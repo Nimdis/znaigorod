@@ -15,12 +15,6 @@
         </div>
       <% end %>
 
-      <% if @organization.sms_claimable? %>
-        <% @organization.suborganizations.each do |suborganization| %>
-          <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
-        <% end %>
-      <% end %>
-
       <%= @organization.iconize_info %>
       <h1><%= @organization.title %></h1>
       <div class="left_part">
@@ -50,12 +44,25 @@
         <li class='title'>Категории:</li>
         <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
       </ul>
+
+      <% if @organization.sms_claimable? %>
+        <ul class='sms_claims'>
+        <% @organization.suborganizations.each do |suborganization| %>
+          <li>
+            <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
+          </li>
+        <% end %>
+        </ul>
+      <% end %>
+
     </div>
+
     <% if @organization.description.present? %>
       <div class='description'>
         <%= @organization.description.as_html %>
       </div>
     <% end %>
+
     <% if @organization.has_photogallery? %>
       <div class="photogallery">
         <ul>
@@ -65,6 +72,7 @@
         </ul>
       </div>
     <% end %>
+
   </div>
 
   <% @organization.decorated_suborganizations.each do |suborganization| %>
