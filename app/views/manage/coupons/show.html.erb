@@ -17,7 +17,7 @@
 
   <div>
     <span class="label">Количество:</span>
-    <span class="value"><%= resource.count %></span>
+    <span class="value"><%= resource.number %></span>
   </div>
 
   <div>
@@ -82,6 +82,18 @@
     <% else %>
       <span class="blank">Нет</span>
     <% end %>
+  </div>
+
+  <div>
+    <span class="label">Коды:</span>
+    <ul>
+      <% resource.copies.each do |copy| %>
+        <li>
+          <%= copy.code %>
+          <%= copy.state %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 
 </div>

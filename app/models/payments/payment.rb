@@ -3,6 +3,7 @@
 class Payment < ActiveRecord::Base
   attr_accessible :number, :phone
 
+  belongs_to :coupon
   belongs_to :ticket
   belongs_to :user
 

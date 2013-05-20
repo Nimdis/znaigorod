@@ -116,7 +116,7 @@ ru:
       coupon:
         <<: *common_attributes
         complete_at: Продажа заканчивается
-        count: Количество
+        number: Количество
         description: Описание
         discount: Скидка
         image: Изображение

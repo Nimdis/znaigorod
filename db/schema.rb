@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520022640) do
+ActiveRecord::Schema.define(:version => 20130520045457) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -213,7 +213,7 @@ ActiveRecord::Schema.define(:version => 20130520022640) do
     t.integer  "price"
     t.string   "kind"
     t.string   "place"
-    t.integer  "count"
+    t.integer  "number"
     t.datetime "stale_at"
     t.datetime "complete_at"
   end

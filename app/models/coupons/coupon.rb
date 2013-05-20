@@ -1,10 +1,12 @@
 class Coupon < ActiveRecord::Base
+  include Copies
+
   extend Enumerize
 
   attr_accessible :description, :discount, :title, :organization_id, :price_with_discount,
                   :price_without_discount, :price, :organization_quota,
                   :kind, :image, :delete_image, :place, :vfs_path,
-                  :count, :stale_at, :complete_at
+                  :number, :stale_at, :complete_at
 
   attr_accessor :delete_image
 
@@ -19,7 +21,7 @@ class Coupon < ActiveRecord::Base
 
   enumerize :kind, in: [:certificate, :coupon], predicates: true
 
-  validates_presence_of :kind, :place, :stale_at, :complete_at
+  validates_presence_of :kind, :number, :place, :stale_at, :complete_at
 
   def self.generate_vfs_path
     "/znaigorod/coupons/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}"
@@ -40,7 +42,7 @@ class Coupon < ActiveRecord::Base
 
   def set_discount
     if self.price_without_discount? & self.price_with_discount?
-      self.discount = (self.price_without_discount - self.price_with_discount) * 100 / price_without_discount 
+      self.discount = ((self.price_without_discount - self.price_with_discount) * 100 / price_without_discount).round
     else
       self.discount = nil
     end
