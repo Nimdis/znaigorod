@@ -1,19 +1,15 @@
 class Ticket < ActiveRecord::Base
+  include Copies
+
   attr_accessible :number, :original_price, :price, :description, :stale_at
 
   belongs_to :affiche
 
-  has_many :payments, dependent: :destroy
-  has_many :copies, :as => :copyable, dependent: :destroy
-
   validates_presence_of :number, :original_price, :price, :description, :stale_at
-
-  after_create :create_copies
-
-  delegate :count, :for_sale, :reserved, :sold, to: :copies, prefix: true
 
   scope :ordered,   -> { order('created_at DESC') }
   scope :actual,    -> { where('stale_at > ? OR stale_at IS NULL', Time.zone.now) }
+
   scope :available, -> { actual.ordered.joins(:copies).where('copies.state = ?', 'for_sale').uniq }
   scope :by_state,  ->(state) { ordered.joins(:copies).where('copies.state = ?', state).uniq }
 
@@ -31,12 +27,6 @@ class Ticket < ActiveRecord::Base
 
   def discount
     ((original_price - price) * 100 / original_price).round
-  end
-
-  private
-
-  def create_copies
-    number.times { copies.create! }
   end
 end
 
