@@ -1,6 +1,6 @@
 <% object_assoc_chain = voteable.is_a?(Work) ? [voteable.contest, voteable] : [voteable] %>
 <% if voteable.votes.liked.any? %>
-  <div class="votes_counter" title='<%= t :like, :count => voteable.votes.count %>'>
+  <div class="votes_counter" title='<%= t :like, :count => voteable.votes.liked.count %>'>
     <%= link_to voteable.votes.liked.count, polymorphic_url([object_assoc_chain, :liked].flatten), :remote => true %>
   </div>
 <% end %>
