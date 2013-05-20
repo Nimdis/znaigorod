@@ -30,7 +30,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def discount
-    ((original_price - price) * 100 / original_price).round if copies_for_sale.any?
+    ((original_price - price) * 100 / original_price).round
   end
 
   private

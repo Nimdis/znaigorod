@@ -397,7 +397,7 @@ ru:
         value:      Минимальная цена
         max_value:  Максимальная цена
 
-      ticket_info:
+      ticket:
         number:         Количество
         original_price: Цена заведения
         price:          Цена со скидкой
