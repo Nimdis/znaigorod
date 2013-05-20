@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517102338) do
+ActiveRecord::Schema.define(:version => 20130520020423) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -421,15 +421,15 @@ ActiveRecord::Schema.define(:version => 20130517102338) do
   add_index "paperclip_attachments", ["attacheable_id", "attacheable_type"], :name => "index_paperclip_attachments_on_attacheable_fields"
 
   create_table "payments", :force => true do |t|
-    t.integer  "ticket_info_id"
+    t.integer  "ticket_id"
     t.integer  "number"
     t.string   "phone"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "user_id"
   end
 
-  add_index "payments", ["ticket_info_id"], :name => "index_payments_on_ticket_info_id"
+  add_index "payments", ["ticket_id"], :name => "index_payments_on_ticket_info_id"
   add_index "payments", ["user_id"], :name => "index_payments_on_user_id"
 
   create_table "pool_table_prices", :force => true do |t|
