@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
 
   actions :new, :create
 
-  belongs_to :ticket_info
+  belongs_to :ticket
 
   def create
     create! do |success, failure|
