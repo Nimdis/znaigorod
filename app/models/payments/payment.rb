@@ -3,7 +3,7 @@
 class Payment < ActiveRecord::Base
   attr_accessible :number, :phone
 
-  belongs_to :ticket, :foreign_key => :ticket_info_id
+  belongs_to :ticket
   belongs_to :user
 
   has_one :sms, :as => :smsable
