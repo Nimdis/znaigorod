@@ -12,7 +12,7 @@ end
 
 # == Schema Information
 #
-# Table name: ticket_infos
+# Table name: tickets
 #
 #  id             :integer          not null, primary key
 #  affiche_id     :integer
