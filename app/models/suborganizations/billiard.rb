@@ -6,6 +6,8 @@ class Billiard < Entertainment
   presents_as_checkboxes :category, :default_value => Values.instance.billiard.categories
   presents_as_checkboxes :feature
   presents_as_checkboxes :offer
+
+  include SmsClaims
 end
 
 # == Schema Information

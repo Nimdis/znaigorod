@@ -31,6 +31,8 @@ class SalonCenter < ActiveRecord::Base
   include SearchWithFacets
 
   search_with_facets :category, :feature, :offer
+
+  include SmsClaims
 end
 
 # == Schema Information

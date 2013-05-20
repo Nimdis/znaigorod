@@ -1,7 +1,7 @@
 @init_sms_claims = () ->
   $('.sms_claims li a').each (index, element) ->
     link = $(this)
-    link.click (event) ->
+    link.live 'click', (event) ->
       return false if link.hasClass('busy')
       link.addClass('busy')
       $.ajax

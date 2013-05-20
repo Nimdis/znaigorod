@@ -48,6 +48,8 @@ class Meal < ActiveRecord::Base
   include SearchWithFacets
 
   search_with_facets :category, :payment, :cuisine, :feature, :offer, :stuff
+
+  include SmsClaims
 end
 
 # == Schema Information
