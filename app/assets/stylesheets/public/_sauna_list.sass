@@ -41,6 +41,33 @@
         right: 0
         top: 36px
 
+      .sms_claims
+        +clearfix
+        position: absolute
+        top: 34px
+        right: 105px
+        li
+          float: left
+          margin-right: 10px
+          a
+            display: block
+            color: #fff
+            font-size: 11px
+            +text-shadow(#aaa 0 0 1px)
+            border: 1px solid #a62538
+            border-top-color: #f56076
+            border-bottom-color: #a72338
+            border-left-color: #d0455a
+            border-right-color: #d0455a
+            background-color: #cf3a50
+            +background-image(linear-gradient(#df475e, #bc2a41))
+            +border-radius(3px)
+            padding: 5px 10px
+            &:hover
+              cursor: pointer
+              background: #cf3a50
+              text-decoration: none
+
       .attributes
         +border-left-radius(5px)
         +clearfix
