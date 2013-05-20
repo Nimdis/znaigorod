@@ -42,6 +42,7 @@
           busy = false if data.length
           init_photogallery() if $('.content_wrapper .was_in_city_photos li').length && data.length
           init_ticket_payment() if $('.content_wrapper .tickets_list li').length && data.length
+          init_sms_claims() if $('.content_wrapper .sms_claims li').length && data.length
           true
         error: (jqXHR, textStatus, errorThrown) ->
           console.log jqXHR.responseText.strip_tags() if console && console.log
