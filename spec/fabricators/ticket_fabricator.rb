@@ -1,13 +1,10 @@
-require 'spec_helper'
-
-describe TicketInfo do
-  let(:ticket_info) { Fabricate :ticket_info }
-
-  describe 'creates ticket' do
-    subject { ticket_info }
-
-    its(:copies_count) { should == ticket_info.number }
-  end
+Fabricator :ticket do
+  number 10
+  original_price 1000
+  price 500
+  description 'some concert'
+  affiche { Fabricate :exhibition }
+  stale_at { Time.zone.now + 2.days }
 end
 
 # == Schema Information

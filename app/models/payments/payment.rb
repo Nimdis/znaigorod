@@ -3,7 +3,7 @@
 class Payment < ActiveRecord::Base
   attr_accessible :number, :phone
 
-  belongs_to :ticket_info
+  belongs_to :ticket, :foreign_key => :ticket_info_id
   belongs_to :user
 
   has_one :sms, :as => :smsable
@@ -17,7 +17,7 @@ class Payment < ActiveRecord::Base
   after_create :reserve_copies
 
   def amount
-    ticket_info.price * number
+    ticket.price * number
   end
 
   def approve
@@ -33,11 +33,11 @@ class Payment < ActiveRecord::Base
   private
 
   def check_tickets_number
-    errors[:base] << I18n.t('activerecord.errors.messages.not_enough_tickets') if number? && ticket_info.copies_for_sale.count < number
+    errors[:base] << I18n.t('activerecord.errors.messages.not_enough_tickets') if number? && ticket.copies_for_sale.count < number
   end
 
   def reserve_copies
-    copies << ticket_info.copies_for_sale.limit(number)
+    copies << ticket.copies_for_sale.limit(number)
   end
 
   def reserve_copy(copy)
@@ -45,7 +45,7 @@ class Payment < ActiveRecord::Base
   end
 
   def message
-    "#{ticket_info.description}. " << (copies.many? ? 'Коды билетов: ' : 'Код билета: ') << copies.pluck(:code).join(', ')
+    "#{ticket.description}. " << (copies.many? ? 'Коды билетов: ' : 'Код билета: ') << copies.pluck(:code).join(', ')
   end
 end
 
