@@ -11,7 +11,7 @@ Znaigorod::Application.routes.draw do
       resources type.name.underscore.pluralize
     end
     resources :affiches, only: [] do
-      resources :ticket_infos
+      resources :tickets
     end
 
     resources :contests do

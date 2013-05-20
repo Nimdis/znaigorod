@@ -133,6 +133,14 @@ class Affiche < ActiveRecord::Base
     showings.create attributes
   end
 
+  def has_tickets_for_sale?
+    tickets.joins(:copies).where('copies.state = ?', :for_sale).any?
+  end
+
+  def max_tickets_discount
+    tickets.joins(:copies).where('copies.state = ?', :for_sale).map(&:discount).sort.last
+  end
+
   def destroy_showings
     showings.destroy_all
   end

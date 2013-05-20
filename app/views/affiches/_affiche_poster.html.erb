@@ -1,8 +1,8 @@
 <div class="item">
   <%= affiche.has_ribbon %>
-  <% if affiche.ticket_infos.any? && affiche.ticket_infos.map(&:tickets_for_sale).flatten.any? %>
+  <% if affiche.has_tickets_for_sale? %>
     <div class='has_tickets_for_sale' title='У нас вы можете купить билеты на мероприятие со скидкой!'>
-      -<%= affiche.ticket_infos.map(&:discount).compact.sort{ |x,y| y <=> x }.first %>%
+      -<%= affiche.max_tickets_discount %>%
     </div>
   <% end %>
   <div class="rating like_a_line">

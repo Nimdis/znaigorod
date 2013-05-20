@@ -10,26 +10,26 @@
   <div>
     <span class="label">
       Билеты
-      <%= link_to 'Добавить', new_manage_affiche_ticket_info_path(resource) %>
+      <%= link_to 'Добавить', new_manage_affiche_ticket_path(resource) %>
     </span>
     <span class="value">
       <ul>
-        <% resource.ticket_infos.each do |ticket_info| %>
+        <% resource.tickets.each do |ticket| %>
           <li>
-            Цена <%= "#{ticket_info.original_price}/#{ticket_info.price}" %>,
-            всего <%= ticket_info.tickets.count %>,
-            осталось <%= ticket_info.tickets_for_sale.count %>
-            куплено <%= ticket_info.tickets_sold.count %>,
-            забронировано <%= ticket_info.tickets_reserved.count %>,
+            Цена <%= "#{ticket.original_price}/#{ticket.price}" %>,
+            всего <%= ticket.copies.count %>,
+            осталось <%= ticket.copies_for_sale.count %>
+            куплено <%= ticket.copies_sold.count %>,
+            забронировано <%= ticket.copies_reserved.count %>,
             <p>
-              коды: <%= ticket_info.tickets.map(&:code).join(', ') %>
+              коды: <%= ticket.copies.map(&:code).join(', ') %>
             </p>
             <table class='tickets'>
-              <% ticket_info.tickets.each do |ticket| %>
+              <% ticket.copies.each do |copy| %>
                 <tr>
-                  <td><%= ticket.code %></td>
-                  <td><%= ticket.payment ? ticket.payment.phone : '' %></td>
-                  <td><%= ticket.state_text %></td>
+                  <td><%= copy.code %></td>
+                  <td><%= copy.payment ? copy.payment.phone : '' %></td>
+                  <td><%= copy.state_text %></td>
                 </tr>
               <% end %>
             </table>
