@@ -11,6 +11,16 @@
     </div>
   </div>
 
+  <% if suborganization.organization.sms_claimable? %>
+    <ul class='sms_claims'>
+    <% suborganization.organization.claimable_suborganizations.each do |suborganization| %>
+      <li>
+        <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
+      </li>
+    <% end %>
+    </ul>
+  <% end %>
+
   <div class="rating" style='margin: 5px 10px;'>
     <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => suborganization.organization } %>
   </div>

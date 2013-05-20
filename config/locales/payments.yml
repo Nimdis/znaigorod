@@ -1,7 +1,7 @@
 ru:
   sms_claim:
     billiard:
-      link_title: Забронировать стол
+      link_title: Забронировать биллиард
       placeholder: Укажите ориентировочное время и продолжительность игры, пожелания по столу
 
     car_service_center:
