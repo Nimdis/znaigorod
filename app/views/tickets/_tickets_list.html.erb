@@ -4,7 +4,7 @@
       -<%= ticket_info.discount %>%
     </div>
     <div class='item_wrapper'>
-      <div class='image'><%= image_tag_for ticket_info.affiche.poster_url, 120, 160 %></div>
+      <div class='image'><%= link_to image_tag_for(ticket_info.affiche.poster_url, 120, 160), ticket_info.affiche %></div>
       <div class='column'>
         <div class='description'><%= link_to ticket_info.description.truncate(55).gilensize, ticket_info.affiche, title: ticket_info.description %></div>
         <div class='place'><%= AfficheDecorator.decorate(ticket_info.affiche).affiche_place %></div>
