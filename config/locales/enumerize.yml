@@ -44,7 +44,7 @@ ru:
         single:                Разовая
         multiple:              Абонемент
 
-    ticket:
+    copy:
       state:
         for_sale: В продаже
         reserved: Забронирован

@@ -1,5 +1,5 @@
 Znaigorod::Application.routes.draw do
-  resources :ticket_infos, :only => [] do
+  resources :tickets, :only => [] do
     resources :payments, :only => [:new, :create]
   end
 

@@ -48,7 +48,7 @@ SimpleNavigation::Configuration.run do |navigation|
         crm_item.item 'meetings', 'План встреч', [:meetings, :crm, :activities]
     end
 
-    primary.item :ticket_infos, 'Билеты', manage_ticket_infos_path
+    primary.item :tickets, 'Билеты', manage_tickets_path
 
     primary.dom_class = 'navigation'
   end

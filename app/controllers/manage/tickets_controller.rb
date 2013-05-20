@@ -1,4 +1,4 @@
-class Manage::TicketInfosController < Manage::ApplicationController
+class Manage::TicketsController < Manage::ApplicationController
   actions :index, :new, :create
 
   belongs_to :affiche, optional: true
@@ -11,12 +11,12 @@ class Manage::TicketInfosController < Manage::ApplicationController
 
   def index
     if params[:utf8]
-      @ticket_infos = TicketInfo.search {
+      @tickets = Ticket.search {
         keywords params[:q]
         paginate(:page => params[:page] || 1, :per_page => 19)
       }.results
     else
-      @ticket_infos = apply_scopes(TicketInfo)
+      @tickets = apply_scopes(Ticket)
     end
   end
 

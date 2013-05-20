@@ -1,0 +1,68 @@
+<h3>Билеты</h3>
+
+<ul class='ticket_info_states'>
+  <li><%= link_to "Все (#{Copy.count})", manage_tickets_path %></li>
+  <% Copy.state.options.each do |option| %>
+    <li><%= link_to "#{option.first} (#{Copy.by_state(option.last).count})", with_state_manage_tickets_path(option.last) %></li>
+  <% end %>
+</ul>
+
+<%= form_tag manage_tickets_path, :method => :get, :class => 'search_ticket_infos' do %>
+  <%= text_field_tag 'q', params[:q] %>
+  <%= submit_tag 'Найти' %>
+<% end %>
+
+<ul class='ticket_infos'>
+  <% @tickets.group_by(&:organization).each do |organization, tickets| %>
+    <li class='ticket_info'>
+      <h5>
+      <% if organization %>
+        <%= link_to "#{organization.title} (#{organization.address})", manage_organization_path(organization) %>
+      <% else %>
+        Место проведения не указано
+      <% end %>
+      </h5>
+
+      <ul class='manage'>
+        <% tickets.each do |ticket| %>
+          <li>
+            <p><%= link_to ticket.affiche.title, manage_affiche_path(ticket.affiche) %></p>
+
+            <div class="poster">
+              <%= link_to image_tag_for(ticket.affiche.poster_url, 70, 100), manage_affiche_path(ticket.affiche) %>
+            </div>
+
+            <div class="details">
+              <p><%= "Цена: #{ticket.original_price} / #{ticket.price}" %></p>
+              <p>Коды: <%= ticket.copies.map(&:code).join(', ') %></p>
+              <table class='tickets'>
+                <% ticket.copies.each do |copy| %>
+                  <tr>
+                    <td class='code'><%= copy.code %></td>
+                    <td class='phone'><%= copy.payment ? copy.payment.phone : '' %></td>
+                    <td class='state'><%= copy.state_text %></td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+
+      <% if organization %>
+        <div class="text">
+          <p>Коды мероприятий для <%= link_to organization.title, organization_path(organization) %>:</p>
+          <% tickets.each do |ticket| %>
+            <% affiche = AfficheDecorator.new(ticket.affiche) %>
+            <p>
+              <%= link_to "#{affiche.human_when} #{affiche.title}".html_safe, affiche.kind_affiche_path %> -
+              <%= ticket.copies.map(&:code).join(', ') %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @tickets %>
