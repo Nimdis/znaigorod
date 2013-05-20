@@ -1,18 +1,18 @@
-<% @ticket_infos.each do |ticket_info| %>
+<% @tickets.each do |ticket| %>
   <li class='<%= cycle 'first', 'second', 'third' %>'>
     <div class='has_tickets_for_sale'>
-      -<%= ticket_info.discount %>%
+      -<%= ticket.discount %>%
     </div>
     <div class='item_wrapper'>
       <div class='image'><%= link_to image_tag_for(ticket_info.affiche.poster_url, 120, 160), ticket_info.affiche %></div>
       <div class='column'>
-        <div class='description'><%= link_to ticket_info.description.truncate(55).gilensize, ticket_info.affiche, title: ticket_info.description %></div>
-        <div class='place'><%= AfficheDecorator.decorate(ticket_info.affiche).affiche_place %></div>
-        <div class='original_price'><span class='stroke'><%= ticket_info.original_price.to_i %> р.</span></div>
-        <div class='price'><%= ticket_info.price.to_i %> р.</div>
+        <div class='description'><%= link_to ticket.description.truncate(55).gilensize, ticket.affiche, title: ticket.description %></div>
+        <div class='place'><%= AfficheDecorator.decorate(ticket.affiche).affiche_place %></div>
+        <div class='original_price'><span class='stroke'><%= ticket.original_price.to_i %> р.</span></div>
+        <div class='price'><%= ticket.price.to_i %> р.</div>
         <div class='buy_ticket'>
-          <div class='ticket_for_sale'><%= t 'ticket.for_sale', count: ticket_info.tickets_for_sale.count %></div>
-          <%= link_to 'Купить', new_ticket_info_payment_path(ticket_info), class: :ticket_payment %>
+          <div class='ticket_for_sale'><%= t 'ticket.for_sale', count: ticket.copies_for_sale.count %></div>
+          <%= link_to 'Купить', new_ticket_payment_path(ticket), class: :ticket_payment %>
         </div>
       </div>
     </div>

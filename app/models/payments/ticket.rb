@@ -14,8 +14,8 @@ class Ticket < ActiveRecord::Base
 
   scope :ordered,   -> { order('created_at DESC') }
   scope :actual,    -> { where('stale_at > ? OR stale_at IS NULL', Time.zone.now) }
-  scope :available, -> { actual.ordered.joins(:tickets).where('tickets.state = ?', 'for_sale').uniq }
-  scope :by_state,  ->(state) { ordered.joins(:tickets).where('tickets.state = ?', state).uniq }
+  scope :available, -> { actual.ordered.joins(:copies).where('copies.state = ?', 'for_sale').uniq }
+  scope :by_state,  ->(state) { ordered.joins(:copies).where('copies.state = ?', state).uniq }
 
   def organization
     affiche(:include => { :showings => :organizatiob }).showings.first.organization
@@ -30,7 +30,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def discount
-    ((original_price - price) * 100 / original_price).round if tickets_for_sale.any?
+    ((original_price - price) * 100 / original_price).round if copies_for_sale.any?
   end
 
   private
