@@ -1,9 +1,26 @@
 ru:
   sms_claim:
-    sauna:
-      link_title: Забронировать сауну
-      placeholder: Закажите сауну
+    billiard:
+      link_title: Забронировать стол
+      placeholder: Укажите ориентировочное время и продолжительность игры, пожелания по столу
+
+    car_service_center:
+      link_title: Записаться в сервис
+      placeholder: Укажите марку автомобиля, проблему или планируемый ремонт, удобное время
 
     car_wash:
       link_title: Записаться на мойку
-      placeholder: Запишитесь на мойку
+      placeholder: Укажите марку автомобиля, вид мойки и удобное время
+
+    meal:
+      link_title: Забронировать столик
+      placeholder: Укажите желаемое время и количество персон
+
+    salon_center:
+      link_title: Записаться
+      placeholder: Укажите время и желаемые услуги
+
+    sauna:
+      link_title: Забронировать сауну
+      placeholder: Укажите желаемое время, количество человек
+

@@ -58,6 +58,10 @@ class Organization < ActiveRecord::Base
     phone_for_sms? && enough_balance?
   end
 
+  def claimable_suborganizations
+    I18n.t('sms_claim').keys.map { |kind| send(kind) }.compact
+  end
+
   ### Payments ===>
 
   has_many :affiches,       :through => :showings, :uniq => true
