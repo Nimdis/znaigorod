@@ -34,7 +34,6 @@
           true
       false
     true
-  $('.sms_claims li a:first').click()
 
   $('.sms_claim_form_wrapper form').live 'submit', (event) ->
     form = $(this)
