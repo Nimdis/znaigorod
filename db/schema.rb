@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517094639) do
+ActiveRecord::Schema.define(:version => 20130517102338) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -776,7 +776,7 @@ ActiveRecord::Schema.define(:version => 20130517094639) do
     t.text     "description"
   end
 
-  create_table "ticket_infos", :force => true do |t|
+  create_table "tickets", :force => true do |t|
     t.integer  "affiche_id"
     t.integer  "number"
     t.float    "original_price"
@@ -787,7 +787,7 @@ ActiveRecord::Schema.define(:version => 20130517094639) do
     t.datetime "stale_at"
   end
 
-  add_index "ticket_infos", ["affiche_id"], :name => "index_ticket_infos_on_affiche_id"
+  add_index "tickets", ["affiche_id"], :name => "index_ticket_infos_on_affiche_id"
 
   create_table "travels", :force => true do |t|
     t.text     "category"

@@ -1,4 +1,4 @@
-class TicketInfo < ActiveRecord::Base
+class Ticket < ActiveRecord::Base
   attr_accessible :number, :original_price, :price, :description, :stale_at
 
   belongs_to :affiche

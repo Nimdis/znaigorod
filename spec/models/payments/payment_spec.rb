@@ -11,8 +11,8 @@ describe Payment do
     end
 
     context 'enough' do
-      let(:ticket_info) { Fabricate :ticket_info }
-      let(:payment) { Fabricate.build :payment, :number => 5, :ticket_info_id => ticket_info.id }
+      let(:ticket) { Fabricate :ticket }
+      let(:payment) { Fabricate.build :payment, :number => 5, :ticket_info_id => ticket.id }
 
       before { payment.save }
 
@@ -21,22 +21,22 @@ describe Payment do
   end
 
   describe 'reserve tickets' do
-    let(:ticket_info) { Fabricate :ticket_info, :number => 5 }
-    let(:payment) { Fabricate :payment, :number => 3, :ticket_info_id => ticket_info.id }
+    let(:ticket) { Fabricate :ticket, :number => 5 }
+    let(:payment) { Fabricate :payment, :number => 3, :ticket_info_id => ticket.id }
 
     before { payment }
 
-    it { ticket_info.copies_reserved.count.should == payment.number }
+    it { ticket.copies_reserved.count.should == payment.number }
   end
 
   describe 'approve' do
-    let(:ticket_info) { Fabricate :ticket_info, :number => 5 }
-    let(:payment) { Fabricate :payment, :number => 3, :ticket_info_id => ticket_info.id }
+    let(:ticket) { Fabricate :ticket, :number => 5 }
+    let(:payment) { Fabricate :payment, :number => 3, :ticket_info_id => ticket.id }
 
     before { payment.approve }
 
-    it { ticket_info.copies_reserved.count.should be_zero }
-    it { ticket_info.copies_sold.count.should == payment.number }
+    it { ticket.copies_reserved.count.should be_zero }
+    it { ticket.copies_sold.count.should == payment.number }
   end
 end
 
