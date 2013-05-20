@@ -46,11 +46,8 @@
             data-longitude='<%= @organization.address.longitude %>'
             data-hint='<%= @organization.title.text_gilensize %>'
             data-id='<%= @organization.id %>'>
-
-      <% if @organization.sms_claimable? %>
-        <% @organization.suborganizations.each do |suborganization| %>
-          <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
-        <% end %>
+          </div>
+        </div>
       <% end %>
 
       <% if @organization.similar_organizations.present? %>
