@@ -6,7 +6,7 @@ class Copy < ActiveRecord::Base
   attr_accessible :code, :state
 
   belongs_to :copyable, :polymorphic => true
-  belongs_to :payment
+  belongs_to :copy_payment
 
   has_many :smses, :as => :smsable
 
@@ -31,7 +31,7 @@ class Copy < ActiveRecord::Base
     inform_purchaser
 
     self.state = 'for_sale'
-    self.payment_id = nil
+    self.copy_payment_id = nil
     self.save
   end
 
@@ -43,7 +43,7 @@ class Copy < ActiveRecord::Base
   end
 
   def inform_purchaser
-    smses.create! :phone => payment.phone, :message => 'Время ожидания платежа за билет истекло.'
+    smses.create! :phone => copy_payment.phone, :message => 'Время ожидания платежа за билет истекло.'
   end
 end
 

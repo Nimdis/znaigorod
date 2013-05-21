@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130521011846) do
+ActiveRecord::Schema.define(:version => 20130521084949) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -183,16 +183,16 @@ ActiveRecord::Schema.define(:version => 20130521011846) do
   create_table "copies", :force => true do |t|
     t.string   "state"
     t.string   "code"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "payment_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "copy_payment_id"
     t.integer  "copyable_id"
     t.string   "copyable_type"
   end
 
+  add_index "copies", ["copy_payment_id"], :name => "index_tickets_on_payment_id"
   add_index "copies", ["copyable_id"], :name => "index_copies_on_copyable_id"
   add_index "copies", ["copyable_type"], :name => "index_copies_on_copyable_type"
-  add_index "copies", ["payment_id"], :name => "index_tickets_on_payment_id"
 
   create_table "coupons", :force => true do |t|
     t.string   "title"
@@ -428,10 +428,12 @@ ActiveRecord::Schema.define(:version => 20130521011846) do
     t.datetime "updated_at",       :null => false
     t.integer  "user_id"
     t.string   "paymentable_type"
+    t.string   "type"
   end
 
   add_index "payments", ["paymentable_id"], :name => "index_payments_on_paymentable_id"
   add_index "payments", ["paymentable_type"], :name => "index_payments_on_paymentable_type"
+  add_index "payments", ["type"], :name => "index_payments_on_type"
   add_index "payments", ["user_id"], :name => "index_payments_on_user_id"
 
   create_table "pool_table_prices", :force => true do |t|

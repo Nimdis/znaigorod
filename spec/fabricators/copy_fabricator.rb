@@ -1,6 +1,5 @@
 Fabricator :copy do
-  #copyable { Fabricate :ticket }
-  payment
+  copy_payment
 end
 
 # == Schema Information
