@@ -17,7 +17,7 @@
             resizable: false
             open: ->
               $('input[type=submit]', $(this)).attr('disabled', 'disabled').addClass('disabled')
-              $('#payment_phone', $(this)).inputmask 'mask',
+              $('#copy_payment_phone', $(this)).inputmask 'mask',
                 'mask': '+7-(999)-999-9999'
             close: ->
               $(this).dialog('destroy')
@@ -37,7 +37,7 @@
   $('.payment_form_wrapper form').live 'submit', ->
     return false unless $('.payment_form_wrapper #payment_phone').inputmask('isComplete')
 
-  $('.payment_form_wrapper #payment_phone').live 'keyup', ->
+  $('.payment_form_wrapper #copy_payment_phone').live 'keyup', ->
     if $(this).inputmask 'isComplete'
       $('input[type=submit]', $(this).closest('form')).removeAttr('disabled').removeClass('disabled')
     else

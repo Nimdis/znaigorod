@@ -14,7 +14,7 @@
         <div class='price<%= ' without_discount' unless coupon.discount?%>'><%= coupon.price.to_i %> р.</div>
         <div class='buy_coupon'>
           <div class='coupon_for_sale'><%= t "copy.#{coupon.kind}", count: coupon.copies_for_sale.count %></div>
-          <%= link_to 'Купить', new_coupon_payment_path(coupon), class: :payment_link %>
+          <%= link_to 'Купить', new_coupon_copy_payment_path(coupon), class: :payment_link %>
         </div>
       </div>
     </div>
