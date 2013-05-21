@@ -1,0 +1,13 @@
+<%# content_for :page_title, t('meta.tickets.title') %>
+<%# content_for :meta_description, t('meta.tickets.description') %>
+<%# content_for :meta_keywords, t('meta.tickets.keywords') %>
+
+<div class='content_wrapper'>
+  <%= render 'breadcrumbs', :index => true %>
+  <h1>Распродажа сертификатов и купонов</h1>
+  <ul class='coupons_list'>
+    <%= render :partial => 'coupons_list' %>
+  </ul>
+</div>
+
+<%#= paginate @tickets %>

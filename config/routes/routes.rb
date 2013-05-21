@@ -21,6 +21,10 @@ Znaigorod::Application.routes.draw do
     get 'page/:page', :action => :index, :on => :collection
   end
 
+  resources :coupons,  :only => [:index, :show] do
+    get 'page/:page', :action => :index, :on => :collection
+  end
+
   resources :comments, :only => [] do
     put 'change_vote' => 'votes#change_vote', :as => :change_vote
     put 'liked' => 'votes#liked', :as => :liked

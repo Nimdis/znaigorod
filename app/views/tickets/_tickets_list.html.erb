@@ -1,6 +1,6 @@
 <% @tickets.each do |ticket| %>
   <li class='<%= cycle 'first', 'second', 'third' %>'>
-    <div class='has_tickets_for_sale'>
+    <div class='has_items_for_sale'>
       -<%= ticket.discount %>%
     </div>
     <div class='item_wrapper'>
@@ -11,7 +11,7 @@
         <div class='original_price'><span class='stroke'><%= ticket.original_price.to_i %> р.</span></div>
         <div class='price'><%= ticket.price.to_i %> р.</div>
         <div class='buy_ticket'>
-          <div class='ticket_for_sale'><%= t 'ticket.for_sale', count: ticket.copies_for_sale.count %></div>
+          <div class='ticket_for_sale'><%= t 'copy.for_sale', count: ticket.copies_for_sale.count %></div>
           <%= link_to 'Купить', new_ticket_payment_path(ticket), class: :ticket_payment %>
         </div>
       </div>

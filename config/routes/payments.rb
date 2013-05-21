@@ -3,6 +3,10 @@ Znaigorod::Application.routes.draw do
     resources :payments, :only => [:new, :create]
   end
 
+  resources :coupons, :only => [] do
+    resources :payments, :only => [:new, :create]
+  end
+
   scope 'robokassa' do
     post 'paid'    => 'robokassa#paid'
     post 'success' => 'robokassa#success'
