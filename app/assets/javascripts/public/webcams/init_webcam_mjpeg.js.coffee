@@ -21,7 +21,7 @@ render_mjpeg_dialog = (width, height, file, dialog_title) ->
   webcam_dialog = init_webcam_dialog()
   webcam_dialog.html("").hide()
   html = "<center>" +
-    "<img src='#{file}?rate=0' width='#{width}' height='#{height}' />" +
+    "<img src='#{file}?rate=0&user=user&pwd=pwd' width='#{width}' height='#{height}' />" +
     "</center>"
   $(webcam_dialog).html(html)
   webcam_dialog.dialog
