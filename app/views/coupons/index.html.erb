@@ -1,6 +1,6 @@
-<%# content_for :page_title, t('meta.tickets.title') %>
-<%# content_for :meta_description, t('meta.tickets.description') %>
-<%# content_for :meta_keywords, t('meta.tickets.keywords') %>
+<% content_for :page_title, t('meta.coupons.title') %>
+<% content_for :meta_description, t('meta.coupons.description') %>
+<% content_for :meta_keywords, t('meta.coupons.keywords') %>
 
 <div class='content_wrapper'>
   <%= render 'breadcrumbs', :index => true %>
@@ -10,4 +10,4 @@
   </ul>
 </div>
 
-<%#= paginate @tickets %>
+<%= paginate @coupons %>

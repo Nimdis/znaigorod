@@ -1,0 +1,15 @@
+<ol class='ticket_payment_instruction'>
+  <li>Выбери количество и укажи номер сотового телефона</li>
+  <li>Оплати наиболее удобным для тебя способом. <span class='alert'>Оплатить покупку необходимо в течении 30 минут</span></li>
+  <li>Мы пришлем SMS с кодами, эти коды и есть входные билеты, просто покажи это SMS на входе</li>
+</ol>
+<div class='ticket_info'>
+  <div class='ticket_prices'>
+    <p class='ticket_original_price'><span class='stroke'><%= @ticket.original_price.to_i %> р.</span></p>
+    <p class='ticket_price'><%= @ticket.price.to_i %> р.</p>
+  </div>
+  <div class='ticket_description_and_tickets'>
+    <p class='ticket_description'><%= @ticket.description.gilensize %></p>
+    <p class='ticket_for_sale'><%= t 'copy.for_sale', count: @ticket.copies_for_sale.count %></p>
+  </div>
+</div>

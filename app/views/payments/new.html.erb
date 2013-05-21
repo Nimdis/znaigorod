@@ -1,20 +1,6 @@
-<div class='ticket_info'>
-  <div class='ticket_prices'>
-    <p class='ticket_original_price'><span class='stroke'><%= @ticket.original_price.to_i %> р.</span></p>
-    <p class='ticket_price'><%= @ticket.price.to_i %> р.</p>
-  </div>
-  <div class='ticket_description_and_tickets'>
-    <p class='ticket_description'><%= @ticket.description.gilensize %></p>
-    <p class='ticket_for_sale'><%= t 'ticket.for_sale', count: @ticket.copies_for_sale.count %></p>
-  </div>
-</div>
-<ol class='ticket_payment_instruction'>
-  <li>Выбери количество билетов и укажи номер сотового телефона</li>
-  <li>Оплати наиболее удобным для тебя способом: банковской картой, через интернет-банк, электронными деньгами, в терминале или салоне сотовой связи</li>
-  <li>Мы пришлем SMS с кодами билетов, эти коды и есть входные билеты, просто покажи это SMS на входе</li>
-</ol>
-<%= simple_form_for [@ticket, @payment] do |f| %>
-  <%= f.input :number, label: 'Количество', as: :select, collection: 1..@ticket.copies_for_sale.count, include_blank: false, require: false %>
+<%= render parent %>
+<%= simple_form_for [parent, @payment] do |f| %>
+  <%= f.input :number, label: 'Количество', as: :select, collection: 1..parent.copies_for_sale.count, include_blank: false, require: false %>
   <%= f.input :phone, label: 'Введите номер мобильного телефона', require: false %>
   <div class='submit'>
     <%= f.submit 'Купить' %>

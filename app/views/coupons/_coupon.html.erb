@@ -1,0 +1,23 @@
+<ol class='ticket_payment_instruction'>
+  <li>Выбери количество и укажи номер сотового телефона</li>
+  <li>Оплати наиболее удобным для тебя способом. <span class='alert'>Оплатить покупку необходимо в течении 30 минут</span></li>
+  <% if coupon.kind.coupon? %>
+    <li>Мы пришлем SMS с кодами, просто покажи это SMS в заведении и получи скидку</li>
+  <% elsif coupon.kind.certificate? && coupon.organization_quota? %>
+    <li>Мы пришлем SMS с кодами, просто покажи это SMS в заведении и получи скидку или сертификат</li>
+  <% else %>
+    <li>Мы пришлем SMS с кодами, эти коды и являются сертификатом, просто покажи это SMS в заведении и получи услугу</li>
+  <% end %>
+</ol>
+<div class='ticket_info'>
+  <div class='ticket_prices'>
+    <% if coupon.discount? %>
+      <p class='ticket_original_price'><span class='stroke'><%= "#{@coupon.price_without_discount.to_i}р." %></span></p>
+    <% end %>
+    <p class='ticket_price'><%= @coupon.price.to_i %> р.</p>
+  </div>
+  <div class='ticket_description_and_tickets'>
+    <p class='ticket_description'><%= @coupon.description.gilensize %></p>
+    <p class='ticket_for_sale'><%= t "copy.#{@coupon.kind}", count: @coupon.copies_for_sale.count %></p>
+  </div>
+</div>

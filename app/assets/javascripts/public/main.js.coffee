@@ -16,7 +16,7 @@ $ ->
   init_affiches_extend() if $('.content .affiche .trailer')
   init_affiches_filter() if $('.affiches_filter .periods .daily').length
   init_affiches_filter() if $('.navigation .periods .daily').length
-  init_ticket_payment() if $('a.ticket_payment').length
+  init_payment() if $('a.payment_link').length
   init_tabs() if $('.content .tabs').length
   init_poster() if $('.content .image a img, .organization_info .image a img').length
   init_distribution() if $('.content .distribution').length
@@ -43,6 +43,7 @@ $ ->
   init_loading_items() if $('.content_wrapper .search_results ul.items_list li').length
   init_loading_items() if $('.content_wrapper ul.sauna_list li').length
   init_loading_items() if $('.content_wrapper .tickets_list li').length
+  init_loading_items() if $('.content_wrapper .coupons_list li').length
   init_affiche_list_settings() if $('.content_wrapper .affiches_list .list_settings').length
   init_sms_claims() if $('.sms_claims li').length
   init_swfkrpano() if $('#krpano').length

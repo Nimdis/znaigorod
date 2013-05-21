@@ -1,18 +1,20 @@
 <% @coupons.each do |coupon| %>
   <li class='<%= cycle 'first', 'second', 'third' %>'>
-    <div class='has_items_for_sale'>
-      -<%= coupon.discount %>%
-    </div>
+    <% if coupon.discount? %>
+      <div class='has_items_for_sale'>
+        -<%= coupon.discount %>%
+      </div>
+    <% end %>
     <div class='item_wrapper'>
       <div class='image'><%= image_tag_for coupon.image_url, 120, 160 if coupon.image_url? %></div>
       <div class='column'>
         <div class='description'><%= link_to coupon.description.truncate(55).gilensize, title: coupon.description %></div>
         <div class='place'><%= coupon.place %></div>
-        <div class='original_price'><span class='stroke'><%= coupon.price_without_discount %> р.</span></div>
-        <div class='price'><%= coupon.price.to_i %> р.</div>
+        <%= content_tag :div, content_tag(:span, "#{coupon.price_without_discount}р.", class: :stroke), class: :original_price if coupon.discount? %>
+        <div class='price<%= ' without_discount' unless coupon.discount?%>'><%= coupon.price.to_i %> р.</div>
         <div class='buy_coupon'>
-          <div class='coupon_for_sale'><%= t 'copy.for_sale', count: coupon.copies_for_sale.count %></div>
-          <%= link_to 'Купить', new_coupon_payment_path(coupon), class: :coupon_payment %>
+          <div class='coupon_for_sale'><%= t "copy.#{coupon.kind}", count: coupon.copies_for_sale.count %></div>
+          <%= link_to 'Купить', new_coupon_payment_path(coupon), class: :payment_link %>
         </div>
       </div>
     </div>

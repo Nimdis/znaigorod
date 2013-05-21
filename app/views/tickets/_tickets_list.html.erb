@@ -12,7 +12,7 @@
         <div class='price'><%= ticket.price.to_i %> р.</div>
         <div class='buy_ticket'>
           <div class='ticket_for_sale'><%= t 'copy.for_sale', count: ticket.copies_for_sale.count %></div>
-          <%= link_to 'Купить', new_ticket_payment_path(ticket), class: :ticket_payment %>
+          <%= link_to 'Купить', new_ticket_payment_path(ticket), class: :payment_link %>
         </div>
       </div>
     </div>
