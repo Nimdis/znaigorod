@@ -17,6 +17,7 @@
  * = require ./scroll_to
  * = require ./sugar
  * = require ./swfobject
+ * = require ./limit
  * = require ./urlify
  * = require ./yandex_stat
  * = require ./yandex_map

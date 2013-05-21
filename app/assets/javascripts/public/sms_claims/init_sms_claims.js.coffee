@@ -18,6 +18,7 @@
               $('#sms_claim_name').focus()
               $('#sms_claim_phone').inputmask 'mask',
                 'mask': '+7-(999)-999-9999'
+              $('#sms_claim_details').limit('220','#chars_left')
               true
             close: ->
               $(this).dialog('destroy')

@@ -2,6 +2,7 @@
   <%= f.input :name, :input_html => { :placeholder => 'Иванов Пётр Сергеевич' } %>
   <%= f.input :phone, :input_html => { :placeholder => '+7-(111)-111-1111' } %>
   <%= f.input :details, :input_html => { :placeholder => t("sms_claim.#{parent.class.name.underscore}.placeholder") } %>
+  <div class='chars_left'>Символов осталось: <span id='chars_left'></span></div>
   <div class='submit'>
     <%= f.submit 'Оставить заявку' %>
   </div>
