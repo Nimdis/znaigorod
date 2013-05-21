@@ -19,7 +19,7 @@ SimpleNavigation::Configuration.run do |navigation|
         org_item.item :rated, 'Рейтинг организаций', manage_organizations_rated_path
     end
 
-    primary.item :affiches, 'Мероприятия города', manage_affiches_path,
+    primary.item :affiches, 'Мероприятия', manage_affiches_path,
       :highlights_on => ->(){ controller_name == 'affiches' || resource_class.try(:superclass) == Affiche },
       :if => -> { can?(:manage, Affiche) } do |affiche_item|
         Affiche.ordered_descendants.each do |kind|
@@ -49,8 +49,6 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     primary.item :ticket_infos, 'Билеты', manage_ticket_infos_path
-
-    primary.item :main_page, 'Публичный вид', root_url
 
     primary.dom_class = 'navigation'
   end
