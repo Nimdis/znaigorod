@@ -2,7 +2,7 @@ module Copies
   extend ActiveSupport::Concern
 
   included do
-    has_many :payments, :as => :paymentable, :class_name => 'CopyPayment'
+    has_many :copy_payments, :as => :paymentable
     has_many :copies, :as => :copyable, dependent: :destroy
 
     delegate :count, :for_sale, :reserved, :sold, to: :copies, prefix: true

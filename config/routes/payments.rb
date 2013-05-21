@@ -1,10 +1,10 @@
 Znaigorod::Application.routes.draw do
   resources :tickets, :only => [] do
-    resources :payments, :only => [:new, :create]
+    resources :copy_payments, :only => [:new, :create]
   end
 
   resources :coupons, :only => [] do
-    resources :payments, :only => [:new, :create]
+    resources :copy_payments, :only => [:new, :create]
   end
 
   scope 'robokassa' do

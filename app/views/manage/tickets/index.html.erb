@@ -39,7 +39,7 @@
                 <% ticket.copies.each do |copy| %>
                   <tr>
                     <td class='code'><%= copy.code %></td>
-                    <td class='phone'><%= copy.payment ? copy.payment.phone : '' %></td>
+                    <td class='phone'><%= copy.copy_payment ? copy.copy_payment.phone : '' %></td>
                     <td class='state'><%= copy.state_text %></td>
                   </tr>
                 <% end %>
