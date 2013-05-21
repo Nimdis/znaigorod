@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
 
   actions :new, :create
 
-  belongs_to :ticket
+  belongs_to :ticket, :coupon, :polymorphic => true
 
   def create
     create! do |success, failure|

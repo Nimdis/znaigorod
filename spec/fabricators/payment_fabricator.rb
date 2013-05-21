@@ -1,7 +1,7 @@
 Fabricator :payment do
   number 2
   phone '+7-(999)-999-9999'
-  ticket
+  paymentable { Fabricate :ticket }
 end
 
 # == Schema Information

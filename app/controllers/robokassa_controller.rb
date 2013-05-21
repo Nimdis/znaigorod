@@ -16,6 +16,7 @@ class RobokassaController < ApplicationController
     end
   end
 
+  # TODO: надо сделать и проверить
   def success
     notification = Robokassa::Notification.new(request.raw_post, secret: Settings['robokassa.secret_1'])
     payment = Payment.find(notification.item_id)
@@ -24,6 +25,7 @@ class RobokassaController < ApplicationController
     redirect_to affiche, notice: I18n.t('notice.robokassa.success')
   end
 
+  # TODO: надо сделать и проверить
   def fail
     notification = Robokassa::Notification.new(request.raw_post)
     payment = Payment.find(notification.item_id)

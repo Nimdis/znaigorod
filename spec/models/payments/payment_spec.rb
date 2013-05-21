@@ -12,7 +12,7 @@ describe Payment do
 
     context 'enough' do
       let(:ticket) { Fabricate :ticket }
-      let(:payment) { Fabricate.build :payment, :number => 5, :ticket => ticket }
+      let(:payment) { Fabricate.build :payment, :number => 5, :paymentable => ticket }
 
       before { payment.save }
 
@@ -22,7 +22,7 @@ describe Payment do
 
   describe 'reserve tickets' do
     let(:ticket) { Fabricate :ticket, :number => 5 }
-    let(:payment) { Fabricate :payment, :number => 3, :ticket => ticket }
+    let(:payment) { Fabricate :payment, :number => 3, :paymentable => ticket }
 
     before { payment }
 
@@ -31,7 +31,7 @@ describe Payment do
 
   describe 'approve' do
     let(:ticket) { Fabricate :ticket, :number => 5 }
-    let(:payment) { Fabricate :payment, :number => 3, :ticket => ticket }
+    let(:payment) { Fabricate :payment, :number => 3, :paymentable => ticket }
 
     before { payment.approve }
 
