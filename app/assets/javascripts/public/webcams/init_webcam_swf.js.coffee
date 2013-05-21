@@ -41,4 +41,8 @@ render_swfobject_dialog = (width, height, file, dialog_title) ->
     width: width.toNumber() + 36
     height: height.toNumber() + 44
     resizable: false
+    close: ->
+      $(this).parent().remove()
+      $(this).remove()
+      true
   true
