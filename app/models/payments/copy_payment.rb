@@ -13,11 +13,8 @@ class CopyPayment < Payment
   validates :phone, :presence => true, :format => { :with => /\+7-\(\d{3}\)-\d{3}-\d{4}/ }
 
   before_validation :check_copies_number
+  before_create :set_amount
   after_create :reserve_copies
-
-  def amount
-    paymentable.price * number
-  end
 
   def approve
     copies.map(&:sell!)
@@ -33,6 +30,10 @@ class CopyPayment < Payment
 
   def check_copies_number
     errors[:base] << I18n.t('activerecord.errors.messages.not_enough_tickets') if number? && paymentable.copies_for_sale.count < number
+  end
+
+  def set_amount
+    self.amount = paymentable.price * number
   end
 
   def reserve_copies

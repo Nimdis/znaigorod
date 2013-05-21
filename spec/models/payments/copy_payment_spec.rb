@@ -20,6 +20,16 @@ describe CopyPayment do
     end
   end
 
+  describe 'set amount' do
+    let(:ticket) { Fabricate :ticket }
+    let(:copy_payment) { Fabricate.build :copy_payment, :number => 5, :paymentable => ticket }
+
+    subject { copy_payment }
+    before { subject.save }
+
+    its(:amount) { should == 2500.0 }
+  end
+
   describe 'reserve tickets' do
     let(:ticket) { Fabricate :ticket, :number => 5 }
     let(:copy_payment) { Fabricate :copy_payment, :number => 3, :paymentable => ticket }
