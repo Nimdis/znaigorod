@@ -16,9 +16,9 @@ class CopyPayment < Payment
   before_create :set_amount
   after_create :reserve_copies
 
-  def approve
+  def approve!
+    super
     copies.map(&:sell!)
-
     create_sms! :phone => phone, :message => message
   end
 

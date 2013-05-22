@@ -49,6 +49,8 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     primary.item :tickets, 'Билеты', manage_tickets_path
+    primary.item :payments, 'Платежи', manage_payments_path
+    primary.item :main_page, 'Публичный вид', root_url
 
     primary.dom_class = 'navigation'
   end

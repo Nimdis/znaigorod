@@ -28,6 +28,7 @@ describe CopyPayment do
     before { subject.save }
 
     its(:amount) { should == 2500.0 }
+    its(:state) { should == 'pending' }
   end
 
   describe 'reserve tickets' do
@@ -39,12 +40,13 @@ describe CopyPayment do
     it { ticket.copies_reserved.count.should == copy_payment.number }
   end
 
-  describe 'approve' do
+  describe 'approve!' do
     let(:ticket) { Fabricate :ticket, :number => 5 }
     let(:copy_payment) { Fabricate :copy_payment, :number => 3, :paymentable => ticket }
 
-    before { copy_payment.approve }
+    before { copy_payment.approve! }
 
+    it { copy_payment.state.should == 'approved' }
     it { ticket.copies_reserved.count.should be_zero }
     it { ticket.copies_sold.count.should == copy_payment.number }
   end

@@ -8,7 +8,7 @@ class RobokassaController < ApplicationController
 
     if notification.acknowledge
       payment = Payment.find(notification.item_id)
-      payment.approve
+      payment.approve!
 
       render text: notification.success_response
     else

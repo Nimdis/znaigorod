@@ -1,0 +1,16 @@
+<h1>Платежи</h1>
+
+<table class='payments'>
+  <thead>
+    <tr>
+      <th>Сумма</th>
+      <th>Назначение</th>
+      <th>Статус</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @payments.each do |payment| %>
+      <%= render :partial => "manage/payments/#{payment.class.name.underscore}", :locals => { :payment => payment } %>
+    <% end %>
+  </tbody>
+</table>

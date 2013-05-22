@@ -49,3 +49,8 @@ ru:
         for_sale: В продаже
         reserved: Забронирован
         sold:     Продан
+
+    payment:
+      state:
+        pending: Ожидается
+        approved: Подтвержден

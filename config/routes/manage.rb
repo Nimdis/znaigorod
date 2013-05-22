@@ -70,6 +70,8 @@ Znaigorod::Application.routes.draw do
       get ':by_state' => 'tickets#index', :on => :collection, :as => :with_state
     end
 
+    resources :payments, :only => :index
+
     get 'statistics' => 'statistics#index'
 
     namespace :admin do
