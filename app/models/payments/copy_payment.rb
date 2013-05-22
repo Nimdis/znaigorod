@@ -23,7 +23,7 @@ class CopyPayment < Payment
   end
 
   def cancel
-    tickets.map(&:release!)
+    copies.map(&:release!)
   end
 
   private
