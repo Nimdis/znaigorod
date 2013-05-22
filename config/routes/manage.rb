@@ -1,4 +1,5 @@
 Znaigorod::Application.routes.draw do
+
   namespace :manage do
     post 'red_cloth' => 'red_cloth#show'
 
@@ -21,8 +22,8 @@ Znaigorod::Application.routes.draw do
     resources :coupons
 
     resources :affiches do
-      resources :attachments, :only => [:new, :create, :destroy, :edit, :update]
-      resources :images, :only => [:new, :create, :destroy, :edit, :update]
+      resources :attachments, :except => [:index, :show]
+      resources :images,      :except => [:index, :show]
     end
 
     resources :posts do
@@ -45,7 +46,6 @@ Znaigorod::Application.routes.draw do
       resource :billiard, :only => [] do
         resources :pool_tables, :except => [:index, :show]
       end
-
 
       resource :sauna, :except => [] do
         resources :sauna_halls, :except => :index
@@ -81,4 +81,5 @@ Znaigorod::Application.routes.draw do
 
     root :to => 'organizations#index'
   end
+
 end
