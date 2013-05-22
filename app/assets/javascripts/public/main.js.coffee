@@ -68,7 +68,7 @@ $(window).load ->
   init_dobrynin_stat() if $('a.dobrynin').length
   init_skoda_stat() if $('a.skoda').length
   init_peugeot_stat() if $('a.peugeot').length
-  init_tickets_stat() if $('.tickets_list li a.ticket_payment, .affiche .tickets a.ticket_payment').length
+  init_tickets_stat() if $('.tickets_list li a.payment_link, .affiche .tickets a.payment_link').length
 
   init_affiche_yandex_map() if $('.yandex_map .map').length
   init_affiches_map() if $('.show_map_link').length

@@ -29,7 +29,7 @@
  * = require ./affiches_extend
  * = require ./affiches_filter
  * = require ./affiches_map
- * = require ./ticket_payment
+ * = require ./payment
  * = require ./tabs
  * = require ./poster
  * = require ./photogallery
