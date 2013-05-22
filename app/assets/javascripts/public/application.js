@@ -53,7 +53,7 @@
  * = require ./webcams
  * = require ./contest
  * = require ./menus
- * = require ./stream_drifting
+ * = require ./stream_buro_service
  * = require ./services
  * = require ./visitors
  * = require ./sms_claims
