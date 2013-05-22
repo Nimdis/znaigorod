@@ -60,12 +60,15 @@ $(window).load ->
   init_auth() if ('.auth_links').length
   init_rating() if ('.rating').length
   init_votes() if $('.votes_wrapper').length
+
   init_3dtourme_stat() if $('a.3dtourme').length
   init_prokachkov_stat() if $('a.prokachkov').length
   init_avtovokzal_tomsk_ru_stat() if $('a.avtovokzal_tomsk_ru').length
   init_dobrynin_stat() if $('a.dobrynin').length
   init_skoda_stat() if $('a.skoda').length
   init_peugeot_stat() if $('a.peugeot').length
+  init_tickets_stat() if $('.tickets_list li a.ticket_payment, .affiche .tickets a.ticket_payment').length
+
   init_affiche_yandex_map() if $('.yandex_map .map').length
   init_affiches_map() if $('.show_map_link').length
   init_comments() if $('.comments').length
