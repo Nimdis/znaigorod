@@ -23,7 +23,7 @@
   <div>
     <span class="label">Описание:</span>
     <% if resource.description? %>
-      <span class="value"><%= raw resource.description %></span>
+      <span class="value"><%= simple_format resource.description %></span>
     <% else %>
       <span class="blank">Не указано</span>
     <% end %>
@@ -84,16 +84,17 @@
     <% end %>
   </div>
 
-  <div>
-    <span class="label">Коды:</span>
-    <ul>
+  <div class="details">
+    <p><span class='label'>Коды:</span> <%= resource.copies.map(&:code).join(', ') %></p>
+    <table class='tickets'>
       <% resource.copies.each do |copy| %>
-        <li>
-          <%= copy.code %>
-          <%= copy.state %>
-        </li>
-      <% end %>
-    </ul>
+        <tr>
+        <td class='code'><%= copy.code %></td>
+        <td class='phone'><%= copy.copy_payment ? copy.copy_payment.phone : '' %></td>
+        <td class='state'><%= copy.state_text %></td>
+      </tr>
+    <% end %>
+    </table>
   </div>
 
 </div>
