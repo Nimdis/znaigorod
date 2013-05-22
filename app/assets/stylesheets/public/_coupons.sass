@@ -1,0 +1,149 @@
+.coupon
+  +clearfix
+  position: relative
+  background-color: #efeaf1
+  border-top: 4px solid #e0d2e9
+  padding: 5px 10px 0
+  margin-bottom: 15px
+  .info
+    +clearfix
+    +has_ribbon
+    .ribbon_wrapper
+      margin-top: -10px
+
+    .left_part
+      float: left
+      margin-right: 10px
+      width: 180px
+
+      .image
+        position: relative
+        margin: 0 0 15px 0
+
+        a
+          display: block
+
+          img
+            display: block
+
+    .image
+      width: 180px
+      float: left
+      margin-right: 10px
+
+    .description
+      +clearfix
+      line-height: 1.4
+      .closest
+        +inline-block
+        color: #fff
+        font-size: 17px
+        background-color: #6b4381
+        +border-radius(3px)
+        margin: 0 0 15px
+        padding: 2px 4px 4px
+
+      .place
+        font-weight: bold
+        p
+          line-height: 1.4
+        .address
+          font-size: 11px
+          font-weight: normal
+          a
+            +inline-block
+            height: 16px
+            padding-left: 13px
+            background: transparent image_url('public/address.png') no-repeat -3px 0
+        p.address
+          font-size: 14px
+          a
+            background-position: -3px 3px
+
+      .text
+        padding-right: 5px
+      .coupons
+        float: right
+        width: 210px
+        li
+          width: 207px
+          height: 72px
+          +clearfix
+          position: relative
+          background: transparent image_url('public/ticket_bg.png')
+          margin-bottom: 5px
+          &:before
+            content: ''
+            padding: 0
+          .payment_link
+            width: 207px
+            height: 72px
+            overflow: hidden
+            text-indent: -9999em
+            position: absolute
+            top: 0
+            left: 0
+            z-index: 10
+          .coupon_info
+            border: 1px solid #dadada
+            border-bottom: none
+            margin: 12px 12px 0 12px
+            .coupon_header, .certificate_header
+              position: absolute
+              text-align: center
+              top: 8px
+              left: 81px
+              font-size: 11px
+              line-height: 0.8
+              font-weight: bold
+              background-color: #fff
+              padding: 0 3px
+            .certificate_header
+              left: 64px 
+            .coupon_price
+              color: #e3223f
+              font-size: 20px
+              text-align: center
+        .coupon_buy
+          color: #fff
+          font-size: 10px
+          text-align: center
+          background-color: #e3223f
+          padding: 1px 0 3px
+          margin: 0 12px
+      h1, h2, h3, h4, h5, p, table, ol, ul
+        margin-bottom: 10px
+        line-height: 1.5
+      h2
+        font-size: 18px
+      h3
+        font-size: 16px
+      table
+        width: 740px
+        &.full
+          width: 100%
+        tr:nth-child(odd) td
+          background-color: #e8e0eb
+        tr td:first-child
+          width: 5%
+          white-space: nowrap
+          font-weight: bold
+          &:first-letter
+            text-transform: uppercase
+        td
+          padding: 2px 4px
+      ul li
+        &:before
+          content: "\2013"
+          padding-right: 5px
+        ul, ol
+          margin-left: 15px
+      ol
+        counter-reset: li
+        li
+          ul, ol
+            margin-left: 15px
+          &:before
+            content: counter(li)"."
+            counter-increment: li
+            padding-right: 5px

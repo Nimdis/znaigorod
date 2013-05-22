@@ -1,0 +1,62 @@
+<% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0-stable/?load=package.full&lang=ru-RU') %>
+
+<div class='content_wrapper'>
+
+  <%= render 'breadcrumbs', :index => true %>
+
+  <div class='clearfix'>
+
+    <div class='content'>
+      <div class='coupon'>
+        <div class='head'>
+          <%= content_tag :h1, @coupon.title.text_gilensize %>
+        </div>
+
+        <div class='info'>
+          <div class='left_part'>
+            <div class='image'>
+              <%= image_tag_for @coupon.image_url, 160, 200 if @coupon.image_url? %>
+            </div>
+
+          </div>
+
+          <div class='description'>
+            <ul class='coupons'>
+              <% if @coupon.copies_for_sale.any? %>
+                <li>
+                  <%= link_to 'Купить билет', new_coupon_copy_payment_path(@coupon), class: :payment_link %>
+                  <div class='coupon_info'>
+                    <% if @coupon.kind.coupon? %>
+                      <div class='coupon_header'>Купон</div>
+                      <div class='coupon_price'><%= @coupon.price.to_i %> руб.</div>
+                    <% else %>
+                      <div class='certificate_header'>Сертификат</div>
+                      <div class='coupon_price'><%= @coupon.price.to_i %> руб.</div>
+                    <% end %>
+                  </div>
+                  <div class='coupon_buy'>Купить</div>
+                </li>
+              <% end %>
+            </ul>
+            <div class='closest'>
+              <%= "Продажа заканчивается #{I18n.l(@coupon.complete_at, :format => '%e %B %H:%M').squish}" %>
+            </div>
+            <div class="place">
+              <% if @coupon.organization_id? %>
+                <%= PlaceDecorator.new(:organization => @coupon.organization).place %>  
+              <% else %>
+                  <%= @coupon.place %>
+              <% end %>
+            </div>
+            <div class='text'>
+              <%= simple_format @coupon.description %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

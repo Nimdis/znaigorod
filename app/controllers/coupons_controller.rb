@@ -5,4 +5,8 @@ class CouponsController < ApplicationController
     @coupons = Coupon.available.page(params[:page]).per(12)
     render partial: 'coupons_list', layout: false and return if request.xhr?
   end
+
+  def show
+    @coupon= Coupon.find(params[:id])
+  end
 end
