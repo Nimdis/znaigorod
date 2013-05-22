@@ -21,25 +21,24 @@
           </div>
 
           <div class='description'>
-            <ul class='coupons'>
+            <ul class='coupon_tickets'>
               <% if @coupon.copies_for_sale.any? %>
                 <li>
-                  <%= link_to 'Купить билет', new_coupon_copy_payment_path(@coupon), class: :payment_link %>
-                  <div class='coupon_info'>
-                    <% if @coupon.kind.coupon? %>
-                      <div class='coupon_header'>Купон</div>
-                      <div class='coupon_price'><%= @coupon.price.to_i %> руб.</div>
-                    <% else %>
-                      <div class='certificate_header'>Сертификат</div>
-                      <div class='coupon_price'><%= @coupon.price.to_i %> руб.</div>
-                    <% end %>
+                  <%= content_tag :div, "-#{@coupon.discount}%", class: :has_items_for_sale if @coupon.discount? %>
+                  <%= content_tag :div, @coupon.kind.coupon? ? 'Купон' : 'Сертификат', class: :description %>
+                  <div class='ticket_prices'>
+                    <%= content_tag :div, content_tag(:span, "#{@coupon.price_without_discount}р.", class: :stroke), class: :original_price if @coupon.discount? %>
+                    <div class='price'><%= @coupon.price.to_i %> р.</div>
                   </div>
-                  <div class='coupon_buy'>Купить</div>
+                  <div class='buy_ticket'>
+                    <div class='ticket_for_sale'><%= t "copy.#{@coupon.kind}", count: @coupon.copies_for_sale.count %></div>
+                    <%= link_to 'Купить', new_coupon_copy_payment_path(@coupon), class: :payment_link %>
+                  </div>
                 </li>
               <% end %>
             </ul>
             <div class='closest'>
-              <%= "Продажа заканчивается #{I18n.l(@coupon.complete_at, :format => '%e %B %H:%M').squish}" %>
+              <%= "Продажа заканчивается #{I18n.l(@coupon.complete_at, :format => '%e %B в %H:%M').squish}" if @coupon.complete_at? %>
             </div>
             <div class="place">
               <% if @coupon.organization_id? %>
@@ -50,6 +49,13 @@
             </div>
             <div class='text'>
               <%= simple_format @coupon.description %>
+            </div>
+            <div class='stale_at'>
+              <% if @coupon.stale_at? %>
+                <%= "Действие #{@coupon.kind.coupon? ? "купона" : "сертификата"} заканчивается #{I18n.l(@coupon.complete_at, :format => '%e %B %Y года в %H:%M').squish}" %>
+              <% else %>
+                <%= "Действие #{@coupon.kind.coupon? ? "купона" : "сертификата"} неограниченно" %>
+              <% end %>
             </div>
           </div>
         </div>

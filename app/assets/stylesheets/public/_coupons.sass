@@ -62,55 +62,15 @@
 
       .text
         padding-right: 5px
-      .coupons
-        float: right
-        width: 210px
-        li
-          width: 207px
-          height: 72px
-          +clearfix
-          position: relative
-          background: transparent image_url('public/ticket_bg.png')
-          margin-bottom: 5px
-          &:before
-            content: ''
-            padding: 0
-          .payment_link
-            width: 207px
-            height: 72px
-            overflow: hidden
-            text-indent: -9999em
-            position: absolute
-            top: 0
-            left: 0
-            z-index: 10
-          .coupon_info
-            border: 1px solid #dadada
-            border-bottom: none
-            margin: 12px 12px 0 12px
-            .coupon_header, .certificate_header
-              position: absolute
-              text-align: center
-              top: 8px
-              left: 81px
-              font-size: 11px
-              line-height: 0.8
-              font-weight: bold
-              background-color: #fff
-              padding: 0 3px
-            .certificate_header
-              left: 64px 
-            .coupon_price
-              color: #e3223f
-              font-size: 20px
-              text-align: center
-        .coupon_buy
-          color: #fff
-          font-size: 10px
-          text-align: center
-          background-color: #e3223f
-          padding: 1px 0 3px
-          margin: 0 12px
+
+      .stale_at
+        +inline-block
+        color: #fff
+        background-color: #6b4381
+        +border-radius(3px)
+        margin: 0 0 15px
+        padding: 2px 4px 4px
+
       h1, h2, h3, h4, h5, p, table, ol, ul
         margin-bottom: 10px
         line-height: 1.5
