@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130521094011) do
+ActiveRecord::Schema.define(:version => 20130522015801) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -430,6 +430,7 @@ ActiveRecord::Schema.define(:version => 20130521094011) do
     t.string   "paymentable_type"
     t.string   "type"
     t.float    "amount"
+    t.text     "details"
   end
 
   add_index "payments", ["paymentable_id"], :name => "index_payments_on_paymentable_id"

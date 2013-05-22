@@ -408,3 +408,7 @@ ru:
         name:     Имя
         phone:    Телефон
         details:  Подробнее
+
+      service_payment:
+        amount: Сумма платежа
+        details: Назначение платежа

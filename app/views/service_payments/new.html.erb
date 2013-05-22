@@ -1,0 +1,7 @@
+<div class="content_wrapper">
+  <%= simple_form_for @service_payment do |f| %>
+    <%= f.input :amount %>
+    <%= f.input :details %>
+    <%= f.submit 'Оплатить' %>
+  <% end %>
+</div>
