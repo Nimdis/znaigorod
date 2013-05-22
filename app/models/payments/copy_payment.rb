@@ -22,9 +22,9 @@ class CopyPayment < Payment
     create_sms! :phone => phone, :message => message
   end
 
-  #def cancel
-    #tickets.map(&:release!)
-  #end
+  def cancel
+    tickets.map(&:release!)
+  end
 
   private
 

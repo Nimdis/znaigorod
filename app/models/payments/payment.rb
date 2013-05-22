@@ -13,6 +13,9 @@ class Payment < ActiveRecord::Base
     self.save(:validate => false)
   end
 
+  def cancel
+  end
+
   private
 
   def set_state_to_penging

@@ -20,19 +20,37 @@ class RobokassaController < ApplicationController
   def success
     notification = Robokassa::Notification.new(request.raw_post, secret: Settings['robokassa.secret_1'])
     payment = Payment.find(notification.item_id)
-    affiche = payment.ticket_info.affiche
 
-    redirect_to affiche, notice: I18n.t('notice.robokassa.success')
+    if payment.paymentable
+      if paymentable.paymentable.is_a?(Ticket)
+        redirect_to tickets_path
+      else
+        redirect_to coupons_path
+      end
+
+      return
+    end
+
+    redirect_to cooperation_path
   end
 
   # TODO: надо сделать и проверить
   def fail
     notification = Robokassa::Notification.new(request.raw_post)
     payment = Payment.find(notification.item_id)
-    affiche = payment.ticket_info.affiche
-
+    paymentable = payment.paymentable
     payment.cancel
 
-    redirect_to affiche, notice: I18n.t('notice.robokassa.fail')
+    if paymentable
+      if paymentable.is_a?(Ticket)
+        redirect_to tickets_path
+      else
+        redirect_to coupons_path
+      end
+
+      return
+    end
+
+    redirect_to cooperation_path
   end
 end
