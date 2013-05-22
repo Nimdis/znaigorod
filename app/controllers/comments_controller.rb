@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
   end
 
   belongs_to :affiche, :polymorphic => true, :optional => true
+  belongs_to :coupon, :polymorphic => true, :optional => true
   belongs_to :organization, :polymorphic => true, :optional => true
   belongs_to :post, :polymorphic => true, :optional => true
   belongs_to :work, :polymorphic => true, :optional => true

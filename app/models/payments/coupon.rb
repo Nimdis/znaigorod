@@ -19,6 +19,9 @@ class Coupon < ActiveRecord::Base
 
   belongs_to :organization
 
+  has_many :votes, :as => :voteable, :dependent => :destroy
+  has_many :comments, :as => :commentable, :dependent => :destroy
+
   enumerize :kind, in: [:certificate, :coupon], predicates: true
 
   validates_presence_of :image, :kind, :number, :place

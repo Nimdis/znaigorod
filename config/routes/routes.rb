@@ -23,6 +23,10 @@ Znaigorod::Application.routes.draw do
 
   resources :coupons,  :only => [:index, :show] do
     get 'page/:page', :action => :index, :on => :collection
+    put 'change_vote' => 'votes#change_vote', :as => :change_vote
+    put 'liked' => 'votes#liked', :as => :liked
+
+    resources :comments, :only => [:new, :create, :show]
   end
 
   resources :comments, :only => [] do

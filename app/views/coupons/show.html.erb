@@ -1,4 +1,18 @@
+<% content_for :page_title do %>
+  <%= "#{@coupon.title.text_gilensize}. Сертификаты и купоны в Томске" %>
+<% end %>
+<% content_for :meta_description, t('meta.coupons.description') %>
+<% content_for :meta_keywords, t('meta.coupons.keywords') %>
+
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0-stable/?load=package.full&lang=ru-RU') %>
+
+<% content_for :twitter_cards do %>
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:site' content='@znaigorod'/>
+  <meta name='twitter:url' content='<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>'/>
+  <meta name='twitter:title' content='<%= @coupon.title %>'/>
+  <meta name='twitter:description' content='<%= simple_format @coupon.description %>'/>
+<% end %>
 
 <div class='content_wrapper'>
 
@@ -59,7 +73,16 @@
             </div>
           </div>
         </div>
+        <div class='tags_and_share'>
+          <div class='share'>
+            <%= render :partial => 'commons/share_this' %>
+          </div>
+          <div class="votes">
+            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @coupon } %>
+          </div>
+        </div>
       </div>
+      <%= render :partial => 'comments/block', :locals => { :parent_obj => @coupon } %>
 
     </div>
 
