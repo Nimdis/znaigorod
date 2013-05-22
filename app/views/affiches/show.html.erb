@@ -58,7 +58,7 @@
               <% @affiche.tickets.each do |ticket| %>
                 <% if ticket.copies_for_sale.any? %>
                   <li>
-                    <div class='has_tickets_for_sale'>-<%= ticket.discount %>%</div>
+                    <div class='has_items_for_sale'>-<%= ticket.discount %>%</div>
                     <div class='description'>Билет со скидкой</div>
                     <div class='ticket_prices'>
                       <div class='original_price'><span class='stroke'><%= ticket.original_price.to_i %> р.</span></div>
@@ -66,7 +66,7 @@
                     </div>
                     <div class='buy_ticket'>
                       <div class='ticket_for_sale'><%= t 'copy.for_sale', count: ticket.copies_for_sale.count %></div>
-                      <%= link_to 'Купить', new_ticket_payment_path(ticket), class: :payment_link %>
+                      <%= link_to 'Купить', new_ticket_copy_payment_path(ticket), class: :payment_link %>
                     </div>
                   </li>
                 <% end %>
