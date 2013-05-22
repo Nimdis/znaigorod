@@ -4,6 +4,12 @@
 
 <div class="content_wrapper">
 
+  <ul class='breadcrumbs'>
+    <li class='crumb'><%= link_to 'Знай Город', root_path %></li>
+    <li class='separator'><span>&nbsp;</span></li>
+    <li class='crumb'><%= link_to 'Размещение информации', cooperation_path %></li>
+  </ul>
+
   <div class="cooperation">
 
     <div class="right_side">
@@ -12,6 +18,9 @@
         <p>Чтобы ваше заведение появилось в каталоге отправьте письмо на <%= mail_to 'info@znaigorod.ru' %></p>
         <p>Если хотите сотрудничать с нами напишите на <%= mail_to 'office@znaigorod.ru' %></p>
         <p>тел. (3822) 94-22-03</p>
+      </div>
+      <div class='service_payment_link'>
+        <%= link_to 'Оплата услуг', new_service_payment_path %>
       </div>
     </div>
 

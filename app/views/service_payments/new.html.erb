@@ -1,7 +1,24 @@
 <div class="content_wrapper">
-  <%= simple_form_for @service_payment do |f| %>
-    <%= f.input :amount %>
-    <%= f.input :details %>
-    <%= f.submit 'Оплатить' %>
-  <% end %>
+
+  <ul class='breadcrumbs'>
+    <li class='crumb'><%= link_to 'ЗнайГород', root_path %></li>
+    <li class='separator'><span>&nbsp;</span></li>
+    <li class='crumb'><%= link_to 'Размещение информации', cooperation_path %></li>
+    <li class='separator'><span>&nbsp;</span></li>
+    <li class='crumb'><%= link_to 'Оплата услуг', new_service_payment_path %></li>
+  </ul>
+
+  <h1><span class='strong'>Оплата</span> услуг</h1>
+
+  <div class='service_payment_wrapper'>
+    <p><%= 'Для оплаты размещения анонса мероприятия укажите в поле "Сумма платежа" оговоренную с менеджером сумму, в поле "Назначение платежа" название мероприятия.'.gilensize %></p>
+    <%= simple_form_for @service_payment do |f| %>
+      <%= f.input :amount, autofocus: true %>
+      <%= f.input :details %>
+      <div class='submit'>
+        <%= f.submit 'Оплатить' %>
+      </div>
+    <% end %>
+  </div>
+
 </div>
