@@ -11,6 +11,7 @@ class Manage::TicketsController < Manage::ApplicationController
       group :copyable_id_str
       order_by :id, :desc
       paginate :page => page, :per_page => 10
+      with :copyable_type, 'Ticket'
       with :state, state if state.present?
     }
 

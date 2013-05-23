@@ -1,19 +1,27 @@
-<%= render :partial => 'kind_links' %>
-
+<h3>Сертификаты и купоны</h3>
 <div class="new_link">
   <%= link_to t('new_coupon'), new_manage_coupon_path('coupon[vfs_path]' => Coupon.generate_vfs_path), :class => 'new_resource' %>
 </div>
 
-<ul class='collection'>
-  <% collection.each do |item| %>
-    <li>
-      <%= link_to item.title, [:manage, item] %>
-      <% if item.organization_id? %>
-        <%= link_to item.organization, [:manage, item.organization] %>
-      <% else %>
-        <%= item.place %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<%= form_tag manage_coupons_path, :method => :get, :class => 'search_ticket_infos' do %>
+  <%= text_field_tag 'q', params[:q] %>
 
+  <ul>
+    <li>
+      <%= radio_button_tag :state, '', @state == nil, :id => 'state_all' %>
+      <%= label_tag 'state_all', "Все (#{Copy.for_coupons.count})" %>
+    </li>
+    <% Copy.state.options.each do |option| %>
+      <li>
+        <%= radio_button_tag :state, option.last, @state == option.last, :id => "state_#{option.last}" %>
+        <%= label_tag "state_#{option.last}", "#{option.first} (#{Copy.for_coupons.send(option.last).count})"  %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= submit_tag 'Найти' %>
+<% end %>
+
+<%= render partial: 'manage/copies/copies' %>
+
+<%= paginate @groups %>
