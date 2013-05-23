@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130522030522) do
+ActiveRecord::Schema.define(:version => 20130523045511) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20130522030522) do
     t.float    "age_min"
     t.float    "age_max"
     t.float    "total_rating"
+    t.string   "state"
   end
 
   add_index "affiches", ["slug"], :name => "index_affiches_on_slug", :unique => true

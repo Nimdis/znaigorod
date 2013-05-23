@@ -1,7 +1,7 @@
 class Movie < Affiche
   attr_accessible
 
-  before_save :set_wmode_for_trailer
+  before_save :set_wmode_for_trailer, :if => :published?
 
   def premiere?
     distribution_starts_on && distribution_starts_on >= Date.today.beginning_of_week && distribution_starts_on <= Date.today.end_of_week

@@ -4,6 +4,7 @@ require 'vkontakte_api'
 require 'curb'
 
 class Affiche < ActiveRecord::Base
+  extend Enumerize
   extend FriendlyId
 
   include HasVirtualTour
@@ -30,7 +31,7 @@ class Affiche < ActiveRecord::Base
 
   has_one :affiche_schedule, :dependent => :destroy
 
-  validates_presence_of :description, :poster_url, :title
+  validates_presence_of :description, :poster_url, :title, :if => :published?
 
   accepts_nested_attributes_for :affiche_schedule, :allow_destroy => true, :reject_if => :affiche_schedule_attributes_blank?
   accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => :all_blank
@@ -43,14 +44,19 @@ class Affiche < ActiveRecord::Base
   scope :with_images,      -> { where('image_url IS NOT NULL') }
   scope :with_showings,    -> { includes(:showings).where('showings.starts_at > :date OR showings.ends_at > :date', { :date => Date.today }) }
 
-
   default_value_for :yandex_metrika_page_views, 0
   default_value_for :vkontakte_likes,           0
   #before_save :set_popularity
 
+  enumerize :state, :in => [:draft, :published], :default => :published, :predicates => true, :scope => true
+  scope :draft, -> { with_state(:draft) }
+  scope :published, -> { with_state(:published) }
+
   friendly_id :title, use: :slugged
 
   normalize_attribute :image_url
+
+  before_validation :set_published
 
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?
@@ -150,7 +156,7 @@ class Affiche < ActiveRecord::Base
   end
 
   def html_description
-    @html_description ||= description.as_html
+    @html_description ||= description.to_s.as_html
   end
 
   def text_description
@@ -164,6 +170,10 @@ class Affiche < ActiveRecord::Base
   include AfficheQualityRating
 
   private
+
+  def set_published
+    self.published = true if published.nil?
+  end
 
   def affiche_schedule_attributes_blank?(attributes)
     %w[ends_at ends_on starts_at starts_on].each do |attribute|

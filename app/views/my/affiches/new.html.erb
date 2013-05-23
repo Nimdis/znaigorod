@@ -1,0 +1,14 @@
+<% content_for :my_content do %>
+  <ul>
+    <% Affiche.ordered_descendants.map(&:name).map(&:underscore).each do |name| %>
+      <li>
+        <%= simple_form_for [:my, @affiche] do |f| %>
+          <%= hidden_field_tag 'type', name  %>
+          <%= f.submit name %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render :template => 'my/affiches/wrapper' %>
