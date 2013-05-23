@@ -19,6 +19,13 @@ class Copy < ActiveRecord::Base
 
   enumerize :state, :in => [:for_sale, :reserved, :sold]
 
+  searchable do
+    integer :id
+    string :copyable_type
+    string :state
+    string(:copyable_id_str) { copyable_id.to_s }
+  end
+
   def reserve!
     update_attributes :state => 'reserved'
   end
