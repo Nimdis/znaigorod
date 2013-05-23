@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20130530091259) do
     t.float    "age_min"
     t.float    "age_max"
     t.float    "total_rating"
+    t.string   "state"
   end
 
   add_index "affiches", ["slug"], :name => "index_affiches_on_slug", :unique => true

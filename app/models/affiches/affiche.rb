@@ -4,6 +4,7 @@ require 'vkontakte_api'
 require 'curb'
 
 class Affiche < ActiveRecord::Base
+  extend Enumerize
   extend FriendlyId
 
   include HasVirtualTour
@@ -30,7 +31,7 @@ class Affiche < ActiveRecord::Base
 
   has_one :affiche_schedule, :dependent => :destroy
 
-  validates_presence_of :description, :poster_url, :title
+  validates_presence_of :description, :poster_url, :title, :if => :published?
 
   accepts_nested_attributes_for :affiche_schedule, :allow_destroy => true, :reject_if => :affiche_schedule_attributes_blank?
   accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => :all_blank
@@ -48,9 +49,15 @@ class Affiche < ActiveRecord::Base
   default_value_for :total_rating,              0.5
   #before_save :set_popularity
 
+  enumerize :state, :in => [:draft, :published], :default => :published, :predicates => true, :scope => true
+  scope :draft, -> { with_state(:draft) }
+  scope :published, -> { with_state(:published) }
+
   friendly_id :title, use: :slugged
 
   normalize_attribute :image_url
+
+  before_validation :set_published
 
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?
@@ -160,7 +167,7 @@ class Affiche < ActiveRecord::Base
   end
 
   def html_description
-    @html_description ||= description.as_html
+    @html_description ||= description.to_s.as_html
   end
 
   def text_description
@@ -177,6 +184,10 @@ class Affiche < ActiveRecord::Base
 
   def reindex_showings
     showings.actual.map(&:index)
+  end
+
+  def set_published
+    self.published = true if published.nil?
   end
 
   def affiche_schedule_attributes_blank?(attributes)
