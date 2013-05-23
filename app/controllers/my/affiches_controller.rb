@@ -16,7 +16,7 @@ class My::AffichesController < My::ApplicationController
   end
 
   def edit
-    @step = %w[first second third fourth].include?(params[:step]) ? params[:step] : 'first'
+    @step = Affiche.steps.include?(params[:step]) ? params[:step] : 'first'
     @affiche = Affiche.draft.find(params[:id])
   end
 

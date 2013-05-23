@@ -1,6 +1,5 @@
 <ul class='steps_line'>
-  <li><%= link_to 'Общее описание', edit_step_my_affiche_path(@affiche, :step => :first) %></li>
-  <li><%= link_to 'Постер', edit_step_my_affiche_path(@affiche, :step => :second) %></li>
-  <li><%= link_to 'Расписание', edit_step_my_affiche_path(@affiche, :step => :third) %></li>
-  <li><%= link_to 'Дополнительно', edit_step_my_affiche_path(@affiche, :step => :fourth) %></li>
+  <% Affiche.steps.each do |step| %>
+    <%= content_tag :li, link_to(t("my.steps.#{step}"), edit_step_my_affiche_path(@affiche, :step => step)), class: @step.eql?(step) ? 'selected' : nil %>
+  <% end %>
 </ul>

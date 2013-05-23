@@ -90,7 +90,7 @@ end
 #  price                  :integer
 #  kind                   :string(255)
 #  place                  :string(255)
-#  count                  :integer
+#  number                 :integer
 #  stale_at               :datetime
 #  complete_at            :datetime
 #

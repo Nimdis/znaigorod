@@ -16,7 +16,6 @@ class Affiche < ActiveRecord::Base
                   :original_title, :trailer_code, :vk_aid, :yandex_fotki_url, :constant,
                   :age_min, :age_max
 
-
   has_many :images,      :as => :imageable, :dependent => :destroy
   has_many :attachments, :as => :attachable, :dependent => :destroy
   has_many :showings, :dependent => :destroy, :order => :starts_at
@@ -103,6 +102,10 @@ class Affiche < ActiveRecord::Base
 
   def update_rating
     update_attribute :total_rating, (0.5 + 0.1*visits.visited.count + 0.05*votes.liked.count)
+  end
+
+  def self.steps
+    %w[first second third fourth]
   end
 
   def human_model_name
@@ -289,5 +292,6 @@ end
 #  age_min                   :float
 #  age_max                   :float
 #  total_rating              :float
+#  state                     :string(255)
 #
 
