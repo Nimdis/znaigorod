@@ -8,6 +8,18 @@
     <div class="address">
       <%= organization.address %>
     </div>
+    <div class="last_activities">
+      <% if planned_activity = organization.activities.with_state(:planned).first %>
+        <%= image_tag "crm/activity_state_#{planned_activity.state}.png",
+          title: planned_activity.state_text, alt: planned_activity.state_text, size: '16x16' %>
+        <%= planned_activity.title %>
+      <% end %>
+      <% if completed_activity = organization.activities.with_state(:completed).first %>
+        <%= image_tag "crm/activity_state_#{completed_activity.state}.png",
+          title: completed_activity.state_text, alt: completed_activity.state_text, size: '16x16' %>
+        <%= completed_activity.title %>
+      <% end %>
+    </div>
   </div>
   <div class="details">
     <div class="suborganization_kinds">
