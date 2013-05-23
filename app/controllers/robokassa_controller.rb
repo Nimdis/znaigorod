@@ -39,7 +39,7 @@ class RobokassaController < ApplicationController
     notification = Robokassa::Notification.new(request.raw_post)
     payment = Payment.find(notification.item_id)
     paymentable = payment.paymentable
-    payment.cancel
+    payment.cancel!
 
     if paymentable
       if paymentable.is_a?(Ticket)

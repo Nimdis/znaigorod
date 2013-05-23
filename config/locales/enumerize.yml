@@ -54,3 +54,4 @@ ru:
       state:
         pending: Ожидается
         approved: Подтвержден
+        canceled: Отменен

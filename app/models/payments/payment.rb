@@ -6,14 +6,16 @@ class Payment < ActiveRecord::Base
 
   after_initialize :set_state_to_penging
 
-  enumerize :state, :in => [:pending, :approved]
+  enumerize :state, :in => [:pending, :approved, :canceled]
 
   def approve!
     self.state = 'approved'
-    self.save(:validate => false)
+    self.save :validate => false
   end
 
-  def cancel
+  def cancel!
+    self.state = 'canceled'
+    self.save! :validate => false
   end
 
   private
