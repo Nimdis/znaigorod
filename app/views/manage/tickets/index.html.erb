@@ -1,14 +1,21 @@
 <h3>Билеты</h3>
 
-<ul class='ticket_info_states'>
-  <li><%= link_to "Все (#{Copy.count})", manage_tickets_path %></li>
-  <% Copy.state.options.each do |option| %>
-    <li><%= link_to "#{option.first} (#{Copy.by_state(option.last).count})", with_state_manage_tickets_path(option.last) %></li>
-  <% end %>
-</ul>
-
 <%= form_tag manage_tickets_path, :method => :get, :class => 'search_ticket_infos' do %>
   <%= text_field_tag 'q', params[:q] %>
+
+  <ul>
+    <li>
+      <%= radio_button_tag :state, '', @state == nil, :id => 'state_all' %>
+      <%= label_tag 'state_all', "Все (#{Copy.count})" %>
+    </li>
+    <% Copy.state.options.each do |option| %>
+      <li>
+        <%= radio_button_tag :state, option.last, @state == option.last, :id => "state_#{option.last}" %>
+        <%= label_tag "state_#{option.last}", "#{option.first} (#{Copy.send(option.last).count})"  %>
+      </li>
+    <% end %>
+  </ul>
+
   <%= submit_tag 'Найти' %>
 <% end %>
 
@@ -16,11 +23,11 @@
   <% @tickets.group_by(&:organization).each do |organization, tickets| %>
     <li class='ticket_info'>
       <h5>
-      <% if organization %>
-        <%= link_to "#{organization.title} (#{organization.address})", manage_organization_path(organization) %>
-      <% else %>
-        Место проведения не указано
-      <% end %>
+        <% if organization %>
+          <%= link_to "#{organization.title} (#{organization.address})", manage_organization_path(organization) %>
+        <% else %>
+          Место проведения не указано
+        <% end %>
       </h5>
 
       <ul class='manage'>
@@ -36,7 +43,8 @@
               <p><%= "Цена: #{ticket.original_price} / #{ticket.price}" %></p>
               <p>Коды: <%= ticket.copies.map(&:code).join(', ') %></p>
               <table class='tickets'>
-                <% ticket.copies.each do |copy| %>
+                <% copies = @state ? ticket.copies.send(@state) : ticket.copies %>
+                <% copies.each do |copy| %>
                   <tr>
                     <td class='code'><%= copy.code %></td>
                     <td class='phone'><%= copy.copy_payment ? copy.copy_payment.phone : '' %></td>
@@ -65,4 +73,4 @@
   <% end %>
 </ul>
 
-<%= paginate @tickets %>
+<%= paginate @groups %>
