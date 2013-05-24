@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523045511) do
+ActiveRecord::Schema.define(:version => 20130524075843) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -87,6 +87,11 @@ ActiveRecord::Schema.define(:version => 20130523045511) do
     t.float    "age_max"
     t.float    "total_rating"
     t.string   "state"
+    t.string   "poster_image_file_name"
+    t.string   "poster_image_content_type"
+    t.integer  "poster_image_file_size"
+    t.datetime "poster_image_updated_at"
+    t.text     "poster_image_url"
   end
 
   add_index "affiches", ["slug"], :name => "index_affiches_on_slug", :unique => true
