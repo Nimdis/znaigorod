@@ -1,0 +1,95 @@
+// -------------------------------------------------------------------
+///* markItUp! Universal MarkUp Engine, JQuery plugin
+//   By Jay Salvat - http://markitup.jaysalvat.com/
+//   ------------------------------------------------------------------*/
+
+.markItUpContainer
+  font-size: 14px
+  font-family: Arial, Verdana, Helvetica, sans-serif
+
+.markItUpEditor
+  font-size: 14px
+  font-family: 'Courier New', Courier, monospace
+  border: 1px solid #909090
+  +border-bottom-radius(3px)
+  width: 540px
+  height: 380px
+  overflow: auto
+  padding: 5px
+  margin: 0
+  &:focus
+    background-color: #fffbef
+
+.markItUpPreviewFrame
+  overflow: auto
+  background-color: #FFFFFF
+  border: 1px solid #3C769D
+  width: 99.9%
+  height: 300px
+  margin: 5px 0
+
+.markItUpFooter
+  width: 100%
+  cursor: n-resize
+
+.markItUpResizeHandle
+  overflow: hidden
+  width: 22px
+  height: 5px
+  margin-left: auto
+  margin-right: auto
+  background-image: image_url('markitup/handle.png')
+  cursor: n-resize
+
+.markItUpHeader
+  width: 550px
+  border: 1px solid #909090
+  border-bottom: none
+  +border-top-radius(3px)
+  background-color: #f3f3f3
+  ul
+    +clearfix
+    li
+      list-style: none
+      float: left
+      position: relative
+      ul
+        display: none
+      &:hover > ul
+        display: block
+    .markItUpDropMenu
+      background: transparent image_url('markitup/menu.png') no-repeat 115% 50%
+      margin-right: 5px
+      li
+        margin-right: 0px
+    .markItUpSeparator
+      margin: 0 2px
+      width: 1px
+      height: 22px
+      overflow: hidden
+      color: #ccc
+      background-color: #ccc
+    a
+      display: block
+      width: 16px
+      height: 16px
+      text-indent: -10000px
+      background-repeat: no-repeat
+      background-position: center center
+      padding: 3px
+      margin: 0px
+
+.html .markItUpEditor
+  background-image: image_url('markitup/bg-editor-html.png')
+
+.markdown .markItUpEditor
+  background-image: image_url('markitup/bg-editor-markdown.png')
+
+.textile .markItUpEditor
+  background-image: image_url('markitup/bg-editor-textile.png')
+
+.bbcode .markItUpEditor
+  background-image: image_url('markitup/bg-editor-bbcode.png')
+
+.wiki .markItUpEditor, .dotclear .markItUpEditor
+  background-image: image_url('markitup/bg-editor-wiki.png')

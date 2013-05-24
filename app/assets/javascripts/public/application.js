@@ -6,6 +6,8 @@
  * = require magicsuggest
  * = require inputmask
  * = require tipsy
+ * = require markitup
+ * = require textile
  * = require ./auth
  * = require ./rating
  * = require ./md5
@@ -57,5 +59,6 @@
  * = require ./services
  * = require ./visitors
  * = require ./sms_claims
+ * = require ./my_affiche
  * = require ./main
  */
