@@ -158,3 +158,45 @@
       margin: 10px 7px 8px 12px
       .place, .links, .social_links
         text-align: center
+  .fresh_coupons
+    border: 1px solid #c6c1c6
+    margin: 0 0 20px 0
+    text-align: center
+    .fresh_header
+      padding: 12px 0 12px
+      color: #FFF
+      background-color: #784391 
+      text-align: center
+      font-size: 14px
+      a
+        color: #FFF
+
+    .fresh_info
+      border-bottom: 1px solid #c6c1c6
+      &:last-child
+        border-bottom: none
+      padding: 5px
+      .place
+        font-size: 11px
+        color: #626262
+        padding-bottom: 5px
+        margin-bottom: 5px
+        a
+          color: #626262
+      .fresh_price
+        .original_price
+          margin-bottom: 5px
+          color: #6c726e
+          .stroke
+            background: transparent image_url('public/ticket_stroke.png') repeat-x center
+            padding: 0 3px
+        .price
+          color: #fff
+          +inline-block
+          font-size: 18px
+          +text-shadow(#891426 0 1px 2px)
+          background-color: #e3223f
+          padding: 5px 10px
+          margin-bottom: 8px
+          &.without_discount
+            margin-top: 22px

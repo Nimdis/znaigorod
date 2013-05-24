@@ -8,5 +8,6 @@ class CouponsController < ApplicationController
 
   def show
     @coupon= Coupon.find(params[:id])
+    @fresh_coupons = Coupon.last(4)
   end
 end
