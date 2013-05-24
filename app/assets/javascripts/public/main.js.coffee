@@ -54,6 +54,7 @@ $ ->
   init_webcam_mjpeg() if $('.webcams_list .webcam_mjpeg').length
   init_webcam_map() if $('.webcams .webcam_map').length
   init_stream_buro_service() if $('.lyube').length
+  init_my_affiche() if $('.my_affiche_wrapper')
 
   true
 
