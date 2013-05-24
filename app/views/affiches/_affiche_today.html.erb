@@ -29,6 +29,11 @@
             <li>
               <div class="item">
                 <%= affiche.has_ribbon %>
+                <% if affiche.has_tickets_for_sale? %>
+                  <div class='has_items_for_sale' title='У нас вы можете купить билеты на мероприятие со скидкой!'>
+                    -<%= affiche.max_tickets_discount %>%
+                  </div>
+                <% end %>
                 <div class="rating">
                   <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => affiche.model } %>
                 </div>
