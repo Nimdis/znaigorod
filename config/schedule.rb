@@ -33,5 +33,5 @@ every :day, :at => '5am' do
 end
 
 every 5.minutes do
-  rake 'release_copies'
+  rake 'refresh_copies'
 end
