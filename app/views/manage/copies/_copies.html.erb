@@ -57,6 +57,7 @@
               <p>
                 <%= link_to "#{affiche.human_when} #{affiche.title}".html_safe, affiche.kind_affiche_path %> -
                 <%= item.copies.map(&:code).join(', ') %>
+                (<%= item.description %>)
               </p>
             <% else %>
               <p>
