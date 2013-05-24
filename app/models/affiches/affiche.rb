@@ -56,6 +56,10 @@ class Affiche < ActiveRecord::Base
 
   normalize_attribute :image_url
 
+  attr_accessible :poster_image
+  has_attached_file :poster_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
+  validates_presence_of :poster_image
+
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?
   after_save :reindex_showings

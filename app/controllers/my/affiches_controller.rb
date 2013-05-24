@@ -15,7 +15,11 @@ class My::AffichesController < My::ApplicationController
   end
 
   def update
-    update! { edit_step_my_affiche_path(@affiche, :step => next_step) }
+    @affiche = Affiche.find(params[:id])
+    @affiche.attributes = params[:affiche]
+    @affiche.save :validate => false
+
+    redirect_to edit_step_my_affiche_path(@affiche, :step => next_step)
   end
 
   private
