@@ -49,6 +49,7 @@ ru:
         for_sale: В продаже
         reserved: Забронирован
         sold:     Продан
+        stale:    Протух
 
     payment:
       state:

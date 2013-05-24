@@ -12,14 +12,22 @@ class Copy < ActiveRecord::Base
 
   before_create :set_code
 
-  scope :by_state, ->(state) { where :state => state }
   scope :for_coupons, -> { where :copyable_type => 'Coupon' }
-  scope :for_sale, -> { by_state 'for_sale' }
   scope :for_tickets, -> { where :copyable_type => 'Ticket' }
+
+  scope :by_state, ->(state) { where :state => state }
+
+  scope :for_sale, -> { by_state 'for_sale' }
   scope :reserved, -> { by_state 'reserved' }
   scope :sold,     -> { by_state 'sold' }
+  scope :stale,    -> { by_state 'stale' }
 
-  enumerize :state, :in => [:for_sale, :reserved, :sold], :default => :for_sale
+  default_scope order(:id)
+
+  enumerize :state,
+    :in => [:for_sale, :reserved, :sold, :stale],
+    :default => :for_sale,
+    :predicates => true
 
   searchable do
     integer :id
@@ -34,6 +42,10 @@ class Copy < ActiveRecord::Base
 
   def sell!
     update_attributes :state => 'sold'
+  end
+
+  def stale!
+    update_attributes :state => 'stale' unless sold?
   end
 
   def release!

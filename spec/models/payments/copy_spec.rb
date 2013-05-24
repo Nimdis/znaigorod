@@ -9,23 +9,12 @@ describe Copy do
     its(:state) { should == 'for_sale' }
   end
 
-  describe '#reserve!' do
-    before { copy.reserve! }
-
-    its(:state) { should == 'reserved' }
-  end
-
   describe '#release!' do
     let(:copy_payment) { copy.copy_payment }
     before { copy.release! }
 
     its(:state) { should == 'for_sale' }
     it { copy_payment.state.should == 'canceled' }
-  end
-
-  describe '#sell!' do
-    before { copy.sell! }
-    its(:state) { should == 'sold' }
   end
 end
 
