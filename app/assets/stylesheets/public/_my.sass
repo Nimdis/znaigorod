@@ -1,0 +1,61 @@
+.content_wrapper .my_wrapper
+  line-height: 1.4
+  +min-height(300px)
+  margin: 10px
+
+  .steps_line
+    +clearfix
+    border-bottom: 1px dotted #ccc
+    padding-bottom: 10px
+    margin-bottom: 15px
+    li
+      float: left
+      margin-right: 15px
+      &:last-child
+        margin-right: 0
+      &.selected a
+        color: #333
+
+  .form_wrapper
+    width: 580px
+    float: left
+    margin-right: 20px
+
+  .affiche_preview
+    width: 580px
+    float: left
+
+  =input_style
+    font-size: 14px
+    font-family: Arial, Verdana, Tahoma, sans-serif
+    border: 1px solid #909090
+    +border-radius(3px)
+    padding: 5px
+    margin: 0
+    &:focus
+      background-color: #fffbef
+
+  .simple_form
+    .input
+      margin-bottom: 10px
+
+      label
+        font-size: 16px
+        display: block
+        margin-bottom: 5px
+        abbr
+          color: #880000
+
+      input,
+      textarea
+        +input_style
+
+      #affiche_title
+        width: 500px
+
+      #affiche_description
+        width: 500px
+        height: 300px
+
+      #affiche_tag
+        width: 200px
