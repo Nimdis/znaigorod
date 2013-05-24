@@ -10,16 +10,16 @@ class Copy < ActiveRecord::Base
 
   has_many :smses, :as => :smsable
 
-  before_create :set_code_and_state
+  before_create :set_code
 
   scope :by_state, ->(state) { where :state => state }
-  scope :for_coupons, -> { where :copyable_type => 'Coupon' } 
+  scope :for_coupons, -> { where :copyable_type => 'Coupon' }
   scope :for_sale, -> { by_state 'for_sale' }
-  scope :for_tickets, -> { where :copyable_type => 'Ticket' } 
+  scope :for_tickets, -> { where :copyable_type => 'Ticket' }
   scope :reserved, -> { by_state 'reserved' }
   scope :sold,     -> { by_state 'sold' }
 
-  enumerize :state, :in => [:for_sale, :reserved, :sold]
+  enumerize :state, :in => [:for_sale, :reserved, :sold], :default => :for_sale
 
   searchable do
     integer :id
@@ -46,9 +46,8 @@ class Copy < ActiveRecord::Base
 
   private
 
-  def set_code_and_state
+  def set_code
     self.code = 4.times.map { Random.rand(10) }.join
-    self.state = 'for_sale'
   end
 
   def inform_purchaser

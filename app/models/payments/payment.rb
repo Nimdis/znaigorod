@@ -4,9 +4,7 @@ class Payment < ActiveRecord::Base
   belongs_to :paymentable, :polymorphic => true
   belongs_to :user
 
-  after_initialize :set_state_to_penging
-
-  enumerize :state, :in => [:pending, :approved, :canceled]
+  enumerize :state, :in => [:pending, :approved, :canceled], :default => :pending
 
   def approve!
     self.state = 'approved'
@@ -16,11 +14,5 @@ class Payment < ActiveRecord::Base
   def cancel!
     self.state = 'canceled'
     self.save! :validate => false
-  end
-
-  private
-
-  def set_state_to_penging
-    self.state = 'pending' if new_record?
   end
 end
