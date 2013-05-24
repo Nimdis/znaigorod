@@ -22,8 +22,8 @@ class CopyPayment < Payment
     create_sms! :phone => phone, :message => message
   end
 
-  def cancel!
-    super
+  def cancel_and_release_tickets!
+    cancel!
     copies.map(&:release!)
   end
 

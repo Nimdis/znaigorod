@@ -39,8 +39,10 @@ class Copy < ActiveRecord::Base
   def release!
     inform_purchaser
 
-    self.state = 'for_sale'
+    copy_payment.cancel!
+
     self.copy_payment_id = nil
+    self.state = 'for_sale'
     self.save
   end
 

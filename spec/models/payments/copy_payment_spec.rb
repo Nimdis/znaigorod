@@ -56,8 +56,8 @@ describe CopyPayment do
       it { ticket.copies_sold.count.should == copy_payment.number }
     end
 
-    describe 'cancel!' do
-      before { copy_payment.cancel! }
+    describe 'cancel_and_release_tickets!' do
+      before { copy_payment.cancel_and_release_tickets! }
 
       it { copy_payment.state.should == 'canceled' }
       it { ticket.copies_reserved.count.should be_zero }

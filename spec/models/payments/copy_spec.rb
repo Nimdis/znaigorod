@@ -16,9 +16,11 @@ describe Copy do
   end
 
   describe '#release!' do
+    let(:copy_payment) { copy.copy_payment }
     before { copy.release! }
 
     its(:state) { should == 'for_sale' }
+    it { copy_payment.state.should == 'canceled' }
   end
 
   describe '#sell!' do
