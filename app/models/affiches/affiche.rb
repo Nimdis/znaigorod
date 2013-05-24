@@ -56,8 +56,6 @@ class Affiche < ActiveRecord::Base
 
   normalize_attribute :image_url
 
-  before_validation :set_published
-
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?
   after_save :reindex_showings

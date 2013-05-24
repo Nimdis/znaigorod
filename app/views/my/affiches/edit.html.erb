@@ -1,6 +1,7 @@
 <% content_for :my_content do %>
   <%= render partial: 'steps_line' %>
   <%= render partial: "form_#{@step}" %>
+  <%= render partial: 'preview' %>
 <% end %>
 
 <%= render :template => 'my/affiches/wrapper' %>
