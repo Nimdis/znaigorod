@@ -30,7 +30,7 @@ class Affiche < ActiveRecord::Base
 
   has_one :affiche_schedule, :dependent => :destroy
 
-  validates_presence_of :description, :poster_url, :title, :if => :published?
+  validates_presence_of :title, :description, :poster_url, :if => :published?
 
   accepts_nested_attributes_for :affiche_schedule, :allow_destroy => true, :reject_if => :affiche_schedule_attributes_blank?
   accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => :all_blank
