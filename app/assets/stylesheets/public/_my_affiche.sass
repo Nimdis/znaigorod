@@ -54,3 +54,34 @@
 
       #affiche_tag
         width: 200px
+  .affiche_preview
+    .title
+      font-size: 18px
+      margin-bottom: 15px
+    .description
+      line-height: 1.5
+      h2, h3, h4, p, ul, ol, table
+        margin-bottom: 10px
+      h3
+        font-size: 16px
+      h4
+        font-size: 14px
+      ul li
+        &:before
+          content: "\2013"
+          padding-right: 5px
+        ul, ol
+          margin-left: 15px
+      ol
+        counter-reset: li
+        li
+          ul, ol
+            margin-left: 15px
+          &:before
+            content: counter(li)"."
+            counter-increment: li
+            padding-right: 5px
+      table
+        th, td
+          border: 1px solid #dedede
+          padding: 2px 4px

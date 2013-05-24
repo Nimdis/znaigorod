@@ -11,6 +11,10 @@ init_affiche_preview_title = ->
   true
 
 init_affiche_preview_description = ->
+  $.extend mySettings,
+    afterInsert: ->
+      $('#affiche_description').keyup()
+      true
   $('#affiche_description').markItUp(mySettings).keyup ->
     $('.my_affiche_wrapper .affiche_preview .description').html(textile($(this).val()))
     true
