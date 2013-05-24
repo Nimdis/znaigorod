@@ -55,8 +55,6 @@ class Affiche < ActiveRecord::Base
 
   normalize_attribute :image_url
 
-  before_validation :set_published
-
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?
 
@@ -173,10 +171,6 @@ class Affiche < ActiveRecord::Base
   include AfficheQualityRating
 
   private
-
-  def set_published
-    self.published = true if published.nil?
-  end
 
   def affiche_schedule_attributes_blank?(attributes)
     %w[ends_at ends_on starts_at starts_on].each do |attribute|

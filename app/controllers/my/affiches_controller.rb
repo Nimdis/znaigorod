@@ -1,7 +1,6 @@
 class My::AffichesController < My::ApplicationController
-  def new
-    @affiche = Affiche.new
-  end
+  load_and_authorize_resource
+  before_filter :current_step, only: [:edit]
 
   def create
     if Affiche.descendants.map(&:name).map(&:underscore).include?(params[:type])
@@ -15,11 +14,25 @@ class My::AffichesController < My::ApplicationController
     end
   end
 
-  def edit
-    @step = Affiche.steps.include?(params[:step]) ? params[:step] : 'first'
-    @affiche = Affiche.draft.find(params[:id])
+  def update
+    update! { edit_step_my_affiche_path(@affiche, :step => next_step) }
   end
 
-  def update
+  private
+
+  def before_edit
+    current_step
+  end
+
+  def current_step
+    @step ||= Affiche.steps.include?(params[:step]) ? params[:step] : 'first'
+  end
+
+  def next_step
+    begin
+      Affiche.steps[Affiche.steps.index(current_step) + 1]
+    rescue
+      Affiche.steps.last
+    end
   end
 end
