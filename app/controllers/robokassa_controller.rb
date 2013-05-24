@@ -22,7 +22,7 @@ class RobokassaController < ApplicationController
     payment = Payment.find(notification.item_id)
 
     if payment.paymentable
-      if paymentable.paymentable.is_a?(Ticket)
+      if payment.paymentable.is_a?(Ticket)
         redirect_to tickets_path
       else
         redirect_to coupons_path
