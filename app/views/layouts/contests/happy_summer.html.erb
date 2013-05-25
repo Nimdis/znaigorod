@@ -31,6 +31,7 @@
   <%= render :partial => 'commons/public_footer' %>
   <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
   <%= yield :yandex_map_scripts %>
+  <%= yield :two_gis_map_scripts %>
 <% end %>
 
 <%= render :template => 'layouts/base' %>
