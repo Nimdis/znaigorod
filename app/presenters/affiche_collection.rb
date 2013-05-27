@@ -190,7 +190,7 @@ class AfficheCollection
     [].tap do |scopes|
       scopes << 'order_by_starts_at'            if sort.include?('closest')
       scopes << 'order_by_affiche_created_at'   if sort.include?('newest')
-      scopes << 'order_by_affiche_total_rating' if sort.include?('rating')
+      scopes << 'order_by_affiche_rating' if sort.include?('rating')
     end
   end
 
