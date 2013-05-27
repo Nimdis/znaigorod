@@ -10,6 +10,7 @@ class Coupon < ActiveRecord::Base
 
   attr_accessor :delete_image
 
+  scope :ordered, order('created_at DESC') 
   has_attached_file :image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
 
   delegate :clear, :to => :image, :allow_nil => true, :prefix => true
@@ -32,6 +33,10 @@ class Coupon < ActiveRecord::Base
 
   def get_organization_id
     self.try(:organization_id)
+  end
+
+  def random_coupons
+    self.class.where('id != ?', self.id).limit(100).sample(4)
   end
 
   private

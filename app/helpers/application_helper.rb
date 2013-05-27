@@ -189,4 +189,11 @@ module ApplicationHelper
     "#{image_url}/files/#{image_id}/#{width}-#{height}#{image_crop}#{orientation}/#{image_filename}"
   end
 
+  def stale_at(date)
+    if date.hour == 0
+      I18n.l(date, :format => '%e %B %Y')
+    else
+      I18n.l(date, :format => '%e %B %Y года в %H:%M')
+    end
+  end
 end
