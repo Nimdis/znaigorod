@@ -80,4 +80,6 @@ $(window).load ->
 
   init_move_to_top() if $('a.move_to_top').length
 
+  init_crop()
+
   true

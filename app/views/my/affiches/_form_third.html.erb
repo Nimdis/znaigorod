@@ -1,0 +1,10 @@
+<%= simple_form_for @affiche, :url => '#' do |f| %>
+  <div>
+    <% if @affiche.poster_image.exists? %>
+      <%= image_tag resized_image_url(@affiche.poster_image_url, 500, 500, false), :class => 'jcrop' %>
+    <% end %>
+  </div>
+  <div class='submit'>
+    <%= f.submit %>
+  </div>
+<% end %>

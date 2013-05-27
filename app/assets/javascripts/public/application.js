@@ -9,6 +9,7 @@
  * = require markitup
  * = require textile
  * = require tagit
+ * = require jcrop
  * = require ./auth
  * = require ./rating
  * = require ./md5
@@ -61,5 +62,6 @@
  * = require ./visitors
  * = require ./sms_claims
  * = require ./my_affiche
+ * = require ./crop
  * = require ./main
  */

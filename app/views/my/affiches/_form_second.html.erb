@@ -3,7 +3,7 @@
   <%= f.input :poster_image %>
   <%= f.error :poster_image_content_type %>
   <% if @affiche.poster_image.exists? %>
-    <%= image_tag_for @affiche.poster_image_url, 200, 200 %>
+    <%= image_tag resized_image_url(@affiche.poster_image_url, 500, 500, false) %>
   <% end %>
   <div class='submit'>
     <%= f.submit %>
