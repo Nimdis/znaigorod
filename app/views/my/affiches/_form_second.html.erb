@@ -1,8 +1,10 @@
 <%= simple_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche) do |f| %>
   <%= hidden_field_tag :step, @step %>
   <%= f.input :poster_image %>
-  <%= image_tag_for @affiche.poster_image_url, 200, 200 if @affiche.poster_image_url%>
-
+  <%= f.error :poster_image_content_type %>
+  <% if @affiche.poster_image.exists? %>
+    <%= image_tag_for @affiche.poster_image_url, 200, 200 %>
+  <% end %>
   <div class='submit'>
     <%= f.submit %>
   </div>
