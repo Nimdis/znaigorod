@@ -1,4 +1,4 @@
-<%= simple_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche) do |f| %>
+<%= simple_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
   <%= hidden_field_tag :step, @step %>
   <%= f.input :poster_image %>
   <%= f.error :poster_image_content_type %>
