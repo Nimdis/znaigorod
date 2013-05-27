@@ -56,11 +56,30 @@ class Affiche < ActiveRecord::Base
 
   normalize_attribute :image_url
 
-  attr_accessible :poster_image
+  # >>>>>>>>>>>> Wizard  >>>>>>>>>>>>
+
+  attr_accessor :step
+  attr_accessible :poster_image, :step
+
+  def self.steps
+    %w[first second third fourth]
+  end
+
+  steps.each do |step|
+    define_method("#{step}_step?") { self.step == step }
+  end
+
   has_attached_file :poster_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
-  validates_attachment :poster_image, :presence => true,
-    :content_type => { :content_type => ['image/jpeg', 'image/jpg', 'image/png'], :message => 'Изображение должно быть в формате jpeg, jpg или png'  }
-  validates :poster_image, :dimensions => { :width_min => 300, :height_min => 300 }
+
+  validates_presence_of :title, :description,                                           :if => [:draft?, :first_step?]
+
+  validates_attachment :poster_image, :presence => true, :content_type => {
+    :content_type => ['image/jpeg', 'image/jpg', 'image/png'],
+    :message => 'Изображение должно быть в формате jpeg, jpg или png' },                :if => [:draft?, :second_step?]
+
+  validates :poster_image, :dimensions => { :width_min => 300, :height_min => 300 },    :if => [:draft?, :second_step?]
+
+  # <<<<<<<<<<<< Wizard  <<<<<<<<<<<
 
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?

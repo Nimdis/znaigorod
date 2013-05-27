@@ -9,7 +9,7 @@ class My::AffichesController < My::ApplicationController
       @affiche.state = :draft
       @affiche.save :validate => false
 
-      redirect_to  edit_step_my_affiche_path(@affiche, :step => :first)
+      redirect_to  edit_step_my_affiche_path(@affiche.id, :step => Affiche.steps.first)
     else
       redirect_to new_my_affiche_path
     end
@@ -17,10 +17,11 @@ class My::AffichesController < My::ApplicationController
 
   def update
     @affiche = Affiche.find(params[:id])
+    @affiche.step = @step
     @affiche.attributes = params[:affiche]
 
     if @affiche.save
-      redirect_to edit_step_my_affiche_path(@affiche, :step => next_step)
+      redirect_to edit_step_my_affiche_path(@affiche.id, :step => next_step)
     else
       render :edit
     end
@@ -33,7 +34,7 @@ class My::AffichesController < My::ApplicationController
   end
 
   def current_step
-    @step ||= Affiche.steps.include?(params[:step]) ? params[:step] : 'first'
+    @step ||= Affiche.steps.include?(params[:step]) ? params[:step] : Affiche.steps.first
   end
 
   def next_step
