@@ -51,9 +51,9 @@
                 </li>
               <% end %>
             </ul>
-            <% if @coupon.complete_at? %>
+            <% if @coupon.stale_at? %>
               <div class='closest'>
-                <%= "Продажа заканчивается #{stale_at(@coupon.complete_at)}" %>
+                <%= "Продажа заканчивается #{stale_at(@coupon.stale_at)}" %>
               </div>
             <% end %>
             <div class="place">
@@ -66,9 +66,9 @@
             <div class='text'>
               <%= simple_format @coupon.description %>
             </div>
-            <div class='stale_at'>
-              <% if @coupon.stale_at? %>
-                <%= "Действие #{@coupon.kind.coupon? ? "купона" : "сертификата"} заканчивается #{stale_at(@coupon.stale_at)}" %>
+            <div class='complete_at'>
+              <% if @coupon.complete_at? %>
+                <%= "Действие #{@coupon.kind.coupon? ? "купона" : "сертификата"} заканчивается #{stale_at(@coupon.complete_at)}" %>
               <% else %>
                 <%= "Действие #{@coupon.kind.coupon? ? "купона" : "сертификата"} неограниченно" %>
               <% end %>

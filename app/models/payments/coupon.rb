@@ -25,7 +25,7 @@ class Coupon < ActiveRecord::Base
 
   enumerize :kind, in: [:certificate, :coupon], predicates: true
 
-  validates_presence_of :image, :kind, :number, :place
+  validates_presence_of :image, :kind, :number, :place, :stale_at
 
   def self.generate_vfs_path
     "/znaigorod/coupons/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}"
