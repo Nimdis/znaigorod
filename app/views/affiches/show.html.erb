@@ -241,7 +241,7 @@
                 <div class='image'>
                   <%= affiche.has_ribbon %>
                   <div class="rating like_a_line mlt">
-                    <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => @affiche.model } %>
+                    <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => affiche.model } %>
                   </div>
                   <%= content_tag :div, "#{affiche.age_min.to_i}+", class: :age if affiche.age_min.present? %>
                   <%= affiche.more_like_this_poster %>
