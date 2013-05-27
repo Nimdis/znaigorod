@@ -24,10 +24,6 @@ every 4.hours do
   rake 'statistics:all'
 end
 
-every :day, :at => '3am' do
-  rake "recalculate_rating"
-end
-
 every :day, :at => '5am' do
   rake "refresh_sitemaps"
 end
