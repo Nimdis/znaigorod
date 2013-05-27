@@ -22,6 +22,18 @@ ru:
       title: По алфавиту
       starts_at: По ближайшему сеансу
 
+    visits:
+      zero: "нет участников"
+      one: "%{count} участник"
+      few: "%{count} участника"
+      many: "%{count} участников"
+      other: "%{count} участников"
+    votes:
+      zero: "никому не нравится"
+      one: "нравится %{count} пользователю"
+      few: "нравится %{count} пользователям"
+      many: "нравится %{count} пользователям"
+      other: "нравится %{count} пользователям"
 
   affiche_periods:
     today: Сегодня
@@ -55,4 +67,3 @@ ru:
     cafe: Кафе
     billiard: Бильярдные залы
     theatre: Театры
-

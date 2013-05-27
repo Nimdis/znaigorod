@@ -10,6 +10,8 @@ class Visit < ActiveRecord::Base
 
   scope :visited, where(:visited => true)
 
+  after_save :update_visitable_rating
+
   def change_visit
     self.visited = (visited? ? false : true)
     self.save
@@ -19,6 +21,10 @@ class Visit < ActiveRecord::Base
 
     def authenticated_user
       errors.add :visited, 'Вы не зарегистрированы' if user.nil?
+    end
+
+    def update_visitable_rating
+      visitable.update_rating if Affiche.ordered_descendants.include?(visitable.class)
     end
 end
 

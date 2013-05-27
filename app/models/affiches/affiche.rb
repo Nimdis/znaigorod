@@ -54,14 +54,16 @@ class Affiche < ActiveRecord::Base
 
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?
+  after_save :reindex_showings
 
   alias_attribute :to_s,            :title
   alias_attribute :tag_ru,          :tag
   alias_attribute :title_ru,        :title
   alias_attribute :title_translit,  :title
+  alias_attribute :rating, :total_rating
 
   searchable do
-    float :total_rating
+    float :rating
 
     float :age_min
     float :age_max
@@ -86,6 +88,10 @@ class Affiche < ActiveRecord::Base
     float :popularity,        :trie => true
 
     time :last_showing_time,  :trie => true
+  end
+
+  def update_rating
+    update_attribute :total_rating, (0.5 + 0.1*visits.visited.count + 0.05*votes.liked.count)
   end
 
   def human_model_name
@@ -161,9 +167,13 @@ class Affiche < ActiveRecord::Base
     false
   end
 
-  include AfficheQualityRating
+  #include AfficheQualityRating
 
   private
+
+  def reindex_showings
+    showings.actual.map(&:index)
+  end
 
   def affiche_schedule_attributes_blank?(attributes)
     %w[ends_at ends_on starts_at starts_on].each do |attribute|

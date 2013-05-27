@@ -17,14 +17,16 @@ def recalculate_affiche_rating
   affiches = Affiche.all
   bar = ProgressBar.new(affiches.count)
   affiches.each do |affiche|
-    affiche.recalculate_affiche_rating
+    #affiche.recalculate_affiche_rating
+    affiche.update_rating
     bar.increment!
   end
 end
 
 desc "Пересчет рейтинга организиции"
 task :recalculate_rating => :environment do
-  recalculate_rating :class => Organization
+  #recalculate_rating :class => Organization
+  #Affiche.all.map(&:update_rating)
   recalculate_affiche_rating
 end
 

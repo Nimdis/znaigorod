@@ -75,7 +75,7 @@ HasSearcher.create_searcher :showings do
   end
 
   # order
-  scope(:order_by_rating) { order_by(:affiche_total_rating, :desc) }
+  scope(:order_by_rating) { order_by(:affiche_rating, :desc) }
   scope(:order_by_creation)   { order_by(:affiche_created_at, :desc) }
   scope(:order_by_starts_at)  { order_by(:starts_at, :asc) }
 

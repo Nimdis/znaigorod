@@ -6,7 +6,7 @@ class Showing < ActiveRecord::Base
 
   validates_presence_of :place, :starts_at
 
-  delegate :created_at, :distribution_starts_on, :total_rating, :tags, :title, :age_min, :age_max, :to => :affiche, :prefix => true
+  delegate :created_at, :distribution_starts_on, :rating, :tags, :title, :age_min, :age_max, :to => :affiche, :prefix => true
   delegate :address, :title, :to => :organization, :prefix => true, :allow_nil => true
 
   after_create  :index_affiche
@@ -22,7 +22,7 @@ class Showing < ActiveRecord::Base
   searchable do
     date :starts_on
 
-    float :affiche_total_rating
+    float :affiche_rating
 
     integer :affiche_id
     integer :organization_id

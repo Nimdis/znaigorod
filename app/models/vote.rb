@@ -9,6 +9,8 @@ class Vote < ActiveRecord::Base
 
   scope :liked, where(:like => true)
 
+  after_save :update_voteable_rating
+
   def change_vote
     self.like = (like? ? false : true)
     self.save
@@ -17,6 +19,10 @@ class Vote < ActiveRecord::Base
   private
     def authenticated_user
       errors.add :like, 'может быть оставлена только зарегистрированным пользователем' if user.nil?
+    end
+
+    def update_voteable_rating
+      voteable.update_rating if Affiche.ordered_descendants.include?(voteable.class)
     end
 end
 
