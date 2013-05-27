@@ -43,9 +43,9 @@ class Affiche < ActiveRecord::Base
   scope :with_images,      -> { where('image_url IS NOT NULL') }
   scope :with_showings,    -> { includes(:showings).where('showings.starts_at > :date OR showings.ends_at > :date', { :date => Date.today }) }
 
-
   default_value_for :yandex_metrika_page_views, 0
   default_value_for :vkontakte_likes,           0
+  default_value_for :total_rating,              0.5
   #before_save :set_popularity
 
   friendly_id :title, use: :slugged
@@ -54,7 +54,6 @@ class Affiche < ActiveRecord::Base
 
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?
-  after_save :update_rating
   after_save :reindex_showings
 
   alias_attribute :to_s,            :title
