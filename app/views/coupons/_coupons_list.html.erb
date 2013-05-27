@@ -8,7 +8,7 @@
     <div class='item_wrapper'>
       <div class='image'><%=link_to image_tag_for(coupon.image_url, 120, 160), coupon_path(coupon) if coupon.image_url? %></div>
       <div class='column'>
-        <div class='description'><%= link_to coupon.title.truncate(35).gilensize, coupon_path(coupon), title: coupon.description %></div>
+        <div class='description'><%= link_to coupon.title.truncate(55).gilensize, coupon_path(coupon), title: coupon.description %></div>
         <div class='place'><%= coupon.place %></div>
         <%= content_tag :div, content_tag(:span, "#{coupon.price_without_discount}р.", class: :stroke), class: :original_price if coupon.discount? %>
         <div class='price<%= ' without_discount' unless coupon.discount?%>'><%= coupon.price.to_i %> р.</div>
