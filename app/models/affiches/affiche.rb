@@ -54,6 +54,7 @@ class Affiche < ActiveRecord::Base
 
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?
+  after_save :update_rating
   after_save :reindex_showings
 
   alias_attribute :to_s,            :title
