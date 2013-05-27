@@ -58,7 +58,9 @@ class Affiche < ActiveRecord::Base
 
   attr_accessible :poster_image
   has_attached_file :poster_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
-  validates_presence_of :poster_image
+  validates_attachment :poster_image, :presence => true,
+    :content_type => { :content_type => ['image/jpeg', 'image/jpg', 'image/png'], :message => 'Изображение должно быть в формате jpeg, jpg или png'  }
+  validates :poster_image, :dimensions => { :width_min => 300, :height_min => 300 }
 
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?
