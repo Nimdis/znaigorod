@@ -3,7 +3,7 @@
     <div class="search_form">
         <div class="logged">
           <% if user_signed_in? %>
-            <%= image_tag current_user.avatar %>
+            <%= image_tag current_user.avatar if current_user.avatar.present? %>
             <%= link_to current_user.name, current_user.profile %>
             <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
           <% else %>
