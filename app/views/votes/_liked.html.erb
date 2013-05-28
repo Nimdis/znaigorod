@@ -4,7 +4,7 @@
       <li>
         <% if user.profile %>
           <div class='user_item'>
-            <a href='<%= user.profile %>' target='_blank'><%= image_tag user.avatar, :size => "80x80", :title => user.name %></a>
+            <%= link_to image_tag(user.avatar, :size => "80x80", :title => user.name), user.profile, target: '_blank' if user.avatar.present? %>
             <%= link_to user.name, user.profile, :class => 'name' %>
           </div>
         <% else %>
