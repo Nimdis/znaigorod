@@ -27,6 +27,12 @@ class My::AffichesController < My::ApplicationController
     end
   end
 
+  def available_tags
+    query = params[:term]
+    result = Affiche.pluck(:tag).flat_map { |str| str.split(',') }.map(&:squish).uniq.delete_if(&:blank?).select { |str| str =~ /^#{query}/ }.sort
+    render text: result
+  end
+
   private
 
   def before_edit

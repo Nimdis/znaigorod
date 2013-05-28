@@ -1,0 +1,89 @@
+ul.tagit
+  padding: 1px 5px
+  overflow: auto
+  margin-left: inherit
+  /* usually we don't want the regular ul margins.
+  margin-right: inherit
+  li
+    display: block
+    float: left
+    margin: 2px 5px 2px 0
+    &.tagit-choice
+      position: relative
+      line-height: inherit
+    &.tagit-choice-read-only
+      padding: .2em .5em .2em .5em
+    &.tagit-choice-editable
+      padding: .2em 18px .2em .5em
+    &.tagit-new
+      //padding: .25em 4px .25em 0
+      margin: 0
+    &.tagit-choice
+      a.tagit-label
+        cursor: pointer
+        text-decoration: none
+      .tagit-close
+        cursor: pointer
+        position: absolute
+        right: .1em
+        top: 50%
+        margin-top: -8px
+        line-height: 17px
+        .text-icon
+          display: none
+      input
+        display: block
+        float: left
+        margin: 2px 5px 2px 0
+
+  input[type="text"]
+    -moz-box-sizing: border-box
+    -webkit-box-sizing: border-box
+    box-sizing: border-box
+    -moz-box-shadow: none
+    -webkit-box-shadow: none
+    box-shadow: none
+    border: none
+    margin: 0
+    padding: 0
+    width: inherit
+    background-color: inherit
+    outline: none
+
+/* used for some custom themes that don't need image icons
+ul.tagit
+  width: 540px
+  border: 1px solid #909090
+  +border-radius(3px)
+  background: inherit
+  li.tagit-choice
+    +border-radius(3px)
+    border: 1px solid #CAD8F3
+    background: none
+    background-color: #DEE7F8
+    font-weight: normal
+    .tagit-label:not(a)
+      color: #333
+      font-size: 14px
+      font-family: Arial, Verdana, Tahoma, sans-serif
+    a.tagit-close
+      text-decoration: none
+    .tagit-close
+      right: .4em
+    .ui-icon
+      display: none
+    .tagit-close .text-icon
+      display: inline
+      font-family: arial, sans-serif
+      font-size: 16px
+      line-height: 16px
+      color: #777
+    &:hover, &.remove
+      background-color: #bbcef1
+      border-color: #6d95e0
+    a
+      &.tagLabel:hover, &.tagit-close .text-icon:hover
+        color: #222
+  input[type="text"]
+    color: #333
+    background: none
