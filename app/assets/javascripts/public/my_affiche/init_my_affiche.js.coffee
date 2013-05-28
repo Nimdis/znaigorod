@@ -43,3 +43,10 @@ init_affiche_preview_tag = ->
       minLength: 1
       source: "#{$('#affiche_tag').closest('form').attr('action')}/available_tags"
   true
+  $('#affiche_tag').change ->
+    if $(this).val().length
+      $('.my_affiche_wrapper .affiche_preview .tags').html("Теги: #{$(this).val()}")
+    else
+      $('.my_affiche_wrapper .affiche_preview .tags').html('')
+    true
+  $('#affiche_tag').change()
