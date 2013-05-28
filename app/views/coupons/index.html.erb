@@ -6,7 +6,7 @@
   <%= render 'breadcrumbs', :index => true %>
   <h1>Распродажа сертификатов и купонов</h1>
   <ul class='coupons_list'>
-    <%= render :partial => 'coupons_list' %>
+    <%= render :partial => 'coupons_list', :locals => { :collection => @coupons } %>
   </ul>
 </div>
 

@@ -39,6 +39,8 @@ class Organization < ActiveRecord::Base
 
   ### <=== Payments
 
+  has_many :coupons
+
   attr_accessible :phone_for_sms, :balance_delta
   attr_accessor :balance_delta
 

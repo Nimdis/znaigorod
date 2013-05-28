@@ -75,6 +75,15 @@
 
   </div>
 
+  <% if @organization.coupons.any? %>
+    <div class='coupons'>
+      <div class='coupon_header'>Доступны сертификаты и купоны</div>
+      <ul class='coupons_list'>
+        <%= render :partial => 'coupons/coupons_list', :locals => { :collection => @organization.coupons } %>
+      </ul>
+    </div>
+  <% end %>
+
   <% @organization.decorated_suborganizations.each do |suborganization| %>
     <%= render suborganization if suborganization.viewable? %>
   <% end %>
