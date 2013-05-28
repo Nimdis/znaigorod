@@ -8,6 +8,7 @@
  * = require tipsy
  * = require markitup
  * = require textile
+ * = require tagit
  * = require ./auth
  * = require ./rating
  * = require ./md5

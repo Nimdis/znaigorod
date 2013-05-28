@@ -1,6 +1,7 @@
 @init_my_affiche = ->
   init_affiche_preview_title() if $('#affiche_title').length
   init_affiche_preview_description() if $('#affiche_description').length
+  init_affiche_preview_tag() if $('#affiche_tag').length
   true
 
 init_affiche_preview_title = ->
@@ -29,4 +30,16 @@ init_affiche_preview_description = ->
     , 1
     true
   $('#affiche_description').keyup()
+  true
+
+init_affiche_preview_tag = ->
+  $('#affiche_tag').tagit
+    allowSpaces: true
+    caseSensitive: false
+    closeAutocompleteOnEnter: true
+    singleFieldDelimiter: ', '
+    autocomplete:
+      delay: 0
+      minLength: 1
+      source: "#{$('#affiche_tag').closest('form').attr('action')}/available_tags"
   true
