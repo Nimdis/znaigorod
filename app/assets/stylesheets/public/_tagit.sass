@@ -1,5 +1,5 @@
 ul.tagit
-  padding: 1px 5px
+  padding: 1px 3px
   overflow: auto
   margin-left: inherit
   /* usually we don't want the regular ul margins.
@@ -16,7 +16,6 @@ ul.tagit
     &.tagit-choice-editable
       padding: .2em 18px .2em .5em
     &.tagit-new
-      //padding: .25em 4px .25em 0
       margin: 0
     &.tagit-choice
       a.tagit-label
@@ -37,12 +36,8 @@ ul.tagit
         margin: 2px 5px 2px 0
 
   input[type="text"]
-    -moz-box-sizing: border-box
-    -webkit-box-sizing: border-box
-    box-sizing: border-box
-    -moz-box-shadow: none
-    -webkit-box-shadow: none
-    box-shadow: none
+    +box-sizing(border-box)
+    +box-shadow(none)
     border: none
     margin: 0
     padding: 0
@@ -58,12 +53,12 @@ ul.tagit
   background: inherit
   li.tagit-choice
     +border-radius(3px)
-    border: 1px solid #CAD8F3
+    border: 1px solid #c3bec6
     background: none
-    background-color: #DEE7F8
+    background-color: #edecee
     font-weight: normal
     .tagit-label:not(a)
-      color: #333
+      color: #665874
       font-size: 14px
       font-family: Arial, Verdana, Tahoma, sans-serif
     a.tagit-close
@@ -79,8 +74,9 @@ ul.tagit
       line-height: 16px
       color: #777
     &:hover, &.remove
-      background-color: #bbcef1
-      border-color: #6d95e0
+      color: #734d99
+      border-color: #d1c5d8
+      background-color: #f5f3f5
     a
       &.tagLabel:hover, &.tagit-close .text-icon:hover
         color: #222
