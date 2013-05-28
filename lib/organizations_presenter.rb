@@ -48,6 +48,13 @@ module OrganizationsPresenter
     end
   end
 
+  def coupons
+    @coupons ||= Coupon.search { 
+      with :suborganizations_kind, kind
+      paginate :page => 1, :per_page => 100
+    }.results.sample(3)
+  end
+
   def initialize(args = {})
     super(args)
 

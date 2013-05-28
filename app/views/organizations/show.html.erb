@@ -75,9 +75,9 @@
 
   </div>
 
-  <% if @organization.coupons.any? %>
+  <% if Rails.env.development? && @organization.coupons.any? %>
     <div class='coupons'>
-      <div class='coupon_header'>Доступны сертификаты и купоны</div>
+      <div class='coupon_header'>Сертификаты, купоны, скидки</div>
       <ul class='coupons_list'>
         <%= render :partial => 'coupons/coupons_list', :locals => { :collection => @organization.coupons } %>
       </ul>

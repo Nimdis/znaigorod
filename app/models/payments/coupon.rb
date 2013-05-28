@@ -39,6 +39,10 @@ class Coupon < ActiveRecord::Base
     self.class.where('id != ?', self.id).limit(100).sample(4)
   end
 
+  searchable do
+    string(:suborganizations_kind, :multiple => true) { organization.suborganizations.map(&:class).map(&:name).map(&:underscore) }
+  end
+
   private
 
   def image_destroy
