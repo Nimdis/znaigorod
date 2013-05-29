@@ -20,10 +20,11 @@ mySettings = {
     { name: 'Важно', key: 'B', closeWith: '*', openWith: '*', className: 'strong_button' },
     { name: 'Курсив', key: 'I', closeWith: '_', openWith: '_', className: 'italic_button' },
     { separator: '-' },
-    { name: 'Ненумерованный список', openWith:'(!(* |!|*)!)', className: 'unordered_list_button' },
-    { name: 'Нумерованный список', openWith:'(!(# |!|#)!)', className: 'ordered_list_button' },
+    { name: 'Ненумерованный список', openWith:'(!(* |!|*)!)', multiline: true, className: 'unordered_list_button' },
+    { name: 'Нумерованный список', openWith:'(!(# |!|#)!)', multiline: true, className: 'ordered_list_button' },
     { separator: '-' },
-    { name: 'Ссылка', openWith: '"', closeWith: '([![Title]!])":[![Link:!:http://]!]', placeHolder: 'Текст ссылки...', className: 'link_button' },
+    { name: 'Ссылка', openWith: '"', closeWith: '":[![Link:!:http://]!]', placeHolder: 'Текст ссылки...', className: 'link_button' },
+    { name: 'Электронная почта', openWith: '"', closeWith: '":[![Link:!:mailto:]!]', placeHolder: 'Электронная почта...', className: 'email_button' },
     { name: 'Помощь', className: 'help_button' }
   ]
 }
