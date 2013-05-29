@@ -1,6 +1,6 @@
 <% if @affiche.poster_image.exists? %>
-  <% crop_opt = @affiche.poster_url ? @affiche.poster_url.match(/(?<=\/region\/)\w+\/\w+\/\w+\/\w+/).to_s.split('/') : [] %>
-  <% crop_width, crop_height, crop_x, crop_y = crop_opt.any? ? crop_opt : [90, 160, 0, 0] %>
+  <% crop_opt = @affiche.poster_url ? @affiche.poster_url.match(/(?<=\/region\/)\w+\/\w+\/\w+\/\w+/).to_s.split('/').map{|o| (o.to_i/@affiche.resize_factor).round} : [] %>
+  <% crop_width, crop_height, crop_x, crop_y = crop_opt.any? ? crop_opt : [@affiche.poster_image_resized_dimensions[:width]*0.5625, @affiche.poster_image_resized_dimensions[:height], 0, 0] %>
   <%= link_to 'Удалить постер', destroy_image_my_affiche_path(@affiche.id), :method => :delete, :confirm => 'Вы уверены?' %>
   <%= simple_form_for @affiche, as: :affiche, :url => my_affiche_path(@affiche.id) do |f| %>
     <%= hidden_field_tag :step, @step %>
