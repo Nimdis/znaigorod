@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
 
   has_many :post_images, :order => 'post_images.created_at'
   has_many :comments, :as => :commentable, :dependent => :destroy
+  has_many :votes, :as => :voteable, :dependent => :destroy
 
   validates_presence_of :annotation, :content, :title
 

@@ -1,3 +1,68 @@
+=post_like
+  +clearfix
+  +border-radius(3px)
+  +background-image(linear-gradient(#dfd1e8, #cfb7db))
+  border: 1px solid #cfb6dd
+  width: 115px
+
+  &:hover
+    cursor: pointer
+
+  .votes_wrapper
+    +clearfix
+    background: image_url('public/counter_bg.png') no-repeat right center
+    float: none !important
+    padding: 0 33px 0 0
+
+    .cloud_wrapper
+      margin-top: 28px
+
+    a
+      border: none
+      color: #794391
+      height: 18px
+      line-height: 18px
+      padding: 0 0 0 5px
+
+      &:hover
+        padding: 0 0 0 5px
+
+    .votes_counter
+      color: #fff
+      height: 18px
+      left: 86px
+      line-height: 18px
+      margin: 0 -28px 0 0
+      padding: 0
+      position: relative
+      text-align: center
+      width: 28px
+
+      a
+        color: #fff
+
+    .user_like
+      float: left
+
+      &:hover
+        +background(image_url('public/counter_bg.png') no-repeat right center, linear-gradient(#b895ca, #9a68b3))
+        cursor: pointer
+
+        a
+          &:hover
+            color: #fff
+
+      span
+        display: none
+
+      .liked
+        +background(image_url('public/counter_bg.png') no-repeat right center, linear-gradient(#b895ca, #9a68b3))
+        color: #fff
+        width: 110px
+
+      .dont_liked
+        width: 110px
+
 .content_wrapper
   .contact_with_us
     +border-radius(3px)
@@ -150,6 +215,18 @@
           margin: 3px auto
           &:hover
             border-color: #e2d2e2
+
+  .post_like
+    +post_like
+    float: left
+    margin: 10px 0 0 0
+
+    .cloud_wrapper
+      margin-left: -79px !important
+      margin-top: 30px !important
+
+      .cloud_inner_wrapper
+        background-position: 120px top !important
 
   .share
     +clearfix

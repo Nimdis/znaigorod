@@ -32,10 +32,16 @@
           <% end %>
         </div>
 
-        <div class="share">
-          <%= render :partial => "commons/share_this" %>
-        </div>
 
+        <div class="post_share">
+          <div class="post_like">
+            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @post } %>
+          </div>
+
+          <div class="share">
+            <%= render :partial => "commons/share_this" %>
+          </div>
+        </div>
       </div>
 
       <%= render :partial => 'comments/block', :locals => { :parent_obj => @post } %>

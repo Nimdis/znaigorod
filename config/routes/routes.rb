@@ -79,6 +79,9 @@ Znaigorod::Application.routes.draw do
   resources :posts, :only => [:index, :show] do
     get :draft, :on => :collection, :as => :draft
 
+    put 'change_vote' => 'votes#change_vote', :as => :change_vote
+    get 'liked' => 'votes#liked', :as => :liked
+
     resources :comments, :only => [:new, :create, :show]
   end
 
