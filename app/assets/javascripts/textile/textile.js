@@ -16,7 +16,7 @@
 
   /***
    * Regular Expression helper methods
-   * 
+   *
    * This provides the `re` object, which contains several helper
    * methods for working with big regular expressions (soup).
    *
@@ -82,7 +82,7 @@
 
   /***
    * JSONML helper methods - http://www.jsonml.org/
-   * 
+   *
    * This provides the `JSONML` object, which contains helper
    * methods for rendering JSONML to HTML.
    *
@@ -167,7 +167,7 @@
   re.pattern[ 'tx_cite'   ] = ':((?:[^\\s()]|\\([^\\s()]+\\)|[()])+?)(?=[!-\\.:-@\\[\\\\\\]-`{-~]+(?:$|\\s)|$|\\s)';
   re.pattern[ 'ucaps'     ] = "A-Z"+
                               // Latin extended À-Þ
-                              "\u00c0-\u00d6\u00d8-\u00de"+ 
+                              "\u00c0-\u00d6\u00d8-\u00de"+
                               // Latin caps with embelishments and ligatures...
                               "\u0100\u0102\u0104\u0106\u0108\u010a\u010c\u010e\u0110\u0112\u0114\u0116\u0118\u011a\u011c\u011e\u0120\u0122\u0124\u0126\u0128\u012a\u012c\u012e\u0130\u0132\u0134\u0136\u0139\u013b\u013d\u013f"+
                               "\u0141\u0143\u0145\u0147\u014a\u014c\u014e\u0150\u0152\u0154\u0156\u0158\u015a\u015c\u015e\u0160\u0162\u0164\u0166\u0168\u016a\u016c\u016e\u0170\u0172\u0174\u0176\u0178\u0179\u017b\u017d"+
@@ -257,8 +257,8 @@
   , '@':  'code'
   };
 
-  // area, base, basefont, bgsound, br, col, command, embed, frame, hr, 
-  // img, input, keygen, link, meta, param, source, track or wbr 
+  // area, base, basefont, bgsound, br, col, command, embed, frame, hr,
+  // img, input, keygen, link, meta, param, source, track or wbr
   var html_singletons = {
     'br': 1
   , 'hr': 1
@@ -572,7 +572,7 @@
         }
       }
 
-      // only for blocks: 
+      // only for blocks:
       if ( is_img || is_block ) {
         if ( (m = re_pba_align.exec( remaining )) ) {
           var align = pba_align_lookup[ m[1] ];
@@ -631,26 +631,26 @@
     // NB: order is important here ...
     return src
       // arrow
-      .replace( /([^\-]|^)->/, '$1&#8594;' ) // arrow
+      .replace( /([^\-]|^)->/, '$1&#8594;' )      // arrow
       // dimensions
-      .replace( re_dimsign, '$1&#215;$2' ) // dimension sign
+      .replace( re_dimsign, '$1&#215;$2' )        // dimension sign
       // ellipsis
-      .replace( /([^.]?)\.{3}/g, '$1&#8230;' ) // ellipsis
+      .replace( /([^.]?)\.{3}/g, '$1&#8230;' )    // ellipsis
       // dashes
-      .replace( re_emdash, '$1&#8212;$2' ) // em dash
-      .replace( /( )-( )/g, '$1&#8211;$2' ) // en dash
+      .replace( re_emdash, '$1&#8212;$2' )        // em dash
+      .replace( /( )-( )/g, '$1&#8211;$2' )       // en dash
       // legal marks
-      .replace( re_trademark, '$1&#8482;' )   // trademark
-      .replace( re_registered, '$1&#174;'  )   // registered
-      .replace( re_copyright, '$1&#169;'  )   // copyright
+      .replace( re_trademark, '$1&#8482;' )       // trademark
+      .replace( re_registered, '$1&#174;'  )      // registered
+      .replace( re_copyright, '$1&#169;'  )       // copyright
       // double quotes
-      .replace( re_double_prime, '$1&#8243;' ) // double prime
-      .replace( re_closing_dquote, '$1&#8221;' ) // double closing quote
-      .replace( /"/g, '&#8220;' ) // double opening quote
+      .replace( re_double_prime, '$1&#8243;' )    // double prime
+      .replace( re_closing_dquote, '$1&#187;' )   // double closing quote
+      .replace( /"/g, '&#171;' )                  // double opening quote
       // single quotes
-      .replace( re_single_prime, '$1&#8242;' )  // single prime
+      .replace( re_single_prime, '$1&#8242;' )    // single prime
       .replace( re_apostrophe, '$1&#8217;$2' )    // I'm an apostrophe
-      .replace( re_closing_squote, '$1&#8217;' )     // single closing quote
+      .replace( re_closing_squote, '$1&#8217;' )  // single closing quote
       .replace( /'/g, '&#8216;' )
       ;
   }
@@ -879,7 +879,7 @@
           }
           continue;
         }
-        // else 
+        // else
         src.load();
       }
 
@@ -925,7 +925,7 @@
           continue;
         }
         else { // need terminator
-          // gulp up the rest of this block... 
+          // gulp up the rest of this block...
           var re_end_tag = re.compile( "^(.*?)(</" + tag + "\\s*>)", 's' );
           if ( (m = re_end_tag.exec( src )) ) {
             src.advance( m[0] );
@@ -1126,7 +1126,7 @@
         // I simply match them here as there is no way anyone is using nested HTML today, or if they
         // are, then this will at least output less broken HTML as redundant tags will get quoted.
 
-        // Is block tag? ... 
+        // Is block tag? ...
         if ( tag in allowed_blocktags ) {
           src.advance( m[0] );
 
@@ -1142,8 +1142,8 @@
             continue;
           }
           else { // block
-            
-            // gulp up the rest of this block... 
+
+            // gulp up the rest of this block...
             var re_end_tag = re.compile( "^(.*?)(\\s*)(</" + tag + "\\s*>)(\\s*)", 's' );
             if ( (m = re_end_tag.exec( src )) ) {
               src.advance( m[0] );
@@ -1218,7 +1218,7 @@
   }
 
 
-  // recurse the tree and swap out any "href" attributes 
+  // recurse the tree and swap out any "href" attributes
   function fix_links ( jsonml ) {
     if ( _isArray( jsonml ) ) {
       if ( jsonml[0] === 'a' ) { // found a link
