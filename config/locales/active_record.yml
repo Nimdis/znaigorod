@@ -141,6 +141,7 @@ ru:
         image_url: Изображение для главной страницы
         original_title: Оригинальное название
         poster_url: Постер для события
+        poster_image: Постер
         tag: Теги
         trailer_code: Код трейлера
         vk_aid: Код альбома события ВКонтакте
