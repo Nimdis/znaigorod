@@ -6,7 +6,7 @@ class Coupon < ActiveRecord::Base
   attr_accessible :description, :discount, :title, :organization_id, :price_with_discount,
                   :price_without_discount, :price, :organization_quota,
                   :kind, :image, :delete_image, :place, :vfs_path,
-                  :number, :stale_at, :complete_at
+                  :number, :stale_at, :complete_at, :categories
 
   attr_accessor :delete_image
 
@@ -24,8 +24,10 @@ class Coupon < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy
 
   enumerize :kind, in: [:certificate, :coupon], predicates: true
+  serialize :categories, Array
+  enumerize :categories, in: Organization.available_suborganization_kinds.map(&:to_sym), multiple: true
 
-  validates_presence_of :image, :kind, :number, :place, :stale_at
+  validates_presence_of :categories, :image, :kind, :number, :place, :stale_at
 
   def self.generate_vfs_path
     "/znaigorod/coupons/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}"

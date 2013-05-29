@@ -1,6 +1,10 @@
 <div class='form_view'>
   <%= simple_nested_form_for @coupon, :url => [:manage, @coupon], :html => { :novalidate => true }  do |f| %>
-    <%= f.input :kind, :as => :select, :include_blank => false %>
+    <%= f.input :kind, 
+      :as => :select, 
+      :selected => f.object.kind,
+      :include_blank => false %>
+    <%= f.input :categories, :as => :check_boxes , :wrapper_html => { :class => :category_list }%>
     <%= f.input :title %>
     <%= f.input :description, input_html: { class: 'coupon_description' }  %>
     <%  unless f.object.image_url? %>

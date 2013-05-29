@@ -31,6 +31,20 @@ ru:
       kind:
         coupon: Купон
         certificate: Сертификат
+      categories:
+        meal: Кафе и рестораны
+        entertainment: Развлекательные заведения
+        culture: Театры и музеи
+        sport: Спортивные заведения
+        billiard: Бильярдные клубы
+        creation: Творчество и развитие
+        sauna: Сауны
+        hotel: Гостиницы
+        travel: Туристические агентства
+        salon_center: Красота
+        car_sales_center: Автосалоны
+        car_wash: Автомойки
+        car_service_center: Автосервис
 
     service:
       kind:

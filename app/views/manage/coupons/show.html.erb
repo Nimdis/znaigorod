@@ -16,6 +16,17 @@
   </div>
 
   <div>
+    <span class="label">Категории:</span>
+    <span class="value">
+      <% if resource.categories.many? %>
+        <%= resource.categories.map(&:text).join(', ') %>
+      <% else %>
+        <%= resource.categories.first.text %>
+      <% end %>
+    </span>
+  </div>
+
+  <div>
     <span class="label">Количество:</span>
     <span class="value"><%= resource.number %></span>
   </div>

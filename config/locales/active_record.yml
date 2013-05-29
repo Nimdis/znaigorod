@@ -115,6 +115,7 @@ ru:
 
       coupon:
         <<: *common_attributes
+        categories: Категории
         complete_at: Срок действия до
         number: Количество
         description: Описание
