@@ -1,12 +1,34 @@
-<%= simple_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
-  <%= hidden_field_tag :step, @step %>
-  <%= f.input :poster_image %>
-  <%= f.error :poster_image_content_type %>
-  <% if @affiche.poster_image.exists? %>
-    <%= image_tag resized_image_url(@affiche.poster_image_url, 500, 500, false) %>
+<% if @affiche.poster_image.exists? %>
+  <%= simple_form_for @affiche, as: :affiche, :url => my_affiche_path(@affiche.id) do |f| %>
+    <%= hidden_field_tag :step, @step %>
+    <div>
+      <% if @affiche.poster_image.exists? %>
+        <%= f.input :set_region, :as => :hidden, :input_html => { :value => true } %>
+        <%= f.input :crop_x, :as => :hidden, :input_html => { :value => 0 } %>
+        <%= f.input :crop_y, :as => :hidden, :input_html => { :value => 0 } %>
+        <%= f.input :crop_width, :as => :hidden, :input_html => { :value => 90 } %>
+        <%= f.input :crop_height, :as => :hidden, :input_html => { :value => 160 } %>
+        <%= image_tag resized_image_url(@affiche.poster_image_url,
+                                        @affiche.poster_image_resized_dimensions[:width],
+                                        @affiche.poster_image_resized_dimensions[:height],
+                                        false), :class => 'jcrop' %>
+      <% end %>
+    </div>
+    <div class='submit'>
+      <%= f.submit %>
+    </div>
   <% end %>
-  <div class='submit'>
-    <%= f.submit %>
-  </div>
-<% end %>
+<% else %>
+  <%= simple_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
+    <%= hidden_field_tag :step, @step %>
+    <%= f.input :poster_image %>
+    <%= f.error :poster_image_content_type %>
 
+    <% if @affiche.poster_image.exists? %>
+        <%= image_tag resized_image_url(@affiche.poster_image_url,
+                                        @affiche.poster_image_resized_dimensions[:width],
+                                        @affiche.poster_image_resized_dimensions[:height],
+                                        false), :class => 'jcrop' %>
+    <% end %>
+  <% end %>
+<% end %>
