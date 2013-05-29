@@ -1,4 +1,14 @@
 @init_crop = () ->
+  crop_x = $('[id*="crop_x"]').val()
+  crop_y = $('[id*="crop_y"]').val()
+  crop_width = $('[id*="crop_width"]').val()
+  crop_height = $('[id*="crop_height"]').val()
+
   $('.jcrop').Jcrop
-    setSelect:   [ 0, 0, 200, 20 ]
+    setSelect:   [ crop_x, crop_y, crop_x + crop_width, crop_y + crop_height ]
     aspectRatio: 9 / 16
+    onChange: (coords) ->
+      crop_x = $('[id*="crop_x"]').val(coords.x)
+      crop_y = $('[id*="crop_y"]').val(coords.y)
+      crop_width = $('[id*="crop_width"]').val(coords.w)
+      crop_height = $('[id*="crop_height"]').val(coords.h)

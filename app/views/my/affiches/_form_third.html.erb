@@ -1,7 +1,15 @@
-<%= simple_form_for @affiche, :url => '#' do |f| %>
+<%= simple_form_for @affiche, as: :affiche, :url => my_affiche_path(@affiche.id) do |f| %>
+  <%= hidden_field_tag :step, @step %>
   <div>
     <% if @affiche.poster_image.exists? %>
-      <%= image_tag resized_image_url(@affiche.poster_image_url, 500, 500, false), :class => 'jcrop' %>
+      <%= f.input :crop_x, :as => :hidden, :input_html => { :value => 0 } %>
+      <%= f.input :crop_y, :as => :hidden, :input_html => { :value => 0 } %>
+      <%= f.input :crop_width, :as => :hidden, :input_html => { :value => 90 } %>
+      <%= f.input :crop_height, :as => :hidden, :input_html => { :value => 160 } %>
+      <%= image_tag resized_image_url(@affiche.poster_image_url,
+                                      @affiche.poster_image_resized_dimensions[:width],
+                                      @affiche.poster_image_resized_dimensions[:height],
+                                      false), :class => 'jcrop' %>
     <% end %>
   </div>
   <div class='submit'>

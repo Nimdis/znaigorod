@@ -58,8 +58,8 @@ class Affiche < ActiveRecord::Base
 
   # >>>>>>>>>>>> Wizard  >>>>>>>>>>>>
 
-  attr_accessor :step
-  attr_accessible :poster_image, :step
+  attr_accessor :step, :crop_x, :crop_y, :crop_width, :crop_height
+  attr_accessible :poster_image, :step, :crop_x, :crop_y, :crop_width, :crop_height
 
   def self.steps
     %w[first second third fourth]
@@ -78,6 +78,38 @@ class Affiche < ActiveRecord::Base
     :message => 'Изображение должно быть в формате jpeg, jpg или png' },                :if => [:draft?, :second_step?]
 
   validates :poster_image, :dimensions => { :width_min => 300, :height_min => 300 },    :if => [:draft?, :second_step?]
+
+  before_save :set_poster_url, :if => [:draft?, :third_step?]
+
+  def poster_image_original_dimensions
+    @poster_image_original_dimensions ||= {}.tap { |dimensions|
+      dimensions[:width] = poster_image_url.match(/\/(?<dimensions>\d+-\d+)\//)[:dimensions].split('-').first.to_i
+      dimensions[:height] = poster_image_url.match(/\/(?<dimensions>\d+-\d+)\//)[:dimensions].split('-').last.to_i
+    }
+  end
+
+  def side_max_size
+    666.to_f
+  end
+
+  def resize_factor
+    poster_image_original_dimensions.values.max / side_max_size
+  end
+
+  def poster_image_resized_dimensions
+    return poster_image_original_dimensions if poster_image_original_dimensions.values.max < side_max_size
+
+    {}.tap { |dimensions|
+      dimensions[:width] = (poster_image_original_dimensions[:width] / resize_factor).round
+      dimensions[:height] = (poster_image_original_dimensions[:height] / resize_factor).round
+    }
+  end
+
+  def set_poster_url
+    rpl = 'region/' << [crop_width, crop_height, crop_x, crop_y].map(&:to_f).map { |v| v * resize_factor }.map(&:round).join('/')
+    self.poster_url = poster_image_url.gsub /\d+-\d+/, rpl
+  end
+  private :set_poster_url
 
   # <<<<<<<<<<<< Wizard  <<<<<<<<<<<
 
