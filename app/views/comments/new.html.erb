@@ -4,7 +4,7 @@
     <%= render :partial => "commons/social_auth" %>
   <% end %>
   <% if current_user %>
-    <%= image_tag current_user.avatar, :class => 'avatar', :title => current_user.name %>
+    <%= image_tag current_user.avatar, :class => 'avatar', :title => current_user.name if current_user.avatar.present? %>
     <% if current_user.profile %>
       <%= link_to current_user.name, current_user.profile, :target => '_blank', :class => 'profile_link' %>
     <% else %>
