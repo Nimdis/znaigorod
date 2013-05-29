@@ -66,10 +66,7 @@
     border: 1px solid #cfb6dd
     float: left
     margin: 10px 0 0 0
-    width: 145px
-
-    &:hover
-      cursor: pointer
+    width: 115px
 
     .votes_wrapper
       +clearfix
@@ -93,7 +90,7 @@
       .votes_counter
         color: #fff
         height: 18px
-        left: 118px
+        left: 86px
         line-height: 18px
         margin: 0 -28px 0 0
         padding: 0
@@ -107,8 +104,24 @@
       .user_like
         float: left
 
+        &:hover
+          +background(image_url('public/counter_bg.png') no-repeat right center, linear-gradient(#b895ca, #9a68b3))
+          cursor: pointer
+
+          a
+            &:hover
+              color: #fff
+
         span
           display: none
+
+        .liked
+          +background(image_url('public/counter_bg.png') no-repeat right center, linear-gradient(#b895ca, #9a68b3))
+          color: #fff
+          width: 110px
+
+        .dont_liked
+          width: 110px
 
 .share_organization
   .votes_wrapper
@@ -151,7 +164,7 @@
   background: white !important
   max-height: 415px !important
   padding: 10px
-  width: 620px !important
+  width: 440px !important
 
   .liked
     +clearfix
@@ -159,12 +172,12 @@
     li
       float: left
       margin: 10px
-      width: 80px
+      width: 50px
 
       .user_item
         a, img
           display: block
-          width: 80px
+          width: 50px
 
       .name
         color: #0d92bb
@@ -172,4 +185,4 @@
         line-height: 16px
         margin: 10px 0 0 0
         text-align: center
-        width: 80px
+        width: 50px

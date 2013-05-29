@@ -3,7 +3,7 @@
   +border-radius(3px)
   +background-image(linear-gradient(#dfd1e8, #cfb7db))
   border: 1px solid #cfb6dd
-  width: 145px
+  width: 115px
 
   &:hover
     cursor: pointer
@@ -30,7 +30,7 @@
     .votes_counter
       color: #fff
       height: 18px
-      left: 118px
+      left: 86px
       line-height: 18px
       margin: 0 -28px 0 0
       padding: 0
@@ -44,8 +44,24 @@
     .user_like
       float: left
 
+      &:hover
+        +background(image_url('public/counter_bg.png') no-repeat right center, linear-gradient(#b895ca, #9a68b3))
+        cursor: pointer
+
+        a
+          &:hover
+            color: #fff
+
       span
         display: none
+
+      .liked
+        +background(image_url('public/counter_bg.png') no-repeat right center, linear-gradient(#b895ca, #9a68b3))
+        color: #fff
+        width: 110px
+
+      .dont_liked
+        width: 110px
 
 .content_wrapper
   .contest

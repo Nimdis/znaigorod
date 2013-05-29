@@ -4,12 +4,12 @@
       <li>
         <% if user.profile %>
           <div class='user_item'>
-            <%= link_to image_tag(user.avatar, :size => "80x80", :title => user.name), user.profile, target: '_blank' if user.avatar.present? %>
-            <%= link_to user.name, user.profile, :class => 'name' %>
+            <%= link_to image_tag(user.avatar, :size => "50x50", :title => user.name), user.profile, target: '_blank' if user.avatar.present? %>
+            <%= link_to truncate(user.name, :length => 15), user.profile, :class => 'name', :title => user.name %>
           </div>
         <% else %>
           <div class='user_item'>
-            <%= image_tag user.avatar, :size => "24x24", :title => user.name %>
+            <%= image_tag user.avatar, :size => "50x50", :title => user.name %>
             <span class='name'><%= user.name %></span>
           </div>
         <% end %>

@@ -6,7 +6,7 @@ init_dialog = () ->
     modal: true
     position: ['middle', 50]
     resizable: false
-    title: 'Участники'
+    title: 'Понравилось'
     width: 'auto'
 
 @init_votes = () ->

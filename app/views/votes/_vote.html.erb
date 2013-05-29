@@ -8,10 +8,18 @@
 <% if !voteable.is_a?(Comment) || current_user != voteable.user %>
   <div class="user_like">
     <% if current_user && current_user.liked?(voteable) %>
-      <span>Вам это нравится.</span> <%= link_to "Мне не нравится",
-                                    polymorphic_url([object_assoc_chain, :change_vote].flatten, :subdomain => request.subdomain), :method => :put, :remote => true %>
+      <span>Вам это нравится.</span>
+        <%= link_to 'Мне нравится',
+          polymorphic_url([object_assoc_chain, :change_vote].flatten, :subdomain => request.subdomain),
+          :method => :put,
+          :remote => true,
+          :class => 'liked' %>
     <% else %>
-      <%= link_to "Мне нравится", polymorphic_url([object_assoc_chain, :change_vote].flatten), :method => :put, :remote => true %>
+      <%= link_to 'Мне нравится',
+        polymorphic_url([object_assoc_chain, :change_vote].flatten),
+        :method => :put,
+        :remote => true,
+        :class => 'dont_liked' %>
     <% end %>
   </div>
   <% if @vote && @vote.errors.any? %>
