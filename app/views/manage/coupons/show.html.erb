@@ -20,7 +20,7 @@
     <span class="value">
       <% if resource.categories.many? %>
         <%= resource.categories.map(&:text).join(', ') %>
-      <% else %>
+      <% elsif resource.categories.any? %>
         <%= resource.categories.first.text %>
       <% end %>
     </span>

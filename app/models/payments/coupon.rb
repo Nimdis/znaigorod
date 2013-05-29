@@ -57,8 +57,6 @@ class Coupon < ActiveRecord::Base
   def set_discount
     if self.price_without_discount? & self.price_with_discount?
       self.discount = ((self.price_without_discount - self.price_with_discount) * 100 / price_without_discount).round
-    else
-      self.discount = nil
     end
   end
 

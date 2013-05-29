@@ -119,7 +119,7 @@ ru:
         complete_at: Срок действия до
         number: Количество
         description: Описание
-        discount: Скидка
+        discount: Скидка, %
         image: Изображение
         kind: Тип
         organization_id: Организация
