@@ -29,7 +29,7 @@
         <div class='info'>
           <div class='left_part'>
             <div class='image'>
-              <%= image_tag_for @coupon.image_url, 160, 200 if @coupon.image_url? %>
+              <%= link_to image_tag_for(@coupon.image_url, 160, 200), @coupon.image_url if @coupon.image_url? %>
             </div>
 
           </div>
