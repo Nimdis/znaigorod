@@ -17,6 +17,13 @@ init_dialog = () ->
         $(event.target).html(jqXHR.responseText)
     ).dialog('open')
 
+  init_dialog() unless $('.liked_box').length
+  $('.like_box a').on 'ajax:success', (evt, response, status, jqXHR) ->
+    $('.liked_box').dialog(
+      open: (event, ui) ->
+        $(event.target).html(jqXHR.responseText)
+    ).dialog('open')
+
   init_visitors()
   links = $('.votes_wrapper .user_like a').not('.charged')
   link = links.addClass('charged').on 'ajax:success', (evt, response, status, jqXHR) ->
