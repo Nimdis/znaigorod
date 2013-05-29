@@ -12,3 +12,7 @@
       crop_y = $('[id*="crop_y"]').val(coords.y)
       crop_width = $('[id*="crop_width"]').val(coords.w)
       crop_height = $('[id*="crop_height"]').val(coords.h)
+
+
+  $('#affiche_poster_image').on 'change', ->
+    $(this).parents('form').trigger 'submit'

@@ -44,6 +44,8 @@ class My::AffichesController < My::ApplicationController
   end
 
   def next_step
+    return @step if @affiche.second_step? && !@affiche.set_region?
+
     Affiche.steps[Affiche.steps.index(current_step) + 1] || Affiche.steps.last
   end
 end

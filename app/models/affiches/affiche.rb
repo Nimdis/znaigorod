@@ -58,15 +58,19 @@ class Affiche < ActiveRecord::Base
 
   # >>>>>>>>>>>> Wizard  >>>>>>>>>>>>
 
-  attr_accessor :step, :crop_x, :crop_y, :crop_width, :crop_height
-  attr_accessible :poster_image, :step, :crop_x, :crop_y, :crop_width, :crop_height
+  attr_accessor :step, :set_region, :crop_x, :crop_y, :crop_width, :crop_height
+  attr_accessible :poster_image, :step, :set_region, :crop_x, :crop_y, :crop_width, :crop_height
 
   def self.steps
-    %w[first second third fourth]
+    %w[first second third]
   end
 
   steps.each do |step|
     define_method("#{step}_step?") { self.step == step }
+  end
+
+  def set_region?
+    set_region.present?
   end
 
   has_attached_file :poster_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
@@ -75,11 +79,11 @@ class Affiche < ActiveRecord::Base
 
   validates_attachment :poster_image, :presence => true, :content_type => {
     :content_type => ['image/jpeg', 'image/jpg', 'image/png'],
-    :message => 'Изображение должно быть в формате jpeg, jpg или png' },                :if => [:draft?, :second_step?]
+    :message => 'Изображение должно быть в формате jpeg, jpg или png' },                :if => [:draft?, :second_step?], :unless => :set_region?
 
-  validates :poster_image, :dimensions => { :width_min => 300, :height_min => 300 },    :if => [:draft?, :second_step?]
+  validates :poster_image, :dimensions => { :width_min => 300, :height_min => 300 },    :if => [:draft?, :second_step?], :unless => :set_region?
 
-  before_save :set_poster_url, :if => [:draft?, :third_step?]
+  after_validation :set_poster_url, :if => [:draft?, :set_region?]
 
   def poster_image_original_dimensions
     @poster_image_original_dimensions ||= {}.tap { |dimensions|
@@ -93,7 +97,9 @@ class Affiche < ActiveRecord::Base
   end
 
   def resize_factor
-    poster_image_original_dimensions.values.max / side_max_size
+    @resize_factor = poster_image_original_dimensions.values.max / side_max_size
+
+    (@resize_factor < 1) ? 1.0 : @resize_factor
   end
 
   def poster_image_resized_dimensions
