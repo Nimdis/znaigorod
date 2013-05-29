@@ -2,6 +2,7 @@
   init_affiche_preview_title() if $('#affiche_title').length
   init_affiche_preview_description() if $('#affiche_description').length
   init_affiche_preview_tag() if $('#affiche_tag').length
+
   true
 
 init_affiche_preview_title = ->
@@ -14,6 +15,7 @@ init_affiche_preview_title = ->
     , 1
     true
   $('#affiche_title').keyup()
+
   true
 
 init_affiche_preview_description = ->
@@ -30,6 +32,7 @@ init_affiche_preview_description = ->
     , 1
     true
   $('#affiche_description').keyup()
+
   true
 
 init_affiche_preview_tag = ->
@@ -42,7 +45,6 @@ init_affiche_preview_tag = ->
       delay: 0
       minLength: 1
       source: "#{$('#affiche_tag').closest('form').attr('action')}/available_tags"
-  true
   $('#affiche_tag').change ->
     if $(this).val().length
       $('.my_affiche_wrapper .affiche_preview .tags').html("Теги: #{$(this).val()}")
@@ -50,3 +52,5 @@ init_affiche_preview_tag = ->
       $('.my_affiche_wrapper .affiche_preview .tags').html('')
     true
   $('#affiche_tag').change()
+
+  true

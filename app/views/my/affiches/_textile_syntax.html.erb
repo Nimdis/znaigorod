@@ -1,0 +1,247 @@
+<div class='textile_syntax'>
+  <h1>Синтаксис Textile</h1>
+  <p>Textile автоматически преобразует текст в разметку, отслеживая абзацы в тексте. Абзацы, отделяемые пустой строкой, преобразуются в элементы HTML &lt;p&gt;.</p>
+  <p>Переводы строк автоматически преобразуются в элементы HTML &lt;br /&gt;.</p>
+
+  <h2>Строковые элементы</h2>
+  <table class="standard" width="100%">
+    <tr>
+      <th width="30%">Textile</th>
+      <th width="30%">HTML</th>
+      <th width="40%">Отображение</th>
+    </tr>
+    <tr>
+      <td>_выделение_</td>
+      <td>&lt;em&gt;выделение&lt;/em&gt;</td>
+      <td>Это <i>выделенный</i> текст</td>
+    </tr>
+    <tr>
+      <td>*усиление*</td>
+      <td>&lt;strong&gt;усиление&lt;/strong&gt;</td>
+      <td>Это <b>усиленный</b> текст</td>
+    </tr>
+    <tr>
+      <td>__курсив__</td>
+      <td>&lt;i&gt;курсив&lt;/i&gt;</td>
+      <td>Это <i>курсивный</i> текст</td>
+    </tr>
+    <tr>
+      <td>**полужирный**</td>
+      <td>&lt;b&gt;полужирный&lt;/b&gt;</td>
+      <td>Это <b>полужирный</b> текст</td>
+    </tr>
+    <tr>
+      <td>&#160;??цитата??</td>
+      <td>&lt;cite&gt;цитата&lt;/cite&gt;</td>
+      <td>Это <cite>цитата</cite></td>
+    </tr>
+    <tr>
+      <td>-удалённый текст-</td>
+      <td>&lt;del&gt;удалённый текст&lt;/del&gt;</td>
+      <td>Это <del>удалённый</del> текст</td>
+    </tr>
+    <tr>
+      <td>+вставленный текст+</td>
+      <td>&lt;ins&gt;вставленный текст&lt;/ins&gt;</td>
+      <td>Это <ins>вставленный</ins> текст</td>
+    </tr>
+    <tr>
+      <td>^надстрочный^</td>
+      <td>&lt;sup&gt;надстрочный&lt;/sup&gt;</td>
+      <td>Это <sup>надстрочный</sup> текст</td>
+    </tr>
+    <tr>
+      <td>~подстрочный~</td>
+      <td>&lt;sub&gt;подстрочный&lt;/sub&gt;</td>
+      <td>Это <sub>подстрочный</sub> текст</td>
+    </tr>
+    <tr>
+      <td>&#160;%{стиль}фрагмент%</td>
+      <td>&lt;span style="стиль"&gt;фрагмент&lt;/span&gt;</td>
+      <td>Это <span style="color:red;">фрагмент</span> текста</td>
+    </tr>
+    <tr>
+      <td>@код@</td>
+      <td>&lt;code&gt;код&lt;/code&gt;</td>
+      <td>Это код: <code>function code(str)</code></td>
+    </tr>
+  </table>
+
+  <h2>Блочные элементы</h2>
+  <p>Модификаторы блочных элементов обычно заканчиваются точкой и отделяются от содержимого пробелом.</p>
+  <table class="standard" width="100%">
+    <tr>
+      <th width="30%">Textile</th>
+      <th width="30%">HTML</th>
+      <th width="40%">Описание</th>
+    </tr>
+    <tr>
+      <td>h<i>n</i>.</td>
+      <td>&lt;h<i>n</i>&gt;</td>
+      <td>Заголовок уровня <i>n</i></td>
+    </tr>
+    <tr>
+      <td>p.</td>
+      <td>&lt;p&gt;</td>
+      <td>Абзац</td>
+    </tr>
+    <tr>
+      <td>bq.</td>
+      <td>&lt;blockquote&gt;</td>
+      <td>Блочная цитата</td>
+    </tr>
+    <tr>
+      <td>pre.</td>
+      <td>&lt;pre&gt;</td>
+      <td>Форматированный код</td>
+    </tr>
+    <tr>
+      <td>bc.</td>
+      <td>&lt;pre&gt;&lt;code&gt;</td>
+      <td>Программный код (комбинация из двух HTML-элементов)</td>
+    </tr>
+  </table>
+
+  <h2>Ссылки</h2>
+  <p>Текст ссылки заключается в кавычки и отделяется от URL двоеточием:</p>
+  <table class="standard" width="100%">
+    <tr>
+      <th width="30%">Textile</th>
+      <th width="70%">HTML</th>
+    </tr>
+    <tr>
+      <td>"Textile":http://textile.thresholdstate.com/</td>
+      <td>&lt;a href="http://textile.thresholdstate.com/"&gt;Textile&lt;/a&gt;</td>
+    </tr>
+  </table>
+
+  <h2>Пунктуация и подстановки</h2>
+  <p>Автоматически исправляются при конвертировании в XHTML следующие сочетания знаков:</p>
+  <table class="standard" width="100%">
+    <tr>
+      <th width="30%">Textile</th>
+      <th width="30%">HTML</th>
+      <th width="40%">Отображение</th>
+    </tr>
+    <tr>
+      <td>"кавычки"</td>
+      <td>&amp;#8220;кавычки&amp;#8221;</td>
+      <td>“кавычки”</td>
+    </tr>
+    <tr>
+      <td>'кавычки'</td>
+      <td>&amp;#8216;кавычки&amp;#8217;</td>
+      <td>‘кавычки’</td>
+    </tr>
+    <tr>
+      <td>длинное&#160;-- тире</td>
+      <td>длинное&amp;#8212;тире</td>
+      <td>длинное—тире</td>
+    </tr>
+    <tr>
+      <td>короткое&#160;- тире</td>
+      <td>короткое &amp;#8211; тире</td>
+      <td>короткое – тире</td>
+    </tr>
+    <tr>
+      <td>д'Орсе</td>
+      <td>д&amp;#8216;Орсе</td>
+      <td>д’Орсе</td>
+    </tr>
+    <tr>
+      <td>многоточие...</td>
+      <td>многоточие&amp;#8230;</td>
+      <td>многоточие…</td>
+    </tr>
+    <tr>
+      <td>2 x 2 = 4</td>
+      <td>2&amp;#215;2 = 4</td>
+      <td>2×2 = 4</td>
+    </tr>
+    <tr>
+      <td>(c) Dean Allen</td>
+      <td>&amp;#169; Dean Allen</td>
+      <td>© Dean Allen</td>
+    </tr>
+    <tr>
+      <td>Textile(r)</td>
+      <td>Textile&amp;#174;</td>
+      <td>Textile®</td>
+    </tr>
+    <tr>
+      <td>Textpattern(tm)</td>
+      <td>Textpattern&amp;#8482;</td>
+      <td>Textpattern™</td>
+    </tr>
+  </table>
+
+  <h2>Таблицы</h2>
+  <p>Таблицы создаются разделением ячеек вертикальной чертой (ячейки заголовков выделяются подчёркиванием):</p>
+<pre>
+|_. заголовок 1|_. заголовок 2|_. заголовок 3|
+|первый|ряд|таблицы|
+|второй|ряд|таблицы|
+</pre>
+  <p>Объединение ячеек производится следующим образом:</p>
+  <table class="standard" width="100%">
+    <tr>
+      <th width="30%">Textile</th>
+      <th width="70%">HTML</th>
+    </tr>
+    <tr>
+      <td>|\2. Две колонки|таблицы|</td>
+      <td>&lt;tr&gt;&lt;td colspan="2"&gt;Две колонки&lt;/td&gt;&lt;td&gt;таблицы&lt;/td&gt;&lt;/tr&gt;</td>
+    </tr>
+    <tr valign="top">
+      <td>|/2. Две строки|таблицы|</td>
+      <td>&lt;tr&gt;&lt;td rowspan="2"&gt;Две строки&lt;/td&gt;&lt;td&gt;таблицы&lt;/td&gt;&lt;/tr&gt;</td>
+    </tr>
+  </table>
+
+  <h2>Списки</h2>
+  <p>Textile поддерживает как маркированные, так и нумерованные списки. Списки могут быть вложенными, один тип списка может быть вложен в другой. Уровень вложения списков не ограничен.</p>
+  <table class="standard" width="100%">
+    <tr>
+      <th width="30%">Textile</th>
+      <th width="70%">HTML</th>
+    </tr>
+    <tr valign="top">
+      <td>* Маркированный список</td>
+      <td>&lt;ul&gt;<br />
+        &lt;li&gt;Маркированный список&lt;/li&gt;<br />
+        &lt;/ul&gt;</td>
+    </tr>
+    <tr valign="top">
+      <td># Нумерованный список</td>
+      <td>&lt;ol&gt;<br />
+        &lt;li&gt;Нумерованный список&lt;/li&gt;<br />
+        &lt;/ol&gt;</td>
+    </tr>
+    <tr valign="top">
+      <td>
+<pre>
+* Пункт 1
+** Подпункт 1-1
+** Подпункт 1-2
+* Пункт 2
+## Подпункт 2-1
+## Подпункт 2-2
+</pre>
+      </td>
+      <td class="pre">
+        &lt;ul&gt;<br />
+        &lt;li&gt;Пункт 1<br />
+        &lt;ul&gt;<br />
+        &lt;li&gt;Подпункт 1-1&lt;/li&gt;<br />
+        &lt;li&gt;Подпункт 1-2&lt;/li&gt;<br />
+        &lt;/ul&gt;&lt;/li&gt;<br />
+        &lt;li&gt;Пункт 2<br />
+        &lt;ol&gt;<br />
+        &lt;li&gt;Подпункт 2-1&lt;/li&gt;<br />
+        &lt;li&gt;Подпункт 2-2&lt;/li&gt;<br />
+        &lt;/ol&gt;&lt;/li&gt;<br />
+        &lt;/ul&gt;
+      </td>
+    </tr>
+  </table>
+</div>
