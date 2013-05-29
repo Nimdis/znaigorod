@@ -81,7 +81,6 @@ $(window).load ->
   init_menus() if $('.menus')
 
   init_move_to_top() if $('a.move_to_top').length
-
   init_crop()
 
   true

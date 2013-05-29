@@ -3,6 +3,8 @@ class My::AffichesController < My::ApplicationController
 
   before_filter :current_step
 
+  custom_actions :resource => :destroy_image
+
   def create
     if Affiche.descendants.map(&:name).map(&:underscore).include?(params[:type])
       @affiche = params[:type].classify.constantize.new
@@ -31,6 +33,13 @@ class My::AffichesController < My::ApplicationController
     query = params[:term]
     result = Affiche.pluck(:tag).compact.flat_map { |str| str.split(',') }.compact.map(&:squish).uniq.delete_if(&:blank?).select { |str| str =~ /^#{query}/ }.sort
     render text: result
+  end
+
+  def destroy_image
+    @affiche.poster_url = nil
+    @affiche.poster_image.destroy
+    @affiche.save
+    redirect_to edit_step_my_affiche_path(@affiche.id, :step => :second)
   end
 
   private

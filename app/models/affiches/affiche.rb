@@ -115,6 +115,7 @@ class Affiche < ActiveRecord::Base
     rpl = 'region/' << [crop_width, crop_height, crop_x, crop_y].map(&:to_f).map { |v| v * resize_factor }.map(&:round).join('/')
     self.poster_url = poster_image_url.gsub /\d+-\d+/, rpl
   end
+
   private :set_poster_url
 
   # <<<<<<<<<<<< Wizard  <<<<<<<<<<<
