@@ -1,10 +1,9 @@
 <ul class='breadcrumbs'>
-  <% if defined?(index) %>
     <li class='crumb'><%= link_to 'ЗнайГород', root_path %></li>
     <li class='separator'><span>&nbsp;</span></li>
     <li class='crumb'><%= link_to 'Все обзоры', posts_path %></li>
-  <% elsif defined?(show) %>
+  <% if defined?(show) %>
     <li class='separator'><span>&nbsp;</span></li>
     <li class='crumb'><%= link_to @post.title, @post %></li>
-<% end %>
+  <% end %>
 </ul>
