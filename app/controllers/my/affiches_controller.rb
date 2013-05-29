@@ -29,7 +29,7 @@ class My::AffichesController < My::ApplicationController
 
   def available_tags
     query = params[:term]
-    result = Affiche.pluck(:tag).flat_map { |str| str.split(',') }.map(&:squish).uniq.delete_if(&:blank?).select { |str| str =~ /^#{query}/ }.sort
+    result = Affiche.pluck(:tag).compact.flat_map { |str| str.split(',') }.compact.map(&:squish).uniq.delete_if(&:blank?).select { |str| str =~ /^#{query}/ }.sort
     render text: result
   end
 
