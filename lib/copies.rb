@@ -5,6 +5,9 @@ module Copies
     has_many :copy_payments, :as => :paymentable
     has_many :copies, :as => :copyable, dependent: :destroy
 
+    accepts_nested_attributes_for :copies
+    attr_accessible :copies_attributes
+
     delegate :count, :for_sale, :reserved, :sold, to: :copies, prefix: true
 
     after_create :create_copies

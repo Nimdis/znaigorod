@@ -1,0 +1,31 @@
+<h1>Редактирование билета</h1>
+
+<%= simple_nested_form_for [:manage, @ticket] do |f| %>
+  <%= f.input :original_price %>
+  <%= f.input :price %>
+  <%= f.input :description %>
+  <%= f.input :stale_at, :as => :date_picker %>
+
+  <h5>Места</h5>
+  <table>
+    <thead>
+      <tr>
+        <th>Код</th>
+        <th>Ряд</th>
+        <th>Место</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= f.fields_for :copies, :wrapper => false do |copy_form| %>
+        <tr>
+          <td><%= copy_form.object.code %></td>
+          <td><%= copy_form.input :row, :label => false %></td>
+          <td><%= copy_form.input :seat, :label => false %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= f.submit 'Сохранить' %>
+<% end %>
+

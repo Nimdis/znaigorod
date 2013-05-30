@@ -13,7 +13,10 @@
         <% items.each do |item| %>
           <li>
             <% if item.class.name.underscore == "ticket"  %>
-              <p><%= link_to item.affiche.title, manage_affiche_path(item.affiche) %></p>
+              <p>
+                <%= link_to item.affiche.title, manage_affiche_path(item.affiche) %>
+                <%= link_to 'Редактировать', edit_manage_ticket_path(item) %>
+              </p>
 
               <div class="poster">
                 <%= link_to image_tag_for(item.affiche.poster_url, 70, 100), manage_affiche_path(item.affiche) %>
@@ -40,6 +43,9 @@
                     <td class='code'><%= copy.code %></td>
                     <td class='phone'><%= copy.copy_payment ? copy.copy_payment.phone : '' %></td>
                     <td class='state'><%= copy.state_text %></td>
+                    <% if copy.row? %>
+                      <td><%= "#{copy.row} ряд #{copy.seat} место" %></td>
+                    <% end %>
                   </tr>
                 <% end %>
               </table>

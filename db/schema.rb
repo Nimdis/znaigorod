@@ -188,6 +188,8 @@ ActiveRecord::Schema.define(:version => 20130530041522) do
     t.integer  "copy_payment_id"
     t.integer  "copyable_id"
     t.string   "copyable_type"
+    t.integer  "row"
+    t.integer  "seat"
   end
 
   add_index "copies", ["copy_payment_id"], :name => "index_tickets_on_payment_id"

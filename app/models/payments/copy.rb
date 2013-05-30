@@ -3,7 +3,7 @@
 class Copy < ActiveRecord::Base
   extend Enumerize
 
-  attr_accessible :code, :state
+  attr_accessible :code, :state, :row, :seat
 
   belongs_to :copyable, :polymorphic => true
   belongs_to :copy_payment
