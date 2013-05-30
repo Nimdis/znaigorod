@@ -6,11 +6,13 @@ class Coupon < ActiveRecord::Base
   attr_accessible :description, :discount, :title, :organization_id, :price_with_discount,
                   :price_without_discount, :price, :organization_quota,
                   :kind, :image, :delete_image, :place, :vfs_path,
-                  :number, :stale_at, :complete_at, :categories
+                  :number, :stale_at, :complete_at, :categories, :affiliate_url
 
   attr_accessor :delete_image
 
-  scope :ordered, order('created_at DESC') 
+  scope :ordered, -> { order('created_at DESC') }
+  scope :affiliated, -> { where('affiliate_url IS NOT NULL') }
+
   has_attached_file :image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
 
   delegate :clear, :to => :image, :allow_nil => true, :prefix => true
@@ -27,7 +29,7 @@ class Coupon < ActiveRecord::Base
   serialize :categories, Array
   enumerize :categories, in: Organization.available_suborganization_kinds.map(&:to_sym), multiple: true
 
-  validates_presence_of :categories, :image, :kind, :number, :place, :stale_at
+  validates_presence_of :categories, :image, :kind, :place, :stale_at
 
   def self.generate_vfs_path
     "/znaigorod/coupons/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}"
@@ -60,6 +62,9 @@ class Coupon < ActiveRecord::Base
     end
   end
 
+  def create_copies
+    super unless affiliate_url?
+  end
 end
 
 # == Schema Information

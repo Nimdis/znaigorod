@@ -95,17 +95,30 @@
     <% end %>
   </div>
 
-  <div class="details">
-    <p><span class='label'>Коды:</span> <%= resource.copies.map(&:code).join(', ') %></p>
-    <table class='tickets'>
-      <% resource.copies.each do |copy| %>
-        <tr>
-        <td class='code'><%= copy.code %></td>
-        <td class='phone'><%= copy.copy_payment ? copy.copy_payment.phone : '' %></td>
-        <td class='state'><%= copy.state_text %></td>
-      </tr>
+  <div>
+    <span class="label">Партнерская ссылка:</span>
+    <% if resource.affiliate_url? %>
+      <span class="value"><%= link_to 'Ссылка на сторонний ресурс', resource.affiliate_url %></span>
+    <% else %>
+      <span class="blank">Нет</span>
     <% end %>
-    </table>
+  </div>
+
+  <div class="details">
+    <p><span class='label'>Коды:</span></p>
+    <% if resource.copies.any? %>
+      <table class='tickets'>
+        <% resource.copies.each do |copy| %>
+          <tr>
+            <td class='code'><%= copy.code %></td>
+            <td class='phone'><%= copy.copy_payment ? copy.copy_payment.phone : '' %></td>
+            <td class='state'><%= copy.state_text %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <span class="blank">Нет</span>
+    <% end %>
   </div>
 
 </div>

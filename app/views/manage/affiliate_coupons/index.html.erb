@@ -1,0 +1,19 @@
+<h3>Сторонние сертификаты и купоны</h3>
+<div class="new_link">
+  <%= link_to t('new_coupon'), new_manage_coupon_path(), :class => 'new_resource' %>
+</div>
+<ul class='manage'>
+  <% @coupons.each do |coupon| %>
+    <li>
+      <p><%= link_to coupon.title, manage_coupon_path(coupon) %></p>
+
+      <div class='poster'>
+        <%= link_to image_tag_for(coupon.image_url, 70, 100), manage_coupon_path(coupon) %>
+      </div>
+
+      <div class="details">
+        <p>Ссылка: <%= link_to coupon.affiliate_url %></p>
+      </div>
+    </li>
+  <% end %>
+</ul>

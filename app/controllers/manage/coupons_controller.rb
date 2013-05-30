@@ -1,6 +1,4 @@
 class Manage::CouponsController < Manage::ApplicationController
-  actions :all
-
   def index
     @state = state = params[:state].present? ? params[:state] : nil
     page = params[:page].to_i.zero? ? 1 : params[:page]
