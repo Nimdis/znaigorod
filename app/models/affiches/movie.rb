@@ -42,5 +42,10 @@ end
 #  age_max                   :float
 #  total_rating              :float
 #  state                     :string(255)
+#  poster_image_file_name    :string(255)
+#  poster_image_content_type :string(255)
+#  poster_image_file_size    :integer
+#  poster_image_updated_at   :datetime
+#  poster_image_url          :text
 #
 

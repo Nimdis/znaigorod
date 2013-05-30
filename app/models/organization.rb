@@ -68,8 +68,8 @@ class Organization < ActiveRecord::Base
 
   has_many :affiches,       :through => :showings, :uniq => true
   has_many :halls,          :dependent => :destroy
-  has_many :images,         :as => :imageable,  :dependent => :destroy
-  has_many :attachments,    :as => :attachable, :dependent => :destroy
+  has_many :gallery_images, :as => :attachable, :dependent => :destroy
+  has_many :gallery_files,  :as => :attachable, :dependent => :destroy
   has_many :organizations
   has_many :schedules,      :dependent => :destroy
   has_many :sauna_halls,    :through => :sauna
@@ -105,9 +105,9 @@ class Organization < ActiveRecord::Base
   validates :phone, :phone => true, :if => :phone?
 
   accepts_nested_attributes_for :address,             :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :attachments,         :reject_if => :all_blank, :allow_destroy => true
+  #accepts_nested_attributes_for :attachments,         :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :halls,               :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :images,              :reject_if => :all_blank, :allow_destroy => true
+  #accepts_nested_attributes_for :images,              :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :organization_stand,  :reject_if => :all_blank
   accepts_nested_attributes_for :schedules,           :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :social_links,        :reject_if => :all_blank, :allow_destroy => true

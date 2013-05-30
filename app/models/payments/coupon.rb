@@ -93,5 +93,6 @@ end
 #  number                 :integer
 #  stale_at               :datetime
 #  complete_at            :datetime
+#  categories             :text
 #
 

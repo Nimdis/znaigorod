@@ -99,10 +99,18 @@ ActiveRecord::Schema.define(:version => 20130530091259) do
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
     t.string   "attachable_type"
-    t.string   "url"
     t.text     "description"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "type"
+    t.text     "thumbnail_url"
+    t.integer  "height"
+    t.integer  "width"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.text     "file_url"
   end
 
   create_table "car_sales_centers", :force => true do |t|

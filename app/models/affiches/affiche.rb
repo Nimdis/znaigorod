@@ -16,8 +16,9 @@ class Affiche < ActiveRecord::Base
                   :original_title, :trailer_code, :vk_aid, :yandex_fotki_url, :constant,
                   :age_min, :age_max
 
-  has_many :images,      :as => :imageable, :dependent => :destroy
-  has_many :attachments, :as => :attachable, :dependent => :destroy
+  has_many :gallery_images, :as => :attachable, :dependent => :destroy
+  has_many :gallery_files,  :as => :attachable, :dependent => :destroy
+
   has_many :showings, :dependent => :destroy, :order => :starts_at
 
   has_many :organizations, :through => :showings, :uniq => true
@@ -33,8 +34,8 @@ class Affiche < ActiveRecord::Base
   validates_presence_of :title, :description, :poster_url, :if => :published?
 
   accepts_nested_attributes_for :affiche_schedule, :allow_destroy => true, :reject_if => :affiche_schedule_attributes_blank?
-  accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => :all_blank
-  accepts_nested_attributes_for :attachments, :allow_destroy => true, :reject_if => :all_blank
+  #accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => :all_blank
+  #accepts_nested_attributes_for :attachments, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :showings, :allow_destroy => true
 
   default_scope order('affiches.id DESC')
@@ -355,5 +356,10 @@ end
 #  age_max                   :float
 #  total_rating              :float
 #  state                     :string(255)
+#  poster_image_file_name    :string(255)
+#  poster_image_content_type :string(255)
+#  poster_image_file_size    :integer
+#  poster_image_updated_at   :datetime
+#  poster_image_url          :text
 #
 
