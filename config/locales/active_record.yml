@@ -402,6 +402,7 @@ ru:
         number:         Количество
         original_price: Цена заведения
         price:          Цена со скидкой
+        organization_price: Сколько заплатит заведению
         description:    Описание
         stale_at:       Актуально до
 

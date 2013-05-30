@@ -1,7 +1,7 @@
 class Ticket < ActiveRecord::Base
   include Copies
 
-  attr_accessible :number, :original_price, :price, :description, :stale_at
+  attr_accessible :number, :original_price, :price, :description, :stale_at, :organization_price
 
   belongs_to :affiche
 
@@ -20,7 +20,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def discount
-    ((original_price - price) * 100 / original_price).round
+    ((original_price - (organization_price.to_f + price)) * 100 / original_price).round
   end
 end
 

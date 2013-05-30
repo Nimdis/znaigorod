@@ -3,6 +3,7 @@
 <%= simple_nested_form_for [:manage, @ticket] do |f| %>
   <%= f.input :original_price %>
   <%= f.input :price %>
+  <%= f.input :organization_price %>
   <%= f.input :description %>
   <%= f.input :stale_at, :as => :date_picker %>
 
