@@ -35,10 +35,22 @@
     true
 
   $('.payment_form_wrapper form').live 'submit', ->
-    return false unless $('.payment_form_wrapper #payment_phone').inputmask('isComplete')
+    return false unless $('.payment_form_wrapper #copy_payment_phone').inputmask('isComplete') && $('.payment_form_wrapper .copies_with_seats input:checked').length
+    true
 
   $('.payment_form_wrapper #copy_payment_phone').live 'keyup', ->
+    return false if $('.payment_form_wrapper .copies_with_seats input').length && !$('.payment_form_wrapper .copies_with_seats input:checked').length
     if $(this).inputmask 'isComplete'
+      $('input[type=submit]', $(this).closest('form')).removeAttr('disabled').removeClass('disabled')
+    else
+      $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
+    true
+
+  $('.payment_form_wrapper .copies_with_seats input').live 'change', ->
+    unless $('.payment_form_wrapper .copies_with_seats input:checked').length
+      $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
+      return false
+    if $('.payment_form_wrapper #copy_payment_phone').inputmask 'isComplete'
       $('input[type=submit]', $(this).closest('form')).removeAttr('disabled').removeClass('disabled')
     else
       $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
