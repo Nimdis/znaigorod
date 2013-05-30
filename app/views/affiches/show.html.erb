@@ -150,7 +150,7 @@
                         <p class='address'><%= showings.first.place_decorator.address_link %></p>
                       </li>
                       <% showings.each_with_index do |showing, index| %>
-                        <li class='seance<%= ' break' if index > 0 && index % 7 == 0 %>'>
+                        <li class='seance<%= ' break' if index > 0 && index % 9 == 0 %>'>
                           <%= content_tag :p, showing.human_time_starts_at, :class => 'time' unless showing.human_time_starts_at.blank? %>
                           <%= content_tag :p, showing.human_price, :class => 'price' unless showing.human_price.blank? %>
                         </li>
