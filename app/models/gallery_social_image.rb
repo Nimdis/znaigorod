@@ -1,0 +1,3 @@
+class GallerySocialImage < Attachment
+
+end
