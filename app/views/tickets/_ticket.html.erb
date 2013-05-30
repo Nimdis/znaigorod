@@ -11,8 +11,8 @@
   <div class='ticket_description_and_tickets'>
     <p class='ticket_description'><%= @ticket.description.gilensize %></p>
     <% if @ticket.organization_price %>
-      <p>
-        Покажи код, полученный по SMS и заплатите всего  <span class='ticket_price'><%=@ticket.organization_price.to_i  %> р.</span> в кассе заведения. Кроме того, ты можешь быть уверен, что билет на выбранное место будет забронирован за тобой.
+      <p class='ticket_reservation'>
+        Покажи код, полученный по SMS и <span class='ticket_price'>заплати всего <%= t('ticket_price', count: @ticket.organization_price.to_i) %> </span> в кассе заведения. Кроме того, ты можешь быть уверен, что билет на выбранное место будет забронирован за тобой.
       </p>
     <% end %>
     <p class='ticket_for_sale'><%= t 'copy.for_sale', count: @ticket.copies_for_sale.count %></p>

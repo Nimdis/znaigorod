@@ -1,4 +1,10 @@
 ru:
+  ticket_price:
+    one: "%{count} рубль"
+    few: "%{count} рубля"
+    many: "%{count} рублей"
+    other: "%{count} рубля"
+
   sms_claim:
     billiard:
       link_title: Забронировать биллиард
