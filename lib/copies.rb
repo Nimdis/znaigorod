@@ -20,6 +20,10 @@ module Copies
     scope :by_state,  ->(state) { ordered.joins(:copies).where('copies.state = ?', state).uniq }
   end
 
+  def copies_with_seats?
+    copies.first.row?
+  end
+
   private
 
   def create_copies

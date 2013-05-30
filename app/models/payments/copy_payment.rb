@@ -9,12 +9,22 @@ class CopyPayment < Payment
 
   has_many :copies, after_add: :reserve_copy
 
-  validates :number, :presence => true, :numericality => { :greater_than => 0 }
+  validates :number, :presence => true, :numericality => { :greater_than => 0 }, :unless => :copies_with_seats?
   validates :phone, :presence => true, :format => { :with => /\+7-\(\d{3}\)-\d{3}-\d{4}/ }
 
   before_validation :check_copies_number
   before_create :set_amount
   after_create :reserve_copies
+
+  attr_accessor :copy_for_sale_ids, :copies_with_seats
+  attr_accessible :copy_for_sale_ids, :copies_with_seats
+  def copy_for_sale_ids
+    (@copy_for_sale_ids ||= []).delete_if(&:blank?).map(&:to_i)
+  end
+
+  def copies_with_seats?
+    copies_with_seats.present?
+  end
 
   def approve!
     super
@@ -34,7 +44,7 @@ class CopyPayment < Payment
   end
 
   def set_amount
-    self.amount = paymentable.price * number
+    self.amount = paymentable.price * (number || copy_for_sale_ids.count)
   end
 
   def reserve_copies

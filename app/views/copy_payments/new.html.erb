@@ -1,7 +1,29 @@
 <%= render parent %>
+
+--------------------------
+<%= @copy_payment.errors.inspect %>
+-------------------------
+
 <%= simple_form_for [parent, @copy_payment] do |f| %>
-  <%= f.input :number, label: 'Количество', as: :select, collection: 1..parent.copies_for_sale.count, include_blank: false, require: false %>
+  <% if parent.copies_with_seats? %>
+    <div>
+      <%= f.input :copies_with_seats, :as => :hidden, :input_html => { :value => true } %>
+      <p>Выберите места</p>
+      <ul>
+        <% parent.copies_for_sale.each do |copy| %>
+          <li>
+            <%= check_box_tag 'copy_payment[copy_for_sale_ids][]', copy.id, @copy_payment.copy_for_sale_ids.include?(copy.id), :id => "copy_#{copy.id}" %>
+            <%= label_tag "copy_#{copy.id}", "#{copy.row} ряд #{copy.seat} место" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <%= f.input :number, label: 'Количество', as: :select, collection: 1..parent.copies_for_sale.count, include_blank: false, require: false %>
+  <% end %>
+
   <%= f.input :phone, label: 'Введите номер мобильного телефона', require: false %>
+
   <div class='submit'>
     <%= f.submit 'Купить' %>
   </div>
