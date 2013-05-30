@@ -1,5 +1,5 @@
 class Manage::TicketsController < Manage::ApplicationController
-  actions :new, :create, :edit, :update
+  actions :new, :create, :edit, :update, :destroy
 
   belongs_to :affiche, optional: true
 

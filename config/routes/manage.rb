@@ -67,7 +67,7 @@ Znaigorod::Application.routes.draw do
       end
     end
 
-    resources :tickets, only: [:index, :edit, :update] do
+    resources :tickets, only: [:index, :edit, :update, :destroy] do
       get ':by_state' => 'tickets#index', :on => :collection, :as => :with_state
     end
 

@@ -27,5 +27,6 @@
   </table>
 
   <%= f.submit 'Сохранить' %>
+  <%= link_to "Удалить", resource_url, method: :delete, confirm: "Уверен что хочешь удалить этот билет!?", class: :destroy %>
 <% end %>
 
