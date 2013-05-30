@@ -35,7 +35,8 @@
     true
 
   $('.payment_form_wrapper form').live 'submit', ->
-    return false unless $('.payment_form_wrapper #copy_payment_phone').inputmask('isComplete') && $('.payment_form_wrapper .copies_with_seats input:checked').length
+    return false if $('.payment_form_wrapper .copies_with_seats input').length && !$('.payment_form_wrapper .copies_with_seats input:checked').length
+    return false unless $('.payment_form_wrapper #copy_payment_phone').inputmask('isComplete')
     true
 
   $('.payment_form_wrapper #copy_payment_phone').live 'keyup', ->
