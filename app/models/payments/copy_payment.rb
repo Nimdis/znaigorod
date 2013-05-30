@@ -48,7 +48,13 @@ class CopyPayment < Payment
   end
 
   def reserve_copies
-    copies << paymentable.copies_for_sale.limit(number)
+    if number
+      copies << paymentable.copies_for_sale.limit(number)
+    else
+      copy_for_sale_ids.each do |copy_id|
+        copies << paymentable.copies_for_sale.find(copy_id)
+      end
+    end
   end
 
   def reserve_copy(copy)

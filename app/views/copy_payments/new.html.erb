@@ -1,9 +1,5 @@
 <%= render parent %>
 
---------------------------
-<%= @copy_payment.errors.inspect %>
--------------------------
-
 <%= simple_form_for [parent, @copy_payment] do |f| %>
   <% if parent.copies_with_seats? %>
     <div>
