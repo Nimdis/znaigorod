@@ -1,1 +1,15 @@
-<%= image_tag @affiche.poster_url %>
+<%= simple_nested_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
+  <%= hidden_field_tag :step, @step %>
+  <%= f.input :trailer_code %>
+
+  <%= f.simple_fields_for :attachments do |attachment| %>
+    <%= attachment.input :url, :as => :file %>
+    <%= attachment.input :description %>
+    <%= attachment.link_to_remove t('remove_attachment') %>
+  <% end %>
+  <%= f.link_to_add t('add_attachment'), :attachments %>
+
+  <div class='submit'>
+    <%= f.submit %>
+  </div>
+<% end %>
