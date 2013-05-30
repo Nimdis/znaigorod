@@ -3,6 +3,10 @@
  * = require jquery_ujs
  * = require jquery-ui
  * = require jquery_ujs
+ * = require jquery_nested_form
+ * = require jquery-ui/jquery.ui.datepicker-ru.js
+ * = require jquery-ui/jquery-ui-timepicker-addon.js
+ * = require jquery-ui/jquery-ui-timepicker-ru.js
  * = require magicsuggest
  * = require inputmask
  * = require tipsy
@@ -10,6 +14,8 @@
  * = require textile
  * = require tagit
  * = require jcrop
+ * = require autosuggest_handler
+ * = require datetime_picker
  * = require ./auth
  * = require ./rating
  * = require ./md5

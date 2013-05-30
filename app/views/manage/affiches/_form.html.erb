@@ -29,7 +29,7 @@
   <div class="showings_fields">
     <h3>Сеансы:</h3>
     <%= f.simple_fields_for :showings do |showing| %>
-      <%= showing.input :starts_at, :as => :date_picker%>
+      <%= showing.input :starts_at, :as => :date_picker %>
       <%= showing.input :ends_at, :as => :date_picker %>
       <%= showing.input :price_min %>
       <%= showing.input :price_max %>
@@ -42,7 +42,6 @@
       <% end %>
       <%= showing.input :hall %>
       <%= showing.link_to_remove t('remove_showing') %>
-      <%= %>
     <% end %>
     <%= f.link_to_add t('add_showing'), :showings %>
   </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130524075843) do
+ActiveRecord::Schema.define(:version => 20130529052059) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -222,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20130524075843) do
     t.integer  "number"
     t.datetime "stale_at"
     t.datetime "complete_at"
+    t.text     "categories"
   end
 
   add_index "coupons", ["organization_id"], :name => "index_coupons_on_organization_id"
