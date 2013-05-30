@@ -9,7 +9,7 @@
           </div>
         <% else %>
           <div class='user_item'>
-            <%= image_tag user.avatar, :size => "50x50", :title => user.name %>
+            <%= image_tag user.avatar, :size => "50x50", :title => user.name if user.avatar.present? %>
             <span class='name'><%= user.name %></span>
           </div>
         <% end %>
