@@ -1,2 +1,16 @@
-<%= image_tag @affiche.poster_url %>
+<%= simple_nested_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
+  <%= hidden_field_tag :step, @step %>
+  <%= f.simple_fields_for :showings do |showing| %>
+    <%= showing.input :place, :input_html => { :class => 'autosuggest' } %>
+    <%= showing.input :starts_at, :as => :date_picker %>
+    <%= showing.input :ends_at, :as => :date_picker %>
+    <%= showing.input :price_min %>
+    <%= showing.input :price_max %>
+    <%= showing.link_to_remove t('remove_showing') %>
+  <% end %>
+  <%= f.link_to_add t('add_showing'), :showings %>
 
+  <div class='submit'>
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -4,7 +4,7 @@ $.fn.add_autosuggest = () ->
   $this.autocomplete
     source: (request, response) ->
       $.ajax
-        url: '/manage/organizations.json'
+        url: '/organizations.json'
         data: {utf8: 'true', q: request.term}
         success: (data) ->
           response( $.map( data, ( item ) ->
@@ -21,7 +21,7 @@ $.fn.add_autosuggest = () ->
 
 @init_autosuggest_handler = () ->
   autosuggest = $('.autosuggest')
-  autosuggest.add_autosuggest()
+  autosuggest.add_autosuggest() if autosuggest.length
 
   $('form').on('nested:fieldAdded', (event) ->
     $(event.field).find('.autosuggest').filter(':visible').last().add_autosuggest()

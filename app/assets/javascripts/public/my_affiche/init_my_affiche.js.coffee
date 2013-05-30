@@ -3,6 +3,7 @@
   init_affiche_preview_description() if $('#affiche_description').length
   init_affiche_preview_tag() if $('#affiche_tag').length
 
+  init_autosuggest_handler()
   true
 
 init_affiche_preview_title = ->

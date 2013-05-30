@@ -6,7 +6,15 @@ class OrganizationsController < ApplicationController
   before_filter :allow_cross_domain_access
 
   def index
-    @organizations_catalog_presenter = OrganizationsCatalogPresenter.new
+    respond_to do |format|
+      format.html { @organizations_catalog_presenter = OrganizationsCatalogPresenter.new }
+      format.json do
+        searcher = HasSearcher.searcher(:manage_organization, params).paginate(:page => params[:page], :per_page => 10)
+        searcher.results
+
+        render :json => searcher.results
+      end
+    end
   end
 
   def show
