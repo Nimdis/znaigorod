@@ -1,4 +1,6 @@
 class Manage::CouponsController < Manage::ApplicationController
+  before_filter :set_type_and_class, :on => [:new, :create]
+
   def index
     @state = state = params[:state].present? ? params[:state] : nil
     page = params[:page].to_i.zero? ? 1 : params[:page]
@@ -12,6 +14,27 @@ class Manage::CouponsController < Manage::ApplicationController
     }
 
     @groups = search.group(:copyable_id_str).groups
-    @coupons = Coupon.where(:id => @groups.map(&:value)).order('id DESC')
+    @coupons = PaidCoupon.where(:id => @groups.map(&:value)).order('id DESC')
+  end
+
+  def new
+    @coupon = @klass.new
+  end
+
+  def create
+    @coupon = @klass.new(params["#{@type}_coupon"])
+
+    if @coupon.save
+      redirect_to [:manage, @coupon]
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def set_type_and_class
+    @type = params[:type]
+    @klass = "#{@type}_coupon".classify.constantize
   end
 end

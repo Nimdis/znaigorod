@@ -21,6 +21,7 @@ Znaigorod::Application.routes.draw do
 
     resources :coupons
     resources :affiliate_coupons, :only => :index
+    resources :paid_coupons, :only => :show
 
     resources :affiches do
       resources :attachments, :except => [:index, :show]
