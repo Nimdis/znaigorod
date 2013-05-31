@@ -24,6 +24,6 @@
       <%= image_tag(resized_image_url(image.file_url, 100, 100, false), :alt => image.description, :title => image.description) %>
       <%= link_to t('delete'), [:manage, resource, image], :method => :delete, :confirm => 'Вы уверены?' %>
     <% end %>
-    <%= link_to t('add_image'), [:new, :manage, resource, :gallery_image], :class => 'edit_link' %>
+    <%= link_to t('add_gallery_image'), [:new, :manage, resource, :gallery_image], :class => 'edit_link' %>
   </div>
 </div>

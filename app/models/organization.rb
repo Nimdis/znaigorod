@@ -106,9 +106,7 @@ class Organization < ActiveRecord::Base
   validates :phone, :phone => true, :if => :phone?
 
   accepts_nested_attributes_for :address,             :reject_if => :all_blank, :allow_destroy => true
-  #accepts_nested_attributes_for :attachments,         :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :halls,               :reject_if => :all_blank, :allow_destroy => true
-  #accepts_nested_attributes_for :images,              :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :organization_stand,  :reject_if => :all_blank
   accepts_nested_attributes_for :schedules,           :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :social_links,        :reject_if => :all_blank, :allow_destroy => true

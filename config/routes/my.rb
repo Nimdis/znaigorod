@@ -7,7 +7,6 @@ Znaigorod::Application.routes.draw do
       delete 'destroy_image', :on => :member, :as => :destroy_image
     end
 
-
     root to: 'affiches#new'
   end
 end

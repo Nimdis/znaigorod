@@ -10,8 +10,6 @@ class Attachment < ActiveRecord::Base
   after_create :index_attachable
   after_destroy :index_attachable
 
-  alias_attribute :url, :file_url
-
   searchable do
     integer :id
     string :attachable_type

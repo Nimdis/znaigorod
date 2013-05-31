@@ -35,8 +35,6 @@ class Affiche < ActiveRecord::Base
   validates_presence_of :title, :description, :poster_url, :if => :published?
 
   accepts_nested_attributes_for :affiche_schedule, :allow_destroy => true, :reject_if => :affiche_schedule_attributes_blank?
-  #accepts_nested_attributes_for :images, :allow_destroy => true, :reject_if => :all_blank
-  #accepts_nested_attributes_for :attachments, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :showings, :allow_destroy => true
 
   default_scope order('affiches.id DESC')
@@ -271,14 +269,14 @@ class Affiche < ActiveRecord::Base
 
   def save_images_from_vk
     get_images_from_vk.each do |image_hash|
-      self.images.find_or_initialize_by_url_and_thumbnail_url(
-        :url => (image_hash['photo']['src_xbig'].present? ? image_hash['photo']['src_xbig'] : image_hash['photo']['src_big']),
+      self.gallery_social_images.find_or_initialize_by_file_url_and_thumbnail_url(
+        :file_url => (image_hash['photo']['src_xbig'].present? ? image_hash['photo']['src_xbig'] : image_hash['photo']['src_big']),
         :thumbnail_url => image_hash['photo']['src']
       ).tap do |image|
         image.width  = image_hash['photo']['width']
         image.height = image_hash['photo']['height']
         image.description = image_hash['photo']['text']
-        image.save!
+        image.save(:validate => false)
       end
     end
   end
@@ -314,11 +312,11 @@ class Affiche < ActiveRecord::Base
     get_images_from_yandex_fotki.each do |image_hash|
       image_hash = image_hash['img']
 
-      self.images.find_or_initialize_by_url_and_thumbnail_url(:url => image_hash['XXL']['href'], :thumbnail_url => image_hash['M']['href']).tap do |image|
+      self.gallery_social_images.find_or_initialize_by_file_url_and_thumbnail_url(:file_url => image_hash['XXL']['href'], :thumbnail_url => image_hash['M']['href']).tap do |image|
         image.width  = image_hash['XXL']['width']
         image.height = image_hash['XXL']['height']
         image.description = image_hash['summary']
-        image.save!
+        image.save(:validate => false)
       end
     end
   end

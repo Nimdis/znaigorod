@@ -1,5 +1,4 @@
 Znaigorod::Application.routes.draw do
-
   namespace :manage do
     post 'red_cloth' => 'red_cloth#show'
 
@@ -7,9 +6,19 @@ Znaigorod::Application.routes.draw do
     resources :search,    :only => :index
     resources :sessions,  :only => [:new, :create, :destroy]
 
-
     Affiche.descendants.each do |type|
-      resources type.name.underscore.pluralize
+      resources type.name.underscore.pluralize do
+        resources :gallery_files,  :except => [:index, :show] do
+          delete 'destroy_file', :on => :member, :as => :destroy_file
+        end
+
+        resources :gallery_images, :except => [:index, :show] do
+          delete 'destroy_file', :on => :member, :as => :destroy_file
+        end
+
+        resources :gallery_social_images, :except => [:index, :show]
+      end
+
     end
     resources :affiches, only: [] do
       resources :tickets
@@ -25,6 +34,7 @@ Znaigorod::Application.routes.draw do
     resources :affiches do
       resources :gallery_files,  :except => [:index, :show]
       resources :gallery_images, :except => [:index, :show]
+      resources :gallery_social_images, :except => [:index, :show]
     end
 
     resources :posts do
@@ -53,11 +63,19 @@ Znaigorod::Application.routes.draw do
       end
 
       resources :sauna_halls, :only => [] do
-        resources :gallery_images, :only => [:new, :create, :destroy, :edit, :update]
+        resources :gallery_images, :only => [:new, :create, :destroy, :edit, :update] do
+          delete 'destroy_file', :on => :member, :as => :destroy_file
+        end
       end
 
-      resources :gallery_files,  :only => [:new, :create, :destroy, :edit, :update]
-      resources :gallery_images, :only => [:new, :create, :destroy, :edit, :update]
+      resources :gallery_files,  :only => [:new, :create, :destroy, :edit, :update] do
+        delete 'destroy_file', :on => :member, :as => :destroy_file
+      end
+
+      resources :gallery_images, :only => [:new, :create, :destroy, :edit, :update] do
+        delete 'destroy_file', :on => :member, :as => :destroy_file
+      end
+
       resources :organizations,  :only => [:new, :create, :destroy]
     end
 
