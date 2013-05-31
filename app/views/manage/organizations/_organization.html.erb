@@ -223,16 +223,16 @@
 <div class='images'>
   <h3>
     Галерея изображений
-    <%= link_to "Добавить изображение", new_manage_organization_image_path(resource), :class => 'edit_link'  %>
+    <%= link_to "Добавить изображение", new_manage_organization_gallery_image_path(resource), :class => 'edit_link'  %>
   </h3>
-  <% if resource.images.any? %>
+  <% if resource.gallery_images.any? %>
     <span class="value">
       <ul>
-        <% resource.images.each do |image| %>
+        <% resource.gallery_images.each do |image| %>
           <li>
-            <%= image_tag(resized_image_url(image.url, 400, 400, false), :alt => image.description, :title => image.description) %>
-            <%= link_to "Удалить", manage_organization_image_path(resource, image), :method => :delete, :confirm => 'Вы уверены?' %>
-            <%= link_to 'Редактировать', edit_manage_organization_image_path(resource, image) %>
+            <%= image_tag(resized_image_url(image.file_url, 400, 400, false), :alt => image.description, :title => image.description) %>
+            <%= link_to "Удалить", manage_organization_gallery_image_path(resource, image), :method => :delete, :confirm => 'Вы уверены?' %>
+            <%= link_to 'Редактировать', edit_manage_organization_gallery_image_path(resource, image) %>
           </li>
         <% end %>
       </ul>
@@ -245,16 +245,16 @@
 <div class='attachments'>
   <h3>
     Прикрепленные файлы
-    <%= link_to "Добавить файл", new_manage_organization_attachment_path(resource), :class => 'edit_link'  %>
+    <%= link_to "Добавить файл", new_manage_organization_gallery_file_path(resource), :class => 'edit_link'  %>
   </h3>
-  <% if resource.attachments.any?  %>
+  <% if resource.gallery_files.any?  %>
     <span class="value">
       <ul>
-        <% resource.attachments.each do |attachment| %>
+        <% resource.gallery_files.each do |attachment| %>
           <li>
-            <%= link_to attachment.description, attachment.url %>
-            <%= link_to "Удалить", manage_organization_attachment_path(resource, attachment), :method => :delete, :confirm => 'Вы уверены?' %>
-            <%= link_to 'Редактировать', edit_manage_organization_attachment_path(resource, attachment) %>
+            <%= link_to attachment.description, attachment.file_url %>
+            <%= link_to "Удалить", manage_organization_gallery_file_path(resource, attachment), :method => :delete, :confirm => 'Вы уверены?' %>
+            <%= link_to 'Редактировать', edit_manage_organization_gallery_file_path(resource, attachment) %>
           </li>
         <% end %>
       </ul>

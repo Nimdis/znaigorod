@@ -62,7 +62,7 @@ class Photogallery
   end
 
   def paginated_collection
-    searcher_for_period.paginate(page: page, per_page: 10).grouped.group(:imageable_id_str).groups
+    searcher_for_period.paginate(page: page, per_page: 10).grouped.group(:attachable_id_str).groups
   end
 
   private
@@ -135,7 +135,7 @@ class Photogallery
   end
 
   def total_groups(search_params = {})
-    total_searcher(search_params).grouped.group(:imageable_id_str)
+    total_searcher(search_params).grouped.group(:attachable_id_str)
   end
 
   def week_searcher(search_params)
@@ -143,7 +143,7 @@ class Photogallery
   end
 
   def week_groups(search_params = {})
-    week_searcher(search_params).grouped.group(:imageable_id_str)
+    week_searcher(search_params).grouped.group(:attachable_id_str)
   end
 
   def month_searcher(search_params)
@@ -151,7 +151,7 @@ class Photogallery
   end
 
   def month_groups(search_params = {})
-    month_searcher(search_params).grouped.group(:imageable_id_str)
+    month_searcher(search_params).grouped.group(:attachable_id_str)
   end
 
   def total_groups_count

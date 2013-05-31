@@ -26,6 +26,9 @@ class Organization < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy
   has_many :slave_organizations, :class_name => 'Organization', :foreign_key => 'primary_organization_id'
 
+  has_many :gallery_images, :as => :attachable, :dependent => :destroy
+  has_many :gallery_files,  :as => :attachable, :dependent => :destroy
+
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation], default: :fresh, predicates: true
 
@@ -68,8 +71,6 @@ class Organization < ActiveRecord::Base
 
   has_many :affiches,       :through => :showings, :uniq => true
   has_many :halls,          :dependent => :destroy
-  has_many :gallery_images, :as => :attachable, :dependent => :destroy
-  has_many :gallery_files,  :as => :attachable, :dependent => :destroy
   has_many :organizations
   has_many :schedules,      :dependent => :destroy
   has_many :sauna_halls,    :through => :sauna

@@ -21,15 +21,15 @@ module ApplicationHelper
     if image.thumbnail_url?
       if image.width.present? && !image.width.zero? && image.height.present? && !image.height.zero?
         if (image.height * resized_width / image.width) > resized_height
-          link_to(image_tag(image.thumbnail_url, :title => image.description, width: resized_width, height: (image.height * resized_width / image.width)), image.url)
+          link_to(image_tag(image.thumbnail_url, :title => image.description, width: resized_width, height: (image.height * resized_width / image.width)), image.file_url)
         else
-          link_to(image_tag(image.thumbnail_url, :title => image.description, width: (image.width * resized_height / image.height), height: resized_height), image.url, class: 'wide')
+          link_to(image_tag(image.thumbnail_url, :title => image.description, width: (image.width * resized_height / image.height), height: resized_height), image.file_url, class: 'wide')
         end
       else
-        link_to(image_tag(image.thumbnail_url, :title => image.description), image.url)
+        link_to(image_tag(image.thumbnail_url, :title => image.description), image.file_url)
       end
     else
-      link_to(image_tag_for(image.url, resized_width, resized_height, true, 'n', image.description), image.url)
+      link_to(image_tag_for(image.file_url, resized_width, resized_height, true, 'n', image.description), image.file_url)
     end
   end
 
@@ -139,25 +139,25 @@ module ApplicationHelper
       [:manage, resource]
     elsif Organization.available_suborganization_classes.include?(resource_class)
       send("manage_organization_#{resource_class.model_name.underscore}_path", parent)
-    elsif resource.is_a?(Image) && Organization.available_suborganization_classes.include?(parent_class)
+    elsif resource.is_a?(GalleryImage) && Organization.available_suborganization_classes.include?(parent_class)
         [:manage, parent, resource]
     elsif parent.class.superclass == Affiche
-      if (resource_class == Image || resource_class == Attachment) && resource.persisted?
+      if (resource_class == GalleryImage || resource_class == GalleryFile) && resource.persisted?
          send("manage_#{parent.class.superclass.model_name.underscore}_#{resource_class.model_name.underscore}_path", parent, resource)
       else
          send("manage_#{parent.class.superclass.model_name.underscore}_#{resource_class.model_name.underscore.pluralize}_path", parent)
       end
     elsif parent.class == Organization
-      if (resource_class == Image || resource_class == Attachment) && resource.persisted?
+      if (resource_class == GalleryImage || resource_class == GalleryFile) && resource.persisted?
          send("manage_organization_#{resource_class.model_name.underscore}_path", parent, resource)
       else
          send("manage_organization_#{resource_class.model_name.underscore.pluralize}_path", parent)
       end
     elsif parent.class == SaunaHall
-      if resource_class == Image && resource.persisted?
+      if resource_class == GalleryImage && resource.persisted?
         [:manage, @organization, @sauna_hall, @image]
       else
-        [:manage, @organization, @sauna_hall, :images]
+        [:manage, @organization, @sauna_hall, :gallery_image]
       end
     elsif parent.class == Post
       if resource_class == PostImage && resource.persisted?

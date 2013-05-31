@@ -171,6 +171,7 @@ ru:
 
       attachment:
         <<: *common_attributes
+        file: Выберите файл
 
       feedback:
         email: Ваш адрес электронной почты

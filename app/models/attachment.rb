@@ -10,12 +10,15 @@ class Attachment < ActiveRecord::Base
   after_create :index_attachable
   after_destroy :index_attachable
 
+  alias_attribute :url, :file_url
+
   searchable do
     integer :id
     string :attachable_type
     string(:attachable_id_str) { attachable_id.to_s }
     string :category
     string :tags, :multiple => true
+    string :type
     text :description
     time :created_at
   end

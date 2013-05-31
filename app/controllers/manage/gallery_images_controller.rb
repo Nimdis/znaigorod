@@ -1,4 +1,4 @@
-class Manage::ImagesController < Manage::ApplicationController
+class Manage::GalleryImagesController < Manage::ApplicationController
   actions :new, :create, :destroy, :update, :edit
 
   belongs_to *Organization.available_suborganization_kinds,
@@ -6,7 +6,7 @@ class Manage::ImagesController < Manage::ApplicationController
 
   belongs_to :affiche, :organization, :sauna_hall,
     :polymorphic => true, :optional => true
-  
+
   def create
     create! { collection_path }
   end

@@ -17,6 +17,7 @@ class Affiche < ActiveRecord::Base
                   :age_min, :age_max
 
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
+  has_many :gallery_social_images, :as => :attachable, :dependent => :destroy
   has_many :gallery_files,  :as => :attachable, :dependent => :destroy
 
   has_many :showings, :dependent => :destroy, :order => :starts_at
@@ -230,6 +231,10 @@ class Affiche < ActiveRecord::Base
 
   def has_images?
     images.any?
+  end
+
+  def images
+    [gallery_images, gallery_social_images].flatten
   end
 
   def html_description

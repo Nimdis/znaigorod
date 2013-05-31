@@ -25,7 +25,8 @@ class Meal < ActiveRecord::Base
     "#{organization.vfs_path}/#{self.class.name.underscore}"
   end
 
-  has_many :images, :as => :imageable, :dependent => :destroy
+  has_many :gallery_images, :as => :attachable, :dependent => :destroy
+  has_many :gallery_files,  :as => :attachable, :dependent => :destroy
   has_many :menus, :dependent => :destroy
 
   def sunspot_index

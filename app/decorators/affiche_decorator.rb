@@ -188,10 +188,10 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def html_attachments
-    return "" if attachments.blank?
+    return "" if gallery_files.blank?
     links = []
-    attachments.each do |attachment|
-      links << h.content_tag(:li, h.link_to(attachment.description, attachment.url))
+    gallery_files.each do |attachment|
+      links << h.content_tag(:li, h.link_to(attachment.description, attachment.file_url))
     end
     h.content_tag :ul, links.join("\n").html_safe
   end

@@ -15,7 +15,7 @@ HasSearcher.create_searcher :similar_posts do
 end
 
 HasSearcher.create_searcher :photoreport do
-  models :image
+  models :attachment
 
   property :category
   property :tags
@@ -29,16 +29,20 @@ HasSearcher.create_searcher :photoreport do
   end
 
   scope do
+    any_of do
+      with(:type, 'GalleryImage')
+      with(:type, 'GallerySocialImage')
+    end
     facet(:category)
     facet(:tags)
 
     order_by :id, :desc
 
-    with(:imageable_type, 'Affiche')
+    with(:attachable_type, 'Affiche')
   end
 
   scope :grouped do
-    group :imageable_id_str
+    group :attachable_id_str
   end
 end
 

@@ -1,0 +1,3 @@
+<%= image_tag f.object.file_url, :width => '300', :height => '200', :class => 'preview' if f.object.file_url? %>
+<%= f.input :file %>
+<%= f.input :description %>

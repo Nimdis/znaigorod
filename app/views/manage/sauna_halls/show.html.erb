@@ -102,17 +102,17 @@
     </div>
   </div>
 
-  <div class='images'>
+  <div class=.gallery_images'>
     <h3>
       Галерея изображений
-      <%= link_to "Добавить изображение", [:new, :manage, @organization, resource, :image], :class => 'edit_link'  %>
+      <%= link_to "Добавить изображение", [:new, :manage, @organization, resource, :gallery_image], :class => 'edit_link'  %>
     </h3>
-    <% if resource.images.any? %>
+    <% if resource.gallery_images.any? %>
       <span class="value">
         <ul>
-          <% resource.images.each do |image| %>
+          <% resource.gallery_images.each do |image| %>
             <li>
-              <%= image_tag image.url, :alt => image.description, :title => image.description %>
+              <%= image_tag image.file_url, :alt => image.description, :title => image.description %>
               <%= link_to "Удалить", [:manage, @organization, resource, image], :method => :delete, :confirm => 'Вы уверены?' %>
               <%= link_to 'Редактировать', [:edit, :manage, @organization, resource, image] %>
             </li>
