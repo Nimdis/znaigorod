@@ -15,7 +15,7 @@ class CarWash < ActiveRecord::Base
   def vfs_path
     "#{organization.vfs_path}/#{self.class.name.underscore}"
   end
-  has_many :images, :as => :imageable, :dependent => :destroy
+  has_many :gallery_images, :as => :attachable, :dependent => :destroy
 
   def sunspot_index
     index

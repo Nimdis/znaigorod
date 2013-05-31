@@ -1,4 +1,4 @@
-class Manage::AttachmentsController < Manage::ApplicationController
+class Manage::GalleryFilesController < Manage::ApplicationController
   actions :new, :create, :destroy, :update, :edit
 
   belongs_to :affiche, :organization, :polymorphic => true, :optional => true

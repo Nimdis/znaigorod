@@ -1,8 +1,8 @@
 ru:
-  add_attachment: Добавить файл
+  add_gallery_file: Добавить файл
   add_event: "&plus;&nbsp;событие"
   add_hall: Добавить зал
-  add_image: Добавить изображение
+  add_gallery_image: Добавить изображение
   add_menu: Добавить меню
   add_menu_position: Добавить позицию
   add_organization: "&plus;&nbsp;заведение"

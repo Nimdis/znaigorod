@@ -143,7 +143,7 @@
 <div class='images'>
   <h3>
     Галерея изображений
-    <%= link_to "Добавить изображение", new_manage_affiche_image_path(resource), :class => 'edit_link'  %>
+    <%= link_to "Добавить изображение", new_manage_affiche_gallery_image_path(resource), :class => 'edit_link'  %>
   </h3>
   <% if resource.images.any? %>
     <span class="value">
@@ -154,8 +154,8 @@
               <%= resized_link_image(image, 160, 160) %>
             </p>
             <p class='action'>
-              <%= link_to "Удалить", manage_affiche_image_path(resource, image), :method => :delete, :confirm => 'Вы уверены?' %>
-              <%= link_to 'Редактировать', edit_manage_affiche_image_path(resource, image) %>
+              <%= link_to "Удалить", manage_affiche_gallery_image_path(resource, image), :method => :delete, :confirm => 'Вы уверены?' %>
+              <%= link_to 'Редактировать', edit_manage_affiche_gallery_image_path(resource, image) %>
             </p>
           </li>
         <% end %>
@@ -169,16 +169,16 @@
 <div class='attachments'>
   <h3>
     Прикрепленные файлы
-    <%= link_to "Добавить файл", new_manage_affiche_attachment_path(resource), :class => 'edit_link'  %>
+    <%= link_to "Добавить файл", new_manage_affiche_gallery_file_path(resource), :class => 'edit_link'  %>
   </h3>
-  <% if resource.attachments.any?  %>
+  <% if resource.gallery_files.any?  %>
     <span class="value">
       <ul>
-        <% resource.attachments.each do |attachment| %>
+        <% resource.gallery_files.each do |attachment| %>
           <li>
-            <%= link_to attachment.description, attachment.url %>
-            <%= link_to "Удалить", manage_affiche_attachment_path(resource, attachment), :method => :delete, :confirm => 'Вы уверены?' %>
-            <%= link_to 'Редактировать', edit_manage_affiche_attachment_path(resource, attachment) %>
+            <%= link_to attachment.description, attachment.file_url %>
+            <%= link_to "Удалить", manage_affiche_gallery_file_path(resource, attachment), :method => :delete, :confirm => 'Вы уверены?' %>
+            <%= link_to 'Редактировать', edit_manage_affiche_gallery_file_path(resource, attachment) %>
           </li>
         <% end %>
       </ul>

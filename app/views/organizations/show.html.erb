@@ -66,8 +66,8 @@
     <% if @organization.has_photogallery? %>
       <div class="photogallery">
         <ul>
-          <% @organization.images.each do |image| %>
-            <li><%= link_to(image_tag_for(image.url, 124, 94, true, 'n'), image.url, rel: :info_gallery) %></li>
+          <% @organization.gallery_images.each do |image| %>
+            <li><%= link_to(image_tag_for(image.file_url, 124, 94, true, 'n'), image.file_url, rel: :info_gallery) %></li>
           <% end %>
         </ul>
       </div>

@@ -20,10 +20,10 @@
   <%= render partial: 'info', locals: { sauna: resource } %>
 
   <div class="gallery">
-    <% resource.images.each do |image| %>
-      <%= image_tag(resized_image_url(image.url, 100, 100, false), :alt => image.description, :title => image.description) %>
+    <% resource.gallery_images.each do |image| %>
+      <%= image_tag(resized_image_url(image.file_url, 100, 100, false), :alt => image.description, :title => image.description) %>
       <%= link_to t('delete'), [:manage, resource, image], :method => :delete, :confirm => 'Вы уверены?' %>
     <% end %>
-    <%= link_to t('add_image'), [:new, :manage, resource, :image], :class => 'edit_link' %>
+    <%= link_to t('add_image'), [:new, :manage, resource, :gallery_image], :class => 'edit_link' %>
   </div>
 </div>

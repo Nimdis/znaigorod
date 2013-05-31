@@ -11,6 +11,6 @@
   <div class="actions">
     <%= link_to "&larr; Назад".html_safe, :back %>
     <%= button_tag 'Сохранить'.html_safe %>
-    <%= link_to 'Удалить'.html_safe, resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? || resource.is_a?(Image) %>
+    <%= link_to 'Удалить'.html_safe, resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? || resource.is_a?(GalleryImage) %>
   </div>
 <% end %>

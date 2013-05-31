@@ -15,8 +15,8 @@
   <% if hotel.has_photogallery? %>
     <div class="photogallery">
       <ul>
-        <% hotel.images.each do |image| %>
-          <li><%= link_to(image_tag_for(image.url, 124, 94, true, 'n'), image.url, rel: :hotel_gallery) %></li>
+        <% hotel.gallery_images.each do |image| %>
+          <li><%= link_to(image_tag_for(image.file_url, 124, 94, true, 'n'), image.file_url, rel: :hotel_gallery) %></li>
         <% end %>
       </ul>
     </div>

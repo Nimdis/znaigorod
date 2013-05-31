@@ -22,8 +22,8 @@ Znaigorod::Application.routes.draw do
     resources :coupons
 
     resources :affiches do
-      resources :attachments, :except => [:index, :show]
-      resources :images,      :except => [:index, :show]
+      resources :gallery_files,  :except => [:index, :show]
+      resources :gallery_images, :except => [:index, :show]
     end
 
     resources :posts do
@@ -52,17 +52,17 @@ Znaigorod::Application.routes.draw do
       end
 
       resources :sauna_halls, :only => [] do
-        resources :images, :only => [:new, :create, :destroy, :edit, :update]
+        resources :gallery_images, :only => [:new, :create, :destroy, :edit, :update]
       end
 
-      resources :attachments, :only => [:new, :create, :destroy, :edit, :update]
-      resources :images, :only => [:new, :create, :destroy, :edit, :update]
-      resources :organizations, :only => [:new, :create, :destroy]
+      resources :gallery_files,  :only => [:new, :create, :destroy, :edit, :update]
+      resources :gallery_images, :only => [:new, :create, :destroy, :edit, :update]
+      resources :organizations,  :only => [:new, :create, :destroy]
     end
 
     Organization.available_suborganization_kinds.each do |kind|
       resources kind.pluralize, :only => :index do
-        resources :images, :only => [:new, :create, :destroy, :edit, :update]
+        resources :gallery_images, :only => [:new, :create, :destroy, :edit, :update]
       end
     end
 
@@ -81,5 +81,4 @@ Znaigorod::Application.routes.draw do
 
     root :to => 'organizations#index'
   end
-
 end

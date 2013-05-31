@@ -203,7 +203,7 @@ class OrganizationDecorator < ApplicationDecorator
   end
 
   def has_photogallery?
-    organization.images.any?
+    organization.gallery_images.any?
   end
 
   def has_tour?

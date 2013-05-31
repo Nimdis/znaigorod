@@ -9,7 +9,7 @@ class SaunaHall < ActiveRecord::Base
 
   belongs_to :sauna
 
-  has_many :images, :as => :imageable,  :dependent => :destroy
+  has_many :gallery_images, :as => :attachable,  :dependent => :destroy
   has_many :sauna_hall_schedules,       :dependent => :destroy
 
   has_one :sauna_hall_bath, :dependent => :destroy

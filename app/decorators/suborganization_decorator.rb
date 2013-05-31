@@ -105,4 +105,8 @@ class SuborganizationDecorator < ApplicationDecorator
   def has_photogallery?
     images.any?
   end
+
+  def images
+    gallery_images
+  end
 end
