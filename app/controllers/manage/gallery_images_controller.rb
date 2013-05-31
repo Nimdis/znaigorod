@@ -4,6 +4,10 @@ class Manage::GalleryImagesController < Manage::ApplicationController
   belongs_to *Organization.available_suborganization_kinds,
     :polymorphic => true, :optional => true
 
+  Affiche.descendants.each do |type|
+    belongs_to type.name.underscore, :polymorphic => true, :optional => :true
+  end
+
   belongs_to :affiche, :organization, :sauna_hall,
     :polymorphic => true, :optional => true
 
@@ -17,6 +21,11 @@ class Manage::GalleryImagesController < Manage::ApplicationController
 
   def destroy
     destroy! { collection_path }
+  end
+
+  def destroy_file
+    @gallery_image.file.destroy
+    redirect_to [:edit, :manage, parent, @gallery_image]
   end
 
   protected

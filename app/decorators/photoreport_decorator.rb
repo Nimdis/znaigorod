@@ -11,7 +11,7 @@ class PhotoreportDecorator < AfficheDecorator
     h.link_to affiche.title.text_gilensize.truncated(77), kind_affiche_path(:anchor => 'photogallery'), :title => affiche.title
   end
 
-  def main.gallery_images
+  def main_images
     result = ""
     affiche.gallery_images.first(4).reverse.each do |image|
       if image.thumbnail_url?
@@ -23,7 +23,7 @@ class PhotoreportDecorator < AfficheDecorator
     h.raw result
   end
 
-  def.gallery_images_count
+  def images_count
     affiche.gallery_images.count
   end
 

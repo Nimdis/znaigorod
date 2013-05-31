@@ -154,8 +154,8 @@
               <%= resized_link_image(image, 160, 160) %>
             </p>
             <p class='action'>
-              <%= link_to "Удалить", manage_affiche_gallery_image_path(resource, image), :method => :delete, :confirm => 'Вы уверены?' %>
-              <%= link_to 'Редактировать', edit_manage_affiche_gallery_image_path(resource, image) %>
+              <%= link_to "Удалить", [:manage, resource, image], :method => :delete, :confirm => 'Вы уверены?' %>
+              <%= link_to 'Редактировать', [:edit, :manage, resource, image] %>
             </p>
           </li>
         <% end %>
