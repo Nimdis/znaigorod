@@ -1,6 +1,7 @@
 <h3>Сертификаты и купоны</h3>
 <div class="new_link">
   <%= link_to ' Добавить платный купон', new_manage_coupon_path(:type => :paid), :class => 'new_resource' %>
+  <%= link_to ' Добавить партнерский купон', new_manage_coupon_path(:type => :affiliate), :class => 'new_resource' %>
 </div>
 
 <%= form_tag manage_coupons_path, :method => :get, :class => 'search_ticket_infos' do %>

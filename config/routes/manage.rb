@@ -20,7 +20,7 @@ Znaigorod::Application.routes.draw do
     end
 
     resources :coupons
-    resources :affiliate_coupons, :only => :index
+    resources :affiliate_coupons, :only => :show
     resources :paid_coupons, :only => :show
 
     resources :affiches do
