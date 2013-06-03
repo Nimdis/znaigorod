@@ -14,8 +14,11 @@
  * = require textile
  * = require tagit
  * = require jcrop
+ * = require jquery-fileupload/basic
+ * = require jquery-fileupload/vendor/tmpl
  * = require autosuggest_handler
  * = require datetime_picker
+ * = require file_upload
  * = require ./auth
  * = require ./rating
  * = require ./md5

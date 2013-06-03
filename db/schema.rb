@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130530044229) do
+ActiveRecord::Schema.define(:version => 20130530091259) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -202,6 +202,8 @@ ActiveRecord::Schema.define(:version => 20130530044229) do
     t.integer  "copy_payment_id"
     t.integer  "copyable_id"
     t.string   "copyable_type"
+    t.integer  "row"
+    t.integer  "seat"
   end
 
   add_index "copies", ["copy_payment_id"], :name => "index_tickets_on_payment_id"
@@ -231,6 +233,7 @@ ActiveRecord::Schema.define(:version => 20130530044229) do
     t.datetime "stale_at"
     t.datetime "complete_at"
     t.text     "categories"
+    t.text     "affiliate_url"
   end
 
   add_index "coupons", ["organization_id"], :name => "index_coupons_on_organization_id"
@@ -318,20 +321,6 @@ ActiveRecord::Schema.define(:version => 20130530044229) do
   end
 
   add_index "hotels", ["organization_id"], :name => "index_hotels_on_organization_id"
-
-  create_table "images", :force => true do |t|
-    t.text     "url"
-    t.integer  "imageable_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.text     "description"
-    t.string   "imageable_type"
-    t.string   "thumbnail_url"
-    t.integer  "width"
-    t.integer  "height"
-  end
-
-  add_index "images", ["imageable_id"], :name => "index_images_on_organization_id"
 
   create_table "meals", :force => true do |t|
     t.text     "category"
@@ -803,10 +792,11 @@ ActiveRecord::Schema.define(:version => 20130530044229) do
     t.integer  "number"
     t.float    "original_price"
     t.float    "price"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.text     "description"
     t.datetime "stale_at"
+    t.float    "organization_price"
   end
 
   add_index "tickets", ["affiche_id"], :name => "index_ticket_infos_on_affiche_id"

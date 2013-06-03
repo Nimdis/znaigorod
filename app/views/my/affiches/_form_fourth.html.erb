@@ -1,15 +1,33 @@
-<%= simple_nested_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
+<%= simple_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
   <%= hidden_field_tag :step, @step %>
   <%= f.input :trailer_code %>
-
-  <%= f.simple_fields_for :attachments do |attachment| %>
-    <%= attachment.input :url, :as => :file %>
-    <%= attachment.input :description %>
-    <%= attachment.link_to_remove t('remove_attachment') %>
-  <% end %>
-  <%= f.link_to_add t('add_gallery_file'), :attachments %>
 
   <div class='submit'>
     <%= f.submit %>
   </div>
 <% end %>
+
+<div class="gallery_images">
+  <%= render @affiche.gallery_images %>
+</div>
+
+<%= form_for @affiche.gallery_images.new, :url => my_affiche_gallery_images_path(@affiche.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+  <%= f.label :file, "Изображение:" %>
+  <%= f.file_field :file, :multiple => true, :name => "gallery_image[file]" %>
+<% end %>
+
+<div class="gallery_files">
+  <%= render @affiche.gallery_files %>
+</div>
+
+<%= form_for @affiche.gallery_files.new, :url => my_affiche_gallery_files_path(@affiche.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+  <%= f.label :file, "Файл:" %>
+  <%= f.file_field :file, :multiple => true, :name => "gallery_file[file]" %>
+<% end %>
+
+<script id="template-upload" type="text/x-tmpl">
+  <div class="upload">
+    {%=o.name%}
+    <div class="progress"><div class="bar" style="width: 0%"></div></div>
+  </div>
+</script>
