@@ -181,8 +181,12 @@ module ApplicationHelper
   end
 
   def resized_image_url(url, width, height, crop, orientation = '')
-    image_url, image_id, image_width, image_height, image_crop, image_filename =
-      url.match(%r{(.*)/files/(\d+)/(?:(\d+)-(\d+)(\!)?/)?(.*)})[1..-1]
+    if url.match(/\d+\/region\/\d+/)
+      image_url, image_id, image_filename = url.match(/(.+)\/files\/(\d+)\/region\/\d+\/\d+\/\d+\/\d+\/(.+)/).to_a[1..-1]
+    else
+      image_url, image_id, image_width, image_height, image_crop, image_filename =
+        url.match(%r{(.*)/files/(\d+)/(?:(\d+)-(\d+)(\!)?/)?(.*)})[1..-1]
+    end
 
     image_crop = crop ? '!' : ''
 
