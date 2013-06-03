@@ -25,7 +25,7 @@ class Coupon < ActiveRecord::Base
 
   scope :ordered,   -> { order 'created_at DESC' }
 
-  validates_presence_of :categories, :image, :kind, :place, :stale_at
+  validates_presence_of :categories, :kind, :place, :stale_at
 
   def get_organization_id
     self.try(:organization_id)
