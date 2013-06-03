@@ -38,14 +38,20 @@ class Coupon < ActiveRecord::Base
   end
 
   def self.ordered_descendants
-    [AffiliateCoupon, PaidCoupon]
+    [AffiliateCoupon, DiscountCoupon, PaidCoupon]
   end
 
   searchable do
-    string(:suborganizations_kind, :multiple => true) { organization.suborganizations.map(&:class).map(&:name).map(&:underscore) }
+    string :suborganizations_kind, :multiple => true 
   end
 
   private
+
+  def suborganizations_kind
+    return [] unless organization
+
+    organization.suborganizations.map(&:class).map(&:name).map(&:underscore)
+  end
 
   def image_destroy
     if self.delete_image

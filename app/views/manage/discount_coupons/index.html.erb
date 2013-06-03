@@ -1,0 +1,39 @@
+<h3>Скидки в заведениях города Томска</h3>
+<div class="new_link">
+  <%= link_to ' Добавить скидку', new_manage_coupon_path(:type => :discount), :class => 'new_resource' %>
+</div>
+
+<div class='coupons_list'>
+  <% @coupons.each do |coupon| %>
+    <div class='coupon'>
+      <p><%= link_to coupon.title, manage_coupon_path(coupon) %></p>
+      <div class='info'>
+        <div class='poster'>
+          <%= link_to image_tag_for(coupon.image_url, 120, 140), manage_coupon_path(coupon) if coupon.image_url? %>
+        </div>
+        <div class='description'>
+          <div>
+            <span class="label">Скидка:</span>
+            <% if coupon.discount? %>
+              <span class="value"><%=  "#{coupon.discount}%" %></span>
+            <% else %>
+              <span class="blank">Нет</span>
+            <% end %>
+          </div>
+          <div>
+            <span class="label">Место:</span>
+            <% if coupon.organization_id? %>
+              <span class="value"><%= link_to organization.title, manage_organization_path(coupon.organization) %></span>
+            <% else %>
+              <span class="blank"><%= coupon.place %></span>
+            <% end %>
+          </div>
+          <div>
+            <span class="label">Продажа заканчивается:</span>
+            <span class="value"><%= stale_at(coupon.stale_at) %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+</div>
