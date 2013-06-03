@@ -11,6 +11,7 @@ Znaigorod::Application.routes.draw do
     Affiche.descendants.each do |type|
       resources type.name.underscore.pluralize
     end
+
     resources :affiches, only: [] do
       resources :tickets
     end
@@ -20,8 +21,6 @@ Znaigorod::Application.routes.draw do
     end
 
     resources :coupons
-    resources :affiliate_coupons, :only => :show
-    resources :paid_coupons, :only => :show
 
     resources :affiches do
       resources :attachments, :except => [:index, :show]
@@ -83,5 +82,4 @@ Znaigorod::Application.routes.draw do
 
     root :to => 'organizations#index'
   end
-
 end

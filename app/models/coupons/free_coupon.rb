@@ -1,0 +1,2 @@
+class FreeCoupon < Coupon
+end

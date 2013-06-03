@@ -1,0 +1,77 @@
+<div>
+  <span class="label">Количество:</span>
+  <span class="value"><%= resource.number %></span>
+</div>
+
+<div>
+  <span class="label">Организация:</span>
+  <% if resource.organization_id? %>
+    <span class="value"><%= resource.organization %></span>
+  <% else %>
+    <span class="value"><%= resource.place %></span>
+  <% end %>
+</div>
+
+
+<div>
+  <span class="label">Сумма услуг без скидки:</span>
+  <% if resource.price_without_discount? %>
+    <span class="value"><%=  resource.price_without_discount %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
+
+<div>
+  <span class="label">Сумма услуг со скидкой:</span>
+  <% if resource.price_with_discount? %>
+    <span class="value"><%=  resource.price_with_discount %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
+
+<div>
+  <span class="label">Доля организации:</span>
+  <% if resource.organization_quota? %>
+    <span class="value"><%=  resource.organization_quota %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
+
+<div>
+  <span class="label">Стоимость:</span>
+  <% if resource.price? %>
+    <span class="value"><%=  resource.price %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
+
+<div>
+  <span class="label">Скидка:</span>
+  <% if resource.discount? %>
+    <span class="value"><%=  "#{resource.discount}%" %></span>
+  <% else %>
+    <span class="blank">Нет</span>
+  <% end %>
+</div>
+
+<div class="details">
+  <p><span class='label'>Коды:</span></p>
+  <% if resource.copies.any? %>
+    <table class='tickets'>
+      <% resource.copies.each do |copy| %>
+        <tr>
+          <td class='code'><%= copy.code %></td>
+          <td class='phone'><%= copy.copy_payment ? copy.copy_payment.phone : '' %></td>
+          <td class='state'><%= copy.state_text %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <span class="blank">Нет</span>
+  <% end %>
+</div>
+

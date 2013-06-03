@@ -1,5 +1,8 @@
 <div class='form_view'>
-  <%= simple_form_for @coupon, :url => manage_coupons_path, :html => { :novalidate => true } do |f| %>
+  <%= simple_form_for @coupon, 
+    :url => @coupon.new_record? ? manage_coupons_path : manage_coupon_path(@coupon), 
+    :as => :coupon,
+    :html => { :novalidate => true } do |f| %>
     <%= hidden_field_tag 'type', @type %>
     <%= f.input :kind, :as => :select, :selected => f.object.kind, :include_blank => false %>
     <%= f.input :categories, :as => :check_boxes , :wrapper_html => { :class => :category_list }%>
@@ -16,7 +19,7 @@
       </div>
     <% end %>
 
-    <%= render :partial => "#{@type}_coupon_fields", :locals => { :f => f }  %>
+    <%= render :partial => "#{f.object.type.underscore}_fields", :locals => { :f => f }  %>
 
     <div class="actions">
       <%= link_to "&larr; Назад".html_safe, :back %>

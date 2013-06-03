@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130530041522) do
+ActiveRecord::Schema.define(:version => 20130531075943) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -188,6 +188,8 @@ ActiveRecord::Schema.define(:version => 20130530041522) do
     t.integer  "copy_payment_id"
     t.integer  "copyable_id"
     t.string   "copyable_type"
+    t.integer  "row"
+    t.integer  "seat"
   end
 
   add_index "copies", ["copy_payment_id"], :name => "index_tickets_on_payment_id"
@@ -218,6 +220,7 @@ ActiveRecord::Schema.define(:version => 20130530041522) do
     t.datetime "complete_at"
     t.text     "categories"
     t.text     "affiliate_url"
+    t.string   "type"
   end
 
   add_index "coupons", ["organization_id"], :name => "index_coupons_on_organization_id"
@@ -790,10 +793,11 @@ ActiveRecord::Schema.define(:version => 20130530041522) do
     t.integer  "number"
     t.float    "original_price"
     t.float    "price"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.text     "description"
     t.datetime "stale_at"
+    t.float    "organization_price"
   end
 
   add_index "tickets", ["affiche_id"], :name => "index_ticket_infos_on_affiche_id"
