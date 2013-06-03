@@ -56,6 +56,7 @@ $ ->
   init_stream_buro_service() if $('.lyube').length
   init_my_affiche() if $('.my_affiche_wrapper')
   init_datetime_picker()
+  init_file_upload() if $('.file_upload').length
 
   true
 

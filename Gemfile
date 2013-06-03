@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 group :assets do
   gem 'jcrop-rails'
+  gem 'jquery-fileupload-rails'
   gem 'libv8',                      '~> 3.11.8' unless RUBY_PLATFORM =~ /freebsd/
   gem 'therubyracer',               :platforms => :ruby, :require => 'v8'
   gem 'turbo-sprockets-rails3'

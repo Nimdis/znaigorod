@@ -3,9 +3,9 @@ class Attachment < ActiveRecord::Base
 
   belongs_to :attachable, :polymorphic => true
 
-  validates_presence_of :description
-
   default_scope :order => 'id ASC'
+
+  before_create :set_description
 
   after_create :index_attachable
   after_destroy :index_attachable
@@ -33,6 +33,10 @@ private
 
   def tags
     attachable.respond_to?(:tags) ? attachable.tags : []
+  end
+
+  def set_description
+    self.description ||= File.basename(file_file_name, '.*').titleize
   end
 end
 
