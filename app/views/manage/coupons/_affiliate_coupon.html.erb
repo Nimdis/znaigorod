@@ -8,18 +8,18 @@
 </div>
 
 <div>
-  <span class="label">Стоимость:</span>
-  <% if resource.price? %>
-    <span class="value"><%=  resource.price %></span>
+  <span class="label">Скидка:</span>
+  <% if resource.discount? %>
+    <span class="value"><%=  "#{resource.discount}%" %></span>
   <% else %>
-    <span class="blank">Не указано</span>
+    <span class="blank">Нет</span>
   <% end %>
 </div>
 
 <div>
-  <span class="label">Скидка:</span>
-  <% if resource.discount? %>
-    <span class="value"><%=  "#{resource.discount}%" %></span>
+  <span class="label">Ссыла:</span>
+  <% if coupon.affiliate_url? %>
+    <span class="value"><%= link_to 'Ссылка на сторонний сайт', coupon.affiliate_url %></span>
   <% else %>
     <span class="blank">Нет</span>
   <% end %>
