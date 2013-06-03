@@ -46,6 +46,10 @@ ru:
       sauna:                              Сауна
       sport:                              Спорт
 
+      coupon:                             Купоны и сертификаты
+      paid_coupon:                        Платные купоны и сертификаты
+      affiliate_coupon:                   Партнерские купоны и сертификаты
+
       sauna_accessory:                    Общая информация
       sauna_alcohol:                      Алкоголь
       sauna_broom:                        Веники

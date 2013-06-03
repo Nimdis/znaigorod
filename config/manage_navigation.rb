@@ -29,7 +29,11 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :coupons, 'Купоны', manage_coupons_path,
       :highlights_on => ->(){ resource_class == Coupon },
-      :if => -> { can?(:manage, Coupon) }
+      :if => -> { can?(:manage, Coupon) } do |coupon_kind|
+        Coupon.ordered_descendants.each do |kind|
+          coupon_kind.item kind, kind.model_name.human, [:manage, kind.model_name.underscore.pluralize]
+        end
+      end
 
     primary.item :posts, 'Конкурсы', manage_contests_path,
       :highlights_on => ->(){ resource_class == Contest },

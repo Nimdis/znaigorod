@@ -24,8 +24,10 @@ class Coupon < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy
 
   scope :ordered,   -> { order 'created_at DESC' }
+  scope :actual,    -> { where 'stale_at > ?', Time.zone.now }
+  scope :stale,     -> { where 'stale_at <= ?', Time.zone.now }
 
-  validates_presence_of :categories, :kind, :place, :stale_at
+  validates_presence_of :categories, :image, :kind, :stale_at
 
   def get_organization_id
     self.try(:organization_id)
@@ -33,6 +35,10 @@ class Coupon < ActiveRecord::Base
 
   def random_coupons
     self.class.where('id != ?', self.id).limit(100).sample(4)
+  end
+
+  def self.ordered_descendants
+    [AffiliateCoupon, PaidCoupon]
   end
 
   searchable do

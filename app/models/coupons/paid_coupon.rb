@@ -6,7 +6,7 @@ class PaidCoupon < Coupon
   attr_accessible  :price_with_discount, :price_without_discount, :price, :organization_quota, :number
 
   before_save :set_discount
-  validates_presence_of :price, :number
+  validates_presence_of :price, :place, :number
 
   private
 
