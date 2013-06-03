@@ -27,7 +27,7 @@ SimpleNavigation::Configuration.run do |navigation|
         end
     end
 
-    primary.item :coupons, 'Купоны', manage_coupons_path,
+    primary.item :coupons, 'Купоны',
       :highlights_on => ->(){ resource_class == Coupon },
       :if => -> { can?(:manage, Coupon) } do |coupon_kind|
         Coupon.ordered_descendants.each do |kind|
