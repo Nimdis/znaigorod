@@ -31,7 +31,7 @@ SimpleNavigation::Configuration.run do |navigation|
       :highlights_on => ->(){ resource_class == Coupon },
       :if => -> { can?(:manage, Coupon) } do |coupon_kind|
         Coupon.ordered_descendants.each do |kind|
-          coupon_kind.item kind, kind.model_name.human, [:manage, kind.model_name.underscore.pluralize]
+          coupon_kind.item kind, kind.model_name.human, polymorphic_path([:manage, kind.model_name.underscore.pluralize], :type => kind)
         end
       end
 

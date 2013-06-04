@@ -3,6 +3,8 @@
   <%= link_to 'Добавить сертификат', new_manage_coupon_path(:type => :free), :class => 'new_resource' %>
 </div>
 
+<%= render :partial => 'manage/coupons/filter' %>
+
 <div class='coupons_list'>
   <% @coupons.each do |coupon| %>
     <div class='coupon'>
