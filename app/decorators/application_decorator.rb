@@ -15,7 +15,7 @@ class ApplicationDecorator < Draper::Base
   def image_tag(url, width, height, title, crop = true)
     options = {size: "#{width}x#{height}"}
     options.merge!(title: title, alt: title) if title.present?
-    h.image_tag(resized_image_url(url, width, height, crop), options)
+    h.image_tag(h.resized_image_url(url, width, height, crop), options)
   end
 
   def humanize_price(price_min, price_max)
