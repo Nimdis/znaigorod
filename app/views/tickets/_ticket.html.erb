@@ -9,7 +9,7 @@
     <p class='ticket_price'><%= @ticket.price.to_i %> р.</p>
   </div>
   <div class='ticket_description_and_tickets'>
-    <p class='ticket_description'><%= @ticket.description.gilensize %></p>
+    <div class='ticket_description'><%= @ticket.description.as_html %></div>
     <% if @ticket.organization_price %>
       <p class='ticket_reservation'>
         Назови слово "ЗнайГород", покажи код, полученный по SMS и <span class='ticket_price'>заплати всего <%= t('ticket_price', count: @ticket.organization_price.to_i) %> </span> в кассе заведения. Кроме того, ты можешь быть уверен, что билет на выбранное место будет забронирован за тобой.
