@@ -38,7 +38,7 @@ class Coupon < ActiveRecord::Base
   end
 
   def self.ordered_descendants
-    [AffiliateCoupon, DiscountCoupon, PaidCoupon]
+    [AffiliateCoupon, DiscountCoupon, FreeCoupon, PaidCoupon]
   end
 
   searchable do

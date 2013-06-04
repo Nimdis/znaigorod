@@ -46,10 +46,11 @@ ru:
       sauna:                              Сауна
       sport:                              Спорт
 
-      coupon:                             Купоны и сертификаты
-      paid_coupon:                        Платные купоны и сертификаты
       affiliate_coupon:                   Партнерские купоны и сертификаты
+      coupon:                             Купоны и сертификаты
       discount_coupon:                    Скидки в заведениях города Томска
+      free_coupon:                        Бесплатные сертификаты и купоны
+      paid_coupon:                        Платные купоны и сертификаты
 
       sauna_accessory:                    Общая информация
       sauna_alcohol:                      Алкоголь

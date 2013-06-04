@@ -1,0 +1,17 @@
+<div>
+  <span class="label">Место:</span>
+  <% if resource.organization_id? %>
+    <span class="value"><%= resource.organization %></span>
+  <% else %>
+    <span class="value"><%= resource.place %></span>
+  <% end %>
+</div>
+
+<div>
+  <span class="label">Скидка:</span>
+  <% if resource.discount? %>
+    <span class="value"><%=  "#{resource.discount}%" %></span>
+  <% else %>
+    <span class="blank">Нет</span>
+  <% end %>
+</div>
