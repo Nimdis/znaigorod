@@ -11,6 +11,7 @@
  * = require autosuggest_handler
  * = require datetime_picker
  * = require file_upload
+ * = require ajax_delete
  * = require ./info_plugin
  * = require ./choose_file
  * = require ./geocoder

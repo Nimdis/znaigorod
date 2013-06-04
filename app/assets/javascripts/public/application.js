@@ -19,6 +19,7 @@
  * = require autosuggest_handler
  * = require datetime_picker
  * = require file_upload
+ * = require ajax_delete
  * = require ./auth
  * = require ./rating
  * = require ./md5
