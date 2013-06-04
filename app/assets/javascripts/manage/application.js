@@ -6,8 +6,11 @@
  * = require jquery-ui/jquery.ui.datepicker-ru.js
  * = require jquery-ui/jquery-ui-timepicker-addon.js
  * = require jquery-ui/jquery-ui-timepicker-ru.js
+ * = require jquery-fileupload/basic
+ * = require jquery-fileupload/vendor/tmpl
  * = require autosuggest_handler
  * = require datetime_picker
+ * = require file_upload
  * = require ./info_plugin
  * = require ./choose_file
  * = require ./geocoder

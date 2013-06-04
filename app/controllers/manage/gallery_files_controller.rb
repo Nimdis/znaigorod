@@ -12,9 +12,8 @@ class Manage::GalleryFilesController < Manage::ApplicationController
   belongs_to :affiche, :organization, :polymorphic => true, :optional => true
 
   def create
-    create! do
-      is_parent_affiche? ? manage_affiche_path(parent) : manage_organization_path(parent)
-    end
+    @parent = parent.class.find(params[(parent.class.superclass.name.underscore + '_id').to_sym])
+    @gallery_file = @parent.gallery_files.create(:file => params[:gallery_files][:file].first)
   end
 
   def update
