@@ -12,7 +12,7 @@ class Manage::GalleryFilesController < Manage::ApplicationController
   belongs_to :affiche, :organization, :polymorphic => true, :optional => true
 
   def create
-    @parent = parent.class.find(params[(parent.class.superclass.name.underscore + '_id').to_sym])
+    @parent = parent.class.find(params[(parent.class.superclass.name == 'Affiche' ? parent.class.superclass.name.underscore : parent.class.name.underscore) + '_id'])
     @gallery_file = @parent.gallery_files.create(:file => params[:gallery_files][:file].first)
   end
 
@@ -21,9 +21,7 @@ class Manage::GalleryFilesController < Manage::ApplicationController
   end
 
   def destroy
-    destroy! do
-      is_parent_affiche? ? manage_affiche_path(parent) : manage_organization_path(parent)
-    end
+    destroy! { collection_path }
   end
 
   def destroy_file
@@ -33,10 +31,13 @@ class Manage::GalleryFilesController < Manage::ApplicationController
 
   protected
     def collection_path
-      is_parent_affiche? ? manage_affiche_path(parent) : manage_organization_path(parent)
-    end
-
-    def is_parent_affiche?
-      parent.class.superclass.name.underscore == 'affiche'
+      case parent
+      when Affiche
+        manage_affiche_path(parent)
+      when Organization
+        manage_organization_path(parent)
+      when *Organization.available_suborganization_classes
+        manage_organization_path(parent.organization)
+      end
     end
 end

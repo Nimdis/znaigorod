@@ -1,5 +1,6 @@
 class Manage::GalleryImagesController < Manage::ApplicationController
   actions :new, :create, :destroy, :update, :edit
+  custom_actions :resource => :destroy_file
 
   belongs_to *Organization.available_suborganization_kinds,
     :polymorphic => true, :optional => true
@@ -8,11 +9,11 @@ class Manage::GalleryImagesController < Manage::ApplicationController
     belongs_to type.name.underscore, :polymorphic => true, :optional => :true
   end
 
-  belongs_to :affiche, :organization, :sauna_hall,
-    :polymorphic => true, :optional => true
+  belongs_to :affiche, :organization, :sauna_hall, :polymorphic => true, :optional => true
 
   def create
-    create! { collection_path }
+    @parent = parent.class.find(params[(parent.class.superclass.name == 'Affiche' ? parent.class.superclass.name.underscore : parent.class.name.underscore) + '_id'])
+    @gallery_image = @parent.gallery_images.create(:file => params[:gallery_images][:file].first)
   end
 
   def update

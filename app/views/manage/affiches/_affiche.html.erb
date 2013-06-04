@@ -141,14 +141,12 @@
 </div>
 
 <div class='images'>
-  <h3>
-    Галерея изображений
-    <%= link_to "Добавить изображение", new_manage_affiche_gallery_image_path(resource), :class => 'edit_link'  %>
-  </h3>
-  <% if resource.images.any? %>
+  <h3>Галерея изображений</h3>
+
+  <% if resource.gallery_social_images.any? %>
     <span class="value">
       <ul>
-        <% resource.images.each do |image| %>
+        <% resource.gallery_social_images.each do |image| %>
           <li>
             <p class='image'>
               <%= resized_link_image(image, 160, 160) %>
@@ -162,7 +160,19 @@
       </ul>
     </span>
   <% else %>
-    <span class="blank">Нет изображений</span>
+    <span class="blank">Нет изображений загруженных из социальных сетей</span>
+  <% end %>
+
+  <div class="gallery_images">
+    <span class="value">
+      <ul>
+        <%= render resource.gallery_images %>
+      </ul>
+    </span>
+  </div>
+
+  <%= simple_form_for resource.gallery_images.new, :url => manage_affiche_gallery_images_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+    <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_images[file]' } %>
   <% end %>
 </div>
 
@@ -176,16 +186,16 @@
   </div>
 
   <%= simple_form_for resource.gallery_files.new, :url => manage_affiche_gallery_files_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
-    <%= f.input :file, :as => :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' } %>
+    <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' } %>
   <% end %>
-
-  <script id="template-upload" type="text/x-tmpl">
-    <div class="upload">
-      {%=o.name%}
-      <div class="progress"><div class="bar" style="width: 0%"></div></div>
-    </div>
-  </script>
 </div>
+
+<script id="template-upload" type="text/x-tmpl">
+  <div class="upload">
+    {%=o.name%}
+    <div class="progress"><div class="bar" style="width: 0%"></div></div>
+  </div>
+</script>
 
 <% if resource.affiche_schedule.present? %>
   <div>
