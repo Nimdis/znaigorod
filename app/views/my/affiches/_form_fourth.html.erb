@@ -1,12 +1,3 @@
-<%= simple_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
-  <%= hidden_field_tag :step, @step %>
-  <%= f.input :trailer_code %>
-
-  <div class='submit'>
-    <%= f.submit %>
-  </div>
-<% end %>
-
 <div class="gallery_images">
   <%= render @affiche.gallery_images %>
 </div>

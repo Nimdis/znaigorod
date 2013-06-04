@@ -62,7 +62,7 @@ class Affiche < ActiveRecord::Base
   attr_accessible :poster_image, :step, :set_region, :crop_x, :crop_y, :crop_width, :crop_height
 
   def self.steps
-    %w[first second third fourth]
+    %w[first second third fourth fifth]
   end
 
   steps.each do |step|
