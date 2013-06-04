@@ -1,7 +1,7 @@
 <div class="show">
   <h1>
     <%= resource.title %>
-    <%= link_to t("edit_#{resource.class.model_name.underscore}"), edit_manage_coupon_path(resource), :class => 'edit_link' %>
+    <%= link_to t("edit_coupon"), edit_manage_coupon_path(resource), :class => 'edit_link' %>
   </h1>
 
   <% if resource.image_url? %>
