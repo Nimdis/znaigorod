@@ -1,17 +1,15 @@
-<div>
-  <%= form_tag [:manage, resource_class.name.underscore.pluralize], :method => :get, :class => 'search_ticket_infos' do %>
-    <%= text_field_tag 'q', params[:q] %>
-    <%= hidden_field_tag 'type', @klass %>
-
+<div class='coupons_filter'>
+  <%= form_tag [:manage, resource_class.name.underscore.pluralize], :method => :get, :class => 'search_coupon_filter' do %>
+    <%= text_field_tag :q, params[:q] %>
     <ul>
       <li>
         <%= radio_button_tag :category, '', @category == nil, :id => 'category_all' %>
-        <%= label_tag 'category_all', "Все (#{@klass.count})" %>
+        <%= label_tag 'category_all', "Все (#{resource_class.count})" %>
       </li>
       <% Organization.available_suborganization_kinds.each do |kind| %>
         <li>
           <%= radio_button_tag :category, kind, @category == kind, :id => "category_#{kind}" %>
-          <%= label_tag "category_#{kind}", "#{kind} (#{@klass.search { with :suborganizations_kind, kind }.results.count})"  %>
+          <%= label_tag "category_#{kind}", t("organization.kind.#{kind}") + " (#{resource_class.search { with :suborganizations_kind, kind }.results.count})"  %>
         </li>
       <% end %>
     </ul>
@@ -19,4 +17,3 @@
     <%= submit_tag 'Найти' %>
   <% end %>
 </div>
-

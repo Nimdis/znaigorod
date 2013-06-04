@@ -2,7 +2,6 @@ class Manage::AffiliateCouponsController < Manage::ApplicationController
   has_scope :page, default: 1
 
   def index
-    @klass = params[:type].constantize
     @category = category = params[:category].present? ? params[:category] : nil
     page = params[:page].to_i.zero? ? 1 : params[:page]
 
