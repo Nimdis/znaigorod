@@ -167,25 +167,24 @@
 </div>
 
 <div class='attachments'>
-  <h3>
-    Прикрепленные файлы
-    <%= link_to "Добавить файл", new_manage_affiche_gallery_file_path(resource), :class => 'edit_link'  %>
-  </h3>
-  <% if resource.gallery_files.any?  %>
-    <span class="value">
-      <ul>
-        <% resource.gallery_files.each do |attachment| %>
-          <li>
-            <%= link_to attachment.description, attachment.file_url %>
-            <%= link_to "Удалить", manage_affiche_gallery_file_path(resource, attachment), :method => :delete, :confirm => 'Вы уверены?' %>
-            <%= link_to 'Редактировать', edit_manage_affiche_gallery_file_path(resource, attachment) %>
-          </li>
-        <% end %>
-      </ul>
-    </span>
-  <% else %>
-    <span class="blank">Нет файлов</span>
+  <h3>Прикрепленные файлы</h3>
+
+  <div class="gallery_files">
+    <ul>
+      <%= render resource.gallery_files %>
+    </ul>
+  </div>
+
+  <%= simple_form_for resource.gallery_files.new, :url => manage_affiche_gallery_files_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+    <%= f.input :file, :as => :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' } %>
   <% end %>
+
+  <script id="template-upload" type="text/x-tmpl">
+    <div class="upload">
+      {%=o.name%}
+      <div class="progress"><div class="bar" style="width: 0%"></div></div>
+    </div>
+  </script>
 </div>
 
 <% if resource.affiche_schedule.present? %>

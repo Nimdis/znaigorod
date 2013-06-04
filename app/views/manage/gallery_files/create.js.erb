@@ -1,0 +1,5 @@
+<% if @gallery_file.new_record? %>
+  alert("Failed to upload gallery_file: <%= j @gallery_file.errors.full_messages.join(', ').html_safe %>");
+<% else %>
+  $(".gallery_files").append("<%= j render(@gallery_file) %>");
+<% end %>

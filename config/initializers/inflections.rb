@@ -19,7 +19,7 @@ ActiveSupport::Inflector.inflections do |inflect|
 
   inflect.singular 'address',       'address'
   inflect.singular 'affiches',      'affiche'
-  inflect.singular 'master_class',  'master_class'
+  # inflect.singular 'master_class',  'master_class'
   inflect.singular 'masterclass',   'masterclass'
   inflect.singular 'masterclasses', 'masterclass'
 end
