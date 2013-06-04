@@ -12,6 +12,7 @@ $ ->
   init_curtail() if $('.curtail')
   init_discount_hidden() if $('#coupon_discount')
   init_file_upload() if $('.file_upload').length
+  init_ajax_delete() if $('.ajax_delete').length
 
 $(window).load ->
   init_organization_map() if $('.edit_organization, .new_organization').length

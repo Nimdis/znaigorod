@@ -15,7 +15,9 @@ class Manage::GallerySocialImagesController < Manage::ApplicationController
   end
 
   def destroy
-    destroy! { collection_path }
+    destroy! {
+      render :nothing => true and return
+    }
   end
 
   protected

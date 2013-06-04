@@ -1,5 +1,5 @@
 <li>
   <%= link_to gallery_file.description, gallery_file.file_url %>
-  <%= link_to "редактировать", [:edit, :manage, gallery_file.attachable, gallery_file] %>
-  <%= link_to "удалить", [:manage, gallery_file.attachable, gallery_file], :method => :delete, :confirm => 'Вы уверены?' %>
+  <%= link_to "Удалить", [:manage, gallery_file.attachable, gallery_file], :method => :delete, :remote => true, :class => 'ajax_delete' %>
+  <%= link_to "Редактировать", [:edit, :manage, gallery_file.attachable, gallery_file] %>
 </li>

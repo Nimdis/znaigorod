@@ -3,7 +3,7 @@
     <%= image_tag gallery_image.file_url, :width => '160', :height => '160' %>
   </p>
   <p class='action'>
-    <%= link_to "редактировать", [:edit, :manage, gallery_image.attachable, gallery_image] %>
-    <%= link_to "удалить", [:manage, gallery_image.attachable, gallery_image], :method => :delete, :confirm => 'Вы уверены?' %>
+    <%= link_to "Удалить", [:manage, gallery_image.attachable, gallery_image], :method => :delete, :remote => true, :class => 'ajax_delete'  %>
+    <%= link_to "Редактировать", [:edit, :manage, gallery_image.attachable, gallery_image] %>
   </p>
 </li>

@@ -57,6 +57,7 @@ $ ->
   init_my_affiche() if $('.my_affiche_wrapper')
   init_datetime_picker()
   init_file_upload() if $('.file_upload').length
+  init_ajax_delete() if $('.ajax_delete').length
 
   true
 

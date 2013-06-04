@@ -152,7 +152,7 @@
               <%= resized_link_image(image, 160, 160) %>
             </p>
             <p class='action'>
-              <%= link_to "Удалить", [:manage, resource, image], :method => :delete, :confirm => 'Вы уверены?' %>
+              <%= link_to "Удалить", [:manage, resource, image], :method => :delete, :remote => true, :class => 'ajax_delete' %>
               <%= link_to 'Редактировать', [:edit, :manage, resource, image] %>
             </p>
           </li>
