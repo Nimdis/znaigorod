@@ -14,6 +14,6 @@ class Manage::PaidCouponsController < Manage::ApplicationController
     }
 
     @groups = search.group(:copyable_id_str).groups
-    @coupons = PaidCoupon.where(:id => @groups.map(&:value)).order('id DESC')
+    @paid_coupons = PaidCoupon.where(:id => @groups.map(&:value)).order('id DESC')
   end
 end

@@ -21,7 +21,9 @@ Znaigorod::Application.routes.draw do
     end
 
     resources :coupons, :except => :index
-    resources :paid_coupons, :only => :index
+    resources :paid_coupons, :only => :index do
+      get ':by_state' => 'paid_coupons#index', :on => :collection, :as => :with_state
+    end
     resources :affiliate_coupons, :only => :index
     resources :discount_coupons, :only => :index
     resources :free_coupons, :only => :index
