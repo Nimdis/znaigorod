@@ -1,5 +1,4 @@
 <% if f.object.file.exists? %>
-  <%= link_to 'Удалить файл', [:destroy_file, :manage, parent, f.object], :method => :delete, :confirm => 'Вы уверены?' %>
   <%= link_to f.object.file_url if f.object.file.exists? %>
 <% else %>
   <%= f.input :file %>
