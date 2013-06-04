@@ -221,47 +221,40 @@
 </div>
 
 <div class='images'>
-  <h3>
-    Галерея изображений
-    <%= link_to "Добавить изображение", new_manage_organization_gallery_image_path(resource), :class => 'edit_link'  %>
-  </h3>
-  <% if resource.gallery_images.any? %>
+  <h3>Галерея изображений</h3>
+
+  <div class="gallery_images">
     <span class="value">
       <ul>
-        <% resource.gallery_images.each do |image| %>
-          <li>
-            <%= image_tag(resized_image_url(image.file_url, 400, 400, false), :alt => image.description, :title => image.description) %>
-            <%= link_to "Удалить", manage_organization_gallery_image_path(resource, image), :method => :delete, :confirm => 'Вы уверены?' %>
-            <%= link_to 'Редактировать', edit_manage_organization_gallery_image_path(resource, image) %>
-          </li>
-        <% end %>
+        <%= render resource.gallery_images %>
       </ul>
     </span>
-  <% else %>
-    <span class="blank">Нет изображений</span>
+  </div>
+
+  <%= simple_form_for resource.gallery_images.new, :url => manage_organization_gallery_images_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+    <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_images[file]' } %>
   <% end %>
 </div>
 
 <div class='attachments'>
-  <h3>
-    Прикрепленные файлы
-    <%= link_to "Добавить файл", new_manage_organization_gallery_file_path(resource), :class => 'edit_link'  %>
-  </h3>
-  <% if resource.gallery_files.any?  %>
-    <span class="value">
-      <ul>
-        <% resource.gallery_files.each do |attachment| %>
-          <li>
-            <%= link_to attachment.description, attachment.file_url %>
-            <%= link_to "Удалить", manage_organization_gallery_file_path(resource, attachment), :method => :delete, :confirm => 'Вы уверены?' %>
-            <%= link_to 'Редактировать', edit_manage_organization_gallery_file_path(resource, attachment) %>
-          </li>
-        <% end %>
-      </ul>
-    </span>
-  <% else %>
-    <span class="blank">Нет файлов</span>
+  <h3>Прикрепленные файлы</h3>
+
+  <div class="gallery_files">
+    <ul>
+      <%= render resource.gallery_files %>
+    </ul>
+  </div>
+
+  <%= simple_form_for resource.gallery_files.new, :url => manage_organization_gallery_files_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+    <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' } %>
   <% end %>
+
+  <script id="template-upload" type="text/x-tmpl">
+    <div class="upload">
+      {%=o.name%}
+      <div class="progress"><div class="bar" style="width: 0%"></div></div>
+    </div>
+  </script>
 </div>
 
 <div>
