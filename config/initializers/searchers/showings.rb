@@ -1,7 +1,6 @@
 HasSearcher.create_searcher :showing do
   models :showing
 
-  property :affiche_id
   property :affiche_category
   property :starts_on, :modificator => :less_than
   property :starts_at, :modificator => :greater_than
@@ -82,6 +81,9 @@ HasSearcher.create_searcher :showings do
   scope :order_by_nearness do |search|
     search.order_by_geodist(:location, search_object.location.lat, search_object.location.lon) if search_object.location
   end
+
+  property :affiche_id
+  property :affiche_state
 
   # categories tags organizations
   [:categories, :tags, :organization_ids].each do |field|

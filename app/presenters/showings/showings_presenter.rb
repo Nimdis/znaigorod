@@ -152,6 +152,7 @@ class ShowingsPresenter
     @searcher_params ||= {}.tap do |params|
       params[:age_max]          = age_filter.maximum         if age_filter.maximum.present?
       params[:age_min]          = age_filter.minimum         if age_filter.minimum.present?
+      params[:affiche_state]    = 'published'
       params[:categories]       = categories_filter.selected if categories_filter.selected.any?
       params[:organization_ids] = organizations_filter.ids   if organizations_filter.ids.any?
       params[:price_max]        = price_filter.maximum       if price_filter.maximum.present?
@@ -161,14 +162,15 @@ class ShowingsPresenter
       params[:from]             = time_filter.from           if time_filter.from.present?
       params[:to]               = time_filter.to             if time_filter.to.present?
 
-      params[:location]         = Hashie::Mash.new(lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius)  if geo_filter.used?
+      params[:location] = Hashie::Mash.new(lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius) if geo_filter.used?
     end
   end
 
   def query
-    searcher_params.tap { |hash|
-      hash.delete(:starts_on)
+    searcher_params.dup.tap { |hash|
+      hash.delete(:affiche_state)
       hash.delete(:location)
+      hash.delete(:starts_on)
 
       hash[:utf8] = '✓'
       %w[order_by view period lat lon radius].each { |p| hash[p] = send(p) }

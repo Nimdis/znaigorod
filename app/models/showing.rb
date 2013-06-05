@@ -8,7 +8,10 @@ class Showing < ActiveRecord::Base
 
   validates_presence_of :place, :starts_at
 
-  delegate :created_at, :distribution_starts_on, :rating, :tags, :title, :age_min, :age_max, :to => :affiche, :prefix => true
+  delegate :created_at, :distribution_starts_on, :total_rating, :tags, :title, :age_min, :age_max, :state,
+    :to => :affiche,
+    :prefix => true
+
   delegate :address, :title, :to => :organization, :prefix => true, :allow_nil => true
 
   after_create  :index_affiche
@@ -38,6 +41,7 @@ class Showing < ActiveRecord::Base
 
     latlon(:location) { Sunspot::Util::Coordinates.new(get_latitude, get_longitude) }
 
+    string :affiche_state
     string(:affiche_category) { affiche.class.model_name.downcase }
     string(:affiche_id_str) { affiche_id.to_s }
     string(:categories, :multiple => true) { [affiche.class.model_name.downcase] }
