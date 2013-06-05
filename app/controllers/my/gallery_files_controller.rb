@@ -9,6 +9,9 @@ class My::GalleryFilesController < My::ApplicationController
   end
 
   def destroy
-    destroy! { edit_step_my_affiche_path(@affiche.id, :step => :fourth) }
+    destroy! {
+      render :nothing => true and return
+    }
+    # edit_step_my_affiche_path(@affiche.id, :step => :fourth) }
   end
 end
