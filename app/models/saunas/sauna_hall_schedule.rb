@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SaunaHallSchedule < ActiveRecord::Base
   attr_accessible :day, :from, :price, :to
 

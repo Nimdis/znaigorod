@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Coupon < ActiveRecord::Base
   include Copies
 
@@ -94,5 +96,6 @@ end
 #  stale_at               :datetime
 #  complete_at            :datetime
 #  categories             :text
+#  affiliate_url          :text
 #
 

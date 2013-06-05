@@ -92,5 +92,7 @@ end
 #  copy_payment_id :integer
 #  copyable_id     :integer
 #  copyable_type   :string(255)
+#  row             :integer
+#  seat            :integer
 #
 

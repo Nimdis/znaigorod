@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class PoolTablePrice < ActiveRecord::Base
   attr_accessible :day, :from, :price, :to
 

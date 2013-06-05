@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Menu < ActiveRecord::Base
 
   attr_accessible :category, :description, :menu_positions_attributes

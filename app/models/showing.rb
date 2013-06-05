@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Showing < ActiveRecord::Base
   attr_accessible :ends_at, :hall, :place, :price_max, :price_min, :starts_at, :organization_id, :latitude, :longitude, :affiche_id
 

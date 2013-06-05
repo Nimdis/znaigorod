@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Attachment < ActiveRecord::Base
   attr_accessible :file, :description
 
@@ -44,17 +46,12 @@ end
 #
 # Table name: attachments
 #
-#  id                :integer          not null, primary key
-#  attachable_id     :integer
-#  attachable_type   :string(255)
-#  description       :text
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  type              :string(255)
-#  file_file_name    :string(255)
-#  file_content_type :string(255)
-#  file_file_size    :integer
-#  file_updated_at   :datetime
-#  file_url          :text
+#  id              :integer          not null, primary key
+#  attachable_id   :integer
+#  attachable_type :string(255)
+#  url             :string(255)
+#  description     :text
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SaunaHallBath < ActiveRecord::Base
   include UsefulAttributes
 

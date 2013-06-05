@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class AfficheSchedule < ActiveRecord::Base
   attr_accessible :affiche, :ends_at, :ends_on, :hall, :holidays, :place,
                   :price_max, :price_min, :starts_at, :starts_on,

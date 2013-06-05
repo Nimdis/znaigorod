@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class PaperclipAttachment < ActiveRecord::Base
   belongs_to :attacheable, :polymorphic => true
   attr_accessible :attachment

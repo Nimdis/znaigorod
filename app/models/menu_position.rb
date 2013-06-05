@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class MenuPosition < ActiveRecord::Base
 
   attr_accessible :count, :description, :position, :price, :title, :cooking_time, :image, :delete_image

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class OrganizationStand < ActiveRecord::Base
   attr_accessible :guarded, :places, :video_observation
 

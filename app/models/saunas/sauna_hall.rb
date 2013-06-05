@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SaunaHall < ActiveRecord::Base
   # ActiveSupport::Concern extentions
   include UsefulAttributes

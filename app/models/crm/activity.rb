@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Activity < ActiveRecord::Base
   attr_accessible :title, :state, :activity_at, :user_id, :contact_id, :status, :kind
 

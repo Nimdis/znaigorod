@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class PostImage < ActiveRecord::Base
   belongs_to :post
   attr_accessible :title, :attachment
