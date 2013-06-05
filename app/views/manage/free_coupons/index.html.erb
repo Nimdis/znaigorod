@@ -6,7 +6,7 @@
 <%= render :partial => 'manage/coupons/filter' %>
 
 <div class='coupons_list'>
-  <% @coupons.each do |coupon| %>
+  <% @free_coupons.each do |coupon| %>
     <div class='coupon'>
       <p><%= link_to coupon.title, manage_coupon_path(coupon) %></p>
       <div class='info'>
