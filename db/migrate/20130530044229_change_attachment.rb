@@ -18,7 +18,7 @@ class ChangeAttachment < ActiveRecord::Migration
     our_images = Image.where('thumbnail_url IS NULL')
     pg = ProgressBar.new(our_images.count)
     our_images.each do |image|
-      gi = GalleryImage.new(:description => image.description)
+      gi = GalleryImage.new(:description => image.description || '')
       gi.attachable_id = image.imageable_id
       gi.attachable_type = image.imageable_type
       gi.save(:validate => false)
@@ -33,7 +33,7 @@ class ChangeAttachment < ActiveRecord::Migration
     social_images = Image.where('thumbnail_url IS NOT NULL')
     pg = ProgressBar.new(social_images.count)
     social_images.each do |image|
-      gi = GallerySocialImage.new(:description => image.description)
+      gi = GallerySocialImage.new(:description => image.description || '')
       gi.attachable_id = image.imageable_id
       gi.attachable_type = image.imageable_type
       gi.save(:validate => false)
