@@ -80,7 +80,8 @@ class MovieSyncer
     end
 
     def find_similar_movie_by(title)
-      title.gsub!('часть 3', 'часть III') # fix 'Мальчишник: Часть 3' -> 'Мальчишник: Часть III'
+      title.gsub!('Мальчишник: часть 3', 'Мальчишник: часть III') # fix 'Мальчишник: Часть 3' -> 'Мальчишник: Часть III'
+      title.gsub!('Гагарин.Первый в космосе', 'Гагарин. Первый в космосе') # fix 'Гагарин.Первый в космосе' -> 'Гагарин. Первый в космосе'
       similar_movies = Movie.search{fulltext(title){fields(:title)}}.results
       if similar_movies.one?
         puts "Найден похожий фильм '#{title}' -> '#{similar_movies.first.title}'"
