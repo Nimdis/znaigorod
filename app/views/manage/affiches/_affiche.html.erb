@@ -145,6 +145,7 @@
 
   <% if resource.gallery_social_images.any? %>
     <span class="value">
+      <%= link_to 'Удалить все фотографии', [:destroy_all, :manage, resource, :gallery_social_images], :method => :delete %>
       <ul>
         <% resource.gallery_social_images.each do |image| %>
           <li>

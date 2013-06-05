@@ -1,15 +1,15 @@
-<div class="gallery_images">
+<ul class="gallery_images">
   <%= render @affiche.gallery_images %>
-</div>
+</ul>
 
 <%= form_for @affiche.gallery_images.new, :url => my_affiche_gallery_images_path(@affiche.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
   <%= f.label :file, "Изображение:" %>
   <%= f.file_field :file, :multiple => true, :name => "gallery_image[file]" %>
 <% end %>
 
-<div class="gallery_files">
+<ul class="gallery_files">
   <%= render @affiche.gallery_files %>
-</div>
+</ul>
 
 <%= form_for @affiche.gallery_files.new, :url => my_affiche_gallery_files_path(@affiche.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
   <%= f.label :file, "Файл:" %>
