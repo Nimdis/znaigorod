@@ -22,7 +22,6 @@ ru:
       title: По алфавиту
       starts_at: По ближайшему сеансу
 
-
   affiche_periods:
     today: Сегодня
     weekly: На этой неделе
@@ -40,19 +39,3 @@ ru:
       others: Все другие мероприятия
       masterclasses: Все мастер-классы
       competitions: Все конкурсы
-
-  actual_organizations:
-    sauna: Сауны
-    night_club: Ночные клубы
-    bari: Бары
-    breakfast: Завтраки
-    coffe_house: Кофейни
-    detskie_kafe: Детские кафе
-    stolovie: Столовые
-    buiseness_lanch: Бизнес-ланч
-    food_delivery: Доставка еды
-    museums: Музеи
-    cafe: Кафе
-    billiard: Бильярдные залы
-    theatre: Театры
-
