@@ -3,7 +3,12 @@
     <%= image_tag gallery_image.file_url, :width => '160', :height => '160' %>
   </p>
   <p class='action'>
-    <%= link_to "Удалить", [:manage, gallery_image.attachable, gallery_image], :method => :delete, :remote => true, :class => 'ajax_delete'  %>
-    <%= link_to "Редактировать", [:edit, :manage, gallery_image.attachable, gallery_image] %>
+    <% if gallery_image.attachable.is_a?(SaunaHall) %>
+      <%= link_to "Удалить", [:manage, gallery_image.attachable.organization, gallery_image.attachable, gallery_image], :method => :delete, :remote => true, :class => 'ajax_delete'  %>
+      <%= link_to "Редактировать", [:edit, :manage, gallery_image.attachable.organization, gallery_image.attachable, gallery_image] %>
+    <% else %>
+      <%= link_to "Удалить", [:manage, gallery_image.attachable, gallery_image], :method => :delete, :remote => true, :class => 'ajax_delete'  %>
+      <%= link_to "Редактировать", [:edit, :manage, gallery_image.attachable, gallery_image] %>
+    <% end %>
   </p>
 </li>

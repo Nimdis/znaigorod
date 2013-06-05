@@ -155,7 +155,7 @@ module ApplicationHelper
       end
     elsif parent.class == SaunaHall
       if resource_class == GalleryImage && resource.persisted?
-        [:manage, @organization, @sauna_hall, @image]
+        [:manage, @organization, @sauna_hall, :gallery_image]
       else
         [:manage, @organization, @sauna_hall, :gallery_image]
       end

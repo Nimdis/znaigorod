@@ -102,25 +102,28 @@
     </div>
   </div>
 
-  <div class="gallery_images">
-    <h3>
-      Галерея изображений
-      <%= link_to "Добавить изображение", [:new, :manage, @organization, resource, :gallery_image], :class => 'edit_link'  %>
-    </h3>
-    <% if resource.gallery_images.any? %>
+  <div class="images">
+    <h3>Галерея изображений</h3>
+
+    <div class="gallery_images">
       <span class="value">
         <ul>
-          <% resource.gallery_images.each do |image| %>
-            <li>
-              <%= image_tag image.file_url, :alt => image.description, :title => image.description %>
-              <%= link_to "Удалить", [:manage, @organization, resource, image], :method => :delete, :confirm => 'Вы уверены?' %>
-              <%= link_to 'Редактировать', [:edit, :manage, @organization, resource, image] %>
-            </li>
-          <% end %>
+          <%= render resource.gallery_images %>
         </ul>
       </span>
-    <% else %>
-      <span class="blank">Нет изображений</span>
+    </div>
+
+    <%= simple_form_for resource.gallery_images.new, :url => manage_organization_sauna_hall_gallery_images_path(@organization, resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+      <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_images[file]' } %>
     <% end %>
+  </div>
+
+  <div class="upload_wrapper">
+    <script id="template-upload" type="text/x-tmpl">
+      <div class="upload">
+        {%=o.name%}
+        <div class="progress"><div class="bar" style="width: 0%"></div></div>
+      </div>
+    </script>
   </div>
 </div>
