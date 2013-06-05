@@ -4,7 +4,7 @@ class PhotoreportDecorator < AfficheDecorator
   decorates :affiche
 
   def date
-    h.l affiche.gallery_images.first.created_at, :format => '%e %B'
+    h.l affiche.images.first.created_at, :format => '%e %B'
   end
 
   def link
@@ -13,7 +13,7 @@ class PhotoreportDecorator < AfficheDecorator
 
   def main_images
     result = ""
-    affiche.gallery_images.first(4).reverse.each do |image|
+    affiche.images.first(4).reverse.each do |image|
       if image.thumbnail_url?
         result += h.link_to h.image_tag(image.file_url, :height => 190, :title => image.description), kind_affiche_path(:anchor => 'photogallery')
       else
@@ -24,7 +24,7 @@ class PhotoreportDecorator < AfficheDecorator
   end
 
   def images_count
-    affiche.gallery_images.count
+    affiche.images.count
   end
 
 end
