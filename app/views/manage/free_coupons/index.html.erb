@@ -25,7 +25,7 @@
           <div>
             <span class="label">Место:</span>
             <% if coupon.organization_id? %>
-              <span class="value"><%= link_to organization.title, manage_organization_path(coupon.organization) %></span>
+              <span class="value"><%= link_to coupon.organization.title, manage_organization_path(coupon.organization) %></span>
             <% else %>
               <span class="blank"><%= coupon.place %></span>
             <% end %>

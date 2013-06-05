@@ -18,8 +18,6 @@ class Coupon < ActiveRecord::Base
 
   enumerize :kind, in: [:certificate, :coupon], predicates: true
 
-
-
   has_many :votes, :as => :voteable, :dependent => :destroy
   has_many :comments, :as => :commentable, :dependent => :destroy
 
@@ -42,8 +40,8 @@ class Coupon < ActiveRecord::Base
   end
 
   searchable do
-    text :title
     string :suborganizations_kind, :multiple => true
+    text(:description_ru) { [title, description].join(' ') } 
   end
 
   private
