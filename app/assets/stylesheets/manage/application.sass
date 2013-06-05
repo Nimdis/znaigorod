@@ -159,6 +159,29 @@ a
       color: #464646
       font-weight: bold
 
+    .images, .attachments
+      ul
+        list-style: none
+
+        li
+          margin: 0 15px 15px 0
+    .images
+      ul
+        +clearfix
+        li
+          float: left
+          margin: 0 15px 15px 0
+          p
+            text-align: center
+          .image
+            +clearfix
+            width: 160px
+            height: 160px
+            a.wide
+              position: relative
+              display: block
+              margin-left: -25%
+
   .pagination
     padding: 25px 0
 
