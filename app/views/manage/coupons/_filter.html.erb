@@ -1,6 +1,6 @@
 <div class='coupons_filter'>
   <%= form_tag [:manage, resource_class.name.underscore.pluralize], :method => :get, :class => 'search_coupon_filter' do %>
-    <%= text_field_tag :q, params[:q] %>
+    <%= text_field_tag :search, params[:search] %>
     <ul>
       <li>
         <%= radio_button_tag :category, '', @category == nil, :id => 'category_all' %>

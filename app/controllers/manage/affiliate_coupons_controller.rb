@@ -6,6 +6,7 @@ class Manage::AffiliateCouponsController < Manage::ApplicationController
     page = params[:page].to_i.zero? ? 1 : params[:page]
 
     search = AffiliateCoupon.search {
+      fulltext params[:search]
       paginate :page => page, :per_page => 10
       with :suborganizations_kind, category if category.present?
     }

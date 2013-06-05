@@ -42,7 +42,8 @@ class Coupon < ActiveRecord::Base
   end
 
   searchable do
-    string :suborganizations_kind, :multiple => true 
+    text :title
+    string :suborganizations_kind, :multiple => true
   end
 
   private
