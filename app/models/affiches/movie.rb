@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Movie < Affiche
   attr_accessible
 

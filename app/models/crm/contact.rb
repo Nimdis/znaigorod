@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Contact < ActiveRecord::Base
   attr_accessible :email, :facebook, :full_name, :mobile_phone, :phone, :post, :skype, :vkontakte
   validates_presence_of :full_name, :post

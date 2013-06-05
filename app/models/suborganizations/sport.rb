@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Sport < ActiveRecord::Base
   include HasVirtualTour
   include HasServices

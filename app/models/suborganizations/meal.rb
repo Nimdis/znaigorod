@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Meal < ActiveRecord::Base
   include HasVirtualTour
   include HasServices

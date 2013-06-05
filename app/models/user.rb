@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class User < ActiveRecord::Base
   attr_accessible :uid, :provider, :auth_raw_info, :roles_attributes
 

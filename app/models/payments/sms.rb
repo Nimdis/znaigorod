@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Sms < ActiveRecord::Base
   attr_accessible :phone, :message
 

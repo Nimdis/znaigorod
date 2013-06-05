@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SaunaOil < ActiveRecord::Base
   include UsefulAttributes
 

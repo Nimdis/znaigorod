@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Payment < ActiveRecord::Base
   extend Enumerize
 

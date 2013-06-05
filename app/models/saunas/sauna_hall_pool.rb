@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SaunaHallPool < ActiveRecord::Base
   attr_accessible :contraflow, :geyser, :size, :water_filter, :waterfall, :jacuzzi, :bucket
 

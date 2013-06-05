@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SaunaHallInterior < ActiveRecord::Base
   attr_accessible :floors, :lounges, :pit, :pylon, :barbecue
 

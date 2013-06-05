@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SaunaChildStuff < ActiveRecord::Base
   include UsefulAttributes
 

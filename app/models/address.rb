@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Address < ActiveRecord::Base
   attr_accessible :house, :latitude, :longitude, :street, :office
 

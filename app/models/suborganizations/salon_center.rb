@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SalonCenter < ActiveRecord::Base
   include HasVirtualTour
   include HasServices

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class VirtualTour < ActiveRecord::Base
   attr_accessible :link, :attachment
 

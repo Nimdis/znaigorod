@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SocialLink < ActiveRecord::Base
   attr_accessible :title, :url
 

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Contest < ActiveRecord::Base
   extend FriendlyId
 
