@@ -8,6 +8,7 @@ class Manage::TicketsController < Manage::ApplicationController
     page = params[:page].to_i.zero? ? 1 : params[:page]
 
     search = Copy.search(:include => :copyable) {
+      keywords params[:q]
       group :copyable_id_str
       order_by :id, :desc
       paginate :page => page, :per_page => 10
