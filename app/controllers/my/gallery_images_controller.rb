@@ -5,13 +5,12 @@ class My::GalleryImagesController < My::ApplicationController
 
   def create
     @affiche = Affiche.find(params[:affiche_id])
-    @gallery_image = @affiche.gallery_images.create(:file => params[:gallery_image][:file].first)
+    @gallery_image = @affiche.gallery_images.create(:file => params[:gallery_images][:file].first)
   end
 
   def destroy
     destroy! {
       render :nothing => true and return
     }
-    # edit_step_my_affiche_path(@affiche.id, :step => :fourth) }
   end
 end

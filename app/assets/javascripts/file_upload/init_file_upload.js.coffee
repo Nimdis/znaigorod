@@ -4,11 +4,12 @@
     add: (e, data) ->
       file = data.files[0]
       data.context = $(tmpl("template-upload", file))
-      $(e.target).append(data.context)
+      $('.upload_wrapper').append(data.context)
       data.submit()
     progress: (e, data) ->
       if data.context
         progress = parseInt(data.loaded / data.total * 100, 10)
         data.context.find('.bar').css('width', progress + '%')
     done: (e, data) ->
+      $(data.context).slideUp()
       init_ajax_delete()
