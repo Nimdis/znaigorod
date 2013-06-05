@@ -46,7 +46,7 @@
                   </div>
                   <div class='buy_ticket'>
                     <div class='ticket_for_sale'><%= t "copy.#{@coupon.kind}", count: @coupon.copies_for_sale.count %></div>
-                    <%= link_to 'Купить', new_coupon_copy_payment_path(@coupon), class: :payment_link %>
+                    <%= link_to 'Купить', new_paid_coupon_copy_payment_path(@coupon), class: :payment_link %>
                   </div>
                 </li>
               <% end %>

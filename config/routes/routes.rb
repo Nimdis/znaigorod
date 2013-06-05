@@ -29,6 +29,15 @@ Znaigorod::Application.routes.draw do
     resources :comments, :only => [:new, :create, :show]
   end
 
+  Coupon.ordered_descendants.map{ |d| d.name.underscore }.each do |type|
+    resources "#{type}".to_sym, :only => :show do
+      put 'change_vote' => 'votes#change_vote', :as => :change_vote
+      put 'liked' => 'votes#liked', :as => :liked
+
+      resources :comments, :only => [:new, :create, :show]
+    end
+  end
+
   resources :comments, :only => [] do
     put 'change_vote' => 'votes#change_vote', :as => :change_vote
     put 'liked' => 'votes#liked', :as => :liked

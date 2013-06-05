@@ -1,9 +1,10 @@
 <ol class='ticket_payment_instruction'>
+  <%= raise @coupon.inspect %>
   <li>Выбери количество и укажи номер сотового телефона</li>
   <li>Оплати наиболее удобным для тебя способом. <span class='alert'>Оплатить покупку необходимо в течении 30 минут</span></li>
-  <% if coupon.kind.coupon? %>
+  <% if @coupon.kind.coupon? %>
     <li>Мы пришлем SMS с кодами, просто покажи это SMS в заведении и получи скидку</li>
-  <% elsif coupon.kind.certificate? && coupon.organization_quota? %>
+  <% elsif @coupon.kind.certificate? && @coupon.organization_quota? %>
     <li>Мы пришлем SMS с кодами, просто покажи это SMS в заведении и получи скидку или сертификат</li>
   <% else %>
     <li>Мы пришлем SMS с кодами, эти коды и являются сертификатом, просто покажи это SMS в заведении и получи услугу</li>
@@ -11,7 +12,7 @@
 </ol>
 <div class='ticket_info'>
   <div class='ticket_prices'>
-    <% if coupon.discount? %>
+    <% if @coupon.discount? %>
       <p class='ticket_original_price'><span class='stroke'><%= "#{@coupon.price_without_discount.to_i}р." %></span></p>
     <% end %>
     <p class='ticket_price'><%= @coupon.price.to_i %> р.</p>
