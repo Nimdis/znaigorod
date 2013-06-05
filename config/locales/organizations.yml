@@ -1,4 +1,20 @@
 ru:
+
+  actual_organizations:
+    sauna: Сауны
+    night_club: Ночные клубы
+    bari: Бары
+    breakfast: Завтраки
+    coffe_house: Кофейни
+    detskie_kafe: Детские кафе
+    stolovie: Столовые
+    buiseness_lanch: Бизнес-ланч
+    food_delivery: Доставка еды
+    museums: Музеи
+    cafe: Кафе
+    billiard: Бильярдные залы
+    theatre: Театры
+
   organization:
     kind:
       meal: Кафе и рестораны

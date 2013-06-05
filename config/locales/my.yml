@@ -1,5 +1,16 @@
 ru:
+
   my:
+    button:
+      concert:      Концерт
+      exhibition:   Выставка
+      master_class: Мастер-класс
+      movie:        Кино
+      other:        Другое
+      party:        Вечеринка
+      spectacle:    Спектакль
+      sports_event: Спорт
+      competition:  Конкурс
     add_model:
       affiche:      Создание мероприятия
       movie:        Добавление кино
