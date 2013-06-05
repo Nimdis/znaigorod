@@ -6,27 +6,23 @@
 
   .like_box
     opacity: 0.9
-    background: #9c62b6
-    margin-left: -999em
+    display: none
     position: absolute
+    +border-radius(5px)
+    background: #9c62b6
+    margin-top: -63px
+    padding: 6px 20px 8px
 
+    > div
+      margin-bottom: 5px
     a
       font-size: 10px
-      margin-right: 13px
-      margin-bottom: 5px
       background: #c8a8d6
-      border-radius: 7px
+      +border-radius(7px)
       line-height: 20px
 
-  &:hover
-    .like_box
-      +border-radius(5px)
-      position: absolute
-      z-index: 99
-      margin-left: -31px
-      margin-top: -50px
-      width: 182px
-      padding: 0px 5px 8px 24px
+  &:hover .like_box
+    display: block
 
   .votes_counter
     overflow: visible
