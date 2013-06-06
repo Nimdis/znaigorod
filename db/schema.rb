@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130530091259) do
+ActiveRecord::Schema.define(:version => 20130606085655) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -92,9 +92,11 @@ ActiveRecord::Schema.define(:version => 20130530091259) do
     t.integer  "poster_image_file_size"
     t.datetime "poster_image_updated_at"
     t.text     "poster_image_url"
+    t.integer  "user_id"
   end
 
   add_index "affiches", ["slug"], :name => "index_affiches_on_slug", :unique => true
+  add_index "affiches", ["user_id"], :name => "index_affiches_on_user_id"
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"

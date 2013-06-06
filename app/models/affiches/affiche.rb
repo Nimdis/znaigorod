@@ -15,6 +15,8 @@ class Affiche < ActiveRecord::Base
                   :original_title, :trailer_code, :vk_aid, :yandex_fotki_url, :constant,
                   :age_min, :age_max, :state_event, :state
 
+  belongs_to :user
+
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
   has_many :gallery_social_images, :as => :attachable, :dependent => :destroy
   has_many :gallery_files,  :as => :attachable, :dependent => :destroy
