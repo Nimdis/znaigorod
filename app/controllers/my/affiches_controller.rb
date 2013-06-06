@@ -9,6 +9,7 @@ class My::AffichesController < My::ApplicationController
     if Affiche.descendants.map(&:name).map(&:underscore).include?(params[:type])
       @affiche = params[:type].classify.constantize.new
       @affiche.state = :draft
+      @affiche.user = current_user
       @affiche.save :validate => false
 
       redirect_to  edit_step_my_affiche_path(@affiche.id, :step => Affiche.steps.first)
