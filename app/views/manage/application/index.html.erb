@@ -25,6 +25,7 @@
       <%= link_to item.title, [:manage, item] %>
       <%= content_tag :span, 'Клиент, рейтинг: ', :class => 'client_status' if item.class == Organization && item.client? %>
       <%= content_tag :span, item.total_rating.round(2), :class => 'rating' %>
+      <%= content_tag :span, item.human_state_name, :class => 'state' if item.class.superclass == Affiche %>
       <%= content_tag :span, item.respond_to?(:category) ? item.category : item.class.model_name.human, :class => 'category' %>
     </li>
   <% end %>

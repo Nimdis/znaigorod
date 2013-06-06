@@ -4,7 +4,6 @@ require 'vkontakte_api'
 require 'curb'
 
 class Affiche < ActiveRecord::Base
-  extend Enumerize
   extend FriendlyId
 
   include HasVirtualTour
@@ -14,7 +13,7 @@ class Affiche < ActiveRecord::Base
                   :images_attributes, :attachments_attributes,
                   :distribution_starts_on, :distribution_ends_on,
                   :original_title, :trailer_code, :vk_aid, :yandex_fotki_url, :constant,
-                  :age_min, :age_max
+                  :age_min, :age_max, :state_event, :state
 
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
   has_many :gallery_social_images, :as => :attachable, :dependent => :destroy
@@ -48,9 +47,9 @@ class Affiche < ActiveRecord::Base
   default_value_for :total_rating,              0.5
   #before_save :set_popularity
 
-  enumerize :state, :in => [:draft, :published], :default => :published, :predicates => true, :scope => true
   scope :draft, -> { with_state(:draft) }
   scope :published, -> { with_state(:published) }
+  scope :pending, -> { with_state(:pending) }
 
   friendly_id :title, use: :slugged
 
@@ -61,8 +60,25 @@ class Affiche < ActiveRecord::Base
   attr_accessor :step, :set_region, :crop_x, :crop_y, :crop_width, :crop_height
   attr_accessible :poster_image, :step, :set_region, :crop_x, :crop_y, :crop_width, :crop_height
 
+  state_machine :initial => :draft do
+    state :draft do
+    end
+
+    event :send_to_moderation do
+      transition :draft => :pending
+    end
+
+    event :approve do
+      transition :pending => :published
+    end
+
+    event :send_to_author do
+      transition :published => :draft
+    end
+  end
+
   def self.steps
-    %w[first second third fourth fifth]
+    %w[first second third fourth fifth sixth]
   end
 
   steps.each do |step|

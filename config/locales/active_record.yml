@@ -142,6 +142,7 @@ ru:
         original_title: Оригинальное название
         poster_url: Постер для события
         poster_image: Постер
+        state: Статус
         tag: Теги
         trailer_code: Код трейлера
         vk_aid: Код альбома события ВКонтакте
@@ -416,3 +417,12 @@ ru:
       service_payment:
         amount: Сумма платежа
         details: Назначение платежа
+
+    state_machines:
+      affiche:
+        state:
+          states:
+            draft:      Черновик
+            published:  Опубликовано
+            pending:    На модерации
+
