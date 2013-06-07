@@ -1,3 +1,5 @@
+<h2>Постер мероприятия</h2>
+
 <% if @affiche.poster_image.exists? %>
   <% crop_opt = @affiche.poster_url ? @affiche.poster_url.match(/(?<=\/region\/)\w+\/\w+\/\w+\/\w+/).to_s.split('/').map{|o| (o.to_i/@affiche.resize_factor).round} : [] %>
   <% crop_width, crop_height, crop_x, crop_y = crop_opt.any? ? crop_opt : [@affiche.poster_image_resized_dimensions[:width]*0.5625, @affiche.poster_image_resized_dimensions[:height], 0, 0] %>
@@ -18,20 +20,13 @@
       <% end %>
     </div>
     <div class='submit'>
-      <%= f.submit %>
+      <%= f.button :submit, 'Обрезать постер и продолжить', class: :button %>
     </div>
   <% end %>
 <% else %>
   <%= simple_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
     <%= hidden_field_tag :step, @step %>
-    <%= f.input :poster_image %>
+    <%= f.input :poster_image, required: true, class: :button %>
     <%= f.error :poster_image_content_type %>
-
-    <% if @affiche.poster_image.exists? %>
-        <%= image_tag resized_image_url(@affiche.poster_image_url,
-                                        @affiche.poster_image_resized_dimensions[:width],
-                                        @affiche.poster_image_resized_dimensions[:height],
-                                        false), :class => 'jcrop' %>
-    <% end %>
   <% end %>
 <% end %>
