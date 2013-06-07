@@ -25,6 +25,8 @@ SimpleNavigation::Configuration.run do |navigation|
         Affiche.ordered_descendants.each do |kind|
           affiche_item.item kind, kind.model_name.human, [:manage, kind.model_name.underscore.pluralize]
         end
+        affiche_item.item 'pending', 'На модерации', by_state_manage_affiches_path(:pending)
+        affiche_item.item 'draft', 'Черновики', by_state_manage_affiches_path(:draft)
     end
 
     primary.item :coupons, 'Купоны', manage_coupons_path,
