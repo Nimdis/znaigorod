@@ -3,8 +3,8 @@
   <div class='my_affiche_wrapper'>
     <h2>Черновики<h2>
     <ul>
-      <% current_user.affiches.published.each do |affiche| %>
-        <%= render :partial => 'affiches_list', :locals => { :affiche => affiche } %>
+      <% current_user.affiches.draft.each do |affiche| %>
+        <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
       <% end %>
     </ul>
 
@@ -17,8 +17,8 @@
 
     <h2>Опубликованы<h2>
     <ul>
-      <% current_user.affiches.draft.each do |affiche| %>
-        <%= render :partial => 'affiches_list', :locals => { :affiche => affiche } %>
+      <% current_user.affiches.published.each do |affiche| %>
+        <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
       <% end %>
     </ul>
 
