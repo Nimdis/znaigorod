@@ -1,4 +1,4 @@
-<div class='title'><%= @affiche.title %></div>
+<div class='title'><%= @affiche.title.present? ? @affiche.title : 'Нет названия' %></div>
 <div class='description'>
   <div class='poster'>
     <% if @affiche.poster_image.exists? %>
@@ -8,7 +8,7 @@
     <% end %>
   </div>
   <div class='text'>
-    <%= @affiche.description.as_html %>
+    <%= @affiche.description.present? ? @affiche.description.as_html : 'Нет описания' %>
   </div>
 </div>
 <div class='tags'>

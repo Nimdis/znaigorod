@@ -8,7 +8,10 @@
 
 init_affiche_preview_title = ->
   $('#affiche_title').keyup ->
-    $('.my_affiche_wrapper .affiche_preview .title').html($(this).val())
+    if $(this).val()
+      $('.my_affiche_wrapper .affiche_preview .title').html($(this).val())
+    else
+      $('.my_affiche_wrapper .affiche_preview .title').html('Нет названия')
     true
   $('#affiche_title').mouseup (event) ->
     setTimeout ->
@@ -25,7 +28,10 @@ init_affiche_preview_description = ->
       $('#affiche_description').keyup()
       true
   $('#affiche_description').markItUp(mySettings).keyup ->
-    $('.my_affiche_wrapper .affiche_preview .description .text').html(textile($(this).val()))
+    if $(this).val()
+      $('.my_affiche_wrapper .affiche_preview .description .text').html(textile($(this).val()))
+    else
+      $('.my_affiche_wrapper .affiche_preview .description .text').html('Нет описания')
     true
   $('#affiche_description').mouseup (event) ->
     setTimeout ->
