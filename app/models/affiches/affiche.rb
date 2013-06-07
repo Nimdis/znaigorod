@@ -90,6 +90,10 @@ class Affiche < ActiveRecord::Base
     time :last_showing_time,  :trie => true
   end
 
+  def should_generate_new_friendly_id?
+    new_record?
+  end
+
   def update_rating
     update_attribute :total_rating, (0.5 + 0.1*visits.visited.count + 0.05*votes.liked.count)
   end
