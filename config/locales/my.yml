@@ -1,6 +1,10 @@
 ru:
 
   my:
+    add_images:     Выберите фотографии
+    add_files:      Выберите файлы
+    affiche:        Мои афиши
+
     button:
       concert:      Концерт
       exhibition:   Выставка
@@ -29,6 +33,3 @@ ru:
       fourth:       Фото и файлы
       fifth:        Видео
       sixth:        Предпросмотр
-
-    add_images:       Выберите фотографии
-    add_files:        Выберите файлы
