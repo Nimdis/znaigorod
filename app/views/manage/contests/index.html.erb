@@ -4,6 +4,8 @@
   <%= link_to t('new_contest'), new_manage_contest_url('contest[vfs_path]' => Contest.generate_vfs_path), :class => 'new_resource' %>
 </div>
 
+<div class="clearfix"></div>
+
 <ul class='collection'>
   <% collection.each do |item| %>
     <li>
@@ -12,4 +14,3 @@
     </li>
   <% end %>
 </ul>
-

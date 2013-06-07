@@ -49,6 +49,7 @@ class Affiche < ActiveRecord::Base
   default_value_for :total_rating,              0.5
   #before_save :set_popularity
 
+  scope :by_state, ->(state) { where(:state => state) }
   scope :draft, -> { with_state(:draft) }
   scope :published, -> { with_state(:published) }
   scope :pending, -> { with_state(:pending) }
