@@ -3,9 +3,18 @@
     <li class="has_submenu">
       <%= link_to kind.model_name.human, [:manage, kind.model_name.underscore.pluralize] %>
       <ul class="submenu">
-        <li><%= link_to 'Опубликовано', polymorphic_path([:by_state, :manage, kind.model_name.underscore.pluralize], :by_state => 'published') %></li>
-        <li><%= link_to 'На модерации', polymorphic_path([:by_state, :manage, kind.model_name.underscore.pluralize], :by_state => 'pending') %></li>
-        <li class="last"><%= link_to 'Черновики', polymorphic_path([:by_state, :manage, kind.model_name.underscore.pluralize], :by_state => 'draft') %></li>
+        <li>
+          <%= link_to "Опубликовано (#{kind.published.count})", polymorphic_path([:by_state, :manage, kind.model_name.underscore.pluralize],
+                                                                                 :by_state => 'published') %>
+        </li>
+        <li>
+          <%= link_to "На модерации (#{kind.pending.count})", polymorphic_path([:by_state, :manage, kind.model_name.underscore.pluralize],
+                                                                               :by_state => 'pending') %>
+        </li>
+        <li class="last">
+          <%= link_to "Черновики (#{kind.pending.count})", polymorphic_path([:by_state, :manage, kind.model_name.underscore.pluralize],
+                                                                            :by_state => 'draft') %>
+        </li>
       </ul>
     </li>
   <% end %>
