@@ -21,14 +21,11 @@
       </ul>
     </div>
   <% end %>
-  <% sauna.decorated_halls.each_with_index do |sauna_hall, index| %>
+  <% sauna.decorated_halls.each_with_index do |sauna_hall| %>
     <div class='sauna_hall_info'>
       <div class='sauna_hall_header'>
         <div class='left'>
-          <h2>
-            <span class='index'>№<%= index + 1 %></span>
-            <%= sauna_hall.title %>
-          </h2>
+          <h2><%= sauna_hall.title %></h2>
           <%= sauna_hall.price %>
           <%= sauna_hall.schedule %>
         </div>
