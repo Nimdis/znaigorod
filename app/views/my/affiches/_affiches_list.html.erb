@@ -1,4 +1,4 @@
 <li>
   <%= link_to affiche, affiche %>
-  <%= link_to 'Редактировать', edit_step_my_affiche_path(affiche, :first) %>
+  <%= link_to 'Редактировать', edit_step_my_affiche_path(affiche, :first) if defined?(editable) %>
 </li>

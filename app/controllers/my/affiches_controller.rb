@@ -18,8 +18,12 @@ class My::AffichesController < My::ApplicationController
     end
   end
 
+  def edit
+    @affiche = current_user.affiches.available_for_edit.find(params[:id])
+  end
+
   def update
-    @affiche = Affiche.find(params[:id])
+    @affiche = current_user.affiches.available_for_edit.find(params[:id])
     @affiche.step = @step
     @affiche.attributes = params[:affiche]
 
