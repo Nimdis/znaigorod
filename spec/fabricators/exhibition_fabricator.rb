@@ -38,5 +38,6 @@ end
 #  poster_image_file_size    :integer
 #  poster_image_updated_at   :datetime
 #  poster_image_url          :text
+#  user_id                   :integer
 #
 
