@@ -111,7 +111,7 @@ class Affiche < ActiveRecord::Base
   end
 
   def side_max_size
-    666.to_f
+    580.to_f
   end
 
   def resize_factor

@@ -25,7 +25,7 @@ init_affiche_preview_description = ->
       $('#affiche_description').keyup()
       true
   $('#affiche_description').markItUp(mySettings).keyup ->
-    $('.my_affiche_wrapper .affiche_preview .description').html(textile($(this).val()))
+    $('.my_affiche_wrapper .affiche_preview .description .text').html(textile($(this).val()))
     true
   $('#affiche_description').mouseup (event) ->
     setTimeout ->
