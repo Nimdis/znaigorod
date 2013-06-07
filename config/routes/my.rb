@@ -10,6 +10,6 @@ Znaigorod::Application.routes.draw do
       resources :gallery_files
     end
 
-    root to: 'affiches#new'
+    root to: 'affiches#index'
   end
 end

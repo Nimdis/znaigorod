@@ -423,6 +423,6 @@ ru:
         state:
           states:
             draft:      Черновик
-            published:  Опубликовано
             pending:    На модерации
+            published:  Опубликовано
 
