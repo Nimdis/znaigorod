@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606085655) do
+ActiveRecord::Schema.define(:version => 20130610082116) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -843,6 +843,16 @@ ActiveRecord::Schema.define(:version => 20130606085655) do
     t.datetime "remember_created_at"
     t.string   "remember_token"
   end
+
+  create_table "versions", :force => true do |t|
+    t.text     "body"
+    t.integer  "versionable_id"
+    t.string   "versionable_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "versions", ["versionable_id"], :name => "index_versions_on_versionable_id"
 
   create_table "virtual_tours", :force => true do |t|
     t.string   "link"
