@@ -2,4 +2,5 @@
   <% Affiche.steps.each do |step| %>
     <%= content_tag :li, link_to(t("my.steps.#{step}"), edit_step_my_affiche_path(@affiche, :step => step)), class: @step.eql?(step) ? 'selected' : nil %>
   <% end %>
+  <li><%= link_to t('my.send_to_moderation'), my_affiche_moderate_path(@affiche), :method => :put %></li>
 </ul>

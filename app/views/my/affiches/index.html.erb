@@ -1,5 +1,10 @@
 <div class='content_wrapper'>
   <h1><%= t("my.affiche") %></h1>
+
+  <% if flash[:notice] %>
+    <p class="flash-notice"><%= flash[:notice] %></p>
+  <% end %>
+
   <div class='my_affiche_wrapper'>
     <h2>Черновики<h2>
     <ul>

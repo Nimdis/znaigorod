@@ -1,9 +1,10 @@
 ru:
 
   my:
-    add_images:     Выберите фотографии
-    add_files:      Выберите файлы
-    affiche:        Мои афиши
+    add_images:         Выберите фотографии
+    add_files:          Выберите файлы
+    affiche:            Мои афиши
+    send_to_moderation: Отправить на модерацию
 
     button:
       concert:      Концерт

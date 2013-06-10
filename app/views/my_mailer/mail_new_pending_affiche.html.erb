@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+
+  <body>
+    На сайте <%= link_to 'ЗнайГород', Settings['app']['host'] %> пользователь <%= @affiche.user.name %> разместил новую афишу:
+    <hr>
+
+    <div class='title'><%= @affiche.title.present? ? @affiche.title : 'Нет названия' %></div>
+    <div class='description'>
+      <div class='poster'>
+        <% if @affiche.poster_image.exists? %>
+          <%= image_tag @affiche.poster_url, :widht => '150', :height => '200' %>
+        <% else %>
+          <%= image_tag 'public/affiche_poster_stub.png', size: '150x200', alt: :poster %>
+        <% end %>
+      </div>
+      <div class='text'>
+        <%= @affiche.description.present? ? @affiche.description.as_html : 'Нет описания' %>
+      </div>
+    </div>
+    <div class='tags'>
+      <%= "Теги: #{@affiche.tag}" if @affiche.tag.present? %>
+    </div>
+
+    <hr>
+
+    <div class="actions">
+      <%= link_to 'Все афиши на модерации', by_state_manage_affiches_url(:pending, :host => Settings['app']['host']) %>
+    </div>
+
+  </body>
+</html>
