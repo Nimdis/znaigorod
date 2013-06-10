@@ -136,6 +136,10 @@ class Affiche < ActiveRecord::Base
     self.poster_url = poster_image_url.gsub /\d+-\d+/, rpl
   end
 
+  def ready_for_moderation?
+    title.present? && description.present? && poster_image.exists? && showings.any?
+  end
+
   private :set_poster_url
 
   # <<<<<<<<<<<< Wizard  <<<<<<<<<<<
