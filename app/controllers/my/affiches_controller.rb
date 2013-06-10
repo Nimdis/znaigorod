@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class My::AffichesController < My::ApplicationController
   load_and_authorize_resource
 
@@ -45,6 +47,14 @@ class My::AffichesController < My::ApplicationController
     @affiche.poster_image.destroy
     @affiche.save
     redirect_to edit_step_my_affiche_path(@affiche.id, :step => :second)
+  end
+
+  def send_to_moderation
+    @affiche = current_user.affiches.available_for_edit.find(params[:affiche_id])
+    @affiche.update_attributes!(:state => 'pending')
+
+    MyMailer.delay.mail_new_pending_affiche(@affiche)
+    redirect_to my_root_path, :notice => "Афиша «#{@affiche.title}» добавлена в очередь на модерацию."
   end
 
   private
