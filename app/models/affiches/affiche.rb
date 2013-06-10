@@ -28,6 +28,7 @@ class Affiche < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy
   has_many :tickets, :dependent => :destroy
 
+  has_many :versions, :as => :versionable, :dependent => :destroy
   has_many :visits, :as => :visitable, :dependent => :destroy
   has_many :votes, :as => :voteable, :dependent => :destroy
 
@@ -147,6 +148,7 @@ class Affiche < ActiveRecord::Base
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?
   after_save :reindex_showings
+  after_save :save_version,                   :if => :published?
 
   alias_attribute :to_s,            :title
   alias_attribute :tag_ru,          :tag
@@ -347,6 +349,10 @@ class Affiche < ActiveRecord::Base
 
   def get_images_from_yandex_fotki
     JSON.parse(Curl.get("http://api-fotki.yandex.ru/api/users/#{yandex_fotki_url}/photos/?format=json").body_str)['entries']
+  end
+
+  def save_version
+    self.versions.create!(:body => self.to_json)
   end
 
   def set_popularity
