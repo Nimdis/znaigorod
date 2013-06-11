@@ -190,6 +190,7 @@ GEM
     highline (1.6.16)
     hike (1.2.1)
     hirb (0.7.0)
+    htmldiff (0.0.1)
     httparty (0.10.0)
       multi_json (~> 1.0)
       multi_xml
@@ -480,6 +481,7 @@ DEPENDENCIES
   has_searcher
   hashie
   hirb
+  htmldiff
   inherited_resources!
   jcrop-rails
   jquery-fileupload-rails

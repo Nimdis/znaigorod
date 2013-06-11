@@ -7,4 +7,9 @@ class MyMailer < ActionMailer::Base
     @affiche = affiche
     mail(:to => Settings['mail']['to_affiche'], :subject => 'В ЗнайГород добавлена новая афиша')
   end
+
+  def send_affiche_diff(version)
+    @version = version
+    mail(:to => Settings['mail']['to_affiche'], :subject => 'В ЗнайГород изменилась афиша')
+  end
 end

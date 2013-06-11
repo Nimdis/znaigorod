@@ -138,7 +138,7 @@ class Affiche < ActiveRecord::Base
   end
 
   def ready_for_moderation?
-    title.present? && description.present? && poster_image.exists? && showings.any?
+    title.present? && description.present? && poster_image.exists? && showings.any? && draft?
   end
 
   private :set_poster_url
@@ -352,7 +352,22 @@ class Affiche < ActiveRecord::Base
   end
 
   def save_version
-    self.versions.create!(:body => self.to_json)
+    self.versions.create!(:body => self.changes.to_json(:except => [
+                                                              :created_at,
+                                                              :id,
+                                                              :popularity,
+                                                              :poster_image_content_type,
+                                                              :poster_image_file_name,
+                                                              :poster_image_file_size,
+                                                              :poster_image_updated_at,
+                                                              :poster_image_url,
+                                                              :slug,
+                                                              :total_rating,
+                                                              :updated_at,
+                                                              :user_id,
+                                                              :vkontakte_likes,
+                                                              :yandex_metrika_page_views
+                                                            ])) if self.changed?
   end
 
   def set_popularity
