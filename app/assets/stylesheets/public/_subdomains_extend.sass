@@ -127,10 +127,21 @@ body
     +background-image(image_url('public/retro/bg.png'), linear-gradient(#feb653, #413773))
     .retro_logo
       width: 1200px
-      height: 100px
+      height: 105px
       background: transparent image_url('public/retro/logo.png') no-repeat center center
       margin: 0 auto
     .retro
+      +subdomain_common_style
+
+  .geronimo_wrapper
+    background: #eec665 image_url('public/geronimo/bg.png') no-repeat center top
+    +background-image(image_url('public/geronimo/bg.png'), linear-gradient(#e0b040, #ffe092))
+    .geronimo_logo
+      width: 1200px
+      height: 105px
+      background: transparent image_url('public/geronimo/logo.png') no-repeat center center
+      margin: 0 auto
+    .geronimo
       +subdomain_common_style
 
   .zastolie_wrapper
