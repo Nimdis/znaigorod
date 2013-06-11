@@ -56,7 +56,6 @@ ru:
 
     attributes:
       common_attributes: &common_attributes
-        title: Название
         description: Описание
         category: Категория
         feature: Особенности

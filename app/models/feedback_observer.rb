@@ -5,4 +5,3 @@ class FeedbackObserver < ActiveRecord::Observer
     FeedbackMailer.delay.send_email(feedback)
   end
 end
-

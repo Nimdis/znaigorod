@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+
+  <body>
+    На сайте <%= link_to 'ЗнайГород', Settings['app']['host'] %> пользователь <%= @version.versionable.user.name %> изменил афишу:
+    <div class='title'><%= @version.versionable.title.present? ? @version.versionable.title : 'Нет названия' %></div>
+
+    <hr>
+
+    <% @version.what_changed.each do |key,value| %>
+      <p><%= t("activerecord.attributes.affiche.#{key}") %></p>
+      <p><%= Version.diff(value.first, value.last).html_safe %></p>
+    <% end %>
+
+  </body>
+</html>

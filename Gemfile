@@ -36,6 +36,7 @@ group :default do
   gem 'has_scope'
   gem 'has_searcher'
   gem 'hashie'
+  gem 'htmldiff'
   gem 'inherited_resources',        :git => 'git://github.com/DouweM/inherited_resources', :branch => 'nested-singletons' # NOTE: https://github.com/josevalim/inherited_resources/pull/194
   gem 'jquery-rails',               '2.0.3'
   gem 'kaminari'
