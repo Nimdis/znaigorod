@@ -22,8 +22,8 @@
   true
 
 update_crop = (coords) ->
-  rx = 150/coords.w
-  ry = 200/coords.h
+  rx = 180/coords.w
+  ry = 242/coords.h
   preview = $('.affiche_preview .poster img')
 
   preview.css

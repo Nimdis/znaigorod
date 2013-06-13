@@ -320,6 +320,8 @@
     h1
       font-size: 26px
       margin: 0
+      a
+        font-size: 14px
     h2
       font-style: italic
 
@@ -329,6 +331,8 @@
       border-top: 4px solid #e0d2e9
       padding: 5px 10px 0
       margin-bottom: 15px
+      span.red
+        color: #e3223f
       .info
         +clearfix
         +has_ribbon
@@ -346,6 +350,8 @@
 
             a
               display: block
+              &.inline
+                display: inline
 
               img
                 display: block
@@ -431,6 +437,11 @@
             margin: 0 10px 10px 0
             a
               color: #707072
+            &.transparent
+              background-color: transparent
+              a
+                color: #0d92bb
+                font-size: 14px
 
         .share
           +clearfix
@@ -456,6 +467,8 @@
         background: #e1d2e9 image_url('public/affiche_photogallery_header_bg.png') no-repeat left center
         margin: 0 -10px 5px -10px
         padding-left: 40px
+        a
+          font-size: 14px
 
       .photogallery
         clear: left
@@ -483,11 +496,13 @@
               border-color: #e2d2e2
 
       .trailer_header
-        font-size: 20px
+        font-size: 18px
         line-height: 1.5
         background: #e1d2e9 image_url('public/affiche_trailer_header_bg.png') no-repeat left center
         margin: 0 -10px 5px -10px
         padding-left: 40px
+        a
+          font-size: 14px
 
       .trailer
         +clearfix

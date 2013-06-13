@@ -7,14 +7,19 @@ class My::AffichesController < My::ApplicationController
 
   custom_actions :resource => :destroy_image
 
+  def show
+    @affiche = AfficheDecorator.new Affiche.find(params[:id])
+  end
+
   def create
     if Affiche.descendants.map(&:name).map(&:underscore).include?(params[:type])
-      @affiche = params[:type].classify.constantize.new
-      @affiche.state = :draft
-      @affiche.user = current_user
-      @affiche.save :validate => false
+      affiche = params[:type].classify.constantize.new
+      affiche.state = :draft
+      affiche.user = current_user
+      affiche.save :validate => false
+      @affiche = AfficheDecorator.new affiche
 
-      redirect_to  edit_step_my_affiche_path(@affiche.id, :step => Affiche.steps.first)
+      redirect_to my_affiche_path(@affiche)
     else
       redirect_to new_my_affiche_path
     end
@@ -30,7 +35,7 @@ class My::AffichesController < My::ApplicationController
     @affiche.attributes = params[:affiche]
 
     if @affiche.save
-      redirect_to edit_step_my_affiche_path(@affiche.id, :step => next_step)
+      redirect_to my_affiche_path(@affiche.id)
     else
       render :edit
     end
