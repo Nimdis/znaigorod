@@ -1,0 +1,10 @@
+<% if resource.published? %>
+  <%= link_to 'В черновики', polymorphic_url([:manage, resource], "#{resource.class.name.underscore}[state]" => 'draft'), :method => :put %>
+  <%= link_to 'На модерацию', polymorphic_url([:manage, resource], "#{resource.class.name.underscore}[state]" => 'pending'), :method => :put %>
+<% elsif resource.pending?  %>
+  <%= link_to 'В черновики', polymorphic_url([:manage, resource], "#{resource.class.name.underscore}[state]" => 'draft'), :method => :put %>
+  <%= link_to 'Опубликовать', polymorphic_url([:manage, resource], "#{resource.class.name.underscore}[state]" => 'published'), :method => :put %>
+<% elsif resource.draft? %>
+  <%= link_to 'На модерацию', polymorphic_url([:manage, resource], "#{resource.class.name.underscore}[state]" => 'pending'), :method => :put %>
+  <%= link_to 'Опубликовать', polymorphic_url([:manage, resource], "#{resource.class.name.underscore}[state]" => 'published'), :method => :put %>
+<% end %>

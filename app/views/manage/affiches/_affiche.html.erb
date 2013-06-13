@@ -8,6 +8,14 @@
 
 <div class="right_side">
   <div>
+    <span class="label">Статус:</span>
+    <span class="value">
+       <%= resource.human_state_name %>
+    </span>
+    <%= render :partial => 'affiche_state_actions', :locals => { :resource => resource } %>
+  </div>
+
+  <div>
     <span class="label">
       Билеты
       <%= link_to 'Добавить', new_manage_affiche_ticket_path(resource) %>
@@ -123,13 +131,6 @@
     <span class="label">Рейтинг:</span>
     <span class="value">
        <%= resource.total_rating.round(2) %>
-    </span>
-  </div>
-
-  <div>
-    <span class="label">Статус:</span>
-    <span class="value">
-       <%= resource.human_state_name %>
     </span>
   </div>
 </div>
