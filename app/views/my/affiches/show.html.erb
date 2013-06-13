@@ -19,12 +19,12 @@
           <% if @affiche.title.present? %>
             <h1>
               <%= @affiche.title.to_s.text_gilensize %>
-              <a href='#'>изменить</a>
+              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :first) %>
             </h1>
           <% else %>
             <h1>
               <span class='red'>Нет</span> названия
-              <a href='#'>изменить</a>
+              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :first) %>
             </h1>
           <% end %>
           <%= content_tag :h2, @affiche.original_title.text_gilensize if @affiche.original_title? %>
@@ -41,9 +41,9 @@
                 <%= @affiche.item_poster %>
               <% else %>
                 <%= image_tag 'public/stub_poster.png', size: '180x242', alt: :poster %>
+                <span class='red'>Нет</span> постера
               <% end %>
-              <span class='red'>Нет</span> постера
-              <a class='inline' href='#'>изменить</a>
+              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :second) %>
             </div>
           </div>
           <div class='description'>
@@ -64,13 +64,13 @@
               <% else %>
                 <p><span class='red'>Нет</span> описания</p>
               <% end %>
-              <p><a href='#'>изменить описание</a></p>
+              <p><%= link_to 'изменить описание', edit_step_my_affiche_path(@affiche.id, step: :first) %></p>
               <% if @affiche.html_attachments.present? %>
                 <%= @affiche.html_attachments %>
               <% else %>
                 <p><span class='red'>Нет</span> файлов</p>
               <% end %>
-              <p><a href='#'>изменить файлы</a></p>
+              <%= link_to 'изменить файлы', edit_step_my_affiche_path(@affiche.id, step: :fourth) %>
             </div>
           </div>
         </div>
@@ -83,12 +83,12 @@
                 <li><%= link_to(tag, affiches_path('tags[]' => tag)) %></li>
               <% end %>
               <li class='transparent'>
-                <a href='#'>изменить</a>
+                <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :first) %>
               </li>
             <% else %>
               <li class='transparent'>
                 <span class='red'>Нет</span> тэгов
-                <a href='#'>изменить</a>
+                <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :first) %>
               </li>
             <% end %>
           </ul>
@@ -103,7 +103,7 @@
         <% if @affiche.images.present? %>
           <div class='photogallery_header'>
             Фотографии
-            <a href='#'>изменить</a>
+            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :fourth) %>
           </div>
           <div class='photogallery'>
             <ul>
@@ -117,14 +117,14 @@
         <% else %>
           <div class='photogallery_header'>
             <span class='red'>Нет</span> фотографий
-            <a href='#'>изменить</a>
+            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :fourth) %>
           </div>
         <% end %>
 
         <% if @affiche.trailer_code.present? %>
           <div class='trailer_header'>
             Видео
-            <a href='#'>изменить</a>
+            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :fifth) %>
           </div>
           <div class='trailer'>
             <%= @affiche.trailer_code_html %>
@@ -132,7 +132,7 @@
         <% else %>
           <div class='trailer_header'>
             <span class='red'>Нет</span> видео
-            <a href='#'>изменить</a>
+            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :fifth) %>
           </div>
         <% end %>
 
