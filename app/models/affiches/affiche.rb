@@ -104,7 +104,7 @@ class Affiche < ActiveRecord::Base
 
   validates :poster_image, :dimensions => { :width_min => 300, :height_min => 300 },    :if => [:draft?, :second_step?], :unless => :set_region?
 
-  after_validation :set_poster_url, :if => [:draft?, :set_region?]
+  after_validation :set_poster_url, :if => :set_region?
 
   def poster_image_original_dimensions
     @poster_image_original_dimensions ||= {}.tap { |dimensions|
@@ -133,15 +133,16 @@ class Affiche < ActiveRecord::Base
   end
 
   def set_poster_url
-    rpl = 'region/' << [crop_width, crop_height, crop_x, crop_y].map(&:to_f).map { |v| v * resize_factor }.map(&:round).join('/')
-    self.poster_url = poster_image_url.gsub /\d+-\d+/, rpl
+    if poster_image_url?
+      rpl = 'region/' << [crop_width, crop_height, crop_x, crop_y].map(&:to_f).map { |v| v * resize_factor }.map(&:round).join('/')
+      self.poster_url = poster_image_url.gsub /\d+-\d+/, rpl
+    end
   end
+  private :set_poster_url
 
   def ready_for_moderation?
     title.present? && description.present? && poster_image.exists? && showings.any? && draft?
   end
-
-  private :set_poster_url
 
   # <<<<<<<<<<<< Wizard  <<<<<<<<<<<
 
