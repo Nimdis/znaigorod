@@ -184,7 +184,7 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def truncated_description
-    description.excerpt.hyphenate
+    description.to_s.excerpt.hyphenate
   end
 
   def html_attachments
@@ -205,11 +205,12 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def resized_poster_url(width, height, crop)
+    return unless affiche.poster_url.present?
     h.resized_image_url(affiche.poster_url, width, height, crop)
   end
 
   def meta_description
-    description.truncate(200, separator: ' ')
+    description.to_s.truncate(200, separator: ' ')
   end
 
   def meta_keywords
@@ -228,7 +229,7 @@ class AfficheDecorator < ApplicationDecorator
     res = ""
     res << "<meta property='og:description' content='#{desc.truncate(350, :separator => ' ').html_safe}'/>\n"
     res << "<meta property='og:site_name' content='#{I18n.t('meta.default.title')}' />\n"
-    res << "<meta property='og:title' content='#{title.text_gilensize}' />\n"
+    res << "<meta property='og:title' content='#{title.to_s.text_gilensize}' />\n"
     res << "<meta property='og:url' content='#{kind_affiche_url}' />\n"
     res << "<meta property='og:image' content='#{image}' />\n"
     res << "<meta name='image' content='#{image}' />\n"
@@ -411,7 +412,8 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def poster(affiche, width, height)
-    image_tag(affiche.poster_url, width, height, affiche.title.text_gilensize)
+    return unless affiche.poster_url.present?
+    image_tag(affiche.poster_url, width, height, affiche.title.to_s.text_gilensize)
   end
 
   def searcher

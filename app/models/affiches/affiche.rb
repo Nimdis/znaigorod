@@ -193,7 +193,7 @@ class Affiche < ActiveRecord::Base
   end
 
   def tags
-    tag.split(/,\s+/).map(&:mb_chars).map(&:downcase).map(&:squish)
+    tag.to_s.split(/,\s+/).map(&:mb_chars).map(&:downcase).map(&:squish)
   end
 
   def address

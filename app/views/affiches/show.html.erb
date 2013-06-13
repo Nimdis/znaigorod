@@ -1,5 +1,10 @@
 <% content_for :page_title do %>
-  <%= @affiche.title.text_gilensize %>, <%= @affiche.human_kind.mb_chars.downcase %> в Томске
+  <% if @affiche.title.present? %>
+    <%= @affiche.title.to_s.text_gilensize %>,
+  <% else %>
+    Нет названия,
+  <% end %>
+  <%= @affiche.human_kind.mb_chars.downcase %> в Томске
 <% end %>
 <% content_for :meta_keywords, @affiche.meta_keywords %>
 <% content_for :meta_description, @affiche.meta_description %>
@@ -31,7 +36,11 @@
       <div class='affiche'>
         <%= content_tag(:div, link_to(@affiche.human_kind, affiches_path(period: 'all', categories: [@affiche.kind])), class: 'kind') %>
         <div class='head'>
-          <%= content_tag :h1, @affiche.title.text_gilensize %>
+          <% if @affiche.title.present? %>
+            <%= content_tag :h1, @affiche.title.to_s.text_gilensize %>
+          <% else %>
+            <%= content_tag :h1, 'Нет названия' %>
+          <% end %>
           <%= content_tag :h2, @affiche.original_title.text_gilensize if @affiche.original_title? %>
         </div>
 
@@ -39,11 +48,15 @@
           <div class='left_part'>
             <%= @affiche.has_ribbon %>
             <div class='image'>
-              <div class="rating like_a_line">
-                <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => @affiche.model } %>
-              </div>
-              <%= content_tag :div, "#{@affiche.age_min.to_i}+", class: :age if @affiche.age_min.present? %>
-              <%= @affiche.item_poster %>
+              <% if @affiche.poster_url.present? %>
+                <div class="rating like_a_line">
+                  <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => @affiche.model } %>
+                </div>
+                <%= content_tag :div, "#{@affiche.age_min.to_i}+", class: :age if @affiche.age_min.present? %>
+                <%= @affiche.item_poster %>
+              <% else %>
+                <!-- stub poster -->
+              <% end %>
             </div>
 
             <div class='social_actions'>
@@ -83,7 +96,11 @@
               <% end %>
             <% end %>
             <div class='text'>
-              <%= @affiche.html_description %>
+              <% if @affiche.description.present? %>
+                <%= @affiche.html_description %>
+              <% else %>
+                <p>Нет описания</p>
+              <% end %>
               <%= @affiche.html_attachments %>
             </div>
           </div>
