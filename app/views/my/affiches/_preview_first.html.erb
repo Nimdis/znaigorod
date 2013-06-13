@@ -1,13 +1,5 @@
 <div class='title'></div>
 <div class='description'>
-  <div class='poster'>
-    <% if @affiche.poster_image.exists? %>
-      <%= image_tag resized_image_url(@affiche.poster_url, 150, 200, true, 'n'), size: '150x200', alt: :poster %>
-    <% else %>
-      <%= image_tag 'public/affiche_poster_stub.png', size: '150x200', alt: :poster %>
-    <% end %>
-  </div>
   <div class='text'>
   </div>
 </div>
-<div class='tags'></div>
