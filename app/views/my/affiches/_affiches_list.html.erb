@@ -1,4 +1,11 @@
 <li>
-  <%= link_to affiche, affiche %>
-  <%= link_to 'Редактировать', edit_step_my_affiche_path(affiche, :first) if defined?(editable) %>
+  <% if affiche.title.present? %>
+    <%= link_to affiche, affiche %>
+  <% else %>
+    <%= link_to 'Нет названия', affiche %>
+  <% end %>
+  <% if defined?(editable) %>
+    <%= link_to 'Редактировать', edit_step_my_affiche_path(affiche, :first) %>
+    <%= link_to 'Удалить', my_affiche_path(affiche), method: :delete, confirm: 'Вы уверены что хотите удалить?' %>
+  <% end %>
 </li>
