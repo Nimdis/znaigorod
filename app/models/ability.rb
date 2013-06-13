@@ -17,6 +17,10 @@ class Ability
       if user.is_organizations_editor?
         can :manage, [Organization] + Organization.available_suborganization_classes
       end
+    when 'my'
+      can :manage, Affiche if user.is_affiches_editor? || user.is_affiches_trusted_editor?
+      can :manage, GalleryFile if user.is_affiches_editor? || user.is_affiches_trusted_editor?
+      can :manage, GalleryImage if user.is_affiches_editor? || user.is_affiches_trusted_editor?
     when 'crm'
       return false if user.new_record?
 

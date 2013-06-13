@@ -7,7 +7,7 @@ class Role < ActiveRecord::Base
 
   belongs_to :user
 
-  enumerize :role, in: [:admin, :affiches_editor, :organizations_editor, :posts_editor, :sales_manager]
+  enumerize :role, in: [:admin, :affiches_editor, :affiches_trusted_editor, :organizations_editor, :posts_editor, :sales_manager]
 end
 
 # == Schema Information

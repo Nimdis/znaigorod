@@ -3,6 +3,7 @@ ru:
     role:
       admin:                   Администратор
       affiches_editor:         Редактор афиши
+      affiches_trusted_editor: Проверенный редактор афиши
       organizations_editor:    Редактор организаций
       posts_editor:            Редактор статей
       sales_manager:           Менеджер продаж
