@@ -413,7 +413,12 @@ class AfficheDecorator < ApplicationDecorator
 
   def poster(affiche, width, height)
     return unless affiche.poster_url.present?
-    image_tag(affiche.poster_url, width, height, affiche.title.to_s.text_gilensize)
+
+    if affiche.poster_url =~ /region/
+      h.image_tag affiche.poster_url, :size => "#{width}x#{height}"
+    else
+      image_tag(affiche.poster_url, width, height, affiche.title.to_s.text_gilensize)
+    end
   end
 
   def searcher
