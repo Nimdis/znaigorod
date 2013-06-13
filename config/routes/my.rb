@@ -5,6 +5,7 @@ Znaigorod::Application.routes.draw do
       get 'available_tags'
 
       put 'moderate' => 'affiches#send_to_moderation'
+      put 'publish'  => 'affiches#send_to_published'
 
       delete 'destroy_image', :on => :member, :as => :destroy_image
 
