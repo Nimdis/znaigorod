@@ -62,6 +62,14 @@ class My::AffichesController < My::ApplicationController
     redirect_to my_root_path, :notice => "Афиша «#{@affiche.title}» добавлена в очередь на модерацию."
   end
 
+  def send_to_published
+    @affiche = current_user.affiches.available_for_edit.find(params[:affiche_id])
+    @affiche.update_attributes!(:state => 'published')
+
+    MyMailer.delay.mail_new_published_affiche(@affiche)
+    redirect_to my_root_path, :notice => "Афиша «#{@affiche.title}» опубликована."
+  end
+
   private
 
   def before_edit

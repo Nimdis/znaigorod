@@ -5,6 +5,7 @@ ru:
     add_files:          Выберите файлы
     affiche:            Мои афиши
     send_to_moderation: Отправить на модерацию
+    send_to_public:     Опубликовать
 
     button:
       concert:      Концерт
