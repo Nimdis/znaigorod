@@ -16,6 +16,8 @@ Znaigorod::Application.routes.draw do
       resources :gallery_files, :only => [:create, :destroy] do
         delete 'destroy_all', :on => :collection, :as => :destroy_all
       end
+
+      resources :showings
     end
 
     root to: 'affiches#index'

@@ -1,0 +1,15 @@
+<div class="wrapper">
+  <%= f.input :place, :input_html => { :class => 'autosuggest' } %>
+</div>
+<div class="wrapper">
+  <%= f.input :starts_at, :as => :date_picker %>
+  <%= f.input :ends_at, :as => :date_picker %>
+</div>
+<div class="wrapper">
+  <%= f.input :price_min %>
+  <%= f.input :price_max %>
+</div>
+
+<div class='submit'>
+  <%= f.button :submit, 'Сохранить сеансы и продолжить', class: :button %>
+</div>
