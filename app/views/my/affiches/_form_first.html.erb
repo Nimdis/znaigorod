@@ -6,7 +6,8 @@
   <%= f.input :description, required: true, input_html: { id: :affiche_description } %>
   <%= f.input :tag, as: :string, input_html: { id: :affiche_tag } %>
   <div class='submit'>
-    <%= f.button :submit, 'Сохранить общее описание и продолжить', class: :button %>
+    <%= f.button :submit, 'Сохранить общее описание', class: :button %>
+    <%= link_to 'Отмена', my_affiche_path(@affiche) %>
   </div>
 <% end %>
 
