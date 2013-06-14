@@ -47,6 +47,11 @@ class My::AffichesController < My::ApplicationController
     render text: result
   end
 
+  def preview_video
+    affiche = AfficheDecorator.new(Affiche.find(params[:affiche_id]))
+    render text: affiche.trailer_auto_html(params[:data])
+  end
+
   def destroy_image
     @affiche.poster_url = nil
     @affiche.poster_image.destroy

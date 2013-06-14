@@ -3,6 +3,7 @@ Znaigorod::Application.routes.draw do
     resources :affiches do
       get 'edit/step/:step' => 'affiches#edit', :defaults => { :step => 'first' }, :on => :member, :as => :edit_step
       get 'available_tags'
+      get 'preview_video'
 
       put 'moderate' => 'affiches#send_to_moderation'
       put 'publish'  => 'affiches#send_to_published'

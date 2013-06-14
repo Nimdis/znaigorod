@@ -7,6 +7,7 @@ class Affiche < ActiveRecord::Base
   extend FriendlyId
 
   include HasVirtualTour
+  include AutoHtml
 
   attr_accessible :description, :poster_url, :image_url, :showings_attributes,
                   :tag, :title, :vfs_path, :affiche_schedule_attributes,
@@ -279,6 +280,12 @@ class Affiche < ActiveRecord::Base
   end
 
   #include AfficheQualityRating
+
+  def trailer_auto_html(trailer_code)
+    auto_html(trailer_code) do
+      youtube(:width => 740, :height => 450)
+    end
+  end
 
   private
 
