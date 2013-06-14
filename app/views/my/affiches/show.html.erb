@@ -19,12 +19,12 @@
           <% if @affiche.title.present? %>
             <h1>
               <%= @affiche.title.to_s.text_gilensize %>
-              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :first) %>
+              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) %>
             </h1>
           <% else %>
             <h1>
               <span class='red'>Нет</span> названия
-              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :first) %>
+              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) %>
             </h1>
           <% end %>
           <%= content_tag :h2, @affiche.original_title.text_gilensize if @affiche.original_title? %>
@@ -43,7 +43,7 @@
                 <%= image_tag 'public/stub_poster.png', size: '180x242', alt: :poster %>
                 <span class='red'>Нет</span> постера
               <% end %>
-              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :second) %>
+              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :second) %>
             </div>
           </div>
           <div class='description'>
@@ -64,13 +64,13 @@
               <% else %>
                 <p><span class='red'>Нет</span> описания</p>
               <% end %>
-              <p><%= link_to 'изменить описание', edit_step_my_affiche_path(@affiche.id, step: :first) %></p>
+              <p><%= link_to 'изменить описание', edit_step_my_affiche_path(@affiche, step: :first) %></p>
               <% if @affiche.html_attachments.present? %>
                 <%= @affiche.html_attachments %>
               <% else %>
                 <p><span class='red'>Нет</span> файлов</p>
               <% end %>
-              <%= link_to 'изменить файлы', edit_step_my_affiche_path(@affiche.id, step: :fourth) %>
+              <%= link_to 'изменить файлы', edit_step_my_affiche_path(@affiche, step: :fourth) %>
             </div>
           </div>
         </div>
@@ -83,12 +83,12 @@
                 <li><%= link_to(tag, affiches_path('tags[]' => tag)) %></li>
               <% end %>
               <li class='transparent'>
-                <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :first) %>
+                <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) %>
               </li>
             <% else %>
               <li class='transparent'>
                 <span class='red'>Нет</span> тэгов
-                <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :first) %>
+                <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) %>
               </li>
             <% end %>
           </ul>
@@ -103,7 +103,7 @@
         <% if @affiche.images.present? %>
           <div class='photogallery_header'>
             Фотографии
-            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :fourth) %>
+            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fourth) %>
           </div>
           <div class='photogallery'>
             <ul>
@@ -117,14 +117,14 @@
         <% else %>
           <div class='photogallery_header'>
             <span class='red'>Нет</span> фотографий
-            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :fourth) %>
+            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fourth) %>
           </div>
         <% end %>
 
         <% if @affiche.trailer_code.present? %>
           <div class='trailer_header'>
             Видео
-            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :fifth) %>
+            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fifth) %>
           </div>
           <div class='trailer'>
             <%= @affiche.trailer_code_html %>
@@ -132,10 +132,98 @@
         <% else %>
           <div class='trailer_header'>
             <span class='red'>Нет</span> видео
-            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche.id, step: :fifth) %>
+            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fifth) %>
           </div>
         <% end %>
 
+        <% if @affiche.viewable_showings? %>
+
+          <% if @affiche.distribution_movie? %>
+
+            <div class='distribution'>
+              <ul class='dates'>
+                <li class='first'>
+                  <h3>Сеансы</h3>
+                </li>
+                <% @affiche.distribution_movie_grouped_showings.each do |date, showings_with_place| %>
+                  <% unless showings_with_place.values.blank? %>
+                    <li class='text'>
+                      <p class='date' data-id='date-<%= date %>'><%= showings_with_place.values.first.first.human_date %></p>
+                      <p class='day_of_week'><%= l date, format: '%A' %></p>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+              <% @affiche.distribution_movie_grouped_showings.each do |date, showings_with_place| %>
+                <div class='theaters' data-id='date-<%= date %>'>
+                  <% showings_with_place.each do |place, showings| %>
+                    <ul>
+                      <li class='theater'>
+                        <p class='name'><%= showings.first.place_decorator.link_short_title %></p>
+                        <p class='address'><%= showings.first.place_decorator.address_link %></p>
+                      </li>
+                      <% showings.each_with_index do |showing, index| %>
+                        <li class='seance<%= ' break' if index > 0 && index % 7 == 0 %>'>
+                          <%= content_tag :p, showing.human_time_starts_at, :class => 'time' unless showing.human_time_starts_at.blank? %>
+                          <%= content_tag :p, showing.human_price, :class => 'price' unless showing.human_price.blank? %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% elsif @affiche.scheduled_showings? %>
+            <div class='sheduled'>
+              <div class='head'>
+                <h3>Расписание</h3>
+                <div class='places'>
+                  <% @affiche.places.each do |place| %>
+                    <%= place.place %>
+                  <% end %>
+                </div>
+              </div>
+              <div class='shedule'>
+                <div class='price'><strong>Стоимость:</strong> <%= @affiche.schedule.human_price %></div>
+                <ul>
+                  <% @affiche.schedule.days.each do |li| %>
+                    <%= li %>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          <% else %>
+            <% @affiche.showings.group_by(&:place).each do |place, showings| %>
+              <div class='many_showings'>
+                <div class='head'>
+                  <div class='places'>
+                    <p>
+                      <span class='name'><%= place.gilensize %></span>
+                      <% if showings.first.latitude.present? && showings.first.longitude.present? %>
+                        <span class='address'>
+                          <a href='#' class='show_map_link'
+                            data-hint='<%= place.text_gilensize %>'
+                            data-latitude='<%= showings.first.latitude %>'
+                            data-longitude='<%= showings.first.longitude %>'
+                            <%= "data-id='#{showings.first.organization.id}'".html_safe if showings.first.organization.present? %>
+                            title='Показать на карте'>показать на карте</a>
+                        </span>
+                      <% end %>
+                    </p>
+                  </div>
+                </div>
+                <ul>
+                  <% showings.each do |showing| %>
+                    <li>
+                      <%= showing.for_schedule %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          <% end %>
+
+        <% end %>
       </div>
     </div>
   </div>

@@ -24,3 +24,8 @@
 <%= simple_form_for @affiche.gallery_files.new, :url => my_affiche_gallery_files_path(@affiche.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
   <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' }, :label => t('my.add_files') %>
 <% end %>
+
+<div class='submit'>
+  <%= link_to 'Сохранить', my_affiche_path(@affiche), class: :button %>
+  <%= link_to 'Отмена', my_affiche_path(@affiche) %>
+</div>
