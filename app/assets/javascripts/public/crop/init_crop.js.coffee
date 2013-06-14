@@ -1,8 +1,8 @@
 @init_crop = () ->
-  crop_x = $('[id*="crop_x"]').val()
-  crop_y = $('[id*="crop_y"]').val()
-  crop_width = $('[id*="crop_width"]').val()
-  crop_height = $('[id*="crop_height"]').val()
+  crop_x = parseInt($('[id*="crop_x"]').val()) || 0
+  crop_y = parseInt($('[id*="crop_y"]').val()) || 0
+  crop_width = parseInt($('[id*="crop_width"]').val()) || 0
+  crop_height = parseInt($('[id*="crop_height"]').val()) || 0
 
   $('.jcrop').Jcrop
     setSelect: [ crop_x, crop_y, crop_x + crop_width, crop_y + crop_height ]
