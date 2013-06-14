@@ -1,9 +1,11 @@
 <%= simple_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
   <%= hidden_field_tag :step, @step %>
-  <%= f.input :trailer_code %>
+  <%= hidden_field_tag :affiche_id, @affiche.id %>
+  <%= f.input :trailer_code, label: 'Код видео' %>
 
   <div class='submit'>
-    <%= f.submit %>
+    <%= f.button :submit, 'Сохранить код видео', class: :button %>
+    <%= link_to 'Отмена', my_affiche_path(@affiche) %>
   </div>
 <% end %>
 
