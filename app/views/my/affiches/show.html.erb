@@ -231,7 +231,7 @@
                   <% showings.each do |showing| %>
                     <li>
                       <%= showing.for_schedule %>
-                      <p class='edit'><%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, @affiche.showings.first) %></p>
+                      <p class='edit'><%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, showing) %></p>
                     </li>
                   <% end %>
                 </ul>

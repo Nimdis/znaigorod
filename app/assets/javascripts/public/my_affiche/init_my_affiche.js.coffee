@@ -3,6 +3,7 @@
   init_affiche_preview_description() if $('#affiche_description').length
   init_affiche_preview_tag() if $('#affiche_tag').length
   init_affiche_preview_video() if $('#affiche_trailer_code').length
+  init_affiche_preview_map() if $('form.my_affiche_showings .my_affiche_map').length
   init_autosuggest_handler() if $('form.my_affiche_showings').length
 
   true
@@ -87,4 +88,44 @@ init_affiche_preview_video = ->
     , 1
     true
   $('#affiche_trailer_code').keyup()
+  true
+
+init_affiche_preview_map = ->
+  ymaps.ready ->
+    $form = $('form.my_affiche_showings')
+    $map = $('.my_affiche_map', $form)
+    latitude = $('.latitude', $form).val() || '56.5000000'
+    longitude = $('.longitude', $form).val() || '84.9666700'
+
+    map = new ymaps.Map $map[0],
+      center: [latitude, longitude]
+      zoom: 12
+      behaviors: ['drag', 'scrollZoom']
+    ,
+      maxZoom: 23
+      minZoom: 12
+
+    map.controls.add 'zoomControl',
+      top: 5
+      left: 5
+
+    if $('.latitude', $form).val() && $('.longitude', $form).val()
+      console.log latitude
+      console.log longitude
+      affiche_placemark = new ymaps.GeoObject
+        geometry:
+          type: 'Point'
+          coordinates: [latitude, longitude]
+        properties:
+          id: 'affiche_placemark'
+      ,
+        iconImageHref: '/assets/public/affiche_placemark.png'
+        iconImageOffset: [-15, -40]
+        iconImageSize: [37, 42]
+        zIndex: 700
+
+      map.geoObjects.add(affiche_placemark)
+      map.setCenter([latitude, longitude])
+      map.setZoom(15)
+
   true

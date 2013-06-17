@@ -3,9 +3,6 @@
   <div class='my_affiche_wrapper'>
     <%= simple_form_for [@affiche, @showing].flatten, :url => my_affiche_showing_path(@affiche, @showing), html: { class: :my_affiche_showings } do |f| %>
       <%= render :partial => 'form', :locals => { :f => f } %>
-      <p class='remove'>
-        <%= link_to 'удалить', my_affiche_showing_path(@affiche, @showing), method: :delete, confirm: 'Вы уверены что хотите удалить?' %>
-      </p>
     <% end %>
   </div>
 </div>
