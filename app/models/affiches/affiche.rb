@@ -76,15 +76,12 @@ class Affiche < ActiveRecord::Base
       affiche.slug = affiche.normalize_friendly_id(affiche.title) unless affiche.slug?
     end
 
-    state :draft do
-    end
-
     event :send_to_moderation do
       transition :draft => :pending
     end
 
     event :approve do
-      transition :pending => :published
+      transition [:draft, :pending] => :published
     end
 
     event :send_to_author do

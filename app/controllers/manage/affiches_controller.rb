@@ -1,11 +1,21 @@
 class Manage::AffichesController < Manage::ApplicationController
   actions :index, :new
 
+  custom_actions :resource => :fire_state_event
+
   has_scope :page, :default => 1
   has_scope :by_state, :only => :index
 
   def index
     @affiches = apply_scopes(Affiche).page(params[:page], :per_page => per_page)
+  end
+
+  def fire_state_event
+    fire_state_event! {
+      @affiche.fire_state_event params[:event] if @affiche.state_events.include?(params[:event].to_sym)
+
+      redirect_to send("manage_#{@affiche.class.name.underscore}_path", @affiche) and return
+    }
   end
 
   protected
