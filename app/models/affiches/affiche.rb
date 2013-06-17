@@ -390,8 +390,8 @@ class Affiche < ActiveRecord::Base
   end
 
   def prepare_trailer
-    self.trailer_code.gsub!(/width=("|')(\d+)("|')/i, 'width="740"')
-    self.trailer_code.gsub!(/height=("|')(\d+)("|')/i, 'height="450"')
+    self.trailer_code.to_s.gsub!(/width=("|')(\d+)("|')/i, 'width="740"')
+    self.trailer_code.to_s.gsub!(/height=("|')(\d+)("|')/i, 'height="450"')
   end
 end
 
