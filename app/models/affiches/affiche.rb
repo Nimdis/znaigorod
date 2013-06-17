@@ -151,10 +151,6 @@ class Affiche < ActiveRecord::Base
     title.present? && description.present? && poster_image.exists? && showings.any? && draft?
   end
 
-  def ready_for_publish?
-    user.is_affiches_trusted_editor? && ready_for_moderation?
-  end
-
   # <<<<<<<<<<<< Wizard  <<<<<<<<<<<
 
   after_save :save_images_from_vk,            :if => :vk_aid?

@@ -2,10 +2,4 @@
   <% Affiche.steps.each do |step| %>
     <%= content_tag :li, link_to(t("my.steps.#{step}"), edit_step_my_affiche_path(@affiche, :step => step)), class: @step.eql?(step) ? 'selected' : nil %>
   <% end %>
-  <li>
-    <%= link_to t('my.send_to_moderation'), my_affiche_moderate_path(@affiche), :method => :put, :confirm => 'Вы уверены? Отправляя афишу на модерацию вы больше не сомжете ее редактировать!' if @affiche.ready_for_moderation? %>
-  </li>
-  <li>
-    <%= link_to t('my.send_to_public'), my_affiche_publish_path(@affiche), :method => :put, :confirm => 'Вы уверены?' if @affiche.ready_for_publish? %>
-  </li>
 </ul>
