@@ -1,0 +1,16 @@
+<div class='content_wrapper'>
+  <h1><%= t("my.archive") %></h1>
+
+  <div class='my_affiche_wrapper'>
+    <%= link_to t('my.add_affiche'), new_my_affiche_path %>
+    <%= link_to t('my.affiche'), my_affiches_path %>
+
+    <ul>
+      <% current_user.affiches.published.each do |affiche| %>
+        <% if affiche.showings.actual.empty? %>
+          <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
