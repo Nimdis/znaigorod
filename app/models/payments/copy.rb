@@ -31,9 +31,12 @@ class Copy < ActiveRecord::Base
 
   searchable do
     integer :id
+
     string :copyable_type
     string :state
     string(:copyable_id_str) { copyable_id.to_s }
+
+    text :copyable_description
   end
 
   def reserve!
@@ -59,6 +62,14 @@ class Copy < ActiveRecord::Base
   end
 
   private
+
+  def copyable_description
+    case copyable
+    when Ticket
+      copyable.affiche.showings.last.organization.try(:title)
+    when Coupon
+    end
+  end
 
   def set_code
     self.code = 4.times.map { Random.rand(10) }.join
