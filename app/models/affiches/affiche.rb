@@ -84,7 +84,7 @@ class Affiche < ActiveRecord::Base
     end
 
     event :send_to_author do
-      transition [:pending, :published] => :draft
+      transition :published => :draft
     end
   end
 
