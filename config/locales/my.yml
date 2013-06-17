@@ -1,6 +1,7 @@
 ru:
 
   my:
+    add_affiche:        Добавить мероприятие
     add_images:         Выберите фотографии
     add_files:          Выберите файлы
     affiche:            Мои афиши
@@ -8,6 +9,7 @@ ru:
     send_to_public:     Опубликовать
     add_showing:        Добавление расписания
     edit_showing:       Изменение расписания
+    archive:            Архивные афиши
 
     button:
       concert:      Концерт

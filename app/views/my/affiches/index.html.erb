@@ -6,24 +6,28 @@
   <% end %>
 
   <div class='my_affiche_wrapper'>
-    <h2>Черновики<h2>
+    <%= link_to t('my.add_affiche'), new_my_affiche_path %>
+    <%= link_to t('my.archive'), my_affiches_archive_path %>
+
+    <h2>Черновики</h2>
     <ul>
       <% current_user.affiches.draft.each do |affiche| %>
         <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true, :deletable => true } %>
       <% end %>
     </ul>
-    <h2>На модерации<h2>
+    <h2>На модерации</h2>
     <ul>
       <% current_user.affiches.pending.each do |affiche| %>
         <%= render :partial => 'affiches_list', :locals => { :affiche => affiche } %>
       <% end %>
     </ul>
-    <h2>Опубликованы<h2>
+    <h2>Опубликованы</h2>
     <ul>
       <% current_user.affiches.published.each do |affiche| %>
-        <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
+        <% if affiche.showings.actual.any? %>
+          <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
+        <% end %>
       <% end %>
     </ul>
-    <%= link_to 'Добавить мероприятие', new_my_affiche_path %>
   </div>
 </div>
