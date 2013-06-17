@@ -1,19 +1,27 @@
-<div class="wrapper">
-  <%= f.input :organization_id, :as => :hidden, :input_html => { :class => 'autosuggest_target' } %>
-  <%= f.input :latitude, :as => :hidden, :input_html => { :class => 'latitude', :value => @showing.get_latitude } %>
-  <%= f.input :longitude, :as => :hidden, :input_html => { :class => 'longitude', :value => @showing.get_longitude } %>
-  <%= f.input :place, :input_html => { :class => 'autosuggest' } %>
-</div>
-<div class="wrapper">
-  <%= f.input :starts_at, :as => :date_picker %>
-  <%= f.input :ends_at, :as => :date_picker %>
-</div>
-<div class="wrapper">
-  <%= f.input :price_min %>
-  <%= f.input :price_max %>
-</div>
+<% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0-stable/?load=package.full&lang=ru-RU') %>
 
-<div class='submit'>
-  <%= f.button :submit, 'Сохранить сеанс', class: :button %>
-  <%= link_to 'Отмена', my_affiche_path(@affiche) %>
+<div class='clearfix'>
+  <div class='form_fields'>
+    <div class='wrapper'>
+      <%= f.input :organization_id, :as => :hidden, :input_html => { :class => 'autosuggest_target' } %>
+      <%= f.input :latitude, :as => :hidden, :input_html => { :class => 'latitude', :value => @showing.get_latitude } %>
+      <%= f.input :longitude, :as => :hidden, :input_html => { :class => 'longitude', :value => @showing.get_longitude } %>
+      <%= f.input :place, :input_html => { :class => 'autosuggest' } %>
+    </div>
+    <div class='wrapper'>
+      <%= f.input :starts_at, :as => :date_picker %>
+      <%= f.input :ends_at, :as => :date_picker %>
+    </div>
+    <div class='wrapper'>
+      <%= f.input :price_min %>
+      <%= f.input :price_max %>
+    </div>
+    <div class='submit'>
+      <%= f.button :submit, 'Сохранить сеанс', class: :button %>
+      <%= link_to 'Отмена', my_affiche_path(@affiche) %>
+      <%= link_to('Удалить', my_affiche_showing_path(@affiche, @showing), method: :delete, confirm: 'Вы уверены что хотите удалить?', class: :floatr) unless @showing.new_record? %>
+    </div>
+  </div>
+  <div class='my_affiche_map'>
+  </div>
 </div>
