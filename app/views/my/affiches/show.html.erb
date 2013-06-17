@@ -241,7 +241,20 @@
 
         <% end %>
       </div>
+
     </div>
+
+    <% if @affiche.draft? %>
+      <div class='public_action'>
+        <% if current_user.is_affiches_trusted_editor? %>
+          <%= link_to t('my.send_to_public'), my_affiche_publish_path(@affiche), :method => :put, :class => "#{@affiche.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены?' %>
+        <% else %>
+          <%= link_to t('my.send_to_public'), my_affiche_moderate_path(@affiche), :method => :put, :class => "#{@affiche.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены? Отправляя афишу на публикацию вы больше не сможете ее редактировать!' %>
+        <% end %>
+      </div>
+    <% else %>
+      Опубликовано
+    <% end %>
   </div>
 
 </div>
