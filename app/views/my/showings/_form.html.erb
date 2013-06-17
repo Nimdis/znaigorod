@@ -1,4 +1,7 @@
 <div class="wrapper">
+  <%= f.input :organization_id, :as => :hidden, :input_html => { :class => 'autosuggest_target' } %>
+  <%= f.input :latitude, :as => :hidden, :input_html => { :class => 'latitude', :value => @showing.get_latitude } %>
+  <%= f.input :longitude, :as => :hidden, :input_html => { :class => 'longitude', :value => @showing.get_longitude } %>
   <%= f.input :place, :input_html => { :class => 'autosuggest' } %>
 </div>
 <div class="wrapper">
@@ -11,5 +14,6 @@
 </div>
 
 <div class='submit'>
-  <%= f.button :submit, 'Сохранить сеансы и продолжить', class: :button %>
+  <%= f.button :submit, 'Сохранить сеанс', class: :button %>
+  <%= link_to 'Отмена', my_affiche_path(@affiche) %>
 </div>
