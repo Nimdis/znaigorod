@@ -19,7 +19,8 @@
                                       false), :class => 'jcrop' %>
     </div>
     <div class='submit'>
-      <%= f.button :submit, 'Обрезать постер и продолжить', class: :button %>
+      <%= f.button :submit, 'Обрезать постер', class: :button %>
+      <%= link_to 'Отмена', my_affiche_path(@affiche) %>
     </div>
   <% end %>
 <% else %>

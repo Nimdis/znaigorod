@@ -1,3 +1,5 @@
+<% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0-stable/?load=package.full&lang=ru-RU') %>
+
 <% content_for :page_title do %>
   <% if @affiche.title.present? %>
     <%= @affiche.title.to_s.text_gilensize %>,
@@ -49,7 +51,11 @@
           <div class='description'>
             <div class='closest'>
               <%= @affiche.when_with_price %>
-              <a href='#'>изменить</a>
+              <% if @affiche.showings.any? %>
+                <%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, @affiche.showings.first) %>
+              <% else %>
+                <%= link_to 'изменить', new_my_affiche_showing_path(@affiche) %>
+              <% end %>
             </div>
             <% unless @affiche.distribution_movie? %>
               <% @affiche.places.each do |place| %>
@@ -136,6 +142,15 @@
           </div>
         <% end %>
 
+        <div class='sheduled'>
+          <div class='head'>
+            <h3 class='inline'>
+              Ещё сеансы
+              <%= link_to 'добавить', new_my_affiche_showing_path(@affiche) %>
+            </h3>
+          </div>
+        </div>
+
         <% if @affiche.viewable_showings? %>
 
           <% if @affiche.distribution_movie? %>
@@ -216,6 +231,7 @@
                   <% showings.each do |showing| %>
                     <li>
                       <%= showing.for_schedule %>
+                      <p class='edit'><%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, @affiche.showings.first) %></p>
                     </li>
                   <% end %>
                 </ul>
