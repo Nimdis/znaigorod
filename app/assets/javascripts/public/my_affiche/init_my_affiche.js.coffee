@@ -68,7 +68,7 @@ init_affiche_preview_video = ->
     $.ajax
       type: 'GET'
       url: "/my/affiches/#{$('#affiche_id').val()}/preview_video"
-      data: "data=#{$('#affiche_trailer_code').val()}"
+      data: $('#affiche_trailer_code').closest('form').serialize()
       success: (data, textStatus, jqXHR) ->
         $('.my_affiche_wrapper .affiche_preview .video').html(data)
         true

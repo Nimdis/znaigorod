@@ -48,8 +48,10 @@ class My::AffichesController < My::ApplicationController
   end
 
   def preview_video
-    affiche = AfficheDecorator.new(Affiche.find(params[:affiche_id]))
-    render text: affiche.trailer_auto_html(params[:data])
+    code = params[:affiche].try(:[], :trailer_code)
+    code.gsub!(/width=("|')(\d+)("|')/i, 'width="580"')
+    code.gsub!(/height=("|')(\d+)("|')/i, 'height="350"')
+    render text: Affiche.trailer_auto_html(code)
   end
 
   def destroy_image
