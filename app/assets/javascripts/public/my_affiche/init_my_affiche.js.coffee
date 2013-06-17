@@ -110,8 +110,6 @@ init_affiche_preview_map = ->
       left: 5
 
     if $('.latitude', $form).val() && $('.longitude', $form).val()
-      console.log latitude
-      console.log longitude
       affiche_placemark = new ymaps.GeoObject
         geometry:
           type: 'Point'
