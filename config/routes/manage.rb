@@ -24,7 +24,10 @@ Znaigorod::Application.routes.draw do
       end
 
     end
+
     resources :affiches, only: [] do
+      put 'fire_event_state/:event' => 'affiches#fire_state_event', :on => :member, :as => :fire_state_event
+
       resources :tickets
     end
 

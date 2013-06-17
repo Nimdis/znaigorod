@@ -1,10 +1,3 @@
-<% if resource.published? %>
-  <%= link_to 'В черновики', polymorphic_url([:manage, resource], "#{resource.class.name.underscore}[state]" => 'draft'), :method => :put %>
-  <%= link_to 'На модерацию', polymorphic_url([:manage, resource], "#{resource.class.name.underscore}[state]" => 'pending'), :method => :put %>
-<% elsif resource.pending?  %>
-  <%= link_to 'В черновики', polymorphic_url([:manage, resource], "#{resource.class.name.underscore}[state]" => 'draft'), :method => :put %>
-  <%= link_to 'Опубликовать', polymorphic_url([:manage, resource], "#{resource.class.name.underscore}[state]" => 'published'), :method => :put %>
-<% elsif resource.draft? %>
-  <%= link_to 'На модерацию', polymorphic_url([:manage, resource], "#{resource.class.name.underscore}[state]" => 'pending'), :method => :put %>
-  <%= link_to 'Опубликовать', polymorphic_url([:manage, resource], "#{resource.class.name.underscore}[state]" => 'published'), :method => :put %>
+<% resource.state_events.each do |state_event| %>
+  <%= link_to t("state_machine.events.#{state_event}"), fire_state_event_manage_affiche_path(resource, state_event), :method => :put %>
 <% end %>

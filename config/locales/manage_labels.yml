@@ -75,3 +75,9 @@ ru:
         affiche: Редактор афиш
         post: Редактор публикаций
         organization: Редактор организаций
+
+  state_machine:
+    events:
+      approve:            Опубликовать
+      send_to_author:     В черновики
+      send_to_moderation: На модерацию

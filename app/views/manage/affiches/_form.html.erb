@@ -3,7 +3,6 @@
 <%= f.input :title %>
 <%= f.input :original_title %>
 <%= f.input :description, :input_html => { :class => 'description' } %>
-<%= f.input :state, :collection => Affiche.state_machine.states.map{ |s| [s.human_name, s.name] }, :include_blank => false %>
 <%= f.input :tag %>
 <%= f.input :trailer_code %>
 <%= f.input :vk_aid %>
