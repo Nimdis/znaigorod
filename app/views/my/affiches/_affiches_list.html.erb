@@ -6,7 +6,7 @@
   <% end %>
 
   <% if defined?(editable) %>
-    <%= link_to 'Редактировать', edit_step_my_affiche_path(affiche, :first) %>
+    <%= link_to 'Редактировать', my_affiche_path(affiche) %>
   <% end %>
 
   <% if defined?(deletable) %>
