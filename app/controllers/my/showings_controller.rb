@@ -12,6 +12,6 @@ class My::ShowingsController < My::ApplicationController
   end
 
   def update
-    create! { redirect_to my_affiche_path(@affiche) and return }
+    update! { redirect_to my_affiche_path(@affiche) and return }
   end
 end
