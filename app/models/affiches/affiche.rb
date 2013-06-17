@@ -50,6 +50,7 @@ class Affiche < ActiveRecord::Base
   default_value_for :vkontakte_likes,           0
   default_value_for :total_rating,              0.5
   #before_save :set_popularity
+  before_save :prepare_trailer
 
   scope :available_for_edit,    -> { where(:state => [:draft, :published]) }
   scope :by_state,              ->(state) { where(:state => state) }
@@ -281,9 +282,11 @@ class Affiche < ActiveRecord::Base
 
   #include AfficheQualityRating
 
-  def trailer_auto_html(trailer_code)
-    auto_html(trailer_code) do
-      youtube(:width => 740, :height => 450)
+  def self.trailer_auto_html(trailer_code)
+    AutoHtml.auto_html(trailer_code) do
+      youtube(:width => 580, :height => 350)
+      vimeo(:width => 580, :height => 350)
+      link(:target => '_blank', :rel => 'nofollow')
     end
   end
 
@@ -384,6 +387,11 @@ class Affiche < ActiveRecord::Base
 
   def set_popularity
     self.popularity = 0.3 * yandex_metrika_page_views.to_f + vkontakte_likes.to_f
+  end
+
+  def prepare_trailer
+    self.trailer_code.gsub!(/width=("|')(\d+)("|')/i, 'width="740"')
+    self.trailer_code.gsub!(/height=("|')(\d+)("|')/i, 'height="450"')
   end
 end
 
