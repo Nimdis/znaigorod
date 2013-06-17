@@ -35,7 +35,11 @@ class My::AffichesController < My::ApplicationController
     @affiche.attributes = params[:affiche]
 
     if @affiche.save
-      redirect_to my_affiche_path(@affiche.id)
+      if params[:crop]
+        redirect_to edit_step_my_affiche_path(@affiche.id, :step => :second)
+      else
+        redirect_to my_affiche_path(@affiche.id)
+      end
     else
       render :edit
     end
