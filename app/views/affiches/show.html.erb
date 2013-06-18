@@ -101,6 +101,13 @@
                 <p>Нет описания</p>
               <% end %>
               <%= @affiche.html_attachments %>
+              <% if @affiche.user.present? %>
+                <p class='affiche_owner'>
+                  <span>Автор:</span>
+                  <%= image_tag @affiche.user.avatar, size: '24x24', alt: @affiche.user.name if @affiche.user.avatar.present? %>
+                  <%= link_to @affiche.user.name, @affiche.user.profile %>
+                </p>
+              <% end %>
             </div>
           </div>
         </div>
