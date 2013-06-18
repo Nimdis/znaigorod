@@ -1,6 +1,6 @@
 <div class='description'>
   <div class='poster'>
-    <% if @affiche.poster_image.exists? %>
+    <% if @affiche.poster_image_url? %>
       <%= image_tag resized_image_url(@affiche.poster_image_url,
                                       @affiche.poster_image_resized_dimensions[:width].round,
                                       @affiche.poster_image_resized_dimensions[:height].round, false),
