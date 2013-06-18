@@ -1,35 +1,73 @@
 <div class='content_wrapper'>
   <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
 
-  <h1><%= t("my.affiche") %></h1>
+  <h1>
+    <%= t("my.affiche") %>
+    (<%= link_to t('my.add_affiche'), new_my_affiche_path if can? :new, Affiche.new %>)
+  </h1>
 
   <% if flash[:notice] %>
     <p class="flash-notice"><%= flash[:notice] %></p>
   <% end %>
 
   <div class='my_affiche_wrapper'>
-    <%= link_to t('my.add_affiche'), new_my_affiche_path if can? :new, Affiche.new %>
-    <%= link_to t('my.archive'), archive_my_affiches_path if current_user.showings.actual.any? %>
+    <div class='my_affiches_preview'>
 
-    <h2>Черновики</h2>
-    <ul class='my_affiche_items'>
-      <% current_user.affiches.draft.order("created_at DESC").each do |affiche| %>
-        <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true, :deletable => true } %>
-      <% end %>
-    </ul>
-    <h2>На модерации</h2>
-    <ul class='my_affiche_items'>
-      <% current_user.affiches.pending.order("created_at DESC").each do |affiche| %>
-        <%= render :partial => 'affiches_list', :locals => { :affiche => affiche } %>
-      <% end %>
-    </ul>
-    <h2>Опубликованы</h2>
-    <ul class='my_affiche_items'>
-      <% current_user.affiches.published.order("created_at DESC").each do |affiche| %>
-        <% if affiche.showings.actual.any? %>
-          <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
+      <h2>Черновики</h2>
+      <ul class='my_affiche_items'>
+        <% current_user.affiches.draft.order("created_at DESC").each do |affiche| %>
+          <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true, :deletable => true } %>
         <% end %>
-      <% end %>
-    </ul>
+      </ul>
+      <h2>На модерации</h2>
+      <ul class='my_affiche_items'>
+        <% current_user.affiches.pending.order("created_at DESC").each do |affiche| %>
+          <%= render :partial => 'affiches_list', :locals => { :affiche => affiche } %>
+        <% end %>
+      </ul>
+      <h2>Опубликованы</h2>
+      <ul class='my_affiche_items'>
+        <% current_user.affiches.published.order("created_at DESC").each do |affiche| %>
+          <% if affiche.showings.actual.any? %>
+            <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
+          <% end %>
+        <% end %>
+      </ul>
+
+    </div>
+
+    <div class='my_affiche_help'>
+      <h2><%= t('my.help') %></h2>
+      <p>Если вы желаете выкладывать свои афиши на сайте, ознакомьтесь с примером оформления</p>
+
+      <h4>Заголовок:</h4>
+      <ul>
+        <li>Написан на русском (англ. при необходимости)</li>
+        <li>Начинаться с заглавной буквы</li>
+        <li>Не содержать точки в конце</li>
+        <li>Не содержать названия организации</li>
+        <li>Не содержать сокращений и не цензурной лексики</li>
+        <li>Запрещено писать с включенной клавишей CapsLock</li>
+      </ul>
+
+      <h4>Описание мероприятия:</h4>
+      <ul>
+        <li>Краткое описание</li>
+        <li>Программа мероприятия</li>
+        <li>Информация об организаторах</li>
+        <li>Ссылка на веб-сайт</li>
+        <li>Не содержать сокращений и не цензурной лексики</li>
+        <li>Запрещено писать с включенной клавишей CapsLock</li>
+      </ul>
+
+      <p>Фото и видео материалы должны быть надлежащего качества и содержания и не нарушать действующего законодательства РФ.</p>
+
+      <div class='my_affiche_archive'>
+        <p>
+          Также вы можете посмотреть мероприятия
+          <%= link_to 'которые уже прошли', archive_my_affiches_path if current_user.showings.actual.any? %>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
