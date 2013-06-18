@@ -6,10 +6,10 @@
   <% end %>
 
   <% if defined?(editable) %>
-    <%= link_to 'Редактировать', my_affiche_path(affiche) %>
+    <%= link_to 'Редактировать', my_affiche_path(affiche) if can? :edit, @affiche %>
   <% end %>
 
   <% if defined?(deletable) %>
-    <%= link_to 'Удалить', my_affiche_path(affiche), method: :delete, confirm: 'Вы уверены что хотите удалить?' %>
+    <%= link_to 'Удалить', my_affiche_path(affiche), method: :delete, confirm: 'Вы уверены что хотите удалить?' if can? :destroy, @affiche %>
   <% end %>
 </li>

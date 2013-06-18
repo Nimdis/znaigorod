@@ -6,7 +6,7 @@
   <% end %>
 
   <div class='my_affiche_wrapper'>
-    <%= link_to t('my.add_affiche'), new_my_affiche_path %>
+    <%= link_to t('my.add_affiche'), new_my_affiche_path if can? :new, @affiche %>
     <%= link_to t('my.archive'), my_affiches_archive_path %>
 
     <h2>Черновики</h2>

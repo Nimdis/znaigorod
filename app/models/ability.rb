@@ -18,10 +18,28 @@ class Ability
         can :manage, [Organization] + Organization.available_suborganization_classes
       end
     when 'my'
-      can :manage, Affiche if user.is_affiches_editor? || user.is_affiches_trusted_editor?
-      can :manage, GalleryFile if user.is_affiches_editor? || user.is_affiches_trusted_editor?
-      can :manage, GalleryImage if user.is_affiches_editor? || user.is_affiches_trusted_editor?
-      can :manage, Showing if user.is_affiches_editor? || user.is_affiches_trusted_editor?
+      can [:new, :create, :available_tags, :preview_video], Affiche if user.persisted?
+      can [:edit, :update, :destroy_image], Affiche do |affiche|
+        affiche.state != 'pending' && affiche.user == user
+      end
+
+      can [:destroy, :send_to_moderation], Affiche do |affiche|
+        affiche.draft? && affiche.user == user
+      end
+
+      can :send_to_published, Affiche if user.is_affiches_trusted_editor?
+
+      can :manage, GalleryFile do |gallery_file|
+        gallery_file.attacheable.state != 'pending' && gallery_file.attacheable.user == user
+      end
+
+      can :manage, GalleryImage do |gallery_image|
+        gallery_image.attacheable.state != 'pending' && gallery_image.attacheable.user == user
+      end
+
+      can :manage, Showing do |showing|
+        showing.affiche.state != 'pending' && showing.affiche.user == user
+      end
     when 'crm'
       return false if user.new_record?
 

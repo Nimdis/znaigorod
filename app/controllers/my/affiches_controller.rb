@@ -1,11 +1,11 @@
 #encoding: utf-8
 
 class My::AffichesController < My::ApplicationController
-  load_and_authorize_resource
 
   before_filter :current_step
 
-  custom_actions :resource => :destroy_image
+  actions :all
+  custom_actions :resource => [:destroy_image, :send_to_moderation, :send_to_published], :collection => [:available_tags, :preview_video]
 
   def show
     @affiche = AfficheDecorator.new Affiche.find(params[:id])
@@ -67,7 +67,7 @@ class My::AffichesController < My::ApplicationController
 
   def send_to_moderation
     @affiche = current_user.affiches.available_for_edit.find(params[:affiche_id])
-    @affiche.update_attributes!(:state => 'pending')
+    @affiche.pending!
 
     MyMailer.delay.mail_new_pending_affiche(@affiche)
     redirect_to my_root_path, :notice => "Афиша «#{@affiche.title}» добавлена в очередь на модерацию."
@@ -75,7 +75,7 @@ class My::AffichesController < My::ApplicationController
 
   def send_to_published
     @affiche = current_user.affiches.available_for_edit.find(params[:affiche_id])
-    @affiche.update_attributes!(:state => 'published')
+    @affiche.published!
 
     MyMailer.delay.mail_new_published_affiche(@affiche)
     redirect_to my_root_path, :notice => "Афиша «#{@affiche.title}» опубликована."

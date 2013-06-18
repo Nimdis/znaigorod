@@ -21,12 +21,12 @@
           <% if @affiche.title.present? %>
             <h1>
               <%= @affiche.title.to_s.text_gilensize %>
-              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) %>
+              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) if can? :edit, @affiche %>
             </h1>
           <% else %>
             <h1>
               <span class='red'>Нет</span> названия
-              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) %>
+              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) if can? :edit, @affiche %>
             </h1>
           <% end %>
           <%= content_tag :h2, @affiche.original_title.text_gilensize if @affiche.original_title? %>
@@ -45,16 +45,16 @@
                 <%= image_tag 'public/stub_poster.png', size: '180x242', alt: :poster %>
                 <span class='red'>Нет</span> постера
               <% end %>
-              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :second) %>
+              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :second) if can? :edit, @affiche %>
             </div>
           </div>
           <div class='description'>
             <div class='closest'>
               <%= @affiche.when_with_price %>
               <% if @affiche.showings.any? %>
-                <%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, @affiche.showings.first) %>
+                <%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, @affiche.showings.first) if can? :edit, @affiche.showings.first %>
               <% else %>
-                <%= link_to 'изменить', new_my_affiche_showing_path(@affiche) %>
+                <%= link_to 'изменить', new_my_affiche_showing_path(@affiche) if can? :new, @affiche.showings.new %>
               <% end %>
             </div>
             <% unless @affiche.distribution_movie? %>
@@ -70,13 +70,13 @@
               <% else %>
                 <p><span class='red'>Нет</span> описания</p>
               <% end %>
-              <p><%= link_to 'изменить описание', edit_step_my_affiche_path(@affiche, step: :first) %></p>
+              <p><%= link_to 'изменить описание', edit_step_my_affiche_path(@affiche, step: :first) if can? :edit, @affiche %></p>
               <% if @affiche.html_attachments.present? %>
                 <%= @affiche.html_attachments %>
               <% else %>
                 <p><span class='red'>Нет</span> файлов</p>
               <% end %>
-              <%= link_to 'изменить файлы', edit_step_my_affiche_path(@affiche, step: :fourth) %>
+              <%= link_to 'изменить файлы', edit_step_my_affiche_path(@affiche, step: :fourth) if can? :edit, @affiche %>
             </div>
           </div>
         </div>
@@ -89,12 +89,12 @@
                 <li><%= link_to(tag, affiches_path('tags[]' => tag)) %></li>
               <% end %>
               <li class='transparent'>
-                <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) %>
+                <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) if can? :edit, @affiche %>
               </li>
             <% else %>
               <li class='transparent'>
                 <span class='red'>Нет</span> тэгов
-                <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) %>
+                <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) if can? :edit, @affiche %>
               </li>
             <% end %>
           </ul>
@@ -109,7 +109,7 @@
         <% if @affiche.images.present? %>
           <div class='photogallery_header'>
             Фотографии
-            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fourth) %>
+            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fourth) if can? :edit, @affiche %>
           </div>
           <div class='photogallery'>
             <ul>
@@ -123,14 +123,14 @@
         <% else %>
           <div class='photogallery_header'>
             <span class='red'>Нет</span> фотографий
-            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fourth) %>
+            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fourth) if can? :edit, @affiche %>
           </div>
         <% end %>
 
         <% if @affiche.trailer_code.present? %>
           <div class='trailer_header'>
             Видео
-            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fifth) %>
+            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fifth) if can? :edit, @affiche %>
           </div>
           <div class='trailer'>
             <%= @affiche.trailer_code_html %>
@@ -138,7 +138,7 @@
         <% else %>
           <div class='trailer_header'>
             <span class='red'>Нет</span> видео
-            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fifth) %>
+            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fifth) if can? :edit, @affiche %>
           </div>
         <% end %>
 
@@ -146,7 +146,7 @@
           <div class='head'>
             <h3 class='inline'>
               Ещё сеансы
-              <%= link_to 'добавить', new_my_affiche_showing_path(@affiche) %>
+              <%= link_to 'добавить', new_my_affiche_showing_path(@affiche) if can? :new, @affiche.showings.new %>
             </h3>
           </div>
         </div>
@@ -231,7 +231,7 @@
                   <% showings.each do |showing| %>
                     <li>
                       <%= showing.for_schedule %>
-                      <p class='edit'><%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, showing) %></p>
+                      <p class='edit'><%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, showing) if can? :edit, showing %></p>
                     </li>
                   <% end %>
                 </ul>
@@ -247,9 +247,11 @@
     <% if @affiche.draft? %>
       <div class='public_action'>
         <% if current_user.is_affiches_trusted_editor? %>
-          <%= link_to t('my.send_to_public'), my_affiche_publish_path(@affiche), :method => :put, :class => "#{@affiche.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены?' %>
+          <%= link_to t('my.send_to_public'), publish_my_affiche_path(@affiche), :method => :put, :class => "#{@affiche.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены?' %>
         <% else %>
-          <%= link_to t('my.send_to_public'), my_affiche_moderate_path(@affiche), :method => :put, :class => "#{@affiche.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены? Отправляя афишу на публикацию вы больше не сможете ее редактировать!' %>
+          <% if can? :send_to_moderation, @affiche %>
+            <%= link_to t('my.send_to_public'), moderate_my_affiche_path(@affiche), :method => :put, :class => "#{@affiche.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены? Отправляя афишу на публикацию вы больше не сможете ее редактировать!' %>
+          <% end %>
         <% end %>
       </div>
     <% else %>
