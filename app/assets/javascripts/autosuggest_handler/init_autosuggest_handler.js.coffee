@@ -9,9 +9,11 @@ $.fn.add_autosuggest = () ->
         success: (data) ->
           response( $.map( data, ( item ) ->
             return {
-              label: item.term
-              value: item.term
               id: item.id
+              label: item.term
+              latitude: item.latitude
+              longitude: item.longitude
+              value: item.term
             }
           ))
     minLength: 3
