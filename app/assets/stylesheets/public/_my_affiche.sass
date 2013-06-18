@@ -1,7 +1,80 @@
+.content_wrapper
+  .public_action
+    float: left
+    padding: 5px 0 0 0
+    width: 240px
+
+    h4
+      font-size: 16px
+      line-height: 20px
+      margin: 0 0 10px 0
+      text-align: center
+
+    .requirements
+      font-size: 14px
+      line-height: 18px
+      margin: 0 0 15px 0
+
+      color: #777
+      li
+        padding: 0 0 0 40px
+        &.enabled
+          background: image_url('done.png') no-repeat 20px center
+          font-weight: bold
+        &.disabled
+
+    a
+      +border-radius(3px)
+      +box-shadow(#ccc 1px 1px 5px)
+      color: #fff
+      display: block
+      font-size: 16px
+      font-weight: bold
+      line-height: 20px
+      margin: 0 auto
+      padding: 4px 7px
+      text-align: center
+      width: 150px
+
+      &.disabled
+        +background-image(linear-gradient(#c4c4c4, #999))
+
+        &:hover
+          cursor: default
+
+      &.enabled
+        +background-image(linear-gradient(#91ac4a, #658d34))
+
+      &:hover
+        text-decoration: none
+
 .content_wrapper .my_affiche_wrapper
   line-height: 1.4
   +min-height(300px)
   margin: 10px
+
+  .my_affiche_items
+    +clearfix
+
+    .my_affiche_item
+      +clearfix
+      float: left
+      margin: 5px
+      text-align: center
+      width: 120px
+
+      img
+        +inline-block
+        width: 80px
+
+      .title
+        +inline-block
+        font-size: 12px
+        line-height: 16px
+        width: 120px
+
+      a
+        font-size: 10px
 
   h2
     font-size: 18px
@@ -216,3 +289,29 @@
     .tags
       clear: left
       font-size: 11px
+
+  .my_affiches_preview
+    float: left
+    width: 800px
+
+  .my_affiche_help
+    +clearfix
+    font-size: 14px
+    line-height: 18px
+    width: 380px
+
+    h4
+      font-size: 16px
+      line-height: 20px
+      margin: 10px 0 5px 0
+
+    ul
+      margin: 0 0 15px 15px
+
+      li
+        list-style: disc outside
+
+    .my_affiche_archive
+      margin: 20px 0
+
+
