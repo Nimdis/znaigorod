@@ -1,0 +1,34 @@
+.content_wrapper
+  .breadcrumbs
+    +clearfix
+    line-height: 1.4
+    font-size: 11px
+    margin: 0 0 15px 10px
+    li
+      float: left
+      &.separator
+        overflow: hidden
+        width: 6px
+        height: 8px
+        text-indent: -9999em
+        background: transparent image_url('public/breadcrumbs_separator.png') no-repeat center center
+        margin: 5px 10px 0
+  div.breadcrumbs
+    a
+      display: block
+      float: left
+      &:after
+        display: block
+        float: right
+        content: ' '
+        width: 6px
+        height: 8px
+        background: transparent image_url('public/breadcrumbs_separator.png') no-repeat center center
+        margin: 5px 10px 0
+      &:last-child
+        &:after
+          content: ''
+          width: auto
+          height: auto
+          background: none
+          margin: 0
