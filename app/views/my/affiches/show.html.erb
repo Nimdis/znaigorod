@@ -37,10 +37,6 @@
           <div class='left_part'>
             <div class='image'>
               <% if @affiche.poster_url.present? %>
-                <div class="rating like_a_line">
-                  <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => @affiche.model } %>
-                </div>
-                <%= content_tag :div, "#{@affiche.age_min.to_i}+", class: :age if @affiche.age_min.present? %>
                 <%= @affiche.item_poster %>
               <% else %>
                 <% if can? :edit, @affiche %>
