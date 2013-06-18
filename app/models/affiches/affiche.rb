@@ -148,7 +148,7 @@ class Affiche < ActiveRecord::Base
   private :set_poster_url
 
   def ready_for_moderation?
-    title.present? && description.present? && poster_image.exists? && showings.any? && draft?
+    title.present? && description.present? && poster_image_url? && showings.any? && draft?
   end
 
   # <<<<<<<<<<<< Wizard  <<<<<<<<<<<
