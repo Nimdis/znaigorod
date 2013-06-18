@@ -1,4 +1,6 @@
 <div class='content_wrapper'>
+  <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
+
   <h1><%= t("my.affiche") %></h1>
 
   <% if flash[:notice] %>
