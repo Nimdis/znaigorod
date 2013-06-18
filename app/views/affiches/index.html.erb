@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <%= render :partial => 'advertisment' if DateTime.now <= DateTime.new(2013, 6, 16, 22, 00, 00, '+7') %>
+    <%= render :partial => 'advertisment' if DateTime.now <= DateTime.new(2013, 6, 23, 22, 00, 00, '+7') %>
 
     <% if @presenter.collection.any? %>
       <ul class="items_list <%= @presenter.view %>">
