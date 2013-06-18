@@ -11,7 +11,7 @@ $.fn.add_autosuggest = () ->
             return {
               label: item.term
               value: item.term
-              id:    item.id
+              id: item.id
             }
           ))
     minLength: 3
