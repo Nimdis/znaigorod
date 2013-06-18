@@ -12,28 +12,34 @@
 
   <div class='my_affiche_wrapper'>
     <div class='my_affiches_preview'>
-
       <h2>Черновики</h2>
-      <ul class='my_affiche_items'>
-        <% current_user.affiches.draft.order("created_at DESC").each do |affiche| %>
-          <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true, :deletable => true } %>
-        <% end %>
-      </ul>
-      <h2>На модерации</h2>
-      <ul class='my_affiche_items'>
-        <% current_user.affiches.pending.order("created_at DESC").each do |affiche| %>
-          <%= render :partial => 'affiches_list', :locals => { :affiche => affiche } %>
-        <% end %>
-      </ul>
-      <h2>Опубликованы</h2>
-      <ul class='my_affiche_items'>
-        <% current_user.affiches.published.order("created_at DESC").each do |affiche| %>
-          <% if affiche.showings.actual.any? %>
-            <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
+      <% current_user.affiches.draft.order("created_at DESC").each_slice(5) do |affiches| %>
+        <ul class='my_affiche_items'>
+          <% affiches.each do |affiche| %>
+            <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true, :deletable => true } %>
           <% end %>
-        <% end %>
-      </ul>
+        </ul>
+      <% end %>
 
+      <h2>На модерации</h2>
+      <% current_user.affiches.pending.order("created_at DESC").each_slice(5) do |affiches| %>
+        <ul class='my_affiche_items'>
+          <% affiches.each do |affiche| %>
+            <%= render :partial => 'affiches_list', :locals => { :affiche => affiche } %>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <h2>Опубликованы</h2>
+      <% current_user.affiches.published.order("created_at DESC").each_slice(5) do |affiches| %>
+        <ul class='my_affiche_items'>
+          <% affiches.each do |affiche| %>
+            <% if affiche.showings.actual.any? %>
+              <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
+            <% end %>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
 
     <div class='my_affiche_help'>
