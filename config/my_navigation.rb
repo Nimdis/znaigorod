@@ -18,5 +18,6 @@ SimpleNavigation::Configuration.run do |navigation|
         affiche_item.item :showings, 'Расписание', edit_my_affiche_showing_path(@affiche, @showing) if @showing && @showing.persisted?
       end if @affiche && @affiche.persisted?
     end
+    primary.dom_class = 'breadcrumbs'
   end
 end
