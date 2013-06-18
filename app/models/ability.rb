@@ -30,11 +30,11 @@ class Ability
       can :send_to_published, Affiche if user.is_affiches_trusted_editor?
 
       can :manage, GalleryFile do |gallery_file|
-        gallery_file.attacheable.state != 'pending' && gallery_file.attacheable.user == user
+        gallery_file.attachable.state != 'pending' && gallery_file.attachable.user == user
       end
 
       can :manage, GalleryImage do |gallery_image|
-        gallery_image.attacheable.state != 'pending' && gallery_image.attacheable.user == user
+        gallery_image.attachable.state != 'pending' && gallery_image.attachable.user == user
       end
 
       can :manage, Showing do |showing|
