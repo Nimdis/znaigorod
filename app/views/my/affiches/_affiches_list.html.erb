@@ -1,15 +1,15 @@
 <li>
   <% if affiche.title.present? %>
-    <%= link_to affiche, affiche %>
+    <%= affiche %>
   <% else %>
-    <%= link_to 'Нет названия', affiche %>
+    Нет названия
   <% end %>
 
   <% if defined?(editable) %>
-    <%= link_to 'Редактировать', my_affiche_path(affiche) if can? :edit, @affiche %>
+    <%= link_to 'Редактировать', my_affiche_path(affiche) if can? :edit, affiche %>
   <% end %>
 
   <% if defined?(deletable) %>
-    <%= link_to 'Удалить', my_affiche_path(affiche), method: :delete, confirm: 'Вы уверены что хотите удалить?' if can? :destroy, @affiche %>
+    <%= link_to 'Удалить', my_affiche_path(affiche), method: :delete, confirm: 'Вы уверены что хотите удалить?' if can? :destroy, affiche %>
   <% end %>
 </li>

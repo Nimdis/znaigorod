@@ -18,7 +18,7 @@ class Ability
         can :manage, [Organization] + Organization.available_suborganization_classes
       end
     when 'my'
-      can [:index, :archive, :new, :create, :available_tags, :preview_video], Affiche if user.persisted?
+      can [:index, :show, :archive, :new, :create, :available_tags, :preview_video], Affiche if user.persisted?
       can [:edit, :update, :destroy_image], Affiche do |affiche|
         affiche.state != 'pending' && affiche.user == user
       end
