@@ -190,7 +190,7 @@ class Organization < ActiveRecord::Base
   end
 
   def as_json(options)
-    super(:only => :id, :methods => :term)
+    super(:only => :id, :methods => [:term, :latitude, :longitude])
   end
 
   def nearest_affiches

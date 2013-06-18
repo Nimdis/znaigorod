@@ -94,6 +94,7 @@ init_affiche_preview_map = ->
   ymaps.ready ->
     $form = $('form.my_affiche_showings')
     $map = $('.my_affiche_map', $form)
+
     latitude = $('.latitude', $form).val() || '56.5000000'
     longitude = $('.longitude', $form).val() || '84.9666700'
 
@@ -110,29 +111,54 @@ init_affiche_preview_map = ->
       left: 5
 
     if $('.latitude', $form).val() && $('.longitude', $form).val()
-      affiche_placemark = new ymaps.GeoObject
-        geometry:
-          type: 'Point'
-          coordinates: [latitude, longitude]
-        properties:
-          id: 'affiche_placemark'
-      ,
-        iconImageHref: '/assets/public/affiche_placemark.png'
-        iconImageOffset: [-15, -40]
-        iconImageSize: [37, 42]
-        zIndex: 700
-
+      affiche_placemark = create_placemark(latitude, longitude)
       map.geoObjects.add(affiche_placemark)
       map.setCenter([latitude, longitude])
       map.setZoom(16)
 
+    map.events.add 'click', (event) ->
+      coordinates = event.get('coordPosition')
+      latitude = coordinates[0]
+      longitude = coordinates[1]
+      $('#showing_latitude').val(latitude)
+      $('#showing_longitude').val(longitude)
+      map.geoObjects.remove(affiche_placemark) if affiche_placemark?
+      affiche_placemark = create_placemark(latitude, longitude)
+      map.geoObjects.add(affiche_placemark)
+      true
+
     $('#showing_place').on 'autocompleteselect', (event, ui) ->
-      # TODO do something
-      #console.log 'select !!!'
-      #console.log event
-      #console.log ui
-      #console.log $('.latitude', $form).val()
-      #console.log $('.longitude', $form).val()
+      latitude = ui.item.latitude
+      longitude = ui.item.longitude
+      $('#showing_latitude').val(latitude)
+      $('#showing_longitude').val(longitude)
+      map.setCenter [latitude, longitude], 16,
+        checkZoomRange: true
+        duration: 800
+        timingFunction: 'ease-in-out'
+      map.geoObjects.remove(affiche_placemark) if affiche_placemark?
+      affiche_placemark = create_placemark(latitude, longitude)
+      map.geoObjects.add(affiche_placemark)
+
+      true
+
+    $('#showing_place').on 'autocompletesearch', (event, ui) ->
+      $('#showing_organization_id').val('')
       true
 
   true
+
+create_placemark = (latitude, longitude) ->
+  affiche_placemark = new ymaps.GeoObject
+    geometry:
+      type: 'Point'
+      coordinates: [latitude, longitude]
+    properties:
+      id: 'affiche_placemark'
+  ,
+    iconImageHref: '/assets/public/affiche_placemark.png'
+    iconImageOffset: [-15, -40]
+    iconImageSize: [37, 42]
+    zIndex: 700
+
+  affiche_placemark
