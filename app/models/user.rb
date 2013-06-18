@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
     omniauth_providers: [:vkontakte, :google_oauth2, :yandex, :facebook, :twitter, :odnoklassniki, :mailru]
 
   has_many :affiches
+  has_many :showings, :through => :affiches
   has_many :activities,     dependent:  :destroy
   has_many :comments
   has_many :organizations

@@ -1,8 +1,7 @@
 Znaigorod::Application.routes.draw do
   namespace :my do
-    get 'affiches/archive'
-
     resources :affiches do
+      get 'archive', :on => :collection, :as => :archive
       get 'edit/step/:step' => 'affiches#edit', :defaults => { :step => 'first' }, :on => :member, :as => :edit_step
       get 'available_tags'
       get 'preview_video'

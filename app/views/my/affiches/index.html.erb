@@ -6,8 +6,8 @@
   <% end %>
 
   <div class='my_affiche_wrapper'>
-    <%= link_to t('my.add_affiche'), new_my_affiche_path if can? :new, @affiche %>
-    <%= link_to t('my.archive'), my_affiches_archive_path %>
+    <%= link_to t('my.add_affiche'), new_my_affiche_path if can? :new, Affiche.new %>
+    <%= link_to t('my.archive'), archive_my_affiches_path if current_user.showings.actual.any? %>
 
     <h2>Черновики</h2>
     <ul>
