@@ -12,20 +12,20 @@
     <%= link_to t('my.archive'), archive_my_affiches_path if current_user.showings.actual.any? %>
 
     <h2>Черновики</h2>
-    <ul>
-      <% current_user.affiches.draft.each do |affiche| %>
+    <ul class='my_affiche_items'>
+      <% current_user.affiches.draft.order("created_at DESC").each do |affiche| %>
         <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true, :deletable => true } %>
       <% end %>
     </ul>
     <h2>На модерации</h2>
-    <ul>
-      <% current_user.affiches.pending.each do |affiche| %>
+    <ul class='my_affiche_items'>
+      <% current_user.affiches.pending.order("created_at DESC").each do |affiche| %>
         <%= render :partial => 'affiches_list', :locals => { :affiche => affiche } %>
       <% end %>
     </ul>
     <h2>Опубликованы</h2>
-    <ul>
-      <% current_user.affiches.published.each do |affiche| %>
+    <ul class='my_affiche_items'>
+      <% current_user.affiches.published.order("created_at DESC").each do |affiche| %>
         <% if affiche.showings.actual.any? %>
           <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
         <% end %>

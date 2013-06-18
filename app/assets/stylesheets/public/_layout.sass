@@ -252,6 +252,29 @@ body
   width: $common_width
   margin: 25px auto 0
 
+  .my_affiche_items
+    +clearfix
+
+    .my_affiche_item
+      +clearfix
+      float: left
+      margin: 5px
+      text-align: center
+      width: 120px
+
+      img
+        +inline-block
+        width: 80px
+
+      .title
+        +inline-block
+        font-size: 12px
+        line-height: 16px
+        width: 120px
+
+      a
+        font-size: 10px
+
   .public_action
     float: left
     padding: 5px 0 0 0
