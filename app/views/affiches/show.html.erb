@@ -54,7 +54,7 @@
                 <%= content_tag :div, "#{@affiche.age_min.to_i}+", class: :age if @affiche.age_min.present? %>
                 <%= @affiche.item_poster %>
               <% else %>
-                <!-- stub poster -->
+                <%= image_tag('public/stub_poster.png', size: '180x242', alt: :poster) %>
               <% end %>
             </div>
 

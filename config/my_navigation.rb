@@ -4,7 +4,7 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.item :my, 'Мои афиши', my_root_path do |my_item|
       my_item.item :new_affiche, 'Добавление афишы', new_my_affiche_path
-      my_item.item :affiche, @affiche.title || 'Название не указано', my_affiche_path(@affiche) do |affiche_item|
+      my_item.item :affiche, @affiche.title || 'Нет названия', my_affiche_path(@affiche) do |affiche_item|
         affiche_item.item :first_step, 'Описание', edit_step_my_affiche_path(@affiche, :first)
 
         affiche_item.item :second_step, 'Постер', edit_step_my_affiche_path(@affiche, :second)
