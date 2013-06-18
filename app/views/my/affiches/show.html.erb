@@ -43,7 +43,11 @@
                 <%= content_tag :div, "#{@affiche.age_min.to_i}+", class: :age if @affiche.age_min.present? %>
                 <%= @affiche.item_poster %>
               <% else %>
-                <%= image_tag 'public/stub_poster.png', size: '180x242', alt: :poster %>
+                <% if can? :edit, @affiche %>
+                  <%= link_to image_tag('public/stub_poster.png', size: '180x242', alt: :poster), edit_step_my_affiche_path(@affiche, step: :second) %>
+                <% else %>
+                  <%= image_tag('public/stub_poster.png', size: '180x242', alt: :poster) %>
+                <% end %>
                 <span class='red'>Нет</span> постера
               <% end %>
               <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :second) if can? :edit, @affiche %>

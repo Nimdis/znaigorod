@@ -246,7 +246,7 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def item_poster
-    h.link_to poster(affiche, 180, 242), affiche.poster_url
+    h.link_to poster(affiche, 180, 242), affiche.poster_url, class: :poster
   end
 
   def more_like_this_poster
