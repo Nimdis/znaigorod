@@ -124,6 +124,15 @@ init_affiche_preview_map = ->
 
       map.geoObjects.add(affiche_placemark)
       map.setCenter([latitude, longitude])
-      map.setZoom(15)
+      map.setZoom(16)
+
+    $('#showing_place').on 'autocompleteselect', (event, ui) ->
+      # TODO do something
+      #console.log 'select !!!'
+      #console.log event
+      #console.log ui
+      #console.log $('.latitude', $form).val()
+      #console.log $('.longitude', $form).val()
+      true
 
   true
