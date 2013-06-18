@@ -54,6 +54,7 @@
               <%= @affiche.when_with_price %>
               <% if @affiche.showings.any? %>
                 <%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, @affiche.showings.first) if can? :edit, @affiche.showings.first %>
+                <%= link_to 'добавить ещё сеанс', new_my_affiche_showing_path(@affiche), class: :add_more_schedule if can? :new, @affiche.showings.new %>
               <% else %>
                 <%= link_to 'изменить', new_my_affiche_showing_path(@affiche) if can? :new, @affiche.showings.new %>
               <% end %>
@@ -77,7 +78,14 @@
               <% else %>
                 <p><span class='red'>Нет</span> файлов</p>
               <% end %>
-              <%= link_to 'изменить файлы', edit_step_my_affiche_path(@affiche, step: :fourth) if can? :edit, @affiche %>
+              <p><%= link_to 'изменить файлы', edit_step_my_affiche_path(@affiche, step: :fourth) if can? :edit, @affiche %></p>
+              <% if @affiche.user.present? %>
+                <p class='affiche_owner'>
+                  <span>Автор:</span>
+                  <%= image_tag @affiche.user.avatar, size: '24x24', alt: @affiche.user.name if @affiche.user.avatar.present? %>
+                  <%= link_to @affiche.user.name, @affiche.user.profile %>
+                </p>
+              <% end %>
             </div>
           </div>
         </div>
