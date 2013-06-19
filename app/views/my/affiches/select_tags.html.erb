@@ -1,5 +1,5 @@
 <div class='tag_lists'>
-  <% count = (@tags.size / 4.0).round %>
+  <% count = (@tags.size / 4.0).ceil %>
   <% k = 0 %>
   <% @tags.each_slice(count) do |tags| %>
     <ul>
@@ -15,5 +15,5 @@
 </div>
 
 <div>
-  <%= submit_tag 'Применить', :class => 'submit' %>
+  <%= submit_tag 'Выбрать', :class => 'submit button' %>
 </div>
