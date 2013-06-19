@@ -55,7 +55,7 @@ body
   float: right
   line-height: 24px
   height: 24px
-  margin: 5px 0
+  margin: 5px 5px 5px 0
 
   img
     display: block
@@ -70,6 +70,12 @@ body
     height: 24px
     line-height: 24px
     margin: 0 5px 0 0
+
+    &.logout
+      width: 24px
+      +clearfix
+      text-indent: -9999em
+      background: transparent image_url('public/logout.png') no-repeat center center
 
   .social_signin_links
     li
@@ -133,7 +139,7 @@ body
         margin: 0
       .submit
         position: absolute
-        top: 40px
+        top: 5px
         right: 1px
         width: 26px
         height: 16px

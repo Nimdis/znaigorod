@@ -267,7 +267,7 @@
           <%= link_to t('my.send_to_public'), publish_my_affiche_path(@affiche), :method => :put, :class => "#{@affiche.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены?' %>
         <% else %>
           <% if can? :send_to_moderation, @affiche %>
-            <%= link_to t('my.send_to_public'), moderate_my_affiche_path(@affiche), :method => :put, :class => "#{@affiche.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены? Отправляя афишу на публикацию вы больше не сможете ее редактировать!' %>
+            <%= link_to t('my.send_to_public'), moderate_my_affiche_path(@affiche), :method => :put, :class => "#{@affiche.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены? Отправляя афишу на публикацию вы больше не сможете ее редактировать пока она не будет опубликована!' %>
           <% end %>
         <% end %>
       <% else %>

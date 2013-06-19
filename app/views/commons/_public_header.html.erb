@@ -1,25 +1,26 @@
 <div class="header_wrapper">
   <div class="header">
-    <div class="search_form">
-        <div class="logged">
-          <% if user_signed_in? %>
-            <%= image_tag current_user.avatar if current_user.avatar.present? %>
-            <%= link_to current_user.name, current_user.profile %>
-            <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
-          <% else %>
-            <%= render :partial => 'commons/social_auth' %>
-          <% end %>
-        </div>
-      <%= form_tag search_path, :method => :get do %>
-        <%= text_field_tag "q", params[:q], :placeholder => "Поиск по городу", :class => "search" %>
-        <%= submit_tag("", :class => "submit", :name => "") %>
-      <% end %>
-    </div>
     <div class="logo">
       <a href="/"><%= t("meta.default.title") %></a>
     </div>
     <div class="tomsk">
       <a href="/">Томск</a>
+    </div>
+    <div class="logged">
+      <% if user_signed_in? %>
+        <%= link_to 'Мои афиши', my_root_path %>
+        <%= image_tag current_user.avatar %>
+        <%= link_to current_user.name, current_user.profile %>
+        <%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: :logout %>
+      <% else %>
+        <%= render :partial => 'commons/social_auth' %>
+      <% end %>
+    </div>
+    <div class="search_form">
+      <%= form_tag search_path, :method => :get do %>
+        <%= text_field_tag "q", params[:q], :placeholder => "Поиск по городу", :class => "search" %>
+        <%= submit_tag("", :class => "submit", :name => "") %>
+      <% end %>
     </div>
   </div>
 </div>
