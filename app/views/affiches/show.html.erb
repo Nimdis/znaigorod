@@ -107,6 +107,12 @@
                   <%= image_tag @affiche.user.avatar, size: '24x24', alt: @affiche.user.name if @affiche.user.avatar.present? %>
                   <%= link_to @affiche.user.name, @affiche.user.profile %>
                 </p>
+              <% else %>
+                <p class='affiche_owner'>
+                  <span>Автор:</span>
+                  <%= image_tag 'public/avatar_znaigorod.jpg', size: '24x24', alt: 'ЗнайГород' %>
+                  <%= link_to 'ЗнайГород (Афиша Томска)', 'http://vk.com/znaigorod' %>
+                </p>
               <% end %>
             </div>
           </div>
