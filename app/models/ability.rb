@@ -20,10 +20,6 @@ class Ability
     when 'my'
       can [:index, :archive, :new, :create, :available_tags, :preview_video], Affiche if user.persisted?
 
-      can :show, Affiche do |affiche|
-        affiche.user == user
-      end
-
       can [:edit, :update, :destroy_image], Affiche do |affiche|
         affiche.state != 'pending' && affiche.user == user
       end
