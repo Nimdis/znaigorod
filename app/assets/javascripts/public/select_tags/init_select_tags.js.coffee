@@ -13,12 +13,22 @@
 
       open: ->
         $(this).html(jqXHR.responseText)
-        selected_tags = $('.tagit-label').map (index, span) -> $(span).text()
+        selected_tags = $.makeArray($('.tagit-label').map (index, span) -> $(span).text())
 
-        $.makeArray(selected_tags).each (tag, index) ->
+        selected_tags.each (tag, index) ->
           $('input[value="' + tag + '"]').attr('checked', 'checked')
 
+        $('.submit').click ->
+          tags = $.makeArray($('input:checked').map (index, input) -> $(input).attr('value'))
+          $('#affiche_tag').tagit('removeAll')
+          tags.each (tag, index) ->
+            $('#affiche_tag').tagit('createTag', tag)
+
+          container.dialog('destroy')
+          container.remove()
+
       close: ->
+        console.log $(this)
         $(this).dialog('destroy')
         $(this).remove()
     true
