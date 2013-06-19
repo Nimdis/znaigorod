@@ -78,7 +78,7 @@
               <% else %>
                 <p><span class='red'>Нет</span> файлов</p>
               <% end %>
-              <p><%= link_to 'изменить файлы', edit_step_my_affiche_path(@affiche, step: :fourth) if can? :edit, @affiche %></p>
+              <p><%= link_to 'изменить файлы', edit_step_my_affiche_path(@affiche, step: :sixth) if can? :edit, @affiche %></p>
               <% if @affiche.user.present? %>
                 <p class='affiche_owner'>
                   <span>Автор:</span>

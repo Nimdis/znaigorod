@@ -11,7 +11,7 @@ ru:
     edit_showing:       Изменение расписания
     archive:            Архивные афиши
     help:               Правила публикации
-    social_gallery_url: Ссылка на альбом
+    social_gallery_url: Ссылка на альбом ВКонтакте или Яндекс.Фотки
 
     button:
       concert:      Концерт
@@ -38,6 +38,6 @@ ru:
       first:        Общее описание
       second:       Постер
       third:        Расписание
-      fourth:       Фото и файлы
+      fourth:       Фотографии
       fifth:        Видео
-      sixth:        Предпросмотр
+      sixth:        Файлы
