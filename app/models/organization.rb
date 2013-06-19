@@ -230,7 +230,6 @@ class Organization < ActiveRecord::Base
     @text_description ||= html_description.as_text
   end
 
-
   def self.inherited_suborganization_kinds
     available_suborganization_kinds.map(&:classify).map(&:constantize).flat_map(&:descendants).map(&:name).map(&:downcase)
   end
@@ -265,6 +264,10 @@ class Organization < ActiveRecord::Base
     count = self.class.count
 
     self.class.solr_search_ids { order_by(:rating, :desc); paginate(:page => 1, :per_page => count) }.index(id) + 1
+  end
+
+  def images
+    gallery_images
   end
 
   private
