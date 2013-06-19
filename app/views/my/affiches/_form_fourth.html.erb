@@ -25,6 +25,16 @@
   <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' }, :label => t('my.add_files') %>
 <% end %>
 
+<ul class="gallery_social_images">
+  <%= render @affiche.gallery_social_images %>
+</ul>
+<%= link_to 'Удалить все фотографии', destroy_all_my_affiche_gallery_social_images_path(@affiche.id), :method => :delete, :confirm => 'Вы уверены, что хотите удалить все фотографии для этой афиши?' if @affiche.gallery_social_images.many? %>
+
+<%= simple_form_for @affiche, :url => social_gallery_my_affiche_path(@affiche.id), :as => :affiche, :html => { :class => 'inline_form' } do |f| %>
+  <%= f.input :social_gallery_url, :label => t('my.social_gallery_url') %>
+  <%= f.submit 'Добавить', :class => 'button submit' %>
+<% end %>
+
 <div class='submit'>
   <%= link_to 'Сохранить', my_affiche_path(@affiche), class: :button %>
   <%= link_to 'Отмена', my_affiche_path(@affiche) %>

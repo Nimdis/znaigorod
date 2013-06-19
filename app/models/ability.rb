@@ -33,8 +33,16 @@ class Ability
         gallery_file.attachable.state != 'pending' && gallery_file.attachable.user == user
       end
 
+      can :social_gallery, Affiche do |affiche|
+        affiche.state != 'pending' && affiche.user == user
+      end
+
       can :manage, GalleryImage do |gallery_image|
         gallery_image.attachable.state != 'pending' && gallery_image.attachable.user == user
+      end
+
+      can [:destroy, :destroy_all], GallerySocialImage do |gallery_social_image|
+        gallery_social_image.attachable.state != 'pending' && gallery_social_image.attachable.user == user
       end
 
       can :manage, Showing do |showing|

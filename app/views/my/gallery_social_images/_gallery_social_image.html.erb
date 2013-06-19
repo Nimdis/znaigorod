@@ -1,0 +1,10 @@
+<li>
+  <div class='image_wrapper'>
+    <% if gallery_social_image.width > gallery_social_image.height %>
+      <%= image_tag gallery_social_image.thumbnail_url, :width => 130 %>
+    <% else %>
+      <%= image_tag gallery_social_image.thumbnail_url, :height => 108 %>
+    <% end %>
+  </div>
+  <%= link_to "удалить", my_affiche_gallery_social_image_path(@affiche.id, gallery_social_image), :method => :delete, :remote => true, :class => 'ajax_delete' %>
+</li>

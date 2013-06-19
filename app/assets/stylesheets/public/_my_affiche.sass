@@ -129,6 +129,12 @@
     float: left
     margin-right: 20px
 
+    .inline_form
+      margin: 20px 0
+
+      .input
+        +inline-block
+
   .affiche_preview
     width: 580px
     float: left
@@ -231,16 +237,23 @@
   .textile_syntax
     display: none
 
-  .gallery_images
+  .gallery_images, .gallery_social_images
     +clearfix
+
     li
       float: left
-      width: 130px
       text-align: center
       margin: 0 10px 15px 0
-      img
+
+      .image_wrapper
+        +clearfix
+        height: 108px
+        line-height: 108px
         width: 130px
-        height: 100px
+
+        img
+          +inline-block
+
       a
         text-transform: lowercase
         font-size: 11px
