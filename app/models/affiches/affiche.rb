@@ -89,6 +89,10 @@ class Affiche < ActiveRecord::Base
     end
   end
 
+  def self.available_tags(query)
+    pluck(:tag).compact.flat_map { |str| str.split(',') }.compact.map(&:squish).uniq.delete_if(&:blank?).select { |str| str =~ /^#{query}/ }.sort
+  end
+
   def self.steps
     %w[first second third fourth fifth sixth]
   end

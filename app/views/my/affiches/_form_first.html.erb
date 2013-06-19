@@ -5,6 +5,7 @@
   <%= f.input :title, required: true, input_html: { id: :affiche_title } %>
   <%= f.input :description, required: true, input_html: { id: :affiche_description } %>
   <%= f.input :tag, as: :string, input_html: { id: :affiche_tag } %>
+  <%= link_to 'выбрать из списка',  my_affiche_available_tags_path(@affiche, :format => :html), :class => 'select_tags', :remote => true %>
   <div class='submit'>
     <%= f.button :submit, 'Сохранить общее описание', class: :button %>
     <%= link_to 'Отмена', my_affiche_path(@affiche) %>
