@@ -6,6 +6,7 @@ Znaigorod::Application.routes.draw do
       get 'available_tags'
       get 'preview_video'
 
+      put 'social_gallery' => 'affiches#social_gallery', :on => :member, :as => :social_gallery
       put 'moderate' => 'affiches#send_to_moderation', :on => :member, :as => :moderate
       put 'publish'  => 'affiches#send_to_published', :on => :member, :as => :publish
 
@@ -16,6 +17,10 @@ Znaigorod::Application.routes.draw do
       end
 
       resources :gallery_files, :only => [:create, :destroy] do
+        delete 'destroy_all', :on => :collection, :as => :destroy_all
+      end
+
+      resources :gallery_social_images, :only => :destroy do
         delete 'destroy_all', :on => :collection, :as => :destroy_all
       end
 

@@ -24,6 +24,7 @@ class Manage::GallerySocialImagesController < Manage::ApplicationController
   def destroy_all
     destroy_all! {
       parent.gallery_social_images.destroy_all
+      parent.update_attributes :vk_aid => nil, :yandex_fotki_url => nil
       redirect_to collection_path and return
     }
   end

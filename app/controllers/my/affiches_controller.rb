@@ -5,7 +5,7 @@ class My::AffichesController < My::ApplicationController
   before_filter :current_step
 
   actions :all
-  custom_actions :resource => [:destroy_image, :send_to_moderation, :send_to_published], :collection => [:available_tags, :preview_video]
+  custom_actions :resource => [:destroy_image, :send_to_moderation, :send_to_published, :social_gallery], :collection => [:available_tags, :preview_video]
 
   def show
     @affiche = AfficheDecorator.new Affiche.find(params[:id])
@@ -79,6 +79,21 @@ class My::AffichesController < My::ApplicationController
 
     MyMailer.delay.mail_new_published_affiche(@affiche)
     redirect_to my_root_path, :notice => "Афиша «#{@affiche.title}» опубликована."
+  end
+
+  def social_gallery
+    @affiche = current_user.affiches.available_for_edit.find(params[:id])
+    gallery_url = params[:affiche][:social_gallery_url]
+    case gallery_url
+    when /yandex/
+      url = gallery_url.match(/(?<=\/users\/).+\/album\/\d+/)
+      @affiche.update_attributes :yandex_fotki_url => url.to_s if url.present?
+    when /vk\.com/
+      url = gallery_url.match(/(?<=\/album)-?\d+_\d+/).to_s.match(/\d+_\d+/)
+      @affiche.update_attributes :vk_aid => url.to_s if url.present?
+    end
+
+    redirect_to edit_step_my_affiche_path(@affiche.id, :step => :fourth)
   end
 
   private

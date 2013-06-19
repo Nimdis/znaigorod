@@ -1,4 +1,6 @@
 <li>
-  <%= image_tag resized_image_url(gallery_image.file_url, 130, 100, true, 'n')  %>
+  <div class='image_wrapper'>
+    <%= image_tag resized_image_url(gallery_image.file_url, 130, 100, true, 'n')  %>
+  </div>
   <%= link_to "Удалить", my_affiche_gallery_image_path(@affiche, gallery_image), :method => :delete, :remote => true, :class => 'ajax_delete' %>
 </li>

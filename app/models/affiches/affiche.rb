@@ -64,8 +64,8 @@ class Affiche < ActiveRecord::Base
 
   # >>>>>>>>>>>> Wizard  >>>>>>>>>>>>
 
-  attr_accessor :step, :set_region, :crop_x, :crop_y, :crop_width, :crop_height
-  attr_accessible :poster_image, :step, :set_region, :crop_x, :crop_y, :crop_width, :crop_height
+  attr_accessor :step, :set_region, :crop_x, :crop_y, :crop_width, :crop_height, :social_gallery_url
+  attr_accessible :poster_image, :step, :set_region, :crop_x, :crop_y, :crop_width, :crop_height, :social_gallery_url
 
   def should_generate_new_friendly_id?
     false
@@ -310,6 +310,7 @@ class Affiche < ActiveRecord::Base
   end
 
   def save_images_from_vk
+    return unless changes.keys.include?('vk_aid')
     get_images_from_vk.each do |image_hash|
       self.gallery_social_images.find_or_initialize_by_file_url_and_thumbnail_url(
         :file_url => (image_hash['photo']['src_xbig'].present? ? image_hash['photo']['src_xbig'] : image_hash['photo']['src_big']),
@@ -351,13 +352,14 @@ class Affiche < ActiveRecord::Base
   end
 
   def save_images_from_yandex_fotki
+    return unless changes.keys.include?('yandex_fotki_url')
     get_images_from_yandex_fotki.each do |image_hash|
       image_hash = image_hash['img']
 
-      self.gallery_social_images.find_or_initialize_by_file_url_and_thumbnail_url(:file_url => image_hash['XXL']['href'], :thumbnail_url => image_hash['M']['href']).tap do |image|
-        image.width  = image_hash['XXL']['width']
-        image.height = image_hash['XXL']['height']
-        image.description = image_hash['summary']
+      self.gallery_social_images.find_or_initialize_by_file_url_and_thumbnail_url(:file_url => image_hash.keys.include?('XXL') ? image_hash['XXL']['href'] : image_hash['orig']['href'], :thumbnail_url => image_hash['M']['href']).tap do |image|
+        image.width  = image_hash.keys.include?('XXL') ? image_hash['XXL']['width'] : image_hash['orig']['width']
+        image.height = image_hash.keys.include?('XXL') ? image_hash['XXL']['height'] : image_hash['orig']['height']
+        image.description = image_hash['summary'] || ''
         image.save(:validate => false)
       end
     end
