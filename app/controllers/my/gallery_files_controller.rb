@@ -18,7 +18,7 @@ class My::GalleryFilesController < My::ApplicationController
   def destroy_all
     destroy_all! {
       @affiche.gallery_files.destroy_all
-      redirect_to edit_step_my_affiche_path(@affiche.id, :step => :fourth) and return
+      redirect_to edit_step_my_affiche_path(@affiche.id, :step => :sixth) and return
     }
   end
 end

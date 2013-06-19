@@ -10,9 +10,11 @@ SimpleNavigation::Configuration.run do |navigation|
 
         affiche_item.item :second_step, 'Постер', edit_step_my_affiche_path(@affiche, :second)
 
-        affiche_item.item :fourth_step, 'Файлы', edit_step_my_affiche_path(@affiche, :fourth)
+        affiche_item.item :fourth_step, 'Фотографии', edit_step_my_affiche_path(@affiche, :fourth)
 
         affiche_item.item :fifth_step, 'Видео', edit_step_my_affiche_path(@affiche, :fifth)
+
+        affiche_item.item :fourth_step, 'Файлы', edit_step_my_affiche_path(@affiche, :sixth)
 
         affiche_item.item :showings, 'Расписание', new_my_affiche_showing_path(@affiche)
 
