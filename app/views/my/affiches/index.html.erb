@@ -68,12 +68,14 @@
 
       <p>Фото и видео материалы должны быть надлежащего качества и содержания и не нарушать действующего законодательства РФ.</p>
 
-      <div class='my_affiche_archive'>
-        <p>
-          Также вы можете посмотреть мероприятия
-          <%= link_to 'которые уже прошли', archive_my_affiches_path if current_user.showings.actual.any? %>
-        </p>
-      </div>
+      <% if current_user.showings.actual.any? %>
+        <div class='my_affiche_archive'>
+          <p>
+            Также вы можете посмотреть мероприятия
+            <%= link_to 'которые уже прошли', archive_my_affiches_path %>
+          </p>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
