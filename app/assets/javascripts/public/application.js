@@ -73,5 +73,6 @@
  * = require ./sms_claims
  * = require ./my_affiche
  * = require ./crop
+ * = require ./select_tags
  * = require ./main
  */

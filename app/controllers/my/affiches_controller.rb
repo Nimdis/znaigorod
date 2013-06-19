@@ -46,9 +46,12 @@ class My::AffichesController < My::ApplicationController
   end
 
   def available_tags
-    query = params[:term]
-    result = Affiche.pluck(:tag).compact.flat_map { |str| str.split(',') }.compact.map(&:squish).uniq.delete_if(&:blank?).select { |str| str =~ /^#{query}/ }.sort
-    render text: result
+    @tags = Affiche.available_tags(params[:term])
+
+    respond_to do |format|
+      format.json { render text: @tags }
+      format.html { render :select_tags }
+    end
   end
 
   def preview_video
