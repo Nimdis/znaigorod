@@ -6,21 +6,24 @@
     <div class="tomsk">
       <a href="/">Томск</a>
     </div>
-    <div class="logged">
-      <% if user_signed_in? %>
-        <%= link_to 'Мои афиши', my_root_path %>
-        <%= image_tag current_user.avatar %>
-        <%= link_to current_user.name, current_user.profile %>
-        <%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: :logout %>
-      <% else %>
-        <%= render :partial => 'commons/social_auth' %>
-      <% end %>
+    <div class="right">
+      <div class="logged">
+        <% if user_signed_in? %>
+          <%= link_to 'Мои афиши', my_root_path %>
+          <%= image_tag current_user.avatar %>
+          <%= link_to current_user.name, current_user.profile %>
+          <%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: :logout %>
+        <% else %>
+          <%= render :partial => 'commons/social_auth' %>
+        <% end %>
+      </div>
+      <div class="search_form">
+        <%= form_tag search_path, :method => :get do %>
+          <%= text_field_tag "q", params[:q], :placeholder => "Поиск по городу", :class => "search" %>
+          <%= submit_tag("", :class => "submit", :name => "") %>
+        <% end %>
+      </div>
     </div>
-    <div class="search_form">
-      <%= form_tag search_path, :method => :get do %>
-        <%= text_field_tag "q", params[:q], :placeholder => "Поиск по городу", :class => "search" %>
-        <%= submit_tag("", :class => "submit", :name => "") %>
-      <% end %>
-    </div>
+    <%= content_tag :div, link_to('Создай свою афишу', my_root_path), class: 'create_my_affiche' if user_signed_in? %>
   </div>
 </div>
