@@ -8,7 +8,7 @@ class My::AffichesController < My::ApplicationController
   custom_actions :resource => [:destroy_image, :send_to_moderation, :send_to_published, :social_gallery], :collection => [:available_tags, :preview_video]
 
   def show
-    @affiche = AfficheDecorator.new Affiche.find(params[:id])
+    @affiche = AfficheDecorator.new(current_user.affiches.available_for_edit.find(params[:id]))
   end
 
   def create
