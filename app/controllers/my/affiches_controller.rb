@@ -72,7 +72,6 @@ class My::AffichesController < My::ApplicationController
     @affiche = current_user.affiches.available_for_edit.find(params[:id])
     @affiche.send_to_moderation!
 
-    MyMailer.delay.mail_new_pending_affiche(@affiche)
     redirect_to my_root_path, :notice => "Афиша «#{@affiche.title}» добавлена в очередь на модерацию."
   end
 
@@ -80,7 +79,6 @@ class My::AffichesController < My::ApplicationController
     @affiche = current_user.affiches.available_for_edit.find(params[:id])
     @affiche.approve!
 
-    MyMailer.delay.mail_new_published_affiche(@affiche)
     redirect_to my_root_path, :notice => "Афиша «#{@affiche.title}» опубликована."
   end
 

@@ -80,8 +80,16 @@ class Affiche < ActiveRecord::Base
       transition :draft => :pending
     end
 
+    after_transition :draft => :pending do |affiche, transition|
+      MyMailer.delay.mail_new_pending_affiche(affiche)
+    end
+
     event :approve do
       transition [:draft, :pending] => :published
+    end
+
+    after_transition [:draft, :pending] => :published do |affiche, transition|
+      MyMailer.delay.mail_new_published_affiche(affiche)
     end
 
     event :send_to_author do
