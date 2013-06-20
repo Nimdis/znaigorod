@@ -34,14 +34,12 @@
         <% end %>
       <% end %>
 
-      <% if current_user.affiches.published.any? %>
+      <% if current_user.affiches.actual.published.any? %>
         <h2>Опубликованы</h2>
-        <% current_user.affiches.published.order("created_at DESC").each_slice(5) do |affiches| %>
+        <% current_user.affiches.actual.published.order("created_at DESC").each_slice(5) do |affiches| %>
           <ul class='my_affiche_items'>
             <% affiches.each do |affiche| %>
-              <% if affiche.showings.actual.any? %>
-                <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
-              <% end %>
+              <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
             <% end %>
           </ul>
         <% end %>
@@ -74,7 +72,7 @@
 
       <p>Фото и видео материалы должны быть надлежащего качества и содержания и не нарушать действующего законодательства РФ.</p>
 
-      <% if current_user.showings.actual.any? %>
+      <% if current_user.affiches.archive.any? %>
         <div class='my_affiche_archive'>
           <p>
             Также вы можете посмотреть мероприятия

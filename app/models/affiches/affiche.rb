@@ -57,6 +57,8 @@ class Affiche < ActiveRecord::Base
   scope :draft,                 -> { with_state(:draft) }
   scope :published,             -> { with_state(:published) }
   scope :pending,               -> { with_state(:pending) }
+  scope :actual,                -> { joins(:showings).where('showings.starts_at >= ? OR (showings.ends_at is not null AND showings.ends_at > ?)', DateTime.now.beginning_of_day, Time.zone.now) }
+  scope :archive,               -> { joins(:showings).where('showings.starts_at < ? OR (showings.ends_at is not null AND showings.ends_at < ?)', DateTime.now.beginning_of_day, Time.zone.now) }
 
   friendly_id :title, use: :slugged
 
