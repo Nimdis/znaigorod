@@ -24,13 +24,13 @@ mySettings = {
     { name: 'Нумерованный список', openWith:'(!(# |!|#)!)', multiline: true, className: 'ordered_list_button' },
     { separator: '-' },
     { name: 'Ссылка', openWith: '"', closeWith: '":[![Link:!:http://]!]', placeHolder: 'Текст ссылки...', className: 'link_button' },
-    { name: 'Электронная почта', openWith: '"', closeWith: '":[![Link:!:mailto:]!]', placeHolder: 'Электронная почта...', className: 'email_button' },
+    { name: 'Электронная почта', openWith: '"', closeWith: '":mailto:[![Email]!]', placeHolder: 'E-mail', className: 'email_button' },
     { name: 'Помощь', className: 'help_button',
       beforeInsert: function(h) {
         if (!$('.textile_syntax').length || !$.fn.dialog) {
           return true;
         }
-        var textile_dialog_height = $(window).innerHeight() * 90 /100;
+        var textile_dialog_height = $(window).innerHeight() * 90 / 100;
         $('.textile_syntax').dialog({
           title: 'Синтаксис Textile',
           width: '1000',
