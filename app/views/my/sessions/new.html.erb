@@ -1,0 +1,12 @@
+<div class='content_wrapper'>
+  <div class='new_session'>
+  <% if flash[:notice] %>
+    <div class='flash_message'>
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <h2>Добавлять афиши могут только зарегистрированные пользователи. Пожалуйста, войдите с помощью одной из социальных сетей:</h2>
+  <%= render :partial => 'commons/social_auth', :locals => { :no_js => true } %>
+  </div>
+</div>

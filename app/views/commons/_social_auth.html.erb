@@ -1,4 +1,4 @@
-<ul class='social_signin_links auth_links'>
+<ul class='social_signin_links <%= defined?(no_js) ? 'no_js' : 'auth_links' %>'>
   <li class='vkontakte'>
     <%= link_to 'ВКонтакте', user_omniauth_authorize_url(:vkontakte, :subdomain => request.subdomain), :title => 'Войти с помощью ВКонтакте' %>
   </li>

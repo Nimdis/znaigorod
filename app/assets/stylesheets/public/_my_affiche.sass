@@ -335,6 +335,62 @@
     .my_affiche_archive
       margin: 20px 0
 
+.content_wrapper
+  .social_signin_links
+    +clearfix
+    margin: 10px 0
+    text-align: center
+
+    li
+      +inline-block
+      margin: 0 15px 0 0
+
+      a
+        display: block
+        text-indent: -9999px
+        height: 33px
+        width: 33px
+
+      &.vkontakte
+        a
+          background: image_url('social_icons.png') no-repeat 0 0
+
+      &.yandex
+        a
+          background: image_url('social_icons.png') no-repeat -33px 0
+
+      &.facebook
+        a
+          background: image_url('social_icons.png') no-repeat -66px 0
+
+      &.twitter
+        a
+          background: image_url('social_icons.png') no-repeat -99px 0
+
+      &.google
+        a
+          background: image_url('social_icons.png') no-repeat -132px 0
+
+      &.mail_ru
+        a
+          background: image_url('social_icons.png') no-repeat -165px 0
+
+      &.odnoklassniki
+        a
+          background: image_url('social_icons.png') no-repeat -198px 0
+
+.content_wrapper
+  .new_session
+    min-height: 220px
+
+    .flash_message
+      margin: 15px 0 25px 0
+
+    h2
+      text-align: center
+      font-size: 16px
+      line-height: 21px
+
 .tags_wrapper
   background: #fff !important
   color: #000
@@ -350,3 +406,6 @@
   .submit
     +button_style
     margin-top: 10px
+
+
+
