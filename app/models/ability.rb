@@ -28,6 +28,10 @@ class Ability
         affiche.draft? && affiche.user == user
       end
 
+      can :show, Affiche do |affiche|
+        affiche.user == user
+      end
+
       can :send_to_published, Affiche if user.is_affiches_trusted_editor?
 
       can :manage, GalleryFile do |gallery_file|
