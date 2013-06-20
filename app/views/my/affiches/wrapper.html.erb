@@ -1,10 +1,17 @@
 <div class='content_wrapper'>
   <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
 
-  <h1><%= t("my.add_model.#{@affiche.class.model_name.underscore}") %></h1>
-  <div class='help'>
-    <%= yield :help %>
+  <h1>
+    <%= t("my.add_model.#{@affiche.class.model_name.underscore}") %>
+    <%= link_to 'помощь', '#', :class => 'show_help' %>
+  </h1>
+
+  <div class='help_wrapper'>
+    <div class='help'>
+      <%= yield :help %>
+    </div>
   </div>
+
   <div class='my_affiche_wrapper'>
     <%= yield :my_content %>
   </div>

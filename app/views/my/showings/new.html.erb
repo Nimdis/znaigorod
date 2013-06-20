@@ -1,10 +1,17 @@
 <div class='content_wrapper'>
   <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
 
-  <h1><%= t("my.add_showing") %> <a href="#">помощь</a></h1>
-  <div class='help'>
-    <%= render :partial => 'help' %>
+  <h1>
+    <%= t("my.add_showing") %>
+    <%= link_to 'помощь', '#', :class => 'show_help' %>
+  </h1>
+
+  <div class='help_wrapper'>
+    <div class='help'>
+      <%= yield :help %>
+    </div>
   </div>
+
   <div class='my_affiche_wrapper'>
     <%= simple_form_for [@affiche, @showing].flatten, :url => my_affiche_showings_path(@affiche), html: { class: :my_affiche_showings } do |f| %>
       <%= render :partial => 'form', :locals => { :f => f } %>
