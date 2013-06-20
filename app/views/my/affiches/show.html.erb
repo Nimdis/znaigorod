@@ -56,7 +56,7 @@
                 <%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, @affiche.showings.first) if can? :edit, @affiche.showings.first %>
                 <%= link_to 'добавить ещё сеанс', new_my_affiche_showing_path(@affiche), class: :add_more_schedule if can? :new, @affiche.showings.new %>
               <% else %>
-                <%= link_to 'добавить', new_my_affiche_showing_path(@affiche) if can? :new, @affiche.showings.new %>
+                <%= link_to 'добавить сеанс', new_my_affiche_showing_path(@affiche) if can? :new, @affiche.showings.new %>
               <% end %>
             </div>
             <% unless @affiche.distribution_movie? %>
@@ -256,6 +256,7 @@
     <div class='public_action'>
       <% if @affiche.draft? %>
         <h4>Публикация мероприятия</h4>
+        <p>Для того, чтобы опубликовать созданное мероприятие, необходимо заполнить следующие поля:</p>
         <ul class='requirements'>
           <li class='<%= @affiche.title? ? 'enabled' : 'disabled' %>'>Название мероприятия</li>
           <li class='<%= @affiche.description? ? 'enabled' : 'disabled' %>'>Описание</li>
