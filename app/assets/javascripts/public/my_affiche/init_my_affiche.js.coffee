@@ -5,6 +5,7 @@
   init_affiche_preview_video() if $('#affiche_trailer_code').length
   init_affiche_preview_map() if $('form.my_affiche_showings .my_affiche_map').length
   init_autosuggest_handler() if $('form.my_affiche_showings').length
+  init_affiche_help() if $('.help').length
 
   true
 
@@ -162,3 +163,13 @@ create_placemark = (latitude, longitude) ->
     zIndex: 700
 
   affiche_placemark
+
+init_affiche_help = ->
+  left = $('.show_help').position().left
+  $('.help').css('left', left).prepend('<a class="close" title="закрыть" href="#">X</a>')
+  $('.show_help').click ->
+    $('.help').toggle()
+    false
+  $('.help .close').click ->
+    $('.help').toggle()
+    false

@@ -1,4 +1,46 @@
 .content_wrapper
+  .help_wrapper
+    position: relative
+
+    .help
+      background-color: #fff
+      border: 2px solid #ccc
+      display: none
+      line-height: 1.5
+      padding: 20px 20px 10px 20px
+      position: absolute
+      top: -18px
+      width: 600px
+      z-index: 9999
+
+      .close
+        float: right
+        font-size: 15px
+        margin: 0 0 20px 20px
+        position: relative
+        right: -10px
+        top: -15px
+
+      h3
+        font-size: 16px
+        margin-bottom: 10px
+
+      p
+        margin-bottom: 10px
+
+      ol, ul
+        margin: 0 0 10px 15px
+
+      ol li
+        list-style: decimal
+
+      ul li
+        list-style: disc
+
+  .show_help
+    font-size: 16px
+    line-height: 14px
+
   .public_action
     float: left
     padding: 5px 0 0 0
