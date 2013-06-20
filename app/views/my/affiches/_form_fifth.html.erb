@@ -1,3 +1,13 @@
+<% content_for :help do %>
+  <p>Видео можно добавить несколькими способами:</p>
+  <ul>
+    <li>Указать адрес страницы YouTube в виде <a href="http://www.youtube.com/watch?v=8NmrGSe3jWY">http://www.youtube.com/watch?v=8NmrGSe3jWY</a></li>
+    <li>Указать адрес страницы Vimeo в виде <a href="http://vimeo.com/42263763">http://vimeo.com/42263763</a></li>
+    <li>Указать "Код для вставки" видео Вконтакте в виде <%= "<iframe src='http://vk.com/video_ext.php?oid=-35689602&id=163034420&hash=b12c86301fd7f163&sd' width='607' height='360' frameborder='0'></iframe>" %></li>
+  </ul>
+  <p>При необходимости можно добавить несколько видео, вставив ссылки или коды начиная с новой строки.</p>
+<% end %>
+
 <%= simple_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
   <%= hidden_field_tag :step, @step %>
   <%= hidden_field_tag :affiche_id, @affiche.id %>
@@ -8,4 +18,3 @@
     <%= link_to 'Отмена', my_affiche_path(@affiche) %>
   </div>
 <% end %>
-
