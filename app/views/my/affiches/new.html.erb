@@ -1,10 +1,10 @@
 <% content_for :my_content do %>
   <ul class='new_affiche_list'>
     <% Affiche.ordered_descendants.map(&:name).map(&:underscore).each do |name| %>
-      <li>
+      <li<%= " class='clear_left'".html_safe if name == 'sports_event' %>>
         <%= simple_form_for [:my, @affiche] do |f| %>
           <%= hidden_field_tag 'type', name %>
-          <%= f.button :submit, t("my.button.#{name}"), class: :button %>
+          <%= f.button :submit, t("my.button.#{name}"), class: "button #{name}" %>
         <% end %>
       </li>
     <% end %>
