@@ -56,7 +56,7 @@
                 <%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, @affiche.showings.first) if can? :edit, @affiche.showings.first %>
                 <%= link_to 'добавить ещё сеанс', new_my_affiche_showing_path(@affiche), class: :add_more_schedule if can? :new, @affiche.showings.new %>
               <% else %>
-                <%= link_to 'изменить', new_my_affiche_showing_path(@affiche) if can? :new, @affiche.showings.new %>
+                <%= link_to 'добавить', new_my_affiche_showing_path(@affiche) if can? :new, @affiche.showings.new %>
               <% end %>
             </div>
             <% unless @affiche.distribution_movie? %>
