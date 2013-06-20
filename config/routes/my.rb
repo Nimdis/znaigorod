@@ -1,5 +1,7 @@
 Znaigorod::Application.routes.draw do
   namespace :my do
+    resources :sessions,  :only => [:new, :destroy]
+
     resources :affiches do
       get 'archive', :on => :collection, :as => :archive
       get 'edit/step/:step' => 'affiches#edit', :defaults => { :step => 'first' }, :on => :member, :as => :edit_step

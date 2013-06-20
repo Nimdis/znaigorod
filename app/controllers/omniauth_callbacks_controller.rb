@@ -23,6 +23,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def after_sign_in_path_for(resource_or_scope)
+    return my_root_path if request.env['omniauth.origin'].match(/my\/sessions\/new/)
     return request.env['omniauth.origin'] if request.env['omniauth.origin']
 
     root_path
@@ -35,6 +36,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     sign_in @user, :event => :authentication
     @after_sign_in_url = after_sign_in_path_for(@user)
 
-     @after_sign_in_url.match(/manage/) ? redirect_to(manage_root_path) : render('callback', :layout => false)
+    if @after_sign_in_url.match(/manage/)
+      redirect_to(manage_root_path)
+    elsif @after_sign_in_url.match(/my\z/)
+      redirect_to(my_root_path)
+    else
+      render('callback', :layout => false)
+    end
   end
 end
