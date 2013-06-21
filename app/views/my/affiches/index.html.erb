@@ -58,7 +58,7 @@
     <% if current_user.affiches.archive.any? %>
       <div class='my_affiche_archive'>
         <h2>
-          <%= link_to 'Архивные афиши', archive_my_affiches_path %>
+          <%= link_to t('my.archive'), archive_my_affiches_path %>
         </h2>
       </div>
     <% end %>
