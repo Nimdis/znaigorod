@@ -34,6 +34,12 @@ ru:
       master_class: Добавление мастер-класса
       competition:  Добавление кокурса
       other:        Добавление другого мероприятия
+    edit_model:
+      first:        Общая информация
+      second:       Постер
+      fourth:       Фотографии
+      fifth:        Видео
+      sixth:        Файлы
     steps:
       first:        Общее описание
       second:       Постер

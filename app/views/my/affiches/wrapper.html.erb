@@ -2,7 +2,7 @@
   <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
 
   <h1>
-    <%= t("my.add_model.#{@affiche.class.model_name.underscore}") %>
+    <%= t("my.edit_model.#{@step}") %>
     <%= link_to 'помощь', '#', :class => 'show_help' if content_for?(:help) %>
   </h1>
 

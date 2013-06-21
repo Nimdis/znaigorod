@@ -3,8 +3,6 @@
   <p>После этого можно будет выделить необходимый фрагмент картинки для отображения в виде постера афиши.</p>
 <% end %>
 
-<h2>Постер мероприятия</h2>
-
 <% if @affiche.poster_image_url? %>
   <% crop_opt = @affiche.poster_url ? @affiche.poster_url.match(/(?<=\/region\/)\w+\/\w+\/\w+\/\w+/).to_s.split('/').map{|o| (o.to_i/@affiche.resize_factor).round} : [] %>
   <% crop_width, crop_height, crop_x, crop_y = crop_opt.any? ? crop_opt : [@affiche.poster_image_resized_dimensions[:width] / @affiche.resize_factor, @affiche.poster_image_resized_dimensions[:height] , 0, 0] %>
@@ -32,7 +30,7 @@
   <%= simple_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
     <%= hidden_field_tag :step, @step %>
     <%= hidden_field_tag :crop, true %>
-    <%= f.input :poster_image, required: true, class: :button %>
+    <%= f.input :poster_image, label: 'Выберите изображение', required: true, class: :button %>
     <%= f.error :poster_image_content_type %>
     <div class='submit'>
       <%= link_to 'Отмена', my_affiche_path(@affiche) %>
