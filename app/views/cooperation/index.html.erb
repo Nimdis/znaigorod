@@ -17,7 +17,7 @@
         <p>Информацию о предстоящих событиях присылайте на <%= mail_to 'afisha@znaigorod.ru' %></p>
         <p>Чтобы ваше заведение появилось в каталоге отправьте письмо на <%= mail_to 'info@znaigorod.ru' %></p>
         <p>Если хотите сотрудничать с нами напишите на <%= mail_to 'office@znaigorod.ru' %></p>
-        <p>тел. (3822) 94-22-03</p>
+        <p>тел. <%= t('contacts.phone') %></p>
       </div>
       <div class='service_payment_link'>
         <%= link_to 'Оплата услуг', new_service_payment_path %>
@@ -45,6 +45,6 @@
 
     <p>Подробнее ознакомиться с расценками Вы сможете в <a class="icon_pdf_small" href="<%= asset_path "nashi_uslugi.pdf"  %>">перечне услуг</a>.</p>
 
-    <p>Для осуществления взаимовыгодного партнёрства Вы можете связаться с нашим менеджером по телефону (3822) 94-22-03 или по электронной почте <a href="mailto:team@znaigorod.ru">team@znaigorod.ru</a></p>
+    <p>Для осуществления взаимовыгодного партнёрства Вы можете связаться с нашим менеджером по телефону <%= t('contacts.phone') %> или по электронной почте <a href="mailto:team@znaigorod.ru">team@znaigorod.ru</a></p>
   </div>
 </div>
