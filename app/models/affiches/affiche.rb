@@ -216,10 +216,6 @@ class Affiche < ActiveRecord::Base
     update_attribute :total_rating, (0.5 + 0.1*visits.visited.count + 0.05*votes.liked.count)
   end
 
-  def self.steps
-    %w[first second third fourth]
-  end
-
   def human_model_name
     self.class.model_name.human
   end
