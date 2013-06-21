@@ -7,10 +7,10 @@ $ ->
   init_vk_token() if $('.form_view.vk_token').length
   init_saunas() if $('#sauna_tabs').length
   init_menu_handler() if $('.input_with_image').length
-  init_has_virtual_tour() if $('.virtual_tour_fields')
-  init_address() if $('.address_fields')
-  init_curtail() if $('.curtail')
-  init_discount_hidden() if $('#coupon_discount')
+  init_has_virtual_tour() if $('.virtual_tour_fields').length
+  init_address() if $('.address_fields').length
+  init_curtail() if $('.curtail').length
+  init_discount_hidden() if $('#coupon_discount').length
   init_file_upload() if $('.file_upload').length
   init_ajax_delete() if $('.ajax_delete').length
 
