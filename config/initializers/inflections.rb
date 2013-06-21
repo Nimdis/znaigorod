@@ -15,12 +15,13 @@
 # end
 
 ActiveSupport::Inflector.inflections do |inflect|
-  inflect.irregular 'sms', 'smses'
   inflect.irregular 'affiche', 'affiches'
+  inflect.irregular 'sms',     'smses'
 
-  inflect.singular 'address',       'address'
-  #inflect.singular 'affiches',      'affiche'
-  #inflect.singular 'master_class',  'master_class'
-  inflect.singular 'masterclass',   'masterclass'
-  inflect.singular 'masterclasses', 'masterclass'
+  inflect.singular 'address',        'address'
+  inflect.singular 'affiches',       'affiche'
+  inflect.singular 'master_class',   'master_class'
+  inflect.singular 'master_classes', 'master_class'
+  inflect.singular 'masterclass',    'masterclass'
+  inflect.singular 'masterclasses',  'masterclass'
 end
