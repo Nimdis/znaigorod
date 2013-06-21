@@ -75,7 +75,7 @@ class Affiche < ActiveRecord::Base
 
   state_machine :initial => :draft do
     before_transition any => :published do |affiche, transition|
-      affiche.slug = affiche.normalize_friendly_id(affiche.title) unless affiche.slug?
+      affiche.send(:set_slug)
     end
 
     event :send_to_moderation do
