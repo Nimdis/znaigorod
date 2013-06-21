@@ -295,7 +295,7 @@ class Affiche < ActiveRecord::Base
     false
   end
 
-  #include AfficheQualityRating
+  # include AfficheQualityRating
 
   def self.trailer_auto_html(trailer_code)
     AutoHtml.auto_html(trailer_code) do
