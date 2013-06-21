@@ -3,7 +3,7 @@
 
   <h1>
     <%= t("my.add_model.#{@affiche.class.model_name.underscore}") %>
-    <%= link_to 'помощь', '#', :class => 'show_help' %>
+    <%= link_to 'помощь', '#', :class => 'show_help' if content_for?(:help) %>
   </h1>
 
   <div class='help_wrapper'>
