@@ -1,16 +1,25 @@
 <div class='content_wrapper'>
   <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
 
-  <h1>
-    <%= t("my.affiche") %>
-    (<%= link_to t('my.add_affiche'), new_my_affiche_path if can? :new, Affiche.new %>)
-  </h1>
-
   <% if flash[:notice] %>
     <p class="flash-notice"><%= flash[:notice] %></p>
   <% end %>
 
   <div class='my_affiche_wrapper'>
+    <h2><%= t('my.add_affiche') %></h2>
+    <% Affiche.ordered_descendants.map(&:name).map(&:underscore).each_slice(2) do |affiche_types| %>
+      <ul class='new_affiche_list'>
+        <% affiche_types.each do |name| %>
+          <li>
+            <%= simple_form_for [:my, Affiche.new] do |f| %>
+              <%= hidden_field_tag 'type', name %>
+              <%= f.button :submit, t("my.button.#{name}"), class: "button #{name}" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+
     <div class='my_affiches_preview'>
       <% if current_user.affiches.draft.any? %>
         <h2>Черновики</h2>
@@ -44,42 +53,16 @@
           </ul>
         <% end %>
       <% end %>
-    </div>
 
-    <div class='my_affiche_help'>
-      <h2><%= t('my.help') %></h2>
-      <p>Если вы желаете выкладывать свои афиши на сайте, ознакомьтесь с примером оформления</p>
 
-      <h4>Заголовок:</h4>
-      <ul>
-        <li>Написан на русском (англ. при необходимости)</li>
-        <li>Начинаться с заглавной буквы</li>
-        <li>Не содержать точки в конце</li>
-        <li>Не содержать названия организации</li>
-        <li>Не содержать сокращений и нецензурной лексики</li>
-        <li>Запрещено писать с включенной клавишей CapsLock</li>
-      </ul>
+    <% if current_user.affiches.archive.any? %>
+      <div class='my_affiche_archive'>
+        <h2>
+          <%= link_to 'Архивные афиши', archive_my_affiches_path %>
+        </h2>
+      </div>
+    <% end %>
 
-      <h4>Описание мероприятия:</h4>
-      <ul>
-        <li>Краткое описание</li>
-        <li>Программа мероприятия</li>
-        <li>Информация об организаторах</li>
-        <li>Ссылка на веб-сайт</li>
-        <li>Не содержать сокращений и нецензурной лексики</li>
-        <li>Запрещено писать с включенной клавишей CapsLock</li>
-      </ul>
-
-      <p>Фото и видео материалы должны быть надлежащего качества и содержания и не нарушать действующего законодательства РФ.</p>
-
-      <% if current_user.affiches.archive.any? %>
-        <div class='my_affiche_archive'>
-          <p>
-            Также вы можете посмотреть мероприятия
-            <%= link_to 'которые уже прошли', archive_my_affiches_path %>
-          </p>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>

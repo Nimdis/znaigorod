@@ -3,7 +3,6 @@
 
   <h1>
     <%= t("my.archive") %>
-    (<%= link_to t('my.add_affiche'), new_my_affiche_path if can? :new, Affiche.new %>)
   </h1>
 
   <div class='my_affiche_wrapper'>

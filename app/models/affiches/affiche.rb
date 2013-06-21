@@ -14,7 +14,7 @@ class Affiche < ActiveRecord::Base
                   :images_attributes, :attachments_attributes,
                   :distribution_starts_on, :distribution_ends_on,
                   :original_title, :trailer_code, :vk_aid, :yandex_fotki_url, :constant,
-                  :age_min, :age_max, :state_event, :state
+                  :age_min, :age_max, :state_event, :state, :user_id
 
   belongs_to :user
 
