@@ -184,6 +184,8 @@ class Affiche < ActiveRecord::Base
     float :age_min
     float :age_max
 
+    string :state
+
     text :title,                :boost => 1.0 * 1.2
     text :title_ru,             :boost => 1.0,        :more_like_this => true
     text :title_translit,       :boost => 0.0,                                  :stored => true
