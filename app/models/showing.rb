@@ -8,7 +8,7 @@ class Showing < ActiveRecord::Base
 
   validates_presence_of :place, :starts_at
 
-  delegate :created_at, :distribution_starts_on, :total_rating, :tags, :title, :age_min, :age_max, :state,
+  delegate :created_at, :distribution_starts_on, :rating, :tags, :title, :age_min, :age_max, :state,
     :to => :affiche,
     :prefix => true
 
