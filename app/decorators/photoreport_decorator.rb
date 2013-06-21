@@ -8,7 +8,7 @@ class PhotoreportDecorator < AfficheDecorator
   end
 
   def link
-    h.link_to affiche.title.text_gilensize.truncated(77), kind_affiche_path(:anchor => 'photogallery'), :title => affiche.title
+    h.link_to affiche.title.to_s.text_gilensize.truncated(77), kind_affiche_path(:anchor => 'photogallery'), :title => affiche.title
   end
 
   def main_images
