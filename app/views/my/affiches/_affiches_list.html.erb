@@ -1,5 +1,7 @@
 <li class='my_affiche_item'>
-  <%= image_tag (affiche.poster_image_url? ? resized_image_url(affiche.poster_image_url, 80, 108, true) : 'public/stub_poster.png'), :width => 80, :height => 108 %>
+  <%= link_to my_affiche_path(affiche) do %>
+    <%= image_tag (affiche.poster_image_url? ? resized_image_url(affiche.poster_image_url, 80, 108, true) : 'public/stub_poster.png'), :width => 80, :height => 108 %>
+  <% end %>
   <span class="title"><%= affiche.title.present? ? affiche : 'Нет названия' %></span>
 
   <% if defined?(editable) %>
