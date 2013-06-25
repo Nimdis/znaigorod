@@ -11,7 +11,7 @@ class Movie < Affiche
 
   private
     def set_wmode_for_trailer
-      self.trailer_code.gsub!(/(object|embed)/, '\1 wmode="opaque"')
+      self.trailer_code.gsub!(/(object|embed)/, '\1 wmode="opaque"') if self.trailer_code?
     end
 end
 
