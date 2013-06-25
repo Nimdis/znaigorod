@@ -32,6 +32,7 @@ class SaunaHall < ActiveRecord::Base
 
   delegate :organization_title, :to => :sauna
   delegate :size, :to => :sauna_hall_pool, :prefix => :pool
+  alias_method :images, :gallery_images
 
   searchable do
     integer :capacity
