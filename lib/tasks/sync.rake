@@ -226,6 +226,7 @@ namespace :sync do
 end
 
 task :sync => ['sync:fakel', 'sync:kinomax', 'sync:kinomir'] do
-  bad_showings = Showing.where(:affiche_id => MovieSyncer.finded_movies.map(&:id).uniq).where('starts_at > ?', MovieSyncer.now).where('updated_at <> ?', MovieSyncer.now)
+  organiation_ids = Organization.where(:title => ['Киномир, кинотеатр', 'Киномакс, кинотеатр', 'Центр досуга и спорта "Факел", развлекательный комплекс']).map(&:id)
+  bad_showings = Showing.where(:affiche_id => MovieSyncer.finded_movies.map(&:id).uniq).where(:organization_id => organiation_ids).where('starts_at > ?', MovieSyncer.now).where('updated_at <> ?', MovieSyncer.now)
   bad_showings.destroy_all
 end
