@@ -70,7 +70,8 @@ class Affiche < ActiveRecord::Base
   attr_accessible :poster_image, :step, :set_region, :crop_x, :crop_y, :crop_width, :crop_height, :social_gallery_url
 
   def should_generate_new_friendly_id?
-    false
+    return false if self.slug.present?
+    true
   end
 
   state_machine :initial => :draft do
@@ -206,10 +207,6 @@ class Affiche < ActiveRecord::Base
     float :popularity,        :trie => true
 
     time :last_showing_time,  :trie => true
-  end
-
-  def should_generate_new_friendly_id?
-    new_record?
   end
 
   def update_rating
