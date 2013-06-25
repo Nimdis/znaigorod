@@ -330,6 +330,9 @@ class Affiche < ActiveRecord::Base
       ).tap do |image|
         image.width  = image_hash['photo']['width']
         image.height = image_hash['photo']['height']
+
+        next if image.width.nil? || image.height.nil?
+
         image.description = image_hash['photo']['text']
         image.save(:validate => false)
       end

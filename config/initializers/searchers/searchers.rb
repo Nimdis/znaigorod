@@ -39,6 +39,7 @@ HasSearcher.create_searcher :photoreport do
     order_by :id, :desc
 
     with(:attachable_type, 'Affiche')
+    with(:attachable_state, 'published')
   end
 
   scope :grouped do

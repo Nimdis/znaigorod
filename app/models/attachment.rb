@@ -19,6 +19,7 @@ class Attachment < ActiveRecord::Base
     string :category
     string :tags, :multiple => true
     string :type
+    string(:attachable_state) { attachable.state if attachable.respond_to? :state }
     text :description
     time :created_at
   end
