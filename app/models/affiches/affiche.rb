@@ -70,12 +70,13 @@ class Affiche < ActiveRecord::Base
   attr_accessible :poster_image, :step, :set_region, :crop_x, :crop_y, :crop_width, :crop_height, :social_gallery_url
 
   def should_generate_new_friendly_id?
-    return false if self.slug.present?
-    true
+    return true if !self.slug? && self.published?
+
+    false
   end
 
   state_machine :initial => :draft do
-    before_transition any => :published do |affiche, transition|
+    after_transition any => :published do |affiche, transition|
       affiche.send(:set_slug)
     end
 
