@@ -75,6 +75,7 @@ group :development do
   gem 'capistrano-unicorn'
   gem 'debugger'
   gem 'hirb'
+  gem 'letter_opener'
   gem 'openteam-capistrano'
   gem 'quiet_assets'
   gem 'rails-erd'
