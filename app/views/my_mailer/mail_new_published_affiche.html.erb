@@ -25,5 +25,9 @@
       <%= "Теги: #{@affiche.tag}" if @affiche.tag.present? %>
     </div>
 
+    <div class="actions">
+      <%= link_to "Помотреть эту афишу в manage", polymorphic_url([:manage, @affiche], :host => Settings['app']['host']) %>
+    </div>
+
   </body>
 </html>
