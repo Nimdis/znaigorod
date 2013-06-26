@@ -383,22 +383,28 @@ class Affiche < ActiveRecord::Base
   end
 
   def save_version
-    self.versions.create!(:body => self.changes.to_json(:except => [
-                                                              :created_at,
-                                                              :id,
-                                                              :popularity,
-                                                              :poster_image_content_type,
-                                                              :poster_image_file_name,
-                                                              :poster_image_file_size,
-                                                              :poster_image_updated_at,
-                                                              :poster_image_url,
-                                                              :slug,
-                                                              :total_rating,
-                                                              :updated_at,
-                                                              :user_id,
-                                                              :vkontakte_likes,
-                                                              :yandex_metrika_page_views
-                                                            ])) if self.changed?
+    ignore_fields = [
+              :created_at,
+              :id,
+              :popularity,
+              :poster_image_content_type,
+              :poster_image_file_name,
+              :poster_image_file_size,
+              :poster_image_updated_at,
+              :poster_image_url,
+              :slug,
+              :state,
+              :total_rating,
+              :updated_at,
+              :user_id,
+              :vkontakte_likes,
+              :yandex_metrika_page_views,
+              :vfs_path
+    ]
+
+    if self.changed? && (self.changes.keys.map(&:to_sym) - ignore_fields).any?
+      self.versions.create!(:body => self.changes.to_json(:except => ignore_fields))
+    end
   end
 
   def set_popularity
