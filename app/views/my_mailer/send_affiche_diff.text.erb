@@ -1,5 +1,5 @@
 На сайте ЗнайГород (<%= Settings['app']['host'] %>)
-<% if @version.versionable.user? %>
+<% if @version.versionable.user %>
   пользователь <%= @version.versionable.user.name %> <%= @version.versionable.user.profile %> изменил афишу:
 <% else %>
   была изменена афиша:
