@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   devise :trackable, :omniauthable, :rememberable,
     omniauth_providers: [:vkontakte, :google_oauth2, :yandex, :facebook, :twitter, :odnoklassniki, :mailru]
 
-  has_many :affiches
+  has_many :affiches, :uniq => true
   has_many :showings, :through => :affiches
   has_many :activities,     dependent:  :destroy
   has_many :comments
