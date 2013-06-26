@@ -1,0 +1,9 @@
+На сайте ЗнайГород (<%= Settings['app']['host'] %>) пользователь <%= @affiche.user.name %> <%= @affiche.user.profile %> разместил новую афишу:
+
+Название: <%= @affiche.title.present? ? @affiche.title : 'Нет названия' %>
+Постер: <%= @affiche.poster_url? ? @affiche.poster_url : 'Нет постера' %>
+Теги: <%= @affiche.tag.present? ? @affiche.tag : 'Нет тегов' %>
+Описание: <%= @affiche.description.present? ? @affiche.description : 'Нет описания' %>
+
+Все афиши на модерации: <%= by_state_manage_affiches_url(:pending, :host => Settings['app']['host']) %>
+Помотреть эту афишу в manage: <%= polymorphic_url([:manage, @affiche], :host => Settings['app']['host']) %>

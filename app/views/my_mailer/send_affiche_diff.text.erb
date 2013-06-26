@@ -1,0 +1,15 @@
+На сайте ЗнайГород (<%= Settings['app']['host'] %>) пользователь <%= @version.versionable.user.name %> <%= @version.versionable.user.profile %> изменил афишу:
+
+Название: <%= @version.versionable.title.present? ? @version.versionable.title : 'Нет названия' %>
+Постер: <%= @version.versionable.poster_url? ? @version.versionable.poster_url : 'Нет постера' %>
+Теги: <%= @version.versionable.tag.present? ? @version.versionable.tag : 'Нет тегов' %>
+Описание: <%= @version.versionable.description.present? ? @version.versionable.description : 'Нет описания' %>
+
+Изменения:
+<% @version.what_changed.each do |key,value| %>
+  <%= t("activerecord.attributes.affiche.#{key}") %>
+  <%= value.first %> -> <%= value.last %>
+
+<% end %>
+
+Помотреть эту афишу в manage: <%= polymorphic_url([:manage, @version.versionable], :host => Settings['app']['host']) %>
