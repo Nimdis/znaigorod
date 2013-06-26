@@ -1,4 +1,9 @@
-На сайте ЗнайГород (<%= Settings['app']['host'] %>) пользователь <%= @version.versionable.user.name %> <%= @version.versionable.user.profile %> изменил афишу:
+На сайте ЗнайГород (<%= Settings['app']['host'] %>)
+<% if @version.versionable.user? %>
+  пользователь <%= @version.versionable.user.name %> <%= @version.versionable.user.profile %> изменил афишу:
+<% else %>
+  была изменена афиша:
+<% end %>
 
 Название: <%= @version.versionable.title.present? ? @version.versionable.title : 'Нет названия' %>
 Постер: <%= @version.versionable.poster_url? ? @version.versionable.poster_url : 'Нет постера' %>

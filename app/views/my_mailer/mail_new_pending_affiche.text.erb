@@ -1,4 +1,9 @@
-На сайте ЗнайГород (<%= Settings['app']['host'] %>) пользователь <%= @affiche.user.name %> <%= @affiche.user.profile %> разместил новую афишу:
+На сайте ЗнайГород (<%= Settings['app']['host'] %>)
+<% if @affiche.user? %>
+  пользователь <%= @affiche.user.name %> <%= @affiche.user.profile %> разместил новую афишу:
+<% else %>
+  была добавлена новая афиша:
+<% end %>
 
 Название: <%= @affiche.title.present? ? @affiche.title : 'Нет названия' %>
 Постер: <%= @affiche.poster_url? ? @affiche.poster_url : 'Нет постера' %>
