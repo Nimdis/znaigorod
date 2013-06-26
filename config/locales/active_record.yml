@@ -408,6 +408,10 @@ ru:
         description:    Описание
         stale_at:       Актуально до
 
+      copy:
+        row:           Ряд
+        seat:          Место
+
       sms_claim:
         name:     Имя
         phone:    Телефон

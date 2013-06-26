@@ -14,7 +14,7 @@
           <li>
             <% if item.class.name.underscore == "ticket"  %>
               <p>
-                <%= link_to item.affiche.title, manage_affiche_path(item.affiche) %>
+                <%= link_to item.affiche.title, polymorphic_url([:manage, item.affiche]) %>
                 <%= link_to 'Редактировать', edit_manage_ticket_path(item) %>
               </p>
 
