@@ -1,6 +1,10 @@
 <tr>
   <td><%= payment.amount %></td>
-  <td><%= payment.paymentable.description %></td>
+
+  <% if payment.paymentable %>
+    <td><%= payment.paymentable.description %></td>
+  <% end %>
+
   <td><%= payment.state_text %></td>
   <td><%= l payment.created_at %></td>
 </tr>
