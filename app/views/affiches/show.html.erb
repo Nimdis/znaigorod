@@ -128,7 +128,7 @@
             <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @affiche.model } %>
           </div>
           <div class='share'>
-            <%= render :partial => 'commons/share_this' %>
+            <%= render :partial => 'commons/affiche_share_this' %>
           </div>
         </div>
 
@@ -282,12 +282,6 @@
           <div class='all_today'>
             <%= @affiche.all_affiches_link %>
           </div>
-        </div>
-      <% end %>
-
-      <% if Rails.env.production? %>
-        <div class='vk_recommended_wrapper'>
-          <div id='vk_recommended'></div>
         </div>
       <% end %>
 
