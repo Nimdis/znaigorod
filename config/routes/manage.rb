@@ -6,21 +6,25 @@ Znaigorod::Application.routes.draw do
     resources :search,    :only => :index
     resources :sessions,  :only => [:new, :create, :destroy]
 
-    Affiche.pluck(:kind).uniq.each do |type|
-      resources type.pluralize do
-        get ':by_state' => "#{type.pluralize}#index", :on => :collection, :as => :by_state, :constraints => { :by_state => /draft|published|pending/ }
+    if Affiche.column_names.include?('kind')
 
-        resources :gallery_files,  :except => [:index, :show] do
-          delete 'destroy_file', :on => :member, :as => :destroy_file
+      Affiche.pluck(:kind).uniq.each do |type|
+        resources type.pluralize do
+          get ':by_state' => "#{type.pluralize}#index", :on => :collection, :as => :by_state, :constraints => { :by_state => /draft|published|pending/ }
+
+          resources :gallery_files,  :except => [:index, :show] do
+            delete 'destroy_file', :on => :member, :as => :destroy_file
+          end
+
+          resources :gallery_images, :except => [:index, :show] do
+            delete 'destroy_file', :on => :member, :as => :destroy_file
+          end
+
+          resources :gallery_social_images, :except => [:index, :show] do
+            delete 'destroy_all', :on => :collection, :as => :destroy_all
+          end
         end
 
-        resources :gallery_images, :except => [:index, :show] do
-          delete 'destroy_file', :on => :member, :as => :destroy_file
-        end
-
-        resources :gallery_social_images, :except => [:index, :show] do
-          delete 'destroy_all', :on => :collection, :as => :destroy_all
-        end
       end
 
     end

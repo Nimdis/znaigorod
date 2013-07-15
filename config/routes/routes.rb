@@ -50,25 +50,27 @@ Znaigorod::Application.routes.draw do
 
   get 'photogalleries/:period/(*query)' => 'photogalleries#index',  :as => :photogalleries, :period => /all|month|week/
 
-  Affiche.pluck(:kind).uniq do |type|
-    get  "#{type}/:#{type}_id/comments/new" => 'comments#new',    :as => "new_#{type}_comment"
-    get  "#{type}/:#{type}_id/comments/:id" => 'comments#show',   :as => "#{type}_comment"
-    post "#{type}/:#{type}_id/comments"     => 'comments#create', :as => "#{type}_comments"
+  if Affiche.column_names.include?('kind')
+    Affiche.pluck(:kind).uniq do |type|
+      get  "#{type}/:#{type}_id/comments/new" => 'comments#new',    :as => "new_#{type}_comment"
+      get  "#{type}/:#{type}_id/comments/:id" => 'comments#show',   :as => "#{type}_comment"
+      post "#{type}/:#{type}_id/comments"     => 'comments#create', :as => "#{type}_comments"
 
-    get  "#{type}/:#{type}_id/user_ratings/:id"          => 'user_ratings#show',     :as => "#{type}_user_rating"
-    get  "#{type}/:#{type}_id/user_ratings/new"          => 'user_ratings#new',      :as => "new_#{type}_user_rating"
-    post "#{type}/:#{type}_id/user_ratings"              => 'user_ratings#create',   :as => "#{type}_user_ratings"
-    get  "#{type}/:#{type}_id/user_ratings/:id/edit"     => 'user_ratings#edit',     :as => "edit_#{type}_user_rating"
-    put  "#{type}/:#{type}_id/user_ratings/:id"          => 'user_ratings#update',   :as => "#{type}_user_rating"
+      get  "#{type}/:#{type}_id/user_ratings/:id"          => 'user_ratings#show',     :as => "#{type}_user_rating"
+      get  "#{type}/:#{type}_id/user_ratings/new"          => 'user_ratings#new',      :as => "new_#{type}_user_rating"
+      post "#{type}/:#{type}_id/user_ratings"              => 'user_ratings#create',   :as => "#{type}_user_ratings"
+      get  "#{type}/:#{type}_id/user_ratings/:id/edit"     => 'user_ratings#edit',     :as => "edit_#{type}_user_rating"
+      put  "#{type}/:#{type}_id/user_ratings/:id"          => 'user_ratings#update',   :as => "#{type}_user_rating"
 
-    get "#{type}/:id"                           => 'affiches#show',         :as => "#{type}"
-    get "#{type.gsub('_','')}/:id"              => 'affiches#show',         :as => "#{type.gsub('_','')}"
+      get "#{type}/:id"                           => 'affiches#show',         :as => "#{type}"
+      get "#{type.gsub('_','')}/:id"              => 'affiches#show',         :as => "#{type.gsub('_','')}"
 
-    put "#{type}/:#{type}_id/change_vote" => "votes#change_vote", :as => "#{type}_change_vote"
-    put "#{type}/:#{type}_id/change_visit" => "visits#change_visit", :as => "#{type}_change_visit"
+      put "#{type}/:#{type}_id/change_vote" => "votes#change_vote", :as => "#{type}_change_vote"
+      put "#{type}/:#{type}_id/change_visit" => "visits#change_visit", :as => "#{type}_change_visit"
 
-    get "#{type}/:#{type}_id/visitors" => "visits#visitors", :as => "#{type}_visitors"
-    get "#{type}/:#{type}_id/liked" => "votes#liked", :as => "#{type}_liked"
+      get "#{type}/:#{type}_id/visitors" => "visits#visitors", :as => "#{type}_visitors"
+      get "#{type}/:#{type}_id/liked" => "votes#liked", :as => "#{type}_liked"
+    end
   end
 
   Organization.basic_suborganization_kinds.each do |kind|
