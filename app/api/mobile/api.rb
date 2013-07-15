@@ -23,9 +23,15 @@ module Mobile
           { category: 'На выходных',  url:  "#{base_path}/#{kind}/weekend"}
         ]
       end
+
+      def affishes(kind, period, sorting, page)
+        ShowingsPresenter.new(:categories => (kind == 'all' ?  [] : [kind]), :period => period, :order_by => sorting, :page => page )
+      end
+
     end
 
     resource :affisha do
+
       get '/categories' do
         categories = [ {category: 'Все мероприятия', url: "#{base_path}/all", subcategories: subcategories('all') }]
         categories += Affiche.ordered_descendants.map do |affiche_class|
@@ -35,10 +41,8 @@ module Mobile
             subcategories: subcategories(affiche_class.name.downcase.pluralize)
           }
         end
-        {
-          lastUpdate: api_version,
-          categories: categories
-        }
+
+        { lastUpdate: api_version, categories: categories }
       end
 
       get '/sortings' do
@@ -51,6 +55,19 @@ module Mobile
           ]
         }
       end
+
+      params do
+        optional :page, :type => Integer
+      end
+
+      get ':kind/:period/:sorting' do
+        affishes = affishes(params[:kind], params[:period], params[:sorting], params[:page] || 1)
+        {
+          urlModifier: affishes.paginated_collection.next_page ? "?page=#{affishes.paginated_collection.next_page}" : '',
+          affishes: affishes.collection.map {|a| {:url => "#{base_path}/#{a.slug}"}}
+        }
+      end
+
     end
   end
 end
