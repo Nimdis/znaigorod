@@ -5,7 +5,7 @@ class ChangeAffiche < ActiveRecord::Migration
     pg = ProgressBar.new(Affiche.all.count)
 
     Affiche.all.each do |affiche|
-      affiche.update_column :kind, affiche.type.underscore
+      affiche.update_column :kind, affiche.type.downcase
       pg.increment!
     end
 

@@ -4,9 +4,9 @@
       <a href='/affiches'>Афиша</a>
       <ul class='submenu'>
         <li><a href='/affiches'>Все мероприятия</a></li>
-        <% Affiche.ordered_descendants.each do |klass| %>
+        <% Affiche.kind.values.each do |kind| %>
           <li>
-            <%= link_to klass.model_name.human, send("#{klass.name.downcase.pluralize}_path") %>
+            <%= link_to kind.text, send("#{kind.pluralize}_path") %>
           </li>
         <% end %>
       </ul>

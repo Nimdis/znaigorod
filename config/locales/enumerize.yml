@@ -1,5 +1,17 @@
 ru:
   enumerize:
+    affiche:
+      kind:
+        party: Вечеринки
+        other: Другое
+        masterclass: Мастер-классы
+        concert: Концерты
+        sportsevent: Спорт
+        exhibition: Выставки
+        movie: Кино
+        competition: Конкурсы
+        spectacle: Спектакли
+
     role:
       admin:                   Администратор
       affiches_editor:         Редактор афиши

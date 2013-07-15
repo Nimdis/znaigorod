@@ -5,8 +5,8 @@ class CategoriesFilter
 
   def initialize(categories, hidden = false)
     @selected    = (categories || []).delete_if(&:blank?)
-    @available   = Affiche.ordered_descendants.map(&:name).map(&:downcase)
-    @human_names = Affiche.ordered_descendants.map(&:model_name).map(&:human)
+    @available   = Affiche.kind.values
+    @human_names = Affiche.kind.values.map(&:text)
     @hidden = !!hidden
   end
 

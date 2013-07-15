@@ -22,9 +22,9 @@ class ShowingsPresenter
     super(args)
     self.categories ||= []
 
-    @page ||= 1
-    @per_page = 12
-    @view     = 'posters'
+    @page     ||= 1
+    @per_page   = 12
+    @view       = 'posters'
 
     initialize_filters
   end
@@ -95,12 +95,12 @@ class ShowingsPresenter
   end
 
   def today_affiche_links
-    @today_affiche_links ||= Affiche.ordered_descendants.map { |descendant|
+    @today_affiche_links ||= Affiche.kind.values.map { |kind|
       {
-        title: "#{descendant.model_name.human}",
-        query: { categories: [descendant.name.downcase], period: 'today' },
-        current: categories.include?(descendant.name.downcase),
-        count: Counter.new(category: descendant.name.downcase).today
+        title: "#{kind.text}",
+        query: { categories: [kind], period: 'today' },
+        current: categories.include?(kind),
+        count: Counter.new(category: kind).today
       }
     }
   end

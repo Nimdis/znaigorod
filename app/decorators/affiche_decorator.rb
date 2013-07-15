@@ -4,7 +4,7 @@ class AfficheDecorator < ApplicationDecorator
   include AutoHtmlFor
   decorates :affiche
 
-  delegate :distribution_starts_on, :distribution_ends_on, :distribution_starts_on?, :distribution_ends_on?, :to => :affiche
+  delegate :distribution_starts_on, :distribution_ends_on, :distribution_starts_on?, :distribution_ends_on?, :kind, :to => :affiche
   attr_accessor :showings
 
   def initialize(affiche, showings = nil)
@@ -22,10 +22,6 @@ class AfficheDecorator < ApplicationDecorator
 
   def has_ribbon
     h.content_tag(:div, h.content_tag(:div, "Премьера недели", class: :ribbon), class: :ribbon_wrapper) if affiche.premiere?
-  end
-
-  def kind
-    affiche.class.name.downcase
   end
 
   def geo_present?
@@ -324,10 +320,6 @@ class AfficheDecorator < ApplicationDecorator
     elsif distribution_ends_on?
       return "До #{I18n.l(distribution_ends_on, :format => '%e %B')}".squish
     end
-  end
-
-  def kind
-    affiche.class.name.downcase
   end
 
   def pluralized_kind

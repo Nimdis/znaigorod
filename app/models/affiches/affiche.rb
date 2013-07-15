@@ -36,7 +36,7 @@ class Affiche < ActiveRecord::Base
   has_one :affiche_schedule, :dependent => :destroy
 
   extend Enumerize
-  enumerize :kind, in: [:party, :other, :master_class, :concert, :sports_event, :exhibition, :movie, :competition, :spectacle], predicates: true
+  enumerize :kind, in: [:movie, :concert, :party, :spectacle, :exhibition, :sportsevent, :masterclass, :competition, :other], predicates: true
 
   validates_presence_of :title, :description, :poster_url, :if => :published?
 
@@ -226,7 +226,7 @@ class Affiche < ActiveRecord::Base
   alias_attribute :human_model_name_ru, :human_model_name
 
   def self.ordered_descendants
-    [Movie, Concert, Party, Spectacle, Exhibition, SportsEvent, MasterClass, Competition, Other]
+    kind.values
   end
 
   def tags

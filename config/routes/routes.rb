@@ -50,7 +50,7 @@ Znaigorod::Application.routes.draw do
 
   get 'photogalleries/:period/(*query)' => 'photogalleries#index',  :as => :photogalleries, :period => /all|month|week/
 
-  Affiche.kind.values do |type|
+  Affiche.kind.values.each do |type|
     get  "#{type}/:#{type}_id/comments/new" => 'comments#new',    :as => "new_#{type}_comment"
     get  "#{type}/:#{type}_id/comments/:id" => 'comments#show',   :as => "#{type}_comment"
     post "#{type}/:#{type}_id/comments"     => 'comments#create', :as => "#{type}_comments"

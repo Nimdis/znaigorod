@@ -6,7 +6,7 @@ Znaigorod::Application.routes.draw do
     resources :search,    :only => :index
     resources :sessions,  :only => [:new, :create, :destroy]
 
-    Affiche.kind.values do |type|
+    Affiche.kind.values.each do |type|
       resources type.pluralize do
         get ':by_state' => "#{type.pluralize}#index", :on => :collection, :as => :by_state, :constraints => { :by_state => /draft|published|pending/ }
 
