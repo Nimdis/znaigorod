@@ -14,7 +14,7 @@ class Affiche < ActiveRecord::Base
                   :images_attributes, :attachments_attributes,
                   :distribution_starts_on, :distribution_ends_on,
                   :original_title, :trailer_code, :vk_aid, :yandex_fotki_url, :constant,
-                  :age_min, :age_max, :state_event, :state, :user_id
+                  :age_min, :age_max, :state_event, :state, :user_id, :kind
 
   belongs_to :user
 
@@ -35,6 +35,9 @@ class Affiche < ActiveRecord::Base
 
   has_one :affiche_schedule, :dependent => :destroy
 
+  extend Enumerize
+  enumerize :kind, in: [:party, :other, :master_class, :concert, :sports_event, :exhibition, :movie, :competition, :spectacle], predicates: true
+
   validates_presence_of :title, :description, :poster_url, :if => :published?
 
   accepts_nested_attributes_for :affiche_schedule, :allow_destroy => true, :reject_if => :affiche_schedule_attributes_blank?
@@ -50,7 +53,9 @@ class Affiche < ActiveRecord::Base
   default_value_for :vkontakte_likes,           0
   default_value_for :total_rating,              0.5
   #before_save :set_popularity
+
   before_save :prepare_trailer
+  before_save :set_wmode_for_trailer, :if => :published?
 
   scope :available_for_edit,    -> { where(:state => [:draft, :published]) }
   scope :by_state,              ->(state) { where(:state => state) }
@@ -301,6 +306,11 @@ class Affiche < ActiveRecord::Base
     end
   end
 
+  # Affiche movie kind #
+  def premiere?
+    distribution_starts_on && distribution_starts_on >= Date.today.beginning_of_week && distribution_starts_on <= Date.today.end_of_week
+  end
+
   private
 
   def reindex_showings
@@ -414,6 +424,10 @@ class Affiche < ActiveRecord::Base
   def prepare_trailer
     self.trailer_code.to_s.gsub!(/width=("|')(\d+)("|')/i, 'width="740"')
     self.trailer_code.to_s.gsub!(/height=("|')(\d+)("|')/i, 'height="450"')
+  end
+
+  def set_wmode_for_trailer
+    self.trailer_code.gsub!(/(object|embed)/, '\1 wmode="opaque"') if self.trailer_code?
   end
 end
 

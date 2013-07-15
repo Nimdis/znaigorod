@@ -6,9 +6,9 @@ Znaigorod::Application.routes.draw do
     resources :search,    :only => :index
     resources :sessions,  :only => [:new, :create, :destroy]
 
-    Affiche.descendants.each do |type|
-      resources type.name.underscore.pluralize do
-        get ':by_state' => "#{type.name.underscore.pluralize}#index", :on => :collection, :as => :by_state, :constraints => { :by_state => /draft|published|pending/ }
+    Affiche.pluck(:kind).uniq.each do |type|
+      resources type.pluralize do
+        get ':by_state' => "#{type.pluralize}#index", :on => :collection, :as => :by_state, :constraints => { :by_state => /draft|published|pending/ }
 
         resources :gallery_files,  :except => [:index, :show] do
           delete 'destroy_file', :on => :member, :as => :destroy_file
