@@ -1,5 +1,6 @@
 Znaigorod::Application.routes.draw do
   mount Affiches::API => '/'
+  mount Mobile::API => '/'
   mount ElVfsClient::Engine => '/'
 
   devise_for :users, :controllers => { :omniauth_callbacks =>  'omniauth_callbacks' }
