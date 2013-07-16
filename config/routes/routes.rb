@@ -15,13 +15,16 @@ Znaigorod::Application.routes.draw do
   get 'search'            => 'search#search',              :as => :search
   get 'webcams'           => 'webcams#index'
 
-  resources :affiches, :only => :index do
+  resources :affiches, :only => [:index, :show] do
     resources :comments, :only => [:new, :show, :create]
-
+    get "visitors" => "visits#visitors", :as => :visitors
     put "change_visit" => "visits#change_visit", :as => :change_visit
     put "change_vote" => "votes#change_vote", :as => :change_vote
-
     get "liked" => "votes#liked", :as => :liked
+  end
+
+  Affiche.kind.values.each do |type|
+    get "#{type.gsub('_','')}/:id"              => 'affiches#show',         :as => "#{type.gsub('_','')}"
   end
 
   resources :saunas,   :only => :index
@@ -58,19 +61,6 @@ Znaigorod::Application.routes.draw do
   end
 
   get 'photogalleries/:period/(*query)' => 'photogalleries#index',  :as => :photogalleries, :period => /all|month|week/
-
-  Affiche.kind.values.each do |type|
-    get  "#{type}/:#{type}_id/user_ratings/:id"          => 'user_ratings#show',     :as => "#{type}_user_rating"
-    get  "#{type}/:#{type}_id/user_ratings/new"          => 'user_ratings#new',      :as => "new_#{type}_user_rating"
-    post "#{type}/:#{type}_id/user_ratings"              => 'user_ratings#create',   :as => "#{type}_user_ratings"
-    get  "#{type}/:#{type}_id/user_ratings/:id/edit"     => 'user_ratings#edit',     :as => "edit_#{type}_user_rating"
-    put  "#{type}/:#{type}_id/user_ratings/:id"          => 'user_ratings#update',   :as => "#{type}_user_rating"
-
-    get "#{type}/:id"                           => 'affiches#show',         :as => "#{type}"
-    get "#{type.gsub('_','')}/:id"              => 'affiches#show',         :as => "#{type.gsub('_','')}"
-
-    get "#{type}/:#{type}_id/visitors" => "visits#visitors", :as => "#{type}_visitors"
-  end
 
   Organization.basic_suborganization_kinds.each do |kind|
     get "/#{kind.pluralize}" => 'suborganizations#index', :as => kind.pluralize, :constraints => { :kind => kind }, :defaults => { :kind => kind }

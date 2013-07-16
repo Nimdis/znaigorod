@@ -49,12 +49,6 @@ module ApplicationHelper
     end
   end
 
-  def search_class(resource_class)
-    return resource_class if [Affiche, Organization].include?(resource_class)
-    return Affiche        if Affiche.descendants.include?(resource_class)
-    return Organization   if Organization.descendants.include?(resource_class)
-  end
-
   def transliterate(string)
     I18n.transliterate(string).downcase.gsub(/[^[:alnum:]]+/,'_')
   end
