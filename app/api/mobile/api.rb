@@ -7,8 +7,12 @@ module Mobile
 
     helpers do
 
+      def site_url
+        "http://znaigorod.ru"
+      end
+
       def base_path
-        "http://znaigorod.ru/mobile/affisha"
+        "#{site_url}/mobile/affisha"
       end
 
       def api_version
@@ -26,6 +30,13 @@ module Mobile
 
       def affishes(kind, period, sorting, page)
         ShowingsPresenter.new(:categories => (kind == 'all' ?  [] : [kind]), :period => period, :order_by => sorting, :page => page )
+      end
+
+      def affisha_updated_at(affisha)
+        array = [affisha.updated_at]
+        array << affisha.showings.actual.map(&:updated_at) if affisha.showings.actual.any?
+        array << affisha.tickets.map(&:updated_at) if affisha.has_tickets_for_sale?
+        array.flatten.max
       end
 
     end
@@ -63,8 +74,40 @@ module Mobile
       get ':kind/:period/:sorting' do
         affishes = affishes(params[:kind], params[:period], params[:sorting], params[:page] || 1)
         {
+          lastUpdate: api_version, # TODO get max updated_at for collection
           urlModifier: affishes.paginated_collection.next_page ? "?page=#{affishes.paginated_collection.next_page}" : '',
-          affishes: affishes.collection.map {|a| {:url => "#{base_path}/#{a.slug}"}}
+          affishes: affishes.collection.map { |affisha| {:url => "#{base_path}/#{affisha.slug}"} }
+        }
+      end
+
+      get ':slug' do
+        affisha = Affiche.find(params[:slug])
+        decorated_affisha = AfficheDecorator.new affisha
+        {
+          id: affisha.slug,
+          link: "#{site_url}/#{affisha.class.name.downcase}/#{affisha.slug}",
+          name: affisha.title,
+          image: affisha.poster_url,
+          description: affisha.html_description,
+          expires: affisha.distribution_ends_on? ? affisha.distribution_ends_on : affisha.showings.map(&:starts_at).max,
+          showings: decorated_affisha.showings.actual.map { |showing|
+            decorated_showing = ShowingDecorator.new(showing)
+            {
+              date: decorated_showing.human_when,
+              price: decorated_showing.human_price,
+              place: showing.organization.present? ? "#{showing.organization.title}, #{showing.organization.address.to_s}" : showing.place
+            }
+          },
+          tickets: decorated_affisha.tickets.map { |ticket|
+            if ticket.copies.for_sale.count > 0
+              {
+                original_price: ticket.original_price,
+                price: ticket.price,
+                count_for_sale: ticket.copies.for_sale.count
+              }
+            end
+          }.compact,
+          lastUpdate: affisha_updated_at(decorated_affisha)
         }
       end
 
