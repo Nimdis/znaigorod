@@ -23,7 +23,7 @@
     <%= link_to t('leave', :scope => visitable.class.name.underscore),
       polymorphic_url([visitable, :change_visit], :subdomain => request.subdomain), :method => :put, :remote => true %>
   <% else %>
-    <%= link_to t('join', :scope => visitable.class.name.underscore), polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true, :class => 'button' %>
+    <%= link_to t('join', :scope => visitable.kind), polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true, :class => 'button' %>
   <% end %>
 </div>
 

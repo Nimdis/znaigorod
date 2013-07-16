@@ -3,11 +3,7 @@ class VisitsController < ApplicationController
 
   custom_actions :collection => [:change_visit, :visitors]
 
-  Affiche.descendants.each do |type|
-    belongs_to type.name.underscore, :polymorphic => true, :optional => :true
-  end
-
-  belongs_to :organization, :polymorphic => true, :optional => true
+  belongs_to :affiche, :organization, :polymorphic => true, :optional => true
 
   layout false
 

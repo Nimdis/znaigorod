@@ -3,10 +3,7 @@ class VotesController < ApplicationController
 
   custom_actions :collection => [:change_vote, :liked]
 
-  Affiche.descendants.each do |type|
-    belongs_to type.name.underscore, :polymorphic => true, :optional => :true
-  end
-
+  belongs_to :affiche, :polymorphic => true, :optional => true
   belongs_to :comment, :polymorphic => true, :optional => true
   belongs_to :coupon, :polymorphic => true, :optional => true
   belongs_to :organization, :polymorphic => true, :optional => true

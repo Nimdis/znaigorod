@@ -15,7 +15,15 @@ Znaigorod::Application.routes.draw do
   get 'search'            => 'search#search',              :as => :search
   get 'webcams'           => 'webcams#index'
 
-  resources :affiches, :only => :index
+  resources :affiches, :only => :index do
+    resources :comments, :only => [:new, :show, :create]
+
+    put "change_visit" => "visits#change_visit", :as => :change_visit
+    put "change_vote" => "votes#change_vote", :as => :change_vote
+
+    get "liked" => "votes#liked", :as => :liked
+  end
+
   resources :saunas,   :only => :index
 
   resources :tickets,  :only => :index do
@@ -52,10 +60,6 @@ Znaigorod::Application.routes.draw do
   get 'photogalleries/:period/(*query)' => 'photogalleries#index',  :as => :photogalleries, :period => /all|month|week/
 
   Affiche.kind.values.each do |type|
-    get  "#{type}/:#{type}_id/comments/new" => 'comments#new',    :as => "new_#{type}_comment"
-    get  "#{type}/:#{type}_id/comments/:id" => 'comments#show',   :as => "#{type}_comment"
-    post "#{type}/:#{type}_id/comments"     => 'comments#create', :as => "#{type}_comments"
-
     get  "#{type}/:#{type}_id/user_ratings/:id"          => 'user_ratings#show',     :as => "#{type}_user_rating"
     get  "#{type}/:#{type}_id/user_ratings/new"          => 'user_ratings#new',      :as => "new_#{type}_user_rating"
     post "#{type}/:#{type}_id/user_ratings"              => 'user_ratings#create',   :as => "#{type}_user_ratings"
@@ -65,11 +69,7 @@ Znaigorod::Application.routes.draw do
     get "#{type}/:id"                           => 'affiches#show',         :as => "#{type}"
     get "#{type.gsub('_','')}/:id"              => 'affiches#show',         :as => "#{type.gsub('_','')}"
 
-    put "#{type}/:#{type}_id/change_vote" => "votes#change_vote", :as => "#{type}_change_vote"
-    put "#{type}/:#{type}_id/change_visit" => "visits#change_visit", :as => "#{type}_change_visit"
-
     get "#{type}/:#{type}_id/visitors" => "visits#visitors", :as => "#{type}_visitors"
-    get "#{type}/:#{type}_id/liked" => "votes#liked", :as => "#{type}_liked"
   end
 
   Organization.basic_suborganization_kinds.each do |kind|
