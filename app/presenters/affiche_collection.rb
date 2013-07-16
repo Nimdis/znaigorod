@@ -43,19 +43,6 @@ class AfficheCollection
     return 12
   end
 
-  def kind_links
-    links = []
-    ([Affiche] + Affiche.ordered_descendants).each do |affiche_kind|
-      kind = affiche_kind.model_name.downcase.pluralize
-      links << Link.new(:title => affiche_kind.model_name.human, :current => kind  == self.kind, :kind => kind, :html_options => {}, :url => affiches_path(kind, period, on))
-    end
-    current_index = links.index { |link| link.current? }
-    links[current_index - 1].html_options[:class] = :before_current if current_index > 0
-    links[current_index + 1].html_options[:class] = :after_current if current_index < links.size - 1
-    links[current_index].html_options[:class] = :current
-    links
-  end
-
   def period_links
     links = []
     %w(today weekly weekend daily all).each do |affiche_period|
@@ -89,22 +76,6 @@ class AfficheCollection
   def presented_tags
     searcher_params = search_params
     searcher(searcher_params).faceted.facet(:tags).rows.map(&:value)
-  end
-
-  def categories_links
-    searcher_params = search_params
-    searcher_params.delete(:affiche_category)
-    existed_categories = searcher(searcher_params).categories.group(:affiche_category).groups.map(&:value)
-    [].tap do |array|
-      Affiche.ordered_descendants.each do |category|
-        array << Link.new(title: category.model_name.human.mb_chars.downcase,
-                          url: affiches_path(kind, period, on, categories: tag_params('categories', category.model_name.downcase.pluralize), tags: tags.any? ? tags : nil),
-                          current: categories.include?(category.model_name.downcase.pluralize),
-                          html_options: categories.include?(category.model_name.downcase.pluralize) ? { class: 'selected' } : {},
-                          disabled: !existed_categories.include?(category.model_name.downcase)
-                         )
-      end
-    end
   end
 
   def tag_links

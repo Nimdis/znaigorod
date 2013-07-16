@@ -4,8 +4,6 @@ require 'vkontakte_api'
 require 'curb'
 
 class Affiche < ActiveRecord::Base
-  extend FriendlyId
-
   include HasVirtualTour
   include AutoHtml
 
@@ -36,7 +34,8 @@ class Affiche < ActiveRecord::Base
   has_one :affiche_schedule, :dependent => :destroy
 
   extend Enumerize
-  enumerize :kind, in: [:movie, :concert, :party, :spectacle, :exhibition, :sportsevent, :masterclass, :competition, :other], predicates: true
+  #serialize :kind, Array
+  enumerize :kind, in: [:movie, :concert, :party, :spectacle, :exhibition, :sportsevent, :masterclass, :competition, :other], predicates: true #, multiple: true
 
   validates_presence_of :title, :description, :poster_url, :if => :published?
 
@@ -65,6 +64,7 @@ class Affiche < ActiveRecord::Base
   scope :actual,                -> { joins(:showings).where('showings.starts_at >= ? OR (showings.ends_at is not null AND showings.ends_at > ?)', DateTime.now.beginning_of_day, Time.zone.now) }
   scope :archive,               -> { joins(:showings).where('showings.starts_at < ? OR (showings.ends_at is not null AND showings.ends_at < ?)', DateTime.now.beginning_of_day, Time.zone.now) }
 
+  extend FriendlyId
   friendly_id :title, use: :slugged
 
   normalize_attribute :image_url
