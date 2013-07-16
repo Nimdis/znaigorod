@@ -22,7 +22,7 @@ class Vote < ActiveRecord::Base
     end
 
     def update_voteable_rating
-      voteable.update_rating if Affiche.ordered_descendants.include?(voteable.class)
+      voteable.update_rating if Affiche.kind.values.include?(voteable.kind)
     end
 end
 

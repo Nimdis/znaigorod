@@ -24,7 +24,7 @@ class Visit < ActiveRecord::Base
     end
 
     def update_visitable_rating
-      visitable.update_rating if Affiche.ordered_descendants.include?(visitable.class)
+      visitable.update_rating if Affiche.kind.values.include?(visitable.kind)
     end
 end
 
