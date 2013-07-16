@@ -74,7 +74,7 @@ module Mobile
       get ':kind/:period/:sorting' do
         affishes = affishes(params[:kind], params[:period], params[:sorting], params[:page] || 1)
         {
-          lastUpdate: api_version, # TODO get max updated_at for collection
+          lastUpdate: affishes.collection.map { |affisha| affisha_updated_at(affisha.affiche) }.max,
           urlModifier: affishes.paginated_collection.next_page ? "?page=#{affishes.paginated_collection.next_page}" : '',
           affishes: affishes.collection.map { |affisha| {:url => "#{base_path}/#{affisha.slug}"} }
         }
