@@ -8,7 +8,7 @@ module Mobile
     helpers do
 
       def site_url
-        "http://znaigorod.ru"
+        'http://znaigorod.ru'
       end
 
       def base_path
@@ -76,7 +76,18 @@ module Mobile
         {
           lastUpdate: affishes.collection.map { |affisha| affisha_updated_at(affisha.affiche) }.max,
           urlModifier: affishes.paginated_collection.next_page ? "?page=#{affishes.paginated_collection.next_page}" : '',
-          affishes: affishes.collection.map { |affisha| {:url => "#{base_path}/#{affisha.slug}"} }
+          affishes: affishes.collection.map do |affisha|
+            {
+              :url => "#{base_path}/#{affisha.slug}",
+              :name => affisha.title,
+              :when => affisha.human_when,
+              :price => affisha.human_price,
+              :place => affisha.places.map(&:title).join("; "),
+              :image => affisha.poster_url,
+              :expires => affisha.distribution_ends_on? ? affisha.distribution_ends_on : affisha.showings.map(&:starts_at).max,
+              lastUpdate: affisha_updated_at(affisha.affiche)
+            }
+          end
         }
       end
 
