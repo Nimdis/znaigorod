@@ -29,7 +29,7 @@ module Mobile
       end
 
       def affishes(kind, period, sorting, page)
-        ShowingsPresenter.new(:categories => (kind == 'all' ?  [] : [kind]), :period => period, :order_by => sorting, :page => page )
+        ShowingsPresenter.new(:categories => (kind == 'all' ?  [] : [kind.singularize]), :period => period, :order_by => sorting, :page => page )
       end
 
       def affisha_updated_at(affisha)
