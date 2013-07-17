@@ -18,7 +18,7 @@ ru:
       feedback:                           Обратная связь
       vote:                               Голос
 
-      affiche:                            Вся афиша
+      afisha:                            Вся афиша
       concert:                            Концерты
       exhibition:                         Выставки
       master_class:                       Мастер-классы
@@ -130,7 +130,7 @@ ru:
         stale_at: Продажа заканчивается
         title: Название
 
-      affiche:
+      afisha:
         <<: *common_attributes
         age_max: Максимальный возраст
         age_min: Минимальный возраст
@@ -147,7 +147,7 @@ ru:
         vk_aid: Код альбома события ВКонтакте
         yandex_fotki_url: URL альбома из Фотки.Яндекс
 
-      affiche_schedule:
+      afisha_schedule:
         ends_at: Время окончания
         ends_on: Дата окончания
         hall: Зал
@@ -422,7 +422,7 @@ ru:
         details: Назначение платежа
 
     state_machines:
-      affiche:
+      afisha:
         state:
           states:
             draft:      Черновик

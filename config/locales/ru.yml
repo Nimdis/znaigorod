@@ -54,7 +54,7 @@
       other: "%{count} стола"
 
   search:
-    affiches: В мероприятиях
+    afisha: В мероприятиях
     organizations: В заведениях
 
   suborganizations:

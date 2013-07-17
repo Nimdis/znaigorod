@@ -1,9 +1,9 @@
 <div class='main_menu_wrapper'>
   <ul class='main_menu'>
     <li class='has_submenu'>
-      <a href='/affiches'>Афиша</a>
+      <a href='/afisha'>Афиша</a>
       <ul class='submenu'>
-        <li><a href='/affiches'>Все мероприятия</a></li>
+        <li><a href='/afisha'>Все мероприятия</a></li>
         <% Afisha.kind.values.each do |kind| %>
           <li>
             <%= link_to kind.text, send("#{kind.pluralize}_path") %>

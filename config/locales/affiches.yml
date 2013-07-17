@@ -1,5 +1,5 @@
 ru:
-  affiche:
+  afisha:
     empty:
       movies: кино
       concerts: концертов
@@ -35,14 +35,14 @@ ru:
       many: "нравится %{count} пользователям"
       other: "нравится %{count} пользователям"
 
-  affiche_periods:
+  afisha_periods:
     today: Сегодня
     weekly: На этой неделе
     week: На этой неделе
     weekend: На этих выходных
     daily: Выбрать дату
     all:
-      affiches: Вся афиша мероприятий
+      afisha: Вся афиша мероприятий
       movies: Всё кино
       concerts: Все концерты
       parties: Все вечеринки
