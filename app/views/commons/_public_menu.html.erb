@@ -4,7 +4,7 @@
       <a href='/affiches'>Афиша</a>
       <ul class='submenu'>
         <li><a href='/affiches'>Все мероприятия</a></li>
-        <% Affiche.kind.values.each do |kind| %>
+        <% Afisha.kind.values.each do |kind| %>
           <li>
             <%= link_to kind.text, send("#{kind.pluralize}_path") %>
           </li>

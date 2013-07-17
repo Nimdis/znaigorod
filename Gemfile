@@ -27,7 +27,7 @@ group :default do
   gem 'devise-russian'
   gem 'draper'
   gem 'el_vfs_client'
-  gem 'enumerize'
+  gem 'enumerize', :git => 'git://github.com/brainspec/enumerize', :branch => 'master' # NOTE https://github.com/brainspec/enumerize/pull/87
   gem 'esp-ckeditor'
   gem 'fastimage'
   gem 'friendly_id'

@@ -1,6 +1,6 @@
 <div class="main_page_block_wrapper today_in_city_header">
   <div class="main_page_block">
-    <%= link_to "Вся афиша Томска", affiches_path, :class => "all_affiches" %>
+    <%= link_to "Вся афиша Томска", afisha_index_path, :class => "all_affiches" %>
     <h1><span class="strong">Сегодня</span> в городе</h1>
   </div>
 </div>
@@ -8,9 +8,9 @@
 <div class="main_page_block_wrapper today_in_city_menu">
   <div class="main_page_block">
     <ul>
-      <% @presenter.today_affiche_links.each do |link| %>
+      <% @presenter.today_afisha_links.each do |link| %>
         <%= content_tag :li, link[:current] ? { class: 'current' } : nil do %>
-          <%= link_to affiches_path(link[:query]) do %>
+          <%= link_to afisha_index_path(link[:query]) do %>
             <%= link[:title] %>
             <span><%= "(#{link[:count]})" %></span>
           <% end %>
@@ -57,9 +57,9 @@
 <div class="main_page_block_wrapper more_in_city">
   <div class="main_page_block">
     <ul>
-      <% @presenter.category_affiche_links.each do |link| %>
+      <% @presenter.category_afisha_links.each do |link| %>
         <li>
-          <%= link_to link[:title], affiches_path(link[:query]) %>
+          <%= link_to link[:title], afisha_index_path(link[:query]) %>
         </li>
       <% end %>
     </ul>

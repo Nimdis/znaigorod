@@ -15,7 +15,7 @@ end
 # Table name: tickets
 #
 #  id                 :integer          not null, primary key
-#  affiche_id         :integer
+#  afisha_id          :integer
 #  number             :integer
 #  original_price     :float
 #  price              :float

@@ -8,8 +8,8 @@ class Sauna < ActiveRecord::Base
   belongs_to :organization
 
   delegate :address, :phone, :schedules, :halls,
-           :site?, :site, :email?, :email, :affiches,
-           :latitude, :longitude, :nearest_affiches, :to => :organization
+           :site?, :site, :email?, :email, :afisha,
+           :latitude, :longitude, :nearest_afisha, :to => :organization
 
   delegate :title, :description, :description?, to: :organization, prefix: true
 

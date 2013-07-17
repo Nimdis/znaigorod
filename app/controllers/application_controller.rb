@@ -2,7 +2,6 @@
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  include UrlHelper
   helper_method :banners, :hot_offers, :page, :per_page
 
   layout :resolve_layout

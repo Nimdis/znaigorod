@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
   devise :trackable, :omniauthable, :rememberable,
     omniauth_providers: [:vkontakte, :google_oauth2, :yandex, :facebook, :twitter, :odnoklassniki, :mailru]
 
-  has_many :affiches, :uniq => true
-  has_many :showings, :through => :affiches
+  has_many :afisha, :uniq => true
+  has_many :showings, :through => :afisha
   has_many :activities,     dependent:  :destroy
   has_many :comments
   has_many :organizations
@@ -101,14 +101,6 @@ class User < ActiveRecord::Base
     is_sales_manager? && organization.manager == self
   end
 
-  # TODO: depricated
-  def roles_from_mask
-    roles = %w[admin affiches_editor organizations_editor posts_editor sales_manager]
-
-    roles.reject do |r|
-      ((roles_mask || 0) & 2**roles.index(r)).zero?
-    end
-  end
 end
 
 # == Schema Information

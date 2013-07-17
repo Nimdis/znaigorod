@@ -1,11 +1,11 @@
 # encoding: utf-8
 
 class AfficheSchedule < ActiveRecord::Base
-  attr_accessible :affiche, :ends_at, :ends_on, :hall, :holidays, :place,
+  attr_accessible :afisha, :ends_at, :ends_on, :hall, :holidays, :place,
                   :price_max, :price_min, :starts_at, :starts_on,
                   :organization_id, :longitude, :latitude
 
-  belongs_to :affiche
+  belongs_to :afisha
 
   validates_presence_of :ends_at, :ends_on, :place, :starts_at, :starts_on
 
@@ -21,22 +21,22 @@ class AfficheSchedule < ActiveRecord::Base
   normalize_attribute :holidays, :with => [:as_array_of_integer]
 
   def get_latitude
-    affiche.try(:showings).try(:first).try(:latitude)
+    afisha.try(:showings).try(:first).try(:latitude)
   end
 
   def get_longitude
-    affiche.try(:showings).try(:first).try(:longitude)
+    afisha.try(:showings).try(:first).try(:longitude)
   end
 
   def get_organization_id
-    affiche.try(:showings).try(:first).try(:organization_id)
+    afisha.try(:showings).try(:first).try(:organization_id)
   end
 
   private
     def create_showings
       (starts_on..ends_on).each do |date|
         wday = date.wday == 0 ? 7 : date.wday
-        affiche.create_showing attributes_for_showing_on(date) unless holidays.include? wday
+        afisha.create_showing attributes_for_showing_on(date) unless holidays.include? wday
       end
     end
 
@@ -45,7 +45,7 @@ class AfficheSchedule < ActiveRecord::Base
     end
 
     def destroy_showings
-      affiche.destroy_showings
+      afisha.destroy_showings
     end
 
     def attributes_for_showing_on(date)
@@ -64,7 +64,7 @@ end
 # Table name: affiche_schedules
 #
 #  id              :integer          not null, primary key
-#  affiche_id      :integer
+#  afisha_id       :integer
 #  starts_on       :date
 #  ends_on         :date
 #  starts_at       :time

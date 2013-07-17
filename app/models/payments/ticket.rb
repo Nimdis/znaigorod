@@ -5,19 +5,19 @@ class Ticket < ActiveRecord::Base
 
   attr_accessible :number, :original_price, :price, :description, :stale_at, :organization_price
 
-  belongs_to :affiche
+  belongs_to :afisha
 
   validates_presence_of :number, :original_price, :price, :description, :stale_at
 
   def organization
-    affiche(:include => { :showings => :organizatiob }).showings.first.organization
+    afisha(:include => { :showings => :organizatiob }).showings.first.organization
   end
 
-  delegate :title, :to => :affiche, :prefix => true
+  delegate :title, :to => :afisha, :prefix => true
   delegate :title, :to => :organization, :prefix => true, :allow_nil => true
 
   searchable do
-    text :affiche_title
+    text :afisha_title
     text :organization_title
   end
 
@@ -31,7 +31,7 @@ end
 # Table name: tickets
 #
 #  id                 :integer          not null, primary key
-#  affiche_id         :integer
+#  afisha_id          :integer
 #  number             :integer
 #  original_price     :float
 #  price              :float

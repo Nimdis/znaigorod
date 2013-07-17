@@ -17,7 +17,7 @@ class Photogallery
   end
 
   def reports_for_main_page
-    PhotoreportDecorator.decorate total_groups.groups[0..2].map(&:value).map { |id| Affiche.find(id) }
+    PhotoreportDecorator.decorate total_groups.groups[0..2].map(&:value).map { |id| Afisha.find(id) }
   end
 
   def period_links
@@ -58,7 +58,7 @@ class Photogallery
   end
 
   def collection
-    PhotoreportDecorator.decorate paginated_collection.map(&:value).map { |id| Affiche.find(id) }
+    PhotoreportDecorator.decorate paginated_collection.map(&:value).map { |id| Afisha.find(id) }
   end
 
   def paginated_collection

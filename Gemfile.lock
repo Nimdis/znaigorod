@@ -8,6 +8,14 @@ GIT
       responders (~> 0.6.0)
 
 GIT
+  remote: git://github.com/brainspec/enumerize
+  revision: 3913c0eb09f67f7acd5976a4c768d2ae2012d754
+  branch: master
+  specs:
+    enumerize (0.6.1)
+      activesupport (>= 3.2)
+
+GIT
   remote: git://github.com/sgruhier/capistrano-db-tasks
   revision: 229c2a63ebb43a61ed2aa1f042d4d447ee186037
   specs:
@@ -147,8 +155,6 @@ GEM
       configliere
       curb
       rails
-    enumerize (0.6.1)
-      activesupport (>= 3.2)
     erubis (2.7.0)
     esp-ckeditor (0.1.3)
       formtastic
@@ -231,7 +237,7 @@ GEM
     mime-types (1.22)
     money (5.1.1)
       i18n (~> 0.6.0)
-    multi_json (1.7.2)
+    multi_json (1.7.7)
     multi_xml (0.5.1)
     multipart-post (1.1.5)
     nested_form (0.3.1)
@@ -474,7 +480,7 @@ DEPENDENCIES
   devise-russian
   draper
   el_vfs_client
-  enumerize
+  enumerize!
   esp-ckeditor
   fabrication
   fastimage

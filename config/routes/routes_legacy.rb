@@ -1,17 +1,23 @@
 # encoding: utf-8
 
 Znaigorod::Application.routes.draw do
-  Affiche.kind.values.map(&:pluralize).each do |kind|
-    get kind => 'affiches#index', :as => kind, :defaults => { :categories => [kind.singularize], :hide_categories => true }
+
+  get '/affiches', :to => redirect('/afisha')
+
+  Afisha.kind.values.map(&:pluralize).each do |kind|
+    get kind => 'afisha#index', :as => kind, :defaults => { :categories => [kind.singularize], :hide_categories => true }
     match "/#{kind}/all" => redirect("/#{kind}")
   end
 
-  Affiche.descendants.map(&:name).map(&:downcase).each do |kind|
+  Afisha.kind.values.each do |kind|
+    get "#{kind}/:id", :to => redirect { |params, req|
+      "/afisha/#{params[:id]}"
+    }
     get "#{kind}/:id/photogallery", :to => redirect { |params, req|
-      "/#{kind}/#{params[:id]}#photogallery"
+      "/afisha/#{params[:id]}#photogallery"
     }
     get "#{kind}/:id/trailer", :to => redirect { |params, req|
-      "/#{kind}/#{params[:id]}#trailer"
+      "/afisha/#{params[:id]}#trailer"
     }
   end
 
@@ -32,7 +38,7 @@ Znaigorod::Application.routes.draw do
                else
                  params[:period]
                end
-      url = "/affiches?order_by=popularity&view=posters"
+      url = "/afisha?order_by=popularity&view=posters"
       url += "&period=#{period}"
       parameters['categories'].each do |cat|
         url += "&categories[]=#{cat.singularize}"
@@ -69,24 +75,21 @@ Znaigorod::Application.routes.draw do
         end
       end
       URI.encode(url)
-    }
+  }
 
-    get 'organizations/:id/affiche/all' => redirect { |params, req|
-      o = Organization.find(params[:id])
-      "/organizations/#{o.slug}"
-    }
+  get 'organizations/:id/affiche/all' => redirect { |params, req|
+    o = Organization.find(params[:id])
+    "/organizations/#{o.slug}"
+  }
 
-    get 'organizations/:id/tour' => redirect { |params, req|
-      o = Organization.find(params[:id])
-      "/organizations/#{o.slug}"
-    }
+  get 'organizations/:id/tour' => redirect { |params, req|
+    o = Organization.find(params[:id])
+    "/organizations/#{o.slug}"
+  }
 
-    get 'organizations/:id/photogallery' => redirect { |params, req|
-      o = Organization.find(params[:id])
-      "/organizations/#{o.slug}"
-    }
+  get 'organizations/:id/photogallery' => redirect { |params, req|
+    o = Organization.find(params[:id])
+    "/organizations/#{o.slug}"
+  }
 
-    #Organization.where('subdomain is not null').each do |organization|
-      #get "organizations/#{organization.slug}" => redirect("http://#{organization.subdomain}.znaigorod.ru")
-    #end
 end

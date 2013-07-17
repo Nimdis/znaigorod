@@ -64,26 +64,26 @@ class ShowingsPresenter
   end
 
   def url
-    return 'affiches' unless categories_filter.hidden?
+    return 'afisha' unless categories_filter.hidden?
 
-    categories_filter.selected.first.try(:pluralize) || 'affiches'
+    categories_filter.selected.first.try(:pluralize) || 'afisha'
   end
 
   def collection
-    searcher.group(:affiche_id_str).groups.map do |group|
-      affiche = Affiche.find(group.value)
+    searcher.group(:afisha_id_str).groups.map do |group|
+      afisha = Afisha.find(group.value)
       showings = group.hits.map(&:result)
 
-      AfficheDecorator.new(affiche, ShowingDecorator.decorate(showings))
+      AfishaDecorator.new(afisha, ShowingDecorator.decorate(showings))
     end
   end
 
   def paginated_collection
-    searcher.group(:affiche_id_str).groups
+    searcher.group(:afisha_id_str).groups
   end
 
   def total_count
-    searcher.group(:affiche_id_str).total
+    searcher.group(:afisha_id_str).total
   end
 
   def view_list?
@@ -91,11 +91,11 @@ class ShowingsPresenter
   end
 
   def partial
-    "affiches/affiches_#{view}"
+    "afishas/afisha_#{view}"
   end
 
-  def today_affiche_links
-    @today_affiche_links ||= Affiche.kind.values.map { |kind|
+  def today_afisha_links
+    @today_afisha_links ||= Afisha.kind.values.map { |kind|
       {
         title: "#{kind.text}",
         query: { categories: [kind], period: 'today' },
@@ -109,17 +109,17 @@ class ShowingsPresenter
     categories.first || 'movie'
   end
 
-  def category_affiche_links
-    @category_affiche_links ||= [].tap { |array|
+  def category_afisha_links
+    @category_afisha_links ||= [].tap { |array|
       (period_filter.available_period_values - ['all']).each { |period|
         array << {
-          title: "#{I18n.t("affiche_periods.#{period}")} (#{Counter.new(category: kind).send(period)})",
+          title: "#{I18n.t("afisha_periods.#{period}")} (#{Counter.new(category: kind).send(period)})",
           query: { categories: [kind], period: period }
         }
       }
 
       array << {
-        title: "#{I18n.t("affiche_periods.all.#{kind.pluralize}")} (#{Counter.new(category: kind).all})",
+        title: "#{I18n.t("afisha_periods.all.#{kind.pluralize}")} (#{Counter.new(category: kind).all})",
         query: { categories: [kind] }
       }
     }
@@ -152,7 +152,7 @@ class ShowingsPresenter
     @searcher_params ||= {}.tap do |params|
       params[:age_max]          = age_filter.maximum         if age_filter.maximum.present?
       params[:age_min]          = age_filter.minimum         if age_filter.minimum.present?
-      params[:affiche_state]    = 'published'
+      params[:afisha_state]    = 'published'
       params[:categories]       = categories_filter.selected if categories_filter.selected.any?
       params[:organization_ids] = organizations_filter.ids   if organizations_filter.ids.any?
       params[:price_max]        = price_filter.maximum       if price_filter.maximum.present?
@@ -168,7 +168,7 @@ class ShowingsPresenter
 
   def query
     searcher_params.dup.tap { |hash|
-      hash.delete(:affiche_state)
+      hash.delete(:afisha_state)
       hash.delete(:location)
       hash.delete(:starts_on)
 

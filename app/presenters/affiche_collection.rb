@@ -33,8 +33,8 @@ class AfficheCollection
   end
 
   def view_partial
-    return 'affiches/affiches_list' if presentation_mode == 'list'
-    return 'affiches/affiches_posters'
+    return 'afishas/afisha_list' if presentation_mode == 'list'
+    return 'afishas/afisha_posters'
   end
 
   def per_page

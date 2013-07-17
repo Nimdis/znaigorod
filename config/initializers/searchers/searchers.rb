@@ -1,5 +1,5 @@
-HasSearcher.create_searcher :similar_affiches do
-  models :affiche
+HasSearcher.create_searcher :similar_afisha do
+  models :afisha
 
   scope do
     with(:last_showing_time).greater_than HasSearcher.cacheable_now
@@ -38,7 +38,7 @@ HasSearcher.create_searcher :photoreport do
 
     order_by :id, :desc
 
-    with(:attachable_type, 'Affiche')
+    with(:attachable_type, 'Afisha')
     with(:attachable_state, 'published')
   end
 
@@ -107,13 +107,13 @@ HasSearcher.create_searcher :manage_organization do
 end
 
 HasSearcher.create_searcher :global do
-  models :organization, :affiche
+  models :organization, :afisha
   keywords :q do
     highlight :title_translit
     highlight :description_ru
     highlight :address_ru
     HitDecorator::ADDITIONAL_FIELDS.each do |field|
-      if (Organization.instance_methods + Affiche.instance_methods).include? :"#{field}_ru"
+      if (Organization.instance_methods + Afisha.instance_methods).include? :"#{field}_ru"
         highlight "#{field}_ru"
       else
         highlight field
@@ -128,7 +128,7 @@ HasSearcher.create_searcher :global do
     boost(
       function {
         sum(
-          div(:total_rating, Affiche.maximum(:total_rating)),
+          div(:total_rating, Afisha.maximum(:total_rating)),
           div(:total_rating, Organization.maximum(:total_rating))
         )
       }

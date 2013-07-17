@@ -71,7 +71,7 @@ class Organization < ActiveRecord::Base
 
   ### Payments ===>
 
-  has_many :affiches,       :through => :showings, :uniq => true
+  has_many :afisha,       :through => :showings, :uniq => true
   has_many :halls,          :dependent => :destroy
   has_many :organizations
   has_many :schedules,      :dependent => :destroy
@@ -193,9 +193,9 @@ class Organization < ActiveRecord::Base
     super(:only => :id, :methods => [:term, :latitude, :longitude])
   end
 
-  def nearest_affiches
-    Affiche.where :id => Showing.unscoped.where('starts_at > :now AND organization_id = :organization_id',
-                  { :now => DateTime.now.utc, :organization_id => id }).group(:affiche_id).pluck(:affiche_id)
+  def nearest_afisha
+    Afisha.where :id => Showing.unscoped.where('starts_at > :now AND organization_id = :organization_id',
+                  { :now => DateTime.now.utc, :organization_id => id }).group(:afisha_id).pluck(:afisha_id)
   end
 
   def cuisine

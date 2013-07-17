@@ -33,7 +33,7 @@ end
 # Table name: affiche_schedules
 #
 #  id              :integer          not null, primary key
-#  affiche_id      :integer
+#  afisha_id       :integer
 #  starts_on       :date
 #  ends_on         :date
 #  starts_at       :time

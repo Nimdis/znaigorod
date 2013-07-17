@@ -1,15 +1,15 @@
 # encoding: utf-8
 
-class AfficheDecorator < ApplicationDecorator
+class AfishaDecorator < ApplicationDecorator
   include AutoHtmlFor
-  decorates :affiche
+  decorates :afisha
 
-  delegate :distribution_starts_on, :distribution_ends_on, :distribution_starts_on?, :distribution_ends_on?, :kind, :to => :affiche
+  delegate :distribution_starts_on, :distribution_ends_on, :distribution_starts_on?, :distribution_ends_on?, :kind, :to => :afisha
   attr_accessor :showings
 
-  def initialize(affiche, showings = nil)
+  def initialize(afisha, showings = nil)
     super
-    @showings = showings ? ShowingDecorator.decorate(showings) : ShowingDecorator.decorate(affiche.showings.actual)
+    @showings = showings ? ShowingDecorator.decorate(showings) : ShowingDecorator.decorate(afisha.showings.actual)
   end
 
   def main_page_link
@@ -21,7 +21,7 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def has_ribbon
-    h.content_tag(:div, h.content_tag(:div, "Премьера недели", class: :ribbon), class: :ribbon_wrapper) if affiche.premiere?
+    h.content_tag(:div, h.content_tag(:div, "Премьера недели", class: :ribbon), class: :ribbon_wrapper) if afisha.premiere?
   end
 
   def geo_present?
@@ -33,74 +33,54 @@ class AfficheDecorator < ApplicationDecorator
     vimeo(:width => 740, :height => 450)
   end
 
-  def kind_affiche_path(options = {})
-    h.send "#{kind}_path", affiche, options
+  def kind_afisha_path(options = {})
+    h.send "afisha_path", afisha, options
   end
 
-  def kind_affiche_url(options = {})
-    h.send "#{kind}_url", affiche, options
+  def kind_afisha_url(options = {})
+    h.send "afisha_url", afisha, options
   end
 
-  def kind_affiche_photogallery_path(options = {})
-    h.send "#{kind}_path", affiche, options.merge({:anchor => 'photogallery'})
+  def kind_affisha_photogallery_path(options = {})
+    h.send "afisha_path", afisha, options.merge({:anchor => 'photogallery'})
   end
 
-  def kind_affiche_trailer_path(options = {})
-    h.send "#{kind}_path", affiche, options.merge({:anchor => 'trailer'})
+  def kind_afisha_trailer_path(options = {})
+    h.send "afisha_path", afisha, options.merge({:anchor => 'trailer'})
   end
 
-  def all_affiches_link
-    h.link_to "Все #{human_kind.mb_chars.downcase} (#{counter.all})", h.affiches_path(categories: [kind])
+  def all_afisha_link
+    h.link_to "Все #{human_kind.mb_chars.downcase} (#{counter.all})", h.affisha_index_path(categories: [kind])
   end
 
   def breadcrumbs
     links = []
     links << h.content_tag(:li, h.link_to("Знай\u00ADГород", h.root_path), :class => "crumb")
     links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
-    links << h.content_tag(:li, h.link_to("Вся афиша Томска", h.affiches_path), :class => "crumb")
+    links << h.content_tag(:li, h.link_to("Вся афиша Томска", h.afisha_index_path), :class => "crumb")
     links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
-    links << h.content_tag(:li, h.link_to("Все #{human_kind.mb_chars.downcase} в Томске", h.affiches_path('categories[]' => kind)), :class => "crumb")
+    links << h.content_tag(:li, h.link_to("Все #{human_kind.mb_chars.downcase} в Томске", h.afisha_index_path('categories[]' => kind)), :class => "crumb")
     links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
-    links << h.content_tag(:li, h.link_to(title, kind_affiche_path), :class => "crumb")
+    links << h.content_tag(:li, h.link_to(title, afisha_path), :class => "crumb")
     %w(photogallery trailer).each do |method|
       if h.controller.action_name == method
         links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
-        links << h.content_tag(:li, h.link_to(navigation_title(method), self.send("kind_affiche_#{method}_path")), :class => "crumb")
+        links << h.content_tag(:li, h.link_to(navigation_title(method), self.send("afisha_#{method}_path")), :class => "crumb")
       end
     end
     h.content_tag :ul, links.join("\n").html_safe, :class => "breadcrumbs"
   end
 
-  def link
-    h.link_to affiche.title.text_gilensize, kind_affiche_path
-  end
-
-  def title_link
-    link
-  end
-
-  def show_url
-    kind_affiche_path
-  end
-
-  def more_link
-    h.link_to "Подробнее...", kind_affiche_path, :title => affiche.title
-  end
-
   def schedule
-    AfficheScheduleDecorator.decorate affiche.affiche_schedule
-  end
-
-  def has_show?
-    true
+    AfficheScheduleDecorator.decorate afisha.affiche_schedule
   end
 
   def has_photogallery?
-    affiche.has_images?
+    afisha.has_images?
   end
 
   def has_trailer?
-    affiche.trailer_code?
+    afisha.trailer_code?
   end
 
   def navigation_title(method)
@@ -108,9 +88,9 @@ class AfficheDecorator < ApplicationDecorator
     when 'show'
       "Описание"
     when 'photogallery'
-      affiche.is_a?(Movie) ? "Кадры" : "Фотографии"
+      afisha.movie? ? "Кадры" : "Фотографии"
     when 'trailer'
-      affiche.is_a?(Movie) ? "Трейлер" : "Видео"
+      afisha.movie? ? "Трейлер" : "Видео"
     end
   end
 
@@ -119,7 +99,7 @@ class AfficheDecorator < ApplicationDecorator
     %w(show photogallery trailer).each do |method|
       links << Link.new(
                         title: navigation_title(method),
-                        url: method == 'show' ? self.send("kind_affiche_path") : self.send("kind_affiche_#{method}_path"),
+                        url: method == 'show' ? self.send("afisha_path") : self.send("afisha_#{method}_path"),
                         current: h.controller.action_name == method,
                         disabled: !self.send("has_#{method}?"),
                         kind: method
@@ -132,7 +112,7 @@ class AfficheDecorator < ApplicationDecorator
     links
   end
 
-  def affiche_place(length = 45, separator = ' ')
+  def afisha_place(length = 45, separator = ' ')
     max_lenght = length
     place_output = ""
     places.each_with_index do |place, index|
@@ -153,11 +133,11 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def main_page_place
-    affiche_place
+    afisha_place
   end
 
   def posters_place
-    affiche_place(22, nil)
+    afisha_place(22, nil)
   end
 
   def places
@@ -165,11 +145,11 @@ class AfficheDecorator < ApplicationDecorator
       if showings.any?
         showings.map { |showing| showing.organization ? showing.organization : showing.place }.uniq.each do |place|
           array << (place.is_a?(Organization) ? PlaceDecorator.new(:organization => place) : PlaceDecorator.new(:title => place,
-                                                                       :latitude => affiche.showings.where(:place => place).first.latitude,
-                                                                       :longitude => affiche.showings.where(:place => place).first.longitude))
+                                                                       :latitude => afisha.showings.where(:place => place).first.latitude,
+                                                                       :longitude => afisha.showings.where(:place => place).first.longitude))
         end
       else
-        last_showoing = affiche.showings.last
+        last_showoing = afisha.showings.last
         return [] unless last_showoing
         place = last_showoing.organization ? last_showoing.organization : last_showoing.place
         array << (place.is_a?(Organization) ? PlaceDecorator.new(:organization => place) : PlaceDecorator.new(:title => place,
@@ -193,16 +173,16 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def main_page_poster
-    poster_with_link affiche, 200, 268
+    poster_with_link afisha, 200, 268
   end
 
   def posters_list_poster
-    poster_with_link affiche, 170, 228
+    poster_with_link afisha, 170, 228
   end
 
   def resized_poster_url(width, height, crop)
-    return unless affiche.poster_url.present?
-    h.resized_image_url(affiche.poster_url, width, height, crop)
+    return unless afisha.poster_url.present?
+    h.resized_image_url(afisha.poster_url, width, height, crop)
   end
 
   def meta_description
@@ -210,7 +190,7 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def meta_keywords
-    [human_kind, affiche.tags, raw_places].flatten.map(&:mb_chars).map(&:downcase).join(', ')
+    [human_kind, afisha.tags, raw_places].flatten.map(&:mb_chars).map(&:downcase).join(', ')
   end
 
   def tags_for_vk
@@ -226,7 +206,7 @@ class AfficheDecorator < ApplicationDecorator
     res << "<meta property='og:description' content='#{desc.truncate(350, :separator => ' ').html_safe}'/>\n"
     res << "<meta property='og:site_name' content='#{I18n.t('meta.default.title')}' />\n"
     res << "<meta property='og:title' content='#{title.to_s.text_gilensize}' />\n"
-    res << "<meta property='og:url' content='#{kind_affiche_url}' />\n"
+    res << "<meta property='og:url' content='#{afisha_url}' />\n"
     res << "<meta property='og:image' content='#{image}' />\n"
     res << "<meta name='image' content='#{image}' />\n"
     res << "<link rel='image_src' href='#{image}' />\n"
@@ -238,61 +218,56 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def list_poster
-    poster_with_link affiche, 180, 242
+    poster_with_link afisha, 180, 242
   end
 
   def item_poster
-    h.link_to poster(affiche, 180, 242), affiche.poster_url, class: :poster
+    h.link_to poster(afisha, 180, 242), afisha.poster_url, class: :poster
   end
 
   def more_like_this_poster
-    poster_with_link affiche, 150, 202
+    poster_with_link afisha, 150, 202
   end
 
-  def affiche_distribution?
-    affiche.distribution_starts_on? || affiche.distribution_ends_on? || affiche.constant?
+  def afisha_distribution?
+    afisha.distribution_starts_on? || afisha.distribution_ends_on? || afisha.constant?
   end
 
-  def affiche_actual?
-    affiche.showings.actual.count > 0
+  def afisha_actual?
+    afisha.showings.actual.count > 0
   end
 
   def viewable_showings?
-    return false if (affiche.is_a?(Other) || affiche.is_a?(SportsEvent)) && affiche_distribution?
-    affiche_actual? && other_showings.any?
+    return false if (afisha.other? || afisha.sportsevent?) && afisha_distribution?
+    afisha_actual? && other_showings.any?
   end
 
   def distribution_movie?
-    affiche.is_a?(Movie) && affiche_distribution?
+    afisha.movie? && afisha_distribution?
   end
 
   def scheduled_showings?
-    affiche.affiche_schedule && affiche_distribution? && (affiche.is_a?(Exhibition) || affiche.is_a?(MasterClass))
+    afisha.affiche_schedule && afisha_distribution? && (afisha.exhibition? || afisha.masterclass?)
   end
 
   def human_when
-    nealest_showing = showings.any? ? showings.first : ShowingDecorator.new(affiche.showings.last)
+    nealest_showing = showings.any? ? showings.first : ShowingDecorator.new(afisha.showings.last)
     return "Время проведения неизвестно" unless nealest_showing.showing
-    if affiche_actual?
-      if affiche.constant?
-        case affiche.class.name
-        when 'Exhibition'
-          return "Постоянная экспозиция"
-        else
-          return "Постоянное мероприятие"
-        end
+    if afisha_actual?
+      if afisha.constant?
+        afisha.exhibition? ? 'Постоянная экспозиция' : 'Постоянное мероприятие'
       end
-      return human_distribution if affiche_distribution?
+      return human_distribution if afisha_distribution?
     else
-      case affiche.class.name
-      when 'Movie'
-        if affiche_distribution?
-          return human_distribution if affiche.distribution_starts_on >= Date.today
+      case afisha.kind
+      when 'movie'
+        if afisha_distribution?
+          return human_distribution if afisha.distribution_starts_on >= Date.today
           return "Было в прокате до #{nealest_showing.e_B(nealest_showing.starts_at)}"
         else
           return "Последний показ был #{nealest_showing.e_B(nealest_showing.starts_at)}"
         end
-      when 'Exhibition'
+      when 'exhibition'
         return "Выставка закончилась #{nealest_showing.e_B(nealest_showing.starts_at)}"
       end
     end
@@ -331,16 +306,16 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def other_showings
-    return [] unless affiche_actual?
+    return [] unless afisha_actual?
     first_showing = showings.first
     @other_showings ||= if first_showing && first_showing.actual?
-                          if affiche_distribution?
-                            ShowingDecorator.decorate affiche.showings.where("starts_at >= ?", showings.first.starts_at)
+                          if afisha_distribution?
+                            ShowingDecorator.decorate afisha.showings.where("starts_at >= ?", showings.first.starts_at)
                           else
-                            ShowingDecorator.decorate affiche.showings.where("starts_at > ?", showings.first.starts_at)
+                            ShowingDecorator.decorate afisha.showings.where("starts_at > ?", showings.first.starts_at)
                           end
                         else
-                          ShowingDecorator.decorate affiche.showings.where("starts_at > ?", DateTime.now.beginning_of_day)
+                          ShowingDecorator.decorate afisha.showings.where("starts_at > ?", DateTime.now.beginning_of_day)
                         end
   end
 
@@ -353,7 +328,7 @@ class AfficheDecorator < ApplicationDecorator
   end
 
   def html_many_other_showings
-    h.link_to("и еще #{other_showings_size}", kind_affiche_path(:anchor => "showings")) if other_showings_size > 0
+    h.link_to("и еще #{other_showings_size}", affisha_path(:anchor => "showings")) if other_showings_size > 0
   end
 
   def html_other_showings
@@ -376,40 +351,39 @@ class AfficheDecorator < ApplicationDecorator
     "Ближайшие сеансы #{other_showings.first.human_date.mb_chars.downcase}" if other_showings.any?
   end
 
-  def similar_affiches
-    searcher.more_like_this(affiche).limit(2).results.map { |a| AfficheDecorator.new a }
+  def similar_affisha
+    searcher.more_like_this(afisha).limit(2).results.map { |a| AfishaDecorator.new a }
   end
 
-  def similar_affiches_with_images
-    searcher.more_like_this(affiche).with_images.limit(2).results.map { |a| AfficheDecorator.new a }
+  def similar_afisha_with_images
+    searcher.more_like_this(afisha).with_images.limit(2).results.map { |a| AfishaDecorator.new a }
   end
 
   def trailer
-    return "" if trailer_code.blank?
-    trailer_code.html_safe
+    trailer_code.to_s.html_safe
   end
 
   private
 
   def truncated_link(length, anchor = nil, separator = ' ')
-    h.link_to affiche.title.text_gilensize.truncated(length, separator), kind_affiche_path(anchor: anchor), :title => affiche.title
+    h.link_to afisha.title.text_gilensize.truncated(length, separator), h.afisha_show_path(afisha, anchor: anchor), :title => afisha.title
   end
 
   def in_one_day?
     distribution_starts_on == distribution_ends_on
   end
 
-  def poster_with_link(affiche, width, height)
-    h.link_to poster(affiche, width, height), kind_affiche_path
+  def poster_with_link(afisha, width, height)
+    h.link_to poster(afisha, width, height), h.afisha_show_path(afisha)
   end
 
-  def poster(affiche, width, height)
-    return unless affiche.poster_url.present?
+  def poster(afisha, width, height)
+    return unless afisha.poster_url.present?
 
-    if affiche.poster_url =~ /region/
-      h.image_tag affiche.poster_url, :size => "#{width}x#{height}"
+    if afisha.poster_url =~ /region/
+      h.image_tag afisha.poster_url, :size => "#{width}x#{height}"
     else
-      image_tag(affiche.poster_url, width, height, affiche.title.to_s.text_gilensize)
+      image_tag(afisha.poster_url, width, height, afisha.title.to_s.text_gilensize)
     end
   end
 

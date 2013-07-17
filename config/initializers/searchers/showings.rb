@@ -1,7 +1,7 @@
 HasSearcher.create_searcher :showing do
   models :showing
 
-  property :affiche_category
+  property :afisha_category
   property :starts_on, :modificator => :less_than
   property :starts_at, :modificator => :greater_than
   property :starts_at_hour, :modificators => [:greater_than, :less_than]
@@ -34,7 +34,7 @@ HasSearcher.create_searcher :showing do
   end
 
   property :tags
-  property :affiche_category
+  property :afisha_category
 
   property :starts_on, :modificator => :greater_than do |search|
     starts_on_gt = search_object.starts_on_greater_than || Date.today
@@ -70,20 +70,20 @@ HasSearcher.create_searcher :showings do
 
   # groups
   scope :groups do
-    group(:affiche_id_str) { limit 1000 }
+    group(:afisha_id_str) { limit 1000 }
   end
 
   # order
-  scope(:order_by_rating) { order_by(:affiche_rating, :desc) }
-  scope(:order_by_creation)   { order_by(:affiche_created_at, :desc) }
+  scope(:order_by_rating) { order_by(:afisha_rating, :desc) }
+  scope(:order_by_creation)   { order_by(:afisha_created_at, :desc) }
   scope(:order_by_starts_at)  { order_by(:starts_at, :asc) }
 
   scope :order_by_nearness do |search|
     search.order_by_geodist(:location, search_object.location.lat, search_object.location.lon) if search_object.location
   end
 
-  property :affiche_id
-  property :affiche_state
+  property :afisha_id
+  property :afisha_state
 
   # categories tags organizations
   [:categories, :tags, :organization_ids].each do |field|

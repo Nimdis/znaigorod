@@ -23,7 +23,6 @@ module Znaigorod
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(
-                                #{config.root}/app/models/affiches
                                 #{config.root}/app/models/billiards
                                 #{config.root}/app/models/contests
                                 #{config.root}/app/models/crm

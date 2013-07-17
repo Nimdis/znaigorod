@@ -6,7 +6,7 @@ Znaigorod::Application.routes.draw do
     resources :search,    :only => :index
     resources :sessions,  :only => [:new, :create, :destroy]
 
-    Affiche.kind.values.each do |type|
+    Afisha.kind.values.each do |type|
       resources type.pluralize do
         get ':by_state' => "#{type.pluralize}#index", :on => :collection, :as => :by_state, :constraints => { :by_state => /draft|published|pending/ }
 
@@ -25,8 +25,8 @@ Znaigorod::Application.routes.draw do
 
     end
 
-    resources :affiches, only: [] do
-      put 'fire_event_state/:event' => 'affiches#fire_state_event', :on => :member, :as => :fire_state_event
+    resources :afisha, only: [] do
+      put 'fire_event_state/:event' => 'afisha#fire_state_event', :on => :member, :as => :fire_state_event
 
       resources :tickets
     end
@@ -38,8 +38,8 @@ Znaigorod::Application.routes.draw do
     resources :coupons
     resources :affiliate_coupons, :only => :index
 
-    resources :affiches do
-      get ':by_state' => 'affiches#index', :on => :collection, :as => :by_state
+    resources :afisha do
+      get ':by_state' => 'afisha#index', :on => :collection, :as => :by_state
 
       resources :gallery_files,  :except => [:index, :show]
       resources :gallery_images, :except => [:index, :show]

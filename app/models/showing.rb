@@ -1,21 +1,21 @@
 # encoding: utf-8
 
 class Showing < ActiveRecord::Base
-  attr_accessible :ends_at, :hall, :place, :price_max, :price_min, :starts_at, :organization_id, :latitude, :longitude, :affiche_id
+  attr_accessible :ends_at, :hall, :place, :price_max, :price_min, :starts_at, :organization_id, :latitude, :longitude, :afisha_id
 
-  belongs_to :affiche
+  belongs_to :afisha
   belongs_to :organization
 
   validates_presence_of :place, :starts_at
 
   delegate :created_at, :distribution_starts_on, :rating, :tags, :title, :age_min, :age_max, :state,
-    :to => :affiche,
+    :to => :afisha,
     :prefix => true
 
   delegate :address, :title, :to => :organization, :prefix => true, :allow_nil => true
 
-  after_create  :index_affiche
-  after_destroy :index_affiche
+  after_create  :index_afisha
+  after_destroy :index_afisha
 
   scope :actual, -> { where('showings.starts_at >= ? OR (showings.ends_at is not null AND showings.ends_at > ?)', DateTime.now.beginning_of_day, Time.zone.now) }
 
@@ -27,32 +27,32 @@ class Showing < ActiveRecord::Base
   searchable do
     date :starts_on
 
-    float :affiche_rating
+    float :afisha_rating
 
-    integer :affiche_id
+    integer :afisha_id
     integer :organization_id
     integer :price_max
     integer :price_min
-    float(:age_max) { affiche_age_max }
-    float(:age_min) { affiche_age_min }
+    float(:age_max) { afisha_age_max }
+    float(:age_min) { afisha_age_min }
     integer(:ends_at_hour) { ends_at.try(:hour) }
     integer(:organization_ids, :multiple => true) { [organization_id] if organization_id? }
     integer(:starts_at_hour) { starts_at.hour }
 
     latlon(:location) { Sunspot::Util::Coordinates.new(get_latitude, get_longitude) }
 
-    string :affiche_state
-    string(:affiche_category) { affiche.class.model_name.downcase }
-    string(:affiche_id_str) { affiche_id.to_s }
-    string(:categories, :multiple => true) { [affiche.class.model_name.downcase] }
-    string(:tags, :multiple => true) { affiche_tags.delete_if(&:blank?) }
+    string :afisha_state
+    string(:afisha_category) { afisha.kind }
+    string(:afisha_id_str) { afisha_id.to_s }
+    string(:categories, :multiple => true) { [afisha.kind].flatten }
+    string(:tags, :multiple => true) { afisha_tags.delete_if(&:blank?) }
 
-    text :affiche_title
+    text :afisha_title
     text :organization_title
     text :place
 
-    time :affiche_created_at, :trie => true
-    time :affiche_distribution_starts_on, :trie => true
+    time :afisha_created_at, :trie => true
+    time :afisha_distribution_starts_on, :trie => true
     time :ends_at
     time :starts_at, :trie => true
   end
@@ -87,8 +87,8 @@ class Showing < ActiveRecord::Base
   end
 
   private
-    def index_affiche
-      affiche.index
+    def index_afisha
+      afisha.index
     end
 end
 
@@ -97,7 +97,7 @@ end
 # Table name: showings
 #
 #  id              :integer          not null, primary key
-#  affiche_id      :integer
+#  afisha_id       :integer
 #  place           :string(255)
 #  starts_at       :datetime
 #  price_min       :integer

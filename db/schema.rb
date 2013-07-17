@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130715034009) do
+ActiveRecord::Schema.define(:version => 20130716083313) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20130715034009) do
   add_index "addresses", ["organization_id"], :name => "index_addresses_on_organization_id"
 
   create_table "affiche_schedules", :force => true do |t|
-    t.integer  "affiche_id"
+    t.integer  "afisha_id"
     t.date     "starts_on"
     t.date     "ends_on"
     t.time     "starts_at"
@@ -60,12 +60,12 @@ ActiveRecord::Schema.define(:version => 20130715034009) do
     t.string   "longitude"
   end
 
-  add_index "affiche_schedules", ["affiche_id"], :name => "index_affiche_schedules_on_affiche_id"
+  add_index "affiche_schedules", ["afisha_id"], :name => "index_affiche_schedules_on_affiche_id"
 
-  create_table "affiches", :force => true do |t|
+  create_table "afisha", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
     t.text     "description"
     t.string   "original_title"
     t.string   "poster_url"
@@ -92,11 +92,11 @@ ActiveRecord::Schema.define(:version => 20130715034009) do
     t.datetime "poster_image_updated_at"
     t.text     "poster_image_url"
     t.integer  "user_id"
-    t.text     "kind"
+    t.text     "kind",                      :default => "--- []\n"
   end
 
-  add_index "affiches", ["slug"], :name => "index_affiches_on_slug", :unique => true
-  add_index "affiches", ["user_id"], :name => "index_affiches_on_user_id"
+  add_index "afisha", ["slug"], :name => "index_affiches_on_slug", :unique => true
+  add_index "afisha", ["user_id"], :name => "index_affiches_on_user_id"
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -735,7 +735,7 @@ ActiveRecord::Schema.define(:version => 20130715034009) do
   end
 
   create_table "showings", :force => true do |t|
-    t.integer  "affiche_id"
+    t.integer  "afisha_id"
     t.string   "place"
     t.datetime "starts_at"
     t.integer  "price_min"
@@ -749,7 +749,7 @@ ActiveRecord::Schema.define(:version => 20130715034009) do
     t.string   "longitude"
   end
 
-  add_index "showings", ["affiche_id"], :name => "index_showings_on_affiche_id"
+  add_index "showings", ["afisha_id"], :name => "index_showings_on_affiche_id"
 
   create_table "sms_claims", :force => true do |t|
     t.string   "name"
@@ -790,7 +790,7 @@ ActiveRecord::Schema.define(:version => 20130715034009) do
   end
 
   create_table "tickets", :force => true do |t|
-    t.integer  "affiche_id"
+    t.integer  "afisha_id"
     t.integer  "number"
     t.float    "original_price"
     t.float    "price"
@@ -801,7 +801,7 @@ ActiveRecord::Schema.define(:version => 20130715034009) do
     t.float    "organization_price"
   end
 
-  add_index "tickets", ["affiche_id"], :name => "index_ticket_infos_on_affiche_id"
+  add_index "tickets", ["afisha_id"], :name => "index_ticket_infos_on_affiche_id"
 
   create_table "travels", :force => true do |t|
     t.text     "category"

@@ -9,7 +9,7 @@ class Meal < ActiveRecord::Base
   belongs_to :organization
 
   delegate :address, :phone, :schedules, :halls, :site?, :site,
-    :email?, :email, :affiches, :nearest_affiches,
+    :email?, :email, :afisha, :nearest_afisha,
     to: :organization
 
   delegate :title, :description, :description?, to: :organization, prefix: true

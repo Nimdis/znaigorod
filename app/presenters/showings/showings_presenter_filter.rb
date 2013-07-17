@@ -5,8 +5,8 @@ class CategoriesFilter
 
   def initialize(categories, hidden = false)
     @selected    = (categories || []).delete_if(&:blank?)
-    @available   = Affiche.kind.values
-    @human_names = Affiche.kind.values.map(&:text)
+    @available   = Afisha.kind.values
+    @human_names = Afisha.kind.values.map(&:text)
     @hidden = !!hidden
   end
 
@@ -73,8 +73,8 @@ class PriceFilter
 
   def available
     Hashie::Mash.new(
-      minimum: Affiche.with_showings.joins(:showings).minimum(:price_min),
-      maximum: Affiche.with_showings.joins(:showings).maximum(:price_max)
+      minimum: Afisha.with_showings.joins(:showings).minimum(:price_min),
+      maximum: Afisha.with_showings.joins(:showings).maximum(:price_max)
     )
   end
 
@@ -99,8 +99,6 @@ class AgeFilter
 
   def available
     Hashie::Mash.new(
-      #minimum: Affiche.with_showings.joins(:showings).minimum(:age_min),
-      #maximum: Affiche.with_showings.joins(:showings).maximum(:age_max)
       minimum: 0, maximum: 99
     )
   end

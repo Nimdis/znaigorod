@@ -1,7 +1,7 @@
 <% content_for :two_gis_map_scripts, javascript_include_tag('http://maps.api.2gis.ru/1.0') %>
 
 <% content_for :extra_meta do %>
-  <link rel="canonical" href="<%= send("#{@presenter.url}_url") %>" />
+  <link rel="canonical" href="<%#= send("#{@presenter.url}_url") %>" />
 <% end %>
 
 <div class='filters_wrapper'>

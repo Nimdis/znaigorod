@@ -11,35 +11,35 @@ class Ability
 
     case namespace
     when 'manage'
-      can :manage, Affiche if user.is_affiches_editor?
+      can :manage, Afisha if user.is_afisha_editor?
       can :manage, Post    if user.is_posts_editor?
 
       if user.is_organizations_editor?
         can :manage, [Organization] + Organization.available_suborganization_classes
       end
     when 'my'
-      can [:index, :archive, :new, :create, :available_tags, :preview_video], Affiche if user.persisted?
+      can [:index, :archive, :new, :create, :available_tags, :preview_video], Afisha if user.persisted?
 
-      can [:edit, :update, :destroy_image], Affiche do |affiche|
-        affiche.state != 'pending' && affiche.user == user
+      can [:edit, :update, :destroy_image], Afisha do |afisha|
+        afisha.state != 'pending' && afisha.user == user
       end
 
-      can [:destroy, :send_to_moderation], Affiche do |affiche|
-        affiche.draft? && affiche.user == user
+      can [:destroy, :send_to_moderation], Afisha do |afisha|
+        afisha.draft? && afisha.user == user
       end
 
-      can :show, Affiche do |affiche|
-        affiche.user == user
+      can :show, Afisha do |afisha|
+        afisha.user == user
       end
 
-      can :send_to_published, Affiche if user.is_affiches_trusted_editor?
+      can :send_to_published, Afisha if user.is_afisha_trusted_editor?
 
       can :manage, GalleryFile do |gallery_file|
         gallery_file.attachable.state != 'pending' && gallery_file.attachable.user == user
       end
 
-      can :social_gallery, Affiche do |affiche|
-        affiche.state != 'pending' && affiche.user == user
+      can :social_gallery, Afisha do |afisha|
+        afisha.state != 'pending' && afisha.user == user
       end
 
       can :manage, GalleryImage do |gallery_image|
@@ -51,7 +51,7 @@ class Ability
       end
 
       can :manage, Showing do |showing|
-        showing.affiche.state != 'pending' && showing.affiche.user == user
+        showing.afisha.state != 'pending' && showing.afisha.user == user
       end
     when 'crm'
       return false if user.new_record?

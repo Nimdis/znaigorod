@@ -3,7 +3,7 @@
 require 'vkontakte_api'
 require 'curb'
 
-class Affiche < ActiveRecord::Base
+class Afisha < ActiveRecord::Base
   include HasVirtualTour
   include AutoHtml
 
@@ -34,15 +34,15 @@ class Affiche < ActiveRecord::Base
   has_one :affiche_schedule, :dependent => :destroy
 
   extend Enumerize
-  #serialize :kind, Array
-  enumerize :kind, in: [:movie, :concert, :party, :spectacle, :exhibition, :sportsevent, :masterclass, :competition, :other], predicates: true #, multiple: true
+  serialize :kind, Array
+  enumerize :kind, in: [:movie, :concert, :party, :spectacle, :exhibition, :sportsevent, :masterclass, :competition, :other], multiple: true, predicates: true
 
   validates_presence_of :title, :description, :poster_url, :if => :published?
 
   accepts_nested_attributes_for :affiche_schedule, :allow_destroy => true, :reject_if => :affiche_schedule_attributes_blank?
   accepts_nested_attributes_for :showings, :allow_destroy => true
 
-  default_scope order('affiches.id DESC')
+  default_scope order('afisha.id DESC')
 
   scope :latest,           ->(count) { limit(count) }
   scope :with_images,      -> { where('image_url IS NOT NULL') }
@@ -81,24 +81,24 @@ class Affiche < ActiveRecord::Base
   end
 
   state_machine :initial => :draft do
-    after_transition any => :published do |affiche, transition|
-      affiche.send(:set_slug)
+    after_transition any => :published do |afisha, transition|
+      afisha.send(:set_slug)
     end
 
     event :send_to_moderation do
       transition :draft => :pending
     end
 
-    after_transition :draft => :pending do |affiche, transition|
-      MyMailer.delay.mail_new_pending_affiche(affiche)
+    after_transition :draft => :pending do |afisha, transition|
+      MyMailer.delay.mail_new_pending_affiche(afisha)
     end
 
     event :approve do
       transition [:draft, :pending] => :published
     end
 
-    after_transition [:draft, :pending] => :published do |affiche, transition|
-      MyMailer.delay.mail_new_published_affiche(affiche)
+    after_transition [:draft, :pending] => :published do |afisha, transition|
+      MyMailer.delay.mail_new_published_affiche(afisha)
     end
 
     event :send_to_author do
@@ -296,8 +296,6 @@ class Affiche < ActiveRecord::Base
     false
   end
 
-  # include AfficheQualityRating
-
   def self.trailer_auto_html(trailer_code)
     AutoHtml.auto_html(trailer_code) do
       youtube(:width => 580, :height => 350)
@@ -306,7 +304,7 @@ class Affiche < ActiveRecord::Base
     end
   end
 
-  # Affiche movie kind #
+  # Afisha movie kind #
   def premiere?
     distribution_starts_on && distribution_starts_on >= Date.today.beginning_of_week && distribution_starts_on <= Date.today.end_of_week
   end
@@ -321,7 +319,7 @@ class Affiche < ActiveRecord::Base
     self.published = true if published.nil?
   end
 
-  def affiche_schedule_attributes_blank?(attributes)
+  def afisha_schedule_attributes_blank?(attributes)
     %w[ends_at ends_on starts_at starts_on].each do |attribute|
       return false unless attributes[attribute].blank?
     end
@@ -433,7 +431,7 @@ end
 
 # == Schema Information
 #
-# Table name: affiches
+# Table name: afisha
 #
 #  id                        :integer          not null, primary key
 #  title                     :string(255)
@@ -443,7 +441,6 @@ end
 #  original_title            :string(255)
 #  poster_url                :string(255)
 #  trailer_code              :text
-#  type                      :string(255)
 #  tag                       :text
 #  vfs_path                  :string(255)
 #  image_url                 :string(255)
@@ -466,5 +463,6 @@ end
 #  poster_image_updated_at   :datetime
 #  poster_image_url          :text
 #  user_id                   :integer
+#  kind                      :text
 #
 

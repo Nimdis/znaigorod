@@ -1,10 +1,10 @@
 # TODO: нужно использовать searcher :showings, а этот выпилить
 
-HasSearcher.create_searcher :affiche do
+HasSearcher.create_searcher :afisha do
   models :showing
 
-  property :affiche_category do |search|
-    search.with(:affiche_category, search_object.affiche_category) if search_object.affiche_category.present?
+  property :afisha_category do |search|
+    search.with(:afisha_category, search_object.afisha_category) if search_object.afisha_category.present?
   end
 
   property :starts_on do |search|
@@ -22,7 +22,7 @@ HasSearcher.create_searcher :affiche do
   end
 
   property :tags
-  property :affiche_id
+  property :afisha_id
   property :organization_id
 
   scope :today do
@@ -64,26 +64,26 @@ HasSearcher.create_searcher :affiche do
     end
   end
 
-  scope :affiches do
-    group :affiche_id_str do
+  scope :afisha do
+    group :afisha_id_str do
       limit 1000
     end
   end
 
   scope :categories do
-    group :affiche_category
+    group :afisha_category
   end
 
   scope :order_by_starts_at do
     order_by(:starts_at, :asc)
   end
 
-  scope :order_by_affiche_created_at do
-    order_by(:affiche_created_at, :desc)
+  scope :order_by_afisha_created_at do
+    order_by(:afisha_created_at, :desc)
   end
 
-  scope :order_by_affiche_rating do
-    order_by(:affiche_rating, :desc)
+  scope :order_by_afisha_rating do
+    order_by(:afisha_rating, :desc)
   end
 
   scope :faceted do
@@ -91,8 +91,8 @@ HasSearcher.create_searcher :affiche do
   end
 end
 
-HasSearcher.create_searcher :similar_affiches do
-  models :affiche
+HasSearcher.create_searcher :similar_afisha do
+  models :afisha
 
   scope do
     with(:last_showing_time).greater_than HasSearcher.cacheable_now
@@ -131,7 +131,7 @@ HasSearcher.create_searcher :photoreport do
 
     order_by :id, :desc
 
-    with(:attachable_type, 'Affiche')
+    with(:attachable_type, 'Afisha')
   end
 
   scope :grouped do
@@ -160,13 +160,13 @@ HasSearcher.create_searcher :manage_organization do
 end
 
 HasSearcher.create_searcher :global do
-  models :organization, :affiche
+  models :organization, :afisha
   keywords :q do
     highlight :title_translit
     highlight :description_ru
     highlight :address_ru
     HitDecorator::ADDITIONAL_FIELDS.each do |field|
-      if (Organization.instance_methods + Affiche.instance_methods).include? :"#{field}_ru"
+      if (Organization.instance_methods + Afisha.instance_methods).include? :"#{field}_ru"
         highlight "#{field}_ru"
       else
         highlight field
@@ -181,7 +181,7 @@ HasSearcher.create_searcher :global do
     boost(
       function {
         sum(
-          div(:rating, Affiche.maximum(:total_rating)),
+          div(:rating, Afisha.maximum(:total_rating)),
           div(:rating, Organization.maximum(:total_rating))
         )
       }

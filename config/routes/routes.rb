@@ -15,17 +15,21 @@ Znaigorod::Application.routes.draw do
   get 'search'            => 'search#search',              :as => :search
   get 'webcams'           => 'webcams#index'
 
-  resources :affiches, :only => [:index, :show] do
+  resources :afisha, :only => [], :controller => 'afishas' do
+
     resources :comments, :only => [:new, :show, :create]
+
+    get "photogallery" => "afisha#photogallery", :as => :photogallery
+    get "trailer" => "afisha#trailer", :as => :trailer
+
     get "visitors" => "visits#visitors", :as => :visitors
     put "change_visit" => "visits#change_visit", :as => :change_visit
     put "change_vote" => "votes#change_vote", :as => :change_vote
     get "liked" => "votes#liked", :as => :liked
   end
 
-  Affiche.kind.values.each do |type|
-    get "#{type.gsub('_','')}/:id"              => 'affiches#show',         :as => "#{type.gsub('_','')}"
-  end
+  get "/afisha" => "afishas#index", :as => :afisha_index, :controller => 'afishas'
+  get "/afisha/:id" => "afishas#show", :as => :afisha_show, :controller => 'afishas'
 
   resources :saunas,   :only => :index
 

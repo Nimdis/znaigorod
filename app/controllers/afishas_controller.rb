@@ -1,8 +1,8 @@
 # encoding: utf-8
 
-class AffichesController < ApplicationController
+class AfishasController < ApplicationController
   def index
-    cookie = cookies['znaigorod_affiches_list_settings'].to_s
+    cookie = cookies['znaigorod_afishas_list_settings'].to_s
     settings = {}
     settings = JSON.parse(cookie) if cookie.present? && cookie.length > 1
 
@@ -13,19 +13,19 @@ class AffichesController < ApplicationController
         render partial: @presenter.partial, layout: false and return
       end
 
-      render :partial => 'affiche_today', :layout => false and return
+      render :partial => 'afisha_today', :layout => false and return
     end
   end
 
   def show
-    @affiche = AfficheDecorator.new Affiche.find(params[:id])
+    @afisha = AfishaDecorator.new Afisha.find(params[:id])
   end
 
   def photogallery
-    @affiche = AfficheDecorator.new Affiche.find(params[:id])
+    @afisha = AfishaDecorator.new Afisha.find(params[:id])
   end
 
   def trailer
-    @affiche = AfficheDecorator.new Affiche.find(params[:id])
+    @afisha = AfishaDecorator.new Afisha.find(params[:id])
   end
 end
