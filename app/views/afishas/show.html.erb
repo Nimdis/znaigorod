@@ -1,58 +1,58 @@
 <% content_for :page_title do %>
-  <% if @affiche.title.present? %>
-    <%= @affiche.title.to_s.text_gilensize %>,
+  <% if @afisha.title.present? %>
+    <%= @afisha.title.to_s.text_gilensize %>,
   <% else %>
     Нет названия,
   <% end %>
-  <%= @affiche.human_kind.mb_chars.downcase %> в Томске
+  <%= @afisha.kind.map(&:text).join(', ') %> в Томске
 <% end %>
-<% content_for :meta_keywords, @affiche.meta_keywords %>
-<% content_for :meta_description, @affiche.meta_description %>
+<% content_for :meta_keywords, @afisha.meta_keywords %>
+<% content_for :meta_description, @afisha.meta_description %>
 
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0-stable/?load=package.full&lang=ru-RU') %>
 
 <% content_for :extra_meta do %>
-  <%= @affiche.tags_for_vk %>
+  <%= @afisha.tags_for_vk %>
 <% end %>
 
 <% content_for :twitter_cards do %>
   <meta name='twitter:card' content='summary'>
   <meta name='twitter:site' content='@znaigorod'/>
   <meta name='twitter:url' content='<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>'/>
-  <meta name='twitter:title' content='<%= @affiche.title %>'/>
-  <meta name='twitter:description' content='<%= @affiche.truncated_description %>'/>
-  <meta name='twitter:image' content='<%= @affiche.resized_poster_url(120, 120, false) %>'/>
+  <meta name='twitter:title' content='<%= @afisha.title %>'/>
+  <meta name='twitter:description' content='<%= @afisha.truncated_description %>'/>
+  <meta name='twitter:image' content='<%= @afisha.resized_poster_url(120, 120, false) %>'/>
 <% end %>
 
 <div class='content_wrapper'>
 
-  <%= @affiche.breadcrumbs %>
+  <%= @afisha.breadcrumbs %>
 
   <div class='clearfix'>
 
     <div class='content'>
 
       <div class='affiche'>
-        <%= content_tag(:div, link_to(@affiche.human_kind, affiches_path(period: 'all', categories: [@affiche.kind])), class: 'kind') %>
+        <%= content_tag(:div, link_to(@afisha.kind.map(&:text).join(', '), affiches_path(period: 'all', categories: [@afisha.kind])), class: 'kind') %>
         <div class='head'>
-          <% if @affiche.title.present? %>
-            <%= content_tag :h1, @affiche.title.to_s.text_gilensize %>
+          <% if @afisha.title.present? %>
+            <%= content_tag :h1, @afisha.title.to_s.text_gilensize %>
           <% else %>
             <%= content_tag :h1, 'Нет названия' %>
           <% end %>
-          <%= content_tag :h2, @affiche.original_title.text_gilensize if @affiche.original_title? %>
+          <%= content_tag :h2, @afisha.original_title.text_gilensize if @afisha.original_title? %>
         </div>
 
         <div class='info'>
           <div class='left_part'>
-            <%= @affiche.has_ribbon %>
+            <%= @afisha.has_ribbon %>
             <div class='image'>
-              <% if @affiche.poster_url.present? %>
+              <% if @afisha.poster_url.present? %>
                 <div class="rating like_a_line">
-                  <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => @affiche.model } %>
+                  <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => @afisha.model } %>
                 </div>
-                <%= content_tag :div, "#{@affiche.age_min.to_i}+", class: :age if @affiche.age_min.present? %>
-                <%= @affiche.item_poster %>
+                <%= content_tag :div, "#{@afisha.age_min.to_i}+", class: :age if @afisha.age_min.present? %>
+                <%= @afisha.item_poster %>
               <% else %>
                 <%= image_tag('public/stub_poster.png', size: '180x242', alt: :poster) %>
               <% end %>
@@ -60,14 +60,14 @@
 
             <div class='social_actions'>
               <div class="visits">
-                <%= render :partial => 'visits/visit_wrapper', :locals => { :visitable => @affiche.model } %>
+                <%= render :partial => 'visits/visit_wrapper', :locals => { :visitable => @afisha.model } %>
               </div>
             </div>
           </div>
 
           <div class='description'>
             <ul class='affiche_tickets'>
-              <% @affiche.tickets.each do |ticket| %>
+              <% @afisha.tickets.each do |ticket| %>
                 <% if ticket.copies_for_sale.any? %>
                   <li>
                     <div class='has_items_for_sale'>-<%= ticket.discount %>%</div>
@@ -85,27 +85,27 @@
               <% end %>
             </ul>
             <div class='closest'>
-              <%= @affiche.when_with_price %>
+              <%= @afisha.when_with_price %>
             </div>
-            <% unless @affiche.distribution_movie? %>
-              <% @affiche.places.each do |place| %>
+            <% unless @afisha.distribution_movie? %>
+              <% @afisha.places.each do |place| %>
                 <div class='place'>
                   <%= place.place %>
                 </div>
               <% end %>
             <% end %>
             <div class='text'>
-              <% if @affiche.description.present? %>
-                <%= @affiche.html_description %>
+              <% if @afisha.description.present? %>
+                <%= @afisha.html_description %>
               <% else %>
                 <p>Нет описания</p>
               <% end %>
-              <%= @affiche.html_attachments %>
-              <% if @affiche.user.present? %>
+              <%= @afisha.html_attachments %>
+              <% if @afisha.user.present? %>
                 <p class='affiche_owner'>
                   <span>Автор:</span>
-                  <%= image_tag @affiche.user.avatar, size: '24x24', alt: @affiche.user.name if @affiche.user.avatar.present? %>
-                  <%= link_to @affiche.user.name, @affiche.user.profile %>
+                  <%= image_tag @afisha.user.avatar, size: '24x24', alt: @afisha.user.name if @afisha.user.avatar.present? %>
+                  <%= link_to @afisha.user.name, @afisha.user.profile %>
                 </p>
               <% else %>
                 <p class='affiche_owner'>
@@ -120,23 +120,23 @@
 
         <div class='tags_and_share'>
           <ul class='tags'>
-            <% @affiche.tags.each do |tag| %>
+            <% @afisha.tags.each do |tag| %>
               <li><%= link_to(tag, affiches_path('tags[]' => tag)) %></li>
             <%end%>
           </ul>
           <div class="votes">
-            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @affiche.model } %>
+            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @afisha.model } %>
           </div>
           <div class='share'>
             <%= render :partial => 'commons/affiche_share_this' %>
           </div>
         </div>
 
-        <% if @affiche.images.present? %>
+        <% if @afisha.images.present? %>
           <div class='photogallery_header'>Фотографии</div>
           <div class='photogallery'>
             <ul>
-              <% @affiche.images.each do |image| %>
+              <% @afisha.images.each do |image| %>
                 <li>
                   <%= resized_link_image(image, 124, 94) %>
                 </li>
@@ -145,23 +145,23 @@
           </div>
         <% end %>
 
-        <% if @affiche.trailer_code.present? %>
+        <% if @afisha.trailer_code.present? %>
           <div class='trailer_header'>Видео</div>
           <div class='trailer'>
-            <%= @affiche.trailer_code_html %>
+            <%= @afisha.trailer_code_html %>
           </div>
         <% end %>
 
-        <% if @affiche.viewable_showings? %>
+        <% if @afisha.viewable_showings? %>
 
-          <% if @affiche.distribution_movie? %>
+          <% if @afisha.distribution_movie? %>
 
             <div class='distribution'>
               <ul class='dates'>
                 <li class='first'>
                   <h3>Сеансы</h3>
                 </li>
-                <% @affiche.distribution_movie_grouped_showings.each do |date, showings_with_place| %>
+                <% @afisha.distribution_movie_grouped_showings.each do |date, showings_with_place| %>
                   <% unless showings_with_place.values.blank? %>
                     <li class='text'>
                       <p class='date' data-id='date-<%= date %>'><%= showings_with_place.values.first.first.human_date %></p>
@@ -170,7 +170,7 @@
                   <% end %>
                 <% end %>
               </ul>
-              <% @affiche.distribution_movie_grouped_showings.each do |date, showings_with_place| %>
+              <% @afisha.distribution_movie_grouped_showings.each do |date, showings_with_place| %>
                 <div class='theaters' data-id='date-<%= date %>'>
                   <% showings_with_place.each do |place, showings| %>
                     <ul>
@@ -189,27 +189,27 @@
                 </div>
               <% end %>
             </div>
-          <% elsif @affiche.scheduled_showings? %>
+          <% elsif @afisha.scheduled_showings? %>
             <div class='sheduled'>
               <div class='head'>
                 <h3>Расписание</h3>
                 <div class='places'>
-                  <% @affiche.places.each do |place| %>
+                  <% @afisha.places.each do |place| %>
                     <%= place.place %>
                   <% end %>
                 </div>
               </div>
               <div class='shedule'>
-                <div class='price'><strong>Стоимость:</strong> <%= @affiche.schedule.human_price %></div>
+                <div class='price'><strong>Стоимость:</strong> <%= @afisha.schedule.human_price %></div>
                 <ul>
-                  <% @affiche.schedule.days.each do |li| %>
+                  <% @afisha.schedule.days.each do |li| %>
                     <%= li %>
                   <% end %>
                 </ul>
               </div>
             </div>
           <% else %>
-            <% @affiche.showings.group_by(&:place).each do |place, showings| %>
+            <% @afisha.showings.group_by(&:place).each do |place, showings| %>
               <div class='many_showings'>
                 <div class='head'>
                   <div class='places'>
@@ -243,44 +243,44 @@
 
       </div>
 
-      <%= render :partial => 'comments/block', :locals => { :parent_obj => @affiche.model } %>
+      <%= render :partial => 'comments/block', :locals => { :parent_obj => @afisha.model } %>
     </div>
 
     <div class='right_side'>
 
-      <% if @affiche.geo_present? %>
+      <% if @afisha.geo_present? %>
         <div class='yandex_map'>
           <h2>На карте города</h2>
           <div class='map'
-            data-latitude='<%= @affiche.places.first.latitude %>'
-            data-longitude='<%= @affiche.places.first.longitude %>'
-            data-hint='<%= @affiche.places.first.title.text_gilensize %>'
-            <%= "data-id=#{@affiche.places.first.organization.id}" if @affiche.places.first.organization %>>
+            data-latitude='<%= @afisha.places.first.latitude %>'
+            data-longitude='<%= @afisha.places.first.longitude %>'
+            data-hint='<%= @afisha.places.first.title.text_gilensize %>'
+            <%= "data-id=#{@afisha.places.first.organization.id}" if @afisha.places.first.organization %>>
           </div>
         </div>
       <% end %>
 
-      <% unless @affiche.similar_affiches.blank? %>
+      <% unless @afisha.similar_afisha.blank? %>
         <div class='more_like_this'>
-          <h2><%= I18n.t "more_like_this.#{@affiche.kind}" %></h2>
+          <h2><%= I18n.t "more_like_this.#{@afisha.kind.values.first}" %></h2>
           <ul>
-            <% @affiche.similar_affiches.each do |affiche| %>
+            <% @afisha.similar_afisha.each do |afisha| %>
               <li>
-                <div class='title'><%= link_to affiche.title.text_gilensize, affiche.kind_affiche_path %></div>
+                <div class='title'><%= link_to afisha.title.text_gilensize, afisha_show_path(afisha) %></div>
                 <div class='image'>
-                  <%= affiche.has_ribbon %>
+                  <%= afisha.has_ribbon %>
                   <div class="rating like_a_line mlt">
-                    <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => affiche.model } %>
+                    <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => afisha.model } %>
                   </div>
-                  <%= content_tag :div, "#{affiche.age_min.to_i}+", class: :age if affiche.age_min.present? %>
-                  <%= affiche.more_like_this_poster %>
+                  <%= content_tag :div, "#{afisha.age_min.to_i}+", class: :age if afisha.age_min.present? %>
+                  <%= afisha.more_like_this_poster %>
                 </div>
-                <%= content_tag :div, affiche.main_page_place, :class => 'places' unless affiche.main_page_place.blank? %>
+                <%= content_tag :div, afisha.main_page_place, :class => 'places' unless afisha.main_page_place.blank? %>
               </li>
             <% end %>
           </ul>
           <div class='all_today'>
-            <%= @affiche.all_affiches_link %>
+            <%= @afisha.all_afisha_link %>
           </div>
         </div>
       <% end %>

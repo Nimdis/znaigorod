@@ -22,7 +22,7 @@ class Vote < ActiveRecord::Base
     end
 
     def update_voteable_rating
-      voteable.update_rating if Affiche.kind.values.include?(voteable.kind)
+      voteable.update_rating unless (Afisha.kind.values - voteable.kind).flatten.uniq.empty?
     end
 end
 

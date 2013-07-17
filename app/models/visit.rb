@@ -13,7 +13,7 @@ class Visit < ActiveRecord::Base
   after_save :update_visitable_rating
 
   def change_visit
-    self.visited = (visited? ? false : true)
+    self.visited = !visited?
     self.save
   end
 
@@ -24,7 +24,7 @@ class Visit < ActiveRecord::Base
     end
 
     def update_visitable_rating
-      visitable.update_rating if Affiche.kind.values.include?(visitable.kind)
+      visitable.update_rating unless (Afisha.kind.values - visitable.kind).flatten.uniq.empty?
     end
 end
 

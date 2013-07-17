@@ -10,7 +10,7 @@
   </div>
 
   <%= simple_form_for [parent_obj, (parent_obj.user_ratings.where(:user_id => current_user.try(:id)).first || @user_rating || parent_obj.user_ratings.new)],
-                      :url => polymorphic_url([parent_obj, (parent_obj.user_ratings.where(:user_id => current_user.try(:id)).first || @user_rating || parent_obj.user_ratings.new)], :subdomain => request.subdomain),
+                      :url => polymorphic_url([parent_obj, (parent_obj.user_ratings.where(:user_id => current_user.try(:id)).first || @user_rating || parent_obj.user_ratings.new)]),
                       :remote => true do |f| %>
     <%= f.input :value, :as => :radio_buttons, :collection => 0..4 %>
     <% if f.object.errors.any? %>

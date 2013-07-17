@@ -3,7 +3,7 @@ class VisitsController < ApplicationController
 
   custom_actions :collection => [:change_visit, :visitors]
 
-  belongs_to :affiche, :organization, :polymorphic => true, :optional => true
+  belongs_to :afisha, :organization, :polymorphic => true, :optional => true
 
   layout false
 

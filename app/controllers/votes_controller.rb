@@ -3,7 +3,7 @@ class VotesController < ApplicationController
 
   custom_actions :collection => [:change_vote, :liked]
 
-  belongs_to :affiche, :polymorphic => true, :optional => true
+  belongs_to :afisha, :polymorphic => true, :optional => true
   belongs_to :comment, :polymorphic => true, :optional => true
   belongs_to :coupon, :polymorphic => true, :optional => true
   belongs_to :organization, :polymorphic => true, :optional => true

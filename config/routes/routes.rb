@@ -26,6 +26,7 @@ Znaigorod::Application.routes.draw do
     put "change_visit" => "visits#change_visit", :as => :change_visit
     put "change_vote" => "votes#change_vote", :as => :change_vote
     get "liked" => "votes#liked", :as => :liked
+    resources :visits, :only => [:new, :create, :show, :update]
   end
 
   get "/afisha" => "afishas#index", :as => :afisha_index, :controller => 'afishas'

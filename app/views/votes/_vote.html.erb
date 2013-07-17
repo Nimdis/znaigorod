@@ -18,7 +18,7 @@
     <% if current_user && current_user.liked?(voteable) %>
       <span>Вам это нравится.</span>
       <%= link_to 'Мне нравится',
-        polymorphic_url([object_assoc_chain, :change_vote].flatten, :subdomain => request.subdomain),
+        polymorphic_url([object_assoc_chain, :change_vote].flatten),
         :method => :put,
         :remote => true,
         :class => 'liked' %>

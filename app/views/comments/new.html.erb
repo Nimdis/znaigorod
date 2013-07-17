@@ -14,7 +14,7 @@
     <%= image_tag @comment.avatar, :class => 'avatar', :title => 'неизвестный автор' %>
     <span class="profile_link">неизвестный автор</span>
   <% end %>
-  <%= simple_form_for [association_chain, @comment].flatten, :url => polymorphic_url([association_chain, @comment].flatten, :subdomain => request.subdomain), :html => { :remote => true } do |f| %>
+  <%= simple_form_for [association_chain, @comment].flatten, :url => polymorphic_url([association_chain, @comment].flatten), :html => { :remote => true } do |f| %>
     <%= f.input :parent_id, :as => :hidden %>
     <%= f.input :body, :as => :text, :label => false, :placeholder => 'Текст вашего комментария...' %>
     <div class="buttons">

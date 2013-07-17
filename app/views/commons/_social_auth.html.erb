@@ -1,23 +1,23 @@
 <ul class='social_signin_links <%= defined?(no_js) ? 'no_js' : 'auth_links' %>'>
   <li class='vkontakte'>
-    <%= link_to 'ВКонтакте', user_omniauth_authorize_url(:vkontakte, :subdomain => request.subdomain), :title => 'Войти с помощью ВКонтакте' %>
+    <%= link_to 'ВКонтакте', user_omniauth_authorize_url(:vkontakte), :title => 'Войти с помощью ВКонтакте' %>
   </li>
   <li class='yandex'>
-    <%= link_to 'Яндекс', user_omniauth_authorize_url(:yandex, :subdomain => request.subdomain), :title => 'Войти с помощью Яндекс' %>
+    <%= link_to 'Яндекс', user_omniauth_authorize_url(:yandex), :title => 'Войти с помощью Яндекс' %>
   </li>
   <li class='facebook'>
-    <%= link_to 'Facebook', user_omniauth_authorize_url(:facebook, :subdomain => request.subdomain), :title => 'Войти с помощью Facebook' %>
+    <%= link_to 'Facebook', user_omniauth_authorize_url(:facebook), :title => 'Войти с помощью Facebook' %>
   </li>
   <li class='twitter'>
-    <%= link_to 'Twitter', user_omniauth_authorize_url(:twitter, :subdomain => request.subdomain), :title => 'Войти с помощью Twitter' %>
+    <%= link_to 'Twitter', user_omniauth_authorize_url(:twitter), :title => 'Войти с помощью Twitter' %>
   </li>
   <li class='google'>
-    <%= link_to 'Google', user_omniauth_authorize_url(:google_oauth2, :subdomain => request.subdomain), :title => 'Войти с помощью Google' %>
+    <%= link_to 'Google', user_omniauth_authorize_url(:google_oauth2), :title => 'Войти с помощью Google' %>
   </li>
   <li class='mail_ru'>
-    <%= link_to 'Mail.Ru', user_omniauth_authorize_url(:mailru, :subdomain => request.subdomain), :title => 'Войти с помощью Mail.Ru' %>
+    <%= link_to 'Mail.Ru', user_omniauth_authorize_url(:mailru), :title => 'Войти с помощью Mail.Ru' %>
   </li>
   <li class='odnoklassniki'>
-    <%= link_to 'Одноклассники', user_omniauth_authorize_url(:odnoklassniki, :subdomain => request.subdomain), :title => 'Войти с помощью Одноклассники' %>
+    <%= link_to 'Одноклассники', user_omniauth_authorize_url(:odnoklassniki), :title => 'Войти с помощью Одноклассники' %>
   </li>
 </ul>

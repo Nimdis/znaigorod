@@ -12,7 +12,7 @@
       <span class="date">
         <%= l comment.created_at, :format => :long %>
       </span>
-      <%= link_to "ответить", polymorphic_url([:new, comment.commentable, :comment], :comment => {:parent_id => comment.id}, :subdomain => request.subdomain), :remote => true, :class => 'new_answer' %>
+      <%= link_to "ответить", polymorphic_url([:new, comment.commentable, :comment], :comment => {:parent_id => comment.id}), :remote => true, :class => 'new_answer' %>
       <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => comment } %>
     </div>
     <div class="body">

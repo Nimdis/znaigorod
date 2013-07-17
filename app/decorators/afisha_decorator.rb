@@ -50,7 +50,7 @@ class AfishaDecorator < ApplicationDecorator
   end
 
   def all_afisha_link
-    h.link_to "Все #{human_kind.mb_chars.downcase} (#{counter.all})", h.affisha_index_path(categories: [kind])
+    h.link_to "Все #{kind.map(&:text).join(', ')} (#{counter.all})", h.afisha_index_path(afisha, categories: [kind])
   end
 
   def breadcrumbs
@@ -59,9 +59,9 @@ class AfishaDecorator < ApplicationDecorator
     links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
     links << h.content_tag(:li, h.link_to("Вся афиша Томска", h.afisha_index_path), :class => "crumb")
     links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
-    links << h.content_tag(:li, h.link_to("Все #{human_kind.mb_chars.downcase} в Томске", h.afisha_index_path('categories[]' => kind)), :class => "crumb")
+    links << h.content_tag(:li, h.link_to("Все #{kind.map(&:text).join(', ')} в Томске", h.afisha_index_path('categories[]' => kind)), :class => "crumb")
     links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
-    links << h.content_tag(:li, h.link_to(title, afisha_path), :class => "crumb")
+    links << h.content_tag(:li, h.link_to(title, h.afisha_show_path(afisha)), :class => "crumb")
     %w(photogallery trailer).each do |method|
       if h.controller.action_name == method
         links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
@@ -190,7 +190,7 @@ class AfishaDecorator < ApplicationDecorator
   end
 
   def meta_keywords
-    [human_kind, afisha.tags, raw_places].flatten.map(&:mb_chars).map(&:downcase).join(', ')
+    [kind.map(&:text).join(', '), afisha.tags, raw_places].flatten.map(&:mb_chars).map(&:downcase).join(', ')
   end
 
   def tags_for_vk
@@ -206,7 +206,7 @@ class AfishaDecorator < ApplicationDecorator
     res << "<meta property='og:description' content='#{desc.truncate(350, :separator => ' ').html_safe}'/>\n"
     res << "<meta property='og:site_name' content='#{I18n.t('meta.default.title')}' />\n"
     res << "<meta property='og:title' content='#{title.to_s.text_gilensize}' />\n"
-    res << "<meta property='og:url' content='#{afisha_url}' />\n"
+    res << "<meta property='og:url' content='#{h.afisha_show_url(afisha)}' />\n"
     res << "<meta property='og:image' content='#{image}' />\n"
     res << "<meta name='image' content='#{image}' />\n"
     res << "<link rel='image_src' href='#{image}' />\n"
@@ -301,10 +301,6 @@ class AfishaDecorator < ApplicationDecorator
     kind.pluralize
   end
 
-  def human_kind
-    I18n.t("activerecord.models.#{kind}")
-  end
-
   def other_showings
     return [] unless afisha_actual?
     first_showing = showings.first
@@ -351,7 +347,7 @@ class AfishaDecorator < ApplicationDecorator
     "Ближайшие сеансы #{other_showings.first.human_date.mb_chars.downcase}" if other_showings.any?
   end
 
-  def similar_affisha
+  def similar_afisha
     searcher.more_like_this(afisha).limit(2).results.map { |a| AfishaDecorator.new a }
   end
 
