@@ -7,7 +7,7 @@
     container.dialog
       height: dialog_height
       width: 850
-      title: 'Форма заказа'
+      title: 'Выбор тегов'
       modal: true
       resizable: false
 
@@ -18,7 +18,7 @@
           $('input[value="' + tag + '"]').attr('checked', 'checked')
 
         $('.submit', container).click ->
-          tags = $.makeArray($('input:checked').map (index, input) -> $(input).attr('value'))
+          tags = $.makeArray($('input:checked', container).map (index, input) -> $(input).attr('value'))
           $('#affiche_tag').tagit('removeAll')
           tags.each (tag, index) ->
             $('#affiche_tag').tagit('createTag', tag)

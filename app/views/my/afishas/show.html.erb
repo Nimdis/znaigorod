@@ -1,12 +1,12 @@
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0-stable/?load=package.full&lang=ru-RU') %>
 
 <% content_for :page_title do %>
-  <% if @affiche.title.present? %>
-    <%= @affiche.title.to_s.text_gilensize %>,
+  <% if @afisha.title.present? %>
+    <%= @afisha.title.to_s.text_gilensize %>,
   <% else %>
     Нет названия,
   <% end %>
-  <%= @affiche.human_kind.mb_chars.downcase %> в Томске
+  <%= @afisha.kind.values.map(&:text).join(', ') %> в Томске
 <% end %>
 
 <div class='content_wrapper'>
@@ -17,73 +17,73 @@
     <div class='content'>
 
       <div class='affiche'>
-        <%= content_tag(:div, link_to(@affiche.human_kind, affiches_path(period: 'all', categories: [@affiche.kind])), class: 'kind') %>
+        <%= content_tag(:div, link_to(@afisha.kind.values.map(&:text).join(', '), afisha_index_path(period: 'all', categories: @afisha.kind.join(','))), class: 'kind') %>
         <div class='head'>
-          <% if @affiche.title.present? %>
+          <% if @afisha.title.present? %>
             <h1>
-              <%= @affiche.title.to_s.text_gilensize %>
-              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) if can? :edit, @affiche %>
+              <%= @afisha.title.to_s.text_gilensize %>
+              <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %>
             </h1>
           <% else %>
             <h1>
               <span class='red'>Нет</span> названия
-              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) if can? :edit, @affiche %>
+              <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %>
             </h1>
           <% end %>
-          <%= content_tag :h2, @affiche.original_title.text_gilensize if @affiche.original_title? %>
+          <%= content_tag :h2, @afisha.original_title.text_gilensize if @afisha.original_title? %>
         </div>
 
         <div class='info'>
           <div class='left_part'>
             <div class='image'>
-              <% if @affiche.poster_url.present? %>
-                <%= @affiche.item_poster %>
+              <% if @afisha.poster_url.present? %>
+                <%= @afisha.item_poster %>
               <% else %>
-                <% if can? :edit, @affiche %>
-                  <%= link_to image_tag('public/stub_poster.png', size: '180x242', alt: :poster), edit_step_my_affiche_path(@affiche, step: :second) %>
+                <% if can? :edit, @afisha %>
+                  <%= link_to image_tag('public/stub_poster.png', size: '180x242', alt: :poster), edit_step_my_afisha_path(@afisha, step: :second) %>
                 <% else %>
                   <%= image_tag('public/stub_poster.png', size: '180x242', alt: :poster) %>
                 <% end %>
                 <span class='red'>Нет</span> постера
               <% end %>
-              <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :second) if can? :edit, @affiche %>
+              <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :second) if can? :edit, @afisha %>
             </div>
           </div>
           <div class='description'>
             <div class='closest'>
-              <%= @affiche.when_with_price %>
-              <% if @affiche.showings.any? %>
-                <%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, @affiche.showings.first) if can? :edit, @affiche.showings.first %>
-                <%= link_to 'добавить ещё сеанс', new_my_affiche_showing_path(@affiche), class: :add_more_schedule if can? :new, @affiche.showings.new %>
+              <%= @afisha.when_with_price %>
+              <% if @afisha.showings.any? %>
+                <%= link_to 'изменить', edit_my_afisha_showing_path(@afisha, @afisha.showings.first) if can? :edit, @afisha.showings.first %>
+                <%= link_to 'добавить ещё сеанс', new_my_afisha_showing_path(@afisha), class: :add_more_schedule if can? :new, @afisha.showings.new %>
               <% else %>
-                <%= link_to 'добавить сеанс', new_my_affiche_showing_path(@affiche) if can? :new, @affiche.showings.new %>
+                <%= link_to 'добавить сеанс', new_my_afisha_showing_path(@afisha) if can? :new, @afisha.showings.new %>
               <% end %>
             </div>
-            <% unless @affiche.distribution_movie? %>
-              <% @affiche.places.each do |place| %>
+            <% unless @afisha.distribution_movie? %>
+              <% @afisha.places.each do |place| %>
                 <div class='place'>
                   <%= place.place %>
                 </div>
               <% end %>
             <% end %>
             <div class='text'>
-              <% if @affiche.description.present? %>
-                <%= @affiche.html_description %>
+              <% if @afisha.description.present? %>
+                <%= @afisha.html_description %>
               <% else %>
                 <p><span class='red'>Нет</span> описания</p>
               <% end %>
-              <p><%= link_to 'изменить описание', edit_step_my_affiche_path(@affiche, step: :first) if can? :edit, @affiche %></p>
-              <% if @affiche.html_attachments.present? %>
-                <%= @affiche.html_attachments %>
+              <p><%= link_to 'изменить описание', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %></p>
+              <% if @afisha.html_attachments.present? %>
+                <%= @afisha.html_attachments %>
               <% else %>
                 <p><span class='red'>Нет</span> файлов</p>
               <% end %>
-              <p><%= link_to 'изменить файлы', edit_step_my_affiche_path(@affiche, step: :sixth) if can? :edit, @affiche %></p>
-              <% if @affiche.user.present? %>
+              <p><%= link_to 'изменить файлы', edit_step_my_afisha_path(@afisha, step: :sixth) if can? :edit, @afisha %></p>
+              <% if @afisha.user.present? %>
                 <p class='affiche_owner'>
                   <span>Автор:</span>
-                  <%= image_tag @affiche.user.avatar, size: '24x24', alt: @affiche.user.name if @affiche.user.avatar.present? %>
-                  <%= link_to @affiche.user.name, @affiche.user.profile %>
+                  <%= image_tag @afisha.user.avatar, size: '24x24', alt: @afisha.user.name if @afisha.user.avatar.present? %>
+                  <%= link_to @afisha.user.name, @afisha.user.profile %>
                 </p>
               <% end %>
             </div>
@@ -92,37 +92,37 @@
 
         <div class='tags_and_share'>
           <ul class='tags'>
-            <% if @affiche.tags.any? %>
+            <% if @afisha.tags.any? %>
               <li class='transparent'>Тэги:</li>
-              <% @affiche.tags.each do |tag| %>
-                <li><%= link_to(tag, affiches_path('tags[]' => tag)) %></li>
+              <% @afisha.tags.each do |tag| %>
+                <li><%= tag %></li>
               <% end %>
               <li class='transparent'>
-                <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) if can? :edit, @affiche %>
+                <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %>
               </li>
             <% else %>
               <li class='transparent'>
                 <span class='red'>Нет</span> тэгов
-                <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :first) if can? :edit, @affiche %>
+                <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %>
               </li>
             <% end %>
           </ul>
           <div class="votes">
-            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @affiche.model } %>
+            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @afisha.model } %>
           </div>
           <div class='share'>
             <%= render :partial => 'commons/share_this' %>
           </div>
         </div>
 
-        <% if @affiche.images.present? %>
+        <% if @afisha.images.present? %>
           <div class='photogallery_header'>
             Фотографии
-            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fourth) if can? :edit, @affiche %>
+            <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :fourth) if can? :edit, @afisha %>
           </div>
           <div class='photogallery'>
             <ul>
-              <% @affiche.images.each do |image| %>
+              <% @afisha.images.each do |image| %>
                 <li>
                   <%= resized_link_image(image, 124, 94) %>
                 </li>
@@ -132,22 +132,22 @@
         <% else %>
           <div class='photogallery_header'>
             <span class='red'>Нет</span> фотографий
-            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fourth) if can? :edit, @affiche %>
+            <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :fourth) if can? :edit, @afisha %>
           </div>
         <% end %>
 
-        <% if @affiche.trailer_code.present? %>
+        <% if @afisha.trailer_code.present? %>
           <div class='trailer_header'>
             Видео
-            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fifth) if can? :edit, @affiche %>
+            <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :fifth) if can? :edit, @afisha %>
           </div>
           <div class='trailer'>
-            <%= @affiche.trailer_code_html %>
+            <%= @afisha.trailer_code_html %>
           </div>
         <% else %>
           <div class='trailer_header'>
             <span class='red'>Нет</span> видео
-            <%= link_to 'изменить', edit_step_my_affiche_path(@affiche, step: :fifth) if can? :edit, @affiche %>
+            <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :fifth) if can? :edit, @afisha %>
           </div>
         <% end %>
 
@@ -155,21 +155,21 @@
           <div class='head'>
             <h3 class='inline'>
               Ещё сеансы
-              <%= link_to 'добавить', new_my_affiche_showing_path(@affiche) if can? :new, @affiche.showings.new %>
+              <%= link_to 'добавить', new_my_afisha_showing_path(@afisha) if can? :new, @afisha.showings.new %>
             </h3>
           </div>
         </div>
 
-        <% if @affiche.viewable_showings? %>
+        <% if @afisha.viewable_showings? %>
 
-          <% if @affiche.distribution_movie? %>
+          <% if @afisha.distribution_movie? %>
 
             <div class='distribution'>
               <ul class='dates'>
                 <li class='first'>
                   <h3>Сеансы</h3>
                 </li>
-                <% @affiche.distribution_movie_grouped_showings.each do |date, showings_with_place| %>
+                <% @afisha.distribution_movie_grouped_showings.each do |date, showings_with_place| %>
                   <% unless showings_with_place.values.blank? %>
                     <li class='text'>
                       <p class='date' data-id='date-<%= date %>'><%= showings_with_place.values.first.first.human_date %></p>
@@ -178,7 +178,7 @@
                   <% end %>
                 <% end %>
               </ul>
-              <% @affiche.distribution_movie_grouped_showings.each do |date, showings_with_place| %>
+              <% @afisha.distribution_movie_grouped_showings.each do |date, showings_with_place| %>
                 <div class='theaters' data-id='date-<%= date %>'>
                   <% showings_with_place.each do |place, showings| %>
                     <ul>
@@ -197,27 +197,27 @@
                 </div>
               <% end %>
             </div>
-          <% elsif @affiche.scheduled_showings? %>
+          <% elsif @afisha.scheduled_showings? %>
             <div class='sheduled'>
               <div class='head'>
                 <h3>Расписание</h3>
                 <div class='places'>
-                  <% @affiche.places.each do |place| %>
+                  <% @afisha.places.each do |place| %>
                     <%= place.place %>
                   <% end %>
                 </div>
               </div>
               <div class='shedule'>
-                <div class='price'><strong>Стоимость:</strong> <%= @affiche.schedule.human_price %></div>
+                <div class='price'><strong>Стоимость:</strong> <%= @afisha.schedule.human_price %></div>
                 <ul>
-                  <% @affiche.schedule.days.each do |li| %>
+                  <% @afisha.schedule.days.each do |li| %>
                     <%= li %>
                   <% end %>
                 </ul>
               </div>
             </div>
           <% else %>
-            <% @affiche.showings.group_by(&:place).each do |place, showings| %>
+            <% @afisha.showings.group_by(&:place).each do |place, showings| %>
               <div class='many_showings'>
                 <div class='head'>
                   <div class='places'>
@@ -240,7 +240,7 @@
                   <% showings.each do |showing| %>
                     <li>
                       <%= showing.for_schedule %>
-                      <p class='edit'><%= link_to 'изменить', edit_my_affiche_showing_path(@affiche, showing) if can? :edit, showing %></p>
+                      <p class='edit'><%= link_to 'изменить', edit_my_afisha_showing_path(@afisha, showing) if can? :edit, showing %></p>
                     </li>
                   <% end %>
                 </ul>
@@ -254,21 +254,21 @@
     </div>
 
     <div class='public_action'>
-      <% if @affiche.draft? %>
+      <% if @afisha.draft? %>
         <h4>Публикация мероприятия</h4>
         <p>Для того, чтобы опубликовать созданное мероприятие, необходимо заполнить следующие поля:</p>
         <ul class='requirements'>
-          <li class='<%= @affiche.title? ? 'enabled' : 'disabled' %>'>Название мероприятия</li>
-          <li class='<%= @affiche.description? ? 'enabled' : 'disabled' %>'>Описание</li>
-          <li class='<%= @affiche.poster_image_url? ? 'enabled' : 'disabled' %>'>Постер</li>
-          <li class='<%= @affiche.showings.any? ? 'enabled' : 'disabled' %>'>Сеансы</li>
+          <li class='<%= @afisha.title? ? 'enabled' : 'disabled' %>'>Название мероприятия</li>
+          <li class='<%= @afisha.description? ? 'enabled' : 'disabled' %>'>Описание</li>
+          <li class='<%= @afisha.poster_image_url? ? 'enabled' : 'disabled' %>'>Постер</li>
+          <li class='<%= @afisha.showings.any? ? 'enabled' : 'disabled' %>'>Сеансы</li>
         </ul>
 
-        <% if current_user.is_affiches_trusted_editor? %>
-          <%= link_to t('my.send_to_public'), publish_my_affiche_path(@affiche), :method => :put, :class => "#{@affiche.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены?' %>
+        <% if current_user.is_afisha_trusted_editor? %>
+          <%= link_to t('my.send_to_public'), publish_my_afisha_path(@afisha), :method => :put, :class => "#{@afisha.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены?' %>
         <% else %>
-          <% if can? :send_to_moderation, @affiche %>
-            <%= link_to t('my.send_to_public'), moderate_my_affiche_path(@affiche), :method => :put, :class => "#{@affiche.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены? Отправляя афишу на публикацию вы больше не сможете ее редактировать пока она не будет опубликована!' %>
+          <% if can? :send_to_moderation, @afisha %>
+            <%= link_to t('my.send_to_public'), moderate_my_afisha_path(@afisha), :method => :put, :class => "#{@afisha.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены? Отправляя афишу на публикацию вы больше не сможете ее редактировать пока она не будет опубликована!' %>
           <% end %>
         <% end %>
       <% else %>

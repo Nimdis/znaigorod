@@ -37,7 +37,11 @@ class Afisha < ActiveRecord::Base
   serialize :kind, Array
   enumerize :kind, in: [:movie, :concert, :party, :spectacle, :exhibition, :sportsevent, :masterclass, :competition, :other], multiple: true, predicates: true
 
-  validates_presence_of :title, :description, :poster_url, :if => :published?
+  normalize_attribute :kind, with: :blank_array
+
+  validates_presence_of :kind, :title, :description
+
+  validates_presence_of :poster_url, :if => :published?
 
   accepts_nested_attributes_for :affiche_schedule, :allow_destroy => true, :reject_if => :affiche_schedule_attributes_blank?
   accepts_nested_attributes_for :showings, :allow_destroy => true
@@ -51,7 +55,6 @@ class Afisha < ActiveRecord::Base
   default_value_for :yandex_metrika_page_views, 0
   default_value_for :vkontakte_likes,           0
   default_value_for :total_rating,              0.5
-  #before_save :set_popularity
 
   before_save :prepare_trailer
   before_save :set_wmode_for_trailer, :if => :published?
@@ -123,8 +126,6 @@ class Afisha < ActiveRecord::Base
   end
 
   has_attached_file :poster_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
-
-  validates_presence_of :title, :description,                                           :if => [:draft?, :first_step?]
 
   validates_attachment :poster_image, :presence => true, :content_type => {
     :content_type => ['image/jpeg', 'image/jpg', 'image/png'],

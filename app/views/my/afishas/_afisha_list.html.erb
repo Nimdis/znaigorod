@@ -1,0 +1,18 @@
+<li class='my_affiche_item'>
+  <% if defined?(editable) %>
+    <%= link_to my_afisha_show_path(afisha) do %>
+      <%= image_tag (afisha.poster_image_url? ? resized_image_url(afisha.poster_image_url, 80, 108, true) : 'public/stub_poster.png'), :width => 80, :height => 108 %>
+    <% end %>
+  <% else %>
+    <%= image_tag (afisha.poster_image_url? ? resized_image_url(afisha.poster_image_url, 80, 108, true) : 'public/stub_poster.png'), :width => 80, :height => 108 %>
+  <% end %>
+  <span class="title"><%= afisha.title.present? ? afisha : 'Нет названия' %></span>
+
+  <% if defined?(editable) %>
+    <%= link_to 'Редактировать', my_afisha_show_path(afisha) if can? :edit, afisha %>
+  <% end %>
+
+  <% if defined?(deletable) %>
+    <%= link_to 'Удалить', my_afisha_show_path(afisha), method: :delete, confirm: 'Вы уверены что хотите удалить?' if can? :destroy, afisha %>
+  <% end %>
+</li>
