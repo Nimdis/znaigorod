@@ -60,6 +60,7 @@ class My::AfishasController < My::ApplicationController
   end
 
   def destroy_image
+    @afisha = current_user.afisha.available_for_edit.find(params[:id])
     @afisha.poster_url = nil
     @afisha.poster_image.destroy
     @afisha.save

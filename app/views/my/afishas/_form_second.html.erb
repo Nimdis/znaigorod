@@ -3,11 +3,11 @@
   <p>После этого можно будет выделить необходимый фрагмент картинки для отображения в виде постера афиши.</p>
 <% end %>
 
-<% if @affiche.poster_image_url? %>
-  <% crop_opt = @affiche.poster_url ? @affiche.poster_url.match(/(?<=\/region\/)\w+\/\w+\/\w+\/\w+/).to_s.split('/').map{|o| (o.to_i/@affiche.resize_factor).round} : [] %>
-  <% crop_width, crop_height, crop_x, crop_y = crop_opt.any? ? crop_opt : [@affiche.poster_image_resized_dimensions[:width] / @affiche.resize_factor, @affiche.poster_image_resized_dimensions[:height] , 0, 0] %>
+<% if @afisha.poster_image_url? %>
+  <% crop_opt = @afisha.poster_url ? @afisha.poster_url.match(/(?<=\/region\/)\w+\/\w+\/\w+\/\w+/).to_s.split('/').map{|o| (o.to_i/@afisha.resize_factor).round} : [] %>
+  <% crop_width, crop_height, crop_x, crop_y = crop_opt.any? ? crop_opt : [@afisha.poster_image_resized_dimensions[:width] / @afisha.resize_factor, @afisha.poster_image_resized_dimensions[:height] , 0, 0] %>
 
-  <%= simple_form_for @affiche, as: :affiche, :url => my_affiche_path(@affiche.id) do |f| %>
+  <%= simple_form_for @afisha, as: :afisha, :url => my_afisha_show_path(@afisha.id) do |f| %>
     <%= hidden_field_tag :step, @step %>
     <div>
       <%= f.input :set_region, :as => :hidden, :input_html => { :value => true } %>
@@ -15,25 +15,25 @@
       <%= f.input :crop_y, :as => :hidden, :input_html => { :value => crop_y } %>
       <%= f.input :crop_width, :as => :hidden, :input_html => { :value => crop_width } %>
       <%= f.input :crop_height, :as => :hidden, :input_html => { :value => crop_height } %>
-      <%= image_tag resized_image_url(@affiche.poster_image_url,
-                                      @affiche.poster_image_resized_dimensions[:width],
-                                      @affiche.poster_image_resized_dimensions[:height],
+      <%= image_tag resized_image_url(@afisha.poster_image_url,
+                                      @afisha.poster_image_resized_dimensions[:width],
+                                      @afisha.poster_image_resized_dimensions[:height],
                                       false), :class => 'jcrop' %>
     </div>
     <div class='submit'>
       <%= f.button :submit, 'Обрезать постер', class: :button %>
-      <%= link_to 'Отмена', my_affiche_path(@affiche) %>
-      <%= link_to 'Удалить постер', destroy_image_my_affiche_path(@affiche.id), :method => :delete, :confirm => 'Вы уверены что хотите удалить?', class: :floatr %>
+      <%= link_to 'Отмена', my_afisha_show_path(@afisha) %>
+      <%= link_to 'Удалить постер', destroy_image_my_afisha_path(@afisha.id), :method => :delete, :confirm => 'Вы уверены что хотите удалить?', class: :floatr %>
     </div>
   <% end %>
 <% else %>
-  <%= simple_form_for @affiche, as: :affiche, url: my_affiche_path(@affiche.id) do |f| %>
+  <%= simple_form_for @afisha, as: :afisha, url: my_afisha_show_path(@afisha.id) do |f| %>
     <%= hidden_field_tag :step, @step %>
     <%= hidden_field_tag :crop, true %>
     <%= f.input :poster_image, label: 'Выберите изображение', required: true, class: :button %>
     <%= f.error :poster_image_content_type %>
     <div class='submit'>
-      <%= link_to 'Отмена', my_affiche_path(@affiche) %>
+      <%= link_to 'Отмена', my_afisha_show_path(@afisha) %>
     </div>
   <% end %>
 <% end %>

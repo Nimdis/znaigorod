@@ -15,8 +15,8 @@
       crop_height = $('[id*="crop_height"]').val(coords.h)
       true
 
-  $('#affiche_poster_image').on 'change', ->
-    $(this).parents('form').trigger 'submit'
+  $('#afisha_poster_image').on 'change', ->
+    $(this).parents('form').submit()
     true
 
   true
