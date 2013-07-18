@@ -80,8 +80,8 @@ module Mobile
             {
               :url => "#{base_path}/#{affisha.slug}",
               :name => affisha.title,
-              :when => affisha.human_when,
-              :price => affisha.human_price,
+              :when => affisha.human_when.replace_special_html_chars,
+              :price => affisha.human_price.replace_special_html_chars,
               :place => affisha.places.map(&:title).join("; "),
               :image => affisha.poster_url,
               :expires => affisha.distribution_ends_on? ? affisha.distribution_ends_on : affisha.showings.map(&:starts_at).max,
