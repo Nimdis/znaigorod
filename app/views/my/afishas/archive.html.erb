@@ -8,8 +8,8 @@
   <div class='my_affiche_wrapper'>
     <div class='my_affiches_preview'>
       <ul class='my_affiche_items'>
-        <% current_user.affiches.archive.published.each do |affiche| %>
-          <%= render :partial => 'affiches_list', :locals => { :affiche => affiche, :editable => true } %>
+        <% current_user.afisha.archive.published.each do |afisha| %>
+          <%= render :partial => 'afisha_list', :locals => { :afisha => afisha, :editable => true } %>
         <% end %>
       </ul>
     </div>

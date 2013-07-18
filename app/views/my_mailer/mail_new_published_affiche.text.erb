@@ -1,13 +1,13 @@
 На сайте ЗнайГород (<%= Settings['app']['host'] %>)
-<% if @affiche.user %>
-  пользователь <%= @affiche.user.name %> <%= @affiche.user.profile %> опубликовал новую афишу:
+<% if @afisha.user %>
+  пользователь <%= @afisha.user.name %> <%= @afisha.user.profile %> опубликовал новую афишу:
 <% else %>
   была опубликована афиша:
 <% end %>
 
-Название: <%= @affiche.title.present? ? @affiche.title : 'Нет названия' %>
-Постер: <%= @affiche.poster_url? ? @affiche.poster_url : 'Нет постера' %>
-Теги: <%= @affiche.tag.present? ? @affiche.tag : 'Нет тегов' %>
-Описание: <%= @affiche.description.present? ? @affiche.description : 'Нет описания' %>
+Название: <%= @afisha.title.present? ? @afisha.title : 'Нет названия' %>
+Постер: <%= @afisha.poster_url? ? @afisha.poster_url : 'Нет постера' %>
+Теги: <%= @afisha.tag.present? ? @afisha.tag : 'Нет тегов' %>
+Описание: <%= @afisha.description.present? ? @afisha.description : 'Нет описания' %>
 
-Помотреть эту афишу в manage: <%= polymorphic_url([:manage, @affiche], :host => Settings['app']['host']) %>
+Помотреть эту афишу в manage: <%= polymorphic_url([:manage, @afisha], :host => Settings['app']['host']) %>
