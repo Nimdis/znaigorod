@@ -18,8 +18,8 @@
     </div>
     <div class='submit'>
       <%= f.button :submit, 'Сохранить сеанс', class: :button %>
-      <%= link_to 'Отмена', my_affiche_path(@affiche) %>
-      <%= link_to('Удалить', my_affiche_showing_path(@affiche, @showing), method: :delete, confirm: 'Вы уверены что хотите удалить?', class: :floatr) unless @showing.new_record? %>
+      <%= link_to 'Отмена', my_afisha_show_path(@afisha) %>
+      <%= link_to('Удалить', my_afisha_showing_path(@afisha, @showing), method: :delete, confirm: 'Вы уверены что хотите удалить?', class: :floatr) unless @showing.new_record? %>
     </div>
   </div>
   <div class='my_affiche_map'>

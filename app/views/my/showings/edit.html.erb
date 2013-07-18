@@ -13,7 +13,7 @@
   </div>
 
   <div class='my_affiche_wrapper'>
-    <%= simple_form_for [@affiche, @showing].flatten, :url => my_affiche_showing_path(@affiche, @showing), html: { class: :my_affiche_showings } do |f| %>
+    <%= simple_form_for [@afisha, @showing].flatten, :url => my_afisha_showing_path(@afisha, @showing), html: { class: :my_affiche_showings } do |f| %>
       <%= render :partial => 'form', :locals => { :f => f } %>
     <% end %>
   </div>
