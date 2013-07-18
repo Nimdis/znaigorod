@@ -22,25 +22,25 @@
 </div>
 
 <ul class="gallery_images">
-  <%= render @affiche.gallery_images %>
+  <%= render @afisha.gallery_images %>
 </ul>
-<%= link_to 'Удалить все фотографии', destroy_all_my_affiche_gallery_images_path(@affiche.id), :method => :delete, :confirm => 'Вы уверены, что хотите удалить все фотографии для этой афиши?' if @affiche.gallery_images.many? %>
+<%= link_to 'Удалить все фотографии', destroy_all_my_afisha_gallery_images_path(@afisha.id), :method => :delete, :confirm => 'Вы уверены, что хотите удалить все фотографии для этой афиши?' if @afisha.gallery_images.many? %>
 
-<%= simple_form_for @affiche.gallery_images.new, :url => my_affiche_gallery_images_path(@affiche.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+<%= simple_form_for @afisha.gallery_images.new, :url => my_afisha_gallery_images_path(@afisha.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
   <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_images[file]' }, :label => t('my.add_images') %>
 <% end %>
 
 <ul class="gallery_social_images">
-  <%= render @affiche.gallery_social_images %>
+  <%= render @afisha.gallery_social_images %>
 </ul>
-<%= link_to 'Удалить все фотографии', destroy_all_my_affiche_gallery_social_images_path(@affiche.id), :method => :delete, :confirm => 'Вы уверены, что хотите удалить все фотографии для этой афиши?' if @affiche.gallery_social_images.many? %>
+<%= link_to 'Удалить все фотографии', destroy_all_my_afisha_gallery_social_images_path(@afisha.id), :method => :delete, :confirm => 'Вы уверены, что хотите удалить все фотографии для этой афиши?' if @afisha.gallery_social_images.many? %>
 
-<%= simple_form_for @affiche, :url => social_gallery_my_affiche_path(@affiche.id), :as => :affiche, :html => { :class => 'inline_form' } do |f| %>
+<%= simple_form_for @afisha, :url => social_gallery_my_afisha_path(@afisha.id), :as => :afisha, :html => { :class => 'inline_form' } do |f| %>
   <%= f.input :social_gallery_url, :label => t('my.social_gallery_url') %>
   <%= f.submit 'Добавить', :class => 'button submit' %>
 <% end %>
 
 <div class='submit'>
-  <%= link_to 'Сохранить', my_affiche_path(@affiche), class: :button %>
-  <%= link_to 'Отмена', my_affiche_path(@affiche) %>
+  <%= link_to 'Сохранить', my_afisha_show_path(@afisha), class: :button %>
+  <%= link_to 'Отмена', my_afisha_show_path(@afisha) %>
 </div>

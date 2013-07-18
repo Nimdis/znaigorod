@@ -2,7 +2,7 @@ class My::GallerySocialImagesController < My::ApplicationController
   actions :destroy
   custom_actions :collection => :destroy_all
 
-  belongs_to :affiche, :polymorphic => true, :optional => true
+  belongs_to :afisha, :polymorphic => true, :optional => true
 
   def destroy
     destroy! {
@@ -12,9 +12,9 @@ class My::GallerySocialImagesController < My::ApplicationController
 
   def destroy_all
     destroy_all! {
-      @affiche.gallery_social_images.destroy_all
-      @affiche.update_attributes :vk_aid => nil, :yandex_fotki_url => nil
-      redirect_to edit_step_my_affiche_path(@affiche.id, :step => :fourth) and return
+      @afisha.gallery_social_images.destroy_all
+      @afisha.update_attributes :vk_aid => nil, :yandex_fotki_url => nil
+      redirect_to edit_step_my_afisha_path(@afisha.id, :step => :fourth) and return
     }
   end
 end
