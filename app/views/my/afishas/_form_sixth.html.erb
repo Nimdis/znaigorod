@@ -12,15 +12,15 @@
 </div>
 
 <ul class="gallery_files">
-  <%= render @affiche.gallery_files %>
+  <%= render @afisha.gallery_files %>
 </ul>
-<%= link_to 'Удалить все файлы', destroy_all_my_affiche_gallery_files_path(@affiche.id), :method => :delete, :confirm => 'Вы уверены, что хотите удалить все вложения для этой афиши?' if @affiche.gallery_files.many? %>
+<%= link_to 'Удалить все файлы', destroy_all_my_afisha_gallery_files_path(@afisha.id), :method => :delete, :confirm => 'Вы уверены, что хотите удалить все вложения для этой афиши?' if @afisha.gallery_files.many? %>
 
-<%= simple_form_for @affiche.gallery_files.new, :url => my_affiche_gallery_files_path(@affiche.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+<%= simple_form_for @afisha.gallery_files.new, :url => my_afisha_gallery_files_path(@afisha.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
   <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' }, :label => t('my.add_files') %>
 <% end %>
 
 <div class='submit'>
-  <%= link_to 'Сохранить', my_affiche_path(@affiche), class: :button %>
-  <%= link_to 'Отмена', my_affiche_path(@affiche) %>
+  <%= link_to 'Сохранить', my_afisha_show_path(@afisha), class: :button %>
+  <%= link_to 'Отмена', my_afisha_show_path(@afisha) %>
 </div>
