@@ -2,7 +2,7 @@
   init_affiche_preview_title() if $('#affiche_title').length
   init_affiche_preview_description() if $('#affiche_description').length
   init_affiche_preview_tag() if $('#affiche_tag').length
-  init_affiche_preview_video() if $('#affiche_trailer_code').length
+  init_affiche_preview_video() if $('#afisha_trailer_code').length
   init_affiche_preview_map() if $('form.my_affiche_showings .my_affiche_map').length
   init_autosuggest_handler() if $('form.my_affiche_showings').length
   init_affiche_help() if $('.help').length
@@ -66,11 +66,11 @@ init_affiche_preview_tag = ->
   true
 
 init_affiche_preview_video = ->
-  $('#affiche_trailer_code').keyup ->
+  $('#afisha_trailer_code').keyup ->
     $.ajax
       type: 'GET'
-      url: "/my/affiches/#{$('#affiche_id').val()}/preview_video"
-      data: $('#affiche_trailer_code').closest('form').serialize()
+      url: "/my/afisha/#{$('#afisha_id').val()}/preview_video"
+      data: $('#afisha_trailer_code').closest('form').serialize()
       success: (data, textStatus, jqXHR) ->
         $('.my_affiche_wrapper .affiche_preview .video').html(data)
         true
@@ -83,12 +83,12 @@ init_affiche_preview_video = ->
         true
     true
 
-  $('#affiche_trailer_code').mouseup (event) ->
+  $('#afisha_trailer_code').mouseup (event) ->
     setTimeout ->
-      $('#affiche_trailer_code').keyup()
+      $('#afisha_trailer_code').keyup()
     , 1
     true
-  $('#affiche_trailer_code').keyup()
+  $('#afisha_trailer_code').keyup()
   true
 
 init_affiche_preview_map = ->
