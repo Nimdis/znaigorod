@@ -83,7 +83,7 @@ module Mobile
               :when => affisha.human_when.replace_special_html_chars,
               :price => affisha.human_price.replace_special_html_chars,
               :place => affisha.places.map(&:title).join("; "),
-              :image => affisha.poster_url,
+              :image => affisha.poster_url.gsub(/\/\d+-\d+\//, '/74-100!n/'),
               :expires => affisha.distribution_ends_on? ? affisha.distribution_ends_on : affisha.showings.map(&:starts_at).max,
               lastUpdate: affisha_updated_at(affisha.affiche)
             }
