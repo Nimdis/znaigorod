@@ -39,6 +39,10 @@ class String
     args.empty? ? gilensize_without_html_safe.html_safe : gilensize_without_html_safe(*args)
   end
 
+  def replace_special_html_chars
+    self.gsub("&ndash;", "-").gsub("&mdash;", "-").gsub("&nbsp;", " ").gsub("&#160;", " ")
+  end
+
   alias_method_chain :gilensize, :html_safe
 
 end
