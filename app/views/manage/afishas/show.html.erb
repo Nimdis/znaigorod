@@ -1,138 +1,138 @@
-<div class="logo">
-  <% if resource.poster_url.present? %>
-    <%= image_tag_for resource.poster_url, 290, 390 %>
-  <% else %>
-    <%= image_tag "manage/stub.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
-  <% end %>
-</div>
+<div class="show">
+  <h1><%= resource.title %></h1>
+  <%= link_to t("посмотреть в публичном виде"), afisha_show_path(resource), :class => 'edit_link' %>
 
-<div class="right_side">
-  <div>
-    <span class="label">Статус:</span>
-    <span class="value">
-       <%= resource.human_state_name %>
-    </span>
-    <%= render :partial => 'affiche_state_actions', :locals => { :resource => resource } %>
+  <div class="logo">
+    <% if resource.poster_url.present? %>
+      <%= image_tag_for resource.poster_url, 290, 390 %>
+    <% else %>
+      <%= image_tag "manage/stub.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
+    <% end %>
   </div>
 
-  <div>
-    <span class="label">
-      Билеты
-      <%= link_to 'Добавить', new_manage_affiche_ticket_path(resource) %>
-    </span>
-    <span class="value">
-      <ul>
-        <% resource.tickets.each do |ticket| %>
-          <li>
-            Цена <%= "#{ticket.original_price}/#{ticket.price}" %>,
-            всего <%= ticket.copies.count %>,
-            осталось <%= ticket.copies_for_sale.count %>
+  <div class="right_side">
+    <div>
+      <span class="label">Статус:</span>
+      <span class="value">
+        <%= resource.human_state_name %>
+      </span>
+      <%= render :partial => 'state_actions' %>
+    </div>
+
+    <div>
+      <span class="label">
+        Билеты
+        <%= link_to 'Добавить', new_manage_afisha_ticket_path(resource) %>
+      </span>
+      <span class="value">
+        <ul>
+          <% resource.tickets.each do |ticket| %>
+            <li>
+              Цена <%= "#{ticket.original_price}/#{ticket.price}" %>,
+              всего <%= ticket.copies.count %>,
+              осталось <%= ticket.copies_for_sale.count %>
             куплено <%= ticket.copies_sold.count %>,
             забронировано <%= ticket.copies_reserved.count %>,
             <p>
               коды: <%= ticket.copies.map(&:code).join(', ') %>
-            </p>
-            <table class='tickets'>
-              <% ticket.copies.each do |copy| %>
-                <tr>
-                  <td><%= copy.code %></td>
-                  <td><%= copy.copy_payment ? copy.copy_payment.phone : '' %></td>
-                  <td><%= copy.state_text %></td>
-                </tr>
-              <% end %>
-            </table>
+          </p>
+          <table class='tickets'>
+            <% ticket.copies.each do |copy| %>
+              <tr>
+                <td><%= copy.code %></td>
+                <td><%= copy.copy_payment ? copy.copy_payment.phone : '' %></td>
+                <td><%= copy.state_text %></td>
+              </tr>
+            <% end %>
+          </table>
         </li>
       <% end %>
     </ul>
-    </span>
-  </div>
-  <div>
-    <span class="label">Оригинальное название:</span>
-    <% if resource.original_title.present? %>
-      <span class="value"><%= resource.original_title %></span>
-    <% else %>
-      <span class="blank">Не указано</span>
-    <% end %>
-  </div>
+  </span>
+</div>
+<div>
+  <span class="label">Оригинальное название:</span>
+  <% if resource.original_title.present? %>
+    <span class="value"><%= resource.original_title %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
 
-  <div>
-    <span class="label">Тип события:</span>
-    <% if resource.type.present? %>
-      <span class="value"><%= resource.class.model_name.human %></span>
-    <% else %>
-      <span class="blank">Не указано</span>
-    <% end %>
-  </div>
+<div>
+  <span class="label">Тип события:</span>
+  <span class="value"><%= resource.kind.values.map(&:text).join(', ') %></span>
+</div>
 
-  <div>
-    <span class="label">Описание:</span>
-    <% if resource.description? %>
-      <span class="value"><%= resource.html_description %></span>
-    <% else %>
-      <span class="blank">Не указано</span>
-    <% end %>
-  </div>
+<div>
+  <span class="label">Описание:</span>
+  <% if resource.description? %>
+    <span class="value"><%= resource.html_description %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
 
-  <div>
-    <span class="label">Тэги:</span>
-    <% if resource.tag.present? %>
-      <span class="value"><%= resource.tags.join(', ') %></span>
-    <% else %>
-      <span class="blank">Не указано</span>
-    <% end %>
-  </div>
+<div>
+  <span class="label">Тэги:</span>
+  <% if resource.tag.present? %>
+    <span class="value"><%= resource.tags.join(', ') %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
 
-  <div>
-    <span class="label">Начало проката:</span>
-    <% if resource.distribution_starts_on? %>
-      <span class="value"><%= l(resource.distribution_starts_on, :format => '%e %B') %></span>
-    <% else %>
-      <span class="blank">Не указано</span>
-    <% end %>
-  </div>
+<div>
+  <span class="label">Начало проката:</span>
+  <% if resource.distribution_starts_on? %>
+    <span class="value"><%= l(resource.distribution_starts_on, :format => '%e %B') %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
 
-  <div>
-    <span class="label">Окончание проката:</span>
-    <% if resource.distribution_ends_on? %>
-      <span class="value"><%= l(resource.distribution_ends_on, :format => '%e %B') %></span>
-    <% else %>
-      <span class="blank">Не указано</span>
-    <% end %>
-  </div>
+<div>
+  <span class="label">Окончание проката:</span>
+  <% if resource.distribution_ends_on? %>
+    <span class="value"><%= l(resource.distribution_ends_on, :format => '%e %B') %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
 
-  <div>
-    <span class="label">Постоянная экспозиция:</span>
-    <% if resource.constant? %>
-      <span class="value">Да</span>
-    <% else %>
-      <span class="blank">Нет</span>
-    <% end %>
-  </div>
+<div>
+  <span class="label">Постоянная экспозиция:</span>
+  <% if resource.constant? %>
+    <span class="value">Да</span>
+  <% else %>
+    <span class="blank">Нет</span>
+  <% end %>
+</div>
 
-  <div>
-    <span class="label">Минимальный возраст:</span>
-    <% if resource.age_min? %>
-      <span class="value"><%= resource.age_min %></span>
-    <% else %>
-      <span class="blank">Не указано</span>
-    <% end %>
-  </div>
+<div>
+  <span class="label">Минимальный возраст:</span>
+  <% if resource.age_min? %>
+    <span class="value"><%= resource.age_min %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
 
-  <div>
-    <span class="label">Максимальный возраст:</span>
-    <% if resource.age_max? %>
-      <span class="value"><%= resource.age_max %></span>
-    <% else %>
-      <span class="blank">Не указано</span>
-    <% end %>
-  </div>
+<div>
+  <span class="label">Максимальный возраст:</span>
+  <% if resource.age_max? %>
+    <span class="value"><%= resource.age_max %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
 
-  <div>
-    <span class="label">Рейтинг:</span>
-    <span class="value">
-       <%= resource.total_rating.round(2) %>
-    </span>
-  </div>
+<div>
+  <span class="label">Рейтинг:</span>
+  <span class="value">
+    <%= resource.total_rating.round(2) %>
+  </span>
+</div>
 </div>
 
 <div style='clear:both;'>
@@ -151,10 +151,10 @@
 <div class="upload_wrapper">
   <script id="template-upload" type="text/x-tmpl">
     <div class="upload">
-      {%=o.name%}
-      <div class="progress"><div class="bar" style="width: 0%"></div></div>
-    </div>
-  </script>
+{%=o.name%}
+<div class="progress"><div class="bar" style="width: 0%"></div></div>
+</div>
+</script>
 </div>
 
 <div class='images'>
@@ -189,7 +189,7 @@
     </span>
   </div>
 
-  <%= simple_form_for resource.gallery_images.new, :url => manage_affiche_gallery_images_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+  <%= simple_form_for resource.gallery_images.new, :url => manage_afisha_gallery_images_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
     <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_images[file]' } %>
   <% end %>
 </div>
@@ -203,7 +203,7 @@
     </ul>
   </div>
 
-  <%= simple_form_for resource.gallery_files.new, :url => manage_affiche_gallery_files_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+  <%= simple_form_for resource.gallery_files.new, :url => manage_afisha_gallery_files_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
     <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' } %>
   <% end %>
 </div>
@@ -223,8 +223,8 @@
     </div>
 
     <div>
-    	<span class="label">Время работы:</span>
-        <span class="value"><%= [resource.affiche_schedule.starts_at, resource.affiche_schedule.ends_at].map{|t| l(t, :format => "%H:%M")}.join(' &mdash; ').html_safe %></span>
+      <span class="label">Время работы:</span>
+      <span class="value"><%= [resource.affiche_schedule.starts_at, resource.affiche_schedule.ends_at].map{|t| l(t, :format => "%H:%M")}.join(' &mdash; ').html_safe %></span>
     </div>
 
     <div>
@@ -239,15 +239,15 @@
     </div>
 
     <div>
-        <span class="label">Место проведения:</span>
-        <% if resource.affiche_schedule.place.present? %>
-          <span class="value">
-            <%= [resource.affiche_schedule.place, resource.affiche_schedule.hall].join(', ') %>
-          </span>
-        <% else %>
-          <span class="blank">Не указано</span>
-        <% end %>
-      </div>
+      <span class="label">Место проведения:</span>
+      <% if resource.affiche_schedule.place.present? %>
+        <span class="value">
+          <%= [resource.affiche_schedule.place, resource.affiche_schedule.hall].join(', ') %>
+        </span>
+      <% else %>
+        <span class="blank">Не указано</span>
+      <% end %>
+    </div>
 
     <div>
       <span class="label">Цена:</span>
@@ -295,3 +295,4 @@
 <% end %>
 
 <%= render resource.virtual_tour %>
+</div>

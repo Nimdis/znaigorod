@@ -4,10 +4,7 @@
     <%= link_to t("edit_#{resource.class.model_name.underscore}"), [:edit, :manage, resource], :class => 'edit_link' %>
   </h1>
 
-  <% if resource_class == Affiche || resource_class.superclass == Affiche %>
-    <%= link_to t("посмотреть в публичном виде"), send("#{resource.class.name.downcase}_path", resource), :class => 'edit_link' %>
-    <%= render 'manage/affiches/affiche' %>
-  <% else %>
+  <% if resource_class == Organization %>
     <%= link_to t("посмотреть в публичном виде"), organization_path(resource), :class => 'edit_link' %>
     <%= render 'manage/organizations/organization' %>
   <% end %>

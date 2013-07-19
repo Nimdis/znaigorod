@@ -1,3 +1,0 @@
-<% resource.state_events.each do |state_event| %>
-  <%= link_to t("state_machine.events.#{state_event}"), fire_state_event_manage_affiche_path(resource, state_event), :method => :put %>
-<% end %>
