@@ -13,8 +13,8 @@ module Rateable
     update_column(:total_rating, calculate_total_rating)
   end
 
-  def recalculate_affiche_rating
-    update_column(:total_rating, calculate_affiche_total_rating)
+  def recalculate_afisha_rating
+    update_column(:total_rating, calculate_afisha_total_rating)
   end
 
   private

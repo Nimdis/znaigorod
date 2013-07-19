@@ -1,11 +1,11 @@
 require 'active_support/concern'
 
-module AfficheQualityRating
+module AfishaQualityRating
   extend ActiveSupport::Concern
 
   include Rateable
 
-  def calculate_affiche_total_rating
+  def calculate_afisha_total_rating
     user_rating - (user_rating - quality_rating) / (user_ratings.count + 1)**((user_ratings.count * 0.02)/(user_rating + 0.1))
   end
 

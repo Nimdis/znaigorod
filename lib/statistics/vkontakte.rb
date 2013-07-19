@@ -6,7 +6,7 @@ module Statistics
 
   class Vkontakte
     def update_statistics
-      update_affiches
+      update_afisha
       update_organizations
     end
 
@@ -36,18 +36,18 @@ module Statistics
       @yandex_statistics ||= Yandex.new
     end
 
-    delegate :affiche_urls, :organization_urls, to: :yandex_statistics
+    delegate :afisha_urls, :organization_urls, to: :yandex_statistics
 
-    def update_affiches
-      puts 'Updating affiches...'
-      pb = ProgressBar.new(affiche_urls.size)
+    def update_afisha
+      puts 'Updating afisha...'
+      pb = ProgressBar.new(afisha_urls.size)
 
-      affiche_urls.each do |url|
+      afisha_urls.each do |url|
         pb.increment!
         slug = url.split('/').last
 
-        if affiche = Affiche.find_by_slug(slug)
-          affiche.update_attribute :vkontakte_likes, likes_for(url)
+        if afisha = Afisha.find_by_slug(slug)
+          afisha.update_attribute :vkontakte_likes, likes_for(url)
         end
       end
     end

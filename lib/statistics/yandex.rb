@@ -3,12 +3,12 @@ require 'curb'
 module Statistics
   class Yandex
     def update_statistics
-      update_affiches
+      update_afisha
       update_organizations
     end
 
-    def affiche_urls
-      affiche_items.sort_by { |item| item.page_views }.reverse.first(100).map(&:url)
+    def afisha_urls
+      afisha_items.sort_by { |item| item.page_views }.reverse.first(100).map(&:url)
     end
 
     def organization_urls
@@ -57,24 +57,24 @@ module Statistics
       @data ||= response.data
     end
 
-    def affiche_items
-      @affiche_items ||= data.select { |item| item.url =~ %r{(concert|exhibition|movie|other|party|spectacle|sportsevent)/[^#/]+$} }
+    def afisha_items
+      @afisha_items ||= data.select { |item| item.url =~ %r{(#{Afisha.kind.values.join('|')})/[^#/]+$} }
     end
 
     def organization_items
       @organization_items ||= data.select { |item| item.url =~ %r{organizations/[^#/]+$} }
     end
 
-    def update_affiches
-      puts 'Updating affiches...'
-      pb = ProgressBar.new(affiche_items.size)
+    def update_afisha
+      puts 'Updating afisha...'
+      pb = ProgressBar.new(afisha_items.size)
 
-      affiche_items.each do |item|
+      afisha_items.each do |item|
         pb.increment!
         slug = item.url.split('/').last
 
-        if affiche = Affiche.find_by_slug(slug)
-          affiche.update_attribute :yandex_metrika_page_views, item.page_views
+        if afisha = Afisha.find_by_slug(slug)
+          afisha.update_attribute :yandex_metrika_page_views, item.page_views
         end
       end
     end

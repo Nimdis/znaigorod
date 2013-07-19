@@ -6,7 +6,7 @@ module OrganizationQualityRating
   include Rateable
 
   def quality_rating
-    @quality_rating ||= 0.8*fullness_rating + 0.1*affiches_rating + 0.05*images_rating + 0.05*sauna_hall_images_rating
+    @quality_rating ||= 0.8*fullness_rating + 0.1*afisha_rating + 0.05*images_rating + 0.05*sauna_hall_images_rating
   end
 
   def fullness_rating
@@ -22,8 +22,8 @@ module OrganizationQualityRating
 
   private
 
-  def affiches_rating
-    [nearest_affiches.count, 2].min * 0.5
+  def afisha_rating
+    [nearest_afisha.count, 2].min * 0.5
   end
 
   def images_rating

@@ -12,21 +12,18 @@ def recalculate_rating(options={})
   end
 end
 
-def recalculate_affiche_rating
-  puts "recalculate rating for Affiche"
-  affiches = Affiche.all
-  bar = ProgressBar.new(affiches.count)
-  affiches.each do |affiche|
-    #affiche.recalculate_affiche_rating
-    affiche.update_rating
+def recalculate_afisha_rating
+  puts "recalculate rating for Afisha"
+  afisha = Afisha.all
+  bar = ProgressBar.new(afisha.count)
+  afisha.each do |afisha|
+    afisha.update_rating
     bar.increment!
   end
 end
 
 desc "Пересчет рейтинга организиции"
 task :recalculate_rating => :environment do
-  #recalculate_rating :class => Organization
-  #Affiche.all.map(&:update_rating)
-  recalculate_affiche_rating
+  recalculate_afisha_rating
 end
 

@@ -1,6 +1,6 @@
 def skip_callbacks
-  Affiche.skip_callback(:save, :after, :save_images_from_vk)
-  Affiche.skip_callback(:save, :after, :save_images_from_yandex_fotki)
+  Afisha.skip_callback(:save, :after, :save_images_from_vk)
+  Afisha.skip_callback(:save, :after, :save_images_from_yandex_fotki)
 end
 
 namespace :statistics do

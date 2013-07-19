@@ -31,7 +31,7 @@ class MovieSyncer
       next unless title.squish
       if (movie = find_movie_by(title.squish)) && (cinematheatre = find_similar_cinematheatre_by(place.squish))
         MovieSyncer.finded_movies << movie
-        showings = Showing.where(:id => Showing.search{with(:affiche_id, movie.id); fulltext(place){fields(:place, :organization_title)}; paginate(:per_page => '100000')}.results.map(&:id))
+        showings = Showing.where(:id => Showing.search{with(:afisha_id, movie.id); fulltext(place){fields(:place, :organization_title)}; paginate(:per_page => '100000')}.results.map(&:id))
 
         seances.each do |seance|
           seance.each do |k,v| v.squish! if v.is_a?(String) end
@@ -48,7 +48,7 @@ class MovieSyncer
                                     :starts_at => seance[:starts_at],
                                     :price_min => seance[:price_min],
                                     :price_max => seance[:price_max],
-                                    :affiche_id => movie.id).tap do |s|
+                                    :afisha_id => movie.id).tap do |s|
 
                 if place =~ /Факел/
                  s.place = 'Факел, кинозал'
@@ -76,7 +76,7 @@ class MovieSyncer
 
   private
     def find_movie_by(title)
-      Movie.find_by_title(title) || find_similar_movie_by(title)
+      Afisha.find_by_title(title) || find_similar_movie_by(title)
     end
 
     def find_similar_movie_by(title)
@@ -227,6 +227,6 @@ end
 
 task :sync => ['sync:fakel', 'sync:kinomax', 'sync:kinomir'] do
   organiation_ids = Organization.where(:title => ['Киномир, кинотеатр', 'Киномакс, кинотеатр', 'Центр досуга и спорта "Факел", развлекательный комплекс']).map(&:id)
-  bad_showings = Showing.where(:affiche_id => MovieSyncer.finded_movies.map(&:id).uniq).where(:organization_id => organiation_ids).where('starts_at > ?', MovieSyncer.now).where('updated_at <> ?', MovieSyncer.now)
+  bad_showings = Showing.where(:afisha_id => MovieSyncer.finded_movies.map(&:id).uniq).where(:organization_id => organiation_ids).where('starts_at > ?', MovieSyncer.now).where('updated_at <> ?', MovieSyncer.now)
   bad_showings.destroy_all
 end
