@@ -93,7 +93,7 @@ class Afisha < ActiveRecord::Base
     end
 
     after_transition :draft => :pending do |afisha, transition|
-      MyMailer.delay.mail_new_pending_affiche(afisha)
+      MyMailer.delay.mail_new_pending_afisha(afisha)
     end
 
     event :approve do
@@ -101,7 +101,7 @@ class Afisha < ActiveRecord::Base
     end
 
     after_transition [:draft, :pending] => :published do |afisha, transition|
-      MyMailer.delay.mail_new_published_affiche(afisha)
+      MyMailer.delay.mail_new_published_afisha(afisha)
     end
 
     event :send_to_author do

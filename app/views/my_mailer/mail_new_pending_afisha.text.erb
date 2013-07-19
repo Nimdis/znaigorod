@@ -10,5 +10,7 @@
 Теги: <%= @afisha.tag.present? ? @afisha.tag : 'Нет тегов' %>
 Описание: <%= @afisha.description.present? ? @afisha.description : 'Нет описания' %>
 
-Все афиши на модерации: <%= by_state_manage_affiches_url(:pending, :host => Settings['app']['host']) %>
+<%# TODO fix this route! %>
+Все афиши на модерации: <%#= by_state_manage_affiches_url(:pending, :host => Settings['app']['host']) %>
+
 Помотреть эту афишу в manage: <%= polymorphic_url([:manage, @afisha], :host => Settings['app']['host']) %>
