@@ -2,17 +2,6 @@
   <% Afisha.kind.values.each do |kind| %>
     <li class="has_submenu">
       <%= link_to kind.text, by_kind_manage_afisha_index_path(:by_kind => kind.pluralize) %>
-      <ul class="submenu">
-        <li>
-          <%= link_to "Опубликовано (#{Afisha.published.count})", by_state_manage_afisha_index_path(:by_state => 'published') %>
-        </li>
-        <li>
-          <%= link_to "На модерации (#{Afisha.pending.count})", by_state_manage_afisha_index_path(:by_state => 'pending') %>
-        </li>
-        <li class="last">
-          <%= link_to "Черновики (#{Afisha.pending.count})", by_state_manage_afisha_index_path(:by_state => 'draft') %>
-        </li>
-      </ul>
     </li>
   <% end %>
 </ul>
