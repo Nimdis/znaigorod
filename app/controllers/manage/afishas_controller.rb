@@ -1,13 +1,34 @@
 class Manage::AfishasController < Manage::ApplicationController
   defaults :resource_class => Afisha
 
-  actions :index, :new
-
   custom_actions :resource => :fire_state_event
 
   has_scope :page, :default => 1
   has_scope :by_state, :only => :index
   has_scope :by_kind, :only => :index
+
+  def create
+    create! do |success, failure|
+      success.html {
+        resource.approve!
+        redirect_to manage_afisha_show_path(resource)
+      }
+      failure.html { render :new }
+    end
+  end
+
+  def update
+    update! do |success, failure|
+      success.html {
+        redirect_to manage_afisha_show_path(resource)
+      }
+      failure.html { render :edit }
+    end
+  end
+
+  def destroy
+    destroy! { manage_afisha_index_path }
+  end
 
   def fire_state_event
     fire_state_event! {
@@ -44,5 +65,13 @@ class Manage::AfishasController < Manage::ApplicationController
       with :kind, params[:by_kind] if params[:by_kind].present?
       paginate :page => params[:page], :per_page => per_page
     }.results
+  end
+
+  alias_method :old_build_resource, :build_resource
+
+  def build_resource
+    old_build_resource.tap do |object|
+      object.user = current_user
+    end
   end
 end

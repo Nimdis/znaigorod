@@ -41,9 +41,7 @@ class Afisha < ActiveRecord::Base
 
   validates_presence_of :kind, :title, :description
 
-  validates_presence_of :poster_url, :if => :published?
-
-  accepts_nested_attributes_for :affiche_schedule, :allow_destroy => true, :reject_if => :affiche_schedule_attributes_blank?
+  accepts_nested_attributes_for :affiche_schedule, :allow_destroy => true, :reject_if => :afisha_schedule_attributes_blank?
   accepts_nested_attributes_for :showings, :allow_destroy => true
 
   default_scope order('afisha.id DESC')

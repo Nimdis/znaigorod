@@ -42,7 +42,7 @@ module ApplicationHelper
 
   def path_for(item)
     case item.class.superclass.name
-    when 'Affiche'
+    when 'Afisha'
       affiche_path(item)
     when 'Organization'
       organization_path(item)
@@ -129,23 +129,23 @@ module ApplicationHelper
   end
 
   def form_url_for_resource
-    if resource.class.superclass == Affiche || resource_class == Organization
+    if resource.class.superclass == Afisha || resource_class == Organization
       [:manage, resource]
     elsif Organization.available_suborganization_classes.include?(resource_class)
       send("manage_organization_#{resource_class.model_name.underscore}_path", parent)
     elsif resource.is_a?(GalleryImage) && Organization.available_suborganization_classes.include?(parent_class)
-        [:manage, parent, resource]
-    elsif parent.class.superclass == Affiche
+      [:manage, parent, resource]
+    elsif parent.class.superclass == Afisha
       if (resource_class == GalleryImage || resource_class == GallerySocialImage || resource_class == GalleryFile) && resource.persisted?
-         send("manage_#{parent.class.superclass.model_name.underscore}_#{resource_class.model_name.underscore}_path", parent, resource)
+        send("manage_#{parent.class.superclass.model_name.underscore}_#{resource_class.model_name.underscore}_path", parent, resource)
       else
-         send("manage_#{parent.class.superclass.model_name.underscore}_#{resource_class.model_name.underscore.pluralize}_path", parent)
+        send("manage_#{parent.class.superclass.model_name.underscore}_#{resource_class.model_name.underscore.pluralize}_path", parent)
       end
     elsif parent.class == Organization
       if (resource_class == GalleryImage || resource_class == GalleryFile) && resource.persisted?
-         send("manage_organization_#{resource_class.model_name.underscore}_path", parent, resource)
+        send("manage_organization_#{resource_class.model_name.underscore}_path", parent, resource)
       else
-         send("manage_organization_#{resource_class.model_name.underscore.pluralize}_path", parent)
+        send("manage_organization_#{resource_class.model_name.underscore.pluralize}_path", parent)
       end
     elsif parent.class == SaunaHall
       if resource_class == GalleryImage && resource.persisted?

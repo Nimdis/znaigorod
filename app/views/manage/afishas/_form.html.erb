@@ -1,5 +1,7 @@
+<%= simple_nested_form_for resource, :url => [:manage, resource], :html => { :novalidate => true } do |f| %>
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0-stable/?load=package.full&lang=ru-RU') %>
 
+<%= f.input :kind, as: :check_boxes %>
 <%= f.input :title %>
 <%= f.input :original_title %>
 <%= f.input :description, :input_html => { :class => 'description' } %>
@@ -77,3 +79,9 @@
 
 <%= render :partial => 'virtual_tour_form_fields', :locals => { :f => f } %>
 
+  <div class="actions">
+    <%= link_to "&larr; Назад".html_safe, :back %>
+    <%= button_tag 'Сохранить'.html_safe %>
+    <%= link_to 'Удалить'.html_safe, manage_afisha_show_path(resource), method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
+  </div>
+<% end %>
