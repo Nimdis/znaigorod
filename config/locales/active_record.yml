@@ -18,7 +18,7 @@ ru:
       feedback:                           Обратная связь
       vote:                               Голос
 
-      afisha:                            Вся афиша
+      afisha:                             Вся афиша
       concert:                            Концерты
       exhibition:                         Выставки
       master_class:                       Мастер-классы
@@ -138,6 +138,7 @@ ru:
         distribution_ends_on: Окончание проката
         distribution_starts_on: Начало проката
         image_url: Изображение для главной страницы
+        kind: Тип мероприятия
         original_title: Оригинальное название
         poster_url: Постер для события
         poster_image: Постер

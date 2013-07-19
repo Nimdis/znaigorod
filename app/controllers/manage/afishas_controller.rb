@@ -32,9 +32,9 @@ class Manage::AfishasController < Manage::ApplicationController
 
   def fire_state_event
     fire_state_event! {
-      @afisha.fire_state_event params[:event] if @afisha.state_events.include?(params[:event].to_sym)
+      resource.fire_state_event params[:event] if resource.state_events.include?(params[:event].to_sym)
 
-      redirect_to send("manage_#{@afisha.class.name.underscore}_path", @afisha) and return
+      redirect_to manage_afisha_show_path(resource) and return
     }
   end
 
