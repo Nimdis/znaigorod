@@ -1,6 +1,7 @@
 <div class="show">
   <h1><%= resource.title %></h1>
-  <%= link_to t("посмотреть в публичном виде"), afisha_show_path(resource), :class => 'edit_link' %>
+  <%= link_to "редактировать", edit_manage_afisha_path(resource), :class => 'edit_link' %>
+  <%= link_to "посмотреть в публичном виде", afisha_show_path(resource), target: :_blank, :class => 'edit_link floatr' %>
 
   <div class="logo">
     <% if resource.poster_url.present? %>

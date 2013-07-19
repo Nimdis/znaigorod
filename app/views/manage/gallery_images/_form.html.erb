@@ -1,6 +1,13 @@
-<% if f.object.file.exists? %>
-  <%= image_tag f.object.file_url, :width => '300', :height => '200', :class => 'preview' if f.object.file_url? %>
-<% else %>
-  <%= f.input :file %>
+<%= simple_form_for resource, :url => [:manage, parent, resource], :html => { :novalidate => true }  do |f| %>
+  <% if f.object.file.exists? %>
+    <%= image_tag f.object.file_url, :width => '300', :height => '200', :class => 'preview' if f.object.file_url? %>
+  <% else %>
+    <%= f.input :file %>
+  <% end %>
+  <%= f.input :description %>
+
+  <div class="actions">
+    <%= link_to "&larr; Назад".html_safe, :back %>
+    <%= button_tag 'Сохранить'.html_safe %>
+  </div>
 <% end %>
-<%= f.input :description %>

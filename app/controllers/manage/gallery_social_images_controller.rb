@@ -2,10 +2,7 @@ class Manage::GallerySocialImagesController < Manage::ApplicationController
   actions :new, :create, :destroy, :update, :edit
   custom_actions :collection => :destroy_all
 
-  Affiche.descendants.each do |type|
-    belongs_to type.name.underscore, :polymorphic => true, :optional => :true
-  end
-  belongs_to :affiche, :polymorphic => true, :optional => true
+  belongs_to :afisha, :polymorphic => true, :optional => true
 
   def create
     create! { collection_path }
@@ -31,6 +28,6 @@ class Manage::GallerySocialImagesController < Manage::ApplicationController
 
   protected
     def collection_path
-      manage_affiche_path(parent)
+      manage_afisha_show_path(parent)
     end
 end

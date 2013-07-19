@@ -5,15 +5,10 @@ class Manage::GalleryImagesController < Manage::ApplicationController
   belongs_to *Organization.available_suborganization_kinds,
     :polymorphic => true, :optional => true
 
-  Affiche.descendants.each do |type|
-    belongs_to type.name.underscore, :polymorphic => true, :optional => :true
-  end
-
-  belongs_to :affiche, :organization, :sauna_hall, :polymorphic => true, :optional => true
+  belongs_to :afisha, :organization, :sauna_hall, :polymorphic => true, :optional => true
 
   def create
-    @parent = parent.class.find(params[(parent.class.superclass.name == 'Affiche' ? parent.class.superclass.name.underscore : parent.class.name.underscore) + '_id'])
-    @gallery_image = @parent.gallery_images.create(:file => params[:gallery_images][:file].first)
+    @gallery_image = parent.gallery_images.create(:file => params[:gallery_images][:file].first)
   end
 
   def update
@@ -34,8 +29,8 @@ class Manage::GalleryImagesController < Manage::ApplicationController
   protected
     def collection_path
       case parent
-      when Affiche
-        manage_affiche_path(parent)
+      when Afisha
+        manage_afisha_show_path(parent)
       when Organization
         manage_organization_path(parent)
       when SaunaHall

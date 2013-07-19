@@ -135,12 +135,12 @@ module ApplicationHelper
       send("manage_organization_#{resource_class.model_name.underscore}_path", parent)
     elsif resource.is_a?(GalleryImage) && Organization.available_suborganization_classes.include?(parent_class)
       [:manage, parent, resource]
-    elsif parent.class.superclass == Afisha
-      if (resource_class == GalleryImage || resource_class == GallerySocialImage || resource_class == GalleryFile) && resource.persisted?
-        send("manage_#{parent.class.superclass.model_name.underscore}_#{resource_class.model_name.underscore}_path", parent, resource)
-      else
-        send("manage_#{parent.class.superclass.model_name.underscore}_#{resource_class.model_name.underscore.pluralize}_path", parent)
-      end
+#    elsif parent.class.superclass == Afisha
+#      if (resource_class == GalleryImage || resource_class == GallerySocialImage || resource_class == GalleryFile) && resource.persisted?
+#        send("manage_#{parent.class.superclass.model_name.underscore}_#{resource_class.model_name.underscore}_path", parent, resource)
+#      else
+#        send("manage_#{parent.class.superclass.model_name.underscore}_#{resource_class.model_name.underscore.pluralize}_path", parent)
+#      end
     elsif parent.class == Organization
       if (resource_class == GalleryImage || resource_class == GalleryFile) && resource.persisted?
         send("manage_organization_#{resource_class.model_name.underscore}_path", parent, resource)

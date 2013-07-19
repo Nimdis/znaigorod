@@ -2,7 +2,5 @@
   <h2><%= parent.title if respond_to?(:parent) && parent %></h2>
   <h1><%= t "manage.edit_#{resource.class.model_name.underscore}" %></h1>
 
-  <% if resource_class == Organization %>
-    <%= render :partial => 'form_wrapper' %>
-  <% end %>
+  <%= render :partial => 'form_wrapper' unless resource_class == Afisha %>
 </div>
