@@ -19,14 +19,14 @@ SimpleNavigation::Configuration.run do |navigation|
         org_item.item :rated, 'Рейтинг организаций', manage_organizations_rated_path
     end
 
-    primary.item :affiches, 'Мероприятия', manage_affiches_path,
-      :highlights_on => ->(){ controller_name == 'affiches' || resource_class.try(:superclass) == Affiche },
-      :if => -> { can?(:manage, Affiche) } do |affiche_item|
-        Affiche.ordered_descendants.each do |kind|
-          affiche_item.item kind, kind.model_name.human, [:manage, kind.model_name.underscore.pluralize]
+    primary.item :afisha, 'Мероприятия', manage_afisha_index_path,
+      :highlights_on => ->(){ controller_name == 'afisha' },
+      :if => -> { can?(:manage, Afisha) } do |afisha_item|
+        Afisha.kind.values.each do |kind|
+          afisha_item.item kind, kind.text, by_kind_manage_afisha_index_path(kind.pluralize)
         end
-        affiche_item.item 'pending', "На модерации (#{Affiche.pending.count})", by_state_manage_affiches_path(:pending)
-        affiche_item.item 'draft', "Черновики (#{Affiche.draft.count})", by_state_manage_affiches_path(:draft)
+        afisha_item.item 'pending', "На модерации (#{Afisha.pending.count})", by_state_manage_afisha_index_path(:pending)
+        afisha_item.item 'draft', "Черновики (#{Afisha.draft.count})", by_state_manage_afisha_index_path(:draft)
     end
 
     primary.item :coupons, 'Купоны', manage_coupons_path,

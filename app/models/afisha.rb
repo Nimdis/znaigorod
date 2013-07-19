@@ -61,6 +61,7 @@ class Afisha < ActiveRecord::Base
 
   scope :available_for_edit,    -> { where(:state => [:draft, :published]) }
   scope :by_state,              ->(state) { where(:state => state) }
+  scope :by_kind,               ->(kind) { where(:kind => kind) }
   scope :draft,                 -> { with_state(:draft) }
   scope :published,             -> { with_state(:published) }
   scope :pending,               -> { with_state(:pending) }
@@ -193,6 +194,7 @@ class Afisha < ActiveRecord::Base
     float :age_max
 
     string :state
+    string(:kind, :multiple => true) { kind.map(&:value) }
 
     text :title,                :boost => 1.0 * 1.2
     text :title_ru,             :boost => 1.0,        :more_like_this => true

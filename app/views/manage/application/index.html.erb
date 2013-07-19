@@ -1,22 +1,15 @@
 <%= render :partial => 'kind_links' %>
 
 <div class="new_link">
-  <% if controller_name == 'affiches' %>
-    <%= link_to t("new_#{resource_class.model_name.underscore}"), '#', :class => 'new_resource dropdown' %>
-    <ul>
-      <% Affiche.ordered_descendants.each do |type| %>
-        <% type_name = type.to_s.underscore %>
-        <% vfs_path = "/znaigorod/affiches/#{type_name.pluralize}/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}" %>
-        <li><%= link_to t("new_#{type.model_name.underscore}"), send("new_manage_#{type_name}_path", "#{type_name}[vfs_path]" => vfs_path) %></li>
-      <% end %>
-    </ul>
-  <% elsif Affiche.ordered_descendants.map(&:model_name).map(&:underscore).map(&:pluralize).include?(controller_name) %>
-    <% vfs_path = "/znaigorod/affiches/#{controller_name}/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}" %>
-    <%= link_to t("new_#{resource_class.model_name.underscore}"), new_resource_url(:params => {"#{resource_class.to_s.underscore}[vfs_path]" => "#{vfs_path}"}), :class => 'new_resource' %>
-  <% else %>
-    <% vfs_path = "/znaigorod/affiches/organizations/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}" %>
-    <%= link_to t("new_#{resource_class.model_name.underscore}"), new_resource_url(:params => {'organization[vfs_path]' => "#{vfs_path}"}), :class => 'new_resource' %>
-  <% end %>
+  <%# if controller_name == 'afishas' %>
+    <%#= link_to t("new_#{resource_class.model_name.underscore}"), '#', :class => 'new_resource dropdown' %>
+  <%# elsif Afisha.ordered_descendants.map(&:model_name).map(&:underscore).map(&:pluralize).include?(controller_name) %>
+    <%# vfs_path = "/znaigorod/affiches/#{controller_name}/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}" %>
+    <%#= link_to t("new_#{resource_class.model_name.underscore}"), new_resource_url(:params => {"#{resource_class.to_s.underscore}[vfs_path]" => "#{vfs_path}"}), :class => 'new_resource' %>
+  <%# else %>
+    <%# vfs_path = "/znaigorod/affiches/organizations/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}" %>
+    <%#= link_to t("new_#{resource_class.model_name.underscore}"), new_resource_url(:params => {'organization[vfs_path]' => "#{vfs_path}"}), :class => 'new_resource' %>
+  <%# end %>
 </div>
 
 <div class="clearfix"></div>
@@ -27,8 +20,8 @@
       <%= link_to item.title, [:manage, item] %>
       <%= content_tag :span, 'Клиент, рейтинг: ', :class => 'client_status' if item.class == Organization && item.client? %>
       <%= content_tag :span, item.total_rating.round(2), :class => 'rating' %>
-      <%= content_tag :span, item.human_state_name, :class => 'state' if item.class.superclass == Affiche %>
-      <%= content_tag :span, item.respond_to?(:category) ? item.category : item.class.model_name.human, :class => 'category' %>
+      <%= content_tag :span, item.human_state_name, :class => 'state' if item.class.superclass == Afisha %>
+      <%= content_tag :span, item.kind.map(&:text).join(', '), :class => 'category' %>
     </li>
   <% end %>
 </ul>

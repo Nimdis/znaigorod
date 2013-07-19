@@ -6,30 +6,25 @@ Znaigorod::Application.routes.draw do
     resources :search,    :only => :index
     resources :sessions,  :only => [:new, :create, :destroy]
 
-    Afisha.kind.values.each do |type|
-      resources type.pluralize do
-        get ':by_state' => "#{type.pluralize}#index", :on => :collection, :as => :by_state, :constraints => { :by_state => /draft|published|pending/ }
+    resources :afisha, :except => [:index, :show], :controller => 'afishas' do
+      get ':by_state' => 'afishas#index', :on => :collection, :as => :by_state, :constraints => { :by_state => /#{Afisha.state_machine.states.map(&:name).join('|')}/ }
+      get ':by_kind' => 'afishas#index', :on => :collection, :as => :by_kind, :constraints => { :by_kind => /#{Afisha.kind.values.map(&:pluralize).join('|')}/ }
+      put 'fire_event_state/:event' => 'afishas#fire_state_event', :on => :member, :as => :fire_state_event
 
-        resources :gallery_files,  :except => [:index, :show] do
-          delete 'destroy_file', :on => :member, :as => :destroy_file
-        end
-
-        resources :gallery_images, :except => [:index, :show] do
-          delete 'destroy_file', :on => :member, :as => :destroy_file
-        end
-
-        resources :gallery_social_images, :except => [:index, :show] do
-          delete 'destroy_all', :on => :collection, :as => :destroy_all
-        end
+      resources :gallery_files,  :except => [:index, :show] do
+        delete 'destroy_file', :on => :member, :as => :destroy_file
       end
-
-    end
-
-    resources :afisha, only: [] do
-      put 'fire_event_state/:event' => 'afisha#fire_state_event', :on => :member, :as => :fire_state_event
-
+      resources :gallery_images, :except => [:index, :show] do
+        delete 'destroy_file', :on => :member, :as => :destroy_file
+      end
+      resources :gallery_social_images, :except => [:index, :show] do
+        delete 'destroy_all', :on => :collection, :as => :destroy_all
+      end
       resources :tickets
     end
+
+    get "/afisha" => "afishas#index", :as => :afisha_index, :controller => 'afishas'
+    get "/afisha/:id" => "afishas#show", :as => :afisha_show, :controller => 'afishas'
 
     resources :contests do
       resources :works, :except => [:index, :show]
@@ -38,13 +33,6 @@ Znaigorod::Application.routes.draw do
     resources :coupons
     resources :affiliate_coupons, :only => :index
 
-    resources :afisha do
-      get ':by_state' => 'afisha#index', :on => :collection, :as => :by_state
-
-      resources :gallery_files,  :except => [:index, :show]
-      resources :gallery_images, :except => [:index, :show]
-      resources :gallery_social_images, :except => [:index, :show]
-    end
 
     resources :posts do
       resources :post_images
