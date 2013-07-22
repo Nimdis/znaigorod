@@ -52,7 +52,7 @@ class Manage::AfishasController < Manage::ApplicationController
       order_by :created_at, :desc
       paginate paginate_options.merge(:per_page => per_page)
 
-      # FIXME @sev fix me, please
+      # FIXME @evserykh fix me, please
       #adjust_solr_params do |params|
         #params[:sort] = 'recip(abs(ms(NOW,first_showing_time_dt)),3.16e-11,1,1) asc'
       #end
