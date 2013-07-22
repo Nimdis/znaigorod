@@ -214,6 +214,7 @@ class Afisha < ActiveRecord::Base
     float :popularity,        :trie => true
 
     time :last_showing_time,  :trie => true
+    date :created_at
   end
 
   def update_rating

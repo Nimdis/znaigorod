@@ -49,12 +49,13 @@ class Manage::AfishasController < Manage::ApplicationController
       keywords params[:q]
       with :state, params[:by_state] if params[:by_state].present?
       with :kind, params[:by_kind].singularize if params[:by_kind].present?
+      order_by :created_at, :desc
       paginate paginate_options.merge(:per_page => per_page)
 
-      adjust_solr_params do |params|
-        params[:sort] = 'recip(abs(ms(NOW,first_showing_time_dt)),3.16e-11,1,1) desc'
-      end
-
+      # FIXME @sev fix me, please
+      #adjust_solr_params do |params|
+        #params[:sort] = 'recip(abs(ms(NOW,first_showing_time_dt)),3.16e-11,1,1) asc'
+      #end
     }.results
   end
 
@@ -63,6 +64,7 @@ class Manage::AfishasController < Manage::ApplicationController
       keywords params[:q]
       with :state, params[:by_state] if params[:by_state].present?
       with :kind, params[:by_kind] if params[:by_kind].present?
+      order_by :created_at, :desc
       paginate :page => params[:page], :per_page => per_page
     }.results
   end
