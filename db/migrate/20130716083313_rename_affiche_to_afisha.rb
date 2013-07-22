@@ -12,6 +12,14 @@ class RenameAfficheToAfisha < ActiveRecord::Migration
       a.update_attribute :attachable_type, 'Afisha'
       pg.increment!
     end
+
+    comments = Comment.where(:commentable_type => 'Affiche')
+    pg = ProgressBar.new(comments.count)
+
+    comments.each do |c|
+      c.update_attribute :commentable_type, 'Afisha'
+      pg.increment!
+    end
   end
 
   def down
@@ -25,6 +33,14 @@ class RenameAfficheToAfisha < ActiveRecord::Migration
 
     attachments.each do |a|
       a.update_attribute :attachable_type, 'Affiche'
+      pg.increment!
+    end
+
+    comments = Comment.where(:commentable_type => 'Afisha')
+    pg = ProgressBar.new(comments.count)
+
+    comments.each do |c|
+      c.update_attribute :commentable_type, 'Affiche'
       pg.increment!
     end
   end
