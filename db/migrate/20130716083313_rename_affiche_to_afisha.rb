@@ -7,7 +7,6 @@ class RenameAfficheToAfisha < ActiveRecord::Migration
 
     attachments = Attachment.where(:attachable_type => 'Affiche')
     pg = ProgressBar.new(attachments.count)
-
     attachments.each do |a|
       a.update_attribute :attachable_type, 'Afisha'
       pg.increment!
@@ -15,9 +14,29 @@ class RenameAfficheToAfisha < ActiveRecord::Migration
 
     comments = Comment.where(:commentable_type => 'Affiche')
     pg = ProgressBar.new(comments.count)
-
     comments.each do |c|
       c.update_attribute :commentable_type, 'Afisha'
+      pg.increment!
+    end
+
+    visits = Visit.where(:visitable_type => 'Affiche')
+    pg = ProgressBar.new(visits.count)
+    visits.each do |v|
+      v.update_attribute :visitable_type, 'Afisha'
+      pg.increment!
+    end
+
+    votes = Vote.where(:voteable_type => 'Affiche')
+    pg = ProgressBar.new(votes.count)
+    votes.each do |v|
+      v.update_attribute :voteable_type, 'Afisha'
+      pg.increment!
+    end
+
+    versions = Version.where(:versionable_type => 'Affiche')
+    pg = ProgressBar.new(versions.count)
+    versions.each do |v|
+      v.update_attribute :versionable_type, 'Afisha'
       pg.increment!
     end
   end
@@ -30,7 +49,6 @@ class RenameAfficheToAfisha < ActiveRecord::Migration
 
     attachments = Attachment.where(:attachable_type => 'Afisha')
     pg = ProgressBar.new(attachments.count)
-
     attachments.each do |a|
       a.update_attribute :attachable_type, 'Affiche'
       pg.increment!
@@ -38,9 +56,29 @@ class RenameAfficheToAfisha < ActiveRecord::Migration
 
     comments = Comment.where(:commentable_type => 'Afisha')
     pg = ProgressBar.new(comments.count)
-
     comments.each do |c|
       c.update_attribute :commentable_type, 'Affiche'
+      pg.increment!
+    end
+
+    visits = Visit.where(:visitable_type => 'Afisha')
+    pg = ProgressBar.new(visits.count)
+    visits.each do |v|
+      v.update_attribute :visitable_type, 'Affiche'
+      pg.increment!
+    end
+
+    votes = Vote.where(:voteable_type => 'Afisha')
+    pg = ProgressBar.new(votes.count)
+    votes.each do |v|
+      v.update_attribute :voteable_type, 'Affiche'
+      pg.increment!
+    end
+
+    versions = Version.where(:versionable_type => 'Afisha')
+    pg = ProgressBar.new(versions.count)
+    versions.each do |v|
+      v.update_attribute :versionable_type, 'Affiche'
       pg.increment!
     end
   end
