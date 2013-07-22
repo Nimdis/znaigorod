@@ -39,6 +39,7 @@ ru:
   edit_meal_suborganization: Редактировать информацию о заведении общественного питания
   edit_salon_center_suborganization: Редактировать информацию о салоне красоты
   edit_sauna_suborganization: Редактировать информацию о сауне
+  edit_sauna_hall: Редактирование информации о зале сауны
   edit_sport_suborganization: Редактировать информацию о спортивном заведении
   edit_travel_suborganization: Редактировать информацию о туристическом агенстве
   email: Почта
@@ -63,6 +64,7 @@ ru:
   new_meal_suborganization: Добавить информацию о заведении общественного питания
   new_salon_center_suborganization: Добавить информацию о салоне красоты
   new_sauna_suborganization: Добавить информацию о сауне
+  new_sauna_hall: Добавить информацию о зале сауны
   new_sport_suborganization: Добавить информацию о спортивном заведении
   new_travel_suborganization: Добавить информацию о туристическом агенстве
   organization: Заведения

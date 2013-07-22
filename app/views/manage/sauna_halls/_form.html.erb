@@ -1,81 +1,88 @@
-<%= f.input :title %>
-<%= f.input :description %>
+<%= simple_nested_form_for [@organization, resource], :url => [:manage, @organization, :sauna, resource], :html => { :novalidate => true } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description %>
 
-<div id="sauna_tabs">
-  <ul>
-    <li><a href="#sauna_hall_capacity_attributes">Вместительность</a></li>
-    <li><a href="#sauna_hall_entertainment_attributes">Развлечения</a></li>
-    <li><a href="#sauna_hall_schedules_attributes">Стоимость</a></li>
-    <li><a href="#sauna_hall_bath_attributes">Парные</a></li>
-    <li><a href="#sauna_hall_pool_attributes">Бассейн</a></li>
-    <li><a href="#sauna_hall_interior_attributes">Интерьер</a></li>
-    <li><a href="#sauna_virtual_tour">3D-тур</a></li>
-  </ul>
+  <div id="sauna_tabs">
+    <ul>
+      <li><a href="#sauna_hall_capacity_attributes">Вместительность</a></li>
+      <li><a href="#sauna_hall_entertainment_attributes">Развлечения</a></li>
+      <li><a href="#sauna_hall_schedules_attributes">Стоимость</a></li>
+      <li><a href="#sauna_hall_bath_attributes">Парные</a></li>
+      <li><a href="#sauna_hall_pool_attributes">Бассейн</a></li>
+      <li><a href="#sauna_hall_interior_attributes">Интерьер</a></li>
+      <li><a href="#sauna_virtual_tour">3D-тур</a></li>
+    </ul>
 
-  <div id="sauna_hall_capacity_attributes">
-    <%= f.simple_fields_for :sauna_hall_capacity_attributes, resource.sauna_hall_capacity || resource.build_sauna_hall_capacity do |capacity_form| %>
-      <%= capacity_form.input :default, :input_html => { :class => "required count" } %>
-      <%= capacity_form.input :maximal, :input_html => { :class => "required count" } %>
-      <%= capacity_form.input :extra_guest_cost, :input_html => { :class => "required cost" } %>
-    <% end %>
+    <div id="sauna_hall_capacity_attributes">
+      <%= f.simple_fields_for :sauna_hall_capacity_attributes, resource.sauna_hall_capacity || resource.build_sauna_hall_capacity do |capacity_form| %>
+        <%= capacity_form.input :default, :input_html => { :class => "required count" } %>
+        <%= capacity_form.input :maximal, :input_html => { :class => "required count" } %>
+        <%= capacity_form.input :extra_guest_cost, :input_html => { :class => "required cost" } %>
+      <% end %>
+    </div>
+
+    <div id="sauna_hall_entertainment_attributes">
+      <%= f.simple_fields_for :sauna_hall_entertainment_attributes, resource.sauna_hall_entertainment || resource.build_sauna_hall_entertainment do |entertainment_form| %>
+        <%= entertainment_form.input :guitar, :input_html => { :class => "cost" } %>
+        <%= entertainment_form.input :karaoke, :input_html => { :class => "cost" } %>
+        <%= entertainment_form.input :tv, :input_html => { :class => "cost" } %>
+        <%= entertainment_form.input :hookah, :input_html => { :class => "cost" } %>
+
+        <%= entertainment_form.input :billiard, :input_html => { :class => "cost" } %>
+        <%= entertainment_form.input :ping_pong, :input_html => { :class => "cost" } %>
+        <%= entertainment_form.input :aerohockey, :input_html => { :class => "cost" } %>
+
+        <%= entertainment_form.input :checkers, :input_html => { :class => "cost" } %>
+        <%= entertainment_form.input :chess, :input_html => { :class => "cost" } %>
+        <%= entertainment_form.input :backgammon, :input_html => { :class => "cost" } %>
+      <% end %>
+    </div>
+
+    <div id="sauna_hall_schedules_attributes">
+      <%= f.simple_fields_for :sauna_hall_schedules %>
+      <%= f.link_to_add 'Добавить интервал', :sauna_hall_schedules %>
+    </div>
+
+    <div id="sauna_hall_bath_attributes">
+      <%= f.simple_fields_for :sauna_hall_bath_attributes, resource.sauna_hall_bath || resource.build_sauna_hall_bath do |bath_form| %>
+        <%= bath_form.input :russian %>
+        <%= bath_form.input :finnish %>
+        <%= bath_form.input :turkish %>
+        <%= bath_form.input :japanese %>
+        <%= bath_form.input :infrared %>
+      <% end %>
+    </div>
+
+    <div id="sauna_hall_pool_attributes">
+      <%= f.simple_fields_for :sauna_hall_pool_attributes, resource.sauna_hall_pool || resource.build_sauna_hall_pool do |pool_form| %>
+        <%= pool_form.input :size %>
+        <%= pool_form.input :contraflow %>
+        <%= pool_form.input :geyser %>
+        <%= pool_form.input :waterfall %>
+        <%= pool_form.input :water_filter %>
+        <%= pool_form.input :jacuzzi %>
+        <%= pool_form.input :bucket %>
+      <% end %>
+    </div>
+
+    <div id="sauna_hall_interior_attributes">
+      <%= f.simple_fields_for :sauna_hall_interior_attributes, resource.sauna_hall_interior || resource.build_sauna_hall_interior do |interior_form| %>
+        <%= interior_form.input :pit %>
+        <%= interior_form.input :pylon %>
+        <%= interior_form.input :barbecue %>
+        <%= interior_form.input :floors, :input_html => { :class => "required count" } %>
+        <%= interior_form.input :lounges, :input_html => { :class => "required count" } %>
+      <% end %>
+    </div>
+
+    <div id="sauna_virtual_tour">
+      <%= render :partial => 'virtual_tour_form_fields', :locals => { :f => f } %>
+    </div>
   </div>
 
-  <div id="sauna_hall_entertainment_attributes">
-    <%= f.simple_fields_for :sauna_hall_entertainment_attributes, resource.sauna_hall_entertainment || resource.build_sauna_hall_entertainment do |entertainment_form| %>
-      <%= entertainment_form.input :guitar, :input_html => { :class => "cost" } %>
-      <%= entertainment_form.input :karaoke, :input_html => { :class => "cost" } %>
-      <%= entertainment_form.input :tv, :input_html => { :class => "cost" } %>
-      <%= entertainment_form.input :hookah, :input_html => { :class => "cost" } %>
-
-      <%= entertainment_form.input :billiard, :input_html => { :class => "cost" } %>
-      <%= entertainment_form.input :ping_pong, :input_html => { :class => "cost" } %>
-      <%= entertainment_form.input :aerohockey, :input_html => { :class => "cost" } %>
-
-      <%= entertainment_form.input :checkers, :input_html => { :class => "cost" } %>
-      <%= entertainment_form.input :chess, :input_html => { :class => "cost" } %>
-      <%= entertainment_form.input :backgammon, :input_html => { :class => "cost" } %>
-    <% end %>
+  <div class="actions">
+    <%= link_to "&larr; Назад".html_safe, :back %>
+    <%= f.submit 'Сохранить' %>
+    <%= link_to 'Удалить'.html_safe, manage_afisha_show_path(resource), method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
   </div>
-
-  <div id="sauna_hall_schedules_attributes">
-    <%= f.simple_fields_for :sauna_hall_schedules %>
-    <%= f.link_to_add 'Добавить интервал', :sauna_hall_schedules %>
-  </div>
-
-  <div id="sauna_hall_bath_attributes">
-    <%= f.simple_fields_for :sauna_hall_bath_attributes, resource.sauna_hall_bath || resource.build_sauna_hall_bath do |bath_form| %>
-      <%= bath_form.input :russian %>
-      <%= bath_form.input :finnish %>
-      <%= bath_form.input :turkish %>
-      <%= bath_form.input :japanese %>
-      <%= bath_form.input :infrared %>
-    <% end %>
-  </div>
-
-  <div id="sauna_hall_pool_attributes">
-    <%= f.simple_fields_for :sauna_hall_pool_attributes, resource.sauna_hall_pool || resource.build_sauna_hall_pool do |pool_form| %>
-      <%= pool_form.input :size %>
-      <%= pool_form.input :contraflow %>
-      <%= pool_form.input :geyser %>
-      <%= pool_form.input :waterfall %>
-      <%= pool_form.input :water_filter %>
-      <%= pool_form.input :jacuzzi %>
-      <%= pool_form.input :bucket %>
-    <% end %>
-  </div>
-
-  <div id="sauna_hall_interior_attributes">
-    <%= f.simple_fields_for :sauna_hall_interior_attributes, resource.sauna_hall_interior || resource.build_sauna_hall_interior do |interior_form| %>
-      <%= interior_form.input :pit %>
-      <%= interior_form.input :pylon %>
-      <%= interior_form.input :barbecue %>
-      <%= interior_form.input :floors, :input_html => { :class => "required count" } %>
-      <%= interior_form.input :lounges, :input_html => { :class => "required count" } %>
-    <% end %>
-  </div>
-
-  <div id="sauna_virtual_tour">
-    <%= render :partial => 'virtual_tour_form_fields', :locals => { :f => f } %>
-  </div>
-</div>
-
+<% end %>
