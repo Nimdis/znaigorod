@@ -1,28 +1,28 @@
 <div class="form_view">
-<h1>Редактирование билета</h1>
+  <h1>Редактирование билета</h1>
 
-<%= simple_nested_form_for [:manage, @ticket] do |f| %>
-  <%= f.input :original_price %>
-  <%= f.input :price %>
-  <%= f.input :organization_price %>
-  <%= f.input :description %>
-  <%= f.input :stale_at, :as => :date_picker %>
+  <%= simple_nested_form_for [:manage, @ticket] do |f| %>
+    <%= f.input :original_price %>
+    <%= f.input :price %>
+    <%= f.input :organization_price %>
+    <%= f.input :description %>
+    <%= f.input :stale_at, :as => :date_picker %>
 
-  <h5>Места</h5>
+    <h5>Места</h5>
 
-  <%= f.fields_for :copies, :wrapper => false do |copy_form| %>
-    <div class="input">
-      <label>Код билета:</label>
-      <div><%= copy_form.object.code %></div>
+    <%= f.fields_for :copies, :wrapper => false do |copy_form| %>
+      <div class="input">
+        <label>Код билета:</label>
+        <div><%= copy_form.object.code %></div>
+      </div>
+
+      <%= copy_form.input :row, :input_html => { :class => 'small_input' } %>
+      <%= copy_form.input :seat, :input_html => { :class => 'small_input' } %>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit 'Сохранить' %>
+      <%= link_to "Удалить", resource_url, method: :delete, confirm: "Уверен что хочешь удалить этот билет!?", class: :destroy %>
     </div>
-
-    <%= copy_form.input :row, :input_html => { :class => 'small_input' } %>
-    <%= copy_form.input :seat, :input_html => { :class => 'small_input' } %>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit 'Сохранить' %>
-    <%= link_to "Удалить", resource_url, method: :delete, confirm: "Уверен что хочешь удалить этот билет!?", class: :destroy %>
-  </div>
-<% end %>
 </div>

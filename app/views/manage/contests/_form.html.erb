@@ -8,9 +8,10 @@
     <%= f.input :description, :as => :ckeditor, :label => false %>
     <%= f.input :starts_on, :as => :string, :as => :date_picker %>
     <%= f.input :ends_on, :as => :string, :as => :date_picker %>
+
     <div class="actions">
       <%= link_to "&larr; Назад".html_safe, :back %>
-      <%= button_tag 'Сохранить'.html_safe %>
+      <%= f.submit 'Сохранить' %>
       <%= link_to 'Удалить'.html_safe, resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
     </div>
   <% end %>

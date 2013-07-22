@@ -1,14 +1,6 @@
 <%= render :partial => 'kind_links' %>
 
 <div class="new_link">
-  <ul>
-    <% Affiche.ordered_descendants.each do |type| %>
-      <% type_name = type.to_s.underscore %>
-      <% vfs_path = "/znaigorod/affiches/#{type_name.pluralize}/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}" %>
-      <li><%= link_to t("new_#{type.model_name.underscore}"), send("new_manage_#{type_name}_path", "#{type_name}[vfs_path]" => vfs_path) %></li>
-    <% end %>
-  </ul>
-
   <% vfs_path = "/znaigorod/affiches/organizations/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}" %>
   <%= link_to t('new_organization'), new_manage_organization_url(:params => {'organization[vfs_path]' => "#{vfs_path}"}), :class => 'new_resource' %>
 </div>

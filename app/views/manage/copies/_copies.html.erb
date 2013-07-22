@@ -14,12 +14,12 @@
           <li>
             <% if item.class.name.underscore == "ticket"  %>
               <p>
-                <%= link_to item.affiche.title, polymorphic_url([:manage, item.affiche]) %>
+                <%= link_to item.afisha.title, polymorphic_url([:manage, item.afisha]) %>
                 <%= link_to 'Редактировать', edit_manage_ticket_path(item) %>
               </p>
 
               <div class="poster">
-                <%= link_to image_tag_for(item.affiche.poster_url, 70, 100), manage_affiche_path(item.affiche) %>
+                <%= link_to image_tag_for(item.afisha.poster_url, 70, 100), manage_afisha_show_path(item.afisha) %>
               </div>
             <% else %>
               <p><%= link_to item.title, manage_coupon_path(item) %></p>
@@ -59,9 +59,9 @@
           <p>Коды для <%= link_to organization.title, organization_path(organization) %>:</p>
           <% items.each do |item| %>
             <% if item.class.name.underscore == "ticket"  %>
-              <% affiche = AfficheDecorator.new(item.affiche) %>
+              <% afisha = AfishaDecorator.new(item.afisha) %>
               <p>
-                <%= link_to "#{affiche.human_when} #{affiche.title}".html_safe, affiche.kind_affiche_path %> -
+                <%= link_to "#{afisha.human_when} #{afisha.title}".html_safe, manage_afisha_show_path(afisha) %> -
                 <%= item.copies.map(&:code).join(', ') %>
                 (<%= item.description %>)
               </p>

@@ -1,38 +1,32 @@
-<div class='form_view'>
-  <%= simple_nested_form_for @coupon, :url => [:manage, @coupon], :html => { :novalidate => true }  do |f| %>
-    <%= f.input :kind, 
-      :as => :select, 
-      :selected => f.object.kind,
-      :include_blank => false %>
-    <%= f.input :categories, :as => :check_boxes , :wrapper_html => { :class => :category_list }%>
-    <%= f.input :title %>
-    <%= f.input :description, input_html: { class: 'coupon_description' }  %>
-    <%  unless f.object.image_url? %>
-      <%= f.input :image %>
-    <% else %>
-      <div class='input_with_image'>
-        <%= image_tag f.object.image_url %>
-        <%= link_to "удалить изображение", '#', class: :remove %>
-        <%= f.input :image, wrapper_html: { class: :hidden } %>
-      </div>
-    <% end %>
-    <%= f.input :organization_id, :as => :hidden, :input_html => { :class => 'autosuggest_target', :value => f.object.get_organization_id } %>
-    <%= f.input :place, :input_html => { :class => 'autosuggest' , :value => f.object.organization_id ? Organization.find(f.object.organization_id) : f.object.place} %>
-    <%= f.input :complete_at, :as => :date_picker %>
-    <%= f.input :stale_at, :as => :date_picker %>
-    <%= f.input :price_without_discount %>
-    <%= f.input :price_with_discount %>
-    <%= f.input :price %>
-    <%= f.input :discount %>
-    <%= f.input :organization_quota %>
-    <%= f.input :affiliate_url %>
-    <%= f.input :number %>
-
-
-    <div class="actions">
-      <%= link_to "&larr; Назад".html_safe, :back %>
-      <%= button_tag 'Сохранить'.html_safe %>
-      <%= link_to 'Удалить'.html_safe, resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
+<%= simple_nested_form_for @coupon, :url => [:manage, @coupon], :html => { :novalidate => true }  do |f| %>
+  <%= f.input :kind, :as => :select, :selected => f.object.kind, :include_blank => false %>
+  <%= f.input :categories, :as => :check_boxes , :wrapper_html => { :class => :category_list } %>
+  <%= f.input :title %>
+  <%= f.input :description, input_html: { class: 'coupon_description' } %>
+  <%  unless f.object.image_url? %>
+    <%= f.input :image %>
+  <% else %>
+    <div class='input_with_image'>
+      <%= image_tag f.object.image_url %>
+      <%= link_to "удалить изображение", '#', class: :remove %>
+      <%= f.input :image, wrapper_html: { class: :hidden } %>
     </div>
   <% end %>
-</div>
+  <%= f.input :organization_id, :as => :hidden, :input_html => { :class => 'autosuggest_target', :value => f.object.get_organization_id } %>
+  <%= f.input :place, :input_html => { :class => 'autosuggest' , :value => f.object.organization_id ? Organization.find(f.object.organization_id) : f.object.place} %>
+  <%= f.input :complete_at, :as => :date_picker %>
+  <%= f.input :stale_at, :as => :date_picker %>
+  <%= f.input :price_without_discount %>
+  <%= f.input :price_with_discount %>
+  <%= f.input :price %>
+  <%= f.input :discount %>
+  <%= f.input :organization_quota %>
+  <%= f.input :affiliate_url %>
+  <%= f.input :number %>
+
+  <div class="actions">
+    <%= link_to "&larr; Назад".html_safe, :back %>
+    <%= f.submit 'Сохранить' %>
+    <%= link_to 'Удалить'.html_safe, resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
+  </div>
+<% end %>

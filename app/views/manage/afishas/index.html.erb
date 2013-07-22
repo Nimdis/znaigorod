@@ -1,1 +1,23 @@
-<%= render :file => 'manage/application/index', :locals => { :collection => @afisha } %>
+<%= render :partial => 'kind_links' %>
+
+<div class="new_link">
+  <% vfs_path = "/znaigorod/afisha/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}" %>
+  <%= link_to t("new_afisha"), new_manage_afisha_path(:params => {"#{resource_class.to_s.underscore}[vfs_path]" => "#{vfs_path}"}), :class => 'new_resource' %>
+</div>
+
+<div class="clearfix"></div>
+
+<ul class='collection'>
+  <% collection.each do |item| %>
+    <li>
+      <%= image_tag(resized_image_url(item.poster_url, 30, 50, false)) if item.poster_url? %>
+      <%= link_to item.title, [:manage, item] %>
+      <%= item.user.name if item.user_id? %>
+      <%= content_tag :span, item.total_rating.round(2), :class => 'rating' %>
+      <%= content_tag :span, item.human_state_name, :class => 'state' if item.class.superclass == Afisha %>
+      <%= content_tag :span, item.kind.map(&:text).join(', '), :class => 'category' %>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate collection %>

@@ -22,19 +22,9 @@ ru:
   delete: Удалить
   eating: Заведения
   edit: Редактировать
-  edit_afisha:  Редактировать информацию о мероприятии
-  edit_concert: Редактировать информацию о концерте
-  edit_contest: Редактировать информацию о конкурсе
-  edit_competition: Редактировать информацию о конкурсе
-  edit_coupon: Редактировать купон
-  edit_exhibition: Редактировать информацию о выставке
-  edit_master_class: Редактировать информацию о мастер-классе
-  edit_movie: Редактировать информацию о фильме
-  edit_organization: Редактировать информацию о заведении
-  edit_other: Редактировать информацию о событии
-  edit_party: Редактировать информацию о вечеринке
-  edit_spectacle: Редактировать информацию о спектакле
-  edit_sports_event: Редактировать информацию о спортивном событии
+  edit_afisha: Редактировать информацию о мероприятии
+  edit_coupon: Редактирование информации о купоне
+  edit_contest: Редактирование информации о конкурсе
   edit_suborganization: Редактировать информацию о подзаведении
   email: Почта
   entertainment: Развлечения
@@ -43,18 +33,8 @@ ru:
   meal: Заведения питания
   name: Имя
   new_afisha: Добавить новое событие
-  new_concert: Новый концерт
-  new_contest: Новый конкурс
-  new_competition: Новый конкурс
-  new_coupon: Добавить купон
-  new_exhibition: Новая выставка
-  new_master_class: Новый мастер-класс
-  new_movie: Новый фильм
-  new_organization: Добавить новое заведение
-  new_other: Новое другое
-  new_party: Новая вечеринка
-  new_spectacle: Новый спектакль
-  new_sports_event: Новое спортивное мероприятие
+  new_coupon: Добавление купона
+  new_contest: Добавить конкурс
   organization: Заведения
   organizations: Заведения
   our_social_link: Контакты
