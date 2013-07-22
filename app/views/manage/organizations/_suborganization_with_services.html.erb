@@ -29,7 +29,7 @@
       </span>
     </div>
 
-    <%= simple_form_for resource.gallery_images.new, :url => manage_organization_gallery_images_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+    <%= simple_form_for resource.gallery_images.new, :url => [:manage, resource, resource.gallery_images.new], :html => { :multipart => true, :class => 'file_upload' } do |f| %>
       <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_images[file]' } %>
     <% end %>
   </div>
@@ -44,7 +44,5 @@
   </div>
 
   <%= render 'services' %>
-  <% if resource.is_a?(Meal) %>
-    <%= render 'menus' %>
-<% end %>
+  <%= render 'menus' if resource.is_a?(Meal) %>
 </div>

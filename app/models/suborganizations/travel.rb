@@ -2,6 +2,7 @@
 
 class Travel < ActiveRecord::Base
   include HasVirtualTour
+  include HasServices
 
   attr_accessible :category, :description, :title, :offer, :feature
 
@@ -16,6 +17,7 @@ class Travel < ActiveRecord::Base
   def vfs_path
     "#{organization.vfs_path}/#{self.class.name.underscore}"
   end
+
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
 
   def sunspot_index
