@@ -2,7 +2,9 @@
     <% if visitable.visits.count > 6 %>
       <%= link_to t(:visitors, :count => visitable.visits.visited.count, :scope => visitable.kind.values.first), polymorphic_url([visitable, :visitors]), :remote => true %>
     <% else %>
-      <span><%= t(:visitors, :count => visitable.visits.visited.count, :scope => visitable.kind.values.first) %></span>
+      <span>
+        <%= t(:visitors, :count => visitable.visits.visited.count, :scope => visitable.is_a?(Afisha) ? visitable.kind.values.first : visitable.class.name.underscore) %>
+      </span>
     <% end %>
 
     <% if visitable.visits.visited.any? %>
@@ -20,10 +22,9 @@
 
 <div class="user_like">
   <% if current_user && current_user.visited?(visitable) %>
-    <%= link_to t('leave', :scope => visitable.kind.values.first),
-      polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true %>
+    <%= link_to t('leave', :scope => visitable.is_a?(Afisha) ? visitable.kind.values.first : visitable.class.name.underscore), polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true %>
   <% else %>
-    <%= link_to t('join', :scope => visitable.kind.values.first), polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true, :class => 'button' %>
+    <%= link_to t('join', :scope => visitable.is_a?(Afisha) ? visitable.kind.values.first : visitable.class.name.underscore), polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true, :class => 'button' %>
   <% end %>
 </div>
 

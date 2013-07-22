@@ -24,7 +24,7 @@ class Visit < ActiveRecord::Base
     end
 
     def update_visitable_rating
-      visitable.update_rating if (Afisha.kind.values & visitable.kind).any?
+      visitable.update_rating if visitable.is_a?(Afisha) && (Afisha.kind.values & visitable.kind).any?
     end
 end
 
