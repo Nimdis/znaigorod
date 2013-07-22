@@ -1,7 +1,15 @@
-<%= f.input :title %>
-<%= f.input :description %>
-<%= f.input :category_list, :as => :check_boxes, :collection => f.object.available_categories, :checked => f.object.categories, :wrapper_html => { :class => :category_list } %>
-<%= f.input :feature_list, :as => :check_boxes, :collection => f.object.available_features, :checked => f.object.features %>
-<%= f.input :offer_list, :as => :check_boxes, :collection => f.object.available_offers, :checked => f.object.offers %>
+<%= simple_nested_form_for [@organization, resource], :url => [:manage, @organization, :salon_center], :html => { :novalidate => true } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :category_list, :as => :check_boxes, :collection => f.object.available_categories, :checked => f.object.categories, :wrapper_html => { :class => :category_list } %>
+  <%= f.input :feature_list, :as => :check_boxes, :collection => f.object.available_features, :checked => f.object.features %>
+  <%= f.input :offer_list, :as => :check_boxes, :collection => f.object.available_offers, :checked => f.object.offers %>
 
-<%= render :partial => 'virtual_tour_form_fields', :locals => { :f => f } %>
+  <%= render :partial => 'virtual_tour_form_fields', :locals => { :f => f } %>
+
+  <div class="actions">
+    <%= link_to "&larr; Назад".html_safe, :back %>
+    <%= f.submit 'Сохранить' %>
+    <%= link_to 'Удалить'.html_safe, manage_afisha_show_path(resource), method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
+  </div>
+<% end %>

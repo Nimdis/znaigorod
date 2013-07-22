@@ -1,10 +1,17 @@
-<%= f.input :kind %>
-<%= f.input :size %>
-<%= f.input :count %>
+<%= simple_nested_form_for [@organization, resource], :url => [:manage, @organization, :billiard, resource], :html => { :novalidate => true } do |f| %>
+  <%= f.input :kind %>
+  <%= f.input :size %>
+  <%= f.input :count %>
 
-<fieldset id="pool_table_prices">
-  <legend>Цена по дням недели и часам</legend>
-  <%= f.simple_fields_for :pool_table_prices %>
-  <p class="add"><%= f.link_to_add 'Добавить интервал стоимости', :pool_table_prices %></p>
-</div>
+  <fieldset id="pool_table_prices">
+    <legend>Цена по дням недели и часам</legend>
+    <%= f.simple_fields_for :pool_table_prices %>
+    <p class="add"><%= f.link_to_add 'Добавить интервал стоимости', :pool_table_prices %></p>
+  </div>
 
+  <div class="actions">
+    <%= link_to "&larr; Назад".html_safe, :back %>
+    <%= f.submit 'Сохранить' %>
+    <%= link_to 'Удалить'.html_safe, manage_afisha_show_path(resource), method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
+  </div>
+<% end %>

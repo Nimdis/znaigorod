@@ -25,7 +25,22 @@ ru:
   edit_afisha: Редактировать информацию о мероприятии
   edit_coupon: Редактирование информации о купоне
   edit_contest: Редактирование информации о конкурсе
+  edit_organization: Редактировать информации о заведении
   edit_suborganization: Редактировать информацию о подзаведении
+  edit_billiard_suborganization: Редактировать информацию о бильярдном зале
+  edit_pool_table: Редактировать информацию о бильярдных столах
+  edit_car_sales_center_suborganization: Редактировать информацию о автосалоне
+  edit_car_service_center_suborganization: Редактировать информацию о автосервисе
+  edit_car_wash_suborganization: Редактировать информацию о автомойке
+  edit_creation_suborganization: Редактировать информацию о творческом и развивающем заведении
+  edit_culture_suborganization: Редактировать информацию о культурном
+  edit_entertainment_suborganization: Редактировать информацию о развлекательном
+  edit_hotel_suborganization: Редактировать информацию о отеле
+  edit_meal_suborganization: Редактировать информацию о заведении общественного питания
+  edit_salon_center_suborganization: Редактировать информацию о салоне красоты
+  edit_sauna_suborganization: Редактировать информацию о сауне
+  edit_sport_suborganization: Редактировать информацию о спортивном заведении
+  edit_travel_suborganization: Редактировать информацию о туристическом агенстве
   email: Почта
   entertainment: Развлечения
   find: Найти
@@ -35,6 +50,21 @@ ru:
   new_afisha: Добавить новое событие
   new_coupon: Добавление купона
   new_contest: Добавить конкурс
+  new_organization: Добавить организацию
+  new_billiard_suborganization: Добавить информацию о бильярдном зале
+  new_pool_table: Добавление бильярдных столов
+  new_car_sales_center_suborganization: Добавить информацию о автосалоне
+  new_car_service_center_suborganization: Добавить информацию о автосервисе
+  new_car_wash_suborganization: Добавить информацию о автомойке
+  new_creation_suborganization: Добавить информацию о творческом и развивающем заведении
+  new_culture_suborganization: Добавить информацию о культурном
+  new_entertainment_suborganization: Добавить информацию о развлекательном
+  new_hotel_suborganization: Добавить информацию о отеле
+  new_meal_suborganization: Добавить информацию о заведении общественного питания
+  new_salon_center_suborganization: Добавить информацию о салоне красоты
+  new_sauna_suborganization: Добавить информацию о сауне
+  new_sport_suborganization: Добавить информацию о спортивном заведении
+  new_travel_suborganization: Добавить информацию о туристическом агенстве
   organization: Заведения
   organizations: Заведения
   our_social_link: Контакты

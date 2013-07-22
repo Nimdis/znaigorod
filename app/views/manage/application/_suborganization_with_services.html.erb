@@ -1,9 +1,9 @@
 <div class="show">
-  <h1>
+  <h3>
     <%= link_to resource.organization, manage_organization_path(resource.organization) %> /
     <%= resource.title %>
     <%= link_to t("edit_suborganization"), [:edit, :manage, resource.organization, resource.class.model_name.underscore], :class => 'edit_link' %>
-  </h1>
+  </h3>
 
   <% %w[title description category feature offer].each do |attribute| %>
     <% if resource.respond_to?(attribute) %>
