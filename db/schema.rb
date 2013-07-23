@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716083313) do
+ActiveRecord::Schema.define(:version => 20130723085010) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -842,6 +842,7 @@ ActiveRecord::Schema.define(:version => 20130716083313) do
     t.text     "auth_raw_info"
     t.datetime "remember_created_at"
     t.string   "remember_token"
+    t.string   "rating"
   end
 
   create_table "versions", :force => true do |t|

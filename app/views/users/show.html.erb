@@ -1,0 +1,33 @@
+<div class="content_wrapper">
+  <div class="profile">
+
+    <div class="avatar">
+      <%= image_tag @user.avatar, size: '50x50' if @user.avatar.present? %>
+    </div>
+    <div class="info">
+      <div class="login">
+        <%= @user %>
+      </div>
+
+      <div class="provider <%= @user.provider %>">
+        <%= link_to @user.profile, @user.profile %>
+      </div>
+
+      <div class="join">
+        <%= time_ago_in_words(@user.created_at) %> на сайте
+      </div>
+      <div class="activities">
+        <span class="comment">
+          <%= t :user_comments, :count => @user.comments.count %>
+        </span>
+        <span class="vote">
+          <%= t :user_votes, :count => @user.votes.count %>
+        </span>
+        <span class="visit">
+          <%= t :user_visits, :count => @user.visits.count %>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div>

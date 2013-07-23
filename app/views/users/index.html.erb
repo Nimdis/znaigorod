@@ -1,0 +1,25 @@
+<div class="content_wrapper">
+  <h1>Пользователи</h1>
+
+  <div class="left_part">
+    <div class="user_search">
+      <%= simple_form_for :search, method: :get do |f| %>
+        <%= f.input :name, label: false, input_html: { class: 'user_name' }, placeholder: 'Фамилия или имя пользователя' %>
+        <%= f.submit 'Найти', class: 'submit' %>
+      <% end %>
+    </div>
+
+    <ul class='users_list'>
+      <%= render :partial => 'users_list', :locals => { :collection => collection } %>
+    </ul>
+  </div>
+
+  <div class="right_part">
+    <% unless user_signed_in? %>
+      <p>Чтобы стать пользователем информационного портала «ЗнайГород» войдите с помощью одной из социальных сетей:</p>
+      <%= render :partial => 'commons/social_auth' %>
+    <% end %>
+  </div>
+</div>
+
+<%= paginate collection %>

@@ -25,6 +25,11 @@ class User < ActiveRecord::Base
   scope :with_role,      ->(role) { joins(:roles).where('roles.role = ?', role) }
   scope :sales_managers, -> { with_role(:sales_manager) }
 
+  searchable do
+    text :name
+    double :rating
+  end
+
   def self.find_or_create_by_oauth(auth_raw_info)
     provider, uid = auth_raw_info.provider, auth_raw_info.uid.to_s
 
@@ -101,6 +106,10 @@ class User < ActiveRecord::Base
     is_sales_manager? && organization.manager == self
   end
 
+  def update_rating
+    rating = self.comments.count * 0.5 + self.votes.count * 0.25 + self.visits.count * 0.25
+    update_column(:rating, rating)
+  end
 end
 
 # == Schema Information

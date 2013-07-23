@@ -45,6 +45,7 @@ $ ->
   init_loading_items() if $('.content_wrapper ul.sauna_list li').length
   init_loading_items() if $('.content_wrapper .tickets_list li').length
   init_loading_items() if $('.content_wrapper .coupons_list li').length
+  init_loading_items() if $('.content_wrapper .users_list li').length
   init_affiche_list_settings() if $('.content_wrapper .affiches_list .list_settings').length
   init_sms_claims() if $('.sms_claims li').length
   init_swfkrpano() if $('#krpano').length

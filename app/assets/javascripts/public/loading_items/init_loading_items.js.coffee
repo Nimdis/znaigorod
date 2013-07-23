@@ -10,7 +10,8 @@
     '.content_wrapper ul.sauna_list,' +
     '.content_wrapper .search_results ul.items_list,' +
     '.content_wrapper .tickets_list,' +
-    '.content_wrapper .coupons_list'
+    '.content_wrapper .coupons_list,' +
+    '.content_wrapper .users_list'
   )
   first_item = $('li:first', list)
   return true unless first_item.length
