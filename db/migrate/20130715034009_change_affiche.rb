@@ -30,7 +30,7 @@ end
 
 class ChangeAffiche < ActiveRecord::Migration
   def up
-    add_column :affiches, :kind, :text, default: []
+    add_column :affiches, :kind, :text
 
     pg = ProgressBar.new(Affiche.all.count)
 
