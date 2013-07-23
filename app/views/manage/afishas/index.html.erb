@@ -10,11 +10,15 @@
 <ul class='collection'>
   <% collection.each do |item| %>
     <li>
-      <%= image_tag(resized_image_url(item.poster_url, 30, 50, false)) if item.poster_url? %>
+      <% if item.poster_url? %>
+        <%= image_tag(resized_image_url(item.poster_url, 40, 60, false), size: '40x60') %>
+      <% else %>
+        <%= image_tag 'public/stub_poster.png', size: '40x60' %>
+      <% end %>
       <%= link_to item.title, [:manage, item] %>
       <%= item.user.name if item.user_id? %>
       <%= content_tag :span, item.total_rating.round(2), :class => 'rating' %>
-      <%= content_tag :span, item.human_state_name, :class => 'state' if item.class.superclass == Afisha %>
+      <%= content_tag :span, item.human_state_name, :class => 'state' %>
       <%= content_tag :span, item.kind.map(&:text).join(', '), :class => 'category' %>
     </li>
   <% end %>
