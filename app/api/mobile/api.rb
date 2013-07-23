@@ -21,10 +21,10 @@ module Mobile
 
       def subcategories(kind)
         [
-          { category: 'Все',  url:  "#{base_path}/#{kind}/all/creation"},
-          { category: 'Сегодня',  url:  "#{base_path}/#{kind}/today/creation"},
-          { category: 'На неделе',  url:  "#{base_path}/#{kind}/week/creation"},
-          { category: 'На выходных',  url:  "#{base_path}/#{kind}/weekend/creation"}
+          { category: 'Все',  url:  "#{base_path}/#{kind}/all"},
+          { category: 'Сегодня',  url:  "#{base_path}/#{kind}/today"},
+          { category: 'На неделе',  url:  "#{base_path}/#{kind}/week"},
+          { category: 'На выходных',  url:  "#{base_path}/#{kind}/weekend"}
         ]
       end
 
@@ -44,11 +44,11 @@ module Mobile
     resource :affisha do
 
       get '/categories' do
-        categories = [ {category: 'Все мероприятия', url: "#{base_path}/all/all/creation", subcategories: subcategories('all') }]
+        categories = [ {category: 'Все мероприятия', url: "#{base_path}/all/all", subcategories: subcategories('all') }]
         categories += Affiche.ordered_descendants.map do |affiche_class|
           {
             category: affiche_class.model_name.human,
-            url: "#{base_path}/#{affiche_class.name.downcase.pluralize}/all/creation",
+            url: "#{base_path}/#{affiche_class.name.downcase.pluralize}/all",
             subcategories: subcategories(affiche_class.name.downcase.pluralize)
           }
         end
