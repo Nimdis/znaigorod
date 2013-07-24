@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130723085010) do
+ActiveRecord::Schema.define(:version => 20130724045828) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "patronymic"
+    t.string   "email"
+    t.string   "rating"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -843,7 +853,10 @@ ActiveRecord::Schema.define(:version => 20130723085010) do
     t.datetime "remember_created_at"
     t.string   "remember_token"
     t.string   "rating"
+    t.integer  "account_id"
   end
+
+  add_index "users", ["account_id"], :name => "index_users_on_account_id"
 
   create_table "versions", :force => true do |t|
     t.text     "body"
