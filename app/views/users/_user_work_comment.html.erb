@@ -1,0 +1,18 @@
+<div class="poster">
+  <% if comment.commentable.image_url? %>
+    <%= image_tag(resized_image_url(comment.commentable.image_url, 40, 54, true), size: '40x54') %>
+  <% else %>
+    <%= image_tag 'public/stub_poster.png', size: '40x54' %>
+  <% end %>
+</div>
+<div class="user_comment">
+  <div class="kind">
+    <%= t("user_activity.kind.#{comment.commentable_type.downcase}") %>
+  </div>
+  <div class="title">
+    <%= link_to comment.commentable.contest.title, contest_work_path(comment.commentable.contest, comment.commentable) %>
+  </div>
+  <div class="body">
+    <%= comment.body %>
+  </div>
+</div>

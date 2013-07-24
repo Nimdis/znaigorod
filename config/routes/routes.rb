@@ -94,7 +94,9 @@ Znaigorod::Application.routes.draw do
 
   resources :service_payments, :only => [:new, :create]
 
-  resources :users, :only => [:index, :show]
+  resources :users, :only => [:index, :show] do
+    resources :comments, :only => :index
+  end
 
   get 'feedback' => 'feedback#new', :as => :new_feedback
   post 'feedback' => 'feedback#create', :as => :create_feedback

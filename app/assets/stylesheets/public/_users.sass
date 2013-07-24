@@ -97,3 +97,59 @@
     p
       font-size: 16px
       line-height: 20px
+
+  .profile
+    .avatar
+      +clearfix
+      margin: 0 10px 0 0
+      float: left
+
+      img
+        border: 1px solid #ccc
+        padding: 2px
+
+    .info
+      height: 65px
+
+      .login
+        font-size: 16px
+        line-height: 28px
+
+      .join
+        color: #777
+
+      .provider
+        &.twitter
+
+    h3
+      font-size: 16px
+      line-height: 18px
+      margin: 0 0 10px 0
+
+      a
+        font-size: 12px
+
+  ul
+    &.user_comments, &.user_votes, &.user_visits
+      li
+        +clearfix
+        margin: 0 0 20px 0
+
+        .poster
+          +clearfix
+          margin: 0 10px 0 0
+          float: left
+
+        .kind
+          color: #777
+          font-size: 12px
+          line-height: 16px
+
+        .body
+          margin: 4px 0 0 0
+
+        a
+          font-size: 14px
+          line-height: 20px
+
+

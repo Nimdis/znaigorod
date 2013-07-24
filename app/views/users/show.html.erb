@@ -1,8 +1,13 @@
 <div class="content_wrapper">
-  <div class="profile">
+  <%= render_navigation context: 'user', :renderer => :breadcrumbs %>
 
+  <div class="profile">
     <div class="avatar">
-      <%= image_tag @user.avatar, size: '50x50' if @user.avatar.present? %>
+      <% if @user.avatar.present? %>
+        <%= image_tag @user.avatar, size: '50x50' %>
+      <% else %>
+        <%= image_tag 'public/stub_poster.png', size: '50x50' %>
+      <% end %>
     </div>
     <div class="info">
       <div class="login">
@@ -16,18 +21,30 @@
       <div class="join">
         <%= time_ago_in_words(@user.created_at) %> на сайте
       </div>
-      <div class="activities">
-        <span class="comment">
-          <%= t :user_comments, :count => @user.comments.count %>
-        </span>
-        <span class="vote">
-          <%= t :user_votes, :count => @user.votes.count %>
-        </span>
-        <span class="visit">
-          <%= t :user_visits, :count => @user.visits.count %>
-        </span>
-      </div>
     </div>
 
+    <% if @user.comments.any? %>
+      <h3>
+        Комментарии
+        <%= link_to t('all_user_comments'), user_comments_path(@user) %>
+      </h3>
+      <%= render partial: 'user_comments', locals: { comments: @user.comments.limit(5) } %>
+    <% end %>
+
+    <% if @user.votes.any? %>
+      <h3>
+        Понравилось
+        <%= link_to t('all_user_votes'), '#' %>
+      </h3>
+      <%= render partial: 'user_votes', locals: { votes: @user.votes.limit(5) } %>
+    <% end %>
+
+    <% if @user.visits.any? %>
+      <h3>
+        Посетил
+        <%= link_to t('all_user_visits'), '#' %>
+      </h3>
+      <%= render partial: 'user_visits', locals: { visits: @user.visits.limit(5) } %>
+    <% end %>
   </div>
 </div>

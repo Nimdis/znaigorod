@@ -1,4 +1,6 @@
 <div class="content_wrapper">
+  <%= render_navigation context: 'user', :renderer => :breadcrumbs %>
+
   <h1>Пользователи</h1>
 
   <div class="left_part">
@@ -10,7 +12,7 @@
     </div>
 
     <ul class='users_list'>
-      <%= render :partial => 'users_list', :locals => { :collection => collection } %>
+      <%= render :partial => 'users_list', :locals => { collection: collection } %>
     </ul>
   </div>
 
