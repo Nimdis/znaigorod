@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class User < ActiveRecord::Base
-  attr_accessible :uid, :provider, :auth_raw_info, :roles_attributes
+  attr_accessible :uid, :provider, :auth_raw_info, :roles_attributes, :account_id
 
   devise :trackable, :omniauthable, :rememberable,
     omniauth_providers: [:vkontakte, :google_oauth2, :yandex, :facebook, :twitter, :odnoklassniki, :mailru]
@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   has_many :visits
   has_many :payments
   has_many :events, :class_name => 'Afisha'
+
+  belongs_to :account
 
   serialize :auth_raw_info
 
@@ -41,6 +43,14 @@ class User < ActiveRecord::Base
 
   def name
     auth_raw_info.try(:info).try(:name) || 'Mister X'
+  end
+
+  def nickname
+    auth_raw_info.try(:info).try(:nickname)
+  end
+
+  def location
+    auth_raw_info.try(:info).try(:location)
   end
 
   alias_attribute :to_s, :name
