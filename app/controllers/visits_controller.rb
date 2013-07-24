@@ -4,8 +4,9 @@ class VisitsController < ApplicationController
   custom_actions :collection => [:change_visit, :visitors]
 
   belongs_to :afisha, :organization, :polymorphic => true, :optional => true
+  belongs_to :user, :optional => true
 
-  layout false
+  layout false unless :index
 
   def change_visit
     change_visit!{

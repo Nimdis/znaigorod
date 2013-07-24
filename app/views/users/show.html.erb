@@ -34,7 +34,7 @@
     <% if @user.votes.any? %>
       <h3>
         Понравилось
-        <%= link_to t('all_user_votes'), '#' %>
+        <%= link_to t('all_user_votes'), user_votes_path(@user) %>
       </h3>
       <%= render partial: 'user_votes', locals: { votes: @user.votes.limit(5) } %>
     <% end %>
@@ -42,7 +42,7 @@
     <% if @user.visits.any? %>
       <h3>
         Посетил
-        <%= link_to t('all_user_visits'), '#' %>
+        <%= link_to t('all_user_visits'), user_visits_path(@user) %>
       </h3>
       <%= render partial: 'user_visits', locals: { visits: @user.visits.limit(5) } %>
     <% end %>

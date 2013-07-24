@@ -96,6 +96,8 @@ Znaigorod::Application.routes.draw do
 
   resources :users, :only => [:index, :show] do
     resources :comments, :only => :index
+    resources :visits, :only => :index
+    resources :votes, :only => :index
   end
 
   get 'feedback' => 'feedback#new', :as => :new_feedback

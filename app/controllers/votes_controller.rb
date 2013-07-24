@@ -9,8 +9,9 @@ class VotesController < ApplicationController
   belongs_to :organization, :polymorphic => true, :optional => true
   belongs_to :work, :polymorphic => true, :optional => true
   belongs_to :post, :polymorphic => true, :optional => true
+  belongs_to :user, :optional => true
 
-  layout false
+  layout false unless :index
 
   def change_vote
     change_vote!{

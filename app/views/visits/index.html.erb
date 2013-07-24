@@ -1,0 +1,4 @@
+<div class="content_wrapper">
+  <h1>Все посещения пользователя <%= link_to @user, @user %></h1>
+  <%= render partial: 'users/user_visits', locals: { visits: collection } %>
+</div>
