@@ -6,7 +6,7 @@
   <div class="left_part">
     <div class="user_search">
       <%= simple_form_for :search, method: :get do |f| %>
-        <%= f.input :name, label: false, input_html: { class: 'user_name' }, placeholder: 'Фамилия или имя пользователя' %>
+        <%= f.input :name, label: false, input_html: { class: 'user_name', value: params[:search] ? params[:search][:name] : '' }, placeholder: 'Фамилия или имя пользователя' %>
         <%= f.submit 'Найти', class: 'submit' %>
       <% end %>
     </div>
