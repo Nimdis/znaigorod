@@ -1,0 +1,15 @@
+<div class="poster">
+  <% if event.poster_url? %>
+    <%= image_tag(resized_image_url(event.poster_url, 40, 54, true), size: '40x54') %>
+  <% else %>
+    <%= image_tag 'public/stub_poster.png', size: '40x54' %>
+  <% end %>
+</div>
+<div class="user_comment">
+  <div class="kind">
+    <%= t("user_activity.kind.#{event.kind.first.text}") %>
+  </div>
+  <div class="title">
+    <%= link_to event.title, afisha_show_path(event) %>
+  </div>
+</div>

@@ -47,12 +47,20 @@
       <%= render partial: 'user_visits', locals: { visits: @user.visits.limit(5) } %>
     <% end %>
 
-    <% if @user.payments.any? %>
+    <% if @user.payments.with_state(:approved).any? %>
       <h3>
         Купил билет
         <%= link_to t('all_user_payments'), user_payments_path(@user) %>
       </h3>
       <%= render partial: 'user_payments', locals: { payments: @user.payments.with_state(:approved).limit(5) } %>
+    <% end %>
+
+    <% if @user.afisha.published.any? %>
+      <h3>
+        Добавил мероприятие
+        <%= link_to t('all_user_events'), user_events_path(@user) %>
+      </h3>
+      <%= render partial: 'user_events', locals: { events: @user.afisha.published.limit(5) } %>
     <% end %>
   </div>
 </div>

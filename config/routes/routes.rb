@@ -95,6 +95,7 @@ Znaigorod::Application.routes.draw do
   resources :service_payments, :only => [:new, :create]
 
   resources :users, :only => [:index, :show] do
+    resources :events, :only => :index
     resources :comments, :only => :index
     resources :payments, :only => :index
     resources :visits, :only => :index

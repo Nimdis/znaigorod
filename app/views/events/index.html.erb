@@ -1,0 +1,4 @@
+<div class="content_wrapper">
+  <h1>Все мероприятия пользователя <%= link_to @user, @user %></h1>
+  <%= render partial: 'users/user_events', locals: { events: collection.published } %>
+</div>

@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :votes
   has_many :visits
   has_many :payments
+  has_many :events, :class_name => 'Afisha'
 
   serialize :auth_raw_info
 
