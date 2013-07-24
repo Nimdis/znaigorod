@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
   scope :with_role,      ->(role) { joins(:roles).where('roles.role = ?', role) }
   scope :sales_managers, -> { with_role(:sales_manager) }
 
+  after_create :create_account
+
   searchable do
     text :name
     double :rating
@@ -120,6 +122,14 @@ class User < ActiveRecord::Base
   def update_rating
     rating = self.comments.count * 0.5 + self.votes.count * 0.25 + self.visits.count * 0.25
     update_column(:rating, rating)
+  end
+
+  private
+
+  def create_account
+    name = self.name.split(' ')
+    account = Account.create(first_name: name.first, last_name: name.last, nickname: self.nickname, location: self.location)
+    update_attributes(account_id: account.id)
   end
 end
 
