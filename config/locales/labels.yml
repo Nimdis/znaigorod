@@ -15,6 +15,7 @@ ru:
   all_user_comments: Все комментарии
   all_user_votes: Все что понравилось
   all_user_visits: Все посещения
+  all_user_payments: Все приобретенные билеты
   back: Назад
   choose_file: Выбрать файл
   clear_filters: Очистить фильтры
@@ -95,6 +96,7 @@ ru:
   user_activity:
     kind:
       afisha: Афиша
+      ticket: Афиша
       organization: Организация
       work: Конкурсная работа
       post: Обзор

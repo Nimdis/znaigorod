@@ -6,7 +6,7 @@ class Payment < ActiveRecord::Base
   belongs_to :paymentable, :polymorphic => true
   belongs_to :user
 
-  enumerize :state, :in => [:pending, :approved, :canceled], :default => :pending
+  enumerize :state, in: [:pending, :approved, :canceled], default: :pending, scope: true
 
   def approve!
     self.state = 'approved'

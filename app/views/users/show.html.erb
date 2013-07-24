@@ -46,5 +46,13 @@
       </h3>
       <%= render partial: 'user_visits', locals: { visits: @user.visits.limit(5) } %>
     <% end %>
+
+    <% if @user.payments.any? %>
+      <h3>
+        Купил билет
+        <%= link_to t('all_user_payments'), user_payments_path(@user) %>
+      </h3>
+      <%= render partial: 'user_payments', locals: { payments: @user.payments.with_state(:approved).limit(5) } %>
+    <% end %>
   </div>
 </div>
