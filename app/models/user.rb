@@ -32,7 +32,6 @@ class User < ActiveRecord::Base
 
   searchable do
     text :name
-    double :rating
   end
 
   def self.find_or_create_by_oauth(auth_raw_info)
