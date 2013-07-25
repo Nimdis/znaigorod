@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
 
   scope :with_role,      ->(role) { joins(:roles).where('roles.role = ?', role) }
   scope :sales_managers, -> { with_role(:sales_manager) }
+  scope :vkontakte,      -> { where(provider: 'vkontakte') }
 
   after_create :create_account
 
