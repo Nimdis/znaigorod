@@ -32,7 +32,11 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
   def authenticate
-    @user = User.find_or_create_by_oauth(request.env['omniauth.auth'])
+    auth_raw_info = request.env['omniauth.auth']
+    @user = User.find_or_create_by_oauth(auth_raw_info)
+
+    @user.account.delay.get_vkontakte_friends(@user) if @user.provider == 'vkontakte'
+    
     sign_in @user, :event => :authentication
     @after_sign_in_url = after_sign_in_path_for(@user)
 
