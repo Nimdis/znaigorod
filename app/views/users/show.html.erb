@@ -1,66 +1,59 @@
-<div class="content_wrapper">
-  <%= render_navigation context: 'user', :renderer => :breadcrumbs %>
+<%= render_navigation context: 'user', :renderer => :breadcrumbs %>
 
-  <div class="profile">
-    <div class="avatar">
-      <% if @user.avatar.present? %>
-        <%= image_tag @user.avatar, size: '50x50' %>
-      <% else %>
-        <%= image_tag 'public/stub_poster.png', size: '50x50' %>
-      <% end %>
-    </div>
-    <div class="info">
-      <div class="login">
-        <%= @user %>
-      </div>
-
-      <div class="provider <%= @user.provider %>">
-        <%= link_to @user.profile, @user.profile %>
-      </div>
-
-      <div class="join">
-        <%= time_ago_in_words(@user.created_at) %> на сайте
-      </div>
-    </div>
-
-    <% if @user.comments.any? %>
-      <h3>
-        Комментарии
-        <%= link_to t('all_user_comments'), user_comments_path(@user) %>
-      </h3>
-      <%= render partial: 'user_comments', locals: { comments: @user.comments.limit(5) } %>
-    <% end %>
-
-    <% if @user.votes.any? %>
-      <h3>
-        Понравилось
-        <%= link_to t('all_user_votes'), user_votes_path(@user) %>
-      </h3>
-      <%= render partial: 'user_votes', locals: { votes: @user.votes.limit(5) } %>
-    <% end %>
-
-    <% if @user.visits.any? %>
-      <h3>
-        Посетил
-        <%= link_to t('all_user_visits'), user_visits_path(@user) %>
-      </h3>
-      <%= render partial: 'user_visits', locals: { visits: @user.visits.limit(5) } %>
-    <% end %>
-
-    <% if @user.payments.with_state(:approved).any? %>
-      <h3>
-        Купил билет
-        <%= link_to t('all_user_payments'), user_payments_path(@user) %>
-      </h3>
-      <%= render partial: 'user_payments', locals: { payments: @user.payments.with_state(:approved).limit(5) } %>
-    <% end %>
-
-    <% if @user.afisha.published.any? %>
-      <h3>
-        Добавил мероприятие
-        <%= link_to t('all_user_events'), user_events_path(@user) %>
-      </h3>
-      <%= render partial: 'user_events', locals: { events: @user.afisha.published.limit(5) } %>
+<div class="profile">
+  <div class="avatar">
+    <% if @user.avatar.present? %>
+      <%= image_tag @user.avatar, size: '50x50' %>
+    <% else %>
+      <%= image_tag 'public/stub_poster.png', size: '50x50' %>
     <% end %>
   </div>
+
+  <div class="join">
+    <%= time_ago_in_words(@user.created_at) %> на сайте
+  </div>
 </div>
+
+<div class="provider <%= @user.provider %>">
+  <%= link_to @user.profile, @user.profile %>
+</div>
+
+<% if @user.comments.any? %>
+  <h3>
+    Комментарии
+    <%= link_to t('all_user_comments'), user_comments_path(@user) %>
+  </h3>
+  <%= render partial: 'user_comments', locals: { comments: @user.comments.limit(5) } %>
+<% end %>
+
+<% if @user.votes.any? %>
+  <h3>
+    Понравилось
+    <%= link_to t('all_user_votes'), user_votes_path(@user) %>
+  </h3>
+  <%= render partial: 'user_votes', locals: { votes: @user.votes.limit(5) } %>
+<% end %>
+
+<% if @user.visits.any? %>
+  <h3>
+    Посетил
+    <%= link_to t('all_user_visits'), user_visits_path(@user) %>
+  </h3>
+  <%= render partial: 'user_visits', locals: { visits: @user.visits.limit(5) } %>
+<% end %>
+
+<% if @user.payments.with_state(:approved).any? %>
+  <h3>
+    Купил билет
+    <%= link_to t('all_user_payments'), user_payments_path(@user) %>
+  </h3>
+  <%= render partial: 'user_payments', locals: { payments: @user.payments.with_state(:approved).limit(5) } %>
+<% end %>
+
+<% if @user.afisha.published.any? %>
+  <h3>
+    Добавил мероприятие
+    <%= link_to t('all_user_events'), user_events_path(@user) %>
+  </h3>
+  <%= render partial: 'user_events', locals: { events: @user.afisha.published.limit(5) } %>
+<% end %>

@@ -2,30 +2,28 @@
 <% content_for :meta_description, t('meta.posts.description') %>
 <% content_for :meta_keywords, t('meta.posts.keywords') %>
 
-<div class="content_wrapper">
-  <%= render 'breadcrumbs' %>
-  <div class='contact_with_us'>
-    <%= link_to 'Добавить пост', new_feedback_path %>
-  </div>
-  <h1>Обзоры города</h1>
-
-  <ul class="post_list">
-    <% @posts.each do |post| %>
-      <li class="post_item">
-        <div class="post_meta">
-          <h2><%= link_to post.title, post %></h2>
-          <span class="date"><%= l(post.created_at, :format => "%d %B %Y") %></span>
-        </div>
-
-        <div class="post_content">
-          <% if post.post_images.any? %>
-            <%= image_tag post.post_images.first.attachment_url.gsub(/\/\d+-\d+\//, '/200-150!/'), :alt => post.post_images.first.title, :class => 'preview' %>
-          <% end %>
-          <%= raw post.annotation %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+<%= render 'breadcrumbs' %>
+<div class='contact_with_us'>
+  <%= link_to 'Добавить пост', new_feedback_path %>
 </div>
+<h1>Обзоры города</h1>
+
+<ul class="post_list">
+  <% @posts.each do |post| %>
+    <li class="post_item">
+      <div class="post_meta">
+        <h2><%= link_to post.title, post %></h2>
+        <span class="date"><%= l(post.created_at, :format => "%d %B %Y") %></span>
+      </div>
+
+      <div class="post_content">
+        <% if post.post_images.any? %>
+          <%= image_tag post.post_images.first.attachment_url.gsub(/\/\d+-\d+\//, '/200-150!/'), :alt => post.post_images.first.title, :class => 'preview' %>
+        <% end %>
+        <%= raw post.annotation %>
+      </div>
+    </li>
+  <% end %>
+</ul>
 
 <%= paginate @posts %>

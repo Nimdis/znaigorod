@@ -8,11 +8,8 @@
   <%= @organization.tags_for_vk %>
 <% end %>
 
-<div class="content_wrapper">
+<%= @organization.breadcrumbs %>
 
-  <%= @organization.breadcrumbs %>
-
-  <div class="organization_info">
-    <%= yield :organization_content %>
-  </div>
+<div class="organization_info">
+  <%= yield :organization_content %>
 </div>

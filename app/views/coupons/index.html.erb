@@ -2,12 +2,10 @@
 <% content_for :meta_description, t('meta.coupons.description') %>
 <% content_for :meta_keywords, t('meta.coupons.keywords') %>
 
-<div class='content_wrapper'>
-  <%= render 'breadcrumbs', :index => true %>
-  <h1>Сертификаты, купоны, скидки</h1>
-  <ul class='coupons_list'>
-    <%= render :partial => 'coupons_list', :locals => { :collection => @coupons } %>
-  </ul>
-</div>
+<%= render 'breadcrumbs', :index => true %>
+<h1>Сертификаты, купоны, скидки</h1>
+<ul class='coupons_list'>
+  <%= render :partial => 'coupons_list', :locals => { :collection => @coupons } %>
+</ul>
 
 <%= paginate @coupons %>

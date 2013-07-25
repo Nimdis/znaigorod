@@ -1,29 +1,30 @@
-<div class="header_wrapper">
-  <div class="header">
-    <div class="logo">
-      <a href="/"><%= t("meta.default.title") %></a>
+<div class='promo_wrapper'>
+  <div class='promo'>
+    <%= link_to 'Непрелично дешевые билеты на все развлечения Томска! Купи в 2 клика! Только на сайте znaigorod.ru', tickets_path %>
+  </div>
+</div>
+
+<div class='header_wrapper'>
+  <div class='header'>
+    <div class='logo'>
+      <a href='/'><%= t('meta.default.title') %></a>
     </div>
-    <div class="tomsk">
-      <a href="/">Томск</a>
+    <div class='tomsk'>
+      <a href='/'>Томск</a>
     </div>
-    <div class="right">
-      <div class="logged">
-        <% if user_signed_in? %>
-          <%= link_to 'Мои афиши', my_root_path %>
+    <div class='dashboard'>
+      <% if user_signed_in? %>
+        <p>
           <%= image_tag current_user.avatar %>
-          <%= link_to current_user.name, current_user.profile %>
+          <%= link_to current_user.name, current_user.profile, target: :_blank %>
           <%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: :logout %>
-        <% else %>
-          <%= render :partial => 'commons/social_auth' %>
-        <% end %>
-      </div>
-      <div class="search_form">
-        <%= form_tag search_path, :method => :get do %>
-          <%= text_field_tag "q", params[:q], :placeholder => "Поиск по городу", :class => "search" %>
-          <%= submit_tag("", :class => "submit", :name => "") %>
-        <% end %>
-      </div>
+        </p>
+        <p><%= link_to 'Личный кабинет', my_root_path %></p>
+      <% else %>
+        <%= render :partial => 'commons/social_auth' %>
+      <% end %>
     </div>
-    <%= content_tag :div, link_to('Добавить афишу', new_my_afisha_path), class: 'create_my_affiche' %>
+    <div class='main_menu'>
+    </div>
   </div>
 </div>

@@ -14,126 +14,123 @@
   <meta name='twitter:description' content='<%= simple_format @coupon.description %>'/>
 <% end %>
 
-<div class='content_wrapper'>
+<%= render 'breadcrumbs', :index => true %>
 
-  <%= render 'breadcrumbs', :index => true %>
+<div class='clearfix'>
 
-  <div class='clearfix'>
+  <div class='content'>
+    <div class='coupon'>
+      <div class='head'>
+        <%= content_tag :h1, @coupon.title.text_gilensize %>
+      </div>
 
-    <div class='content'>
-      <div class='coupon'>
-        <div class='head'>
-          <%= content_tag :h1, @coupon.title.text_gilensize %>
-        </div>
-
-        <div class='info'>
-          <div class='left_part'>
-            <div class='image'>
-              <%= link_to image_tag_for(@coupon.image_url, 160, 200), @coupon.image_url if @coupon.image_url? %>
-            </div>
-
+      <div class='info'>
+        <div class='left_part'>
+          <div class='image'>
+            <%= link_to image_tag_for(@coupon.image_url, 160, 200), @coupon.image_url if @coupon.image_url? %>
           </div>
 
-          <div class='description'>
-            <ul class='coupon_tickets'>
-              <% if @coupon.copies_for_sale.any? %>
-                <li>
-                  <%= content_tag :div, "-#{@coupon.discount}%", class: :has_items_for_sale if @coupon.discount? %>
-                  <%= content_tag :div, @coupon.kind.coupon? ? 'Купон' : 'Сертификат', class: :description %>
-                  <div class='ticket_prices'>
-                    <%= content_tag :div, content_tag(:span, "#{@coupon.price_without_discount}р.", class: :stroke), class: :original_price if @coupon.discount? %>
-                    <div class='price'><%= @coupon.price.to_i %> р.</div>
-                  </div>
-                  <div class='buy_ticket'>
-                    <div class='ticket_for_sale'><%= t "copy.#{@coupon.kind}", count: @coupon.copies_for_sale.count %></div>
-                    <%= link_to 'Купить', new_coupon_copy_payment_path(@coupon), class: :payment_link %>
-                  </div>
-                </li>
-              <% end %>
-            </ul>
-            <% if @coupon.stale_at? %>
-              <div class='closest'>
-                <%= "Продажа заканчивается #{stale_at(@coupon.stale_at)}" %>
-              </div>
+        </div>
+
+        <div class='description'>
+          <ul class='coupon_tickets'>
+            <% if @coupon.copies_for_sale.any? %>
+              <li>
+                <%= content_tag :div, "-#{@coupon.discount}%", class: :has_items_for_sale if @coupon.discount? %>
+                <%= content_tag :div, @coupon.kind.coupon? ? 'Купон' : 'Сертификат', class: :description %>
+                <div class='ticket_prices'>
+                  <%= content_tag :div, content_tag(:span, "#{@coupon.price_without_discount}р.", class: :stroke), class: :original_price if @coupon.discount? %>
+                  <div class='price'><%= @coupon.price.to_i %> р.</div>
+                </div>
+                <div class='buy_ticket'>
+                  <div class='ticket_for_sale'><%= t "copy.#{@coupon.kind}", count: @coupon.copies_for_sale.count %></div>
+                  <%= link_to 'Купить', new_coupon_copy_payment_path(@coupon), class: :payment_link %>
+                </div>
+              </li>
             <% end %>
-            <div class="place">
-              <% if @coupon.organization_id? %>
-                <%= PlaceDecorator.new(:organization => @coupon.organization).place %>  
-              <% else %>
-                  <%= @coupon.place %>
-              <% end %>
+          </ul>
+          <% if @coupon.stale_at? %>
+            <div class='closest'>
+              <%= "Продажа заканчивается #{stale_at(@coupon.stale_at)}" %>
             </div>
-            <div class='text'>
-              <%= simple_format @coupon.description %>
-            </div>
-            <div class='complete_at'>
-              <% if @coupon.complete_at? %>
-                <%= "Действие #{@coupon.kind.coupon? ? "купона" : "сертификата"} заканчивается #{stale_at(@coupon.complete_at)}" %>
-              <% else %>
-                <%= "Действие #{@coupon.kind.coupon? ? "купона" : "сертификата"} неограниченно" %>
-              <% end %>
-            </div>
+          <% end %>
+          <div class="place">
+            <% if @coupon.organization_id? %>
+              <%= PlaceDecorator.new(:organization => @coupon.organization).place %>
+            <% else %>
+                <%= @coupon.place %>
+            <% end %>
           </div>
-        </div>
-        <div class='tags_and_share'>
-          <div class='share'>
-            <%= render :partial => 'commons/share_this' %>
+          <div class='text'>
+            <%= simple_format @coupon.description %>
           </div>
-          <div class="votes">
-            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @coupon } %>
+          <div class='complete_at'>
+            <% if @coupon.complete_at? %>
+              <%= "Действие #{@coupon.kind.coupon? ? "купона" : "сертификата"} заканчивается #{stale_at(@coupon.complete_at)}" %>
+            <% else %>
+              <%= "Действие #{@coupon.kind.coupon? ? "купона" : "сертификата"} неограниченно" %>
+            <% end %>
           </div>
         </div>
       </div>
-      <%= render :partial => 'comments/block', :locals => { :parent_obj => @coupon } %>
-    </div>
-    
-    <div class='right-side'>
-      <% if @coupon.organization_id? %>
-        <div class='organization_card'>
-          <% organization = OrganizationDecorator.new(@coupon.organization) %>
-          <div class='title'><%= link_to organization.title, organization_path(organization) %></div>
-          <div class='organization_image'>
-            <%= link_to image_tag_for(organization.logotype_url, 120, 160), organization_path(organization) if organization.logotype_url? %>
-          </div>
-          <div class="rating like_a_line">
-            <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => organization } %>
-          </div>
-          <div class='organization_info'>
-            <%= content_tag(:div, organization.address_link + organization.office.to_s, class: :place) unless organization.address.to_s.blank? %>
-            <div class='schedule'>
-              <%= organization.work_schedule %>
-            </div>
-            <%= content_tag(:div, organization.phone, class: :phone_wrapper) if organization.phone.present? %>
-            <%= content_tag(:div, organization.contact_links, class: :links) if organization.contact_links.present? %>
-            <% if organization.social_links.present? %>
-              <ul class="social_links">
-                <% organization.social_links.each do |link| %>
-                  <li><%= link_to link.title, link.url, :target => '_blank' %></li>
-                <% end %>
-              </ul>
-            <% end %>
-          </div>
+      <div class='tags_and_share'>
+        <div class='share'>
+          <%= render :partial => 'commons/share_this' %>
         </div>
-      <% end %>
+        <div class="votes">
+          <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @coupon } %>
+        </div>
+      </div>
+    </div>
+    <%= render :partial => 'comments/block', :locals => { :parent_obj => @coupon } %>
+  </div>
 
-      <% if @coupon.random_coupons.any? %>
-        <div class='random_coupons'>
-          <div class='random_coupons_header'>Сертификаты и купоны</div>
-          <% @coupon.random_coupons.each do |coupon| %>
-            <div class='random_coupons_info'>
-              <div class='title'><%= link_to coupon.title, coupon_path(coupon) %></div>
-              <div class='place'><%= coupon.place %></div>
-              <div class='coupon_image'>
-                <%= link_to image_tag_for(coupon.image_url, 120, 160), coupon_path(coupon) if coupon.image_url? %>
-              </div>
-              <div class='random_coupons_price'>
-                <%= content_tag :div, content_tag(:span, "#{coupon.price_without_discount}р.", class: :stroke), class: :original_price if coupon.discount? %>
-                <div class='price<%= ' without_discount' unless coupon.discount?%>'><%= coupon.price.to_i %> р.</div>
-              </div>
-            </div>
+  <div class='right-side'>
+    <% if @coupon.organization_id? %>
+      <div class='organization_card'>
+        <% organization = OrganizationDecorator.new(@coupon.organization) %>
+        <div class='title'><%= link_to organization.title, organization_path(organization) %></div>
+        <div class='organization_image'>
+          <%= link_to image_tag_for(organization.logotype_url, 120, 160), organization_path(organization) if organization.logotype_url? %>
+        </div>
+        <div class="rating like_a_line">
+          <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => organization } %>
+        </div>
+        <div class='organization_info'>
+          <%= content_tag(:div, organization.address_link + organization.office.to_s, class: :place) unless organization.address.to_s.blank? %>
+          <div class='schedule'>
+            <%= organization.work_schedule %>
+          </div>
+          <%= content_tag(:div, organization.phone, class: :phone_wrapper) if organization.phone.present? %>
+          <%= content_tag(:div, organization.contact_links, class: :links) if organization.contact_links.present? %>
+          <% if organization.social_links.present? %>
+            <ul class="social_links">
+              <% organization.social_links.each do |link| %>
+                <li><%= link_to link.title, link.url, :target => '_blank' %></li>
+              <% end %>
+            </ul>
           <% end %>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+
+    <% if @coupon.random_coupons.any? %>
+      <div class='random_coupons'>
+        <div class='random_coupons_header'>Сертификаты и купоны</div>
+        <% @coupon.random_coupons.each do |coupon| %>
+          <div class='random_coupons_info'>
+            <div class='title'><%= link_to coupon.title, coupon_path(coupon) %></div>
+            <div class='place'><%= coupon.place %></div>
+            <div class='coupon_image'>
+              <%= link_to image_tag_for(coupon.image_url, 120, 160), coupon_path(coupon) if coupon.image_url? %>
+            </div>
+            <div class='random_coupons_price'>
+              <%= content_tag :div, content_tag(:span, "#{coupon.price_without_discount}р.", class: :stroke), class: :original_price if coupon.discount? %>
+              <div class='price<%= ' without_discount' unless coupon.discount?%>'><%= coupon.price.to_i %> р.</div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

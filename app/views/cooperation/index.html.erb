@@ -2,49 +2,46 @@
 <% content_for :meta_description, t('meta.cooperation.description') %>
 <% content_for :meta_keywords, t('meta.cooperation.keywords') %>
 
-<div class="content_wrapper">
+<ul class='breadcrumbs'>
+  <li class='crumb'><%= link_to 'Знай Город', root_path %></li>
+  <li class='separator'><span>&nbsp;</span></li>
+  <li class='crumb'><%= link_to 'Размещение информации', cooperation_path %></li>
+</ul>
 
-  <ul class='breadcrumbs'>
-    <li class='crumb'><%= link_to 'Знай Город', root_path %></li>
-    <li class='separator'><span>&nbsp;</span></li>
-    <li class='crumb'><%= link_to 'Размещение информации', cooperation_path %></li>
-  </ul>
+<div class="cooperation">
 
-  <div class="cooperation">
-
-    <div class="right_side">
-      <div class='message'>
-        <p>Информацию о предстоящих событиях присылайте на <%= mail_to 'afisha@znaigorod.ru' %></p>
-        <p>Чтобы ваше заведение появилось в каталоге отправьте письмо на <%= mail_to 'info@znaigorod.ru' %></p>
-        <p>Если хотите сотрудничать с нами напишите на <%= mail_to 'office@znaigorod.ru' %></p>
-        <p>тел. <%= t('contacts.phone') %></p>
-      </div>
-      <div class='service_payment_link'>
-        <%= link_to 'Оплата услуг', new_service_payment_path %>
-      </div>
+  <div class="right_side">
+    <div class='message'>
+      <p>Информацию о предстоящих событиях присылайте на <%= mail_to 'afisha@znaigorod.ru' %></p>
+      <p>Чтобы ваше заведение появилось в каталоге отправьте письмо на <%= mail_to 'info@znaigorod.ru' %></p>
+      <p>Если хотите сотрудничать с нами напишите на <%= mail_to 'office@znaigorod.ru' %></p>
+      <p>тел. <%= t('contacts.phone') %></p>
     </div>
-
-    <h1><span class="strong">Размещение</span> информации</h1>
-
-    <p>Мы предлагаем Вам сотрудничество с командой информационного ресурса Znaigorod.ru.</p>
-
-    <p>Наш проект &mdash; это информационный портал, содержащий полную информацию обо всех мероприятиях и культурно-развлекательных заведениях Томска.</p>
-
-    <h2>5 плюсов в нашу пользу, которые говорят сами за себя:</h2>
-
-    <ol class="advantages">
-      <li><p>Всегда <strong>актуальная афиша</strong> всех предстоящих мероприятий города, с гибкими возможностями выбора.</p></li>
-      <li><p><strong>Уникальная система подбора заведений</strong> по множеству характеристик позволяет выделить уникальные особенности каждого заведения.</p></li>
-      <li><p><strong>Представление исчерпывающей информации о заведении</strong> с детальным описанием, режимом работы и месторасположением, фотографиями интерьера, 3D-туром (от профессиональной команды 3tour.me), актуальной афиши мероприятий.</p></li>
-      <li><p><strong>Постоянное продвижение ресурса</strong> в поисковых системах и реклама на наиболее популярных ресурсах Тонета.</p></li>
-      <li>
-        <p>Динамично развивающаяся группа</p>
-        <p><a class="icon_vk_big" href="http://vk.com/znaigorod">Знай Город ВКонтакте</a></p>
-      </li>
-    </ol>
-
-    <p>Подробнее ознакомиться с расценками Вы сможете в <a class="icon_pdf_small" href="<%= asset_path "nashi_uslugi.pdf"  %>">перечне услуг</a>.</p>
-
-    <p>Для осуществления взаимовыгодного партнёрства Вы можете связаться с нашим менеджером по телефону <%= t('contacts.phone') %> или по электронной почте <a href="mailto:team@znaigorod.ru">team@znaigorod.ru</a></p>
+    <div class='service_payment_link'>
+      <%= link_to 'Оплата услуг', new_service_payment_path %>
+    </div>
   </div>
+
+  <h1><span class="strong">Размещение</span> информации</h1>
+
+  <p>Мы предлагаем Вам сотрудничество с командой информационного ресурса Znaigorod.ru.</p>
+
+  <p>Наш проект &mdash; это информационный портал, содержащий полную информацию обо всех мероприятиях и культурно-развлекательных заведениях Томска.</p>
+
+  <h2>5 плюсов в нашу пользу, которые говорят сами за себя:</h2>
+
+  <ol class="advantages">
+    <li><p>Всегда <strong>актуальная афиша</strong> всех предстоящих мероприятий города, с гибкими возможностями выбора.</p></li>
+    <li><p><strong>Уникальная система подбора заведений</strong> по множеству характеристик позволяет выделить уникальные особенности каждого заведения.</p></li>
+    <li><p><strong>Представление исчерпывающей информации о заведении</strong> с детальным описанием, режимом работы и месторасположением, фотографиями интерьера, 3D-туром (от профессиональной команды 3tour.me), актуальной афиши мероприятий.</p></li>
+    <li><p><strong>Постоянное продвижение ресурса</strong> в поисковых системах и реклама на наиболее популярных ресурсах Тонета.</p></li>
+    <li>
+      <p>Динамично развивающаяся группа</p>
+      <p><a class="icon_vk_big" href="http://vk.com/znaigorod">Знай Город ВКонтакте</a></p>
+    </li>
+  </ol>
+
+  <p>Подробнее ознакомиться с расценками Вы сможете в <a class="icon_pdf_small" href="<%= asset_path "nashi_uslugi.pdf"  %>">перечне услуг</a>.</p>
+
+  <p>Для осуществления взаимовыгодного партнёрства Вы можете связаться с нашим менеджером по телефону <%= t('contacts.phone') %> или по электронной почте <a href="mailto:team@znaigorod.ru">team@znaigorod.ru</a></p>
 </div>

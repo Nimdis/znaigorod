@@ -4,33 +4,32 @@
 <% content_for :meta_description, t("meta.#{@presenter.pluralized_kind}.description") %>
 <% content_for :meta_keywords, t("meta.#{@presenter.pluralized_kind}.keywords") %>
 
-<div class="content_wrapper">
-  <%= render :partial => 'filters' %>
-  <div class="organizations_list">
-    <div class="list_settings">
-      <div class="sort affiches">
-        <p>Сортировка:</p>
-        <%= render 'commons/suborganization_sorting_links' %>
-      </div>
+<%= render :partial => 'filters' %>
+
+<div class="organizations_list">
+  <div class="list_settings">
+    <div class="sort affiches">
+      <p>Сортировка:</p>
+      <%= render 'commons/suborganization_sorting_links' %>
     </div>
-
-    <% if Rails.env.development? && @presenter.coupons.any? %>
-      <div class='coupons'>
-        <div class='coupon_header'>Сертификаты, купоны, скидки</div>
-        <ul class='coupons_list'>
-          <%= render :partial => 'coupons/coupons_list', :locals => { :collection => @presenter.coupons } %>
-        </ul>
-      </div>
-    <% end %>
-
-    <% if @presenter.collection.any? %>
-      <ul class="items_list">
-        <%= render :partial => "organizations/organizations_list" %>
-      </ul>
-    <% else %>
-      <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
-    <% end %>
   </div>
+
+  <% if Rails.env.development? && @presenter.coupons.any? %>
+    <div class='coupons'>
+      <div class='coupon_header'>Сертификаты, купоны, скидки</div>
+      <ul class='coupons_list'>
+        <%= render :partial => 'coupons/coupons_list', :locals => { :collection => @presenter.coupons } %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @presenter.collection.any? %>
+    <ul class="items_list">
+      <%= render :partial => "organizations/organizations_list" %>
+    </ul>
+  <% else %>
+    <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
+  <% end %>
 </div>
 
 <%= paginate @presenter.paginated_collection %>

@@ -2,37 +2,35 @@
 <% content_for :meta_description, t('meta.feedback.description') %>
 <% content_for :meta_keywords, t('meta.feedback.keywords') %>
 
-<div class='content_wrapper'>
-  <div class='feedback'>
-    <div class='right_side'>
-      <div class='message'>
-        <p>Информацию о предстоящих событиях присылайте на <%= mail_to 'afisha@znaigorod.ru' %></p>
-        <p>Чтобы ваше заведение появилось в каталоге отправьте письмо на <%= mail_to 'info@znaigorod.ru' %></p>
-        <p>Если хотите сотрудничать с нами напишите на <%= mail_to 'office@znaigorod.ru' %></p>
-        <p>тел. <%= t('contacts.phone') %></p>
-      </div>
+<div class='feedback'>
+  <div class='right_side'>
+    <div class='message'>
+      <p>Информацию о предстоящих событиях присылайте на <%= mail_to 'afisha@znaigorod.ru' %></p>
+      <p>Чтобы ваше заведение появилось в каталоге отправьте письмо на <%= mail_to 'info@znaigorod.ru' %></p>
+      <p>Если хотите сотрудничать с нами напишите на <%= mail_to 'office@znaigorod.ru' %></p>
+      <p>тел. <%= t('contacts.phone') %></p>
+    </div>
+  </div>
+
+  <h1>Обратная связь</h1>
+
+  <%= content_tag :div, flash[:notice], class: :flash_message if flash[:notice] %>
+
+  <%= simple_form_for @feedback, :url => new_feedback_path, :html => {:novalidate => true} do |f| %>
+    <div class='inputs'>
+      <%= f.input :fullname %>
+      <%= f.input :email %>
+      <%= f.input :message %>
     </div>
 
-    <h1>Обратная связь</h1>
+    <div class='recaptcha'>
+      <%= recaptcha_tags :display => {:theme => 'clean'}, :ajax => true %>
+      <%= content_tag :span, 'неверное значение', class: :error if flash[:recaptcha_error] %>
+    </div>
 
-    <%= content_tag :div, flash[:notice], class: :flash_message if flash[:notice] %>
+    <div class='actions'>
+      <%= f.button :submit, 'Отправить', :class => 'submit' %>
+    </div>
+  <% end %>
 
-    <%= simple_form_for @feedback, :url => new_feedback_path, :html => {:novalidate => true} do |f| %>
-      <div class='inputs'>
-        <%= f.input :fullname %>
-        <%= f.input :email %>
-        <%= f.input :message %>
-      </div>
-
-      <div class='recaptcha'>
-        <%= recaptcha_tags :display => {:theme => 'clean'}, :ajax => true %>
-        <%= content_tag :span, 'неверное значение', class: :error if flash[:recaptcha_error] %>
-      </div>
-
-      <div class='actions'>
-        <%= f.button :submit, 'Отправить', :class => 'submit' %>
-      </div>
-    <% end %>
-
-  </div>
 </div>

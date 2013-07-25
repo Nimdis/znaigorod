@@ -4,18 +4,17 @@
   <meta name='description' content='<%= I18n.t("meta_description.search_results") %> <%= I18n.t("meta_description.main_page") %>' />
 <% end %>
 
-<div class="content_wrapper">
-  <div class="search_results">
+<div class="search_results">
 
-    <h1>Результаты поиска &laquo;<%= params[:q] %>&raquo;</h1>
+  <h1>Результаты поиска &laquo;<%= params[:q] %>&raquo;</h1>
 
-    <% if @search_presenter.hits? %>
-      <ul class="items_list">
-        <%= render :partial => "search_results_list" %>
-      </ul>
-    <% else %>
-      <div class="empty">По запросу &laquo;<%= params[:q] %>&raquo; ничего не найдено ;(</div>
-    <% end %>
-  </div>
+  <% if @search_presenter.hits? %>
+    <ul class="items_list">
+      <%= render :partial => "search_results_list" %>
+    </ul>
+  <% else %>
+    <div class="empty">По запросу &laquo;<%= params[:q] %>&raquo; ничего не найдено ;(</div>
+  <% end %>
 </div>
+
 <%= paginate @search_presenter.paginated_collection %>

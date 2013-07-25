@@ -1,79 +1,76 @@
-<div class="content_wrapper">
-  <%= render 'breadcrumbs', :show => true %>
+<%= render 'breadcrumbs', :show => true %>
 
-  <div class="clearfix">
+<div class="clearfix">
 
-    <div class="post_wrapper">
-      <div class="post">
-        <div class="post_meta">
-          <h2><%= @post.title %></h2>
-          <span class="date"><%= l(@post.created_at, :format => "%d %B %Y") %></span>
-        </div>
+  <div class="post_wrapper">
+    <div class="post">
+      <div class="post_meta">
+        <h2><%= @post.title %></h2>
+        <span class="date"><%= l(@post.created_at, :format => "%d %B %Y") %></span>
+      </div>
 
-        <div class="post_content">
-          <div class="post_annotation">
-            <% if @post.post_images.any? %>
-              <%= image_tag @post.post_images.first.attachment_url.gsub(/\/\d+-\d+\//, '/380-284!/'), :alt => @post.post_images.first.title, :class => 'preview' %>
-            <% end %>
-            <%= @post.annotation.as_html %>
-          </div>
-          <div class="post_content">
-            <%= @post.content.as_html %>
-          </div>
-
-          <% if @post.post_images.many? %>
-            <div class="photogallery">
-              <ul>
-                <% @post.post_images.each do |image| %>
-                  <li><%= link_to(image_tag_for(image.attachment_url, 124, 94, true, 'n'), image.attachment_url, rel: :info_gallery) %></li>
-                <% end %>
-              </ul>
-            </div>
+      <div class="post_content">
+        <div class="post_annotation">
+          <% if @post.post_images.any? %>
+            <%= image_tag @post.post_images.first.attachment_url.gsub(/\/\d+-\d+\//, '/380-284!/'), :alt => @post.post_images.first.title, :class => 'preview' %>
           <% end %>
+          <%= @post.annotation.as_html %>
+        </div>
+        <div class="post_content">
+          <%= @post.content.as_html %>
         </div>
 
-
-        <div class="post_share">
-          <div class="post_like">
-            <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @post } %>
-          </div>
-
-          <div class="share">
-            <%= render :partial => "commons/share_this" %>
-          </div>
-        </div>
-      </div>
-
-      <%= render :partial => 'comments/block', :locals => { :parent_obj => @post } %>
-    </div>
-
-
-    <div class="right_side">
-      <div class="more_like_this">
-        <h2>Похожие статьи</h2>
-        <ul class='more_like_this_posts'>
-          <% @post.similar_posts.each do |post| %>
-            <li>
-              <% if post.post_images.any? %>
-                <%= image_tag post.post_images.first.attachment_url.gsub(/\/\d+-\d+\//, '/66-44!/'), :alt => post.post_images.first.title, :class => 'small_preview', :size => '66x44' %>
+        <% if @post.post_images.many? %>
+          <div class="photogallery">
+            <ul>
+              <% @post.post_images.each do |image| %>
+                <li><%= link_to(image_tag_for(image.attachment_url, 124, 94, true, 'n'), image.attachment_url, rel: :info_gallery) %></li>
               <% end %>
-              <div class="post_title">
-                <%= link_to post.title, post %>
-              </div>
-            </li>
-          <% end  %>
-        </ul>
+            </ul>
+          </div>
+        <% end %>
+      </div>
 
-        <div class="all_posts">
-          <%= link_to "Все обзоры (#{@posts.count})", posts_path %>
+
+      <div class="post_share">
+        <div class="post_like">
+          <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @post } %>
+        </div>
+
+        <div class="share">
+          <%= render :partial => "commons/share_this" %>
         </div>
       </div>
-
-      <div class="vk_group_wrapper">
-        <div id="vk_group_thin"></div>
-      </div>
-
     </div>
+
+    <%= render :partial => 'comments/block', :locals => { :parent_obj => @post } %>
   </div>
 
+
+  <div class="right_side">
+    <div class="more_like_this">
+      <h2>Похожие статьи</h2>
+      <ul class='more_like_this_posts'>
+        <% @post.similar_posts.each do |post| %>
+          <li>
+            <% if post.post_images.any? %>
+              <%= image_tag post.post_images.first.attachment_url.gsub(/\/\d+-\d+\//, '/66-44!/'), :alt => post.post_images.first.title, :class => 'small_preview', :size => '66x44' %>
+            <% end %>
+            <div class="post_title">
+              <%= link_to post.title, post %>
+            </div>
+          </li>
+        <% end  %>
+      </ul>
+
+      <div class="all_posts">
+        <%= link_to "Все обзоры (#{@posts.count})", posts_path %>
+      </div>
+    </div>
+
+    <div class="vk_group_wrapper">
+      <div id="vk_group_thin"></div>
+    </div>
+
+  </div>
 </div>

@@ -7,11 +7,11 @@
 <% end %>
 
 <% content_for :content do  %>
-  <%= render partial: 'layouts/manage_header' %>
+  <%= render partial: 'commons/manage_header' %>
   <div class="main_container">
     <%= yield %>
   </div>
   <%= yield :yandex_map_scripts %>
 <% end %>
 
-<%= render :file => 'layouts/base' %>
+<%= render :template => 'layouts/application' %>

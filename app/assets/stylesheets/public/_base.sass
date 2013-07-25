@@ -1,72 +1,29 @@
-=has_ribbon
-  .ribbon_wrapper
-    width: 120px
-    height: 24px
-    font-size: 10px
-    line-height: 1.4
-    position: absolute
-    background: transparent image_url('public/premiere_ribbon_bg.png') no-repeat right top
-    +box-shadow(#777 0 4px 2px -2px)
-    +border-left-radius(2px)
-    border-left: 2px solid #c4102b
-    padding-right: 15px
-    margin: 45px 0 0 -7px
-    z-index: 777
-    .ribbon
-      height: 14px
-      color: #fff
-      +text-shadow(#c4102b 1px 1px 1px)
-      background-color: #e3223f
-      padding: 5px 0 5px 10px
-    &:after
-      content: ' '
-      position: absolute
-      width: 0
-      height: 0
-      left: -1px
-      top: 100%
-      border-width: 3px 3px
-      border-style: solid
-      border-color: #75010e #75010e transparent transparent
+$min_width: 1000px
+$max_width: 1440px
 
-=has_items_for_sale
-  .has_items_for_sale
-    +clearfix
-    width: 48px
-    height: 48px
-    color: #fff
-    font-size: 11px
-    font-weight: bold
-    position: absolute
-    text-align: center
-    background: transparent image_url('public/ticket_star.png') no-repeat
-    margin: 18px 0 0 -11px
-    padding-top: 17px
+=max-width($width)
+  max-width: $width
 
-=payment_link
-  float: right
-  display: block
-  color: #fff
+=fluid_settings($min: $min_width, $max: $max_width)
+  +min-width($min)
+  +max-width($max)
+  margin: 0 auto
+
+body
+  font-size: 11px
+  font-family: 'Verdana', 'Tahoma', sans-serif
+  background-color: #fff
+  line-height: 1.5
+  +min-width(1000px)
+
+a
+  color: #06c
   text-decoration: none
-  border: 1px solid #a62538
-  border-top-color: #f56076
-  border-bottom-color: #a72338
-  border-left-color: #d0455a
-  border-right-color: #d0455a
-  background-color: #cf3a50
-  +background-image(linear-gradient(#df475e, #bc2a41))
-  padding: 4px 6px 5px
-  &:active
-    +background-image(linear-gradient(#bc2a41, #df475e))
+  &:hover
+    text-decoration: underline
 
-=has_age($size: 30px, $font_size: 11px)
-  +border-radius($size / 2)
-  +text-shadow(#c4102b 1px 1px 1px)
-  background-color: #e3223f
-  color: #fff
-  font-size: $font_size
-  height: $size
-  line-height: $size
-  position: absolute
-  text-align: center
-  width: $size
+strong, b
+  font-weight: bold
+
+em, i
+  font-style: italic

@@ -13,30 +13,29 @@
   <meta property='og:image' content='<%= @work.image_url.gsub(/\/\d+-\d+\//, '/100-63!n/') %>' />
 <% end %>
 
-<div class='content_wrapper'>
-  <h1><%= @work.contest.title.excerpt %></h1>
-  <div class='contest'>
-    <div class='description'>
-      <%= @work.contest.description.as_html %>
-    </div>
-    <div class='work'>
-      <%= link_to 'Все участники конкурса', contest_path(@work.contest), :class => :link_to_contest %>
-      <%= content_tag :h2, @work.title if @work.title.present? %>
-      <div class='image'>
-        <%= work_image_tag @work %>
-      </div>
-      <% if @work.contest.ends_on >= Date.today %>
-        <div class='contest_work_like'>
-          <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @work } %>
-        </div>
-      <% else %>
-        <div class='contest_work_vk_like'><%= t 'contest.votes', :count => @work.vk_likes.to_i %></div>
-      <% end %>
-      <div class='author'>
-        <%= "<strong>Автор работы:</strong> #{@work.author_info}".html_safe if @work.author_info.present? %>
-      </div>
-      <%= content_tag :div, @work.description.as_html, :class => :description if @work.description.present? %>
-    </div>
-    <%= render :partial => 'comments/block', :locals => { :parent_obj => @work } %>
+<h1><%= @work.contest.title.excerpt %></h1>
+
+<div class='contest'>
+  <div class='description'>
+    <%= @work.contest.description.as_html %>
   </div>
+  <div class='work'>
+    <%= link_to 'Все участники конкурса', contest_path(@work.contest), :class => :link_to_contest %>
+    <%= content_tag :h2, @work.title if @work.title.present? %>
+    <div class='image'>
+      <%= work_image_tag @work %>
+    </div>
+    <% if @work.contest.ends_on >= Date.today %>
+      <div class='contest_work_like'>
+        <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @work } %>
+      </div>
+    <% else %>
+      <div class='contest_work_vk_like'><%= t 'contest.votes', :count => @work.vk_likes.to_i %></div>
+    <% end %>
+    <div class='author'>
+      <%= "<strong>Автор работы:</strong> #{@work.author_info}".html_safe if @work.author_info.present? %>
+    </div>
+    <%= content_tag :div, @work.description.as_html, :class => :description if @work.description.present? %>
+  </div>
+  <%= render :partial => 'comments/block', :locals => { :parent_obj => @work } %>
 </div>

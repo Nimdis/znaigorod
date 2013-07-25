@@ -1,19 +1,18 @@
 <% content_for :page_title, @contest.title.excerpt %>
 
-<div class='content_wrapper'>
-  <h1><%= @contest.title.excerpt %></h1>
-  <div class='contest'>
-    <div class='description'>
-      <%= @contest.description.as_html %>
-    </div>
-    <% if @works.any? %>
-      <div class='works'>
-        <h2>Участники</h2>
-        <ul>
-          <%= render :partial => 'works/list' %>
-        </ul>
-      </div>
-    <% end %>
+<h1><%= @contest.title.excerpt %></h1>
+<div class='contest'>
+  <div class='description'>
+    <%= @contest.description.as_html %>
   </div>
-  <%= paginate @works %>
+  <% if @works.any? %>
+    <div class='works'>
+      <h2>Участники</h2>
+      <ul>
+        <%= render :partial => 'works/list' %>
+      </ul>
+    </div>
+  <% end %>
 </div>
+
+<%= paginate @works %>

@@ -1,29 +1,27 @@
-<div class="footer_wrapper">
-  <div class="footer">
-    <div class="our_social_link">
-      <h5>Мы в социальных сетях</h5>
-      <ul>
-        <li class="vk"><a href="http://vk.com/znaigorod" class="solid_dark_gray">vk.com/znaigorod</a></li>
-        <li class="fb"><a href="https://www.facebook.com/znai.gorod" class="solid_dark_gray">facebook.com/znai.gorod</a></li>
-        <li class="odnoklassniki"><a href="http://odnoklassniki.ru/group/54186972610564" class="solid_dark_gray">odnoklassniki.ru</a></li>
-        <li class="twitter"><a href="http://twitter.com/znaigorod" class="solid_dark_gray">twitter.com/znaigorod</a></li>
-      </ul>
-    </div>
-
-    <div class="mails">
+<div class='footer_wrapper'>
+  <div class='footer'>
+    <div class='contacts'>
       <h5>Как с нами связаться</h5>
       <ul>
         <li>Информацию о предстоящих событиях присылайте на <%= mail_to 'afisha@znaigorod.ru' %></li>
         <li>Чтобы ваше заведение появилось в каталоге отправьте письмо на <%= mail_to 'info@znaigorod.ru' %></li>
         <li>Если хотите сотрудничать с нами напишите на <%= mail_to 'office@znaigorod.ru' %></li>
-        <li class="telephone"><%= t('contacts.phone') %></li>
+        <li class='telephone'><%= t('contacts.phone') %></li>
       </ul>
     </div>
-
-    <div class="counters">
+    <div class='our_social_link'>
+      <h5>Мы в социальных сетях</h5>
+      <ul>
+        <li class='vk'><a href='http://vk.com/znaigorod' title='ВКонтакте' target='_blank'>vk.com/znaigorod</a></li>
+        <li class='fb'><a href='https://www.facebook.com/znai.gorod' title='Facebook' target='_blank'>facebook.com/znai.gorod</a></li>
+        <li class='odnoklassniki'><a href='http://odnoklassniki.ru/group/54186972610564' title='Одноклассники' target='_blank'>odnoklassniki.ru</a></li>
+        <li class='twitter'><a href='http://twitter.com/znaigorod' title='Twitter' target='_blank'>twitter.com/znaigorod</a></li>
+      </ul>
+    </div>
+    <div class='counters'>
       <% if Rails.env.production? %>
-        <a href="http://region70.ru/" target="_blank" title="Сайты Томска"><img src="http://region70.ru/get88x31/" width="88" height="31" border="0"></a>
-        <span style="margin:0;padding:0" id="tbec"><script type="text/javascript">setTimeout('var tbex=document.createElement("SCRIPT");tbex.type="text/javascript";tbex.src="http://c.tbex.ru/z/a!8831!znaigorod.ru!c.js?rev=2"+String.fromCharCode(38)+"rnd="+(new Date().getTime());(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(tbex)',1)</script></span><noscript><a href="http://tbe.tom.ru/site/znaigorod.ru/"><img src="http://c.tbex.ru/z/a!8831!znaigorod.ru!c.gif" alt="TBE" /></a></noscript>
+        <a class='inline_block' href='http://region70.ru/' target='_blank' title='Сайты Томска'><img src='http://region70.ru/get88x31/' width='88' height='31' border='0'></a>
+        <span class='inline_block' id='tbec'><script type='text/javascript'>setTimeout('var tbex=document.createElement("SCRIPT");tbex.type="text/javascript";tbex.src="http://c.tbex.ru/z/a!8831!znaigorod.ru!c.js?rev=2"+String.fromCharCode(38)+"rnd="+(new Date().getTime());(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(tbex)',1)</script></span><noscript><a href="http://tbe.tom.ru/site/znaigorod.ru/"><img src='http://c.tbex.ru/z/a!8831!znaigorod.ru!c.gif' alt='TBE' /></a></noscript>
       <% end %>
     </div>
   </div>

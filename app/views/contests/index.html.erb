@@ -1,10 +1,8 @@
-<div class='content_wrapper'>
-  <h1>Наши конкурсы</h1>
-  <div class='contest'>
-    <ul class='contests_list'>
+<h1>Наши конкурсы</h1>
+<div class='contest'>
+  <ul class='contests_list'>
     <% @contests.each do |contest| %>
       <li><%= link_to contest.title, contest %></li>
     <% end %>
-    </ul>
-  </div>
+  </ul>
 </div>

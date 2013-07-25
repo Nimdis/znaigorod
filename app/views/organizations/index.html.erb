@@ -2,20 +2,18 @@
 <% content_for :meta_description, t('meta.organizations.description') %>
 <% content_for :meta_keywords, t('meta.organizations.keywords') %>
 
-<div class="content_wrapper">
-  <div class="organizations_catalog">
-    <h1><span class="strong">Заведения</span> города Томска</h1>
-    <% @organizations_catalog_presenter.catalog.each do |kind_link, category_links| %>
-      <% unless category_links.blank? %>
-        <fieldset class="<%= cycle("odd", "even") %>">
-          <legend><%= kind_link %></legend>
-          <ul>
-            <% category_links.each do |category_link| %>
-              <li><%= category_link %></li>
-            <% end %>
-          </ul>
-        </fieldset>
-      <% end %>
+<div class="organizations_catalog">
+  <h1><span class="strong">Заведения</span> города Томска</h1>
+  <% @organizations_catalog_presenter.catalog.each do |kind_link, category_links| %>
+    <% unless category_links.blank? %>
+      <fieldset class="<%= cycle("odd", "even") %>">
+        <legend><%= kind_link %></legend>
+        <ul>
+          <% category_links.each do |category_link| %>
+            <li><%= category_link %></li>
+          <% end %>
+        </ul>
+      </fieldset>
     <% end %>
-  </div>
+  <% end %>
 </div>

@@ -2,56 +2,55 @@
 <% content_for :meta_description, @presenter.meta_description %>
 <% content_for :meta_keywords, @presenter.meta_keywords %>
 
-<div class="content_wrapper">
-  <%= render :partial => 'filters' %>
-  <div class="affiches_list">
-    <div class="list_settings">
-      <div class="sort affiches">
-        <p>Сортировка:</p>
-        <ul>
-          <li>
-              <%= link_to t('afisha.sort.rating'),
-              afisha_index_path(@presenter.query.merge('order_by' => 'rating')),
-              @presenter.sort_by_rating? ? { class: 'selected' } : {} %>
-          </li>
-          <li><span class="separator">&nbsp;</span></li>
-          <li>
-              <%= link_to t('afisha.sort.creation'),
-              afisha_index_path(@presenter.query.merge('order_by' => 'creation')),
-              @presenter.sort_by_creation? ? { class: 'selected' } : {} %>
-          </li>
-          <li><span class="separator">&nbsp;</span></li>
-          <li>
-              <%= link_to t('afisha.sort.starts_at'),
-              afisha_index_path(@presenter.query.merge('order_by' => 'starts_at')),
-              @presenter.sort_by_starts_at? ? { class: 'selected' } : {} %>
-          </li>
-          <li><span class="separator">&nbsp;</span></li>
-          <li>
-            <% if @presenter.geo_filter.used? %>
-              <%= link_to t('afisha.sort.nearness'),
-                afisha_index_path(@presenter.query.merge('order_by' => 'nearness')),
-                @presenter.sort_by_nearness? ? { class: 'selected' } : {} %>
-            <% else %>
-              <%= link_to t('afisha.sort.nearness'),
-                afisha_index_path(@presenter.query.merge('order_by' => 'nearness')),
-                class: 'disabled' %>
-            <% end %>
-          </li>
-        </ul>
-      </div>
-    </div>
+<%= render :partial => 'filters' %>
 
-    <%= render :partial => 'advertisment' if DateTime.now <= DateTime.new(2013, 6, 23, 22, 00, 00, '+7') %>
-
-    <% if @presenter.collection.any? %>
-      <ul class="items_list <%= @presenter.view %>">
-        <%= render :partial => @presenter.partial %>
+<div class="affiches_list">
+  <div class="list_settings">
+    <div class="sort affiches">
+      <p>Сортировка:</p>
+      <ul>
+        <li>
+          <%= link_to t('afisha.sort.rating'),
+            afisha_index_path(@presenter.query.merge('order_by' => 'rating')),
+            @presenter.sort_by_rating? ? { class: 'selected' } : {} %>
+        </li>
+        <li><span class="separator">&nbsp;</span></li>
+        <li>
+          <%= link_to t('afisha.sort.creation'),
+            afisha_index_path(@presenter.query.merge('order_by' => 'creation')),
+            @presenter.sort_by_creation? ? { class: 'selected' } : {} %>
+        </li>
+        <li><span class="separator">&nbsp;</span></li>
+        <li>
+          <%= link_to t('afisha.sort.starts_at'),
+            afisha_index_path(@presenter.query.merge('order_by' => 'starts_at')),
+            @presenter.sort_by_starts_at? ? { class: 'selected' } : {} %>
+        </li>
+        <li><span class="separator">&nbsp;</span></li>
+        <li>
+          <% if @presenter.geo_filter.used? %>
+            <%= link_to t('afisha.sort.nearness'),
+              afisha_index_path(@presenter.query.merge('order_by' => 'nearness')),
+              @presenter.sort_by_nearness? ? { class: 'selected' } : {} %>
+          <% else %>
+            <%= link_to t('afisha.sort.nearness'),
+              afisha_index_path(@presenter.query.merge('order_by' => 'nearness')),
+              class: 'disabled' %>
+          <% end %>
+        </li>
       </ul>
-    <% else %>
-      <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
-    <% end %>
+    </div>
   </div>
+
+  <%= render :partial => 'advertisment' if DateTime.now <= DateTime.new(2013, 6, 23, 22, 00, 00, '+7') %>
+
+  <% if @presenter.collection.any? %>
+    <ul class="items_list <%= @presenter.view %>">
+      <%= render :partial => @presenter.partial %>
+    </ul>
+  <% else %>
+    <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
+  <% end %>
 </div>
 
 <%= paginate @presenter.paginated_collection %>

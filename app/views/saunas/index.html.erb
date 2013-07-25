@@ -2,27 +2,25 @@
 <% content_for :meta_description, t('meta.saunas.description') %>
 <% content_for :meta_keywords, t('meta.saunas.keywords') %>
 
-<div class="content_wrapper">
-  <%= render :partial => 'filters' %>
+<%= render :partial => 'filters' %>
 
-  <div class="list_settings">
-    <div class="presentation">
-    </div>
-    <div class="sort saunas">
-      <p>Сортировка:</p>
-      <ul>
-        <%= @presenter.sort_links %>
-      </ul>
-    </div>
+<div class="list_settings">
+  <div class="presentation">
   </div>
-
-  <% if @presenter.saunas.any? %>
-    <ul class='sauna_list'>
-      <%= render :partial => 'sauna_list' %>
+  <div class="sort saunas">
+    <p>Сортировка:</p>
+    <ul>
+      <%= @presenter.sort_links %>
     </ul>
-  <% else %>
-    <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
-  <% end %>
+  </div>
 </div>
+
+<% if @presenter.saunas.any? %>
+  <ul class='sauna_list'>
+    <%= render :partial => 'sauna_list' %>
+  </ul>
+<% else %>
+  <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
+<% end %>
 
 <%= paginate @presenter.paginatable_collection %>

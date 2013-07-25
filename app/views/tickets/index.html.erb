@@ -2,12 +2,11 @@
 <% content_for :meta_description, t('meta.tickets.description') %>
 <% content_for :meta_keywords, t('meta.tickets.keywords') %>
 
-<div class='content_wrapper'>
-  <%= render 'breadcrumbs', :index => true %>
-  <h1>Распродажа билетов</h1>
-  <ul class='tickets_list'>
-    <%= render :partial => 'tickets_list' %>
-  </ul>
-</div>
+<%= render 'breadcrumbs', :index => true %>
+
+<h1>Распродажа билетов</h1>
+<ul class='tickets_list'>
+  <%= render :partial => 'tickets_list' %>
+</ul>
 
 <%= paginate @tickets %>

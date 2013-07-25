@@ -1,17 +1,15 @@
-<div class='content_wrapper'>
-  <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
+<%= render_navigation context: 'my', :renderer => :breadcrumbs %>
 
-  <h1>
-    <%= t("my.archive") %>
-  </h1>
+<h1>
+  <%= t("my.archive") %>
+</h1>
 
-  <div class='my_affiche_wrapper'>
-    <div class='my_affiches_preview'>
-      <ul class='my_affiche_items'>
-        <% current_user.afisha.archive.published.each do |afisha| %>
-          <%= render :partial => 'afisha_list', :locals => { :afisha => afisha, :editable => true } %>
-        <% end %>
-      </ul>
-    </div>
+<div class='my_affiche_wrapper'>
+  <div class='my_affiches_preview'>
+    <ul class='my_affiche_items'>
+      <% current_user.afisha.archive.published.each do |afisha| %>
+        <%= render :partial => 'afisha_list', :locals => { :afisha => afisha, :editable => true } %>
+      <% end %>
+    </ul>
   </div>
 </div>
