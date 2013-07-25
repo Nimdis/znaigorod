@@ -25,7 +25,7 @@ every 4.hours do
 end
 
 every :day, :at => '3am' do
-  rake "recalculate_users_rating"
+  rake "recalculate_accounts_rating"
 end
 
 every :day, :at => '5am' do
