@@ -4,11 +4,12 @@
   <%= link_to "посмотреть в публичном виде", afisha_show_path(resource), target: :_blank, :class => 'edit_link floatr' %>
 
   <div class="logo">
-    <% if resource.poster_url.present? %>
-      <%= image_tag_for resource.poster_url, 290, 390 %>
+    <% if resource.poster_url? %>
+      <%= image_tag(resized_image_url(resource.poster_url, 290, 390, true), size: '290x390') %>
     <% else %>
-      <%= image_tag "manage/stub.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
+      <%= image_tag 'public/stub_poster.png', size: '290x390' %>
     <% end %>
+    <%= link_to 'изменить постер', poster_manage_afisha_path(resource) %>
   </div>
 
   <div class="right_side">

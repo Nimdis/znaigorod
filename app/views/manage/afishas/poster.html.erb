@@ -1,0 +1,34 @@
+<h1>Постер</h1>
+
+<% if resource.poster_image_url? %>
+  <% crop_opt = resource.poster_url ? resource.poster_url.match(/(?<=\/region\/)\w+\/\w+\/\w+\/\w+/).to_s.split('/').map{|o| (o.to_i/resource.resize_factor).round} : [] %>
+  <% crop_width, crop_height, crop_x, crop_y = crop_opt.any? ? crop_opt : [resource.poster_image_resized_dimensions[:width] / resource.resize_factor, resource.poster_image_resized_dimensions[:height] , 0, 0] %>
+
+  <%= simple_form_for resource, as: :afisha, :url => manage_afisha_show_path(resource.id) do |f| %>
+    <div>
+      <%= f.input :set_region, :as => :hidden, :input_html => { :value => true } %>
+      <%= f.input :crop_x, :as => :hidden, :input_html => { :value => crop_x } %>
+      <%= f.input :crop_y, :as => :hidden, :input_html => { :value => crop_y } %>
+      <%= f.input :crop_width, :as => :hidden, :input_html => { :value => crop_width } %>
+      <%= f.input :crop_height, :as => :hidden, :input_html => { :value => crop_height } %>
+      <%= image_tag resized_image_url(resource.poster_image_url,
+                                      resource.poster_image_resized_dimensions[:width],
+                                      resource.poster_image_resized_dimensions[:height],
+                                      false), :class => 'jcrop' %>
+    </div>
+    <div class='submit'>
+      <%= f.button :submit, 'Обрезать постер', class: :button %>
+      <%= link_to 'Отмена', manage_afisha_show_path(resource) %>
+      <%= link_to 'Удалить постер', destroy_image_manage_afisha_path(resource.id), :method => :delete, :confirm => 'Вы уверены что хотите удалить?', class: :floatr %>
+    </div>
+  <% end %>
+<% else %>
+  <%= simple_form_for resource, as: :afisha, url: manage_afisha_show_path(resource.id) do |f| %>
+    <%= hidden_field_tag :crop, true %>
+    <%= f.input :poster_image, label: 'Выберите изображение', required: true, class: :button %>
+    <%= f.error :poster_image_content_type %>
+    <div class='submit'>
+      <%= link_to 'Отмена', manage_afisha_show_path(resource) %>
+    </div>
+  <% end %>
+<% end %>

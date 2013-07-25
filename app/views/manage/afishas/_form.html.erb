@@ -15,18 +15,6 @@
 <%= f.input :age_min %>
 <%= f.input :age_max %>
 
-<div class='poster'>
-  <h3>Постер для события:</h3>
-  <%= f.input :poster_url, :as => :hidden, :input_html => { :id => 'affiche_poster_url' } %>
-  <div class="choose_file_wrapper">
-    <div class="uploaded_file_wrapper image">
-      <%= image_tag(resized_image_url(f.object.poster_url, 400, 400, false)) if f.object.poster_url.present? %>
-    </div>
-    <%= link_to t('remove_link'), '#', :class => 'remove_link', :style => ("display: none;" unless f.object.poster_url.present?) %>
-    <%= link_to t('choose_file'), '#', :class => 'affiche_poster_url choose_file', :params => "vfs_path=#{f.object.vfs_path}", :style => ('display: none;' if f.object.poster_url.present?) %>
-  </div>
-</div>
-
 <% unless f.object.affiche_schedule.try :persisted? %>
   <div class="showings_fields">
     <h3>Сеансы:</h3>

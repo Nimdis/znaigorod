@@ -12,6 +12,8 @@
  * = require datetime_picker
  * = require file_upload
  * = require ajax_delete
+ * = require jcrop
+ * = require crop
  * = require ./info_plugin
  * = require ./choose_file
  * = require ./geocoder

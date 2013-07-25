@@ -11,6 +11,11 @@ Znaigorod::Application.routes.draw do
       get ':by_kind' => 'afishas#index', :on => :collection, :as => :by_kind, :constraints => { :by_kind => /#{Afisha.kind.values.map(&:pluralize).join('|')}/ }
       put 'fire_event_state/:event' => 'afishas#fire_state_event', :on => :member, :as => :fire_state_event
 
+      get 'poster' => 'afishas#poster', :on => :member, :as => :poster
+      put 'poster' => 'afishas#poster', :on => :member, :as => :poster
+
+      delete 'destroy_image', :on => :member, :as => :destroy_image
+
       resources :gallery_files,  :except => [:index, :show] do
         delete 'destroy_file', :on => :member, :as => :destroy_file
       end

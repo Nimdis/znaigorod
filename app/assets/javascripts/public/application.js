@@ -19,6 +19,7 @@
  * = require autosuggest_handler
  * = require datetime_picker
  * = require file_upload
+ * = require crop
  * = require ajax_delete
  * = require ./auth
  * = require ./rating
@@ -72,7 +73,6 @@
  * = require ./visitors
  * = require ./sms_claims
  * = require ./my_affiche
- * = require ./crop
  * = require ./select_tags
  * = require ./main
  */

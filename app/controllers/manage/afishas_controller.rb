@@ -1,7 +1,7 @@
 class Manage::AfishasController < Manage::ApplicationController
   defaults :resource_class => Afisha
 
-  custom_actions :resource => :fire_state_event
+  custom_actions :resource => [:fire_state_event, :destroy_image]
 
   has_scope :page, :default => 1
   has_scope :by_state, :only => :index
@@ -20,7 +20,11 @@ class Manage::AfishasController < Manage::ApplicationController
   def update
     update! do |success, failure|
       success.html {
-        redirect_to manage_afisha_show_path(resource)
+        if params[:crop]
+          redirect_to poster_manage_afisha_path(resource)
+        else
+          redirect_to manage_afisha_show_path(resource)
+        end
       }
       failure.html { render :edit }
     end
@@ -34,6 +38,15 @@ class Manage::AfishasController < Manage::ApplicationController
     fire_state_event! {
       resource.fire_state_event params[:event] if resource.state_events.include?(params[:event].to_sym)
 
+      redirect_to manage_afisha_show_path(resource) and return
+    }
+  end
+
+  def destroy_image
+    destroy_image! {
+      resource.poster_url = nil
+      resource.poster_image.destroy
+      resource.save
       redirect_to manage_afisha_show_path(resource) and return
     }
   end
