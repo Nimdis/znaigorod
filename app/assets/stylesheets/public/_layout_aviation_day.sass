@@ -1,0 +1,35 @@
+body
+  .aviation_day_wrapper
+    +clearfix
+    background: #e4efcf
+    background-position: center top
+    background-repeat: no-repeat
+    +background-image(image_url('public/aviation_day/background.png'), linear-gradient(#cce0a5, #fff))
+    .aviation_day_header
+      width: $common_width
+      height: 105px
+      +clearfix
+      margin: 0 auto
+      a
+        display: block
+        width: 1200px
+        height: 100px
+        margin-top: 2px
+        overflow: hidden
+        text-indent: -9999em
+        background: transparent image_url('public/aviation_day/logo.png') no-repeat center center
+
+    .aviation_day
+      width: $common_width
+      margin: 0 auto
+      background-color: #fff
+      +box-shadow(#777 0 0 5px)
+      +border-top-left-radius(10px)
+      +border-top-right-radius(10px)
+      .header_wrapper
+        +border-top-left-radius(10px)
+        +border-top-right-radius(10px)
+      .content_wrapper
+        background-color: #fff
+        margin-top: 0
+        padding-top: 15px

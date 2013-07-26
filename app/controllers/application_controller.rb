@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   private
 
   def resolve_layout
-    request.xhr? ? false : 'public'
+    request.xhr? ? false : 'custom/aviation_day'
   end
 
   def page
