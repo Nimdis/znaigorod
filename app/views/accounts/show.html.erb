@@ -13,7 +13,15 @@
     <%= time_ago_in_words(@account.created_at) %> на сайте
   </div>
 
-  <%= link_to t('follow'), account_follow_path(@account), method: :put, remote: true unless current_user.account.follows?(@account) %>
+  <% if @account.gender.present? %>
+    <div class='gender'>
+      <%= t(@account.gender) %>
+    </div>
+  <% end %>
+
+  <% if current_user.account != @account %>
+    <%= link_to t('follow'), account_follow_path(@account), method: :put, remote: true unless current_user.account.follows?(@account) %>
+  <% end %>
   <%= link_to t('unfollow'), account_unfollow_path(@account), method: :put, remote: true if current_user.account.follows?(@account) %>
 </div>
 

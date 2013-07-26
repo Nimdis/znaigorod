@@ -77,8 +77,8 @@ ActiveRecord::Schema.define(:version => 20130726082047) do
 
   create_table "afisha", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.text     "description"
     t.string   "original_title"
     t.string   "poster_url"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(:version => 20130726082047) do
     t.datetime "poster_image_updated_at"
     t.text     "poster_image_url"
     t.integer  "user_id"
-    t.text     "kind",                      :default => "--- []\n"
+    t.text     "kind"
   end
 
   add_index "afisha", ["slug"], :name => "index_affiches_on_slug", :unique => true

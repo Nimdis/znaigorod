@@ -94,6 +94,9 @@ ru:
   twitter_timeline: Эфир
   uid: UID
 
+  male:     Мужской
+  female:   Женский
+
   user_activity:
     kind:
       afisha: Афиша
