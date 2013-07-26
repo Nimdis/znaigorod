@@ -2,7 +2,7 @@ class Account < ActiveRecord::Base
   acts_as_follower
   acts_as_followable
 
-  attr_accessible :email, :first_name, :last_name, :patronymic, :rating, :nickname, :location, :created_at
+  attr_accessible :email, :first_name, :gender, :last_name, :patronymic, :rating, :nickname, :location, :created_at
 
   has_many :users,           order: 'id ASC'
   has_many :afisha,          :through => :users

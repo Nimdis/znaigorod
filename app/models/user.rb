@@ -53,6 +53,14 @@ class User < ActiveRecord::Base
     auth_raw_info.try(:info).try(:nickname)
   end
 
+  def gender
+    auth_raw_info.try(:extra).try(:raw_info).try(:gender) || auth_raw_info.try(:extra).try(:raw_info).try(:sex)
+  end
+
+  def email
+    auth_raw_info.try(:extra).try(:raw_info).try(:email)
+  end
+
   def location
     auth_raw_info.try(:info).try(:location)
   end
@@ -125,7 +133,10 @@ class User < ActiveRecord::Base
 
   def create_account
     name = self.name.split(' ')
-    account = Account.create(first_name: name.first, last_name: name.last, nickname: self.nickname, location: self.location)
+    account = Account.create(first_name: name.first, last_name: name.last,
+                             nickname: self.nickname, location: self.location,
+                             email: self.email, gender: self.gender)
+
     update_attributes(account_id: account.id)
   end
 end
