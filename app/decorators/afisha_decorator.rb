@@ -7,6 +7,14 @@ class AfishaDecorator < ApplicationDecorator
   delegate :distribution_starts_on, :distribution_ends_on, :distribution_starts_on?, :distribution_ends_on?, :kind, :to => :afisha
   attr_accessor :showings
 
+  def show_url
+    h.afisha_show_path(afisha)
+  end
+
+  def title_link
+    afisha.title
+  end
+
   def initialize(afisha, showings = nil)
     super
     @showings = showings ? ShowingDecorator.decorate(showings) : ShowingDecorator.decorate(afisha.showings.actual)
@@ -41,12 +49,12 @@ class AfishaDecorator < ApplicationDecorator
     h.send "afisha_url", afisha, options
   end
 
-  def kind_affisha_photogallery_path(options = {})
-    h.send "afisha_path", afisha, options.merge({:anchor => 'photogallery'})
+  def kind_afisha_photogallery_path(options = {})
+    h.send "afisha_show_path", afisha, options.merge({:anchor => 'photogallery'})
   end
 
   def kind_afisha_trailer_path(options = {})
-    h.send "afisha_path", afisha, options.merge({:anchor => 'trailer'})
+    h.send "afisha_show_path", afisha, options.merge({:anchor => 'trailer'})
   end
 
   def all_afisha_link

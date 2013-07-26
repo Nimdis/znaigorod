@@ -122,7 +122,7 @@ HasSearcher.create_searcher :global do
     boost 1 do
       any_of do
         with(:last_showing_time).greater_than(HasSearcher.cacheable_now)
-        with(:kind, 'organization')
+        with(:kind, ['organization'])
       end
     end
     boost(

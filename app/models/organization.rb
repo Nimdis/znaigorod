@@ -161,7 +161,7 @@ class Organization < ActiveRecord::Base
 
     string :status
     string(:suborganizations, :multiple => true) { suborganizations.map(&:class).map(&:name).map(&:underscore) }
-    string(:kind) { 'organization' }
+    string(:kind, :multiple => true) { ['organization'] }
 
     text :title,                :boost => 1.0 * 1.2
     text :title_ru,             :boost => 1.0,              :more_like_this => true

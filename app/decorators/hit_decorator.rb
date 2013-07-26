@@ -10,7 +10,7 @@ class HitDecorator < ApplicationDecorator
     @decorator ||= if organization?
       OrganizationDecorator.new(result)
     else
-      AfficheDecorator.new(result)
+      AfishaDecorator.new(result)
     end
   end
 
@@ -106,7 +106,7 @@ class HitDecorator < ApplicationDecorator
       %w(photogallery trailer).each do |method|
         links << Link.new(
           title: result_decorator.navigation_title(method),
-          url: result_decorator.send("kind_affiche_#{method}_path")
+          url: result_decorator.send("kind_afisha_#{method}_path")
         ) if result_decorator.send("has_#{method}?")
       end
     end
