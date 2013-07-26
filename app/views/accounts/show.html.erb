@@ -12,11 +12,22 @@
   <div class="join">
     <%= time_ago_in_words(@account.created_at) %> на сайте
   </div>
+
+  <%= link_to t('follow'), account_follow_path(@account), method: :put, remote: true unless current_user.account.follows?(@account) %>
+  <%= link_to t('unfollow'), account_unfollow_path(@account), method: :put, remote: true if current_user.account.follows?(@account) %>
 </div>
 
 <div class="provider">
   <%= link_to @account.users.first.profile, @account.users.first.profile %>
 </div>
+
+<% if @account.followers(Account).any? %>
+  <h3>
+    Друзья
+    <%= link_to t('all_account_followers'), account_followers_path(@account) %>
+  </h3>
+  <%= render partial: 'account_followers', locals: { followers: @account.followers(Account).first(5) } %>
+<% end %>
 
 <% if @account.comments.any? %>
   <h3>
