@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   scope :with_role,      ->(role) { joins(:roles).where('roles.role = ?', role) }
   scope :sales_managers, -> { with_role(:sales_manager) }
   scope :vkontakte,      -> { where(provider: 'vkontakte') }
+  scope :facebook,       -> { where(provider: 'facebook') }
 
   after_create :create_account
 
@@ -37,6 +38,10 @@ class User < ActiveRecord::Base
     find_or_initialize_by_provider_and_uid(provider: provider, uid: uid).tap { |user|
       user.update_attributes provider: provider, uid: uid, auth_raw_info: auth_raw_info
     }
+  end
+
+  def token
+    auth_raw_info.try(:credentials).try(:token)
   end
 
   def name

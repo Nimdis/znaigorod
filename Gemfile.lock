@@ -220,6 +220,10 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.0)
+    koala (1.7.0rc1)
+      addressable
+      faraday
+      multi_json
     launchy (2.3.0)
       addressable (~> 2.3)
     letter_opener (1.1.1)
@@ -499,6 +503,7 @@ DEPENDENCIES
   jquery-fileupload-rails
   jquery-rails (= 2.0.3)
   kaminari
+  koala (~> 1.7.0rc1)
   letter_opener
   libv8 (~> 3.11.8)
   mainsms_api

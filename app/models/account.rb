@@ -4,7 +4,7 @@ class Account < ActiveRecord::Base
 
   attr_accessible :email, :first_name, :last_name, :patronymic, :rating, :nickname, :location
 
-  has_many :users
+  has_many :users,           order: 'id ASC'
   has_many :afisha,          :through => :users
   has_many :showings,        :through => :users
   has_many :activities,      :through => :users
@@ -34,6 +34,14 @@ class Account < ActiveRecord::Base
 
     uids.each do |uid|
       self.follow!(User.find_by_uid(uid.to_s).account) if User.vkontakte.where(uid: uid.to_s).any?
+    end
+  end
+
+  def get_facebook_friends(user)
+    fb_client = Koala::Facebook::API.new(user.token)
+    friends = fb_client.get_connections(user.uid, "friends")
+    friends.each do |friend|
+      self.follow!(User.find_by_uid(friend['id']).account) if User.facebook.where(uid: friend['id']).any?
     end
   end
 
