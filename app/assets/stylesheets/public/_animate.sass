@@ -1,0 +1,77 @@
+=animate_blink($speed: 1s, $repeat: true)
+  animation: fade $speed forwards
+  -webkit-animation: fade $speed forwards
+  -moz-animation: fade $speed forwards
+  -o-animation: fade $speed forwards
+  @if $repeat == true
+    animation-iteration-count: infinite
+    -webkit-animation-iteration-count: infinite
+    -moz-animation-iteration-count: infinite
+    -o-animation-iteration-count: infinite
+
+=animate_paused
+  animation: show 0 forwards
+  -webkit-animation: show 0 forwards
+  -moz-animation: show 0 forwards
+  -o-animation: show 0 forwards
+  +opacity(1)
+  animation-play-state: paused
+  -webkit-animation-play-state: paused
+  -moz-animation-play-state: paused
+  -o-animation-play-state: paused
+
+@keyframes fade
+  0%
+    opacity: 0
+  50%
+    opacity: 1
+  100%
+    opacity: 0
+
+@-webkit-keyframes fade
+  0%
+    opacity: 0
+  50%
+    opacity: 1
+  100%
+    opacity: 0
+
+@-moz-keyframes fade
+  0%
+    opacity: 0
+  50%
+    opacity: 1
+  100%
+    opacity: 0
+
+@-o-keyframes fade
+  0%
+    opacity: 0
+  50%
+    opacity: 1
+  100%
+    opacity: 0
+
+@keyframes show
+  0%
+    opacity: 1
+  100%
+    opacity: 1
+
+@-webkit-keyframes show
+  0%
+    opacity: 1
+  100%
+    opacity: 1
+
+@-moz-keyframes show
+  0%
+    opacity: 1
+  100%
+    opacity: 1
+
+@-o-keyframes show
+  0%
+    opacity: 1
+  100%
+    opacity: 1

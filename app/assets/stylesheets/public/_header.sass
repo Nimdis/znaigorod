@@ -1,12 +1,103 @@
 .header_wrapper
-  +fluid_settings
+  +min-height(75px)
+  border-bottom: 2px solid #f60
+  margin-bottom: 10px
+
   .header
-    +clearfix
+    +liquid($desctop_min_width, $desctop_max_width)
+    position: relative
+
     .logo
-      float: left
-      margin-left: 10px
+      position: absolute
+      top: 0
+      left: 10px
+      a
+        display: block
+        width: 97px
+        height: 54px
+        overflow: hidden
+        text-indent: -9999em
+        background: transparent image_url('public/logotype.png') no-repeat center center
+
     .tomsk
-      float: left
+      font-size: 12px
+      position: absolute
+      top: 0
+      left: 112px
+      a
+        color: #000
+        border-bottom: 1px dashed #000
+        &:after
+          content: '\25be'
+          margin: 0 0 2px 3px
+        &:hover
+          text-decoration: none
+
     .dashboard
-      float: right
-      margin-right: 10px
+      font-size: 12px
+      position: absolute
+      top: 0
+      right: 10px
+      p
+        text-align: right
+      .user
+        a
+          +inline-block
+        .avatar img
+          +border-radius
+        .logout
+          margin-left: 10px
+      .private
+        margin-bottom: 3px
+      .messages
+        +clearfix
+        a
+          color: #000
+          display: block
+          float: right
+          padding-right: 21px
+          background: transparent image_url('public/messages_icon.png') no-repeat right 0
+          text-decoration: none
+          &.empty
+            color: #ccc
+            background-position: right 4px
+          &.new
+            +animate_blink
+            font-weight: bold
+            background-position: right -32px
+            &:hover
+              color: #f60
+              +animate_paused
+
+      .social_signin_links
+        float: right
+        li
+          +inline-block
+
+          a
+            display: block
+            height: 16px
+            text-indent: -9999em
+            background: transparent image_url('public/social_icons_small.png') no-repeat 0 0
+            width: 16px
+
+          &.vkontakte a
+            background-position: 0 0
+
+          &.yandex a
+            background-position: -16px 0
+
+          &.facebook a
+            background-position: -32px 0
+
+          &.twitter a
+            background-position: -48px 0
+
+          &.google a
+            background-position: -64px 0
+
+          &.mail_ru a
+            background-position: -80px 0
+
+          &.odnoklassniki a
+            background-position: -96px 0

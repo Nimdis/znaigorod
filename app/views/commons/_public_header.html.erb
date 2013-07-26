@@ -6,25 +6,32 @@
 
 <div class='header_wrapper'>
   <div class='header'>
-    <div class='logo'>
-      <a href='/'><%= t('meta.default.title') %></a>
-    </div>
-    <div class='tomsk'>
-      <a href='/'>Томск</a>
-    </div>
+    <div class='logo'><a href='/'><%= t('meta.default.title') %></a></div>
+    <div class='tomsk'><a href='/'>Томск</a></div>
     <div class='dashboard'>
       <% if user_signed_in? %>
-        <p>
-          <%= image_tag current_user.avatar %>
-          <%= link_to current_user.name, current_user.profile, target: :_blank %>
-          <%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: :logout %>
+        <p class='user'>
+          <%= link_to(image_tag(current_user.avatar, size: '22x22'), current_user.profile, target: :_blank, class: :avatar) %>
+          <%= link_to(current_user.name, current_user.profile, target: :_blank, class: :user_name) %>
+          <%= link_to('Выйти', destroy_user_session_path, method: :delete, class: :logout) %>
         </p>
-        <p><%= link_to 'Личный кабинет', my_root_path %></p>
+        <p class='private'><%= link_to('Личный кабинет', my_root_path) %></p>
+        <p class='messages'><%= link_to '0', '#', class: :empty, title: 'Нет новых соощений' %></p>
+        <!-- <p class='messages'><%= link_to '0', '#', class: :empty, title: 'Нет новых соощений' %></p> -->
+        <!-- <p class='messages'><%= link_to '+2', '#', class: :new, title: '2 новых сообщения' %></p> -->
       <% else %>
         <%= render :partial => 'commons/social_auth' %>
       <% end %>
     </div>
     <div class='main_menu'>
+      <ul>
+        <li><a href='#'>Все</a></li>
+        <li><a href='#'>Афиша</a></li>
+        <li><a href='#'>Заведения</a></li>
+        <li><a href='#'>Скидки</a></li>
+        <li><a href='#'>Обзоры</a></li>
+        <li><a href='#'>Люди</a></li>
+      </ul>
     </div>
   </div>
 </div>

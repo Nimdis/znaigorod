@@ -4,7 +4,7 @@
   border-top: 1px solid #ccc
 
   .footer
-    +fluid_settings
+    +liquid($desctop_min_width, $desctop_max_width)
     +clearfix
     margin-top: 10px
     margin-bottom: 10px
@@ -42,7 +42,7 @@
             width: 16px
             height: 16px
             text-indent: -9999em
-            background: image_url('public/our_social_link.png') no-repeat 0 0
+            background: transparent image_url('public/our_social_link.png') no-repeat 0 0
 
           &.vk a
             background-position: 0 0

@@ -147,5 +147,7 @@ end
 #  auth_raw_info       :text
 #  remember_created_at :datetime
 #  remember_token      :string(255)
+#  rating              :string(255)
+#  account_id          :integer
 #
 

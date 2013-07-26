@@ -50,3 +50,20 @@ class Account < ActiveRecord::Base
     update_column(:rating, rating)
   end
 end
+
+# == Schema Information
+#
+# Table name: accounts
+#
+#  id         :integer          not null, primary key
+#  first_name :string(255)
+#  last_name  :string(255)
+#  patronymic :string(255)
+#  email      :string(255)
+#  rating     :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  nickname   :string(255)
+#  location   :string(255)
+#
+

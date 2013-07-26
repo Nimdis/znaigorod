@@ -1,23 +1,25 @@
-$min_width: 1000px
-$max_width: 1440px
+$desctop_min_width: 1000px
+$desctop_max_width: 1440px
 
-=max-width($width)
-  max-width: $width
+=max-width($max_width)
+  max-width: $max_width
 
-=fluid_settings($min: $min_width, $max: $max_width)
-  +min-width($min)
-  +max-width($max)
+=liquid($min_width, $max_width)
+  +min-width($min_width)
+  +max-width($max_width)
   margin: 0 auto
 
 body
-  font-size: 11px
-  font-family: 'Verdana', 'Tahoma', sans-serif
   background-color: #fff
+  color: #000
+  font-family: 'Verdana', 'Tahoma', sans-serif
+  font-size: 11px
   line-height: 1.5
-  +min-width(1000px)
+  +min-width($desctop_min_width)
 
 a
   color: #06c
+  outline: none
   text-decoration: none
   &:hover
     text-decoration: underline

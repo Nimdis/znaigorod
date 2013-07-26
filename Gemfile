@@ -12,7 +12,7 @@ end
 group :default do
   gem 'RedCloth'
   gem 'active_attr'
-  gem 'activemerchant', :require => 'active_merchant'
+  gem 'activemerchant',             :require => 'active_merchant'
   gem 'ancestry'
   gem 'attribute_normalizer'
   gem 'auto_html'
@@ -27,7 +27,7 @@ group :default do
   gem 'devise-russian'
   gem 'draper'
   gem 'el_vfs_client'
-  gem 'enumerize', :git => 'git://github.com/brainspec/enumerize', :branch => 'master' # NOTE https://github.com/brainspec/enumerize/pull/87
+  gem 'enumerize',                  :git => 'git://github.com/brainspec/enumerize', :branch => 'master' # NOTE https://github.com/brainspec/enumerize/pull/87
   gem 'esp-ckeditor'
   gem 'fastimage'
   gem 'friendly_id'
@@ -73,7 +73,7 @@ end
 group :development do
   gem 'annotate',                   :require => false
   gem 'brakeman'
-  gem 'capistrano-db-tasks', :git => 'git://github.com/sgruhier/capistrano-db-tasks'
+  gem 'capistrano-db-tasks',        :git => 'git://github.com/sgruhier/capistrano-db-tasks'
   gem 'capistrano-unicorn'
   gem 'debugger'
   gem 'hirb'
