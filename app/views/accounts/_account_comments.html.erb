@@ -1,0 +1,10 @@
+<ul class="user_comments">
+  <% comments.each do |comment| %>
+    <li>
+      <%= render partial: 'accounts/account_afisha_comment', locals: { comment: comment } if comment.commentable.is_a?(Afisha) %>
+      <%= render partial: 'accounts/account_organization_comment', locals: { comment: comment } if comment.commentable.is_a?(Organization) %>
+      <%= render partial: 'accounts/account_work_comment', locals: { comment: comment } if comment.commentable.is_a?(Work) %>
+      <%= render partial: 'accounts/account_post_comment', locals: { comment: comment } if comment.commentable.is_a?(Post) %>
+    </li>
+  <% end %>
+</ul>

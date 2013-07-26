@@ -1,0 +1,10 @@
+<ul class="user_votes">
+  <% votes.each do |vote| %>
+    <li>
+      <%= render partial: 'accounts/account_afisha_vote', locals: { vote: vote } if vote.voteable.is_a?(Afisha) %>
+      <%= render partial: 'accounts/account_organization_vote', locals: { vote: vote } if vote.voteable.is_a?(Organization) %>
+      <%= render partial: 'accounts/account_post_vote', locals: { vote: vote } if vote.voteable.is_a?(Post) %>
+      <%= render partial: 'accounts/account_work_vote', locals: { vote: vote } if vote.voteable.is_a?(Work) %>
+    </li>
+  <% end %>
+</ul>

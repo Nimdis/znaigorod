@@ -1,8 +1,0 @@
-<ul class="user_visits">
-  <% visits.each do |visit| %>
-    <li>
-      <%= render partial: 'users/user_afisha_visit', locals: { visit: visit } if visit.visitable.is_a?(Afisha) %>
-      <%= render partial: 'users/user_organization_visit', locals: { visit: visit } if visit.visitable.is_a?(Organization) %>
-    </li>
-  <% end %>
-</ul>

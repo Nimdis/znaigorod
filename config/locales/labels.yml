@@ -12,11 +12,11 @@ ru:
   add_social_links: Добавить ссылку
   add_price: Добавить стоимость
   add_virtual_tour: Добавить 3D-тур
-  all_user_comments: Все комментарии
-  all_user_votes: Все что понравилось
-  all_user_visits: Все посещения
-  all_user_payments: Все приобретенные билеты
-  all_user_events: Все мероприятия
+  all_account_comments: Все комментарии
+  all_account_votes: Все что понравилось
+  all_account_visits: Все посещения
+  all_account_payments: Все приобретенные билеты
+  all_account_events: Все мероприятия
   back: Назад
   choose_file: Выбрать файл
   clear_filters: Очистить фильтры
@@ -132,21 +132,21 @@ ru:
     many: "Время приготовления: %{count} минут."
     other: "Время приготовления: %{count} минут."
 
-  user_comments:
+  account_comments:
     one: "Оставил один комментарий."
     few: "Оставил %{count} комментария."
     many: "Оставил %{count} комментариев."
     other: "Оставил %{count} комментариев."
     zero: ""
 
-  user_votes:
+  account_votes:
     one: "Понравилось одно мероприятие."
     few: "Понравилось %{count} мероприятия."
     many: "Понравилось %{count} мероприятий."
     other: "Понравилось %{count} мероприятий."
     zero: ""
 
-  user_visits:
+  account_visits:
     one: "Посетил одно мероприятие."
     few: "Посетил %{count} мероприятия."
     many: "Посетил %{count} мероприятий."

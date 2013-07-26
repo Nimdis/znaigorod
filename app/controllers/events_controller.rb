@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
   inherit_resources
   actions :index
-  belongs_to :user, :optional => true
+  belongs_to :account, :optional => true
 end

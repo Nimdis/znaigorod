@@ -1,7 +1,0 @@
-<ul class="user_payments">
-  <% payments.each do |payment| %>
-    <li>
-      <%= render partial: 'users/user_ticket_payment', locals: { payment: payment } if payment.paymentable.is_a?(Ticket) %>
-    </li>
-  <% end %>
-</ul>

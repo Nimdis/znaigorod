@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   belongs_to :organization, :polymorphic => true, :optional => true
   belongs_to :post, :polymorphic => true, :optional => true
   belongs_to :work, :polymorphic => true, :optional => true
-  belongs_to :user, :optional => true
+  belongs_to :account, :optional => true
 
   layout false unless :index
 

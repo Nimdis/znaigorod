@@ -3,8 +3,8 @@
 SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.item :root, 'ЗнайГород', root_path do |item|
-      item.item :users, 'Все пользователи', users_path do |user_item|
-        user_item.item :user, @user, user_path if @user
+      item.item :accounts, 'Все пользователи', accounts_path do |account_item|
+        account_item.item :account, @account, account_path if @account
       end
     end
     primary.dom_class = 'breadcrumbs'

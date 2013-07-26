@@ -1,0 +1,59 @@
+<%= render_navigation context: 'account', :renderer => :breadcrumbs %>
+
+<div class="profile">
+  <div class="avatar">
+    <% if @account.avatar.present? %>
+      <%= image_tag @account.avatar, size: '50x50' %>
+    <% else %>
+      <%= image_tag 'public/stub_poster.png', size: '50x50' %>
+    <% end %>
+  </div>
+
+  <div class="join">
+    <%= time_ago_in_words(@account.created_at) %> на сайте
+  </div>
+</div>
+
+<div class="provider">
+  <%= link_to @account.users.first.profile, @account.users.first.profile %>
+</div>
+
+<% if @account.comments.any? %>
+  <h3>
+    Комментарии
+    <%= link_to t('all_account_comments'), account_comments_path(@account) %>
+  </h3>
+  <%= render partial: 'account_comments', locals: { comments: @account.comments.limit(5) } %>
+<% end %>
+
+<% if @account.votes.any? %>
+  <h3>
+    Понравилось
+    <%= link_to t('all_account_votes'), account_votes_path(@account) %>
+  </h3>
+  <%= render partial: 'account_votes', locals: { votes: @account.votes.limit(5) } %>
+<% end %>
+
+<% if @account.visits.any? %>
+  <h3>
+    Посетил
+    <%= link_to t('all_account_visits'), account_visits_path(@account) %>
+  </h3>
+  <%= render partial: 'account_visits', locals: { visits: @account.visits.limit(5) } %>
+<% end %>
+
+<% if @account.payments.with_state(:approved).any? %>
+  <h3>
+    Купил билет
+    <%= link_to t('all_account_payments'), account_payments_path(@account) %>
+  </h3>
+  <%= render partial: 'account_payments', locals: { payments: @account.payments.with_state(:approved).limit(5) } %>
+<% end %>
+
+<% if @account.afisha.published.any? %>
+  <h3>
+    Добавил мероприятие
+    <%= link_to t('all_account_events'), account_events_path(@account) %>
+  </h3>
+  <%= render partial: 'account_events', locals: { events: @account.afisha.published.limit(5) } %>
+<% end %>

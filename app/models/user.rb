@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   scope :sales_managers, -> { with_role(:sales_manager) }
   scope :vkontakte,      -> { where(provider: 'vkontakte') }
   scope :facebook,       -> { where(provider: 'facebook') }
+  scope :ordered,        -> { order('ID ASC') }
 
   after_create :create_account
 
