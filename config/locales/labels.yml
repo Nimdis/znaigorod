@@ -12,11 +12,6 @@ ru:
   add_social_links: Добавить ссылку
   add_price: Добавить стоимость
   add_virtual_tour: Добавить 3D-тур
-  all_account_comments: Все комментарии
-  all_account_votes: Все что понравилось
-  all_account_visits: Все посещения
-  all_account_payments: Все приобретенные билеты
-  all_account_events: Все мероприятия
   back: Назад
   choose_file: Выбрать файл
   clear_filters: Очистить фильтры
@@ -50,6 +45,8 @@ ru:
   email: Почта
   entertainment: Развлечения
   find: Найти
+  follow: Добавить в друзья
+  unfollow: Убрать из друзей
   funny: Заведения
   meal: Заведения питания
   name: Имя
@@ -136,17 +133,31 @@ ru:
     other: "Время приготовления: %{count} минут."
 
   account_comments:
-    one: "Оставил один комментарий."
-    few: "Оставил %{count} комментария."
-    many: "Оставил %{count} комментариев."
-    other: "Оставил %{count} комментариев."
+    one: "один комментарий"
+    few: "%{count} комментария"
+    many: "%{count} комментариев"
+    other: "%{count} комментария"
     zero: ""
 
+  account_events:
+    one: "одно мероприятие"
+    few: "%{count} мероприятия"
+    many: "%{count} мероприятий"
+    other: "%{count} мероприятия"
+    zero: "еще не добавлял мероприятий"
+
+  account_followers:
+    one: "Один человек"
+    few: "%{count} человека"
+    many: "%{count} человек"
+    other: "%{count} человек"
+    zero: "Еще нет друзей"
+
   account_votes:
-    one: "Понравилось одно мероприятие."
-    few: "Понравилось %{count} мероприятия."
-    many: "Понравилось %{count} мероприятий."
-    other: "Понравилось %{count} мероприятий."
+    one: "одно место"
+    few: "%{count} места"
+    many: "%{count} мест"
+    other: "%{count} места"
     zero: ""
 
   account_visits:

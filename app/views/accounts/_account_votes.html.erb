@@ -1,4 +1,4 @@
-<ul class="user_votes">
+<ul>
   <% votes.each do |vote| %>
     <li>
       <%= render partial: 'accounts/account_afisha_vote', locals: { vote: vote } if vote.voteable.is_a?(Afisha) %>

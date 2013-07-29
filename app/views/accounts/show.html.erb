@@ -3,76 +3,56 @@
 <div class="profile">
   <div class="avatar">
     <% if @account.avatar.present? %>
-      <%= image_tag @account.avatar, size: '50x50' %>
+      <%= image_tag @account.avatar, size: '200x200' %>
     <% else %>
-      <%= image_tag 'public/stub_poster.png', size: '50x50' %>
+      <%= image_tag 'public/stub_poster.png', size: '200x200' %>
     <% end %>
   </div>
 
-  <div class="join">
-    <%= time_ago_in_words(@account.created_at) %> на сайте
+  <h3><%= @account %></h3>
+
+  <div class="actions">
+    <% if current_user.account != @account %>
+      <%= link_to t('follow'), account_follow_path(@account), method: :put, remote: true unless current_user.account.follows?(@account) %>
+    <% end %>
+    <%= link_to t('unfollow'), account_unfollow_path(@account), method: :put, remote: true if current_user.account.follows?(@account) %>
   </div>
 
-  <% if @account.gender.present? %>
-    <div class='gender'>
-      <%= t(@account.gender) %>
-    </div>
-  <% end %>
-
-  <% if current_user.account != @account %>
-    <%= link_to t('follow'), account_follow_path(@account), method: :put, remote: true unless current_user.account.follows?(@account) %>
-  <% end %>
-  <%= link_to t('unfollow'), account_unfollow_path(@account), method: :put, remote: true if current_user.account.follows?(@account) %>
+  <div class="friends">
+    <% if @account.followers(Account).any? %>
+      <h3>
+        Друзья
+        <%= link_to t(:account_followers, count: "#{@account.followers(Account).count}"), account_followers_path(@account) %>
+      </h3>
+      <%= render partial: 'account_followers', locals: { followers: @account.followers(Account).first(5) } %>
+    <% end %>
+  </div>
 </div>
 
-<div class="provider">
-  <%= link_to @account.users.first.profile, @account.users.first.profile %>
+<div class="activities">
+  <% if @account.votes.any? %>
+    <h3>
+      Нравится
+      <%= link_to t(:account_votes, count: "#{@account.votes.count}"), account_votes_path(@account) %>
+    </h3>
+    <%= render partial: 'account_votes', locals: { votes: @account.votes.limit(3) } %>
+  <% end %>
+
+  <% if @account.comments.any? %>
+    <h3>
+      <%= @account.first_name %>
+      <%= @account.male? ? 'написал' : 'написала' %>
+      <%= link_to t(:account_comments, count: "#{@account.comments.count}"), account_comments_path(@account) %>
+    </h3>
+    <%= render partial: 'account_comments', locals: { comments: @account.comments.limit(5) } %>
+  <% end %>
+
+  <% if @account.afisha.published.any? %>
+    <h3>
+      <%= @account.first_name %>
+      <%= @account.male? ? 'добавил' : 'добавила' %>
+      <%= link_to t(:account_events, count: "#{@account.afisha.published.count}"), account_events_path(@account) %>
+    </h3>
+    <%= render partial: 'account_events', locals: { events: @account.afisha.published.limit(5) } %>
+  <% end %>
 </div>
-
-<% if @account.followers(Account).any? %>
-  <h3>
-    Друзья
-    <%= link_to t('all_account_followers'), account_followers_path(@account) %>
-  </h3>
-  <%= render partial: 'account_followers', locals: { followers: @account.followers(Account).first(5) } %>
-<% end %>
-
-<% if @account.comments.any? %>
-  <h3>
-    Комментарии
-    <%= link_to t('all_account_comments'), account_comments_path(@account) %>
-  </h3>
-  <%= render partial: 'account_comments', locals: { comments: @account.comments.limit(5) } %>
-<% end %>
-
-<% if @account.votes.any? %>
-  <h3>
-    Понравилось
-    <%= link_to t('all_account_votes'), account_votes_path(@account) %>
-  </h3>
-  <%= render partial: 'account_votes', locals: { votes: @account.votes.limit(5) } %>
-<% end %>
-
-<% if @account.visits.any? %>
-  <h3>
-    Посетил
-    <%= link_to t('all_account_visits'), account_visits_path(@account) %>
-  </h3>
-  <%= render partial: 'account_visits', locals: { visits: @account.visits.limit(5) } %>
-<% end %>
-
-<% if @account.payments.with_state(:approved).any? %>
-  <h3>
-    Купил билет
-    <%= link_to t('all_account_payments'), account_payments_path(@account) %>
-  </h3>
-  <%= render partial: 'account_payments', locals: { payments: @account.payments.with_state(:approved).limit(5) } %>
-<% end %>
-
-<% if @account.afisha.published.any? %>
-  <h3>
-    Добавил мероприятие
-    <%= link_to t('all_account_events'), account_events_path(@account) %>
-  </h3>
-  <%= render partial: 'account_events', locals: { events: @account.afisha.published.limit(5) } %>
-<% end %>

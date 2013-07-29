@@ -8,12 +8,12 @@ task :get_gender_and_email_for_accounts => :environment do
   bar = ProgressBar.new(accounts.count)
   accounts.each do |account|
     if account.users.any?
-      user = account.users.first 
+      user = account.users.first
       case user.gender
       when 1 || 'female'
-        gender = 'female'
+        gender = :female
       when 2 || 'male'
-        gender = 'male'
+        gender = :male
       else
         gender = nil
       end

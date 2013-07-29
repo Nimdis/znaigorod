@@ -5,18 +5,19 @@ class Account < ActiveRecord::Base
   attr_accessible :email, :first_name, :gender, :last_name, :patronymic, :rating, :nickname, :location, :created_at
 
   has_many :users,           order: 'id ASC'
-  has_many :afisha,          :through => :users
-  has_many :showings,        :through => :users
-  has_many :activities,      :through => :users
-  has_many :comments,        :through => :users
-  has_many :organizations,   :through => :users
-  has_many :roles,           :through => :users
-  has_many :votes,           :through => :users
-  has_many :visits,          :through => :users
-  has_many :payments,        :through => :users
-  has_many :events,          :through => :users
+  has_many :afisha,          through: :users
+  has_many :showings,        through: :users
+  has_many :comments,        through: :users, order: 'comments.created_at DESC'
+  has_many :roles,           through: :users
+  has_many :votes,           through: :users, order: 'votes.created_at DESC'
+  has_many :visits,          through: :users, order: 'visits.created_at DESC'
+  has_many :payments,        through: :users
+  has_many :events,          through: :users, order: 'events.created_at DESC'
 
   scope :ordered, -> { order('ID ASC') }
+
+  extend Enumerize
+  enumerize :gender, in: [:male, :female], predicates: true
 
   searchable do
     text :first_name

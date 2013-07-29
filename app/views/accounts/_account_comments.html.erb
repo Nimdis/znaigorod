@@ -1,4 +1,4 @@
-<ul class="user_comments">
+<ul>
   <% comments.each do |comment| %>
     <li>
       <%= render partial: 'accounts/account_afisha_comment', locals: { comment: comment } if comment.commentable.is_a?(Afisha) %>
