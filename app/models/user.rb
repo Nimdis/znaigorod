@@ -106,12 +106,7 @@ class User < ActiveRecord::Base
     when 'mailru'
       auth_raw_info.try(:[], :extra).try(:[], :raw_info).try(:[], :pic)
     when 'odnoklassniki'
-      link = auth_raw_info.try(:[], :extra).try(:[], :raw_info).try(:[], :pic_1)
-      if link
-        link = link.gsub(/\&photoType=\w+/,'')
-        link = nil if link.match(/\.gif/)
-      end
-      link || Settings['app.odnoklassniki_avatar_url']
+      Settings['app.odnoklassniki_avatar_url']
     when 'twitter'
       link = auth_raw_info.try(:[], :info).try(:[], :image)
       if link
