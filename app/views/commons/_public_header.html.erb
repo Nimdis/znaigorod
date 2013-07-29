@@ -23,15 +23,6 @@
         <%= render :partial => 'commons/social_auth' %>
       <% end %>
     </div>
-    <div class='main_menu'>
-      <ul>
-        <li><a href='#'>Все</a></li>
-        <li><a href='#'>Афиша</a></li>
-        <li><a href='#'>Заведения</a></li>
-        <li><a href='#'>Скидки</a></li>
-        <li><a href='#'>Обзоры</a></li>
-        <li><%= link_to 'Люди', accounts_path %></li>
-      </ul>
-    </div>
+    <%= render :partial => "commons/public_menu" %>
   </div>
 </div>

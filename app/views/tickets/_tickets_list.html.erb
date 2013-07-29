@@ -4,10 +4,10 @@
       -<%= ticket.discount %>%
     </div>
     <div class='item_wrapper'>
-      <div class='image'><%= link_to image_tag_for(ticket.affiche.poster_url, 120, 160), ticket.affiche %></div>
+      <div class='image'><%= link_to image_tag_for(ticket.afisha.poster_url, 120, 160), afisha_show_path(ticket.afisha) %></div>
       <div class='column'>
-        <div class='description'><%= link_to ticket.description.truncate(55).gilensize, ticket.affiche, title: ticket.description %></div>
-        <div class='place'><%= AfficheDecorator.decorate(ticket.affiche).affiche_place %></div>
+        <div class='description'><%= link_to ticket.description.truncate(55).gilensize, afisha_show_path(ticket.afisha), title: ticket.description %></div>
+        <div class='place'><%= AfishaDecorator.decorate(ticket.afisha).afisha_place %></div>
         <div class='original_price'><span class='stroke'><%= ticket.original_price.to_i %> р.</span></div>
         <div class='price'><%= ticket.price.to_i %> р.<%= " + #{ticket.organization_price.to_i} р." if ticket.organization_price %></div>
         <div class='buy_ticket'>

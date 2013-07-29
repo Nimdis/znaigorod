@@ -1,0 +1,9 @@
+<div class='main_menu'>
+  <%= render_navigation context: :public %>
+  <div class='search_form<%= ' selected' if params[:controller] == 'search' %>'>
+    <%= form_tag search_path, :method => :get do %>
+      <%= text_field_tag "q", params[:q], :placeholder => "Поиск по городу", :class => "search" %>
+      <%= submit_tag("", :class => "submit", :name => "") %>
+    <% end %>
+  </div>
+</div>

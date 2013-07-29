@@ -1,3 +1,8 @@
+=placeholder
+  @each $prefix in "::-webkit-input", ":moz", "::-moz", ":-ms-input"
+    #{$prefix}-placeholder
+      @content
+
 =animate_blink($speed: 1s, $repeat: true)
   animation: fade $speed forwards
   -webkit-animation: fade $speed forwards

@@ -1,11 +1,70 @@
-$main_menu_margin_left: 150px
-$main_menu_margin_right: 150px
+$main_menu_margin_top: 50px
+$main_menu_margin_right: 0
+$main_menu_margin_bottom: 0
+$main_menu_margin_left: 140px
 
 .header_wrapper
   .main_menu
+
     +clearfix
     ul
-      margin: 60px $main_menu_margin_right 0 $main_menu_margin_left
-      display: table
+      margin: $main_menu_margin_top 0 $main_menu_margin_bottom $main_menu_margin_left
+      float: left
+      width: 59%
+      +clearfix
       li
-        display: table-cell
+        width: percentage(1/6)
+        background-color: #fff
+        float: left
+        a
+          color: #000
+          display: block
+          font-size: 14px
+          text-align: center
+          background-color: #e8e8e8
+          +border-top-right-radius
+          +border-top-left-radius
+          padding: 4px 10px
+          margin-right: 4px
+        &:last-child a
+          margin-right: 4px
+        &.selected a
+          color: #fff
+          background-color: #f60
+
+    .search_form
+      float: left
+      margin: $main_menu_margin_top $main_menu_margin_right $main_menu_margin_bottom 0
+      form
+        +clearfix
+      +placeholder()
+        color: #999
+      .search
+        float: left
+        font-size: 11px
+        width: 150px
+        color: #000
+        font-family: 'Verdana', 'Tahoma', sans-serif
+        border: 2px solid #e8e8e8
+        border-bottom: 0
+        +border-top-left-radius
+        margin: 0
+        padding: 7px 10px
+        &:focus
+          outline: none
+      .submit
+        float: left
+        width: 30px
+        height: 29px
+        margin: 0
+        padding: 0
+        border: 0
+        cursor: pointer
+        +border-top-right-radius
+        background: #e8e8e8 image_url('public/search_submit.png') no-repeat center 8px
+      &.selected
+        .search
+          border-color: #f60
+        .submit
+          background-color: #f60
+          background-position: center -24px

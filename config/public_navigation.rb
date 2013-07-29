@@ -32,6 +32,13 @@ SimpleNavigation::Configuration.run do |navigation|
 
   # Define the primary navigation
   navigation.items do |primary|
+    primary.item :main, 'Всё', root_path
+    primary.item :afisha, 'Афиша', afisha_index_path
+    primary.item :organizations, 'Заведения', organizations_path
+    primary.item :tickets, 'Билеты', tickets_path
+    primary.item :posts, 'Обзоры', posts_path
+    primary.item :accounts, 'Люди', accounts_path
+
     # Add an item to the primary navigation. The following params apply:
     # key - a symbol which uniquely defines your navigation item in the scope of the primary_navigation
     # name - will be displayed in the rendered navigation. This can also be a call to your I18n-framework.
@@ -49,13 +56,10 @@ SimpleNavigation::Configuration.run do |navigation|
     #                            when the item should be highlighted, you can set a regexp which is matched
     #                            against the current URI.  You may also use a proc, or the symbol <tt>:subpath</tt>.
     #
-
-    primary.item :main, 'Главная', root_path
-
     # Add an item which has a sub navigation (same params, but with block)
     # primary.item :key_2, 'name', url, options do |sub_nav|
-      # Add an item to the sub navigation (same params again)
-      # sub_nav.item :key_2_1, 'name', url, options
+    # # Add an item to the sub navigation (same params again)
+    # # sub_nav.item :key_2_1, 'name', url, options
     # end
 
     # You can also specify a condition-proc that needs to be fullfilled to display an item.
