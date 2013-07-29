@@ -97,12 +97,26 @@ class User < ActiveRecord::Base
 
   def avatar
     case provider
-    when 'vkontakte', 'google_oauth2', 'facebook', 'twitter'
+    when 'google_oauth2'
       auth_raw_info.try(:[], :info).try(:[], :image)
+    when 'facebook'
+      auth_raw_info.try(:[], :info).try(:[], :image)
+    when 'vkontakte'
+      auth_raw_info.try(:[], :extra).try(:[], :raw_info).try(:[], :photo_big)
     when 'mailru'
       auth_raw_info.try(:[], :extra).try(:[], :raw_info).try(:[], :pic)
     when 'odnoklassniki'
-      Settings['app.odnoklassniki_avatar_url']
+      link = auth_raw_info.try(:[], :extra).try(:[], :raw_info).try(:[], :pic_1)
+      if link
+        link = link.gsub(/\&photoType=\w+/,'')
+        link = nil if link.match(/\.gif/)
+      end
+      link || Settings['app.odnoklassniki_avatar_url']
+    when 'twitter'
+      link = auth_raw_info.try(:[], :info).try(:[], :image)
+      if link
+        link = link.gsub(/_\w+\.jpeg\z/,'')+'.jpeg'
+      end
     else
       Settings['app.default_avatar_url']
     end

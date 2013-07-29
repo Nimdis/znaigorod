@@ -2,7 +2,7 @@ class Account < ActiveRecord::Base
   acts_as_follower
   acts_as_followable
 
-  attr_accessible :email, :first_name, :gender, :last_name, :patronymic, :rating, :nickname, :location, :created_at
+  attr_accessible :avatar, :email, :first_name, :gender, :last_name, :patronymic, :rating, :nickname, :location, :created_at
 
   has_many :users,           order: 'id ASC'
   has_many :afisha,          through: :users
@@ -53,10 +53,6 @@ class Account < ActiveRecord::Base
   def update_rating
     rating = self.comments.count * 0.5 + self.votes.count * 0.25 + self.visits.count * 0.25
     update_column(:rating, rating)
-  end
-
-  def avatar
-    users.first.avatar
   end
 end
 
