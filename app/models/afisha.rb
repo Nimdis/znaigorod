@@ -32,6 +32,8 @@ class Afisha < ActiveRecord::Base
   has_many :votes, :as => :voteable, :dependent => :destroy
   has_many :page_visits, :as => :page_visitable, :dependent => :destroy
 
+  has_many :messages, :as => :messageable, :dependent => :destroy
+
   has_one :affiche_schedule, :dependent => :destroy
 
   extend Enumerize
