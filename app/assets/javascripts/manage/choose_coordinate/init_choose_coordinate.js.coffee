@@ -1,11 +1,15 @@
 @init_choose_coordinate = () ->
   link = $('.choose_coordinate')
-  link.add_click_handler()
+  link.each ->
+    $(this).add_click_handler()
+    true
   $('form').on 'nested:fieldAdded', (event) ->
     $('.choose_coordinate', event.field).add_click_handler()
+    true
+
+  true
 
 $.fn.add_click_handler = () ->
-  @link = $(this)
   $this = $(this)
   $this.prepare_affiche_coordenates()
   $this.click ->
@@ -92,4 +96,5 @@ $.fn.prepare_affiche_coordenates = () ->
     $('.latitude', $(this).parent()).val $('.latitude', prev_fields).val()
     $('.longitude', $(this).parent()).val $('.longitude', prev_fields).val()
     $(this).addClass('with_coordinates')
+
   true
