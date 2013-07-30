@@ -143,8 +143,8 @@ ru:
     one: "одно мероприятие"
     few: "%{count} мероприятия"
     many: "%{count} мероприятий"
-    other: "%{count} мероприятия"
-    zero: "еще не добавлял мероприятий"
+    other: "%{count} мероприятие"
+    zero: ""
 
   account_followers:
     one: "Один человек"
@@ -157,13 +157,13 @@ ru:
     one: "одно место"
     few: "%{count} места"
     many: "%{count} мест"
-    other: "%{count} места"
+    other: "%{count} мест"
     zero: ""
 
   account_visits:
-    one: "Посетил одно мероприятие."
-    few: "Посетил %{count} мероприятия."
-    many: "Посетил %{count} мероприятий."
-    other: "Посетил %{count} мероприятий."
+    one: "одно мероприятие"
+    few: "%{count} мероприятия"
+    many: "%{count} мероприятий"
+    other: "%{count} мероприятий"
     zero: ""
 
