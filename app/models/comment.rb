@@ -7,6 +7,7 @@ class Comment < ActiveRecord::Base
 
   has_ancestry
   has_many :votes, :as => :voteable, :dependent => :destroy
+  has_many :messages, :as => :messageable, :dependent => :destroy
 
   normalize_attribute :body, :ancestry
   validates_presence_of :body

@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(:version => 20130801032804) do
 
   create_table "afisha", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
     t.text     "description"
     t.string   "original_title"
     t.string   "poster_url"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(:version => 20130801032804) do
     t.datetime "poster_image_updated_at"
     t.text     "poster_image_url"
     t.integer  "user_id"
-    t.text     "kind"
+    t.text     "kind",                      :default => "--- []\n"
   end
 
   add_index "afisha", ["slug"], :name => "index_affiches_on_slug", :unique => true
@@ -393,6 +393,19 @@ ActiveRecord::Schema.define(:version => 20130801032804) do
   end
 
   add_index "menus", ["meal_id"], :name => "index_menus_on_meal_id"
+
+  create_table "messages", :force => true do |t|
+    t.integer  "messageable_id"
+    t.string   "messageable_type"
+    t.integer  "account_id"
+    t.text     "body"
+    t.string   "state"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "messages", ["account_id"], :name => "index_messages_on_account_id"
+  add_index "messages", ["messageable_id"], :name => "index_messages_on_messageable_id"
 
   create_table "organization_stands", :force => true do |t|
     t.integer  "organization_id"
