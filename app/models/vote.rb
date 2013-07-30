@@ -5,6 +5,8 @@ class Vote < ActiveRecord::Base
   belongs_to :voteable, :polymorphic => true
   attr_accessible :like, :user_id
 
+  has_many :messages, :as => :messageable, :dependent => :destroy
+
   validate :authenticated_user
 
   scope :liked, where(:like => true)
