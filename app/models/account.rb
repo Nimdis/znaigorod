@@ -37,7 +37,9 @@ class Account < ActiveRecord::Base
     uids = vk_client.friends.get(user_id: user.uid)
 
     uids.each do |uid|
-      self.follow!(User.find_by_uid(uid.to_s).account) if User.vkontakte.where(uid: uid.to_s).any?
+      if User.vkontakte.where(uid: uid.to_s).any?
+        self.friends.create(friendable: get_account(uid.to_s), friendly: true) unless self.friends_with?(get_account(uid.to_s))
+      end
     end
   end
 
@@ -45,13 +47,27 @@ class Account < ActiveRecord::Base
     fb_client = Koala::Facebook::API.new(user.token)
     friends = fb_client.get_connections(user.uid, "friends")
     friends.each do |friend|
-      self.follow!(User.find_by_uid(friend['id']).account) if User.facebook.where(uid: friend['id']).any?
+      if User.facebook.where(uid: friend['id']).any?
+        self.friends.create(friendable: get_account(friend['id']), friendly: true) unless self.friends_with?(get_account(friend['id']))
+      end
     end
+  end
+
+  def get_account(uid)
+    User.find_by_uid(uid).account
   end
 
   def update_rating
     rating = self.comments.count * 0.5 + self.votes.count * 0.25 + self.visits.count * 0.25
     update_column(:rating, rating)
+  end
+
+  def friendly_for(friendable)
+    friendable.friends.where(:account_id => self.id)
+  end
+
+  def friends_with?(account)
+    self.friends.where(friendable_id: account.id).any?
   end
 end
 

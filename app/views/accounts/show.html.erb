@@ -13,18 +13,17 @@
 
   <div class="actions">
     <% if current_user.account != @account %>
-      <%= link_to t('follow'), account_follow_path(@account), method: :put, remote: true unless current_user.account.follows?(@account) %>
+      <%= link_to t('follow'), account_change_friendship_path(@account), method: :put, remote: true %> 
     <% end %>
-    <%= link_to t('unfollow'), account_unfollow_path(@account), method: :put, remote: true if current_user.account.follows?(@account) %>
   </div>
 
   <div class="friends">
-    <% if @account.followers(Account).any? %>
+    <% if @account.friends.any? %>
       <h3>
         Друзья
-        <%= link_to t('account_followers', count: @account.followers(Account).count), account_followers_path(@account) %>
+        <%= link_to t('account_friends', count: @account.friends.count), account_friends_path(@account) %>
       </h3>
-      <%= render partial: 'account_followers', locals: { followers: @account.followers(Account).first(5) } %>
+      <%= render partial: 'account_friends', locals: { friends: @account.friends.first(5) } %>
     <% end %>
   </div>
 </div>

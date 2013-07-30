@@ -95,11 +95,10 @@ Znaigorod::Application.routes.draw do
   resources :service_payments, :only => [:new, :create]
 
   resources :accounts, :only => [:index, :show] do
-    put 'follow' => 'accounts#follow', :as => :follow
-    put 'unfollow' => 'accounts#unfollow', :as => :unfollow
+    put 'change_friendship' => 'friends#change_friendship', :as => :change_friendship
 
     resources :events, :only => :index
-    resources :followers, :only => :index
+    resources :friends, :only => :index
     resources :comments, :only => :index
     resources :payments, :only => :index
     resources :visits, :only => :index

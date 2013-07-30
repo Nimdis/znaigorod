@@ -13,7 +13,9 @@ task :get_vk_friends => :environment do
         user = account.users.vkontakte.first
         uids = vk_client.friends.get(user_id: user.uid)
         uids.each do |uid|
-          account.follow!(User.find_by_uid(uid.to_s).account) if User.vkontakte.where(uid: uid.to_s).any?
+          if User.vkontakte.where(uid: uid.to_s).any?
+            account.friends.create(friendable: account.get_account(uid.to_s), friendly: true) unless account.friends_with?(account.get_account(uid.to_s))
+          end
         end
       end
       bar.increment!

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730035210) do
+ActiveRecord::Schema.define(:version => 20130730045201) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -319,8 +319,9 @@ ActiveRecord::Schema.define(:version => 20130730035210) do
     t.integer  "account_id"
     t.integer  "friendable_id"
     t.string   "friendable_type"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "friendly",        :default => false
   end
 
   add_index "friends", ["account_id"], :name => "index_friends_on_account_id"

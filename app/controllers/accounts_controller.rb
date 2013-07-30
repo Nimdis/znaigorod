@@ -10,16 +10,6 @@ class AccountsController < ApplicationController
     }
   end
 
-  def follow
-    current_user.account.follow!(Account.find(params[:account_id]))
-    render :nothing => true
-  end
-
-  def unfollow
-    current_user.account.unfollow!(Account.find(params[:account_id]))
-    render :nothing => true
-  end
-
   private
 
   def collection
