@@ -1,3 +1,49 @@
-<% content_for :extra_meta do %>
-  <link rel="canonical" href="<%= afisha_index_url %>" />
-<% end %>
+<div class='filters'>
+  <div class='by_date'>
+    <ul>
+      <li><a href='#'>Вся афиша</a></li>
+      <li><a href='#'>Сегодня</a></li>
+      <li><a href='#'>На неделе</a></li>
+      <li><a href='#'>На выходных</a></li>
+      <li><a href='#'>Выбрать дату</a></li>
+    </ul>
+  </div>
+  <div class='add_my_afisha'>
+    <a href='#'>Добавить афишу</a>
+  </div>
+  <div class='by_tickets'>
+    <ul>
+      <li><a href='#'>Все</a></li>
+      <li><a href='#'>Только с билетами</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class='filters'>
+  <div class='present_by'>
+    <ul>
+      <li><a href='#'>Постеры</a></li>
+      <li><a href='#'>Список</a></li>
+    </ul>
+  </div>
+  <div class='order by'>
+    <p>Сортировать по:</p>
+    <ul>
+      <li>
+        <%= link_to t('afisha.sort.rating'),
+          afisha_index_path(@presenter.query.merge('order_by' => 'rating')),
+          @presenter.sort_by_rating? ? { class: 'selected' } : {} %>
+      </li>
+      <li>
+        <%= link_to t('afisha.sort.creation'),
+          afisha_index_path(@presenter.query.merge('order_by' => 'creation')),
+          @presenter.sort_by_creation? ? { class: 'selected' } : {} %>
+      </li>
+      <li>
+        <%= link_to t('afisha.sort.starts_at'),
+          afisha_index_path(@presenter.query.merge('order_by' => 'starts_at')),
+          @presenter.sort_by_starts_at? ? { class: 'selected' } : {} %>
+      </li>
+    </ul>
+  </div>
+</div>
