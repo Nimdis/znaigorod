@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class CreationDecorator < SuborganizationDecorator
+
   decorates :creation
 
   def viewable?
@@ -27,19 +28,4 @@ class CreationDecorator < SuborganizationDecorator
     Hash[services.group_by(&:category)]
   end
 
-  def services_on_show
-    content = ""
-    services.filled.group_by(&:category).each do |category, services|
-      content << h.content_tag(:h2, category, class: "title")
-      services_content = ""
-      services.each do |service|
-        info = service.description? ? htmlize_text(service.description) : ''
-        title = h.content_tag(:span, service.title, class: 'offer')
-        age = h.content_tag(:span, human_age(service.age), class: 'age')
-        services_content << h.content_tag(:li, title+info+age)
-      end
-      content << h.content_tag(:ul, services_content.html_safe, class: 'services')
-    end
-    h.content_tag(:div, content.html_safe, class: :services_attributes)
-  end
 end

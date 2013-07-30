@@ -1,4 +1,5 @@
 module ContestHelper
+
   def work_image_tag work, max_width = 965
     source_width, source_height = work.image_url.match(/\d+-\d+/)[0].split('-')
     image_width = source_width.to_i
@@ -10,4 +11,5 @@ module ContestHelper
 
     image_tag work.image_url.gsub(/\d+-\d+/, "#{image_width}-#{image_height}!"), :size => "#{image_width}x#{image_height}", :alt => "#{work.author_info}. #{work.title}"
   end
+
 end

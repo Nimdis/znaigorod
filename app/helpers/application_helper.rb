@@ -2,13 +2,6 @@
 
 module ApplicationHelper
 
-  def facet_status(facet, row)
-    result = params_have_facet?(facet, row.value) ? 'selected' : 'unselected'
-    result << ' inactive' if row.count.zero?
-
-    result
-  end
-
   def image_tag_for(url, width, height, crop = true, orientation = '', alt = '')
     image_tag resized_image_url(url, width, height, crop, orientation), size: "#{width}x#{height}", alt: alt
   end
@@ -33,20 +26,22 @@ module ApplicationHelper
     end
   end
 
+  def resized_image_url(url, width, height, crop, orientation = '')
+    image_crop = crop ? '!' : ''
+
+    if url.match(/\d+\/region\/\d+/)
+      url
+    else
+      image_url, image_id, image_width, image_height, image_crop, image_filename = url.match(%r{(.*)/files/(\d+)/(?:(\d+)-(\d+)(\!)?/)?(.*)})[1..-1]
+      "#{image_url}/files/#{image_id}/#{width}-#{height}#{image_crop}#{orientation}/#{image_filename}"
+    end
+  end
+
   def price_for(showing)
     return 'бесплатно' if showing.price_min.zero? && showing.price_max.zero?
     return number_to_currency(showing.price_min, :precision => 0) if showing.price_max.zero?
 
     "#{showing.price_min} &mdash; #{number_to_currency(showing.price_max, :precision => 0)}".html_safe
-  end
-
-  def path_for(item)
-    case item.class.superclass.name
-    when 'Afisha'
-      affiche_path(item)
-    when 'Organization'
-      organization_path(item)
-    end
   end
 
   def transliterate(string)
@@ -99,23 +94,6 @@ module ApplicationHelper
     res.html_safe
   end
 
-  def is_active_range?(range_name)
-    case range_name
-      when 'amount'
-        if params['search']['price_greater_than'] == '0' && params['search']['price_less_than'] == '>1500'
-          false
-        else
-          true
-        end
-      when 'time'
-        if params['search']['starts_at_hour_greater_than'] == '0' && params['search']['starts_at_hour_less_than'] == '23'
-          false
-        else
-          true
-        end
-    end if params['search']
-  end
-
   def is_active_filter?(filter_name)
     return params.has_key?('search') && params['search'][filter_name].try(:any?) ? true : false
   end
@@ -125,17 +103,6 @@ module ApplicationHelper
       params['search'][filter].include?(variant) ? 'active' : ''
     else
       false
-    end
-  end
-
-  def resized_image_url(url, width, height, crop, orientation = '')
-    image_crop = crop ? '!' : ''
-
-    if url.match(/\d+\/region\/\d+/)
-      url
-    else
-      image_url, image_id, image_width, image_height, image_crop, image_filename = url.match(%r{(.*)/files/(\d+)/(?:(\d+)-(\d+)(\!)?/)?(.*)})[1..-1]
-      "#{image_url}/files/#{image_id}/#{width}-#{height}#{image_crop}#{orientation}/#{image_filename}"
     end
   end
 
