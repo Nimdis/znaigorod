@@ -61,7 +61,6 @@ group :default do
   gem 'simple-navigation'
   gem 'simple_form'
   gem 'sitemap_generator'
-  gem 'socialization'
   gem 'state_machine'
   gem 'sunspot_rails'
   gem 'text-hyphen'

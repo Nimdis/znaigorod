@@ -1,6 +1,4 @@
 class Account < ActiveRecord::Base
-  acts_as_follower
-  acts_as_followable
 
   attr_accessible :avatar, :email, :first_name, :gender, :last_name, :patronymic, :rating, :nickname, :location, :created_at
 
@@ -13,6 +11,7 @@ class Account < ActiveRecord::Base
   has_many :visits,          through: :users, order: 'visits.created_at DESC'
   has_many :payments,        through: :users
   has_many :events,          through: :users, order: 'events.created_at DESC'
+  has_many :friends
 
   scope :ordered, -> { order('ID ASC') }
 

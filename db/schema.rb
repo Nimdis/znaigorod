@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130729030639) do
+ActiveRecord::Schema.define(:version => 20130730035210) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -315,16 +315,16 @@ ActiveRecord::Schema.define(:version => 20130729030639) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "follows", :force => true do |t|
-    t.string   "follower_type"
-    t.integer  "follower_id"
-    t.string   "followable_type"
-    t.integer  "followable_id"
-    t.datetime "created_at"
+  create_table "friends", :force => true do |t|
+    t.integer  "account_id"
+    t.integer  "friendable_id"
+    t.string   "friendable_type"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
-  add_index "follows", ["followable_id", "followable_type"], :name => "fk_followables"
-  add_index "follows", ["follower_id", "follower_type"], :name => "fk_follows"
+  add_index "friends", ["account_id"], :name => "index_friends_on_account_id"
+  add_index "friends", ["friendable_id"], :name => "index_friends_on_friendable_id"
 
   create_table "halls", :force => true do |t|
     t.string   "title"
@@ -363,17 +363,6 @@ ActiveRecord::Schema.define(:version => 20130729030639) do
   end
 
   add_index "meals", ["organization_id"], :name => "index_meals_on_organization_id"
-
-  create_table "mentions", :force => true do |t|
-    t.string   "mentioner_type"
-    t.integer  "mentioner_id"
-    t.string   "mentionable_type"
-    t.integer  "mentionable_id"
-    t.datetime "created_at"
-  end
-
-  add_index "mentions", ["mentionable_id", "mentionable_type"], :name => "fk_mentionables"
-  add_index "mentions", ["mentioner_id", "mentioner_type"], :name => "fk_mentions"
 
   create_table "menu_positions", :force => true do |t|
     t.integer  "menu_id"
