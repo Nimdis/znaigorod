@@ -6,6 +6,8 @@ class Visit < ActiveRecord::Base
   belongs_to :visitable, :polymorphic => true
   belongs_to :user
 
+  has_many :messages, :as => :messageable, :dependent => :destroy
+
   validate :authenticated_user
 
   scope :visited, where(:visited => true)
