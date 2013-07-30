@@ -24,7 +24,7 @@ class Vote < ActiveRecord::Base
     end
 
     def update_voteable_rating
-      voteable.update_rating if (Afisha.kind.values & voteable.kind).any?
+      voteable.update_rating if voteable.is_a?(Afisha) && (Afisha.kind.values & voteable.kind).any?
     end
 end
 
