@@ -398,14 +398,17 @@ ActiveRecord::Schema.define(:version => 20130801032804) do
     t.integer  "messageable_id"
     t.string   "messageable_type"
     t.integer  "account_id"
+    t.integer  "user_id"
     t.text     "body"
     t.string   "state"
+    t.string   "kind"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
 
   add_index "messages", ["account_id"], :name => "index_messages_on_account_id"
   add_index "messages", ["messageable_id"], :name => "index_messages_on_messageable_id"
+  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
 
   create_table "organization_stands", :force => true do |t|
     t.integer  "organization_id"

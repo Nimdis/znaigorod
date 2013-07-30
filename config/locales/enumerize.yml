@@ -84,3 +84,19 @@ ru:
         pending: Ожидается
         approved: Подтвержден
         canceled: Отменен
+
+    message:
+      kind:
+        new_comment: новый комментарий
+        reply_on_comment: ответ
+        afisha_published: афиша опубликована
+        afisha_returned: афиши возвращена
+        user_vote_afisha: понравилась афиша
+        user_vote_comment: понравился комментарий
+        user_visit_afisha: собирается на мероприятие
+        user_add_friend: добавил в друзья
+
+      state:
+        new: Новое
+        read: Прочитанное
+
