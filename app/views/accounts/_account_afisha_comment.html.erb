@@ -6,6 +6,6 @@
     <%= link_to comment.commentable.title, afisha_show_path(comment.commentable) %>
   </div>
   <div class="body">
-    <%= comment.body %>
+    <%= strip_tags comment.body %>
   </div>
 </div>
