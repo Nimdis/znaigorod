@@ -1,8 +1,8 @@
 # encoding: utf-8
 
-require 'showings_presenter_filter'
+require 'afisha_presenter_filter'
 
-class ShowingsPresenter
+class AfishaPresenter
   include ActiveAttr::MassAssignment
 
   attr_accessor :categories,
@@ -94,36 +94,49 @@ class ShowingsPresenter
     "afishas/afisha_#{view}"
   end
 
-  def today_afisha_links
-    @today_afisha_links ||= Afisha.kind.values.map { |kind|
-      {
-        title: "#{kind.text}",
-        query: { categories: [kind], period: 'today' },
-        current: categories.include?(kind),
-        count: Counter.new(category: kind).today
-      }
-    }
-  end
+  #def today_afisha_links
+    #@today_afisha_links ||= Afisha.kind.values.map { |kind|
+      #{
+        #title: "#{kind.text}",
+        #query: { categories: [kind], period: 'today' },
+        #current: categories.include?(kind),
+        #count: Counter.new(category: kind).today
+      #}
+    #}
+  #end
 
   def kind
     categories.first || 'movie'
   end
 
-  def category_afisha_links
-    @category_afisha_links ||= [].tap { |array|
-      (period_filter.available_period_values - ['all']).each { |period|
+  def categories_links
+    @categories_links ||= [].tap { |array|
+      Afisha.kind.values.each do |kind|
         array << {
-          title: "#{I18n.t("afisha_periods.#{period}")} (#{Counter.new(category: kind).send(period)})",
-          query: { categories: [kind], period: period }
+          title: "#{kind.text}",
+          parameters: { category: kind, period: period_filter.period },
+          current: categories.include?(kind),
+          #count: AfishaCounter.new(category: kind, :period => period_filer.period, :date => period_filter.date).count
         }
-      }
-
-      array << {
-        title: "#{I18n.t("afisha_periods.all.#{kind.pluralize}")} (#{Counter.new(category: kind).all})",
-        query: { categories: [kind] }
-      }
+      end
     }
   end
+
+  #def category_afisha_links
+    #@category_afisha_links ||= [].tap { |array|
+      #(period_filter.available_period_values - ['all']).each { |period|
+        #array << {
+          #title: "#{I18n.t("afisha_periods.#{period}")} (#{Counter.new(category: kind).send(period)})",
+          #query: { categories: [kind], period: period }
+        #}
+      #}
+
+      #array << {
+        #title: "#{I18n.t("afisha_periods.all.#{kind.pluralize}")} (#{Counter.new(category: kind).all})",
+        #query: { categories: [kind] }
+      #}
+    #}
+  #end
 
   def keywords
     [].tap { |keywords|

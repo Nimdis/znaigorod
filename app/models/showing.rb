@@ -71,11 +71,11 @@ class Showing < ActiveRecord::Base
 
   def self.tags
     search_params = { :starts_on_greater_than => Date.today, :starts_on_less_than => Date.today + 4.weeks }
-    HasSearcher.searcher(:showing, search_params).faceted.facet(:tags).rows.map(&:value)
+    HasSearcher.searcher(:showings, search_params).faceted.facet(:tags).rows.map(&:value)
   end
 
   def self.nearest
-    HasSearcher.searcher(:showing).actual.today.order(:starts_at).limit(5)
+    HasSearcher.searcher(:showings).actual.today.order(:starts_at).limit(5)
   end
 
   def get_longitude

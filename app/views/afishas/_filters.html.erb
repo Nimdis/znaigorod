@@ -2,10 +2,22 @@
   <div class='filters'>
     <div class='by_date'>
       <ul>
-        <li><a href='#'>Сегодня</a></li>
-        <li><a href='#'>На неделе</a></li>
-        <li><a href='#'>На выходных</a></li>
-        <li><a href='#'>Выбрать дату</a></li>
+        <li>
+          <%= link_to t("afisha_periods.today"),
+            @presenter.period_filter.today? ? afisha_index_path : afisha_index_path(:period => :today) %>
+        </li>
+        <li>
+          <%= link_to t("afisha_periods.week"),
+            @presenter.period_filter.week? ? afisha_index_path : afisha_index_path(:period => :week) %>
+        </li>
+        <li>
+          <%= link_to t("afisha_periods.weekend"),
+            @presenter.period_filter.weekend? ? afisha_index_path : afisha_index_path(:period => :weekend) %>
+        </li>
+        <li>
+          <%= link_to t("afisha_periods.daily"),
+            @presenter.period_filter.daily? ? afisha_index_path : afisha_index_path(:period => :daily) %>
+        </li>
       </ul>
     </div>
     <div class='by_tickets'>
@@ -17,6 +29,7 @@
 
   <div class='filters'>
     <div class='by_kind'>
+      <%= @presenter.categories_links %>
       <ul>
         <li>
           <%= link_to afisha_index_path do %>
@@ -26,7 +39,7 @@
         </li>
         <% Afisha.kind.values.each do |kind| %>
           <li>
-            <%= link_to send("#{kind.pluralize}_path") do %>
+            <%= link_to send("#{kind.pluralize}_index_path") do %>
               <%= content_tag :span, kind.text, class: :name %>
               <%= content_tag :span, Random.new.rand(5...85), class: :count  %>
             <% end %>

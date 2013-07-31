@@ -6,7 +6,7 @@ class AfishasController < ApplicationController
     settings = {}
     settings = JSON.parse(cookie) if cookie.present? && cookie.length > 1
 
-    @presenter = ShowingsPresenter.new(params.merge(settings))
+    @presenter = AfishaPresenter.new(params.merge(settings))
 
     if request.xhr?
       if params[:page]
@@ -18,14 +18,14 @@ class AfishasController < ApplicationController
   end
 
   def show
-    @afisha = AfishaDecorator.new Afisha.find(params[:id])
+    @afisha = AfishaDecorator.find(params[:id])
   end
 
   def photogallery
-    @afisha = AfishaDecorator.new Afisha.find(params[:id])
+    @afisha = AfishaDecorator.find(params[:id])
   end
 
   def trailer
-    @afisha = AfishaDecorator.new Afisha.find(params[:id])
+    @afisha = AfishaDecorator.find(params[:id])
   end
 end

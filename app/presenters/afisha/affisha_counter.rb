@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class Counter
+class AffishaCounter
   include ActiveAttr::MassAssignment
 
   attr_accessor :category, :organization

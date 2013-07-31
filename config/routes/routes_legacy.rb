@@ -5,7 +5,7 @@ Znaigorod::Application.routes.draw do
   get '/affiches', :to => redirect('/afisha')
 
   Afisha.kind.values.map(&:pluralize).each do |kind|
-    get kind => 'afishas#index', :as => kind, :defaults => { :categories => [kind.singularize], :hide_categories => true }
+    get kind => 'afishas#index', :as => "#{kind}_index", :defaults => { :categories => [kind.singularize], :hide_categories => true }
     match "/#{kind}/all" => redirect("/#{kind}")
   end
 

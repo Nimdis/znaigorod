@@ -34,7 +34,7 @@ class PeriodFilter
   end
 
   def period
-    available_period_values.include?(@period) ? @period : available_period_values.last
+    available_period_values.include?(@period) ? @period : 'all'
   end
 
   def date?
@@ -46,7 +46,7 @@ class PeriodFilter
   end
 
   def self.available_period_values
-    %w[today week weekend all]
+    %w[today week weekend daily]
   end
 
   def available_period_values

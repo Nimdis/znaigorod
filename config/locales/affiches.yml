@@ -37,9 +37,9 @@ ru:
 
   afisha_periods:
     today: Сегодня
-    weekly: На этой неделе
-    week: На этой неделе
-    weekend: На этих выходных
+    weekly: На неделе
+    week: На неделе
+    weekend: На выходных
     daily: Выбрать дату
     all:
       afisha: Вся афиша мероприятий
