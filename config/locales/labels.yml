@@ -146,7 +146,7 @@ ru:
     other: "%{count} мероприятие"
     zero: ""
 
-  account_followers:
+  account_friends:
     one: "Один человек"
     few: "%{count} человека"
     many: "%{count} человек"

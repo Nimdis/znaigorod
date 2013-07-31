@@ -12,7 +12,7 @@ class FriendsController < ApplicationController
         @friend.change_friendship
       end
 
-      render :nothing and return
+      render :nothing => true and return
     }
   end
 end

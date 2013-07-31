@@ -63,12 +63,12 @@ class Account < ActiveRecord::Base
     update_column(:rating, rating)
   end
 
-  def friendly_for(friendable)
-    friendable.friends.where(:account_id => self.id)
+  def friendly_for(account)
+    self.friends.where(friendable_id: account.id)
   end
 
   def friends_with?(account)
-    self.friends.where(friendable_id: account.id).any?
+    self.friends.where(friendable_id: account.id, friendly: true).any?
   end
 end
 

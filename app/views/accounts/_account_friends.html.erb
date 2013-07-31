@@ -1,12 +1,12 @@
 <ul>
-<% friends.each do |friend| %>
-  <li>
-    <% if friend.friendable.avatar.present? %>
-      <%= image_tag friend.friendable.avatar, size: '23x23' %>
-    <% else %>
-      <%= image_tag 'public/stub_poster.png', size: '23x23' %>
-    <% end %>
-    <%= link_to friend.friendable, friend.friendable %>
-  </li>
-<% end %>
+  <% friends.each do |friend| %>
+    <li>
+      <% if friend.friendable.avatar.present? %>
+        <%= image_tag friend.friendable.avatar, size: '23x23' %>
+      <% else %>
+        <%= image_tag 'public/stub_poster.png', size: '23x23' %>
+      <% end %>
+      <%= link_to friend.friendable, friend.friendable %>
+    </li>
+  <% end %>
 </ul>
