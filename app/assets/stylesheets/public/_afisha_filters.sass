@@ -8,7 +8,8 @@
     +liquid($desctop_min_width, $desctop_max_width)
     +clearfix
 
-    .by_date
+    .by_date,
+    .by_tickets
       float: left
       margin-left: 10px
       ul
@@ -18,17 +19,32 @@
           margin-right: 5px
           &:last-child
             margin-right: 0
+          a
+            display: block
+            color: #000
+            background-color: #e8e8e8
+            border: 1px solid #ccc
+            +border-radius
+            padding: 1px 8px
+            &:hover
+              color: #f60
+              text-decoration: none
+          &.selected a
+            color: #fff
+            background-color: #f60
+            border-top: 1px solid #b34700
+            border-right: 1px solid #f60
+            border-bottom: 1px solid #f60
+            border-left: 1px solid #b34700
+            +box-shadow(rgba(0, 0, 0, 0.3) 1px 1px 2px inset)
+
+    .by_date
+      float: left
+      margin-left: 10px
 
     .by_tickets
       float: right
       margin-right: 10px
-      ul
-        +clearfix
-        li
-          float: left
-          margin-right: 5px
-          &:last-child
-            margin-right: 0
 
     .by_kind
       width: 80%
