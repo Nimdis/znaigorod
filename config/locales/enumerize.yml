@@ -11,6 +11,7 @@ ru:
         movie: Кино
         competition: Конкурсы
         spectacle: Спектакли
+        all: Вся афиша
 
     role:
       admin:                   Администратор

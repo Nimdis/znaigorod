@@ -64,9 +64,12 @@ class AfishaPresenter
   end
 
   def url
-    return 'afisha' unless categories_filter.hidden?
-
+    #return 'afisha' unless categories_filter.hidden?
     categories_filter.selected.first.try(:pluralize) || 'afisha'
+  end
+
+  def kind
+    categories.first || 'all'
   end
 
   def collection
@@ -94,49 +97,24 @@ class AfishaPresenter
     "afishas/afisha_#{view}"
   end
 
-  #def today_afisha_links
-    #@today_afisha_links ||= Afisha.kind.values.map { |kind|
-      #{
-        #title: "#{kind.text}",
-        #query: { categories: [kind], period: 'today' },
-        #current: categories.include?(kind),
-        #count: Counter.new(category: kind).today
-      #}
-    #}
-  #end
-
-  def kind
-    categories.first || 'movie'
-  end
-
   def categories_links
     @categories_links ||= [].tap { |array|
+      array << {
+        title: I18n.t('enumerize.afisha.kind.all'),
+        parameters: { category: 'afisha', period: period_filter.all? ? nil : period_filter.period },
+        current: kind == 'all',
+        count: AfishaCounter.new(:period => period_filter.period, :date => period_filter.date).count
+      }
       Afisha.kind.values.each do |kind|
         array << {
           title: "#{kind.text}",
-          parameters: { category: kind, period: period_filter.period },
+          parameters: { category: kind.pluralize, period: period_filter.all? ? nil : period_filter.period },
           current: categories.include?(kind),
-          #count: AfishaCounter.new(category: kind, :period => period_filer.period, :date => period_filter.date).count
+          count: AfishaCounter.new(category: kind, :period => period_filter.period, :date => period_filter.date).count
         }
       end
     }
   end
-
-  #def category_afisha_links
-    #@category_afisha_links ||= [].tap { |array|
-      #(period_filter.available_period_values - ['all']).each { |period|
-        #array << {
-          #title: "#{I18n.t("afisha_periods.#{period}")} (#{Counter.new(category: kind).send(period)})",
-          #query: { categories: [kind], period: period }
-        #}
-      #}
-
-      #array << {
-        #title: "#{I18n.t("afisha_periods.all.#{kind.pluralize}")} (#{Counter.new(category: kind).all})",
-        #query: { categories: [kind] }
-      #}
-    #}
-  #end
 
   def keywords
     [].tap { |keywords|

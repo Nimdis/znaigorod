@@ -2,22 +2,12 @@
   <div class='filters'>
     <div class='by_date'>
       <ul>
-        <li>
-          <%= link_to t("afisha_periods.today"),
-            @presenter.period_filter.today? ? afisha_index_path : afisha_index_path(:period => :today) %>
-        </li>
-        <li>
-          <%= link_to t("afisha_periods.week"),
-            @presenter.period_filter.week? ? afisha_index_path : afisha_index_path(:period => :week) %>
-        </li>
-        <li>
-          <%= link_to t("afisha_periods.weekend"),
-            @presenter.period_filter.weekend? ? afisha_index_path : afisha_index_path(:period => :weekend) %>
-        </li>
-        <li>
-          <%= link_to t("afisha_periods.daily"),
-            @presenter.period_filter.daily? ? afisha_index_path : afisha_index_path(:period => :daily) %>
-        </li>
+        <% @presenter.period_filter.available_period_values.each do |period_value| %>
+          <li<%= " class=selected" if @presenter.period_filter.period == period_value %>>
+            <%= link_to t("afisha_periods.#{period_value}"),
+            send("#{@presenter.url}_index_path", (@presenter.period_filter.period == period_value ? nil : {:period => period_value})) %>
+          </li>
+        <% end %>
       </ul>
     </div>
     <div class='by_tickets'>
@@ -29,19 +19,12 @@
 
   <div class='filters'>
     <div class='by_kind'>
-      <%= @presenter.categories_links %>
       <ul>
-        <li>
-          <%= link_to afisha_index_path do %>
-            <%= content_tag :span, 'Вся афиша', class: :name %>
-            <%= content_tag :span, Random.new.rand(55...95), class: :count  %>
-          <% end %>
-        </li>
-        <% Afisha.kind.values.each do |kind| %>
-          <li>
-            <%= link_to send("#{kind.pluralize}_index_path") do %>
-              <%= content_tag :span, kind.text, class: :name %>
-              <%= content_tag :span, Random.new.rand(5...85), class: :count  %>
+        <% @presenter.categories_links.each do |category_link| %>
+          <li class='<%= category_link[:parameters][:category] %><%= ' selected' if category_link[:current] %>'>
+            <%= link_to send("#{category_link[:parameters].delete(:category)}_index_path", category_link[:parameters]) do %>
+              <%= content_tag :span,  category_link[:title], class: :name %>
+              <%= content_tag :span, category_link[:count], class: :count  %>
             <% end %>
           </li>
         <% end %>
