@@ -4,6 +4,8 @@ class Friend < ActiveRecord::Base
   belongs_to :account
   belongs_to :friendable, :polymorphic => true
 
+  has_many :messages, :as => :messageable, :dependent => :destroy
+
   scope :approved, -> { where(friendly: true) }
 
   def change_friendship

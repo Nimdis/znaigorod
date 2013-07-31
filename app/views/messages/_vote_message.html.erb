@@ -1,5 +1,5 @@
 <%= time_ago_in_words(message.created_at) %> назад
-<%= link_to message.user.account, message.user.account %>
+<%= link_to message.producer, message.producer %>
 <%= t(message.kind_text) %>:
 <% if message.messageable.voteable.is_a?(Afisha) %>
   <%= link_to(message.messageable.voteable.title, polymorphic_path([message.messageable.voteable, :show])) %>

@@ -6,6 +6,7 @@
       <li>
         <%= render partial: 'afisha_message', locals: { message: message } if message.messageable.is_a?(Afisha) %>
         <%= render partial: 'comment_message', locals: { message: message } if message.messageable.is_a?(Comment) %>
+        <%= render partial: 'friend_message', locals: { message: message } if message.messageable.is_a?(Friend) %>
         <%= render partial: 'visit_message', locals: { message: message } if message.messageable.is_a?(Visit) %>
         <%= render partial: 'vote_message', locals: { message: message } if message.messageable.is_a?(Vote) %>
       </li>

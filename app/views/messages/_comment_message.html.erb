@@ -1,5 +1,5 @@
 <%= time_ago_in_words(message.created_at) %> назад
-<%= link_to message.user.account, message.user.account %> оставил
+<%= link_to message.producer, message.producer %> оставил
 <%= t(message.kind_text) %>:
 <%= message.body%>
 к мероприятию:
