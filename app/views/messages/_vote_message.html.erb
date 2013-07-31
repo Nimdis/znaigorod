@@ -1,0 +1,10 @@
+<%= time_ago_in_words(message.created_at) %> назад
+<%= link_to message.user.account, message.user.account %>
+<%= t(message.kind_text) %>:
+<% if message.messageable.voteable.is_a?(Afisha) %>
+  <%= link_to(message.messageable.voteable.title, polymorphic_path([message.messageable.voteable, :show])) %>
+<% elsif message.messageable.voteable.is_a?(Comment) %>
+  <%= message.messageable.voteable.body %>
+  к мероприятию:
+  <%= link_to(message.messageable.voteable.commentable.title, polymorphic_path([message.messageable.voteable.commentable, :show], anchor: "comment_#{message.messageable.voteable.id}")) %>
+<% end %>

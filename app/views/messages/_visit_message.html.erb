@@ -1,0 +1,4 @@
+<%= time_ago_in_words(message.created_at) %> назад
+<%= link_to message.user.account, message.user.account %>
+<%= t(message.kind_text) %>:
+<%= link_to(message.messageable.visitable.title, polymorphic_path([message.messageable.visitable, :show])) %>

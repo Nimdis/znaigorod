@@ -1,0 +1,14 @@
+<div class="content_wrapper">
+  <h1>Уведомления</h1>
+
+  <ul>
+    <% @account.messages.each do |message| %>
+      <li>
+        <%= render partial: 'afisha_message', locals: { message: message } if message.messageable.is_a?(Afisha) %>
+        <%= render partial: 'comment_message', locals: { message: message } if message.messageable.is_a?(Comment) %>
+        <%= render partial: 'visit_message', locals: { message: message } if message.messageable.is_a?(Visit) %>
+        <%= render partial: 'vote_message', locals: { message: message } if message.messageable.is_a?(Vote) %>
+      </li>
+    <% end %>
+  </ul>
+</div>

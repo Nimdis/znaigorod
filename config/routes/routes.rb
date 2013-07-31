@@ -103,6 +103,7 @@ Znaigorod::Application.routes.draw do
     resources :payments, :only => :index
     resources :visits, :only => :index
     resources :votes, :only => :index
+    resources :messages, :only => :index
   end
 
   get 'feedback' => 'feedback#new', :as => :new_feedback

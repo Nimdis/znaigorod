@@ -88,9 +88,9 @@ ru:
     message:
       kind:
         new_comment: новый комментарий
-        reply_on_comment: ответ
+        reply_on_comment: ответ на ваш комментарий
         afisha_published: афиша опубликована
-        afisha_returned: афиши возвращена
+        afisha_returned: афиша возвращена
         user_vote_afisha: понравилась афиша
         user_vote_comment: понравился комментарий
         user_visit_afisha: собирается на мероприятие

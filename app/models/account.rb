@@ -1,5 +1,4 @@
 class Account < ActiveRecord::Base
-
   attr_accessible :avatar, :email, :first_name, :gender, :last_name, :patronymic, :rating, :nickname, :location, :created_at
 
   has_many :users,           order: 'id ASC'
@@ -11,8 +10,8 @@ class Account < ActiveRecord::Base
   has_many :visits,          through: :users, order: 'visits.created_at DESC'
   has_many :payments,        through: :users
   has_many :events,          through: :users, order: 'events.created_at DESC'
-  has_many :friends
 
+  has_many :friends
   has_many :messages
 
   scope :ordered, -> { order('ID ASC') }
