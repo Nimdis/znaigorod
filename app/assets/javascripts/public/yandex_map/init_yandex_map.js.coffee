@@ -44,7 +44,7 @@
     ,
       cursor: 'help'
       hasBalloon: false
-      iconImageHref: '/assets/public/affiche_placemark.png'
+      iconImageHref: '/assets/public/afisha_placemark.png'
       iconImageOffset: [-15, -40]
       iconImageSize: [37, 42]
       zIndex: 1000
@@ -92,7 +92,7 @@
             id: 'affiche_placemark'
             hintContent: $map.attr('data-hint')
         ,
-          iconImageHref: '/assets/public/affiche_placemark.png'
+          iconImageHref: '/assets/public/afisha_placemark.png'
           iconImageOffset: [-15, -40]
           iconImageSize: [37, 42]
           zIndex: 700

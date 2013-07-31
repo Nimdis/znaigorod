@@ -157,7 +157,7 @@ create_placemark = (latitude, longitude) ->
     properties:
       id: 'affiche_placemark'
   ,
-    iconImageHref: '/assets/public/affiche_placemark.png'
+    iconImageHref: '/assets/public/afisha_placemark.png'
     iconImageOffset: [-15, -40]
     iconImageSize: [37, 42]
     zIndex: 700

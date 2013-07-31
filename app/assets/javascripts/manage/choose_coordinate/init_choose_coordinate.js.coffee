@@ -63,7 +63,7 @@ $.fn.draw_affiche_map = (link, coordinates) ->
       id: 'placemark'
   ,
     draggable: true
-    iconImageHref: '/assets/public/affiche_placemark.png'
+    iconImageHref: '/assets/public/afisha_placemark.png'
     iconImageOffset: [-15, -40]
     iconImageSize: [37, 42]
 
