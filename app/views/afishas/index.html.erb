@@ -5,39 +5,6 @@
   <link rel='canonical' href='<%= afisha_index_url %>' />
 <% end %>
 
-<div class='presentation_filters'>
-  <div class='present_by'>
-    <p>Вид:</p>
-    <ul>
-      <li><a href='#'>Постеры</a></li>
-      <li><a href='#'>Список</a></li>
-    </ul>
-  </div>
-  <div class='order by'>
-    <p>Сортировать по:</p>
-    <ul>
-      <li>
-        <%= link_to t('afisha.sort.rating'),
-          afisha_index_path(@presenter.query.merge('order_by' => 'rating')),
-          @presenter.sort_by_rating? ? { class: 'selected' } : {} %>
-      </li>
-      <li>
-        <%= link_to t('afisha.sort.creation'),
-          afisha_index_path(@presenter.query.merge('order_by' => 'creation')),
-          @presenter.sort_by_creation? ? { class: 'selected' } : {} %>
-      </li>
-      <li>
-        <%= link_to t('afisha.sort.starts_at'),
-          afisha_index_path(@presenter.query.merge('order_by' => 'starts_at')),
-          @presenter.sort_by_starts_at? ? { class: 'selected' } : {} %>
-      </li>
-    </ul>
-  </div>
-  <div class='add_my_afisha'>
-    <%= link_to 'Добавить свою афишу', new_my_afisha_path %>
-  </div>
-</div>
-
 <div class='afisha_list'>
   <%= render :partial => 'advertisment' if DateTime.now <= DateTime.new(2013, 6, 23, 22, 00, 00, '+7') %>
 

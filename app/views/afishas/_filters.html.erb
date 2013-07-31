@@ -5,7 +5,9 @@
         <% @presenter.period_filter.available_period_values.each do |period_value| %>
           <li<%= " class=selected" if @presenter.period_filter.period == period_value %>>
             <%= link_to t("afisha_periods.#{period_value}"),
-            send("#{@presenter.url}_index_path", (@presenter.period_filter.period == period_value ? nil : {:period => period_value})) %>
+            send("#{@presenter.url}_index_path",
+                 (@presenter.period_filter.period == period_value ? nil : {:period => period_value}),
+                 :order_by => @presenter.sorting_filter.order_by) %>
           </li>
         <% end %>
       </ul>
@@ -30,5 +32,29 @@
         <% end %>
       </ul>
     </div>
+  </div>
+</div>
+
+<div class='presentation_filters'>
+  <div class='present_by'>
+    <p>Вид:</p>
+    <ul>
+      <li><a href='#'>Постеры</a></li>
+      <li><a href='#'>Список</a></li>
+    </ul>
+  </div>
+  <div class='order by'>
+    <p>Сортировать по:</p>
+    <ul>
+      <% @presenter.sorting_filter.available_sortings_values.each do |sorting_value| %>
+        <li<%= " class=selected" if @presenter.sorting_filter.order_by == sorting_value %>>
+          <%= link_to t("afisha.sort.#{sorting_value}"),
+          send("#{@presenter.url}_index_path", :period => @presenter.period_filter.period, :order_by => sorting_value) %>
+      </li>
+    <% end %>
+  </ul>
+  </div>
+  <div class='add_my_afisha'>
+    <%= link_to 'Добавить свою афишу', new_my_afisha_path %>
   </div>
 </div>

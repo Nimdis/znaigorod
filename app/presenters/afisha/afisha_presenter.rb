@@ -38,30 +38,10 @@ class AfishaPresenter
     @organizations_filter ||= OrganizationsFilter.new(organization_ids)
     @tags_filter          ||= TagsFilter.new(tags, @categories_filter.only_category)
     @geo_filter           ||= GeoFilter.new(lat, lon, radius)
+    @sorting_filter       ||= SortingFilter.new(order_by, @geo_filter)
   end
   attr_reader :age_filter, :categories_filter, :organizations_filter, :period_filter,
-    :price_filter, :tags_filter, :time_filter, :geo_filter
-
-  def self.available_sortings
-    %w[rating creation starts_at nearness]
-  end
-
-  available_sortings.each do |sorting|
-    define_method "sort_by_#{sorting}?" do
-      @order_by == sorting
-    end
-  end
-
-  def available_sortings
-    self.class.available_sortings
-  end
-
-  def order_by
-    @order_by = available_sortings.include?(@order_by) ? @order_by : 'creation'
-    @order_by = (available_sortings & [@order_by]).any? ? @order_by : 'creation' if !geo_filter.used?
-
-    @order_by
-  end
+    :price_filter, :tags_filter, :time_filter, :geo_filter, :sorting_filter
 
   def url
     #return 'afisha' unless categories_filter.hidden?
@@ -174,7 +154,7 @@ class AfishaPresenter
     @searcher ||= HasSearcher.searcher(:showings, searcher_params).tap { |s|
       s.paginate(page: page, per_page: per_page)
       s.groups
-      s.send("order_by_#{order_by}")
+      s.send("order_by_#{sorting_filter.order_by}")
 
       unless period_filter.date?
         case period_filter.period

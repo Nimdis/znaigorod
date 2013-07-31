@@ -64,6 +64,36 @@ class PeriodFilter
   end
 end
 
+class SortingFilter
+  def initialize(sorting, geo_filter)
+    @order_by = sorting
+    @geo_filter = geo_filter
+  end
+
+  def self.available_sortings_values
+    %w[creation rating starts_at nearness]
+  end
+
+  def available_sortings_values
+    sortings = %w[creation rating starts_at]
+    sortings << 'nearness' if @geo_filter.used?
+    sortings
+  end
+
+  available_sortings_values.each do |sorting|
+    define_method "sort_by_#{sorting}?" do
+      @order_by == sorting
+    end
+  end
+
+  def order_by
+    @order_by = available_sortings_values.include?(@order_by) ? @order_by : 'creation'
+    #@order_by = (available_sortings_values & [@order_by]).any? ? @order_by : 'creation' if !@geo_filter.used?
+
+    @order_by
+  end
+end
+
 class PriceFilter
   attr_accessor :minimum, :maximum
 
