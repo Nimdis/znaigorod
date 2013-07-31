@@ -17,8 +17,10 @@
         </p>
         <p class='private'><%= link_to('Личный кабинет', my_root_path) %></p>
         <p class='messages'><%= link_to '0', '#', class: :empty, title: 'Нет новых соощений' %></p>
-        <!-- <p class='messages'><%= link_to '0', '#', class: :empty, title: 'Нет новых соощений' %></p> -->
-        <!-- <p class='messages'><%= link_to '+2', '#', class: :new, title: '2 новых сообщения' %></p> -->
+        <!--
+        <p class='messages'><%= link_to '0', '#', class: :empty, title: 'Нет новых соощений' %></p>
+        <p class='messages'><%= link_to '+2', '#', class: :new, title: '2 новых сообщения' %></p>
+        -->
       <% else %>
         <%= render :partial => 'commons/social_auth' %>
       <% end %>
@@ -26,3 +28,5 @@
     <%= render :partial => "commons/public_menu" %>
   </div>
 </div>
+
+<%= render :partial => 'filters' %>

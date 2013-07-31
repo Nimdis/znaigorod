@@ -1,49 +1,38 @@
-<div class='filters'>
-  <div class='by_date'>
-    <ul>
-      <li><a href='#'>Вся афиша</a></li>
-      <li><a href='#'>Сегодня</a></li>
-      <li><a href='#'>На неделе</a></li>
-      <li><a href='#'>На выходных</a></li>
-      <li><a href='#'>Выбрать дату</a></li>
-    </ul>
+<div class="filters_wrapper">
+  <div class='filters'>
+    <div class='by_date'>
+      <ul>
+        <li><a href='#'>Сегодня</a></li>
+        <li><a href='#'>На неделе</a></li>
+        <li><a href='#'>На выходных</a></li>
+        <li><a href='#'>Выбрать дату</a></li>
+      </ul>
+    </div>
+    <div class='by_tickets'>
+      <ul>
+        <li><a href='#'>Только с билетами</a></li>
+      </ul>
+    </div>
   </div>
-  <div class='add_my_afisha'>
-    <a href='#'>Добавить афишу</a>
-  </div>
-  <div class='by_tickets'>
-    <ul>
-      <li><a href='#'>Все</a></li>
-      <li><a href='#'>Только с билетами</a></li>
-    </ul>
-  </div>
-</div>
 
-<div class='filters'>
-  <div class='present_by'>
-    <ul>
-      <li><a href='#'>Постеры</a></li>
-      <li><a href='#'>Список</a></li>
-    </ul>
-  </div>
-  <div class='order by'>
-    <p>Сортировать по:</p>
-    <ul>
-      <li>
-        <%= link_to t('afisha.sort.rating'),
-          afisha_index_path(@presenter.query.merge('order_by' => 'rating')),
-          @presenter.sort_by_rating? ? { class: 'selected' } : {} %>
-      </li>
-      <li>
-        <%= link_to t('afisha.sort.creation'),
-          afisha_index_path(@presenter.query.merge('order_by' => 'creation')),
-          @presenter.sort_by_creation? ? { class: 'selected' } : {} %>
-      </li>
-      <li>
-        <%= link_to t('afisha.sort.starts_at'),
-          afisha_index_path(@presenter.query.merge('order_by' => 'starts_at')),
-          @presenter.sort_by_starts_at? ? { class: 'selected' } : {} %>
-      </li>
-    </ul>
+  <div class='filters'>
+    <div class='by_kind'>
+      <ul>
+        <li>
+          <%= link_to afisha_index_path do %>
+            <%= content_tag :span, 'Вся афиша', class: :name %>
+            <%= content_tag :span, Random.new.rand(55...95), class: :count  %>
+          <% end %>
+        </li>
+        <% Afisha.kind.values.each do |kind| %>
+          <li>
+            <%= link_to send("#{kind.pluralize}_path") do %>
+              <%= content_tag :span, kind.text, class: :name %>
+              <%= content_tag :span, Random.new.rand(5...85), class: :count  %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>

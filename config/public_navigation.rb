@@ -33,7 +33,7 @@ SimpleNavigation::Configuration.run do |navigation|
   # Define the primary navigation
   navigation.items do |primary|
     primary.item :main, 'Всё', root_path
-    primary.item :afisha, 'Афиша', afisha_index_path
+    primary.item :afisha, 'Афиша', afisha_index_path, highlights_on: lambda { params[:controller] == 'afishas' }
     primary.item :organizations, 'Заведения', organizations_path
     primary.item :tickets, 'Билеты', tickets_path
     primary.item :posts, 'Обзоры', posts_path
