@@ -2,12 +2,10 @@
   <div class='afisha_filters'>
     <div class='by_date'>
       <ul>
-        <% @presenter.period_filter.available_period_values.each do |period_value| %>
-          <li<%= " class=selected" if @presenter.period_filter.period == period_value %>>
-            <%= link_to t("afisha_periods.#{period_value}"),
-            send("#{@presenter.url}_index_path",
-                 @presenter.period_filter.period == period_value ? nil : :period => period_value,
-                 :order_by => @presenter.sorting_filter.order_by) %>
+        <% @presenter.periods_links.each do |period_link| %>
+          <li<%= " class=selected" if period_link[:selected] %>>
+            <%= link_to period_link[:title],
+            send(period_link[:url], period_link[:parameters]) %>
           </li>
         <% end %>
       </ul>
@@ -23,8 +21,8 @@
     <div class='by_kind'>
       <ul>
         <% @presenter.categories_links.each do |category_link| %>
-          <li class='<%= category_link[:parameters][:category] %><%= ' selected' if category_link[:current] %>'>
-            <%= link_to send("#{category_link[:parameters].delete(:category)}_index_path", category_link[:parameters]) do %>
+          <li class='<%= category_link[:klass] %><%= ' selected' if category_link[:current] %>'>
+            <%= link_to send(category_link[:url], category_link[:parameters]) do %>
               <%= content_tag :span,  category_link[:title], class: :name %>
               <%= content_tag :span, category_link[:count], class: :count  %>
             <% end %>
@@ -46,13 +44,13 @@
   <div class='order_by'>
     <p>Сортировать по:</p>
     <ul>
-      <% @presenter.sorting_filter.available_sortings_values.each do |sorting_value| %>
-        <li<%= " class=selected" if @presenter.sorting_filter.order_by == sorting_value %>>
-          <%= link_to t("afisha.sort.#{sorting_value}"),
-          send("#{@presenter.url}_index_path", :period => @presenter.period_filter.period, :order_by => sorting_value) %>
-      </li>
-    <% end %>
-  </ul>
+      <% @presenter.sortings_links.each do |sortings_link| %>
+        <li<%= " class=selected" if sortings_link[:selected] %>>
+          <%= link_to sortings_link[:title],
+            send(sortings_link[:url], sortings_link[:parameters]) %>
+        </li>
+      <% end %>
+    </ul>
   </div>
   <div class='add_my_afisha'>
     <%= link_to 'Добавить свою афишу', new_my_afisha_path %>

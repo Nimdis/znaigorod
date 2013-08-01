@@ -44,12 +44,11 @@ class AfishaPresenter
     :price_filter, :tags_filter, :time_filter, :geo_filter, :sorting_filter
 
   def url
-    #return 'afisha' unless categories_filter.hidden?
-    categories_filter.selected.first.try(:pluralize) || 'afisha'
+    @url ||= "#{(categories_filter.selected.first.try(:pluralize) || 'afisha')}_index_path"
   end
 
   def kind
-    categories.first || 'all'
+    @kind ||= categories_filter.selected.first.try(:pluralize) || 'afisha'
   end
 
   def collection
@@ -81,16 +80,57 @@ class AfishaPresenter
     @categories_links ||= [].tap { |array|
       array << {
         title: I18n.t('enumerize.afisha.kind.all'),
-        parameters: { category: 'afisha', period: period_filter.all? ? nil : period_filter.period },
-        current: kind == 'all',
+        klass: 'afisha',
+        url: url,
+        parameters: {
+          period: @period_filter.all? ? nil : @period_filter.period,
+          order_by: @sorting_filter.order_by
+        },
+        current: kind == 'afisha',
         count: AfishaCounter.new(:period => period_filter.period, :date => period_filter.date).count
       }
       Afisha.kind.values.each do |kind|
         array << {
           title: "#{kind.text}",
-          parameters: { category: kind.pluralize, period: period_filter.all? ? nil : period_filter.period },
+          klass: kind.pluralize,
+          url: url,
+          parameters: {
+            period: period_filter.all? ? nil : period_filter.period,
+            order_by: @sorting_filter.order_by },
           current: categories.include?(kind),
           count: AfishaCounter.new(category: kind, :period => period_filter.period, :date => period_filter.date).count
+        }
+      end
+    }
+  end
+
+  def periods_links
+    @periods_links ||= [].tap { |array|
+      @period_filter.available_period_values.each do |period_value|
+        array << {
+          title: I18n.t("afisha_periods.#{period_value}"),
+          url: url,
+          parameters: {
+            :period => @period_filter.period == period_value ? nil : period_value,
+            :order_by => @sorting_filter.order_by
+          },
+          selected: period_value == @period_filter.period
+        }
+      end
+    }
+  end
+
+  def sortings_links
+    @sortings_links ||= [].tap { |array|
+      @sorting_filter.available_sortings_values.each do |sorting_value|
+        array << {
+          title: I18n.t("afisha.sort.#{sorting_value}"),
+          url: url,
+          parameters: {
+            :period => @period_filter.period,
+            :order_by => sorting_value
+          },
+          selected: @sorting_filter.order_by == sorting_value
         }
       end
     }
@@ -103,7 +143,7 @@ class AfishaPresenter
   end
 
   def page_title
-    title = I18n.t("meta.#{url}.title")
+    title = I18n.t("meta.#{kind}.title")
     title += " сегодня" if period_filter.period == 'today'
     title += " на этой неделе" if period_filter.period == 'week'
     title += " на выходных" if period_filter.period == 'weekend'
@@ -112,11 +152,11 @@ class AfishaPresenter
   end
 
   def meta_description
-    I18n.t("meta.#{url}.description", default: I18n.t('meta.default.description'))
+    I18n.t("meta.#{kind}.description", default: I18n.t('meta.default.description'))
   end
 
   def meta_keywords
-    I18n.t("meta.#{url}.keywords", default: I18n.t('meta.default.description'))
+    I18n.t("meta.#{kind}.keywords", default: I18n.t('meta.default.description'))
   end
 
   def searcher_params
