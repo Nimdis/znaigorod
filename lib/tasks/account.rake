@@ -9,6 +9,7 @@ namespace :account do
 
   desc 'Create accounts for users'
   task :create => :environment do
+    puts 'Create accounts'
     users = User.ordered
     bar = ProgressBar.new(users.count)
     users.each do |user|
@@ -25,6 +26,7 @@ namespace :account do
 
   desc 'Get gender and email for accounts'
   task :get_gender_and_email => :environment do
+    puts 'Get gender and email'
     accounts = Account.all
     bar = ProgressBar.new(accounts.count)
     accounts.each do |account|
@@ -46,6 +48,7 @@ namespace :account do
 
   desc 'Get avatar for account'
   task :get_avatar => :environment do
+    puts 'Get avatars'
     accounts = Account.ordered
     fb_client = Koala::Facebook::API.new
     vk_client = VkontakteApi::Client.new
@@ -75,6 +78,7 @@ namespace :account do
 
   desc 'Get friends from vkontakte'
   task :get_vk_friends => :environment do
+    puts 'Get vk friends'
     accounts = Account.ordered
     vk_client = VkontakteApi::Client.new
     bar = ProgressBar.new(accounts.count)
@@ -99,6 +103,7 @@ namespace :account do
 
   desc "Пересчет рейтинга пользователей"
   task :recalculate_rating => :environment do
+    puts 'Recalculate ratings'
     accounts = Account.all
     bar = ProgressBar.new(accounts.count)
     accounts.each do |account|
