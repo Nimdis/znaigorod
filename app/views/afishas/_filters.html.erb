@@ -6,7 +6,7 @@
           <li<%= " class=selected" if @presenter.period_filter.period == period_value %>>
             <%= link_to t("afisha_periods.#{period_value}"),
             send("#{@presenter.url}_index_path",
-                 (@presenter.period_filter.period == period_value ? nil : {:period => period_value}),
+                 @presenter.period_filter.period == period_value ? nil : :period => period_value,
                  :order_by => @presenter.sorting_filter.order_by) %>
           </li>
         <% end %>
