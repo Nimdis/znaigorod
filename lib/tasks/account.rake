@@ -4,6 +4,9 @@ require 'progress_bar'
 
 namespace :account do
 
+  desc 'Make  everything'
+  task :all => [:create, :get_gender_and_email, :get_avatar, :get_vk_friends, :recalculate_rating]
+
   desc 'Create accounts for users'
   task :create => :environment do
     users = User.ordered
