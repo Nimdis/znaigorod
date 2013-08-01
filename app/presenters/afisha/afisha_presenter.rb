@@ -81,7 +81,7 @@ class AfishaPresenter
       array << {
         title: I18n.t('enumerize.afisha.kind.all'),
         klass: 'afisha',
-        url: url,
+        url: 'afisha_index_path',
         parameters: {
           period: @period_filter.all? ? nil : @period_filter.period,
           order_by: @sorting_filter.order_by
@@ -93,7 +93,7 @@ class AfishaPresenter
         array << {
           title: "#{kind.text}",
           klass: kind.pluralize,
-          url: url,
+          url: "#{kind.pluralize}_index_path",
           parameters: {
             period: period_filter.all? ? nil : period_filter.period,
             order_by: @sorting_filter.order_by },
