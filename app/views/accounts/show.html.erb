@@ -12,7 +12,7 @@
   <h3><%= @account %></h3>
 
   <div class="actions change_friendship">
-    <%= render 'friends/friend' if current_user.account != @account %>
+    <%= render 'friends/friend' if current_user && current_user.account != @account %>
   </div>
 
   <div class="friends">
