@@ -12,15 +12,15 @@ ru:
       masterclasses: мастер-классов
 
     sort:
-      closest: По ближайшему сеансу
-      newest: По новизне
-      rating: По рейтингу
+      closest: Ближайшему сеансу
+      newest: Новизне
+      rating: Рейтингу
 
-      creation: По новизне
-      nearness: По отдаленности
-      popularity: По популярности
-      title: По алфавиту
-      starts_at: По ближайшему сеансу
+      creation: Новизне
+      nearness: Отдаленности
+      popularity: Популярности
+      title: Алфавиту
+      starts_at: Ближайшему сеансу
 
     visits:
       zero: "нет участников"
