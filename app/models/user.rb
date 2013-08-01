@@ -42,26 +42,32 @@ class User < ActiveRecord::Base
   end
 
   def token
+    return '' if auth_raw_info.is_a?(String)
     auth_raw_info.try(:credentials).try(:token)
   end
 
   def name
+    return 'Mister X' if auth_raw_info.is_a?(String)
     auth_raw_info.try(:info).try(:name) || 'Mister X'
   end
 
   def nickname
+    return '' if auth_raw_info.is_a?(String)
     auth_raw_info.try(:info).try(:nickname)
   end
 
   def gender
+    return '' if auth_raw_info.is_a?(String)
     auth_raw_info.try(:extra).try(:raw_info).try(:gender) || auth_raw_info.try(:extra).try(:raw_info).try(:sex)
   end
 
   def email
+    return '' if auth_raw_info.is_a?(String)
     auth_raw_info.try(:extra).try(:raw_info).try(:email)
   end
 
   def location
+    return '' if auth_raw_info.is_a?(String)
     auth_raw_info.try(:info).try(:location)
   end
 
