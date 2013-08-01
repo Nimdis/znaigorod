@@ -103,7 +103,9 @@ Znaigorod::Application.routes.draw do
     resources :payments, :only => :index
     resources :visits, :only => :index
     resources :votes, :only => :index
-    resources :messages, :only => :index
+    resources :messages, :only => :index do
+      put 'change_message_status' => 'messages#change_message_status', :as => :change_message_status
+    end
   end
 
   get 'feedback' => 'feedback#new', :as => :new_feedback

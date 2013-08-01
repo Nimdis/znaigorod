@@ -74,5 +74,6 @@
  * = require ./sms_claims
  * = require ./my_affiche
  * = require ./select_tags
+ * = require ./messages
  * = require ./main
  */

@@ -12,15 +12,17 @@
       <% if user_signed_in? %>
         <p class='user'>
           <%= link_to(image_tag(current_user.avatar, size: '22x22'), current_user.profile, target: :_blank, class: :avatar) %>
-          <%= link_to(current_user.name, current_user.profile, target: :_blank, class: :user_name) %>
+          <%= link_to(current_user.name, current_user.account, class: :user_name) %>
           <%= link_to('Выйти', destroy_user_session_path, method: :delete, class: :logout) %>
         </p>
         <p class='private'><%= link_to('Личный кабинет', my_root_path) %></p>
-        <p class='messages'><%= link_to '0', '#', class: :empty, title: 'Нет новых соощений' %></p>
-        <!--
-        <p class='messages'><%= link_to '0', '#', class: :empty, title: 'Нет новых соощений' %></p>
-        <p class='messages'><%= link_to '+2', '#', class: :new, title: '2 новых сообщения' %></p>
-        -->
+        <p class='messages'>
+          <% if current_user.account.messages.with_state(:new).any? %>
+            <%= link_to current_user.account.messages.with_state(:new).count, account_messages_path(current_user.account), class: :new, title: 'Есть новые соощения' %>
+          <% else %>
+            <%= link_to current_user.account.messages.count, account_messages_path(current_user.account), class: :empty, title: 'Нет новых соощений' %>
+          <% end %>
+        </p>
       <% else %>
         <%= render :partial => 'commons/social_auth' %>
       <% end %>
