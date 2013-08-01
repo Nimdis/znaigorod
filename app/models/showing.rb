@@ -8,14 +8,14 @@ class Showing < ActiveRecord::Base
 
   validates_presence_of :place, :starts_at
 
-  delegate :created_at, :distribution_starts_on, :rating, :tags, :title, :age_min, :age_max, :state,
+  delegate :created_at, :distribution_starts_on, :rating, :tags, :title, :age_min, :age_max, :state, :has_tickets_for_sale?,
     :to => :afisha,
     :prefix => true
 
   delegate :address, :title, :to => :organization, :prefix => true, :allow_nil => true
 
-  after_create  :index_afisha
-  after_destroy :index_afisha
+  #after_create  :index_afisha
+  #after_destroy :index_afisha
 
   scope :actual, -> { where('showings.starts_at >= ? OR (showings.ends_at is not null AND showings.ends_at > ?)', DateTime.now.beginning_of_day, Time.zone.now) }
 
@@ -55,6 +55,12 @@ class Showing < ActiveRecord::Base
     time :afisha_distribution_starts_on, :trie => true
     time :ends_at
     time :starts_at, :trie => true
+
+    boolean(:has_tickets) { afisha_has_tickets_for_sale? && actual? }
+  end
+
+  def actual?
+    starts_at >= Time.zone.now.beginning_of_day || (ends_at? && ends_at >= Time.zone.now.beginning_of_day)
   end
 
   def ends_on

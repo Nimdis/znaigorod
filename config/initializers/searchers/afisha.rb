@@ -13,7 +13,7 @@ HasSearcher.create_searcher :showings do
   end
 
   # order
-  scope(:order_by_rating) { order_by(:afisha_rating, :desc) }
+  scope(:order_by_rating)     { order_by(:afisha_rating, :desc) }
   scope(:order_by_creation)   { order_by(:afisha_created_at, :desc) }
   scope(:order_by_starts_at)  { order_by(:starts_at, :asc) }
 
@@ -23,6 +23,7 @@ HasSearcher.create_searcher :showings do
 
   property :afisha_id
   property :afisha_state
+  property :has_tickets
 
   # categories tags organizations
   [:categories, :tags, :organization_ids].each do |field|

@@ -274,7 +274,7 @@ class Afisha < ActiveRecord::Base
   end
 
   def has_tickets_for_sale?
-    tickets.joins(:copies).where('copies.state = ?', :for_sale).any?
+    tickets.available.any?
   end
 
   def max_tickets_discount
@@ -318,11 +318,11 @@ class Afisha < ActiveRecord::Base
     distribution_starts_on && distribution_starts_on >= Date.today.beginning_of_week && distribution_starts_on <= Date.today.end_of_week
   end
 
-  private
-
   def reindex_showings
     showings.actual.map(&:index)
   end
+
+  private
 
   def set_published
     self.published = true if published.nil?

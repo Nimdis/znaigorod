@@ -16,7 +16,8 @@ class AfishaPresenter
                 :order_by,
                 :page, :per_page,
                 :view,
-                :hide_categories
+                :hide_categories,
+                :has_tickets
 
   def initialize(args)
     super(args)
@@ -41,7 +42,7 @@ class AfishaPresenter
     @sorting_filter       ||= SortingFilter.new(order_by, @geo_filter)
   end
   attr_reader :age_filter, :categories_filter, :organizations_filter, :period_filter,
-    :price_filter, :tags_filter, :time_filter, :geo_filter, :sorting_filter
+    :price_filter, :tags_filter, :time_filter, :geo_filter, :sorting_filter, :has_tickets
 
   def url
     @url ||= "#{(categories_filter.selected.first.try(:pluralize) || 'afisha')}_index_path"
@@ -97,7 +98,8 @@ class AfishaPresenter
         url: 'afisha_index_path',
         parameters: {
           period: @period_filter.all? ? nil : @period_filter.period,
-          order_by: @sorting_filter.order_by
+          order_by: @sorting_filter.order_by,
+          has_tickets: has_tickets
         },
         current: kind == 'afisha',
         count: AfishaCounter.new(presenter: self).count
@@ -109,7 +111,9 @@ class AfishaPresenter
           url: "#{kind.pluralize}_index_path",
           parameters: {
             period: period_filter.all? ? nil : period_filter.period,
-            order_by: @sorting_filter.order_by },
+            order_by: @sorting_filter.order_by,
+            has_tickets: has_tickets
+          },
           current: categories.include?(kind),
           count: AfishaCounter.new(presenter: self, categories: [kind]).count
         }
@@ -125,7 +129,8 @@ class AfishaPresenter
           url: url,
           parameters: {
             :period => @period_filter.period == period_value ? nil : period_value,
-            :order_by => @sorting_filter.order_by
+            :order_by => @sorting_filter.order_by,
+            has_tickets: has_tickets
           },
           selected: period_value == @period_filter.period
         }
@@ -141,7 +146,8 @@ class AfishaPresenter
           url: url,
           parameters: {
             :period => @period_filter.period,
-            :order_by => sorting_value
+            :order_by => sorting_value,
+            has_tickets: has_tickets
           },
           selected: @sorting_filter.order_by == sorting_value
         }
@@ -185,6 +191,7 @@ class AfishaPresenter
       params[:tags]             = tags_filter.selected       if tags_filter.selected.any?
       params[:from]             = time_filter.from           if time_filter.from.present?
       params[:to]               = time_filter.to             if time_filter.to.present?
+      params[:has_tickets]      = true                       if has_tickets
 
       params[:location] = Hashie::Mash.new(lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius) if geo_filter.used?
     end

@@ -12,7 +12,13 @@
     </div>
     <div class='by_tickets'>
       <ul>
-        <li><a href='#'>Только с билетами</a></li>
+        <li<%= " class=selected" if @presenter.has_tickets %>>
+          <a href='<%= send(@presenter.url, {
+                      period: @presenter.period_filter.period,
+                      order_by: @presenter.sorting_filter.order_by,
+                      has_tickets: @presenter.has_tickets ? nil : true
+          }) %>'>Только с билетами</a>
+        </li>
       </ul>
     </div>
   </div>

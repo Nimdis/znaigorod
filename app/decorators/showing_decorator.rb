@@ -67,10 +67,6 @@ class ShowingDecorator < ApplicationDecorator
     starts_at >= Time.zone.now.beginning_of_day && starts_at <= Time.zone.now.end_of_day
   end
 
-  def actual?
-    starts_at >= Time.zone.now.beginning_of_day || (ends_at? && ends_at >= Time.zone.now.beginning_of_day)
-  end
-
   def in_one_month?
     starts_at.month == ends_at.month
   end
