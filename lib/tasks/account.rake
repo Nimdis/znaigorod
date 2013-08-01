@@ -10,7 +10,11 @@ namespace :account do
     bar = ProgressBar.new(users.count)
     users.each do |user|
       name = user.name.split(' ')
-      account = Account.create(first_name: name.first, last_name: name.last, nickname: user.nickname, location: user.location, created_at: user.created_at)
+      account = Account.create(first_name: name.first,
+                               last_name: name.last,
+                               nickname: user.nickname,
+                               location: user.location,
+                               created_at: user.created_at)
       user.update_attributes(account_id: account.id)
       bar.increment!
     end
@@ -37,7 +41,6 @@ namespace :account do
     end
   end
 
-
   desc 'Get avatar for account'
   task :get_avatar => :environment do
     accounts = Account.ordered
@@ -50,7 +53,8 @@ namespace :account do
           user = account.users.first
           case user.provider
           when 'vkontakte'
-            image = vk_client.users.get(uid: user.uid, fields: :photo_200_orig).first.photo_200_orig
+            image = vk_client.users.get(uid: user.uid,
+                                        fields: :photo_200_orig).first.photo_200_orig
             account.update_attributes(avatar: image)
           when 'facebook'
             image = fb_client.get_picture(user.uid, type: 'large')
@@ -66,7 +70,6 @@ namespace :account do
     end
   end
 
-
   desc 'Get friends from vkontakte'
   task :get_vk_friends => :environment do
     accounts = Account.ordered
@@ -79,7 +82,8 @@ namespace :account do
           uids = vk_client.friends.get(user_id: user.uid)
           uids.each do |uid|
             if User.vkontakte.where(uid: uid.to_s).any?
-              account.friends.create(friendable: account.get_account(uid.to_s), friendly: true) unless account.friends_with?(account.get_account(uid.to_s))
+              account.friends.create(friendable: account.get_account(uid.to_s),
+                                     friendly: true) unless account.friends_with?(account.get_account(uid.to_s))
             end
           end
         end
@@ -89,7 +93,6 @@ namespace :account do
       end
     end
   end
-
 
   desc "Пересчет рейтинга пользователей"
   task :recalculate_rating => :environment do
