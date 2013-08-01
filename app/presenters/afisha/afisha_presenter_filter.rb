@@ -21,6 +21,10 @@ class CategoriesFilter
   def only_category
     selected.first if hidden?
   end
+
+  def scopes(collection)
+    used? ? collection.where('afishas.kind = ?', @selected) : collection
+  end
 end
 
 class PeriodFilter
@@ -61,6 +65,30 @@ class PeriodFilter
 
   def all?
     @period == 'all' || @period.nil?
+  end
+
+  def scopes(collection)
+    actual_collection = collection.where('showings.starts_at > ? OR showings.ends_at > ?',
+                       DateTime.now.beginning_of_day,
+                       DateTime.now.beginning_of_day)
+    case period
+    when 'all'
+      actual_collection
+    when 'today'
+      actual_collection.where('showings.starts_at < ?', DateTime.now.end_of_day)
+    when 'week'
+      actual_collection.where('showings.starts_at > ? OR showings.starts_at < ?',
+                       DateTime.now.beginning_of_week,
+                       DateTime.now.end_of_week).where('showings.ends_at IS NULL OR showings.ends_at < ?',
+                                                       DateTime.now.end_of_week)
+    when 'weekend'
+      actual_collection.where('showings.starts_at > ? OR showings.starts_at < ?',
+                              DateTime.now.end_of_week - 2.days + 1.second,
+                              DateTime.now.end_of_week).where('showings.ends_at IS NULL OR showings.ends_at < ?',
+                                                              DateTime.now.end_of_week - 2.days + 1.second)
+    else
+      actual_collection
+    end
   end
 end
 

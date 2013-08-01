@@ -52,16 +52,29 @@ class AfishaPresenter
   end
 
   def collection
-    searcher.group(:afisha_id_str).groups.map do |group|
+    if @collection
+      return @collection
+    else
+      @collection = searcher.group(:afisha_id_str).groups
+      #@collection = Afisha.published.includes(:showings)
+      #@collection = @period_filter.scopes(@collection)
+      #@collection = @categories_filter.scopes(@collection)
+    end
+  end
+
+  def decorated_collection
+    collection.map do |group|
       afisha = Afisha.find(group.value)
       showings = group.hits.map(&:result)
 
       AfishaDecorator.new(afisha, ShowingDecorator.decorate(showings))
     end
+    #collection.page(page).per(per_page).map {|afisha| AfishaDecorator.new(afisha, afisha.showings)}
   end
 
   def paginated_collection
     searcher.group(:afisha_id_str).groups
+    #collection.page(page).per(per_page)
   end
 
   def total_count
@@ -87,7 +100,7 @@ class AfishaPresenter
           order_by: @sorting_filter.order_by
         },
         current: kind == 'afisha',
-        count: AfishaCounter.new(:period => period_filter.period, :date => period_filter.date).count
+        count: AfishaCounter.new(presenter: self).count
       }
       Afisha.kind.values.each do |kind|
         array << {
@@ -98,7 +111,7 @@ class AfishaPresenter
             period: period_filter.all? ? nil : period_filter.period,
             order_by: @sorting_filter.order_by },
           current: categories.include?(kind),
-          count: AfishaCounter.new(category: kind, :period => period_filter.period, :date => period_filter.date).count
+          count: AfishaCounter.new(presenter: self, categories: [kind]).count
         }
       end
     }
@@ -159,11 +172,11 @@ class AfishaPresenter
     I18n.t("meta.#{kind}.keywords", default: I18n.t('meta.default.description'))
   end
 
-  def searcher_params
+  def searcher_params(categories = [])
     @searcher_params ||= {}.tap do |params|
       params[:age_max]          = age_filter.maximum         if age_filter.maximum.present?
       params[:age_min]          = age_filter.minimum         if age_filter.minimum.present?
-      params[:afisha_state]    = 'published'
+      params[:afisha_state]     = 'published'
       params[:categories]       = categories_filter.selected if categories_filter.selected.any?
       params[:organization_ids] = organizations_filter.ids   if organizations_filter.ids.any?
       params[:price_max]        = price_filter.maximum       if price_filter.maximum.present?
@@ -175,17 +188,6 @@ class AfishaPresenter
 
       params[:location] = Hashie::Mash.new(lat: geo_filter.lat, lon: geo_filter.lon, radius: geo_filter.radius) if geo_filter.used?
     end
-  end
-
-  def query
-    searcher_params.dup.tap { |hash|
-      hash.delete(:afisha_state)
-      hash.delete(:location)
-      hash.delete(:starts_on)
-
-      hash[:utf8] = '✓'
-      %w[order_by view period lat lon radius].each { |p| hash[p] = send(p) }
-    }
   end
 
   private

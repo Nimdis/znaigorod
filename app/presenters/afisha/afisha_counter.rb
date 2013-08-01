@@ -2,30 +2,28 @@
 
 class AfishaCounter
   include ActiveAttr::MassAssignment
-
-  attr_accessor :category, :organization, :period, :date
+  attr_accessor :categories, :presenter, :organization
 
   def count
-    case period
-    when 'daily'
-      searcher.groups.group(:afisha_id_str).total
-    when 'all'
-      searcher.actual.groups.group(:afisha_id_str).total
-    else
-      searcher.send(period).actual.groups.group(:afisha_id_str).total
-    end
+    searcher.groups.group(:afisha_id_str).total
   end
 
   private
 
-  def searcher_params
-    {}.tap {|hash|
-      hash[:categories] = [category] if category.present?
-      hash[:starts_on] = date if date.present? && period == 'daily'
-    }
-  end
-
   def searcher
-    @searcher ||= HasSearcher.searcher(:showings, searcher_params)
+    @searcher ||= HasSearcher.searcher(:showings, @presenter.searcher_params.merge(:categories => categories)).tap do |s|
+      unless @presenter.period_filter.date?
+        case @presenter.period_filter.period
+        when 'all'
+          s.actual
+        when 'today'
+          s.today.actual
+        when 'week'
+          s.week.actual
+        when 'weekend'
+          s.weekend.actual
+        end
+      end
+    end
   end
 end

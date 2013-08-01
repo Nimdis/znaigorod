@@ -1,11 +1,4 @@
-<% if @presenter.collection.any? && params[:page] == '2' %>
-  <li class='marketvtomske'>
-    <iframe allowtransparency='true' frameborder='0' height='90' hspace='0' marginheight='0' marginwidth='0' scrolling='no'
-      src='http://marketVtomske.ru/catalog/infor/?params=horizontal' vspace='0' width='100%'></iframe>
-  </li>
-<% end %>
-
-<% @presenter.collection.each do |afisha| %>
+<% @presenter.decorated_collection.each do |afisha| %>
   <li class="<%= cycle('first', 'second', 'third', 'fourth', 'fifth', 'sixth') %>">
     <%= render partial: 'afishas/afisha_poster', locals: { afisha: afisha } %>
   </li>
