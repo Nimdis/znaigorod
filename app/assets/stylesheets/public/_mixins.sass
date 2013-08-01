@@ -1,3 +1,4 @@
+/* base */
 =max-width($max_width)
   max-width: $max_width
 
@@ -6,10 +7,36 @@
   +max-width($max_width)
   margin: 0 auto
 
+/* placheholder for form */
+
 =placeholder
   @each $prefix in "::-webkit-input", ":moz", "::-moz", ":-ms-input"
     #{$prefix}-placeholder
       @content
+
+/* toggable buttons for filters */
+
+=toggable-links
+  a
+    display: block
+    color: #000
+    background-color: #e8e8e8
+    border: 1px solid #ccc
+    +border-radius
+    padding: 1px 8px
+    &:hover
+      color: #f60
+      text-decoration: none
+  &.selected a
+    color: #fff
+    background-color: #f60
+    border-top: 1px solid #b34700
+    border-right: 1px solid #f60
+    border-bottom: 1px solid #f60
+    border-left: 1px solid #b34700
+    +box-shadow(rgba(0, 0, 0, 0.3) 1px 1px 2px inset)
+
+/* animations */
 
 =animate_blink($speed: 1s, $repeat: true)
   animation: fade $speed forwards

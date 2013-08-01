@@ -1,42 +1,12 @@
-.filters_wrapper
+.afisha_filters_wrapper
   background-color: #f9f9f9
   +background(linear-gradient(top, #fff, #e8e8e8))
   +box-shadow(#aaa 0 2px 1px)
   margin-bottom: 10px
 
-  .filters
+  .afisha_filters
     +liquid($desctop_min_width, $desctop_max_width)
     +clearfix
-
-    .by_date,
-    .by_tickets
-      float: left
-      margin-left: 10px
-      ul
-        +clearfix
-        li
-          float: left
-          margin-right: 5px
-          &:last-child
-            margin-right: 0
-          a
-            display: block
-            color: #000
-            background-color: #e8e8e8
-            border: 1px solid #ccc
-            +border-radius
-            padding: 1px 8px
-            &:hover
-              color: #f60
-              text-decoration: none
-          &.selected a
-            color: #fff
-            background-color: #f60
-            border-top: 1px solid #b34700
-            border-right: 1px solid #f60
-            border-bottom: 1px solid #f60
-            border-left: 1px solid #b34700
-            +box-shadow(rgba(0, 0, 0, 0.3) 1px 1px 2px inset)
 
     .by_date
       float: left
@@ -45,6 +15,17 @@
     .by_tickets
       float: right
       margin-right: 10px
+
+    .by_date,
+    .by_tickets
+      ul
+        +clearfix
+        li
+          float: left
+          margin-right: 5px
+          +toggable-links
+          &:last-child
+            margin-right: 0
 
     .by_kind
       width: 80%
@@ -174,3 +155,37 @@
               background-position: (42px/2 - 42px/2 - 1140px) -151px
               &:hover
                 background-position: (42px/2 - 42px/2 - 1140px) -76px
+
+.afisha_presentation_filters
+  +clearfix
+  +liquid($desctop_min_width, $desctop_max_width)
+  margin-bottom: 10px
+
+  .present_by
+    float: left
+    /* TODO iconize & show it */
+    display: none
+    margin-left: 10px
+
+  .order_by
+    float: right
+    margin-right: 10px
+
+  .present_by,
+  .order_by
+    p
+      +inline-block
+    ul
+      +inline-block
+      +clearfix
+      li
+        float: left
+        margin-right: 5px
+        +toggable-links
+        &:last-child
+          margin-right: 0
+
+  .add_my_afisha
+    width: 150px
+    text-align: center
+    margin: 0 auto

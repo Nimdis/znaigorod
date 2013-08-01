@@ -1,5 +1,5 @@
-<div class="filters_wrapper">
-  <div class='filters'>
+<div class='afisha_filters_wrapper'>
+  <div class='afisha_filters'>
     <div class='by_date'>
       <ul>
         <% @presenter.period_filter.available_period_values.each do |period_value| %>
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class='filters'>
+  <div class='afisha_filters'>
     <div class='by_kind'>
       <ul>
         <% @presenter.categories_links.each do |category_link| %>
@@ -35,7 +35,7 @@
   </div>
 </div>
 
-<div class='presentation_filters'>
+<div class='afisha_presentation_filters'>
   <div class='present_by'>
     <p>Вид:</p>
     <ul>
@@ -43,7 +43,7 @@
       <li><a href='#'>Список</a></li>
     </ul>
   </div>
-  <div class='order by'>
+  <div class='order_by'>
     <p>Сортировать по:</p>
     <ul>
       <% @presenter.sorting_filter.available_sortings_values.each do |sorting_value| %>
