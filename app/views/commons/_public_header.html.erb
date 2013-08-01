@@ -11,6 +11,7 @@
     <div class='dashboard'>
       <% if user_signed_in? %>
         <p class='user'>
+          <%= link_to 'Добавить афишу', new_my_afisha_path, class: :new_my_afisha %>
           <%= link_to(image_tag(current_user.avatar, size: '22x22'), current_user.profile, target: :_blank, class: :avatar) %>
           <%= link_to(current_user.name, current_user.account, class: :user_name) %>
           <%= link_to('Выйти', destroy_user_session_path, method: :delete, class: :logout) %>
@@ -24,6 +25,7 @@
           <% end %>
         </p>
       <% else %>
+        <%= link_to 'Добавить афишу', new_my_afisha_path, class: :new_my_afisha %>
         <%= render :partial => 'commons/social_auth' %>
       <% end %>
     </div>

@@ -33,16 +33,22 @@
         &:hover
           text-decoration: none
 
+
     .dashboard
       font-size: 12px
       position: absolute
       top: 0
       right: 10px
+      .new_my_afisha
+        font-size: 11px
+        +button-style
       p
         text-align: right
       .user
         a
           +inline-block
+        .new_my_afisha
+          margin: 0 10px 3px 0
         .avatar img
           +border-radius
         .logout
@@ -71,6 +77,7 @@
 
       .social_signin_links
         float: right
+        margin-left: 10px
         li
           +inline-block
 
