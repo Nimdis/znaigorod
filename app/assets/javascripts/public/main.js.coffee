@@ -60,7 +60,8 @@ $ ->
   init_file_upload() if $('.file_upload').length
   init_ajax_delete() if $('.ajax_delete').length
   init_select_tags() if $('.select_tags').length
-  init_messages() if $('.ajax_message_status')
+  init_messages() if $('.ajax_message_status').length
+  init_change_friendship() if $('.change_friendship').length
 
   true
 

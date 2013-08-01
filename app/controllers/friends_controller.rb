@@ -12,7 +12,7 @@ class FriendsController < ApplicationController
         @friend.change_friendship
       end
 
-      render :nothing => true and return
+      render :partial => 'friend', :locals => { friend: @friend } and return
     }
   end
 end

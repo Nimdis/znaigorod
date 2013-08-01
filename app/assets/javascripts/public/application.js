@@ -75,5 +75,6 @@
  * = require ./my_affiche
  * = require ./select_tags
  * = require ./messages
+ * = require ./friends
  * = require ./main
  */

@@ -1,0 +1,5 @@
+<% if current_user.account.friends_with?(@account) %>
+  <%= link_to t('unfollow'), account_change_friendship_path(@account), method: :put, remote: true %>
+<% else %>
+  <%= link_to t('follow'), account_change_friendship_path(@account), method: :put, remote: true %>
+<% end %>

@@ -11,10 +11,8 @@
 
   <h3><%= @account %></h3>
 
-  <div class="actions">
-    <% if current_user.account != @account %>
-      <%= link_to current_user.account.friends_with?(@account) ? t('unfollow') : t('follow'), account_change_friendship_path(@account), method: :put, remote: true %>
-    <% end %>
+  <div class="actions change_friendship">
+    <%= render 'friends/friend' if current_user.account != @account %>
   </div>
 
   <div class="friends">
