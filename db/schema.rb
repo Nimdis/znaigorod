@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730045201) do
+ActiveRecord::Schema.define(:version => 20130801032804) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -436,6 +436,16 @@ ActiveRecord::Schema.define(:version => 20130730045201) do
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true
   add_index "organizations", ["user_id"], :name => "index_organizations_on_user_id"
+
+  create_table "page_visits", :force => true do |t|
+    t.text     "session"
+    t.integer  "page_visitable_id"
+    t.string   "page_visitable_type"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "page_visits", ["page_visitable_id"], :name => "index_page_visits_on_page_visitable_id"
 
   create_table "paperclip_attachments", :force => true do |t|
     t.integer  "attacheable_id"

@@ -30,6 +30,7 @@ class Afisha < ActiveRecord::Base
   has_many :versions, :as => :versionable, :dependent => :destroy
   has_many :visits, :as => :visitable, :dependent => :destroy
   has_many :votes, :as => :voteable, :dependent => :destroy
+  has_many :page_visits, :as => :page_visitable, :dependent => :destroy
 
   has_one :affiche_schedule, :dependent => :destroy
 
@@ -215,6 +216,10 @@ class Afisha < ActiveRecord::Base
 
     time :last_showing_time,  :trie => true
     date :created_at
+  end
+
+  def create_page_visit(session)
+    self.page_visits.find_or_create_by_session(session: session)
   end
 
   def update_rating
