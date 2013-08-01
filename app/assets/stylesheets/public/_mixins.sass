@@ -18,11 +18,18 @@
 =button-style
   color: #fff
   background-color: #ff7f1a
-  +background(linear-gradient(top, #ff9933, #f60))
+  +background(linear-gradient(top, #f93, #f60))
   border: 1px solid #f60
   padding: 1px 8px 2px
   &:hover
+    +text-shadow(#f60 1px 1px 1px)
+    text-decoration: none
     background: none
+    background-color: #f93
+  &:active
+    background-color: #ff7f1a
+    +background(linear-gradient(top, #f60, #f93))
+    padding: 2px 8px 1px
 
 /* toggable buttons for filters */
 
@@ -38,6 +45,8 @@
     &:hover
       color: #f60
       text-decoration: none
+    &:active
+      padding: 2px 8px 1px
   &.selected a
     color: #fff
     line-height: 16px
