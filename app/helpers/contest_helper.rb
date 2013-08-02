@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module ContestHelper
 
   def work_image_tag work, max_width = 965

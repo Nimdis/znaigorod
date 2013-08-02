@@ -7,9 +7,8 @@
 
 <div class='afisha_list'>
   <%= render :partial => 'advertisment' if DateTime.now <= DateTime.new(2013, 6, 23, 22, 00, 00, '+7') %>
-
   <% if @presenter.collection.any? %>
-    <ul class='items_list <%= @presenter.view %>'>
+    <ul class='<%= @presenter.view %>'>
       <%= render :partial => @presenter.partial %>
     </ul>
   <% else %>

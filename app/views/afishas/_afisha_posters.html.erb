@@ -1,5 +1,5 @@
 <% @presenter.decorated_collection.each do |afisha| %>
-  <li class="<%= cycle('first', 'second', 'third', 'fourth', 'fifth', 'sixth') %>">
+  <li>
     <%= render partial: 'afishas/afisha_poster', locals: { afisha: afisha } %>
   </li>
 <% end %>

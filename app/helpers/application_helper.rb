@@ -26,17 +26,6 @@ module ApplicationHelper
     end
   end
 
-  def resized_image_url(url, width, height, crop, orientation = '')
-    image_crop = crop ? '!' : ''
-
-    if url.match(/\d+\/region\/\d+/)
-      url
-    else
-      image_url, image_id, image_width, image_height, image_crop, image_filename = url.match(%r{(.*)/files/(\d+)/(?:(\d+)-(\d+)(\!)?/)?(.*)})[1..-1]
-      "#{image_url}/files/#{image_id}/#{width}-#{height}#{image_crop}#{orientation}/#{image_filename}"
-    end
-  end
-
   def price_for(showing)
     return 'бесплатно' if showing.price_min.zero? && showing.price_max.zero?
     return number_to_currency(showing.price_min, :precision => 0) if showing.price_max.zero?
