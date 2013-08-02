@@ -8,7 +8,7 @@
     <% end %>
     <%= afisha.poster_with_link(178, 240) %>
     <%= content_tag(:div, 'Премьера недели', class: :ribbon) if afisha.premiere? %>
-    <%= link_to afisha_show_path(afisha), class: :details do %>
+    <%= link_to afisha_show_path(afisha, anchor: :by_ticket), class: :details do %>
       <% if afisha.has_tickets_for_sale? %>
         <span class='for_sale'>Купить билет</span>
       <% end %>
@@ -20,11 +20,10 @@
       <span class='second_line'>
         <span class='likes'>123</span>
         <span class='visits'>515</span>
-        <span class='minimal_age'>12+</span>
+        <%= content_tag :span, "#{afisha.age_min.to_i}+", class: :minimal_age if afisha.age_min.present? %>
       </span>
     <% end %>
   </div>
   <div class='place'><%= afisha.afisha_place(23, nil) %></div>
   <div class='human_when'><%= afisha.human_when ? afisha.human_when : "&nbsp;".html_safe %></div>
-  <%#= content_tag :div, "#{afisha.age_min.to_i}+", class: :age if afisha.age_min.present? %>
 </div>
