@@ -12,7 +12,7 @@ class Afisha < ActiveRecord::Base
                   :images_attributes, :attachments_attributes,
                   :distribution_starts_on, :distribution_ends_on,
                   :original_title, :trailer_code, :vk_aid, :yandex_fotki_url, :constant,
-                  :age_min, :age_max, :state_event, :state, :user_id, :kind
+                  :age_min, :age_max, :state_event, :state, :user_id, :kind, :vk_event_url
 
   belongs_to :user
 
@@ -52,6 +52,7 @@ class Afisha < ActiveRecord::Base
   scope :latest,           ->(count) { limit(count) }
   scope :with_images,      -> { where('image_url IS NOT NULL') }
   scope :with_showings,    -> { includes(:showings).where('showings.starts_at > :date OR showings.ends_at > :date', { :date => Date.today }) }
+  scope :with_event_url,   -> { where('vk_event_url IS NOT NULL') }
 
   default_value_for :yandex_metrika_page_views, 0
   default_value_for :vkontakte_likes,           0
@@ -218,6 +219,10 @@ class Afisha < ActiveRecord::Base
 
     time :last_showing_time,  :trie => true
     date :created_at
+  end
+
+  def get_vk_event_id
+    self.vk_event_url.split('/').last.gsub(/event/, '')
   end
 
   def create_page_visit(session)

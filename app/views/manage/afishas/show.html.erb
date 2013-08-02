@@ -130,6 +130,15 @@
 </div>
 
 <div>
+  <span class="label">Страничка в ВК:</span>
+  <% if resource.vk_event_url? %>
+    <span class="value"><%= link_to resource.vk_event_url %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
+
+<div>
   <span class="label">Рейтинг:</span>
   <span class="value">
     <%= resource.total_rating.round(2) %>
