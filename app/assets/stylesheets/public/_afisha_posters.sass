@@ -5,26 +5,31 @@
       float: left
       width: percentage(1/7)
       margin-bottom: 20px
+
       .item
         width: 178px
         border: 1px solid #ccc
         margin: 0 auto
+
         .title
           text-align: center
           margin: 3px 0
+
         .image
           height: 240px
           position: relative
+
           .has_items_for_sale
             width: 190px
             position: absolute
             top: 0
             left: -6px
             color: #fff
-            +box-shadow(#0065cd 0 6px 4px -4px)
             text-align: center
             background-color: #009bdb
-            padding: 2px 0 3px
+            padding: 3px 0
+            z-index: 1
+
             &:before
               content: ''
               width: 0
@@ -45,6 +50,7 @@
               border-width: 5px 3px
               border-style: solid
               border-color: #0065cd transparent transparent #0065cd
+
           .ribbon
             position: absolute
             left: 0
@@ -52,6 +58,69 @@
             color: #fff
             background-color: #f60
             padding: 2px 8px 3px
+
+          .details
+            display: none
+            position: absolute
+            top: 0
+            left: 0
+            color: #999
+            width: 178px
+            height: 240px
+            background-color: rgba(255, 255, 255, 0.85)
+            &:hover
+              text-decoration: none
+
+            .for_sale
+              +button-style
+              display: block
+              position: absolute
+              top: 50px
+              left: 29px
+              font-size: 12px
+              padding: 2px 15.5px 3px
+              &:active
+                padding: 3px 15.5px 2px
+
+            .first_line
+              bottom: 35px
+
+            .second_line
+              bottom: 10px
+
+            .first_line,
+            .second_line
+              display: block
+              width: 100%
+              position: absolute
+              left: 0
+              span
+                display: block
+                float: left
+                width: 34px
+                padding-left: 25px
+                background: transparent image_url('public/afisha_details_sprite.png') no-repeat 10px 3px
+
+                &.to_go
+                  background-position: 12px 3px
+                &.wait_invite
+                  background-position: 4px -17px
+                &.comments
+                  background-position: 5px -36px
+                &.likes
+                  background-position: 12px -57px
+                &.visits
+                  background-position: 6px -77px
+                &.minimal_age
+                  background: none
+                  padding-left: 18px
+
+          &:hover
+            .ribbon
+              display: none
+            .details
+              display: block
+
         .place
           text-align: center
           margin: 3px 0 0 0
