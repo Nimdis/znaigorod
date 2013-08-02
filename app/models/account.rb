@@ -9,7 +9,7 @@ class Account < ActiveRecord::Base
   has_many :votes,           through: :users, order: 'votes.created_at DESC'
   has_many :visits,          through: :users, order: 'visits.created_at DESC'
   has_many :payments,        through: :users
-  has_many :events,          through: :users, order: 'events.created_at DESC'
+  has_many :events,          through: :users, order: 'afisha.created_at DESC'
 
   has_many :friends
   has_many :messages,        order: 'messages.created_at DESC'
