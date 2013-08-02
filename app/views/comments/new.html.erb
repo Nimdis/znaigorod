@@ -6,7 +6,7 @@
   <% if current_user %>
     <%= image_tag current_user.avatar, :class => 'avatar', :title => current_user.name if current_user.avatar.present? %>
     <% if current_user.profile %>
-      <%= link_to current_user.name, current_user.profile, :target => '_blank', :class => 'profile_link' %>
+      <%= link_to current_user.name, current_user.account, :target => '_blank', :class => 'profile_link' %>
     <% else %>
       <span class='profile_link'><%= current_user.name %></span>
     <% end %>

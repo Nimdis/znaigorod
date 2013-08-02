@@ -5,7 +5,7 @@
     </div>
     <div class="user_info">
       <% if  comment.user_profile %>
-        <%= link_to comment.name, comment.user_profile, :target => '_blank', :class => 'profile_link' %>,
+        <%= link_to comment.name, comment.user.account, :target => '_blank', :class => 'profile_link' %>,
       <% else %>
         <span class='profile_link'><%= comment.name %></span>,
       <% end %>
