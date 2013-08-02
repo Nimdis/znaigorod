@@ -104,66 +104,61 @@ ru:
 
   price_kind:
     visiting:
-      one:   "Одно посещение"
+      one:   "%{count} посещение"
       few:   "%{count} посещения"
       many:  "%{count} посещений"
       other: "%{count} посещений"
 
     lesson:
-      one:   "Одно занятие"
+      one:   "%{count} занятие"
       few:   "%{count} занятия"
       many:  "%{count} занятий"
       other: "%{count} занятий"
 
     washing:
-      one:   "Одна мойка"
+      one:   "%{count} мойка"
       few:   "%{count} мойки"
       many:  "%{count} моек"
       other: "%{count} моек"
 
   service_min_price:
     visiting: "от %{count} руб. за посещение"
-    lesson: "от %{count} руб. за занятие"
-    washing: "от %{count} руб."
+    lesson:   "от %{count} руб. за занятие"
+    washing:  "от %{count} руб."
 
   cooking_time_kind:
-    one: "Время приготовления: минута."
-    few: "Время приготовления: %{count} минуты."
-    many: "Время приготовления: %{count} минут."
+    one:   "Время приготовления: %{count} минута."
+    few:   "Время приготовления: %{count} минуты."
+    many:  "Время приготовления: %{count} минут."
     other: "Время приготовления: %{count} минут."
 
   account_comments:
-    one: "один комментарий"
-    few: "%{count} комментария"
-    many: "%{count} комментариев"
+    one:   "%{count} комментарий"
+    few:   "%{count} комментария"
+    many:  "%{count} комментариев"
     other: "%{count} комментария"
-    zero: ""
 
   account_events:
-    one: "одно мероприятие"
-    few: "%{count} мероприятия"
-    many: "%{count} мероприятий"
-    other: "%{count} мероприятие"
-    zero: ""
+    one:   "%{count} мероприятие"
+    few:   "%{count} мероприятия"
+    many:  "%{count} мероприятий"
+    other: "%{count} мероприятия"
 
   account_friends:
-    one: "Один человек"
-    few: "%{count} человека"
-    many: "%{count} человек"
+    one:   "%{count} человек"
+    few:   "%{count} человека"
+    many:  "%{count} человек"
     other: "%{count} человек"
-    zero: "Еще нет друзей"
 
   account_votes:
-    one: "одно место"
-    few: "%{count} места"
-    many: "%{count} мест"
-    other: "%{count} мест"
-    zero: ""
+    one:   "%{count} место"
+    few:   "%{count} места"
+    many:  "%{count} мест"
+    other: "%{count} места"
 
   account_visits:
-    one: "одно мероприятие"
-    few: "%{count} мероприятия"
-    many: "%{count} мероприятий"
-    other: "%{count} мероприятий"
-    zero: ""
+    one:   "%{count} мероприятие"
+    few:   "%{count} мероприятия"
+    many:  "%{count} мероприятий"
+    other: "%{count} мероприятия"
 
