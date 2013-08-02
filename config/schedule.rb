@@ -35,3 +35,7 @@ end
 every 5.minutes do
   rake 'refresh_copies'
 end
+
+every 2.hours do
+  rake 'afisha:event_users'
+end
