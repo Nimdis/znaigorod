@@ -38,14 +38,7 @@ $ ->
   init_post_photos() if $('.post a[rel="colorbox"]').length
   init_schedule_toggle() if $('.organization_info .more_schedule').length
   init_photogallery() if $('.content_wrapper .was_in_city_photos li').length
-  init_loading_items() if $('.content_wrapper .affiches_list ul.items_list li').length
-  init_loading_items() if $('.content_wrapper .affiches_list ul.was_in_city_photos li').length
-  init_loading_items() if $('.content_wrapper .organizations_list ul.items_list li').length
-  init_loading_items() if $('.content_wrapper .search_results ul.items_list li').length
-  init_loading_items() if $('.content_wrapper ul.sauna_list li').length
-  init_loading_items() if $('.content_wrapper .tickets_list li').length
-  init_loading_items() if $('.content_wrapper .coupons_list li').length
-  init_loading_items() if $('.content_wrapper .users_list li').length
+  init_pagination() if $('nav.pagination').length
   init_affiche_list_settings() if $('.content_wrapper .affiches_list .list_settings').length
   init_sms_claims() if $('.sms_claims li').length
   init_swfkrpano() if $('#krpano').length

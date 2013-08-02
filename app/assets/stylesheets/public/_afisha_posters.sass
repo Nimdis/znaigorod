@@ -4,8 +4,57 @@
     li
       float: left
       width: percentage(1/7)
-      margin-bottom: 15px
+      margin-bottom: 20px
       .item
         width: 178px
         border: 1px solid #ccc
         margin: 0 auto
+        .title
+          text-align: center
+          margin: 3px 0
+        .image
+          height: 240px
+          position: relative
+          .has_items_for_sale
+            width: 190px
+            position: absolute
+            top: 0
+            left: -6px
+            color: #fff
+            +box-shadow(#0065cd 0 6px 4px -4px)
+            text-align: center
+            background-color: #009bdb
+            padding: 2px 0 3px
+            &:before
+              content: ''
+              width: 0
+              height: 0
+              position: absolute
+              left: 0
+              bottom: -10px
+              border-width: 5px 3px
+              border-style: solid
+              border-color: #0065cd #0065cd transparent transparent
+            &:after
+              content: ''
+              width: 0
+              height: 0
+              position: absolute
+              right: 0
+              bottom: -10px
+              border-width: 5px 3px
+              border-style: solid
+              border-color: #0065cd transparent transparent #0065cd
+          .ribbon
+            position: absolute
+            left: 0
+            bottom: 0
+            color: #fff
+            background-color: #f60
+            padding: 2px 8px 3px
+        .place
+          text-align: center
+          margin: 3px 0 0 0
+        .human_when
+          text-align: center
+          margin: 2px 0 3px 0

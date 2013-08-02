@@ -61,7 +61,7 @@
  * = require ./included_photos
  * = require ./post_photos
  * = require ./schedule_toggle
- * = require ./loading_items
+ * = require ./pagination
  * = require ./list_settings
  * = require ./swfkrpano
  * = require ./move_to_top

@@ -24,7 +24,7 @@ class AfishaPresenter
     self.categories ||= []
 
     @page     ||= 1
-    @per_page   = 12
+    @per_page   = 21
     @view       = 'posters'
 
     initialize_filters

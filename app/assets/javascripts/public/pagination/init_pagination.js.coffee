@@ -1,11 +1,10 @@
-@init_loading_items = () ->
+@init_pagination = () ->
   $('body nav.pagination').css
     'height': '0'
     'visibility': 'hidden'
   list_url = window.location.pathname
   list = $(
-    '.content_wrapper .affiches_list ul.items_list,' +
-    '.content_wrapper .affiches_list ul.was_in_city_photos,' +
+    '.content_wrapper .afisha_list ul,' +
     '.content_wrapper .organizations_list ul.items_list,' +
     '.content_wrapper ul.sauna_list,' +
     '.content_wrapper .search_results ul.items_list,' +
@@ -20,10 +19,11 @@
   else
     last_item = first_item
   last_item_top = last_item.position().top
+  last_item_offset = 200
   page = 1
   busy = false
   $(window).scroll ->
-    if $(this).scrollTop() + $(this).height() >= last_item_top && !busy
+    if ($(this).scrollTop() + $(this).height()) >= (last_item_top - last_item_offset) && !busy
       busy = true
       search_params = ""
       search_params = window.location.search.replace(/^\?/, "&").replace(/&page=\d+/, "")

@@ -1,15 +1,15 @@
 <div class='item'>
-  <div class='title'><%= afisha.truncated_title_link(23) %></div>
-  <div class='image'><%= afisha.poster_with_link(178, 240) %></div>
-  <div class='place'><%= afisha.afisha_place(22, nil) %></div>
-  <div class='closest'><%#= afisha.when_with_price %></div>
+  <div class='title'><%= afisha.truncated_title_link(25, separator: '') %></div>
+  <div class='image'>
+    <% if afisha.has_tickets_for_sale? %>
+      <div class='has_items_for_sale' title='У нас вы можете купить билеты на мероприятие со скидкой!'>
+        Скидка на билет <%= afisha.max_tickets_discount %>%
+      </div>
+    <% end %>
+    <%= afisha.poster_with_link(178, 240) %>
+    <%= content_tag(:div, 'Премьера недели', class: :ribbon) if afisha.premiere? %>
+  </div>
+  <div class='place'><%= afisha.afisha_place(23, nil) %></div>
+  <div class='human_when'><%= afisha.human_when ? afisha.human_when : "&nbsp;".html_safe %></div>
   <%#= content_tag :div, "#{afisha.age_min.to_i}+", class: :age if afisha.age_min.present? %>
-  <%#= afisha.has_ribbon %>
-  <!--
-  <% if afisha.has_tickets_for_sale? %>
-    <div class='has_items_for_sale' title='У нас вы можете купить билеты на мероприятие со скидкой!'>
-      -<%= afisha.max_tickets_discount %>%
-    </div>
-  <% end %>
-  -->
 </div>

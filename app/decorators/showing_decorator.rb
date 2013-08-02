@@ -28,7 +28,7 @@ class ShowingDecorator < ApplicationDecorator
       else
         return "#{starts_at.day} &ndash; #{e_B(ends_at)}".html_safe if in_one_month? && starts_at_only_date? && ends_at_only_date?
         return "#{e_B(starts_at)} &ndash; #{e_B(ends_at)}".html_safe if starts_at_only_date? && ends_at_only_date?
-        return "#{e_B(starts_at)} #{from_time} &ndash; #{e_B(ends_at)} #{to_time}".html_safe
+        return "#{e_m(starts_at)}, #{from_time} &ndash; #{e_m(ends_at)}, #{to_time}".html_safe
       end
     end
   end
@@ -93,6 +93,10 @@ class ShowingDecorator < ApplicationDecorator
 
   def e_B(date)
     I18n.l(date, :format => '%e %B').squish
+  end
+
+  def e_m(date)
+    I18n.l(date, :format => '%e.%m').squish
   end
 
   def H_M(date)

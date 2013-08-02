@@ -66,6 +66,49 @@ class AfishaDecorator < ApplicationDecorator
     end
   end
 
+  def afisha_distribution?
+    afisha.distribution_starts_on? || afisha.distribution_ends_on? || afisha.constant?
+  end
+
+  def afisha_actual?
+    afisha.showings.actual.count > 0
+  end
+
+  def human_distribution
+    if distribution_starts_on? && distribution_ends_on?
+      return "С #{distribution_starts_on.day} по #{I18n.l(distribution_ends_on, :format => '%e %B')}".squish if  distribution_starts_on.month == distribution_ends_on.month
+      return "С #{I18n.l(distribution_starts_on, :format => '%e %B')} по #{I18n.l(distribution_ends_on, :format => '%e %B')}".squish
+    elsif distribution_starts_on?
+      return "С #{I18n.l(distribution_starts_on, :format => '%e %B')}".squish
+    elsif distribution_ends_on?
+      return "До #{I18n.l(distribution_ends_on, :format => '%e %B')}".squish
+    end
+  end
+
+  def human_when
+    nealest_showing = showings.any? ? showings.first : ShowingDecorator.new(afisha.showings.last)
+    return "Время проведения неизвестно" unless nealest_showing.showing
+    if afisha_actual?
+      if afisha.constant?
+        afisha.exhibition? ? 'Постоянная экспозиция' : 'Постоянное мероприятие'
+      end
+      return human_distribution if afisha_distribution?
+    else
+      case afisha.kind
+      when 'movie'
+        if afisha_distribution?
+          return human_distribution if afisha.distribution_starts_on >= Date.today
+          return "Было в прокате до #{nealest_showing.e_B(nealest_showing.starts_at)}"
+        else
+          return "Последний показ был #{nealest_showing.e_B(nealest_showing.starts_at)}"
+        end
+      when 'exhibition'
+        return "Выставка закончилась #{nealest_showing.e_B(nealest_showing.starts_at)}"
+      end
+    end
+    nealest_showing.actual? ? nealest_showing.human_when : "Было #{nealest_showing.e_B(nealest_showing.starts_at)}"
+  end
+
   #def show_url
     #h.afisha_show_path(afisha)
   #end
@@ -82,9 +125,6 @@ class AfishaDecorator < ApplicationDecorator
     #truncated_link(23, nil, nil)
   #end
 
-  #def has_ribbon
-    #h.content_tag(:div, h.content_tag(:div, "Премьера недели", class: :ribbon), class: :ribbon_wrapper) if afisha.premiere?
-  #end
 
   #def geo_present?
     #places.any? && !places.first.latitude.blank? && !places.first.longitude.blank?
@@ -184,9 +224,9 @@ class AfishaDecorator < ApplicationDecorator
       #place_title = place_title.truncate(max_lenght, :separator => separator)
       #max_lenght -= place_title.size
       #if place.organization
-        #place_output += h.link_to place_title.text_gilensize.hyphenate, OrganizationDecorator.decorate(place.organization).organization_url, :title => place_link_title.text_gilensize
+        #place_output += h.link_to place_title.text_gilensize, OrganizationDecorator.decorate(place.organization).organization_url, :title => place_link_title.text_gilensize
       #else
-        #place_output += place_link_title.blank? ? place_title.text_gilensize.hyphenate : h.content_tag(:abbr, place_title.text_gilensize.hyphenate, :title => place_link_title.text_gilensize)
+        #place_output += place_link_title.blank? ? place_title.text_gilensize : h.content_tag(:abbr, place_title.text_gilensize, :title => place_link_title.text_gilensize)
       #end
       #break if max_lenght < 3
       #place_output += ", " if index < places.size - 1
@@ -203,7 +243,7 @@ class AfishaDecorator < ApplicationDecorator
   #end
 
   #def truncated_description
-    #description.to_s.excerpt.hyphenate
+    #description.to_s.excerpt
   #end
 
   #def html_attachments
@@ -272,14 +312,6 @@ class AfishaDecorator < ApplicationDecorator
     #poster_with_link afisha, 150, 202
   #end
 
-  #def afisha_distribution?
-    #afisha.distribution_starts_on? || afisha.distribution_ends_on? || afisha.constant?
-  #end
-
-  #def afisha_actual?
-    #afisha.showings.actual.count > 0
-  #end
-
   #def viewable_showings?
     #return false if (afisha.other? || afisha.sportsevent?) && afisha_distribution?
     #afisha_actual? && other_showings.any?
@@ -293,30 +325,6 @@ class AfishaDecorator < ApplicationDecorator
     #afisha.affiche_schedule && afisha_distribution? && (afisha.exhibition? || afisha.masterclass?)
   #end
 
-  #def human_when
-    #nealest_showing = showings.any? ? showings.first : ShowingDecorator.new(afisha.showings.last)
-    #return "Время проведения неизвестно" unless nealest_showing.showing
-    #if afisha_actual?
-      #if afisha.constant?
-        #afisha.exhibition? ? 'Постоянная экспозиция' : 'Постоянное мероприятие'
-      #end
-      #return human_distribution if afisha_distribution?
-    #else
-      #case afisha.kind
-      #when 'movie'
-        #if afisha_distribution?
-          #return human_distribution if afisha.distribution_starts_on >= Date.today
-          #return "Было в прокате до #{nealest_showing.e_B(nealest_showing.starts_at)}"
-        #else
-          #return "Последний показ был #{nealest_showing.e_B(nealest_showing.starts_at)}"
-        #end
-      #when 'exhibition'
-        #return "Выставка закончилась #{nealest_showing.e_B(nealest_showing.starts_at)}"
-      #end
-    #end
-    #nealest_showing.actual? ? nealest_showing.human_when : "Было #{nealest_showing.e_B(nealest_showing.starts_at)}"
-  #end
-
   #def human_price
     #humanize_price(showings.map(&:price_min).uniq.compact.min, showings.map(&:price_max).uniq.compact.max)
   #end
@@ -326,17 +334,6 @@ class AfishaDecorator < ApplicationDecorator
       #h.content_tag :p, h.content_tag(:span, human_when, :class => :when ) + ", " + h.content_tag(:span, human_price, :class => :price).html_safe
     #else
       #h.content_tag :p, h.content_tag(:span, human_when, :class => :when )
-    #end
-  #end
-
-  #def human_distribution
-    #if distribution_starts_on? && distribution_ends_on?
-      #return "С #{distribution_starts_on.day} по #{I18n.l(distribution_ends_on, :format => '%e %B')}".squish if  distribution_starts_on.month == distribution_ends_on.month
-      #return "С #{I18n.l(distribution_starts_on, :format => '%e %B')} по #{I18n.l(distribution_ends_on, :format => '%e %B')}".squish
-    #elsif distribution_starts_on?
-      #return "С #{I18n.l(distribution_starts_on, :format => '%e %B')}".squish
-    #elsif distribution_ends_on?
-      #return "До #{I18n.l(distribution_ends_on, :format => '%e %B')}".squish
     #end
   #end
 
