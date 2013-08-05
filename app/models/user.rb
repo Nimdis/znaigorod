@@ -115,9 +115,7 @@ class User < ActiveRecord::Base
       Settings['app.odnoklassniki_avatar_url']
     when 'twitter'
       link = auth_raw_info.try(:[], :info).try(:[], :image)
-      if link
-        link = link.gsub(/_\w+\.jpeg\z/,'')+'.jpeg'
-      end
+      link.gsub(/_normal/,'') if link
     else
       Settings['app.default_avatar_url']
     end
