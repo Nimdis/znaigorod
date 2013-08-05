@@ -1,18 +1,16 @@
-<%= content_tag :div, link_to(hit.image_item, hit.show_url), class: "image" if hit.image? %>
+<div class="image">
+  <%= link_to image_tag(hit.image), hit.show_url %>
+</div>
 
 <div class="title">
-  <%= hit.title_link %>
-  <% if hit.result_decorator.class.name == 'AfficheDecorator' && hit.result_decorator.model.original_title.present? %>
-    (<%= hit.result_decorator.model.original_title %>)
-  <% end %>
+  <%= link_to hit.title, hit.show_url %>
+  <%= "(#{hit.result_decorator.model.original_title})" if hit.afisha? && hit.result_decorator.model.original_title.present? %>
 </div>
-<%= hit.snipped_links %>
-<%= hit.closest %>
+
 <%= hit.places %>
 
-  <div class="rating" style='margin: 5px 10px;'>
-    <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => hit.result_decorator.model } %>
-  </div>
+<%#= hit.snipped_links %>
+<%#= hit.closest %>
 
 <div class='excerpt'><%= hit.excerpt %></div>
 <% HitDecorator::ADDITIONAL_FIELDS.each do |field| %>
@@ -24,12 +22,22 @@
   <% end %>
 <% end %>
 
+<% if hit.afisha?  %>
+  <span class='to_go'><%= hit.result_decorator.visits.visited.count %></span>
+  <span class='wait_invite'>3</span>
+  <span class='comments'><%= hit.result_decorator.comments.count %></span>
+  <span class='likes'><%= hit.result_decorator.votes.liked.count %></span>
+  <span class='visits'><%= hit.result_decorator.page_visits.count %></span>
+<% end %>
+
 <%= content_tag :ul, hit.kind_links, class: "kind" unless hit.kind_links.blank? %>
 
 <% if Rails.env.development? %>
+<!--
   <div class='debug'>
     <%= hit.score %> |
     <%= hit.result.popularity if hit.result.respond_to? :popularity %> |
     <%= hit.result.rating if hit.result.respond_to? :rating %>
   </div>
+-->
 <% end %>

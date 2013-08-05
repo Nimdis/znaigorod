@@ -14,33 +14,28 @@ class HitDecorator < ApplicationDecorator
     end
   end
 
-  def title_link
-    result_decorator.title_link
-  end
-
-  def show_url
-    result_decorator.show_url
-  end
-
-  def image
-    result.poster_url.presence
-  end
-
-  def image?
-    result.poster_url?
+  def afisha?
+    result.is_a?(Afisha)
   end
 
   def organization?
     result.is_a?(Organization)
   end
 
-  def image_item
-    height = 108
-    height = 80 if organization?
-    return h.image_tag_for(image, 80, height) if image
-    ""
+  def show_url
+    afisha? ? h.afisha_show_path(result_decorator) : result_decorator
   end
 
+  def image
+    if afisha?
+      resized_image_url(result_decorator.poster_url, 88, 120)
+    else
+      resized_image_url(result_decorator.logotype_url, 88, 88)
+    end
+  end
+
+  #
+  #
   # FIXME: грязный хак
   def fake_kind
       kind = suborganization.class.name.underscore.gsub(/_decorator/, '')
@@ -121,7 +116,6 @@ class HitDecorator < ApplicationDecorator
 
   def places
     if organization?
-      #address = highlighted('address')
       link = result_decorator.address_link
       h.content_tag(:div, h.content_tag(:span, link, class: :address), class: :places)
     else
