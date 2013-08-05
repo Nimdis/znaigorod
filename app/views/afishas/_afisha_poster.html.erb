@@ -13,13 +13,13 @@
     <% end %>
     <%= link_to afisha_show_path(afisha), class: :details do %>
       <span class='first_line'>
-        <span class='to_go'>15</span>
+        <span class='to_go'><%= afisha.visits.visited.count %></span>
         <span class='wait_invite'>3</span>
-        <span class='comments'>5</span>
+        <span class='comments'><%= afisha.comments.count %></span>
       </span>
       <span class='second_line'>
-        <span class='likes'>123</span>
-        <span class='visits'>515</span>
+        <span class='likes'><%= afisha.votes.liked.count %></span>
+        <span class='visits'><%= afisha.page_visits.count %></span>
         <%= content_tag :span, "#{afisha.age_min.to_i}+", class: :minimal_age if afisha.age_min.present? %>
       </span>
     <% end %>
