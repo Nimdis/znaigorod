@@ -31,6 +31,10 @@ class Post < ActiveRecord::Base
   def similar_posts
     HasSearcher.searcher(:similar_posts).more_like_this(self).limit(3).results
   end
+
+  def poster_url
+    post_images.first.attachment_url
+  end
 end
 
 # == Schema Information

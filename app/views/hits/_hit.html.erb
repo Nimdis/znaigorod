@@ -7,12 +7,12 @@
   <%= "(#{hit.result_decorator.model.original_title})" if hit.afisha? && hit.result_decorator.model.original_title.present? %>
 </div>
 
-<%= hit.places %>
+<%= hit.places if hit.afisha? & hit.organization? %>
 
 <%#= hit.snipped_links %>
 <%#= hit.closest %>
 
-<div class='excerpt'><%= hit.excerpt %></div>
+<div class='excerpt'><%#= hit.excerpt %></div>
 <% HitDecorator::ADDITIONAL_FIELDS.each do |field| %>
   <% if (hit.highlights(field) + hit.highlights("#{field}_ru")).any? %>
     <ul class="tags">

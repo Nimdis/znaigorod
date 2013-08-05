@@ -22,15 +22,27 @@ class HitDecorator < ApplicationDecorator
     result.is_a?(Organization)
   end
 
+  def post?
+    result.is_a?(Post)
+  end
+
   def show_url
-    afisha? ? h.afisha_show_path(result_decorator) : result_decorator
+    if afisha?
+      h.afisha_show_path(result_decorator)
+    elsif organization?
+      result_decorator
+    else
+      h.post_path(result)
+    end
   end
 
   def image
     if afisha?
       resized_image_url(result_decorator.poster_url, 88, 120)
-    else
+    elsif organization?
       resized_image_url(result_decorator.logotype_url, 88, 88)
+    elsif post?
+      resized_image_url(result.poster_url, 88, 120)
     end
   end
 
@@ -61,7 +73,7 @@ class HitDecorator < ApplicationDecorator
         options = pluralized_kind == 'saunas' ? {} : { categories: [category] }
         kind << h.content_tag(:li, h.link_to(category.mb_chars.capitalize, h.send("#{pluralized_kind}_path", options)))
       end
-    else
+    elsif afisha?
       kind << h.content_tag(:li, h.link_to(self.human_kind, h.affiches_path('categories[]' => self.kind)))
     end
     kind.html_safe

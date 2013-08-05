@@ -107,13 +107,13 @@ HasSearcher.create_searcher :manage_organization do
 end
 
 HasSearcher.create_searcher :global do
-  models :organization, :afisha
+  models :organization, :afisha, :post
   keywords :q do
     highlight :title_translit
     highlight :description_ru
     highlight :address_ru
     HitDecorator::ADDITIONAL_FIELDS.each do |field|
-      if (Organization.instance_methods + Afisha.instance_methods).include? :"#{field}_ru"
+      if (Organization.instance_methods + Afisha.instance_methods + Post.instance_methods).include? :"#{field}_ru"
         highlight "#{field}_ru"
       else
         highlight field
