@@ -5,7 +5,7 @@
 
   <div class="logo">
     <% if resource.poster_url? %>
-      <%= image_tag(resized_image_url(resource.poster_url, 290, 390, true), size: '290x390') %>
+      <%= image_tag(resized_image_url(resource.poster_url, 290, 390), size: '290x390') %>
     <% else %>
       <%= image_tag 'public/stub_poster.png', size: '290x390' %>
     <% end %>

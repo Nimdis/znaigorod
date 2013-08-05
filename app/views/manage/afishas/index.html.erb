@@ -11,7 +11,7 @@
   <% collection.each do |item| %>
     <li>
       <% if item.poster_url? %>
-        <%= image_tag(resized_image_url(item.poster_url, 40, 60, true), size: '40x60') %>
+        <%= image_tag(resized_image_url(item.poster_url, 40, 60), size: '40x60') %>
       <% else %>
         <%= image_tag 'public/stub_poster.png', size: '40x60' %>
       <% end %>

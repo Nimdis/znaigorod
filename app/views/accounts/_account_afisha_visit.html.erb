@@ -1,6 +1,6 @@
 <div class="poster">
   <% if visit.visitable.poster_url? %>
-    <%= image_tag(resized_image_url(visit.visitable.poster_url, 40, 54, true), size: '40x54') %>
+    <%= image_tag(resized_image_url(visit.visitable.poster_url, 40, 54), size: '40x54') %>
   <% else %>
     <%= image_tag 'public/stub_poster.png', size: '40x54' %>
   <% end %>
