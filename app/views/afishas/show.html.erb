@@ -24,10 +24,6 @@
   <meta name='twitter:image' content='<%= resized_image_url(@afisha.poster_url, 120, 120) %>'/>
 <% end %>
 
-<div class='clearfix'>
-
-  <div class='content'>
-
     <div class='affiche'>
       <%= content_tag(:div, link_to(@afisha.kind.map(&:text).join(', '), affiches_path(period: 'all', categories: [@afisha.kind])), class: 'kind') %>
       <div class='head'>
@@ -240,9 +236,6 @@
     </div>
 
     <%= render :partial => 'comments/block', :locals => { :parent_obj => @afisha.model } %>
-  </div>
-
-  <div class='right_side'>
 
     <% if @afisha.geo_present? %>
       <div class='yandex_map'>
@@ -277,6 +270,3 @@
         </ul>
       </div>
     <% end %>
-
-  </div>
-</div>
