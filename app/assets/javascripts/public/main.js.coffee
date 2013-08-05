@@ -18,7 +18,7 @@ $ ->
   init_afisha_filter() if $('.navigation .periods .daily').length
   init_payment() if $('a.payment_link').length
   init_tabs() if $('.content .tabs').length
-  init_poster() if $('.content .image a img, .organization_info .image a img').length
+  init_poster() if $('.content .image a img').length
   init_distribution() if $('.content .distribution').length
   init_galleria() if $('.content .gallery_container').length
   init_coupon_colorbox() if $('.coupon .info .left_part a img').length

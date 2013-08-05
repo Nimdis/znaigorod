@@ -33,7 +33,7 @@
 
 /* toggable buttons for filters */
 
-=toggable-links
+=toggable-links($padding-top: 1px, $padding-bottom: 2px)
   a
     display: block
     color: #000
@@ -41,19 +41,21 @@
     background-color: #e8e8e8
     border: 1px solid #ccc
     +border-radius
-    padding: 1px 8px 2px
+    padding: $padding-top 8px $padding-bottom
     &:hover
       color: #f60
       text-decoration: none
     &:active
-      padding: 2px 8px 1px
+      padding: $padding-bottom 8px $padding-top
   &.selected a
     color: #fff
     line-height: 16px
     background-color: #f60
     border: none
     +box-shadow(rgba(0, 0, 0, 0.3) 1px 1px 2px inset)
-    padding: 2px 8px 3px
+    padding: ($padding-top + 1) 8px ($padding-bottom + 1)
+    &:active
+      padding: ($padding-bottom + 1) 8px ($padding-top + 1)
 
 /* animations */
 

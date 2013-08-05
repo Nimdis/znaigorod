@@ -1,32 +1,34 @@
-  <div class="visits_counter" title='<%= t :like, :count => visitable.visits.count %>'>
-    <% if visitable.visits.count > 6 %>
-      <%= link_to t(:visitors, :count => visitable.visits.visited.count, :scope => visitable.kind.values.first), polymorphic_url([visitable, :visitors]), :remote => true %>
-    <% else %>
-      <span>
-        <%= t(:visitors, :count => visitable.visits.visited.count, :scope => visitable.is_a?(Afisha) ? visitable.kind.values.first : visitable.class.name.underscore) %>
-      </span>
-    <% end %>
+<ul class='user_actions'>
+  <li<%= " class='selected'".html_safe if current_user && current_user.visited?(visitable) %>>
+    <%= link_to t('afisha.join'), polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true %>
+    </li>
+</ul>
 
-    <% if visitable.visits.visited.any? %>
-      <div class="avatars">
-        <% visitable.visits.visited.last(6).map(&:user).each do |user| %>
-          <% if user.profile %>
-            <a href='<%= user.profile %>' target='_blank'><%= image_tag user.avatar, :size => "24x24", :title => user.name %></a>
-          <% else %>
-            <%= image_tag user.avatar, :size => "24x24", :title => user.name %>
-          <% end %>
-        <% end %>
-      </div>
+<div class='visits_counter'>
+  <div class='floatl'>Участники</div>
+  <div class='floatr'>
+    <% if visitable.visits.visited.count.zero? %>
+      <%= t('afisha.visitors', :count => visitable.visits.visited.count) %>
+    <% else %>
+      <%= link_to t('afisha.visitors', :count => visitable.visits.visited.count), polymorphic_url([visitable, :visitors]), :remote => true %>
     <% end %>
   </div>
-
-<div class="user_like">
-  <% if current_user && current_user.visited?(visitable) %>
-    <%= link_to t('leave', :scope => visitable.is_a?(Afisha) ? visitable.kind.values.first : visitable.class.name.underscore), polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true %>
-  <% else %>
-    <%= link_to t('join', :scope => visitable.is_a?(Afisha) ? visitable.kind.values.first : visitable.class.name.underscore), polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true, :class => 'button' %>
-  <% end %>
 </div>
+
+<% if visitable.visits.visited.any? %>
+  <ul class='avatars'>
+    <% visitable.visits.visited.map(&:user).map(&:account).each do |account| %>
+      <li>
+        <div class='avatar'>
+          <%= link_to(image_tag(account.avatar, :width => 35, :title => account, :alt => account), account) %>
+        </div>
+        <div class='details'>
+          <%= link_to(account, account, :class => :name) %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
 <% if @visit && @visit.errors.any? %>
   <div class="cloud_wrapper">
@@ -36,4 +38,3 @@
     </div>
   </div>
 <% end %>
-

@@ -77,90 +77,17 @@
       next: "Следующая &gt;&gt;"
       truncate: "&hellip;"
 
-  movie:
-    join: 'Я смотрел'
-    leave: 'Не смотрел'
+  afisha:
+    join: "Я пойду"
     visitors:
-      one: "%{count} участник"
-      few: "%{count} участника"
-      many: "%{count} участников"
-      zero: "Еще никто не смотрел этот фильм."
-
-  party:
-    join: 'Я пойду'
-    leave: 'Не пойду'
-    visitors:
-      one: "%{count} участник"
-      few: "%{count} участника"
-      many: "%{count} участников"
-      zero: "Еще нет участников, станьте первым."
-
-  concert:
-    join: 'Я пойду'
-    leave: 'Не пойду'
-    visitors:
-      one: "%{count} участник"
-      few: "%{count} участника"
-      many: "%{count} участников"
-      zero: "Еще нет участников, станьте первым."
-
-  competition:
-    join: 'Я пойду'
-    leave: 'Не пойду'
-    visitors:
-      one: "%{count} участник"
-      few: "%{count} участника"
-      many: "%{count} участников"
-      zero: "Еще нет участников, станьте первым."
-
-  spectacle:
-    join: 'Я пойду'
-    leave: 'Не пойду'
-    visitors:
-      one: "%{count} участник"
-      few: "%{count} участника"
-      many: "%{count} участников"
-      zero: "Еще нет участников, станьте первым."
-
-  exhibition:
-    join: 'Я пойду'
-    leave: 'Не пойду'
-    visitors:
-      one: "%{count} участник"
-      few: "%{count} участника"
-      many: "%{count} участников"
-      zero: "Еще нет участников, станьте первым."
-
-  sports_event:
-    join: 'Я пойду'
-    leave: 'Не пойду'
-    visitors:
-      one: "%{count} участник"
-      few: "%{count} участника"
-      many: "%{count} участников"
-      zero: "Еще нет участников, станьте первым."
-
-  master_class:
-    join: 'Я пойду'
-    leave: 'Не пойду'
-    visitors:
-      one: "%{count} участник"
-      few: "%{count} участника"
-      many: "%{count} участников"
-      zero: "Еще нет участников, станьте первым."
-
-  other:
-    join: 'Я пойду'
-    leave: 'Не пойду'
-    visitors:
-      one: "%{count} участник"
-      few: "%{count} участника"
-      many: "%{count} участников"
-      zero: "Еще нет участников, станьте первым."
+      one: "%{count} человек"
+      few: "%{count} человека"
+      many: "%{count} человек"
+      zero: "Еще нет"
 
   organization:
-    join: 'Я здесь был'
-    leave: 'Я здесь не был'
+    join: "Я здесь был"
+    leave: "Я здесь не был"
     visitors:
       one: "%{count} посетитель"
       few: "%{count} посетителя"

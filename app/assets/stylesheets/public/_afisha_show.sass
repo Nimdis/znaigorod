@@ -1,0 +1,51 @@
+.afisha_show
+  +clearfix
+
+  .left
+    float: left
+    width: 208px
+    border: 1px solid #ccc
+
+    .image
+      width: 200px
+      margin: 4px
+
+    .user_actions
+      font-size: 12px
+      border-bottom: 1px solid #ccc
+      padding: 0 5px
+      margin-bottom: 5px
+      li
+        +toggable-links(4px, 5px)
+        width: 114px
+        text-align: center
+        margin: 0 auto 5px
+
+    .visits_counter
+      font-size: 12px
+      +clearfix
+      margin: 5px
+
+    .avatars
+      margin: 0 5px 5px
+      li
+        +clearfix
+        margin-bottom: 5px
+      .avatar
+        float: left
+        +clearfix
+        width: 35px
+        height: 35px
+        +border-radius
+        margin: 0 5px 0 0
+      .details
+        .name
+          font-size: 12px
+
+  .right
+    float: right
+    width: 208px
+    border: 1px solid #ccc
+
+  .center
+    margin: 0 220px
