@@ -115,5 +115,5 @@ Znaigorod::Application.routes.draw do
 
   match "/auth/:provider/callback" => "manage/sessions#create"
 
-  root :to => 'application#main_page'
+  root :to => 'afishas#index'
 end

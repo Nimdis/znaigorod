@@ -1,4 +1,4 @@
-@init_affiche_yandex_map = () ->
+@init_afisha_yandex_map = () ->
 
   ymaps.ready ->
 

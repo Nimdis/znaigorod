@@ -5,6 +5,27 @@
   <link rel='canonical' href='<%= afisha_index_url %>' />
 <% end %>
 
+<div class='afisha_presentation_filters'>
+  <div class='present_by'>
+    <p>Вид:</p>
+    <ul>
+      <li><a href='#'>Постеры</a></li>
+      <li><a href='#'>Список</a></li>
+    </ul>
+  </div>
+  <div class='order_by'>
+    <p>Сортировать по:</p>
+    <ul>
+      <% @presenter.sortings_links.each do |sortings_link| %>
+        <li<%= " class=selected" if sortings_link[:selected] %>>
+          <%= link_to sortings_link[:title],
+            send(sortings_link[:url], sortings_link[:parameters]) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
 <div class='afisha_list'>
   <%= render :partial => 'advertisment' if DateTime.now <= DateTime.new(2013, 6, 23, 22, 00, 00, '+7') %>
   <% if @presenter.collection.any? %>
@@ -17,3 +38,9 @@
 </div>
 
 <%= paginate @presenter.paginated_collection %>
+
+<% unless t("meta.#{@presenter.kind}.introduction", default: '').blank? %>
+  <div class='introduction'>
+    <%= t("meta.#{@presenter.kind}.introduction").as_html %>
+  </div>
+<% end %>

@@ -41,9 +41,9 @@
  * = require ./votes
  * = require ./jscrollpane
  * = require ./main_page
- * = require ./affiches_extend
- * = require ./affiches_filter
- * = require ./affiches_map
+ * = require ./afisha_extend
+ * = require ./afisha_filter
+ * = require ./afisha_map
  * = require ./payment
  * = require ./tabs
  * = require ./poster

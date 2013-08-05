@@ -1,5 +1,5 @@
 <div class='item'>
-  <div class='title'><%= afisha.truncated_title_link(25, separator: '') %></div>
+  <div class='title'><%= afisha.truncated_title_link(24, separator: '') %></div>
   <div class='image'>
     <% if afisha.has_tickets_for_sale? %>
       <div class='has_items_for_sale' title='У нас вы можете купить билеты на мероприятие со скидкой!'>
@@ -8,10 +8,10 @@
     <% end %>
     <%= afisha.poster_with_link(178, 240) %>
     <%= content_tag(:div, 'Премьера недели', class: :ribbon) if afisha.premiere? %>
-    <%= link_to afisha_show_path(afisha, anchor: :by_ticket), class: :details do %>
-      <% if afisha.has_tickets_for_sale? %>
-        <span class='for_sale'>Купить билет</span>
-      <% end %>
+    <% if afisha.has_tickets_for_sale? %>
+      <%= link_to 'Купить билет', afisha_show_path(afisha, anchor: :by_ticket), class: :for_sale %>
+    <% end %>
+    <%= link_to afisha_show_path(afisha), class: :details do %>
       <span class='first_line'>
         <span class='to_go'>15</span>
         <span class='wait_invite'>3</span>

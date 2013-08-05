@@ -59,66 +59,61 @@
             background-color: #f60
             padding: 2px 8px 3px
 
-          .details
+          .for_sale
+            +button-style
             display: none
             position: absolute
-            top: 0
+            top: 50px
+            left: 29px
+            font-size: 12px
+            padding: 2px 15.5px 3px
+            &:active
+              padding: 3px 15.5px 2px
+
+          .details
+            color: #000
+
+          .first_line
+            bottom: 35px
+
+          .second_line
+            bottom: 10px
+
+          .first_line,
+          .second_line
+            display: none
+            width: 100%
+            position: absolute
             left: 0
-            color: #999
-            width: 178px
-            height: 240px
-            background-color: rgba(255, 255, 255, 0.85)
-            &:hover
-              text-decoration: none
-
-            .for_sale
-              +button-style
+            span
               display: block
-              position: absolute
-              top: 50px
-              left: 29px
-              font-size: 12px
-              padding: 2px 15.5px 3px
-              &:active
-                padding: 3px 15.5px 2px
+              float: left
+              width: 34px
+              padding-left: 25px
+              background: transparent image_url('public/afisha_details_sprite.png') no-repeat 10px 3px
 
-            .first_line
-              bottom: 35px
-
-            .second_line
-              bottom: 10px
-
-            .first_line,
-            .second_line
-              display: block
-              width: 100%
-              position: absolute
-              left: 0
-              span
-                display: block
-                float: left
-                width: 34px
-                padding-left: 25px
-                background: transparent image_url('public/afisha_details_sprite.png') no-repeat 10px 3px
-
-                &.to_go
-                  background-position: 12px 3px
-                &.wait_invite
-                  background-position: 4px -17px
-                &.comments
-                  background-position: 5px -36px
-                &.likes
-                  background-position: 12px -57px
-                &.visits
-                  background-position: 6px -77px
-                &.minimal_age
-                  background: none
-                  padding-left: 18px
+              &.to_go
+                background-position: 12px 3px
+              &.wait_invite
+                background-position: 4px -17px
+              &.comments
+                background-position: 5px -36px
+              &.likes
+                background-position: 12px -57px
+              &.visits
+                background-position: 6px -77px
+              &.minimal_age
+                background: none
+                padding-left: 18px
 
           &:hover
             .ribbon
               display: none
-            .details
+            img
+              +opacity(0.15)
+            .for_sale,
+            .first_line,
+            .second_line
               display: block
 
         .place

@@ -1,4 +1,4 @@
-@init_affiches_filter = () ->
+@init_afisha_filter = () ->
 
   link = $($('.affiches_filter .periods .daily, .navigation .periods .daily').children()[0])
   wrapper = link.closest('li')

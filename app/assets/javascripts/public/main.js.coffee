@@ -12,10 +12,10 @@ $ ->
     init_vk_group_subscribers() if $('#vk_group_subscribers').length
 
   init_main_page() if $('.main_page_affiche').length
-  init_affiches_extend() if $('.content .affiche .photogallery')
-  init_affiches_extend() if $('.content .affiche .trailer')
-  init_affiches_filter() if $('.affiches_filter .periods .daily').length
-  init_affiches_filter() if $('.navigation .periods .daily').length
+  init_afisha_extend() if $('.content .affiche .photogallery')
+  init_afisha_extend() if $('.content .affiche .trailer')
+  init_afisha_filter() if $('.affiches_filter .periods .daily').length
+  init_afisha_filter() if $('.navigation .periods .daily').length
   init_payment() if $('a.payment_link').length
   init_tabs() if $('.content .tabs').length
   init_poster() if $('.content .image a img, .organization_info .image a img').length
@@ -73,8 +73,8 @@ $(window).load ->
   init_trodetfond_stat() if $('a.trodetfond').length
   init_tickets_stat() if $('.tickets_list li a.payment_link, .affiche .tickets a.payment_link').length
 
-  init_affiche_yandex_map() if $('.yandex_map .map').length
-  init_affiches_map() if $('.show_map_link').length
+  init_afisha_yandex_map() if $('.yandex_map .map').length
+  init_afisha_map() if $('.show_map_link').length
   init_comments() if $('.comments').length
   init_auth() if ('.auth_links').length
   init_services() if $('.services')

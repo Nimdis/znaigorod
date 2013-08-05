@@ -32,7 +32,7 @@ class String
   end
 
   def text_gilensize
-    self.gilensize(:html => false, :raw_output => true).gsub(%r{</?.*?>}, '').gsub(/\A[[:space:]]+|[[:space:]]+\Z/, '').squish
+    self.to_s.gilensize(:html => false, :raw_output => true).gsub(%r{</?.*?>}, '').gsub(/\A[[:space:]]+|[[:space:]]+\Z/, '').squish
   end
 
   def gilensize_with_html_safe(*args)

@@ -1,6 +1,6 @@
 <% content_for :page_title do %>
   <% if @afisha.title.present? %>
-    <%= @afisha.title.to_s.text_gilensize %>,
+    <%= @afisha.title.text_gilensize %>,
   <% else %>
     Нет названия,
   <% end %>
@@ -20,12 +20,9 @@
   <meta name='twitter:site' content='@znaigorod'/>
   <meta name='twitter:url' content='<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>'/>
   <meta name='twitter:title' content='<%= @afisha.title %>'/>
-  <meta name='twitter:description' content='<%= @afisha.truncated_description %>'/>
-  <meta name='twitter:image' content='<%= @afisha.resized_poster_url(120, 120, false) %>'/>
+  <meta name='twitter:description' content='<%= @afisha.description.to_s.excerpt %>'/>
+  <meta name='twitter:image' content='<%= resized_image_url(@afisha.poster_url, 120, 120) %>'/>
 <% end %>
-
-
-<%= @afisha.breadcrumbs %>
 
 <div class='clearfix'>
 
@@ -35,7 +32,7 @@
       <%= content_tag(:div, link_to(@afisha.kind.map(&:text).join(', '), affiches_path(period: 'all', categories: [@afisha.kind])), class: 'kind') %>
       <div class='head'>
         <% if @afisha.title.present? %>
-          <%= content_tag :h1, @afisha.title.to_s.text_gilensize %>
+          <%= content_tag :h1, @afisha.title.text_gilensize %>
         <% else %>
           <%= content_tag :h1, 'Нет названия' %>
         <% end %>
@@ -44,14 +41,14 @@
 
       <div class='info'>
         <div class='left_part'>
-          <%= @afisha.has_ribbon %>
+          <%= content_tag(:div, 'Премьера недели', class: :ribbon) if @afisha.premiere? %>
           <div class='image'>
             <% if @afisha.poster_url.present? %>
               <div class="rating like_a_line">
                 <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => @afisha.model } %>
               </div>
               <%= content_tag :div, "#{@afisha.age_min.to_i}+", class: :age if @afisha.age_min.present? %>
-              <%= @afisha.item_poster %>
+              <%= link_to(image_tag(resized_image_url(@afisha.poster_url, 180, 242), size: '180x242'), @afisha.poster_url, class: :poster) %>
             <% else %>
               <%= image_tag('public/stub_poster.png', size: '180x242', alt: :poster) %>
             <% end %>
@@ -267,20 +264,17 @@
             <li>
               <div class='title'><%= link_to afisha.title.text_gilensize, afisha_show_path(afisha) %></div>
               <div class='image'>
-                <%= afisha.has_ribbon %>
+                <%= content_tag(:div, 'Премьера недели', class: :ribbon) if afisha.premiere? %>
                 <div class="rating like_a_line mlt">
                   <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => afisha.model } %>
                 </div>
                 <%= content_tag :div, "#{afisha.age_min.to_i}+", class: :age if afisha.age_min.present? %>
-                <%= afisha.more_like_this_poster %>
+                <%= link_to(image_tag(resized_image_url(afisha.poster_url, 150, 202), size: '150x202'), afisha_show_path(afisha)) %>
               </div>
-              <%= content_tag :div, afisha.main_page_place, :class => 'places' unless afisha.main_page_place.blank? %>
+              <%= content_tag :div, afisha.afisha_place, :class => 'places' unless afisha.afisha_place.blank? %>
             </li>
           <% end %>
         </ul>
-        <div class='all_today'>
-          <%= @afisha.all_afisha_link %>
-        </div>
       </div>
     <% end %>
 

@@ -109,31 +109,106 @@ class AfishaDecorator < ApplicationDecorator
     nealest_showing.actual? ? nealest_showing.human_when : "Было #{nealest_showing.e_B(nealest_showing.starts_at)}"
   end
 
-  #def show_url
-    #h.afisha_show_path(afisha)
-  #end
+  def meta_keywords
+    [kind.map(&:text).join(', '), afisha.tags].flatten.map(&:mb_chars).map(&:downcase).join(', ')
+  end
 
-  #def title_link
-    #afisha.title
-  #end
+  def meta_description
+    description.to_s.truncate(200, separator: ' ')
+  end
 
-  #def main_page_link
-    #truncated_link(45)
-  #end
+  def tags_for_vk
+    desc = ""
+    desc << when_with_price
+    desc << " "
+    desc << h.link_to(afisha.title.text_gilensize.truncated, h.afisha_show_path(afisha), :title => afisha.title)
+    desc << ". "
+    desc << html_description
+    desc = desc.without_table.gsub(/<\/?\w+.*?>/m, '').gsub(' ,', ',').squish.html_safe
+    image = resized_image_url(poster_url, 180, 242, false)
+    res = ""
+    res << "<meta property='og:description' content='#{desc.truncate(350, :separator => ' ').html_safe}'/>\n"
+    res << "<meta property='og:site_name' content='#{I18n.t('meta.default.title')}' />\n"
+    res << "<meta property='og:title' content='#{title.to_s.text_gilensize}' />\n"
+    res << "<meta property='og:url' content='#{h.afisha_show_url(afisha)}' />\n"
+    res << "<meta property='og:image' content='#{image}' />\n"
+    res << "<meta name='image' content='#{image}' />\n"
+    res << "<link rel='image_src' href='#{image}' />\n"
+    res.html_safe
+  end
 
-  #def posters_title_link
-    #truncated_link(23, nil, nil)
-  #end
+  def when_with_price
+    if showings.any?
+      h.content_tag :p, h.content_tag(:span, human_when, :class => :when ) + ", " + h.content_tag(:span, human_price, :class => :price).html_safe
+    else
+      h.content_tag :p, h.content_tag(:span, human_when, :class => :when )
+    end
+  end
 
+  def distribution_movie?
+    afisha.movie? && afisha_distribution?
+  end
 
-  #def geo_present?
-    #places.any? && !places.first.latitude.blank? && !places.first.longitude.blank?
-  #end
+  def html_attachments
+    return "" if gallery_files.blank?
+    links = []
+    gallery_files.each do |attachment|
+      links << h.content_tag(:li, h.link_to(attachment.description, attachment.file_url))
+    end
+    h.content_tag :ul, links.join("\n").html_safe
+  end
 
-  #auto_html_for :trailer_code do
-    #youtube(:width => 740, :height => 450)
-    #vimeo(:width => 740, :height => 450)
-  #end
+  def viewable_showings?
+    return false if (afisha.other? || afisha.sportsevent?) && afisha_distribution?
+    afisha_actual? && other_showings.any?
+  end
+
+  def other_showings
+    return [] unless afisha_actual?
+    first_showing = showings.first
+    @other_showings ||= if first_showing && first_showing.actual?
+                          if afisha_distribution?
+                            ShowingDecorator.decorate afisha.showings.where("starts_at >= ?", showings.first.starts_at)
+                          else
+                            ShowingDecorator.decorate afisha.showings.where("starts_at > ?", showings.first.starts_at)
+                          end
+                        else
+                          ShowingDecorator.decorate afisha.showings.where("starts_at > ?", DateTime.now.beginning_of_day)
+                        end
+  end
+
+  def scheduled_showings?
+    afisha.affiche_schedule && afisha_distribution? && (afisha.exhibition? || afisha.masterclass?)
+  end
+
+  def schedule
+    AfficheScheduleDecorator.decorate afisha.affiche_schedule
+  end
+
+  def geo_present?
+    places.any? && !places.first.latitude.blank? && !places.first.longitude.blank?
+  end
+
+  def similar_afisha
+    searcher.more_like_this(afisha).limit(2).results.map { |a| AfishaDecorator.new a }
+  end
+
+  def searcher
+    HasSearcher.searcher(:similar_affiches)
+  end
+
+  auto_html_for :trailer_code do
+    youtube(:width => 740, :height => 450)
+    vimeo(:width => 740, :height => 450)
+  end
+
+  def distribution_movie_grouped_showings
+    {}.tap do |hash|
+      showings.group_by(&:starts_on).each do |date, showings|
+        hash[date] = showings.select(&:actual?).group_by(&:place)
+      end
+    end
+  end
 
   #def kind_afisha_path(options = {})
     #h.send "afisha_path", afisha, options
@@ -153,28 +228,6 @@ class AfishaDecorator < ApplicationDecorator
 
   #def all_afisha_link
     #h.link_to "Все #{kind.map(&:text).join(', ')} (#{counter.all})", h.afisha_index_path(afisha, categories: [kind])
-  #end
-
-  #def breadcrumbs
-    #links = []
-    #links << h.content_tag(:li, h.link_to("Знай\u00ADГород", h.root_path), :class => "crumb")
-    #links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
-    #links << h.content_tag(:li, h.link_to("Вся афиша Томска", h.afisha_index_path), :class => "crumb")
-    #links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
-    #links << h.content_tag(:li, h.link_to("Все #{kind.map(&:text).join(', ')} в Томске", h.afisha_index_path('categories[]' => kind)), :class => "crumb")
-    #links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
-    #links << h.content_tag(:li, h.link_to(title, h.afisha_show_path(afisha)), :class => "crumb")
-    #%w(photogallery trailer).each do |method|
-      #if h.controller.action_name == method
-        #links << h.content_tag(:li, h.content_tag(:span, "&nbsp;".html_safe), :class => "separator")
-        #links << h.content_tag(:li, h.link_to(navigation_title(method), self.send("afisha_#{method}_path")), :class => "crumb")
-      #end
-    #end
-    #h.content_tag :ul, links.join("\n").html_safe, :class => "breadcrumbs"
-  #end
-
-  #def schedule
-    #AfficheScheduleDecorator.decorate afisha.affiche_schedule
   #end
 
   #def has_photogallery?
@@ -246,15 +299,6 @@ class AfishaDecorator < ApplicationDecorator
     #description.to_s.excerpt
   #end
 
-  #def html_attachments
-    #return "" if gallery_files.blank?
-    #links = []
-    #gallery_files.each do |attachment|
-      #links << h.content_tag(:li, h.link_to(attachment.description, attachment.file_url))
-    #end
-    #h.content_tag :ul, links.join("\n").html_safe
-  #end
-
   #def main_page_poster
     #poster_with_link afisha, 200, 268
   #end
@@ -266,38 +310,6 @@ class AfishaDecorator < ApplicationDecorator
   #def resized_poster_url(width, height, crop)
     #return unless afisha.poster_url.present?
     #h.resized_image_url(afisha.poster_url, width, height, crop)
-  #end
-
-  #def meta_description
-    #description.to_s.truncate(200, separator: ' ')
-  #end
-
-  #def meta_keywords
-    #[kind.map(&:text).join(', '), afisha.tags, raw_places].flatten.map(&:mb_chars).map(&:downcase).join(', ')
-  #end
-
-  #def tags_for_vk
-    #desc = ""
-    #desc << when_with_price
-    #desc << " "
-    #desc << main_page_place
-    #desc << ". "
-    #desc << html_description
-    #desc = desc.gsub(/<table>.*<\/table>/m, '').gsub(/<\/?\w+.*?>/m, '').gsub(' ,', ',').squish.html_safe
-    #image = resized_image_url(poster_url, 180, 242, false)
-    #res = ""
-    #res << "<meta property='og:description' content='#{desc.truncate(350, :separator => ' ').html_safe}'/>\n"
-    #res << "<meta property='og:site_name' content='#{I18n.t('meta.default.title')}' />\n"
-    #res << "<meta property='og:title' content='#{title.to_s.text_gilensize}' />\n"
-    #res << "<meta property='og:url' content='#{h.afisha_show_url(afisha)}' />\n"
-    #res << "<meta property='og:image' content='#{image}' />\n"
-    #res << "<meta name='image' content='#{image}' />\n"
-    #res << "<link rel='image_src' href='#{image}' />\n"
-    #res.html_safe
-  #end
-
-  #def raw_places
-    #showings.with_organization.map(&:organization).uniq.map(&:title).map { |t| t.split(',').join(' ') }
   #end
 
   #def list_poster
@@ -312,47 +324,12 @@ class AfishaDecorator < ApplicationDecorator
     #poster_with_link afisha, 150, 202
   #end
 
-  #def viewable_showings?
-    #return false if (afisha.other? || afisha.sportsevent?) && afisha_distribution?
-    #afisha_actual? && other_showings.any?
-  #end
-
-  #def distribution_movie?
-    #afisha.movie? && afisha_distribution?
-  #end
-
-  #def scheduled_showings?
-    #afisha.affiche_schedule && afisha_distribution? && (afisha.exhibition? || afisha.masterclass?)
-  #end
-
   #def human_price
     #humanize_price(showings.map(&:price_min).uniq.compact.min, showings.map(&:price_max).uniq.compact.max)
   #end
 
-  #def when_with_price
-    #if showings.any?
-      #h.content_tag :p, h.content_tag(:span, human_when, :class => :when ) + ", " + h.content_tag(:span, human_price, :class => :price).html_safe
-    #else
-      #h.content_tag :p, h.content_tag(:span, human_when, :class => :when )
-    #end
-  #end
-
   #def pluralized_kind
     #kind.pluralize
-  #end
-
-  #def other_showings
-    #return [] unless afisha_actual?
-    #first_showing = showings.first
-    #@other_showings ||= if first_showing && first_showing.actual?
-                          #if afisha_distribution?
-                            #ShowingDecorator.decorate afisha.showings.where("starts_at >= ?", showings.first.starts_at)
-                          #else
-                            #ShowingDecorator.decorate afisha.showings.where("starts_at > ?", showings.first.starts_at)
-                          #end
-                        #else
-                          #ShowingDecorator.decorate afisha.showings.where("starts_at > ?", DateTime.now.beginning_of_day)
-                        #end
   #end
 
   #def first_other_showing_today?
@@ -375,20 +352,8 @@ class AfishaDecorator < ApplicationDecorator
     #other_showings.any? ? other_showings.group_by(&:starts_on).first.second.group_by(&:place) : []
   #end
 
-  #def distribution_movie_grouped_showings
-    #{}.tap do |hash|
-      #showings.group_by(&:starts_on).each do |date, showings|
-        #hash[date] = showings.select(&:actual?).group_by(&:place)
-      #end
-    #end
-  #end
-
   #def distribution_movie_schedule_date
     #"Ближайшие сеансы #{other_showings.first.human_date.mb_chars.downcase}" if other_showings.any?
-  #end
-
-  #def similar_afisha
-    #searcher.more_like_this(afisha).limit(2).results.map { |a| AfishaDecorator.new a }
   #end
 
   #def similar_afisha_with_images
@@ -417,10 +382,6 @@ class AfishaDecorator < ApplicationDecorator
     #else
       #image_tag(afisha.poster_url, width, height, afisha.title.to_s.text_gilensize)
     #end
-  #end
-
-  #def searcher
-    #HasSearcher.searcher(:similar_affiches)
   #end
 
   #def counter

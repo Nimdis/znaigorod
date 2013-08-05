@@ -1,4 +1,4 @@
-@init_affiches_extend = () ->
+@init_afisha_extend = () ->
   if window.location.hash == '#photogallery' && $.fn.scrollTo
     setTimeout ->
       $.scrollTo($('.content .affiche .photogallery'), 500, { offset: {top: -50} })

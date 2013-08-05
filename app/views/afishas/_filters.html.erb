@@ -38,24 +38,3 @@
     </div>
   </div>
 </div>
-
-<div class='afisha_presentation_filters'>
-  <div class='present_by'>
-    <p>Вид:</p>
-    <ul>
-      <li><a href='#'>Постеры</a></li>
-      <li><a href='#'>Список</a></li>
-    </ul>
-  </div>
-  <div class='order_by'>
-    <p>Сортировать по:</p>
-    <ul>
-      <% @presenter.sortings_links.each do |sortings_link| %>
-        <li<%= " class=selected" if sortings_link[:selected] %>>
-          <%= link_to sortings_link[:title],
-            send(sortings_link[:url], sortings_link[:parameters]) %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
