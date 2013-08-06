@@ -5,7 +5,7 @@
         <% @presenter.periods_links.each do |period_link| %>
           <li<%= " class=selected" if period_link[:selected] %>>
             <%= link_to period_link[:title],
-            send(period_link[:url], period_link[:parameters]) %>
+              send(period_link[:url], period_link[:parameters]), :class => period_link[:class] %>
           </li>
         <% end %>
       </ul>
@@ -15,6 +15,7 @@
         <li<%= " class=selected" if @presenter.has_tickets %>>
           <a href='<%= send(@presenter.url, {
                       period: @presenter.period_filter.period,
+                      on: @presenter.period_filter.date,
                       order_by: @presenter.sorting_filter.order_by,
                       has_tickets: @presenter.has_tickets ? nil : true
           }) %>'>Только с билетами</a>

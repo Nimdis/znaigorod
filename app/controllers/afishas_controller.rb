@@ -18,16 +18,9 @@ class AfishasController < ApplicationController
   end
 
   def show
-    @afisha = AfishaDecorator.find(params[:id])
+    @afisha = AfishaDecorator.new Afisha.find(params[:id])
     @presenter = AfishaPresenter.new(params)
     @afisha.create_page_visit(request.session_options[:id])
   end
 
-  def photogallery
-    @afisha = AfishaDecorator.find(params[:id])
-  end
-
-  def trailer
-    @afisha = AfishaDecorator.find(params[:id])
-  end
 end

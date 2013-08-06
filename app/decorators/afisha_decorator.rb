@@ -50,7 +50,7 @@ class AfishaDecorator < ApplicationDecorator
   def places
     [].tap do |array|
       if showings.any?
-        showings.map { |showing| showing.organization ? showing.organization : showing.place }.uniq.each do |place|
+        showings.compact.map { |showing| showing.organization ? showing.organization : showing.place }.uniq.each do |place|
           array << (place.is_a?(Organization) ? PlaceDecorator.new(:organization => place) : PlaceDecorator.new(:title => place,
                                                                        :latitude => afisha.showings.where(:place => place).first.latitude,
                                                                        :longitude => afisha.showings.where(:place => place).first.longitude))
@@ -90,19 +90,19 @@ class AfishaDecorator < ApplicationDecorator
     return "Время проведения неизвестно" unless nealest_showing.showing
     if afisha_actual?
       if afisha.constant?
-        afisha.exhibition? ? 'Постоянная экспозиция' : 'Постоянное мероприятие'
+        return afisha.exhibition? ? 'Постоянная экспозиция' : 'Постоянное мероприятие'
       end
       return human_distribution if afisha_distribution?
     else
       case afisha.kind
-      when 'movie'
+      when *['movie']
         if afisha_distribution?
           return human_distribution if afisha.distribution_starts_on >= Date.today
           return "Было в прокате до #{nealest_showing.e_B(nealest_showing.starts_at)}"
         else
           return "Последний показ был #{nealest_showing.e_B(nealest_showing.starts_at)}"
         end
-      when 'exhibition'
+      when *['exhibition']
         return "Выставка закончилась #{nealest_showing.e_B(nealest_showing.starts_at)}"
       end
     end
@@ -135,6 +135,10 @@ class AfishaDecorator < ApplicationDecorator
     res << "<meta name='image' content='#{image}' />\n"
     res << "<link rel='image_src' href='#{image}' />\n"
     res.html_safe
+  end
+
+  def human_price
+    humanize_price(showings.map(&:price_min).uniq.compact.min, showings.map(&:price_max).uniq.compact.max)
   end
 
   def when_with_price
@@ -322,10 +326,6 @@ class AfishaDecorator < ApplicationDecorator
 
   #def more_like_this_poster
     #poster_with_link afisha, 150, 202
-  #end
-
-  #def human_price
-    #humanize_price(showings.map(&:price_min).uniq.compact.min, showings.map(&:price_max).uniq.compact.max)
   #end
 
   #def pluralized_kind

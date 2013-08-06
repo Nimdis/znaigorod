@@ -14,8 +14,7 @@ $ ->
   init_main_page() if $('.main_page_affiche').length
   init_afisha_extend() if $('.content .affiche .photogallery')
   init_afisha_extend() if $('.content .affiche .trailer')
-  init_afisha_filter() if $('.affiches_filter .periods .daily').length
-  init_afisha_filter() if $('.navigation .periods .daily').length
+  init_afisha_filter() if $('.afisha_filters .by_date .daily').length
   init_payment() if $('a.payment_link').length
   init_tabs() if $('.content .tabs').length
   init_poster() if $('.content .image a img').length

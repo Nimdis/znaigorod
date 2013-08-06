@@ -6,7 +6,7 @@ class AfishaPresenter
   include ActiveAttr::MassAssignment
 
   attr_accessor :categories,
-                :period,
+                :period, :on,
                 :price_min, :price_max,
                 :age_min, :age_max,
                 :time_from, :time_to,
@@ -32,7 +32,7 @@ class AfishaPresenter
 
   def initialize_filters
     @categories_filter    ||= CategoriesFilter.new(categories, hide_categories)
-    @period_filter        ||= PeriodFilter.new(period)
+    @period_filter        ||= PeriodFilter.new(period, on)
     @price_filter         ||= PriceFilter.new(price_min, price_max)
     @age_filter           ||= AgeFilter.new(age_min, age_max)
     @time_filter          ||= TimeFilter.new(time_from, time_to)
@@ -98,6 +98,7 @@ class AfishaPresenter
         url: 'afisha_index_path',
         parameters: {
           period: @period_filter.all? ? nil : @period_filter.period,
+          on: @period_filter.date,
           order_by: @sorting_filter.order_by,
           has_tickets: has_tickets
         },
@@ -111,6 +112,7 @@ class AfishaPresenter
           url: "#{kind.pluralize}_index_path",
           parameters: {
             period: period_filter.all? ? nil : period_filter.period,
+            on: @period_filter.date,
             order_by: @sorting_filter.order_by,
             has_tickets: has_tickets
           },
@@ -125,8 +127,9 @@ class AfishaPresenter
     @periods_links ||= [].tap { |array|
       @period_filter.available_period_values.each do |period_value|
         array << {
-          title: I18n.t("afisha_periods.#{period_value}"),
+          title: (@period_filter.daily? && period_value == 'daily') ? I18n.l(@period_filter.date, format: '%d %B') : I18n.t("afisha_periods.#{period_value}"),
           url: url,
+          class: period_value,
           parameters: {
             :period => @period_filter.period == period_value ? nil : period_value,
             :order_by => @sorting_filter.order_by,
@@ -146,6 +149,7 @@ class AfishaPresenter
           url: url,
           parameters: {
             :period => @period_filter.period,
+            on: @period_filter.date,
             :order_by => sorting_value,
             has_tickets: has_tickets
           },

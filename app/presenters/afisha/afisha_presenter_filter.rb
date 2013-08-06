@@ -28,9 +28,10 @@ class CategoriesFilter
 end
 
 class PeriodFilter
-  def initialize(period)
-    @date = period.to_date rescue nil
+  def initialize(period, on)
+    @date = on.to_date rescue nil
     @period = period
+    @date = Date.today if @date.nil? && daily?
   end
 
   def date
