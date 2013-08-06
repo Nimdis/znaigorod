@@ -130,7 +130,7 @@
         <ul>
           <% @afisha.images.each do |image| %>
             <li>
-              <%= resized_link_image(image, 124, 94) %>
+              <%= image_tag resized_image_url(image.thumbnail_url? ? image.thumbnail_url : image.file_url, 124, 94), :width => '124', :alt => image.description %>
             </li>
           <% end %>
         </ul>
