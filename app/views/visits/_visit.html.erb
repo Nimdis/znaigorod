@@ -7,11 +7,11 @@
 <div class='visits_counter'>
   <div class='floatl'>Участники</div>
   <div class='floatr'>
-    <% if visitable.visits.visited.count.zero? %>
+    <%# if visitable.visits.visited.count.zero? %>
       <%= t('afisha.visitors', :count => visitable.visits.visited.count) %>
-    <% else %>
-      <%= link_to t('afisha.visitors', :count => visitable.visits.visited.count), polymorphic_url([visitable, :visitors]), :remote => true %>
-    <% end %>
+    <%# else %>
+      <%#= link_to t('afisha.visitors', :count => visitable.visits.visited.count), polymorphic_url([visitable, :visitors]), :remote => true %>
+    <%# end %>
   </div>
 </div>
 
