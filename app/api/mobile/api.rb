@@ -21,10 +21,10 @@ module Mobile
 
       def periods
         [
-          { category: 'Все',  urlModifier:  "period=all"},
-          { category: 'Сегодня',  urlModifier:  "period=today"},
-          { category: 'На неделе',  urlModifier:  "period=week"},
-          { category: 'На выходных',  urlModifier:  "period=weekend"}
+          { period: 'Все',  urlModifier:  "period=all"},
+          { period: 'Сегодня',  urlModifier:  "period=today"},
+          { period: 'На неделе',  urlModifier:  "period=week"},
+          { period: 'На выходных',  urlModifier:  "period=weekend"}
         ]
       end
 
@@ -46,11 +46,11 @@ module Mobile
     resource :affisha do
 
       get '/categories' do
-        categories = [ {category: 'Все мероприятия', url: "#{base_path}/all"}]
+        categories = [ {category: 'Все мероприятия', url: "#{base_path}/list/all"}]
         categories += Affiche.ordered_descendants.map do |affiche_class|
           {
             category: affiche_class.model_name.human,
-            url: "#{base_path}/#{affiche_class.name.downcase.pluralize}"
+            url: "#{base_path}/list/#{affiche_class.name.downcase.pluralize}"
           }
         end
 
