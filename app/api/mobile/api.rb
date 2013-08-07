@@ -93,7 +93,7 @@ module Mobile
               :image => affisha.poster_url.gsub(/\/region\/(\d+)\/(\d+)\/\d+\/\d+/, '/74-100!n/').gsub(/\/\d+-\d+\//, '/74-100!n/'),
               :expires => affisha.distribution_ends_on? ? affisha.distribution_ends_on : affisha.showings.map(&:starts_at).max,
               :lastUpdate => affisha_updated_at(affisha.affiche),
-              :ticket_link => affisha.tickets.map(&:copies_for_sale).flatten.any? ? "#{site_url}/affisha/#{affisha.slug}#tickets" : nil,
+              :ticket_link => affisha.tickets.map(&:copies_for_sale).flatten.any? ? "#{site_url}/affisha/#{affisha.slug}#by_ticket" : nil,
             }
           end
         }
