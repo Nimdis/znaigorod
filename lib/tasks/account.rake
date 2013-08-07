@@ -51,6 +51,7 @@ namespace :account do
     puts 'Get avatars'
     accounts = Account.ordered
     fb_client = Koala::Facebook::API.new
+    VkontakteApi.configure { |c| c.log_requests = false }
     vk_client = VkontakteApi::Client.new
     bar = ProgressBar.new(accounts.count)
     accounts.each do |account|
