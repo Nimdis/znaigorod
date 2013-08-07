@@ -59,11 +59,69 @@
 
     h1
       font-size: 22px
+      margin-bottom: 5px
 
-    .closest p
-      +inline-block
-      font-size: 14px
-      color: #fff
-      background-color: #019bdb
-      padding: 1px 8px 2px
+    .closest
+      margin-bottom: 10px
+      p
+        +inline-block
+        font-size: 14px
+        color: #fff
+        background-color: #019bdb
+        padding: 1px 8px 2px
 
+    .place
+      margin-bottom: 10px
+
+      .address
+        background: transparent image_url('public/address.png') no-repeat 2px 2px
+        padding-left: 13px
+
+    .text
+      h3, p, ul, ol
+        margin-bottom: 10px
+
+      h3
+        font-size: 18px
+
+      ul, ol
+        margin-left: 30px
+        ul, ol
+          margin-bottom: 0
+
+      ul > li
+        display: list-item
+        list-style: disc outside
+
+      ol > li
+        display: list-item
+        list-style: decimal outside
+
+    .share_and_likes
+      min-height: 30px
+      border-bottom: 1px solid #ccc
+
+      .share
+        float: left
+        width: 50%
+
+        .title
+          +inline-block
+
+        .yashare-auto-init
+          +inline-block
+
+      .likes
+        float: right
+        +clearfix
+        text-align: right
+        width: 50%
+
+        .vk_like
+          float: right
+          clear: none !important
+        .fb_like
+          float: right
+          margin-right: 20px
+        .ok_like
+          float: right

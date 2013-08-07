@@ -89,13 +89,13 @@
       <% end %>
       <%= @afisha.html_attachments %>
       <% if @afisha.user.present? %>
-        <p class='affiche_owner'>
+        <p class='afisha_owner'>
           <span>Автор:</span>
           <%= image_tag @afisha.user.avatar, size: '24x24', alt: @afisha.user.name if @afisha.user.avatar.present? %>
           <%= link_to @afisha.user.name, @afisha.user.profile %>
         </p>
       <% else %>
-        <p class='affiche_owner'>
+        <p class='afisha_owner'>
           <span>Автор:</span>
           <%= image_tag 'public/avatar_znaigorod.jpg', size: '24x24', alt: 'ЗнайГород' %>
           <%= link_to 'ЗнайГород (Афиша Томска)', 'http://vk.com/znaigorod' %>
@@ -103,18 +103,16 @@
       <% end %>
     </div>
 
-    <div class='tags_and_share'>
-      <ul class='tags'>
-        <% @afisha.tags.each do |tag| %>
-          <li><%= tag %></li>
-        <%end%>
-      </ul>
-      <div class="votes">
-        <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @afisha.model } %>
-      </div>
-      <div class='share'>
-        <%= render :partial => 'commons/affiche_share_this' %>
-      </div>
+    <div class='share_and_likes'>
+      <%= render :partial => 'commons/affiche_share_this' %>
+    </div>
+    <ul class='tags'>
+      <% @afisha.tags.each do |tag| %>
+        <li><%= tag %></li>
+      <%end%>
+    </ul>
+    <div class="votes">
+      <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @afisha.model } %>
     </div>
 
     <% if @afisha.trailer_code.present? %>
