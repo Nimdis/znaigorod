@@ -35,7 +35,7 @@ class PeriodFilter
   end
 
   def date
-    @date || (->{ Date.today }.call)
+    @date
   end
 
   def period
