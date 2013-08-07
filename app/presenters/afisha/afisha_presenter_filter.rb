@@ -31,7 +31,7 @@ class PeriodFilter
   def initialize(period, on)
     @date = on.to_date rescue nil
     @period = period
-    @date = Date.today if @date.nil? && daily?
+    @date ||= Date.today if self.daily?
   end
 
   def date
