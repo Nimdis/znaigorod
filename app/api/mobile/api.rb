@@ -19,16 +19,18 @@ module Mobile
         DateTime.new(2013, 7, 15, 16, 10, 00, '+7')
       end
 
-      def subcategories(kind)
+      def periods
         [
-          { category: 'Все',  url:  "#{base_path}/#{kind}/all"},
-          { category: 'Сегодня',  url:  "#{base_path}/#{kind}/today"},
-          { category: 'На неделе',  url:  "#{base_path}/#{kind}/week"},
-          { category: 'На выходных',  url:  "#{base_path}/#{kind}/weekend"}
+          { category: 'Все',  urlModifier:  "period=all"},
+          { category: 'Сегодня',  urlModifier:  "period=today"},
+          { category: 'На неделе',  urlModifier:  "period=week"},
+          { category: 'На выходных',  urlModifier:  "period=weekend"}
         ]
       end
 
       def affishes(kind, period, sorting, page)
+        period ||= 'all'
+        sorting ||= 'creation'
         ShowingsPresenter.new(:categories => (kind == 'all' ?  [] : [kind.singularize]), :period => period, :order_by => sorting, :page => page )
       end
 
@@ -44,38 +46,43 @@ module Mobile
     resource :affisha do
 
       get '/categories' do
-        categories = [ {category: 'Все мероприятия', url: "#{base_path}/all/all", subcategories: subcategories('all') }]
+        categories = [ {category: 'Все мероприятия', url: "#{base_path}/all"}]
         categories += Affiche.ordered_descendants.map do |affiche_class|
           {
             category: affiche_class.model_name.human,
-            url: "#{base_path}/#{affiche_class.name.downcase.pluralize}/all",
-            subcategories: subcategories(affiche_class.name.downcase.pluralize)
+            url: "#{base_path}/#{affiche_class.name.downcase.pluralize}"
           }
         end
 
         { lastUpdate: api_version, categories: categories }
       end
 
+      get '/periods' do
+        { lastUpdate: api_version, periods: periods }
+      end
+
       get '/sortings' do
         {
           lastUpdate: api_version,
           methods: [
-            { name: 'По новизне', urlModifier: 'creation' },
-            { name: 'По рейтингу', urlModifier: 'rating' },
-            { name: 'По ближайшему сеансу', urlModifier: 'starts_at' }
+            { name: 'По новизне', urlModifier: 'sorting=creation' },
+            { name: 'По рейтингу', urlModifier: 'sorting=rating' },
+            { name: 'По ближайшему сеансу', urlModifier: 'sorting=starts_at' }
           ]
         }
       end
 
       params do
         optional :page, :type => Integer
+        optional :period, :type => String
+        optional :sorting, :type => String
       end
 
-      get ':kind/:period/:sorting' do
+      get 'list/:kind' do
         affishes = affishes(params[:kind], params[:period], params[:sorting], params[:page] || 1)
         {
           lastUpdate: affishes.collection.map { |affisha| affisha_updated_at(affisha.affiche) }.max,
-          urlModifier: affishes.paginated_collection.next_page ? "?page=#{affishes.paginated_collection.next_page}" : '',
+          next_page: affishes.paginated_collection.next_page ? "page=#{affishes.paginated_collection.next_page}" : '',
           affishes: affishes.collection.map do |affisha|
             {
               :url => "#{base_path}/#{affisha.slug}",
