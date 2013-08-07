@@ -127,7 +127,7 @@ class AfishaPresenter
     @periods_links ||= [].tap { |array|
       @period_filter.available_period_values.each do |period_value|
         array << {
-          title: (@period_filter.daily? && period_value == 'daily') ? I18n.l(@period_filter.date, format: '%d %B') : I18n.t("afisha_periods.#{period_value}"),
+          title: (@period_filter.daily? && period_value == 'daily') ? I18n.l(@period_filter.date, format: '%d %B').gsub(/^0/, '') : I18n.t("afisha_periods.#{period_value}"),
           url: url,
           class: period_value,
           parameters: {
