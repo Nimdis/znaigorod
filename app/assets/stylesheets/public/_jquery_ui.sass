@@ -360,7 +360,7 @@ button.ui-button::-moz-focus-inner
       float: right
       margin: .5em .2em .4em
       cursor: pointer
-      padding: .2em .6em .3em .6em
+      padding: .1em .5em .2em .5em
       width: auto
       overflow: visible
       &.ui-datepicker-current
@@ -750,17 +750,20 @@ body .ui-tooltip
 /* Interaction states
  *----------------------------------
 
+$default_link_color: #1c94c4
+$default_link_color: #06c
+
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
   border: 1px solid #cccccc
   background: #f6f6f6 image_url('public/jquery_ui/ui-bg_glass_100_f6f6f6_1x400.png') 50% 50% repeat-x
   font-weight: bold
-  color: #1c94c4
+  color: $default_link_color
 
 .ui-state-default a
-  color: #1c94c4
+  color: $default_link_color
   text-decoration: none
   &:link, &:visited
-    color: #1c94c4
+    color: $default_link_color
     text-decoration: none
 
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus
