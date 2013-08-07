@@ -97,6 +97,10 @@
         display: list-item
         list-style: decimal outside
 
+      .afisha_owner
+        span, a
+          +inline-block
+
     .share_and_likes
       min-height: 30px
       border-bottom: 1px solid #ccc
@@ -125,3 +129,15 @@
           margin-right: 20px
         .ok_like
           float: right
+
+    .tags
+      +clearfix
+      margin: 10px 0 5px
+      li
+        float: left
+        font-size: 11px
+        color: #999
+        +border-radius(3px)
+        background-color: #e8e8e8
+        margin: 0 5px 5px 0
+        padding: 1px 5px 2px
