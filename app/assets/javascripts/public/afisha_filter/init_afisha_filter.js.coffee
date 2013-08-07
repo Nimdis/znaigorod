@@ -23,7 +23,7 @@
       btn.unbind("click").bind "click", ->
         $.datepicker._clearDate inst.input
         object = create_obj_from_uri()
-        delete object['period']
+        object.period = 'all'
         delete object['on']
         search = $.param(object)
         if search.length
