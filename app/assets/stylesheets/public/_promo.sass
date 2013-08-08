@@ -3,8 +3,10 @@
   background-color: #009bdb
   +box-shadow(#016692 0 -2px 2px inset)
   margin-bottom: 10px
+
   .promo
-    +liquid($desctop_min_width, $desctop_max_width)
+    +liquid-size($desctop_min_width, $desctop_max_width)
+    +fixed-size
     font-size: 14px
     text-align: center
     color: #fff

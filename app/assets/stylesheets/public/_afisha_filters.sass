@@ -5,7 +5,8 @@
   margin-bottom: 15px
 
   .afisha_filters
-    +liquid($desctop_min_width, $desctop_max_width)
+    +liquid-size($desctop_min_width, $desctop_max_width)
+    +fixed-size
     +clearfix
 
     .by_date
@@ -161,7 +162,8 @@
 
 .afisha_presentation_filters
   +clearfix
-  +liquid($desctop_min_width, $desctop_max_width)
+  +liquid-size($desctop_min_width, $desctop_max_width)
+  +fixed-size
   margin-bottom: 15px
 
   .present_by

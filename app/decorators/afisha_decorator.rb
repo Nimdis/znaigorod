@@ -204,6 +204,12 @@ class AfishaDecorator < ApplicationDecorator
   auto_html_for :trailer_code do
     youtube(:width => 740, :height => 450)
     vimeo(:width => 740, :height => 450)
+    double_enter
+    simple_format
+  end
+
+  auto_html_for :description do
+    link :target => '_blank', :rel => 'nofollow'
   end
 
   def distribution_movie_grouped_showings
