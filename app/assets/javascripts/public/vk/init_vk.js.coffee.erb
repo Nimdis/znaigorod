@@ -1,9 +1,9 @@
 if typeof VK != "undefined"
   VK.init
     # jenkek.tusur.ru
-    #apiId: 3808420
+    <%= 'apiId: 3808420' if Rails.env.development? %>
     # znaigorod.ru
-    apiId: 3136085
+    <%= 'apiId: 3136085' if Rails.env.production? %>
     # znaigorod.openteam.ru
     #apiId: 3136087
     onlyWidgets: true
