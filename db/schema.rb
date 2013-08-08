@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130802074205) do
+ActiveRecord::Schema.define(:version => 20130807094004) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20130802074205) do
     t.integer  "user_id"
     t.text     "kind"
     t.string   "vk_event_url"
+    t.integer  "fb_likes"
   end
 
   add_index "afisha", ["slug"], :name => "index_affiches_on_slug", :unique => true

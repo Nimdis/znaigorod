@@ -12,7 +12,8 @@ class Afisha < ActiveRecord::Base
                   :images_attributes, :attachments_attributes,
                   :distribution_starts_on, :distribution_ends_on,
                   :original_title, :trailer_code, :vk_aid, :yandex_fotki_url, :constant,
-                  :age_min, :age_max, :state_event, :state, :user_id, :kind, :vk_event_url
+                  :age_min, :age_max, :state_event, :state, :user_id, :kind, :vk_event_url,
+                  :fb_likes
 
   belongs_to :user
 
@@ -219,6 +220,10 @@ class Afisha < ActiveRecord::Base
 
     time :last_showing_time,  :trie => true
     date :created_at
+  end
+
+  def likes_count
+    self.votes.count + vkontakte_likes || 0 + fb_likes || 0
   end
 
   def get_vk_event_id
