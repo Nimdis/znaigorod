@@ -1,0 +1,3 @@
+<%= link_to gallery_image.file_url do %>
+  <%= image_tag(resized_image_url(gallery_image.file_url, 130, 99), :size => '130x99', :alt => gallery_image.description) %>
+<% end %>

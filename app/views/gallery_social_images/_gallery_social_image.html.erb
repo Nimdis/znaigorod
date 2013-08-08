@@ -1,0 +1,17 @@
+<%= link_to gallery_social_image.file_url do %>
+  <% if gallery_social_image.width? && gallery_social_image.height? %>
+    <% if 130 * gallery_social_image.height / gallery_social_image.width < 99 %>
+      <%= image_tag(gallery_social_image.thumbnail_url,
+                    :width => (gallery_social_image.width * 99 / gallery_social_image.height),
+                    :height => 99,
+                    :alt => gallery_social_image.description) %>
+    <% else %>
+      <%= image_tag(gallery_social_image.thumbnail_url,
+                    :width => 130,
+                    :height => (gallery_social_image.height * 130 / gallery_social_image.width),
+                    :alt => gallery_social_image.description) %>
+    <% end %>
+  <% else %>
+    <%= image_tag(gallery_social_image.thumbnail_url, :size => '130x99', :alt => gallery_social_image.description) %>
+  <% end %>
+<% end %>
