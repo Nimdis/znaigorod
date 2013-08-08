@@ -162,6 +162,7 @@ class Organization < ActiveRecord::Base
     string :status
     string(:suborganizations, :multiple => true) { suborganizations.map(&:class).map(&:name).map(&:underscore) }
     string(:kind, :multiple => true) { ['organization'] }
+    string :search_kind
 
     text :title,                :boost => 1.0 * 1.2
     text :title_ru,             :boost => 1.0,              :more_like_this => true
@@ -183,6 +184,10 @@ class Organization < ActiveRecord::Base
 
     text(:services_info) { services.map { |s| "#{s.title} #{s.description} #{s.category} #{s.feature}" }.join(' ') }
     text :term
+  end
+
+  def search_kind
+    self.class.name.underscore
   end
 
   def term

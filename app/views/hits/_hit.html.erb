@@ -1,36 +1,4 @@
-<div class="image">
-  <%= link_to image_tag(hit.image), hit.show_url %>
-</div>
-
-<div class="title">
-  <%= link_to hit.title, hit.show_url %>
-  <%= "(#{hit.result_decorator.model.original_title})" if hit.afisha? && hit.result_decorator.model.original_title.present? %>
-</div>
-
-<%= hit.places if hit.afisha? & hit.organization? %>
-
-<%#= hit.snipped_links %>
-<%#= hit.closest %>
-
-<div class='excerpt'><%#= hit.excerpt %></div>
-<% HitDecorator::ADDITIONAL_FIELDS.each do |field| %>
-  <% if (hit.highlights(field) + hit.highlights("#{field}_ru")).any? %>
-    <ul class="tags">
-      <li class="field_description"><%= hit.result.class.human_attribute_name(field) %>:</li>
-      <%= hit.splitted_fields(field) %>
-    </ul>
-  <% end %>
-<% end %>
-
-<% if hit.afisha?  %>
-  <span class='to_go'><%= hit.result_decorator.visits.visited.count %></span>
-  <span class='wait_invite'>3</span>
-  <span class='comments'><%= hit.result_decorator.comments.count %></span>
-  <span class='likes'><%= hit.result_decorator.votes.liked.count %></span>
-  <span class='visits'><%= hit.result_decorator.page_visits.count %></span>
-<% end %>
-
-<%= content_tag :ul, hit.kind_links, class: "kind" unless hit.kind_links.blank? %>
+<%= render partial: "hits/hit_#{hit.class_name.underscore}", locals: { hit: hit } %>
 
 <% if Rails.env.development? %>
 <!--

@@ -1,0 +1,18 @@
+<%= content_tag :div, link_to(image_tag(hit.image), hit.show_url), class: :image if hit.has_image? %>
+<%= content_tag :div, link_to(hit.title, hit.show_url), class: :title %>
+
+<%= hit.places %>
+<%#= hit.snipped_links %>
+<%#= hit.closest %>
+
+<div class='excerpt'><%#= hit.excerpt %></div>
+<% HitDecorator::ADDITIONAL_FIELDS.each do |field| %>
+  <% if (hit.highlights(field) + hit.highlights("#{field}_ru")).any? %>
+    <ul class="tags">
+      <li class="field_description"><%= hit.result.class.human_attribute_name(field) %>:</li>
+      <%= hit.splitted_fields(field) %>
+    </ul>
+  <% end %>
+<% end %>
+
+<%= content_tag :ul, hit.kind_links, class: "kind" unless hit.kind_links.blank? %>

@@ -198,6 +198,7 @@ class Afisha < ActiveRecord::Base
 
     string :state
     string(:kind, :multiple => true) { kind.map(&:value) }
+    string :search_kind
 
     text :title,                :boost => 1.0 * 1.2
     text :title_ru,             :boost => 1.0,        :more_like_this => true
@@ -220,6 +221,10 @@ class Afisha < ActiveRecord::Base
 
     time :last_showing_time,  :trie => true
     date :created_at
+  end
+
+  def search_kind
+    self.class.name.underscore
   end
 
   def likes_count

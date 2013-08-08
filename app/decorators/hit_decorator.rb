@@ -7,11 +7,16 @@ class HitDecorator < ApplicationDecorator
 
 
   def result_decorator
-    @decorator ||= if organization?
-      OrganizationDecorator.new(result)
-    else
-      AfishaDecorator.new(result)
-    end
+    @decorator ||=
+      if organization?
+        OrganizationDecorator.new(result)
+      elsif afisha?
+        AfishaDecorator.new(result)
+      elsif account?
+        AccountDecorator.new(result)
+      elsif post?
+        PostDecorator.new(result)
+      end
   end
 
   def afisha?
@@ -26,14 +31,18 @@ class HitDecorator < ApplicationDecorator
     result.is_a?(Post)
   end
 
+  def account?
+    result.is_a?(Account)
+  end
+
   def show_url
-    if afisha?
-      h.afisha_show_path(result_decorator)
-    elsif organization?
-      result_decorator
-    else
-      h.post_path(result)
-    end
+    afisha? ? h.afisha_show_path(result_decorator) : result_decorator
+  end
+
+  def has_image?
+    return true if afisha? && result_decorator.poster_url?
+    return true if organization? && result_decorator.logotype_url?
+    return true if post? && result.poster_url?
   end
 
   def image

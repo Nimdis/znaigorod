@@ -2,10 +2,11 @@
   <div class='afisha_filters'>
     <div class='by_date'>
       <ul>
-        <li><%= link_to 'Все разделы', '#' %></li>
-        <li><%= link_to 'Афиша', '#' %></li>
-        <li><%= link_to 'Заведения', '#' %></li>
-        <li><%= link_to 'Обзоры', '#' %></li>
+        <li><%= link_to 'Все разделы', searcher: :all %></li>
+        <li><%= link_to 'Афиша', '#', searcher: :afisha %></li>
+        <li><%= link_to 'Заведения', '#', searcher: :organization %></li>
+        <li><%= link_to 'Обзоры', '#', searcher: :post %></li>
+        <li><%= link_to 'Люди', '#', searcher: :account %></li>
       </ul>
     </div>
   </div>

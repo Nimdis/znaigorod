@@ -26,6 +26,11 @@ class Post < ActiveRecord::Base
     text :title,                :more_like_this => true
     text :annotation,           :more_like_this => true
     text :content,              :more_like_this => true
+    string :search_kind
+  end
+
+  def search_kind
+    self.class.name.underscore
   end
 
   def similar_posts
@@ -33,7 +38,7 @@ class Post < ActiveRecord::Base
   end
 
   def poster_url
-    post_images.first.attachment_url
+    post_images.any? ? post_images.first.attachment_url : 'public/stub_poster.png'
   end
 end
 

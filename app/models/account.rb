@@ -27,6 +27,11 @@ class Account < ActiveRecord::Base
     text :location
 
     string :rating
+    string :search_kind
+  end
+
+  def search_kind
+    self.class.name.underscore
   end
 
   def to_s
