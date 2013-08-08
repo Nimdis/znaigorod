@@ -171,7 +171,7 @@ GEM
       faraday_middleware (~> 0.8)
       oj (~> 1.2)
     fastercsv (1.5.5)
-    fastimage (1.2.13)
+    fastimage (1.5.0)
     fattr (2.2.1)
     formtastic (2.2.1)
       actionpack (>= 3.0)
