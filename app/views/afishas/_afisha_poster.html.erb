@@ -18,7 +18,7 @@
         <span class='comments'><%= afisha.comments.count %></span>
       </span>
       <span class='second_line'>
-        <span class='likes'><%= afisha.votes.liked.count %></span>
+        <span class='likes'><%= afisha.likes_count %></span>
         <span class='visits'><%= afisha.page_visits.count %></span>
         <%= content_tag :span, "#{afisha.age_min.to_i}+", class: :minimal_age if afisha.age_min.present? %>
       </span>
