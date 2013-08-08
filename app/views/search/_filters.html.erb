@@ -2,11 +2,11 @@
   <div class='afisha_filters'>
     <div class='by_date'>
       <ul>
-        <li><%= link_to 'Все разделы', searcher: :all %></li>
-        <li><%= link_to 'Афиша', '#', searcher: :afisha %></li>
-        <li><%= link_to 'Заведения', '#', searcher: :organization %></li>
-        <li><%= link_to 'Обзоры', '#', searcher: :post %></li>
-        <li><%= link_to 'Люди', '#', searcher: :account %></li>
+        <li<%= " class=selected" if params[:search_kind] == nil %>><%= link_to 'Все разделы', search_path(q: params[:q])%></li>
+        <li<%= " class=selected" if params[:search_kind] == 'afisha' %>><%= link_to 'Афиша', search_path(search_kind: :afisha, q: params[:q]) %></li>
+        <li<%= " class=selected" if params[:search_kind] == 'organization' %>><%= link_to 'Заведения', search_path(search_kind: :organization, q: params[:q]) %></li>
+        <li<%= " class=selected" if params[:search_kind] == 'post' %>><%= link_to 'Обзоры', search_path(search_kind: :post, q: params[:q]) %></li>
+        <li<%= " class=selected" if params[:search_kind] == 'account' %>><%= link_to 'Люди', search_path(search_kind: :account, q: params[:q]) %></li>
       </ul>
     </div>
   </div>

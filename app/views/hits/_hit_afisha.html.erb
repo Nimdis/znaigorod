@@ -1,11 +1,11 @@
-<%= content_tag :div, link_to(image_tag(hit.image), hit.show_url), class: :image if hit.has_image? %>
+<%= content_tag :div, link_to(image_tag(hit.image), hit.show_url), class: :image %>
 
 <div class="title">
   <%= link_to hit.title, hit.show_url %>
   <%= "(#{hit.result_decorator.model.original_title})" if hit.result_decorator.model.original_title.present? %>
 </div>
 
-<%= hit.places if hit.afisha? & hit.organization? %>
+<%= hit.places %>
 
 <%#= hit.snipped_links %>
 <%#= hit.closest %>
