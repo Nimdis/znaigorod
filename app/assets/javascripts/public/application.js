@@ -46,6 +46,7 @@
  * = require ./afisha_map
  * = require ./payment
  * = require ./tabs
+ * = require ./trailers
  * = require ./poster
  * = require ./photogallery
  * = require ./distribution

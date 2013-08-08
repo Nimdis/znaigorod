@@ -44,6 +44,7 @@
       .details
         .name
           font-size: 12px
+          margin-top: 8px
 
   .right
     float: right
@@ -108,6 +109,9 @@
       .afisha_owner
         span, a
           +inline-block
+          line-height: 10px
+        a img
+          +border-radius(50%)
 
     .share_and_likes
       min-height: 30px
@@ -141,7 +145,7 @@
 
     .tags
       +clearfix
-      margin: 10px 0 5px
+      margin: 10px 0
       li
         float: left
         font-size: 11px
@@ -150,3 +154,23 @@
         background-color: #e8e8e8
         margin: 0 5px 5px 0
         padding: 1px 5px 2px
+
+    .trailer_header,
+    .photogallery_header
+      font-size: 14px
+      background-color: #e8e8e8
+      padding: 1px 10px 2px
+      margin-bottom: 10px
+
+    .trailer
+      +clearfix
+      p
+        float: left
+        width: 240px
+        height: 146px
+        margin: 0 20px 10px 0
+        &:nth-child(3n)
+          margin-right: 0
+        iframe
+          width: 240px
+          height: 146px
