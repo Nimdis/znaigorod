@@ -20,10 +20,6 @@ every :day, :at => '7:25 am' do
   rake 'sync:kinomir'
 end
 
-every 4.hours do
-  rake 'statistics:all'
-end
-
 every :day, :at => '3am' do
   rake "recalculate_accounts_rating"
 end
@@ -38,4 +34,8 @@ end
 
 every 2.hours do
   rake 'afisha:event_users'
+end
+
+every 2.hours do
+  rake 'afisha:likes'
 end
