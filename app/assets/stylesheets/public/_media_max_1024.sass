@@ -6,13 +6,15 @@
     .dashboard
       font-size: 11px
 
-  .header_wrapper .main_menu ul li a
-    font-size: 12px
-    padding-top: 4px
-    padding-bottom: 4px
-    &:active
-      padding-top: 5px
-      padding-bottom: 3px
+  .header_wrapper .main_menu ul
+    margin-top: 51px
+    li a
+      font-size: 12px
+      padding-top: 4px
+      padding-bottom: 4px
+      &:active
+        padding-top: 5px
+        padding-bottom: 3px
 
   .afisha_filters_wrapper .afisha_filters .by_kind
     width: 90%
@@ -21,3 +23,24 @@
 
   .afisha_list .posters li
     width: percentage(1/5)
+
+  .afisha_show
+    .left
+      .user_actions
+        font-size: 11px
+        li
+          +toggable-links
+      .visits_counter
+        font-size: 11px
+      .avatars .details .name
+        font-size: 11px
+    .center
+      font-size: 11px
+      line-height: 1.5
+      h1
+        font-size: 20px
+      .text
+        h3, p, ul, ol
+          margin-bottom: 5px
+        h3
+          font-size: 17px

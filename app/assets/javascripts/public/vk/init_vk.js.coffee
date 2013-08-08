@@ -1,8 +1,11 @@
 if typeof VK != "undefined"
   VK.init
-    #apiId: 3808420   # jenkek.tusur.ru
-    apiId: 3136085    # znaigorod.ru
-    #apiId: 3136087   # znaigorod.openteam.ru
+    # jenkek.tusur.ru
+    #apiId: 3808420
+    # znaigorod.ru
+    apiId: 3136085
+    # znaigorod.openteam.ru
+    #apiId: 3136087
     onlyWidgets: true
 
 @init_vk_like = () ->

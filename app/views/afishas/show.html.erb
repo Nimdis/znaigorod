@@ -115,10 +115,6 @@
       </ul>
     <%end%>
 
-    <div class="votes">
-      <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @afisha.model } %>
-    </div>
-
     <% if @afisha.trailer_code.present? %>
       <div class='trailer_header'>Видео</div>
       <div class='trailer'>
