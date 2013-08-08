@@ -204,6 +204,7 @@ class AfishaDecorator < ApplicationDecorator
   auto_html_for :trailer_code do
     youtube(:width => 740, :height => 450)
     vimeo(:width => 740, :height => 450)
+    link :target => '_blank'
     double_enter
     simple_format
   end

@@ -76,7 +76,7 @@
         padding-left: 13px
 
     .text
-      h3, p, ul, ol
+      h3, p, ul, ol, table
         margin-bottom: 10px
 
       h3
@@ -94,6 +94,16 @@
       ol > li
         display: list-item
         list-style: decimal outside
+
+      table
+        tr td
+          vertical-align: top
+          padding: 0 10px 2px 0
+          &:first-child
+            @extend .nobr
+            font-weight: bold
+            &:first-letter
+              text-transform: capitalize
 
       .afisha_owner
         span, a
