@@ -27,10 +27,11 @@ namespace :afisha do
   end
 
   desc 'Get likes count from social networks'
-  task :likes => [:fb_likes, :vk_likes]
+  task :likes => [:fb_likes, :vk_likes, :odn_likes]
 
   desc 'Get facebook likes'
   task :fb_likes => :environment do
+    puts 'Getting facebook likes'
     afishas = Afisha.with_showings
     bar = ProgressBar.new(afishas.count)
     afishas.each do |afisha|
@@ -46,6 +47,7 @@ namespace :afisha do
 
   desc 'Get vkontakte likes'
   task :vk_likes => :environment do
+    puts 'Getting vkontakte likes'
     afishas = Afisha.with_showings
     bar = ProgressBar.new(afishas.count)
     vk_client = VkontakteApi::Client.new
@@ -56,6 +58,26 @@ namespace :afisha do
           likes = vk_client.likes.get_list(type: 'sitepage', owner_id: '3136085', page_url: url)['count']
           afisha.update_attributes(vkontakte_likes: likes)
         rescue VkontakteApi::Error => e
+          next
+        end
+      end
+      bar.increment!
+    end
+  end
+
+  desc 'Get odnoklassniki likes'
+  task :odn_likes => :environment do
+    puts 'Getting odnoklassniki likes'
+    afishas = Afisha.with_showings
+    bar = ProgressBar.new(afishas.count)
+    afishas.each do |afisha|
+      if afisha.slug?
+        url = "#{Settings[:app][:url]}/afisha/#{afisha.slug}"
+        begin
+          data = open("http://www.odnoklassniki.ru/dk?st.cmd=shareData&cb=mailru.share.ok.init&ref=#{URI.escape(url)}").read
+          likes = JSON.parse(data.match('\{.+\}').to_s)['count'].to_i
+          afisha.update_attributes(odn_likes: likes)
+        rescue
           next
         end
       end
