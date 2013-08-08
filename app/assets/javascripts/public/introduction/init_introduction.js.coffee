@@ -1,24 +1,6 @@
 @init_introduction = () ->
-  $('.filters .introduction').each (index, item) ->
-    block = $(this)
-    block_height = block.height()
-    max_height = 26
-    if block.height() > max_height
-      block.height(max_height)
-      $('<a href=\'#\' class=\'toggler closed\'>развернуть</a>').prependTo(block)
-    $('a.toggler', block).click (event) ->
-      $(this).toggleClass('closed').toggleClass('opened')
-      if $(this).hasClass('opened')
-        $(this).text('свернуть')
-        block.stop(true, true).animate
-          height: block_height
-        , 'fast'
-      if $(this).hasClass('closed')
-        $(this).text('развернуть')
-        block.stop(true, true).animate
-          height: max_height
-        , 'fast'
-      false
-    true
+  $('.content .introduction').css
+    'height': '0'
+    'visibility': 'hidden'
 
   true
