@@ -1,6 +1,10 @@
 #!/bin/bash
 
 bin/rake db:drop db:create
+
+#yes | bin/cap production db:pull
 yes | bin/cap development db:pull
+#bin/cap production sunspot:pull
 bin/cap development sunspot:pull
+
 bin/rake db:migrate
