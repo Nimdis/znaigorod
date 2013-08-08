@@ -102,6 +102,13 @@ ru:
       work: Конкурсная работа
       post: Обзор
 
+  search_kinds:
+    all: Все
+    afisha: Афиша
+    organization: Заведения
+    post: Обзоры
+    account: Люди
+
   price_kind:
     visiting:
       one:   "%{count} посещение"

@@ -31,6 +31,7 @@ module Znaigorod
                                 #{config.root}/app/presenters
                                 #{config.root}/app/presenters/afisha
                                 #{config.root}/app/presenters/suborganizations
+                                #{config.root}/app/presenters/search
                                 #{config.root}/lib
                                )
 
