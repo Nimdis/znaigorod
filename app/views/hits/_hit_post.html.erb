@@ -1,8 +1,10 @@
 <%= content_tag :div, link_to(image_tag(hit.result_decorator.image, size: '88x88'), hit.result_decorator.show_url), class: :image %>
-<%= link_to hit.result_decorator.title, hit.result_decorator.show_url %>
-<%= hit.result_decorator.annotation %>
+<%= link_to hit.result_decorator.title, hit.result_decorator.show_url, class: :title %>
 
-<div class="details">
-  <%= content_tag :span, hit.result_decorator.comments.count, class: :comments %>
-  <%= content_tag :span, hit.result_decorator.votes.liked.count, class: :likes %>
+<div class="info">
+  <div class='excerpt'><%= hit.excerpt %></div>
+  <div class="details">
+    <%= content_tag :span, hit.result_decorator.comments.count, class: :comments %>
+    <%= content_tag :span, hit.result_decorator.votes.liked.count, class: :likes %>
+  </div>
 </div>

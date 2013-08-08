@@ -1,24 +1,26 @@
-<%= content_tag :div, link_to(image_tag(hit.image), hit.show_url), class: :image if hit.has_image? %>
+<%= content_tag :div, link_to(image_tag(resized_image_url(hit.result_decorator.logotype_url, 88, 88), size: '88x88', alt: hit.result_decorator.title), hit.result_decorator.logotype_url), class: :image if hit.has_image? %>
 <%= content_tag :div, link_to(hit.title, hit.show_url), class: :title %>
 
 <div class="info">
   <%= hit.places %>
+
   <div class='excerpt'><%= hit.excerpt %></div>
-</div>
 
-<% HitDecorator::ADDITIONAL_FIELDS.each do |field| %>
-  <% if (hit.highlights(field) + hit.highlights("#{field}_ru")).any? %>
-    <ul class="tags">
-      <li class="field_description"><%= hit.result.class.human_attribute_name(field) %>:</li>
-      <%= hit.splitted_fields(field) %>
-    </ul>
+  <% HitDecorator::ADDITIONAL_FIELDS.each do |field| %>
+    <% if (hit.highlights(field) + hit.highlights("#{field}_ru")).any? %>
+      <ul class="tags">
+        <li class="field_description"><%= hit.result.class.human_attribute_name(field) %>:</li>
+        <%= hit.splitted_fields(field) %>
+      </ul>
+    <% end %>
   <% end %>
-<% end %>
 
-<%= content_tag :ul, hit.kind_links, class: "kind" unless hit.kind_links.blank? %>
+  <%= content_tag :ul, hit.kind_links, class: "kind" unless hit.kind_links.blank? %>
 
-<div class="details">
-  <%= content_tag :span, hit.result_decorator.visits.visited.count, class: :to_go %>
-  <%= content_tag :span, hit.result_decorator.comments.count, class: :comments %>
-  <%= content_tag :span, hit.result_decorator.votes.liked.count, class: :likes %>
+  <div class="details">
+    <%= content_tag :span, hit.result_decorator.visits.visited.count, class: :to_go %>
+    <%= content_tag :span, hit.result_decorator.comments.count, class: :comments %>
+    <%= content_tag :span, hit.result_decorator.votes.liked.count, class: :likes %>
+  </div>
 </div>
+

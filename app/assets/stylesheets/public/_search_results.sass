@@ -16,12 +16,14 @@
 
       .info
         font-size: 12px
+        margin: 0 0 0 95px
 
         .address
           background: transparent image_url('public/address.png') no-repeat 2px 2px
           padding-left: 13px
 
       .details
+        +clearfix
         color: #999
         display: block
         margin: 5px 0 0 0
@@ -46,7 +48,7 @@
             background: none
             padding-left: 18px
 
-      ul.kind
+      ul.kind, ul.tags
         li
           border: none
           display: inline

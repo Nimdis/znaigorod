@@ -5,7 +5,6 @@ class HitDecorator < ApplicationDecorator
   ORGANIZATION_FIELDS = %w[category cuisine feature offer payment]
   ADDITIONAL_FIELDS = AFFICHE_FIELDS + ORGANIZATION_FIELDS
 
-
   def result_decorator
     @decorator ||=
       if organization?
@@ -40,23 +39,10 @@ class HitDecorator < ApplicationDecorator
   end
 
   def has_image?
-    return true if afisha? && result_decorator.poster_url?
     return true if organization? && result_decorator.logotype_url?
     return true if post? && result.poster_url?
   end
 
-  def image
-    if afisha?
-      resized_image_url(result_decorator.poster_url, 88, 120)
-    elsif organization?
-      resized_image_url(result_decorator.logotype_url, 88, 88)
-    elsif post?
-      resized_image_url(result.poster_url, 88, 120)
-    end
-  end
-
-  #
-  #
   # FIXME: грязный хак
   def fake_kind
       kind = suborganization.class.name.underscore.gsub(/_decorator/, '')

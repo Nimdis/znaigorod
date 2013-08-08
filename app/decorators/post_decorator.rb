@@ -14,8 +14,4 @@ class PostDecorator < ApplicationDecorator
   def image
     post.poster_url
   end
-
-  def annotation
-    post.annotation.html_safe
-  end
 end

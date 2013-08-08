@@ -11,6 +11,8 @@ class Post < ActiveRecord::Base
 
   validates_presence_of :annotation, :content, :title
 
+  alias_attribute :description, :annotation
+
   friendly_id :title, use: :slugged
 
   default_scope order('id DESC')
