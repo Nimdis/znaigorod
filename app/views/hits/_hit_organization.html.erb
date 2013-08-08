@@ -1,11 +1,11 @@
 <%= content_tag :div, link_to(image_tag(hit.image), hit.show_url), class: :image %>
 <%= content_tag :div, link_to(hit.title, hit.show_url), class: :title %>
 
-<%= hit.places %>
-<%#= hit.snipped_links %>
-<%#= hit.closest %>
+<div class="info">
+  <%= hit.places %>
+  <div class='excerpt'><%= hit.excerpt %></div>
+</div>
 
-<div class='excerpt'><%#= hit.excerpt %></div>
 <% HitDecorator::ADDITIONAL_FIELDS.each do |field| %>
   <% if (hit.highlights(field) + hit.highlights("#{field}_ru")).any? %>
     <ul class="tags">
@@ -16,3 +16,9 @@
 <% end %>
 
 <%= content_tag :ul, hit.kind_links, class: "kind" unless hit.kind_links.blank? %>
+
+<div class="details">
+  <%= content_tag :span, hit.result_decorator.visits.visited.count, class: :to_go %>
+  <%= content_tag :span, hit.result_decorator.comments.count, class: :comments %>
+  <%= content_tag :span, hit.result_decorator.votes.liked.count, class: :likes %>
+</div>

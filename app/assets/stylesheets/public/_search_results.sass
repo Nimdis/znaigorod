@@ -1,0 +1,55 @@
+.search_results
+
+  ul.items_list
+    li
+      +clearfix
+      border-top: 1px solid #ccc
+      padding: 5px 0
+
+      .image
+        float: left
+        margin: 0 10px 0 0
+
+      .title
+        font-size: 15px
+        line-height: 22px
+
+      .info
+        font-size: 12px
+
+        .address
+          background: transparent image_url('public/address.png') no-repeat 2px 2px
+          padding-left: 13px
+
+      .details
+        color: #999
+        display: block
+        margin: 5px 0 0 0
+
+        span
+          float: left
+          width: 34px
+          padding-left: 25px
+          background: transparent image_url('public/afisha_details_sprite.png') no-repeat 10px 3px
+
+          &.to_go
+            background-position: 12px 3px
+          &.wait_invite
+            background-position: 4px -17px
+          &.comments
+            background-position: 5px -36px
+          &.likes
+            background-position: 12px -57px
+          &.visits
+            background-position: 6px -77px
+          &.minimal_age
+            background: none
+            padding-left: 18px
+
+      ul.kind
+        li
+          border: none
+          display: inline
+          margin: 0 5px 0 0
+
+

@@ -5,8 +5,6 @@
 <% end %>
 
 <div class="search_results">
-  <h1>Результаты поиска &laquo;<%= params[:q] %>&raquo;</h1>
-
   <% if @search_presenter.hits? %>
     <ul class="items_list">
       <%= render :partial => "search_results_list" %>
