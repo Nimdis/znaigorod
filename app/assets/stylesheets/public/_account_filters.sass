@@ -2,6 +2,16 @@
 
   .filters.account
 
+    .by_gender
+      ul
+        +clearfix
+        li
+          float: left
+          margin-right: 5px
+          +toggable-links
+          &:last-child
+            margin-right: 0
+
     .by_kind
       width: 30%
       margin: 20px auto
@@ -37,13 +47,13 @@
 
           &.all
             a
-              background-position: 24px 0
+              background-position: 16px 0
               &:hover
-                background-position: 24px -67px
+                background-position: 16px -67px
             &.selected a
-              background-position: 24px -136px
+              background-position: 16px -136px
               &:hover
-                background-position: 24px -67px
+                background-position: 16px -67px
 
           &.admin
             a

@@ -1,4 +1,7 @@
-<div class="content_wrapper">
-  <h1>Все друзья пользователя <%= link_to @account, @account %></h1>
-  <%= render partial: 'accounts/account_friends', locals: { friends: @friends.approved } %>
+<div class="accounts_list">
+  <ul class="posters">
+    <%= render partial: 'accounts/account_posters', :locals => { collection: collection } %>
+  </ul>
 </div>
+
+<%= paginate collection %>

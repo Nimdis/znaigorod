@@ -31,6 +31,7 @@ class Account < ActiveRecord::Base
     text :location
     text :title,     :stored => true
 
+    string :gender
     string :rating
     string :search_kind
     string(:kind, :multiple => true) { roles.map(&:role) }

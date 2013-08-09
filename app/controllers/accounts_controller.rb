@@ -14,11 +14,7 @@ class AccountsController < ApplicationController
   private
 
   def collection
-    Account.search {
-      with(:kind, params[:kind]) if params[:kind] != 'all'
-      order_by :rating, :desc
-      paginate paginate_options.merge(:per_page => per_page)
-    }.results
+    HasSearcher.searcher(:accounts, params).paginate(:page => params[:page], :per_page => per_page)
   end
 
   def per_page
