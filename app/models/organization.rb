@@ -12,8 +12,8 @@ class Organization < ActiveRecord::Base
                   :site, :subdomain, :title, :vfs_path, :attachments_attributes,
                   :logotype_url, :non_cash, :priority_suborganization_kind,
                   :comment, :organization_stand_attributes, :additional_rating,
-                  :social_links_attributes,
-                  :user_id, :ability_to_comment
+                  :social_links_attributes, :user_id, :ability_to_comment,
+                  :vkontakte_likes, :fb_likes, :odn_likes
 
   ### <=== CRM
 
