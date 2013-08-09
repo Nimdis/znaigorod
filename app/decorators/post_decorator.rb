@@ -14,4 +14,8 @@ class PostDecorator < ApplicationDecorator
   def image
     post.poster_url
   end
+
+  def date
+    Russian::strftime(post.created_at, "%d %B %Y")
+  end
 end

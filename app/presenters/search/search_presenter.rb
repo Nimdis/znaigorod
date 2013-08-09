@@ -1,7 +1,6 @@
 class SearchPresenter
 
   attr_accessor :params
-
   attr_reader :kind_filter, :query, :page, :per_page
 
   def initialize(params)
@@ -97,5 +96,4 @@ class SearchCounter
   def count
     HasSearcher.searcher(:global, presenter.searcher_parameters.merge(:search_kind => search_kind)).total
   end
-
 end

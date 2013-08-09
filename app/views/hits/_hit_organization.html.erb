@@ -3,6 +3,8 @@
 
 <div class="info">
   <%= hit.places %>
+  <%= hit.result_decorator.schedule_today %>
+  <%= content_tag :div, hit.result_decorator.model.phone, class: :phone %>
 
   <div class='excerpt'><%= hit.excerpt %></div>
 

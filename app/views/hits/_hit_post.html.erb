@@ -1,7 +1,8 @@
-<%= content_tag :div, link_to(image_tag(hit.result_decorator.image, size: '88x88'), hit.result_decorator.show_url), class: :image %>
+<%= content_tag :div, link_to(image_tag(resized_image_url(hit.result_decorator.image, 88, 88), size: '88x88', alt: hit.result_decorator.title), hit.result_decorator.image), class: :image %>
 <%= link_to hit.result_decorator.title, hit.result_decorator.show_url, class: :title %>
 
 <div class="info">
+  <%= content_tag :span, hit.result_decorator.date, class: :date %>
   <div class='excerpt'><%= hit.excerpt %></div>
   <div class="details">
     <%= content_tag :span, hit.result_decorator.comments.count, class: :comments %>
