@@ -59,7 +59,6 @@
  * = require ./prepare_sauna
  * = require ./iconize_info
  * = require ./virtual_tour_link
- * = require ./included_photos
  * = require ./post_photos
  * = require ./schedule_toggle
  * = require ./pagination

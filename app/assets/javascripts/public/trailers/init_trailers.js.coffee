@@ -22,7 +22,6 @@
       'width': wrapper.width()
       'height': wrapper.height()
       'cursor': 'pointer'
-      'z-index': 100
     overlay.click ->
       trailer_dialog = $('<div class="trailer_dialog" />').appendTo('body').html(iframe.clone()).hide()
       trailer_dialog.css

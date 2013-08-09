@@ -2,7 +2,7 @@
 
 module PosterHelper
 
-  def resized_image_url(url, width, height, options = { crop: '!', orientation: nil })
+  def resized_image_url(url, width, height, options = { crop: '!', orientation: 'n' })
     if url.match(/\d+\/region\/\d+/)
       url.gsub!(/\/region\/(\d+)\/(\d+)\/\d+\/\d+/) { "/#{$1}-#{$2}" }
     end

@@ -31,12 +31,9 @@ $ ->
   init_prepare_sauna() if $('.organization_info .sauna_hall_details').length
   init_iconize_info() if $('.organization_info .iconize_info li').length
   init_virtual_tour_link() if $('.organization_info .virtual_tour_link').length
-  init_included_photos() if $('.affiche .photogallery li').length
-  init_included_photos() if $('.organization_info .photogallery li').length
-  init_included_photos() if $('.post .photogallery li').length
   init_post_photos() if $('.post a[rel="colorbox"]').length
   init_schedule_toggle() if $('.organization_info .more_schedule').length
-  init_photogallery() if $('.content_wrapper .was_in_city_photos li').length
+  init_photogallery() if $('.photogallery ul li').length
   init_pagination() if $('nav.pagination').length
   init_affiche_list_settings() if $('.content_wrapper .affiches_list .list_settings').length
   init_sms_claims() if $('.sms_claims li').length
