@@ -1,99 +1,29 @@
-<% content_for :two_gis_map_scripts, javascript_include_tag('http://maps.api.2gis.ru/1.0') %>
-
-<%= render 'commons/filters_meta' %>
-
 <div class='filters_wrapper'>
-  <div class="filters">
-    <h1><%= t("organization.list_title.#{@presenter.kind}") %> в Томске</h1>
-
-    <% unless t("meta.#{@presenter.pluralized_kind}.introduction", default: '').blank? %>
-      <div class='introduction'>
-        <%= t("meta.#{@presenter.pluralized_kind}.introduction").as_html %>
-      </div>
-    <% end %>
-
-    <%= form_tag send("#{@presenter.pluralized_kind}_path"), :method => :get do %>
-      <%= hidden_field_tag :order_by, @presenter.order_by %>
-
-      <% if @presenter.categories_filter.available.many? %>
-        <div class='filter show categories_filter' id='categories'>
-          <%= link_to "очистить", '#', :class => 'clear_filter_link' %>
-          <div class="filter_checkboxes">
-            <% @presenter.categories_filter.available.each_with_index do |category, index| %>
-              <div class="checkbox">
-                <%= check_box_tag 'categories[]', category, (@presenter.categories_filter.selected.include?(category)), :id => "category_#{index}" %>
-                <%= label_tag "category_#{index}", @presenter.categories_filter.available[index] %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-      <% @presenter.class.filters.each do |filter_name| %>
-        <% next if filter_name == :categories %>
-        <div class='filter <%= @presenter.send("#{filter_name}_filter").used? ? 'show' : 'hide' %>' id='<%= filter_name %>'>
-          <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
-          <%= link_to "очистить", '#', :class => 'clear_filter_link' %>
-          <div class="filter_label wide"><%= t("suborganizations.filter.#{filter_name}") %></div>
-          <div class="filter_checkboxes">
-            <% @presenter.send("#{filter_name}_filter").available.each_with_index do |value, index| %>
-              <div class="checkbox <%= cycle('first', 'second', 'third', 'fourth', 'fifth', name: filter_name) %>">
-                <%= check_box_tag "#{filter_name}[]", value, (@presenter.send("#{filter_name}_filter").selected.include?(value)), :id => "#{filter_name.to_s.singularize}_#{index}" %>
-                <%= label_tag "#{filter_name.to_s.singularize}_#{index}", @presenter.send("#{filter_name}_filter").available[index] %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-
-      <div class="filter <%= @presenter.geo_filter.used? ? 'used show' : 'hide' %>" id='geo'>
-        <%= link_to "убрать", '#', :class => 'remove_filter_link' %>
-        <div class="filter_label">Местоположение</div>
-        <div class="filter_geo">
-          <div class="map_wrapper">
-          </div>
-          <div class="hidden_inputs">
-            <%= hidden_field_tag :lat,    @presenter.geo_filter.lat, :class => 'lat' %>
-            <%= hidden_field_tag :lon,    @presenter.geo_filter.lon, :class => 'lon' %>
-            <%= hidden_field_tag :radius, @presenter.geo_filter.radius, :class => 'radius' %>
-          </div>
-        </div>
-        <div class="radius_slider_wrapper">
-          <div class="info_radius"><span class='bold'>Радиус:</span> <span class='rad'><%= "%.0f" % (@presenter.geo_filter.radius.to_f*1000) %></span> м (<span class='time'><%= "%.1f" % (@presenter.geo_filter.radius.to_f*1000/54.6) %></span> мин пешком)</div>
-          <div class="wrapper_box">
-            <div class="min_radius">100 м</div>
-            <div class="radius_slider"></div>
-            <div class="max_radius">11 км</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="criteria_list">
-        <div class="criteria_label">Добавить критерии:</div>
-        <ul>
-          <% @presenter.class.filters.each do |filter_name| %>
-            <% next if filter_name == :categories %>
-            <li>
-              <%= link_to t("suborganizations.filter.#{filter_name}"), '#', :class => filter_name %>
-            </li>
-          <% end %>
-          <li>
-            <%= link_to "Местоположение", '#', :class => 'geo' %>
+  <div class='filters afisha'>
+    <div class='by_date'>
+      <ul>
+        <% @presenter.kinds_links.each do |kind_link| %>
+          <li<%= " class=selected" if kind_link[:selected] %>>
+            <%= link_to kind_link[:title],
+              send(kind_link[:url], kind_link[:parameters]), :class => kind_link[:class] %>
           </li>
-        </ul>
-      </div>
-      <div class="submit_action">
-        <div class="submit_wrapper">
-          <input type="submit" value="Применить фильтр" class='submit' />
-        </div>
-        <div class="results_counter">
-          Найдено организаций: <span class='counter'><%= @presenter.total_count %></span>
-        </div>
-        <div class="clear_wrapper">
-          <%= link_to "Очистить", '#' %>
-        </div>
-      </div>
-    <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class='filters afisha'>
+    <div class='by_kind'>
+      <ul>
+        <% @presenter.categories_links.each do |category_link| %>
+          <li class='<%= category_link[:klass] %><%= ' selected' if category_link[:selected] %>'>
+            <%= link_to send(category_link[:url], category_link[:parameters]) do %>
+              <%= content_tag :span,  category_link[:title], class: :name %>
+              <%= content_tag :span, category_link[:count], class: :count  %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>
-
-

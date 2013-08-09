@@ -1,36 +1,30 @@
-<% resource_class.facets.each do |facet| %>
-  <div class="filter by_<%= facet %>">
-    <h6 <%= is_active_filter?(facet) ? 'class=open' : '' %>><a href='#' class='dashed_dark_gray'><%= Organization.human_attribute_name(facet) %></a></h6>
-    <div class="filter_wrapper <%= is_active_filter?(facet) ? '' : 'hide' %>">
-      <a href="#" class='reset dashed_dark_gray'>Сбросить</a>
+<div class='filters_wrapper'>
+  <div class='filters afisha'>
+    <div class='by_date'>
       <ul>
-        <% @search.facet(resource_class.facet_field(facet)).rows.each do |row| %>
-          <li>
-            <a href="#" class='<%= transliterate(row.value) %> <%= is_active_variant?(facet, row.value) %>' data-value='<%= row.value %>'><%= row.value %></a>
+        <% @presenter.kinds_links.each do |kind_link| %>
+          <li<%= " class=selected" if kind_link[:selected] %>>
+            <%= link_to kind_link[:title],
+              send(kind_link[:url], kind_link[:parameters]), :class => kind_link[:class] %>
           </li>
         <% end %>
       </ul>
     </div>
   </div>
-<% end %>
+
 <!--
-<div class="filter by_location">
-  <h6 class='open'><a href='#' class='dashed_dark_gray'>Место положение</a></h6>
-  <div class="filter_wrapper">
-    <div class="map_container" data-lon="84.982916050722" data-lat="56.492186825082"></div>
-    <div class="additional">
-      <%#= simple_form_for :search_location do |f| %>
-        <%#= f.input :street, :label => "Адрес", :required => false %>
-        <%#= f.button :submit, :label => "Найти" %>
-      <%# end %>
-      <div class="search_radius_wrapper">
-        <div class="info"><strong>Радиус:</strong> <span class="counter">0</span> метров <span class="speed">0</span></div>
-        <div class="min_max">
-          <span class="min">0</span>
-          <span class="max">0</span>
-        </div>
-        <div id="search_radius_slider"></div>
-      </div>
+  <div class='filters afisha'>
+    <div class='by_kind'>
+      <ul>
+        <% @presenter.categories_links.each do |category_link| %>
+          <li class='<%= category_link[:klass] %><%= ' selected' if category_link[:current] %>'>
+            <%= link_to send(category_link[:url], category_link[:parameters]) do %>
+              <%= content_tag :span,  category_link[:title], class: :name %>
+              <%= content_tag :span, category_link[:count], class: :count  %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </div>

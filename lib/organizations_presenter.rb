@@ -20,6 +20,10 @@ module OrganizationsPresenter
     include Rails.application.routes.url_helpers
     attr_accessor :kind, :filters
 
+    def suborganization_kinds
+      [Meal, Entertainment, Sauna, CarWash, CarSalesCenter, Culture, Sport, Creation, SalonCenter]
+    end
+
     def acts_as_organizations_presenter(*args)
       options = args.extract_options!
 
@@ -49,7 +53,7 @@ module OrganizationsPresenter
   end
 
   def coupons
-    @coupons ||= Coupon.search { 
+    @coupons ||= Coupon.search {
       with :suborganizations_kind, kind
       paginate :page => 1, :per_page => 100
     }.results.sample(3)
@@ -124,6 +128,46 @@ module OrganizationsPresenter
   def paginated_collection
     searcher.results
   end
+
+  def kinds_links
+    @kinds_links ||= [].tap do |kinds_links|
+      self.class.suborganization_kinds.map(&:name).map(&:underscore).each do |suborganization_kind|
+        kinds_links << {
+          title: I18n.t("organization.kind.#{suborganization_kind}"),
+          klass: suborganization_kind,
+          url: "#{suborganization_kind.pluralize}_path",
+          parameters: {},
+          selected: kind == suborganization_kind,
+        }
+      end
+    end
+  end
+
+  def categories_links
+    @categories_links ||= [].tap { |array|
+      array << {
+        title: 'Все',
+        klass: 'all',
+        url: "#{pluralized_kind}_path",
+        parameters: {},
+        selected: categories_filter[:selected].empty?,
+        count: HasSearcher.searcher(pluralized_kind.to_sym).total
+      }
+      HasSearcher.searcher(pluralized_kind.to_sym).facet("#{kind}_category").rows.map do |row|
+        array << {
+          title: row.value.mb_chars.capitalize,
+          klass: Russian.translit(row.value).gsub(" ", "_"),
+          url: "#{pluralized_kind}_path",
+          parameters: {
+            categories: [row.value.mb_chars.downcase]
+          },
+          selected: categories_filter[:selected].include?(row.value.mb_chars.downcase),
+          count: row.count
+        }
+      end
+    }
+  end
+
 
   def total_count
     searcher.total

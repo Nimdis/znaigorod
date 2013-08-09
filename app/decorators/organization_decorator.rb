@@ -13,12 +13,12 @@ class OrganizationDecorator < ApplicationDecorator
 
   def logo_link(width = 80, height = 80)
     if organization.logotype_url?
-      h.link_to h.image_tag(resized_image_url(organization.logotype_url, width, height), :alt => organization.title.text_gilensize), organization_url
+      h.link_to h.image_tag(h.resized_image_url(organization.logotype_url, width, height, { crop: '!', orientation: 'n' }), size: "#{width}x#{height}", alt: organization.title.text_gilensize), organization_url
     end
   end
 
   def title_link
-    h.link_to organization.title.text_gilensize.hyphenate, organization_url
+    h.link_to organization.title.text_gilensize, organization_url
   end
 
   def address_link(address = organization.address)

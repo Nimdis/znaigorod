@@ -4,8 +4,6 @@
 <% content_for :meta_description, t("meta.#{@presenter.pluralized_kind}.description") %>
 <% content_for :meta_keywords, t("meta.#{@presenter.pluralized_kind}.keywords") %>
 
-<%= render :partial => 'filters' %>
-
 <div class="organizations_list">
   <div class="list_settings">
     <div class="sort affiches">
@@ -13,15 +11,6 @@
       <%= render 'commons/suborganization_sorting_links' %>
     </div>
   </div>
-
-  <% if Rails.env.development? && @presenter.coupons.any? %>
-    <div class='coupons'>
-      <div class='coupon_header'>Сертификаты, купоны, скидки</div>
-      <ul class='coupons_list'>
-        <%= render :partial => 'coupons/coupons_list', :locals => { :collection => @presenter.coupons } %>
-      </ul>
-    </div>
-  <% end %>
 
   <% if @presenter.collection.any? %>
     <ul class="items_list">
