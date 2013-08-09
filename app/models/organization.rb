@@ -31,6 +31,8 @@ class Organization < ActiveRecord::Base
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
   has_many :gallery_files,  :as => :attachable, :dependent => :destroy
 
+  has_many :page_visits, :as => :page_visitable, :dependent => :destroy
+
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation], default: :fresh, predicates: true
 
@@ -184,6 +186,10 @@ class Organization < ActiveRecord::Base
 
     text(:services_info) { services.map { |s| "#{s.title} #{s.description} #{s.category} #{s.feature}" }.join(' ') }
     text :term
+  end
+
+  def create_page_visit(session)
+    self.page_visits.find_or_create_by_session(session: session)
   end
 
   def search_kind

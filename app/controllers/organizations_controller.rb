@@ -23,6 +23,8 @@ class OrganizationsController < ApplicationController
       @organization = OrganizationDecorator.find(params[:id])
     end
 
+    @organization.create_page_visit(request.session_options[:id])
+
     @presenter = ShowingsPresenter.new(organization_ids: [@organization.id], order_by: params[:order_by], page: params[:page])
 
     render partial: @presenter.partial, layout: false and return if request.xhr?
