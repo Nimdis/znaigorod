@@ -150,7 +150,7 @@
         </div>
       <% end %>
 
-      <div class='sheduled'>
+      <div class='scheduled'>
         <div class='head'>
           <h3 class='inline'>
             Ещё сеансы
@@ -197,7 +197,7 @@
             <% end %>
           </div>
         <% elsif @afisha.scheduled_showings? %>
-          <div class='sheduled'>
+          <div class='scheduled'>
             <div class='head'>
               <h3>Расписание</h3>
               <div class='places'>
@@ -206,7 +206,7 @@
                 <% end %>
               </div>
             </div>
-            <div class='shedule'>
+            <div class='schedule'>
               <div class='price'><strong>Стоимость:</strong> <%= @afisha.schedule.human_price %></div>
               <ul>
                 <% @afisha.schedule.days.each do |li| %>

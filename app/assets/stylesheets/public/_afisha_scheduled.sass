@@ -1,0 +1,49 @@
+.afisha_show .center
+
+  .scheduled
+
+    .scheduled_header
+      font-size: 14px
+      background-color: #e8e8e8
+      padding: 1px 10px 2px
+      margin-bottom: 10px
+
+    .price
+      margin-bottom: 10px
+
+    ul
+      +clearfix
+      li
+        float: left
+        width: 100px
+        margin: 0 10px 10px 0
+        &:last-child
+          margin-right: 0
+        .date
+          +clearfix
+          background-color: #e8e8e8
+          +border-radius
+          padding: 2px 5px 3px
+          .day
+            float: left
+            display: block
+            font-size: 24px
+            margin-right: 5px
+          .month
+            display: block
+            font-size: 11px
+            font-weight: bold
+          .day_of_week
+            display: block
+            font-size: 11px
+            text-transform: lowercase
+        .work_time_wrapper
+          +clearfix
+          text-align: center
+          padding-bottom: 3px
+        &.current
+          color: #fff
+          background-color: #f60
+          +border-radius
+          .date
+            background: none

@@ -15,11 +15,12 @@ class AfficheScheduleDecorator < ApplicationDecorator
   def work_time(date)
     res = ""
     if affiche_schedule.starts_on > date && affiche_schedule.ends_on > date
-      res = h.content_tag(:span, "не работает", class: :weekend)
+      res = h.content_tag(:span, "&mdash;".html_safe, class: :weekend)
     elsif affiche_schedule.holidays.include? (date.wday == 0 ? 7 : date.wday)
       res = h.content_tag(:span, "выходной", :class => :weekend)
     else
       res << h.content_tag(:span, I18n.l(affiche_schedule.starts_at, :format => '%H:%M'), :class => :begin)
+      res << " &ndash; "
       res << h.content_tag(:span, I18n.l(affiche_schedule.ends_at, :format => '%H:%M'), :class => :end)
     end
     h.content_tag :p, res.html_safe, :class => :work_time_wrapper
@@ -30,7 +31,7 @@ class AfficheScheduleDecorator < ApplicationDecorator
     day, month = I18n.l(date, :format => '%e %B').squish.split(" ")
     res << h.content_tag(:span, day, :class => :day)
     res << h.content_tag(:span, month, :class => :month)
-    res << h.content_tag(:span,  I18n.l(date, :format => '%A'), :class => :day_of_week)
+    res << h.content_tag(:span,  I18n.l(date, :format => '%a'), :class => :day_of_week)
     h.content_tag :p, res.html_safe, :class => :date
   end
 

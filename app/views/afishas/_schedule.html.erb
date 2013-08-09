@@ -35,23 +35,10 @@
       <% end %>
     </div>
   <% elsif @afisha.scheduled_showings? %>
-    <div class='sheduled'>
-      <div class='head'>
-        <h3>Расписание</h3>
-        <div class='places'>
-          <% @afisha.places.each do |place| %>
-            <%= place.place %>
-          <% end %>
-        </div>
-      </div>
-      <div class='shedule'>
-        <div class='price'><strong>Стоимость:</strong> <%= @afisha.schedule.human_price %></div>
-        <ul>
-          <% @afisha.schedule.days.each do |li| %>
-            <%= li %>
-          <% end %>
-        </ul>
-      </div>
+    <div class='scheduled'>
+      <div class='scheduled_header'>Расписание</div>
+      <div class='price'>Стоимость: <%= @afisha.schedule.human_price %></div>
+      <ul><%= @afisha.schedule.days.each{ |li| li }.join("\n").html_safe %></ul>
     </div>
   <% else %>
     <% @afisha.showings.group_by(&:place).each do |place, showings| %>
