@@ -1,0 +1,79 @@
+.afisha_show .center
+  .distribution
+    position: relative
+
+    .dates
+      +clearfix
+      margin: 0 0 10px 270px
+
+      li
+        float: left
+        width: 90px
+        cursor: pointer
+        +border-radius
+        background-color: #e8e8e8
+        margin-right: 10px
+        padding: 2px 0 3px
+
+        &:last-child
+          margin-right: 0
+
+        p
+          text-align: center
+
+        .day_of_week
+          color: #999
+          font-size: 11px
+
+        &.selected
+          color: #fff
+          background-color: #f60
+          .day_of_week
+            color: #fff
+
+    .theaters
+      display: none
+
+      ul
+        +clearfix
+        border-bottom: 1px dashed #ccc
+        padding-bottom: 5px
+        margin-bottom: 10px
+
+        &:last-child
+          border-bottom: none
+          padding-bottom: 0
+
+        li
+          float: left
+          margin: 0 0 5px 10px
+
+        .theater
+          +clearfix
+          width: 260px
+          margin-left: 0
+
+          .logo
+            float: left
+            width: 40px
+            height: 40px
+            margin-right: 10px
+
+          .address a
+            font-size: 11px
+            background: transparent image_url('public/address.png') no-repeat 2px 2px
+            padding-left: 13px
+
+        .seance
+          width: 90px
+          text-align: center
+
+          .time
+            font-size: 16px
+            font-weight: bold
+
+          .price
+            font-size: 11px
+
+        .break
+          margin-left: 270px

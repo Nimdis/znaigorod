@@ -1,0 +1,87 @@
+<% if @afisha.viewable_showings? %>
+
+  <% if @afisha.distribution_movie? %>
+
+    <div class='distribution_header'>Сеансы</div>
+    <div class='distribution'>
+      <ul class='dates'>
+        <% @afisha.distribution_movie_grouped_showings.first(5).each do |date, showings_with_place| %>
+          <% unless showings_with_place.values.blank? %>
+            <li>
+              <p class='date' data-id='date-<%= date %>'><%= showings_with_place.values.first.first.human_date %></p>
+              <p class='day_of_week'><%= l date, format: '%A' %></p>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+      <% @afisha.distribution_movie_grouped_showings.first(5).each do |date, showings_with_place| %>
+        <div class='theaters' data-id='date-<%= date %>'>
+          <% showings_with_place.each do |place, showings| %>
+            <ul>
+              <li class='theater'>
+                <p class='logo'><%= showings.first.place_decorator.organization.logo_link(40, 40) %></p>
+                <p class='name'><%= showings.first.place_decorator.link_short_title %></p>
+                <p class='address'><%= showings.first.place_decorator.address_link %></p>
+              </li>
+              <% showings.each_with_index do |showing, index| %>
+                <li class='seance<%= ' break' if index > 0 && index % 5 == 0 %>'>
+                  <%= content_tag :p, showing.human_time_starts_at, :class => 'time' unless showing.human_time_starts_at.blank? %>
+                  <%= content_tag :p, showing.human_price, :class => 'price' unless showing.human_price.blank? %>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% elsif @afisha.scheduled_showings? %>
+    <div class='sheduled'>
+      <div class='head'>
+        <h3>Расписание</h3>
+        <div class='places'>
+          <% @afisha.places.each do |place| %>
+            <%= place.place %>
+          <% end %>
+        </div>
+      </div>
+      <div class='shedule'>
+        <div class='price'><strong>Стоимость:</strong> <%= @afisha.schedule.human_price %></div>
+        <ul>
+          <% @afisha.schedule.days.each do |li| %>
+            <%= li %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% else %>
+    <% @afisha.showings.group_by(&:place).each do |place, showings| %>
+      <div class='many_showings'>
+        <div class='head'>
+          <div class='places'>
+            <p>
+              <span class='name'><%= place.gilensize %></span>
+              <% if showings.first.latitude.present? && showings.first.longitude.present? %>
+                <span class='address'>
+                  <a href='#' class='show_map_link'
+                    data-hint='<%= place.text_gilensize %>'
+                    data-latitude='<%= showings.first.latitude %>'
+                    data-longitude='<%= showings.first.longitude %>'
+                    <%= "data-id='#{showings.first.organization.id}'".html_safe if showings.first.organization.present? %>
+                    title='Показать на карте'>показать на карте</a>
+                </span>
+              <% end %>
+            </p>
+          </div>
+        </div>
+        <ul>
+          <% showings.each do |showing| %>
+            <li>
+              <%= showing.for_schedule %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
+
+<% end %>

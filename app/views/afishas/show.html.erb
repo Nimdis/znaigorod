@@ -117,6 +117,8 @@
       </ul>
     <%end%>
 
+    <%= render :partial => 'schedule' %>
+
     <% if @afisha.trailer_code.present? %>
       <div class='trailer_header'><%= @afisha.kind.include?('movie') ? 'Трейлер' : 'Видео' %></div>
       <div class='trailer'>

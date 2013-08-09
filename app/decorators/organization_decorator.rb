@@ -13,7 +13,7 @@ class OrganizationDecorator < ApplicationDecorator
 
   def logo_link(width = 80, height = 80)
     if organization.logotype_url?
-      h.link_to image_tag(organization.logotype_url, width, height, organization.title.text_gilensize), organization_url
+      h.link_to h.image_tag(resized_image_url(organization.logotype_url, width, height), :alt => organization.title.text_gilensize), organization_url
     end
   end
 
