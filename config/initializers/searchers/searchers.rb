@@ -89,6 +89,8 @@ HasSearcher.create_searcher :organizations do
     order_by(:total_rating, :desc)
   end
 
+  scope(:order_by_title) { order_by :title }
+
   property :without do |search|
     if organization = Organization.find_by_id(search_object.without.to_i)
       search.without(organization)

@@ -22,7 +22,28 @@ class OrganizationsCatalogPresenter
   end
 
   def categories_links
-    []
+    @categories_links ||= [].tap { |array|
+      array << {
+        title: 'Все',
+        klass: 'all',
+        url: "#{pluralized_kind}_path",
+        parameters: {},
+        selected: categories_filter[:selected].empty?,
+        count: HasSearcher.searcher(pluralized_kind.to_sym).total
+      }
+      {'meal' => 'бары'}.each do |kind, category|
+        array << {
+          title: category.capitalize,
+          klass: Russian.translit(category).gsub(" ", "_"),
+          url: "#{kind.pluralize}_path",
+          parameters: {
+            categories: [category]
+          },
+          selected: categories_filter[:selected].include?(category),
+          count: HasSearcher.searcher(kind.pluralize.to_sym, meal_category: [category]).total
+        }
+      end
+    }
   end
 
   def meta_description
