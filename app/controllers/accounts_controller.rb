@@ -6,6 +6,7 @@ class AccountsController < ApplicationController
 
   def index
     index! {
+      @presenter = AccountPresenter.new(params)
       render partial: 'accounts/account_posters', layout: false and return if request.xhr?
     }
   end
@@ -14,6 +15,7 @@ class AccountsController < ApplicationController
 
   def collection
     Account.search {
+      with(:kind, params[:kind]) if params[:kind] != 'all'
       order_by :rating, :desc
       paginate paginate_options.merge(:per_page => per_page)
     }.results

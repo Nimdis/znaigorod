@@ -102,6 +102,11 @@ ru:
       work: Конкурсная работа
       post: Обзор
 
+  account_kinds:
+    all: Все
+    admin: Администраторы
+    afisha_editor: Авторы афиш
+
   search_kinds:
     all: Все
     afisha: Афиша

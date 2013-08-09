@@ -14,6 +14,8 @@ class Account < ActiveRecord::Base
   has_many :friends
   has_many :messages,        order: 'messages.created_at DESC'
 
+  has_many :roles,           through: :users
+
   alias_attribute :to_s, :title
 
   scope :ordered, -> { order('ID ASC') }
@@ -31,6 +33,7 @@ class Account < ActiveRecord::Base
 
     string :rating
     string :search_kind
+    string(:kind, :multiple => true) { roles.map(&:role) }
   end
 
   def search_kind
