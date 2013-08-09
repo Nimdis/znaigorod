@@ -62,7 +62,7 @@
   </div>
 
   <div class='center'>
-    <%= link_to 'изменить', edit_manage_afisha_path(@afisha), :class => 'floatr' if can? :edit, @afisha %>
+    <%= link_to 'изменить', edit_manage_afisha_path(@afisha), :class => 'icon_edit' if can? :edit, @afisha %>
 
     <% if @afisha.title.present? %>
       <%= content_tag :h1, @afisha.title.text_gilensize %>
