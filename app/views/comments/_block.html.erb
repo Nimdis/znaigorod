@@ -1,13 +1,11 @@
 <div class="comments ajaxed">
   <h3>Комментарии</h3>
 
-  <% if parent_obj.comments.any? %>
-    <ul>
-      <% parent_obj.comments.roots.order('created_at ASC').each do |comment| %>
-        <%= render comment %>
-      <% end %>
-    </ul>
-  <% end %>
+  <ul>
+    <% parent_obj.comments.roots.order('created_at ASC').each do |comment| %>
+      <%= render comment %>
+    <% end %>
+  </ul>
 
   <%= link_to "Оставить комментарий", polymorphic_url([:new, parent_obj, :comment].flatten), :remote => true, :class => 'new_comment' %>
 </div>

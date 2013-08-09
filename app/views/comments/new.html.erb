@@ -1,6 +1,6 @@
 <li class='ajaxed_item comment_form'>
   <% unless user_signed_in? %>
-    <h4>Оставлять комментарии могут только зарегистрированные пользователи. Пожалуйста, войдите с помощью одной из социальных сетей:</h4>
+    <p>Оставлять комментарии могут только зарегистрированные пользователи. Пожалуйста, войдите с помощью одной из социальных сетей:</p>
     <%= render :partial => "commons/social_auth" %>
   <% end %>
   <% if current_user %>
@@ -12,7 +12,7 @@
     <% end %>
   <% else %>
     <%= image_tag @comment.avatar, :class => 'avatar', :title => 'неизвестный автор' %>
-    <span class="profile_link">неизвестный автор</span>
+    <span class="profile_link">Неизвестный автор</span>
   <% end %>
   <%= simple_form_for [association_chain, @comment].flatten, :url => polymorphic_url([association_chain, @comment].flatten), :html => { :remote => true } do |f| %>
     <%= f.input :parent_id, :as => :hidden %>
