@@ -3,9 +3,7 @@ class HitDecorator < ApplicationDecorator
 
   AFFICHE_FIELDS = %w[tag]
   ORGANIZATION_FIELDS = %w[category cuisine feature offer payment]
-  ACCOUNT_FIELDS = %w[first_name last_name]
-  POST_FIELDS = %w[annotation]
-  ADDITIONAL_FIELDS = AFFICHE_FIELDS + ORGANIZATION_FIELDS + ACCOUNT_FIELDS + POST_FIELDS
+  ADDITIONAL_FIELDS = AFFICHE_FIELDS + ORGANIZATION_FIELDS
 
   def result_decorator
     @decorator ||=

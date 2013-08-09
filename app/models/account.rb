@@ -14,6 +14,8 @@ class Account < ActiveRecord::Base
   has_many :friends
   has_many :messages,        order: 'messages.created_at DESC'
 
+  alias_attribute :to_s, :title
+
   scope :ordered, -> { order('ID ASC') }
 
   extend Enumerize
@@ -25,6 +27,7 @@ class Account < ActiveRecord::Base
     text :patronymic
     text :nickname
     text :location
+    text :title,     :stored => true
 
     string :rating
     string :search_kind
@@ -34,7 +37,7 @@ class Account < ActiveRecord::Base
     self.class.name.underscore
   end
 
-  def to_s
+  def title
     "#{first_name} #{last_name}"
   end
 

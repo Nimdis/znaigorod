@@ -25,7 +25,7 @@ class Post < ActiveRecord::Base
   end
 
   searchable do
-    text :title,                :more_like_this => true
+    text :title,                :more_like_this => true, :stored => true
     text :annotation,           :more_like_this => true
     text :content,              :more_like_this => true
     string :search_kind
