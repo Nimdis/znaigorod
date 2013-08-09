@@ -5,12 +5,17 @@ class SaunaHallsPresenter
   include ActionView::Helpers
   include Rails.application.routes.url_helpers
 
+  include OrganizationsPresenter
+
+  acts_as_organizations_presenter kind: :sauna, filters: [:categories]
+
   attr_accessor :capacity,
                 :price_min, :price_max,
                 :baths, :features, :pool,
                 :lat, :lon, :radius,
                 :order_by, :direction,
-                :params, :page
+                :params, :page,
+                :categories
 
   alias :pool_features  :pool
 

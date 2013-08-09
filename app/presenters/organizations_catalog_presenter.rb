@@ -14,7 +14,7 @@ class OrganizationsCatalogPresenter
 
 
   def self.suborganization_models
-    [Organization, Meal, Entertainment, Sauna, CarWash, CarSalesCenter, Culture, Sport, Creation, SalonCenter]
+    [Organization, Meal, Entertainment, CarWash, CarSalesCenter, Culture, Sport, Creation, SalonCenter]
   end
 
   def categories_filter
@@ -23,6 +23,7 @@ class OrganizationsCatalogPresenter
 
   def categories_links
     @categories_links ||= [].tap { |array|
+      excluded_categories = %w[сауны]
       array << {
         title: 'Все',
         klass: 'all',
@@ -31,16 +32,17 @@ class OrganizationsCatalogPresenter
         selected: categories_filter[:selected].empty?,
         count: HasSearcher.searcher(pluralized_kind.to_sym).total
       }
-      {'meal' => 'бары'}.each do |kind, category|
+      {'meal' => 'бары',
+       'sauna' => 'сауны'}.each do |kind, category|
+        parameters = excluded_categories.include?(category) ? nil : { :categories => [category] }
+        searcher_parameter = excluded_categories.include?(category) ? {} : { "#{kind}_category".to_sym => [category] }
         array << {
           title: category.capitalize,
           klass: Russian.translit(category).gsub(" ", "_"),
           url: "#{kind.pluralize}_path",
-          parameters: {
-            categories: [category]
-          },
+          parameters: parameters,
           selected: categories_filter[:selected].include?(category),
-          count: HasSearcher.searcher(kind.pluralize.to_sym, meal_category: [category]).total
+          count: HasSearcher.searcher(kind.pluralize.to_sym, searcher_parameter).total
         }
       end
     }
