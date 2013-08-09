@@ -9,9 +9,9 @@ task :social_likes => :environment do
 
   ['Afisha','Organization'].each do |klass|
     if klass == 'Afisha'
-      collection = klass.constantize.last(20)
+      collection = klass.constantize.with_showings
     else
-      collection = klass.constantize.last(20)
+      collection = klass.constantize.all
     end
 
     [:vkontakte_likes, :fb_likes, :odn_likes].each do |attr|
