@@ -7,7 +7,7 @@ class OrganizationsController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html { @organizations_catalog_presenter = OrganizationsCatalogPresenter.new }
+      format.html { @presenter = OrganizationsCatalogPresenter.new(:kind => :organization) }
       format.json do
         searcher = HasSearcher.searcher(:manage_organization, params).paginate(:page => params[:page], :per_page => 10)
 

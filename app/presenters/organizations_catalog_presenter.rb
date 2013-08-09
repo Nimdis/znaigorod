@@ -1,35 +1,28 @@
 # encoding: utf-8
 
 class OrganizationsCatalogPresenter
+  include ActiveAttr::MassAssignment
+  attr_accessor :categories,
+                :lat, :lon, :radius,
+                :page, :per_page
+
   include Rails.application.routes.url_helpers
 
+  include OrganizationsPresenter
+
+  acts_as_organizations_presenter kind: :organization, filters: [:categories]
+
+
   def self.suborganization_models
-    [Meal, Entertainment, Sauna, CarWash, CarSalesCenter, Culture, Sport, Creation, SalonCenter]
+    [Organization, Meal, Entertainment, Sauna, CarWash, CarSalesCenter, Culture, Sport, Creation, SalonCenter]
   end
 
-  self.suborganization_models.map(&:name).map(&:underscore).each do |kind|
-    define_method "#{kind}_searcher" do |params = {}|
-      HasSearcher.searcher(kind.pluralize.to_sym)
-    end
-
-    define_method "#{kind}_categories_links" do
-      self.send("#{kind}_categories").map do |row|
-        options = row.value == I18n.t("organization.list_title.#{kind}").mb_chars.downcase ? {} : { categories: [row.value.mb_chars.downcase]}
-        Link.new(title: "#{row.value.mb_chars.capitalize} (#{row.count})", url: send("#{kind.pluralize}_path", options))
-      end
-    end
-
-    define_method "#{kind}_categories" do
-      self.send("#{kind}_searcher").facet("#{kind}_category").rows
-    end
+  def categories_filter
+    Hashie::Mash.new :selected => [], :available => []
   end
 
-  def catalog
-    {}.tap do |hash|
-      self.class.suborganization_models.map(&:name).map(&:underscore).each do |kind|
-        hash[Link.new(title: I18n.t("organization.kind.#{kind}"), url: send("#{kind.pluralize}_path"))] = send("#{kind}_categories_links")
-      end
-    end
+  def categories_links
+    []
   end
 
   def meta_description

@@ -3,6 +3,8 @@
 class OrganizationDecorator < ApplicationDecorator
   decorates :organization
 
+  delegate :decorated_phones, :to => :decorated_priority_suborganization
+
   def image_for_main_page
     unless organization.logotype_url.blank?
       h.link_to image_tag(organization.logotype_url, 100, 100, organization.title), organization_url
@@ -19,6 +21,14 @@ class OrganizationDecorator < ApplicationDecorator
 
   def title_link
     h.link_to organization.title.text_gilensize, organization_url
+  end
+
+  def truncated_title_link
+    if title.length > 80
+      h.link_to h.truncate(title, length: 80).text_gilensize, organization_url, title: title
+    else
+      h.link_to title.text_gilensize, organization_url
+    end
   end
 
   def address_link(address = organization.address)
@@ -98,6 +108,10 @@ class OrganizationDecorator < ApplicationDecorator
 
   def decorated_suborganizations
     suborganizations.map { |suborganization| "#{suborganization.class.name.underscore}_decorator".classify.constantize.decorate suborganization }
+  end
+
+  def decorated_priority_suborganization
+    @decorated_priority_suborganization ||= "#{priority_suborganization_kind}_decorator".classify.constantize.decorate priority_suborganization
   end
 
   def categories

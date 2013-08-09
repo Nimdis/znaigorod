@@ -2,7 +2,7 @@
 
 class SuborganizationDecorator < ApplicationDecorator
   def decorated_organization
-    OrganizationDecorator.decorate organization
+    @decorated_organization ||= OrganizationDecorator.decorate organization
   end
 
   delegate :logo_link, :title_link, :address_link, :html_description,
@@ -36,11 +36,7 @@ class SuborganizationDecorator < ApplicationDecorator
   end
 
   def truncated_title_link
-    if organization.title.length > 80
-      h.link_to h.truncate(organization.title, length: 80).text_gilensize, organization_url, title: organization.title
-    else
-      h.link_to organization.title.text_gilensize, organization_url
-    end
+    decorated_organization.truncated_title_link
   end
 
   def decorated_phones

@@ -21,7 +21,7 @@ module OrganizationsPresenter
     attr_accessor :kind, :filters
 
     def suborganization_kinds
-      [Meal, Entertainment, Sauna, CarWash, CarSalesCenter, Culture, Sport, Creation, SalonCenter]
+      OrganizationsCatalogPresenter.suborganization_models
     end
 
     def acts_as_organizations_presenter(*args)
