@@ -1,0 +1,50 @@
+.afisha_show .center
+
+  .many_showings
+
+    .many_showing_header
+      font-size: 14px
+      background-color: #e8e8e8
+      padding: 1px 10px 2px
+      margin-bottom: 10px
+
+    ul
+      +clearfix
+
+      li
+        float: left
+        width: 144px
+        margin: 0 10px 10px 0
+
+        &:nth-child(5n)
+          margin-right: 0
+
+        .date
+          +clearfix
+          background-color: #e8e8e8
+          +border-radius
+          padding: 2px 5px 3px
+          margin-bottom: 3px
+
+          .day
+            float: left
+            display: block
+            font-size: 24px
+            margin-right: 5px
+
+          .month
+            display: block
+            font-size: 11px
+
+          .day_of_week
+            display: block
+            color: #999
+            font-size: 11px
+
+        .time,
+        .price,
+        .edit
+          text-align: center
+
+        .price
+          font-size: 11px

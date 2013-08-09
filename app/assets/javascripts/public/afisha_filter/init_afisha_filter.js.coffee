@@ -1,6 +1,6 @@
 @init_afisha_filter = () ->
 
-  link = $('.afisha_filters .by_date .daily')
+  link = $('.filters .by_date .daily')
   wrapper = link.closest('li')
 
   create_obj_from_uri = ->

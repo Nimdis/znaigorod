@@ -56,22 +56,18 @@
   <% else %>
     <% @afisha.showings.group_by(&:place).each do |place, showings| %>
       <div class='many_showings'>
-        <div class='head'>
-          <div class='places'>
-            <p>
-              <span class='name'><%= place.gilensize %></span>
-              <% if showings.first.latitude.present? && showings.first.longitude.present? %>
-                <span class='address'>
-                  <a href='#' class='show_map_link'
-                    data-hint='<%= place.text_gilensize %>'
-                    data-latitude='<%= showings.first.latitude %>'
-                    data-longitude='<%= showings.first.longitude %>'
-                    <%= "data-id='#{showings.first.organization.id}'".html_safe if showings.first.organization.present? %>
-                    title='Показать на карте'>показать на карте</a>
-                </span>
-              <% end %>
-            </p>
-          </div>
+        <div class='many_showing_header'>
+          <%= place.gilensize %>
+          <% if showings.first.latitude.present? && showings.first.longitude.present? %>
+            <span class='address'>
+              <a href='#' class='show_map_link'
+                data-hint='<%= place.text_gilensize %>'
+                data-latitude='<%= showings.first.latitude %>'
+                data-longitude='<%= showings.first.longitude %>'
+                <%= "data-id='#{showings.first.organization.id}'".html_safe if showings.first.organization.present? %>
+                title='Показать на карте'>показать на карте</a>
+            </span>
+          <% end %>
         </div>
         <ul>
           <% showings.each do |showing| %>
