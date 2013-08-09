@@ -6,7 +6,7 @@ class AccountsController < ApplicationController
 
   def index
     index! {
-      render partial: 'accounts/accounts_list', layout: false and return if request.xhr?
+      render partial: 'accounts/account_posters', layout: false and return if request.xhr?
     }
   end
 
@@ -14,9 +14,12 @@ class AccountsController < ApplicationController
 
   def collection
     Account.search {
-      keywords params[:search][:name] if params[:search]
       order_by :rating, :desc
       paginate paginate_options.merge(:per_page => per_page)
     }.results
+  end
+
+  def per_page
+    18
   end
 end

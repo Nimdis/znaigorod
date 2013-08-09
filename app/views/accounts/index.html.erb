@@ -1,25 +1,7 @@
-<%= render_navigation context: 'account', :renderer => :breadcrumbs %>
-
-<h1>Пользователи</h1>
-
-<div class="left_part">
-  <div class="user_search">
-    <%= simple_form_for :search, method: :get do |f| %>
-      <%= f.input :name, label: false, input_html: { class: 'account_name', value: params[:search] ? params[:search][:name] : '' }, placeholder: 'Фамилия или имя пользователя' %>
-      <%= f.submit 'Найти', class: 'submit' %>
-    <% end %>
-  </div>
-
-  <ul class='users_list'>
-    <%= render :partial => 'accounts_list', :locals => { collection: collection } %>
+<div class="accounts_list">
+  <ul class="posters">
+    <%= render :partial => 'accounts/account_posters', :locals => { collection: collection } %>
   </ul>
-</div>
-
-<div class="right_part">
-  <% unless user_signed_in? %>
-    <p>Чтобы стать пользователем информационного портала «ЗнайГород» войдите с помощью одной из социальных сетей:</p>
-    <%= render :partial => 'commons/social_auth' %>
-  <% end %>
 </div>
 
 <%= paginate collection %>
