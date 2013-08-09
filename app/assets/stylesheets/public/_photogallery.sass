@@ -1,63 +1,80 @@
-.photogallery
-  //width: 760px
-    .jcarousel-container-horizontal,
-    .jcarousel-clip-horizontal
-
 .jcarousel-container-horizontal
-  width: 760px
-  //padding: 0 40px
-  //margin-top: 10px
+  width: 700px
+  padding: 0 30px
+
 .jcarousel-clip
-  overflow: hidden
+  +clearfix
+
 .jcarousel-clip-horizontal
-  width: 760px
+  width: 700px
   height: 99px
+
 .jcarousel-list-horizontal
   height: 99px
+
 .jcarousel-item
   width: 130px
   height: 99px
-.jcarousel-item-horizontal
-  //margin-left: 5px
-  //margin-right: 5px
+
+  a
+    +clearfix
+    display: block
+    width: 130px
+    height: 99px
+    margin: 0 auto
+    img
+      +opacity(0.5)
+    &:hover img
+      +opacity(1)
+
 .jcarousel-item-placeholder
   background: #fff
   color: #000
-.jcarousel-next-horizontal
-  position: absolute
-  top: 43px
-  right: 5px
-  width: 32px
-  height: 32px
-  cursor: pointer
-  background: transparent image_url('public/carousel_next_horizontal.png') no-repeat 0 0
-.jcarousel-next-horizontal
-  &:hover, &:focus
-    background-position: -32px 0
-  &:active
-    background-position: -64px 0
-.jcarousel-next-disabled-horizontal
-  cursor: default
-  background-position: -96px 0
-  &:hover, &:focus, &:active
-    cursor: default
-    background-position: -96px 0
+
 .jcarousel-prev-horizontal
   position: absolute
-  top: 43px
-  left: 5px
-  width: 32px
-  height: 32px
+  top: 42px
+  left: 10px
+  width: 8px
+  height: 16px
   cursor: pointer
-  background: transparent image_url('public/carousel_prev_horizontal.png') no-repeat 0 0
-.jcarousel-prev-horizontal
+  background: transparent image_url('public/carousel_arrows.png') no-repeat 0 -32px
+
   &:hover, &:focus
-    background-position: -32px 0
+    background-position: 0 -16px
+
   &:active
-    background-position: -64px 0
+    top: 44px
+
 .jcarousel-prev-disabled-horizontal
   cursor: default
-  background-position: -96px 0
+  background-position: 0 0
+
   &:hover, &:focus, &:active
+    top: 42px
     cursor: default
-    background-position: -96px 0
+    background-position: 0 0
+
+.jcarousel-next-horizontal
+  position: absolute
+  top: 43px
+  right: 10px
+  width: 8px
+  height: 16px
+  cursor: pointer
+  background: transparent image_url('public/carousel_arrows.png') no-repeat -8px -32px
+
+  &:hover, &:focus
+    background-position: -8px -16px
+
+  &:active
+    top: 44px
+
+.jcarousel-next-disabled-horizontal
+  cursor: default
+  background-position: -8px 0
+
+  &:hover, &:focus, &:active
+    top: 43px
+    cursor: default
+    background-position: -8px 0

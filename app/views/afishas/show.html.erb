@@ -33,7 +33,7 @@
       <% else %>
         <%= image_tag('public/stub_poster.png', size: '200x269', alt: :poster) %>
       <% end %>
-      <%= content_tag(:div, 'Премьера недели', class: :ribbon) if @afisha.premiere? %>
+      <%= content_tag(:div, 'Премьера', class: :ribbon) if @afisha.premiere? %>
     </div>
     <div class='social_actions'>
       <%= render :partial => 'visits/visit', :locals => { :visitable => @afisha.model } %>

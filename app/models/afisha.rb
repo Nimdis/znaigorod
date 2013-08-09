@@ -316,10 +316,6 @@ class Afisha < ActiveRecord::Base
     @text_description ||= html_description.as_text
   end
 
-  def premiere?
-    false
-  end
-
   def self.trailer_auto_html(trailer_code)
     AutoHtml.auto_html(trailer_code) do
       youtube(:width => 580, :height => 350)
@@ -330,7 +326,7 @@ class Afisha < ActiveRecord::Base
 
   # Afisha movie kind #
   def premiere?
-    distribution_starts_on && distribution_starts_on >= Date.today.beginning_of_week && distribution_starts_on <= Date.today.end_of_week
+    distribution_starts_on && distribution_starts_on >= Date.today.beginning_of_week && distribution_starts_on <= Date.today.end_of_week && showings.count > 5
   end
 
   def reindex_showings

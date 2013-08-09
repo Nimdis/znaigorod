@@ -6,8 +6,17 @@
     border: 1px solid #ccc
 
     .image
+      position: relative
       width: 200px
       margin: 4px
+
+      .ribbon
+        position: absolute
+        left: 0
+        bottom: 4px
+        color: #fff
+        background-color: #f60
+        padding: 2px 8px 3px
 
     .social_actions
       +clearfix
@@ -42,9 +51,9 @@
         +border-radius
         margin: 0 5px 0 0
       .details
+        margin-top: 8px
         .name
           font-size: 12px
-          margin-top: 8px
 
   .right
     float: right
