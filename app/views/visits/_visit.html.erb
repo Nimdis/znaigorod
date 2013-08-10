@@ -1,18 +1,21 @@
 <ul class='user_actions'>
   <li<%= " class='selected'".html_safe if current_user && current_user.visited?(visitable) %>>
     <%= link_to t('afisha.join'), polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true %>
-    </li>
+  </li>
 </ul>
+
+<% if @visit && @visit.errors.any? %>
+  <div class="cloud_wrapper">
+    <div class="cloud_inner_wrapper">
+      <h4>Пожалуйста, войдите с помощью одной из социальных сетей:</h4>
+      <%= render :partial => 'commons/social_auth' %>
+    </div>
+  </div>
+<% end %>
 
 <div class='visits_counter'>
   <div class='floatl'>Участники</div>
-  <div class='floatr'>
-    <%# if visitable.visits.visited.count.zero? %>
-      <%= t('afisha.visitors', :count => visitable.visits.visited.count) %>
-    <%# else %>
-      <%#= link_to t('afisha.visitors', :count => visitable.visits.visited.count), polymorphic_url([visitable, :visitors]), :remote => true %>
-    <%# end %>
-  </div>
+  <div class='floatr'><%= t('afisha.visitors', :count => visitable.visits.visited.count) %></div>
 </div>
 
 <% if visitable.visits.visited.any? %>
@@ -30,11 +33,3 @@
   </ul>
 <% end %>
 
-<% if @visit && @visit.errors.any? %>
-  <div class="cloud_wrapper">
-    <div class="cloud_inner_wrapper">
-      <h4>Пожалуйста, войдите с помощью одной из социальных сетей:</h4>
-      <%= render :partial => 'commons/social_auth' %>
-    </div>
-  </div>
-<% end %>

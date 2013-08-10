@@ -19,8 +19,55 @@
         padding: 2px 8px 3px
 
     .social_actions
-      +clearfix
       +background(linear-gradient(top, #fff, #e8e8e8))
+      position: relative
+
+      .cloud_wrapper
+        position: absolute
+        width: 360px
+        top: 0
+        left: 47px
+        font-size: 12px
+        background-color: #e8e8e8
+        margin-top: 32px
+        +box-shadow(#999 1px 1px 3px)
+        padding: 10px
+
+        .social_signin_links
+          +clearfix
+          margin: 10px 0 0
+          text-align: center
+
+          li
+            +inline-block
+            margin: 0 15px 0 0
+
+            a
+              display: block
+              text-indent: -9999px
+              height: 33px
+              width: 33px
+
+            &.vkontakte a
+              background: image_url('social_icons.png') no-repeat 0 0
+
+            &.yandex a
+              background: image_url('social_icons.png') no-repeat -33px 0
+
+            &.facebook a
+              background: image_url('social_icons.png') no-repeat -66px 0
+
+            &.twitter a
+              background: image_url('social_icons.png') no-repeat -99px 0
+
+            &.google a
+              background: image_url('social_icons.png') no-repeat -132px 0
+
+            &.mail_ru a
+              background: image_url('social_icons.png') no-repeat -165px 0
+
+            &.odnoklassniki a
+              background: image_url('social_icons.png') no-repeat -198px 0
 
     .user_actions
       font-size: 12px
@@ -40,7 +87,8 @@
       margin: 5px
 
     .avatars
-      margin: 0 5px 5px
+      +clearfix
+      margin: 0 5px
 
       li
         +clearfix
