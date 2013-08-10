@@ -1,5 +1,6 @@
 $ ->
   init_common()
+  init_datetime_picker()
 
   if typeof VK != 'undefined' && window.location.href.match(/http:\/\/znaigorod.ru/)
     init_vk_like() if $('#vk_like').length
@@ -44,9 +45,7 @@ $ ->
   init_webcam_swf() if $('.webcams_list .webcam_swf').length
   init_webcam_mjpeg() if $('.webcams_list .webcam_mjpeg').length
   init_webcam_map() if $('.webcams .webcam_map').length
-  init_stream_buro_service() if $('.lyube').length
   init_my_affiche() if $('.my_affiche_wrapper')
-  init_datetime_picker()
   init_file_upload() if $('.file_upload').length
   init_ajax_delete() if $('.ajax_delete').length
   init_select_tags() if $('.select_tags').length

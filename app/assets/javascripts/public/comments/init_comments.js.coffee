@@ -14,7 +14,7 @@ remove_comment_form = () ->
 
 scroll = () ->
   target = $('.ajaxed_item', '.comments')
-  y_coord = Math.abs($(window).height() - target.offset().top - target.height())
+  y_coord = Math.abs($(window).height() - target.offset().top - target.height()) + 150
   $("html, body").animate({ scrollTop: y_coord })
 
 remove_highlight = () ->
