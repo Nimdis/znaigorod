@@ -59,6 +59,7 @@ $(window).load ->
   init_auth() if ('.auth_links').length
   init_rating() if ('.rating').length
   init_votes() if $('.votes_wrapper').length
+  init_votes() if $('.user_actions').length
 
   init_3dtourme_stat() if $('a.3dtourme').length
   init_prokachkov_stat() if $('a.prokachkov').length
