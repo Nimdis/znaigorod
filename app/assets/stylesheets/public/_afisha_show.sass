@@ -24,7 +24,7 @@
 
       .cloud_wrapper
         position: absolute
-        width: 360px
+        width: 345px
         top: 3px
         left: 47px
         font-size: 12px
@@ -34,15 +34,11 @@
         +box-shadow(#999 1px 1px 2px)
         padding: 10px
 
-        &:before
-          content: ''
-          position: absolute
-          width: 0
-          height: 0
-
         &:after,
         &:before
           content: ''
+          width: 0
+          height: 0
           border-left: 8px solid transparent
           border-right: 8px solid transparent
           border-bottom: 8px solid #e8e8e8
@@ -66,6 +62,9 @@
           li
             +inline-block
             margin: 0 15px 0 0
+
+            &:last-child
+              margin-right: 0
 
             a
               display: block

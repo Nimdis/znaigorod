@@ -1,20 +1,20 @@
 <% object_assoc_chain = voteable.is_a?(Work) ? [voteable.contest, voteable] : [voteable] %>
 <% if voteable.votes.liked.any? %>
-  <div class="like_box">
+  <div class='like_box'>
     <div>
-      <%= link_to (t :like, :count => voteable.votes.liked.count), polymorphic_url([object_assoc_chain, :liked].flatten), :remote => true %>
+      <%= t :like, :count => voteable.votes.liked.count %>
     </div>
     <% voteable.votes.liked.last(6).map(&:user).each do |user| %>
-      <%= image_tag user.avatar, :size => "24x24", :title => user.name %>
+      <%= link_to(image_tag(user.avatar, :size => '24x24', :alt => user.name, :title => user.name), user.account) %>
     <% end %>
   </div>
-  <div class="votes_counter" title='<%= t :like, :count => voteable.votes.liked.count %>'>
+  <div class='votes_counter' title='<%= t :like, :count => voteable.votes.liked.count %>'>
     <%= link_to voteable.votes.liked.count, polymorphic_url([object_assoc_chain, :liked].flatten), :remote => true %>
   </div>
 <% end %>
 
 <% if !voteable.is_a?(Comment) || current_user != voteable.user %>
-  <div class="user_like">
+  <div class='user_like'>
     <% if current_user && current_user.liked?(voteable) %>
       <span>Вам это нравится.</span>
       <%= link_to 'Мне нравится',
@@ -31,8 +31,8 @@
     <% end %>
   </div>
   <% if @vote && @vote.errors.any? %>
-    <div class="cloud_wrapper">
-      <div class="cloud_inner_wrapper">
+    <div class='cloud_wrapper'>
+      <div class='cloud_inner_wrapper'>
         <h4>Оценивать могут только зарегистрированные пользователи. Пожалуйста, войдите с помощью одной из социальных сетей:</h4>
         <%= render :partial => 'commons/social_auth' %>
       </div>

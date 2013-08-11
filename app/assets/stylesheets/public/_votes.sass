@@ -1,27 +1,24 @@
 .votes_wrapper
-  +clearfix
   float: right
   font-size: 11px
   line-height: 12px
+  position: relative
 
   .like_box
     opacity: 0.9
     display: none
     position: absolute
-    +border-radius(5px)
-    background: #9c62b6
+    white-space: nowrap
+    right: 0
+    background: #e8e8e8
+    border: 1px solid #ccc
+    +box-shadow(#999 0 0 2px)
+
     margin-top: -63px
-    padding: 6px 20px 8px
+    padding: 10px
 
     > div
       margin-bottom: 5px
-    a
-      font-size: 10px
-      background: #c8a8d6
-      +border-radius(7px)
-      line-height: 20px
-      white-space: nowrap
-      padding: 0 3px 0 5px
 
   &:hover .like_box
     display: block
@@ -34,3 +31,35 @@
 
   .user_like
     float: left
+
+  .cloud_wrapper
+    position: absolute
+    width: 345px
+    top: -10px
+    right: 2px
+    font-size: 12px
+    border: 1px solid #ccc
+    background-color: #e8e8e8
+    margin-top: 32px
+    +box-shadow(#999 1px 1px 2px)
+    padding: 10px
+
+    &:after,
+    &:before
+      content: ''
+      width: 0
+      height: 0
+      border-left: 8px solid transparent
+      border-right: 8px solid transparent
+      border-bottom: 8px solid #e8e8e8
+      top: -8px
+      right: 30px
+      position: absolute
+
+    &:before
+      border-left: 9px solid transparent
+      border-right: 9px solid transparent
+      border-bottom: 9px solid #ccc
+      border-top-color: inherit
+      top: -9px
+      right: 29px
