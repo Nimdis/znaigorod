@@ -75,6 +75,26 @@
         </div>
       <% end %>
 
+      <% if @afisha.similar_afisha.present? %>
+        <div class='more_like_this'>
+          <p class='title'>Другие мероприятия</p>
+          <ul>
+            <% @afisha.similar_afisha.each do |afisha| %>
+              <li>
+                <div class='image'>
+                  <%= link_to afisha_show_path(afisha) do %>
+                    <%= image_tag resized_image_url(afisha.poster_url, 65, 87), :size => '65x87', :alt => afisha.title.text_gilensize %>
+                  <% end %>
+                  <%= content_tag(:div, 'Премьера', class: :ribbon) if @afisha.premiere? %>
+                </div>
+                <div class='title'><%= link_to afisha.title.text_gilensize, afisha_show_path(afisha) %></div>
+                <%= content_tag :div, afisha.afisha_place, :class => 'places' if afisha.afisha_place.present? %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
     </div>
 
   </div>

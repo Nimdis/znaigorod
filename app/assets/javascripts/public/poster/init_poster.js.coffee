@@ -1,5 +1,5 @@
 @init_poster = () ->
-  poster = $('.content .afisha_show .image a img')
+  poster = $('.content .afisha_show .left .image a img')
   poster.each (index, item) ->
     $(item).closest('a').colorbox
       'close': 'закрыть'
