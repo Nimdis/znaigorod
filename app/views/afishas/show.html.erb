@@ -41,20 +41,24 @@
   </div>
 
   <div class='right'>
+
     <% if @afisha.tickets.map(&:copies_for_sale).any? %>
       <ul class='tickets'>
         <% @afisha.tickets.each do |ticket| %>
           <% if ticket.copies_for_sale.any? %>
             <li>
-              <div class='has_items_for_sale'>-<%= ticket.discount %>%</div>
-              <div class='description'>Билет со скидкой</div>
-              <div class='ticket_prices'>
-                <div class='original_price'><span class='stroke'><%= ticket.original_price.to_i %> р.</span></div>
-                <div class='price'><%= ticket.price.to_i %> р.<%= " + #{ticket.organization_price.to_i} р." if ticket.organization_price %></div>
-              </div>
-              <div class='buy_ticket'>
+              <div class='wrapper'>
+                <div class='has_items_for_sale'>
+                  Скидка на билет
+                  <span class='discount'><%= ticket.discount %></span><span class='percentage'>%</span></div>
+                <div class='ticket_prices'>
+                  <div class='original_price'><%= ticket.original_price.to_i %>р.</div>
+                  <div class='price'><%= ticket.price.to_i %>р.<%= "+#{ticket.organization_price.to_i}р." if ticket.organization_price %></div>
+                </div>
                 <div class='ticket_for_sale'><%= t 'copy.for_sale', count: ticket.copies_for_sale.count %></div>
-                <%= link_to 'Купить', new_ticket_copy_payment_path(ticket), class: :payment_link %>
+                <div class='buy_ticket'>
+                  <%= link_to 'Купить', new_ticket_copy_payment_path(ticket), class: :payment_link %>
+                </div>
               </div>
             </li>
           <% end %>

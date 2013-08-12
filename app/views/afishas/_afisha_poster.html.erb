@@ -9,7 +9,7 @@
     <%= afisha.poster_with_link(178, 240) %>
     <%= content_tag(:div, 'Премьера', class: :ribbon) if afisha.premiere?  %>
     <% if afisha.has_tickets_for_sale? %>
-      <%= link_to 'Купить билет', afisha_show_path(afisha, anchor: :by_ticket), class: :for_sale %>
+      <%= link_to 'Купить билет', afisha_show_path(afisha, anchor: :buy_ticket), class: :for_sale %>
     <% end %>
     <%= link_to afisha_show_path(afisha), class: :details do %>
       <span class='first_line'>

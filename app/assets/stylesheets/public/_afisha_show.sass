@@ -138,6 +138,67 @@
     float: right
     width: 208px
 
+    .tickets
+
+      li
+        font-size: 12px
+        border: 1px solid #f60
+        margin-bottom: 10px
+
+        .wrapper
+          border-top: none
+          border-right: 1px dashed #f60
+          border-bottom: none
+          border-left: 1px dashed #f60
+          margin: 0 10px
+
+        .has_items_for_sale
+          text-align: center
+
+          .discount
+            font-size: 18px
+            font-weight: bold
+            color: #f60
+
+          .percentage
+            color: #f60
+
+        .ticket_prices
+          text-align: center
+
+          .original_price
+            +inline-block
+            color: #a9a9a9
+            margin-right: 10px
+            position: relative
+            &:before
+              position: absolute
+              content: ""
+              width: 120%
+              left: -10%
+              top: 50%
+              right: 0
+              border-top: 1px solid
+              border-color: #f93
+              +rotate(-15deg)
+
+          .price
+            +inline-block
+            font-weight: bold
+            margin-left: 10px
+
+        .ticket_for_sale
+          font-size: 11px
+          text-align: center
+          margin: 5px 0
+
+        .buy_ticket
+          text-align: center
+          a
+            +inline-block
+            +button-style
+            padding: 3px 15px 4px
+
     .wrapper
       border: 1px solid #ccc
       > div:last-child
