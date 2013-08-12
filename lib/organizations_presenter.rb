@@ -98,11 +98,15 @@ module OrganizationsPresenter
   end
 
   def kind
-    self.class.kind
+    @kind ||= self.class.kind
   end
 
   def pluralized_kind
-    kind.pluralize
+    @pluralized_kind ||= kind.pluralize
+  end
+
+  def selected_kind
+    @selected_kind ||= kind
   end
 
   def decorator_class
@@ -137,7 +141,7 @@ module OrganizationsPresenter
           klass: suborganization_kind,
           url: "#{suborganization_kind.pluralize}_path",
           parameters: {},
-          selected: kind == suborganization_kind,
+          selected: selected_kind == suborganization_kind,
         }
       end
     end

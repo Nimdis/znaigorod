@@ -76,6 +76,14 @@ class SaunaHallsPresenter
     sortings[order_by]
   end
 
+  def selected_kind
+    'entertainment'
+  end
+
+  def categories_links
+    EntertainmentsPresenter.new(self.params).categories_links
+  end
+
   def capacity_hash
     Hashie::Mash.new(
       available: { minimum: SaunaHallCapacity.minimum(:default), maximum: SaunaHallCapacity.maximum(:maximal) },
