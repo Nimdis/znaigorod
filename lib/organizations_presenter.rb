@@ -149,14 +149,6 @@ module OrganizationsPresenter
 
   def categories_links
     @categories_links ||= [].tap { |array|
-      array << {
-        title: 'Все',
-        klass: 'all',
-        url: "#{pluralized_kind}_path",
-        parameters: {},
-        selected: categories_filter[:selected].empty?,
-        count: HasSearcher.searcher(pluralized_kind.to_sym).total
-      }
       HasSearcher.searcher(pluralized_kind.to_sym).facet("#{kind}_category").rows.map do |row|
         array << {
           title: row.value.mb_chars.capitalize,
@@ -169,6 +161,15 @@ module OrganizationsPresenter
           count: row.count
         }
       end
+      add_edvanced_categories_links(array)
+      array.insert(0, {
+        title: 'Все',
+        klass: 'all',
+        url: "#{pluralized_kind}_path",
+        parameters: {},
+        selected: array.select {|a| a[:selected]}.empty?,
+        count: HasSearcher.searcher(pluralized_kind.to_sym).total
+      })
     }
   end
 
@@ -215,6 +216,10 @@ module OrganizationsPresenter
       s.paginate(page: page, per_page: per_page_count)
       s.send("order_by_#{order_by}")
     }
+  end
+
+  def add_edvanced_categories_links(links)
+    links
   end
 end
 

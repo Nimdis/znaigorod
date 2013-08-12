@@ -28,4 +28,16 @@ class EntertainmentsPresenter
       s.remove_duplicated if need_remove_duplications?
     }
   end
+
+  def add_edvanced_categories_links(links)
+    links.insert(2, {
+        title: I18n.t("organization.kind.sauna"),
+        klass: 'sauna',
+        url: "saunas_path",
+        parameters: {},
+        selected: categories_filter[:selected].include?('sauna'),
+        count: HasSearcher.searcher(:saunas).total
+    })
+  end
+
 end

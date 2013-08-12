@@ -81,7 +81,7 @@ class SaunaHallsPresenter
   end
 
   def categories_links
-    EntertainmentsPresenter.new(self.params).categories_links
+    EntertainmentsPresenter.new(categories: ['sauna']).categories_links
   end
 
   def capacity_hash
