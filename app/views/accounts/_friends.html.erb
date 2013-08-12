@@ -1,0 +1,12 @@
+<ul class="avatars">
+  <% friends.each do |account| %>
+    <li>
+      <div class="avatar">
+        <%= link_to(image_tag(account.avatar, :width => 35, :title => account, :alt => account), account) %>
+      </div>
+      <div class="details">
+        <%= link_to(account, account, :class => :name) %>
+      </div>
+    </li>
+  <% end %>
+</ul>

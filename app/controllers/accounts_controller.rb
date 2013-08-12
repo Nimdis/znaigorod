@@ -11,6 +11,12 @@ class AccountsController < ApplicationController
     }
   end
 
+  def show
+    show! {
+      @presenter = AccountPresenter.new(params)
+    }
+  end
+
   private
 
   def collection

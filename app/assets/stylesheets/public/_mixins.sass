@@ -67,6 +67,30 @@ $desktop_default_width: 1200px
     &:active
       padding: ($padding-bottom + 1) 8px ($padding-top + 1)
 
+
+=avatar-list-style
+  +clearfix
+  margin: 0 5px 5px
+
+  li
+    +clearfix
+    margin-bottom: 5px
+
+  .avatar
+    float: left
+    +clearfix
+    width: 35px
+    height: 35px
+    +border-radius
+    margin: 0 5px 0 0
+
+  .details
+    margin-top: 8px
+
+    .name
+      font-size: 12px
+
+
 /* animations */
 
 =animate_blink($speed: 1s, $repeat: true)

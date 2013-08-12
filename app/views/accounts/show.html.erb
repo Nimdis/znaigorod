@@ -1,53 +1,60 @@
-<div class="profile">
-  <div class="avatar">
-    <% if @account.avatar.present? %>
-      <%= image_tag @account.avatar, size: '200x200' %>
-    <% else %>
-      <%= image_tag 'public/stub_poster.png', size: '200x200' %>
+<div class="account_show">
+  <div class="left">
+    <div class="image">
+      <% if @account.avatar.present? %>
+        <%= image_tag @account.avatar, size: '200x200' %>
+      <% else %>
+        <%= image_tag 'public/stub_poster.png', size: '200x200' %>
+      <% end %>
+    </div>
+    <h1><%= @account %></h1>
+
+    <div class="social_actions">
+      <ul class="change_friendship">
+        <%= render 'friends/friend' if current_user && current_user.account != @account %>
+      </ul>
+
+      <% if @account.friends.approved.any? %>
+        <div class="friends_counter">
+          <div class="floatl">Друзья</div>
+          <div class="floatr"><%= link_to t('account_friends', count: @account.friends.count), account_friends_path(@account) %></div>
+        </div>
+        <%= render partial: 'friends', locals: { friends: @account.friends.approved.map(&:friendable).first(5) } %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="right">
+    <% if @account.votes.any? %>
+      <div class="votes_header">
+        Нравится
+        <%= link_to t('account_votes', count: @account.votes.count), account_votes_path(@account) %>
+      </div>
+      <div class="votes">
+        <%= render partial: 'account_votes', locals: { votes: @account.votes.limit(3) } %>
+      </div>
+    <% end %>
+
+    <% if @account.afisha.published.any? %>
+      <div class="events_header">
+        <%= @account.first_name %>
+        <%= @account.male? ? 'добавил' : 'добавила' %>
+      </div>
+      <div class="events">
+        <%= link_to t('account_events', count: @account.afisha.published.count), account_events_path(@account) %>
+        <%= render partial: 'account_events', locals: { events: @account.afisha.published.limit(5) } %>
+      </div>
+    <% end %>
+
+    <% if @account.comments.any? %>
+      <div class="comments_header">
+        <%= @account.first_name %>
+        <%= @account.male? ? 'написал' : 'написала' %>
+        <%= link_to t(:account_comments, count: @account.comments.count), account_comments_path(@account) %>
+      </div>
+      <div class="comments">
+        <%= render partial: 'account_comments', locals: { comments: @account.comments.limit(5) } %>
+      </div>
     <% end %>
   </div>
-
-  <h3><%= @account %></h3>
-
-  <div class="actions change_friendship">
-    <%= render 'friends/friend' if current_user && current_user.account != @account %>
-  </div>
-
-  <div class="friends">
-    <% if @account.friends.approved.any? %>
-      <h3>
-        Друзья
-        <%= link_to t('account_friends', count: @account.friends.count), account_friends_path(@account) %>
-      </h3>
-      <%= render partial: 'account_friends', locals: { friends: @account.friends.approved.first(5) } %>
-    <% end %>
-  </div>
-</div>
-
-<div class="activities">
-  <% if @account.votes.any? %>
-    <h3>
-      Нравится
-      <%= link_to t('account_votes', count: @account.votes.count), account_votes_path(@account) %>
-    </h3>
-    <%= render partial: 'account_votes', locals: { votes: @account.votes.limit(3) } %>
-  <% end %>
-
-  <% if @account.comments.any? %>
-    <h3>
-      <%= @account.first_name %>
-      <%= @account.male? ? 'написал' : 'написала' %>
-      <%= link_to t(:account_comments, count: @account.comments.count), account_comments_path(@account) %>
-    </h3>
-    <%= render partial: 'account_comments', locals: { comments: @account.comments.limit(5) } %>
-  <% end %>
-
-  <% if @account.afisha.published.any? %>
-    <h3>
-      <%= @account.first_name %>
-      <%= @account.male? ? 'добавил' : 'добавила' %>
-      <%= link_to t('account_events', count: @account.afisha.published.count), account_events_path(@account) %>
-    </h3>
-    <%= render partial: 'account_events', locals: { events: @account.afisha.published.limit(5) } %>
-  <% end %>
 </div>

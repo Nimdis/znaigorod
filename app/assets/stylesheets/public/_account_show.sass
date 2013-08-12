@@ -1,0 +1,52 @@
+.account_show
+
+  .left
+    float: left
+    width: 208px
+    border: 1px solid #ccc
+
+    .image
+      position: relative
+      width: 200px
+      margin: 4px
+
+    h1
+      font-size: 16px
+      line-height: 24px
+      text-align: center
+
+    .social_actions
+      +clearfix
+      +background(linear-gradient(top, #fff, #e8e8e8))
+      border-top: 1px solid #ccc
+
+    .change_friendship
+      font-size: 12px
+      border-bottom: 1px solid #ccc
+      padding: 5px
+      margin-bottom: 5px
+
+      li
+        +toggable-links(4px, 5px)
+        width: 130px
+        text-align: center
+        margin: 0 auto
+
+    .friends_counter
+      font-size: 12px
+      +clearfix
+      margin: 5px
+
+    .avatars
+      +avatar-list-style
+
+
+  .right
+    margin: 0 0 0 220px
+
+    .votes_header, .events_header, .comments_header
+      font-size: 14px
+      background-color: #e8e8e8
+      padding: 1px 10px 2px
+      margin-bottom: 10px
+
