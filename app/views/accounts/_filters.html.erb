@@ -2,7 +2,7 @@
   <div class='filters account'>
     <div class='by_gender'>
       <ul>
-        <% if user_signed_in? #&& current_user.account.friends.any? %>
+        <% if user_signed_in? && current_user.account.friends.any? %>
           <li class="friends">
             <%= link_to 'Мои друзья', account_friends_path(current_user.account) %>
           </li>

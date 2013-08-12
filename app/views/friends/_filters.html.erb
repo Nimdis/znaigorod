@@ -1,1 +1,35 @@
-<%= render partial: 'accounts/filters' %>
+<div class='filters_wrapper'>
+  <div class='filters account'>
+    <div class='by_gender'>
+      <ul>
+        <% if user_signed_in? && current_user.account.friends.any? %>
+          <li class="friends selected">
+            <%= link_to 'Мои друзья', account_friends_path(current_user.account) %>
+          </li>
+        <% end %>
+        <% @presenter.gender_links.each do |link| %>
+          <li class='<%= link[:klass] %><%= ' selected' if link[:current] %>'>
+            <%= link_to accounts_path(link[:parameters]) do %>
+              <%= content_tag :span,  link[:title], class: :name %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class='filters account'>
+    <div class='by_kind'>
+      <ul>
+        <% @presenter.kinds_links.each do |link| %>
+          <li class='<%= link[:klass] %>'>
+            <%= link_to accounts_path(link[:parameters]) do %>
+              <%= content_tag :span,  link[:title], class: :name %>
+              <%= content_tag :span, link[:count], class: :count  %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

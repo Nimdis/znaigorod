@@ -27,10 +27,7 @@ class FriendsController < ApplicationController
   private
 
   def collection
-    #current_user.account.friends.approved.map(&:friendable)
-
-    @account = Account.find(params[:account_id])
-    @friends = @account.friends.approved.map(&:friendable)
+    @friends = current_user.account.friends.approved.map(&:friendable)
     Kaminari.paginate_array(@friends).page(params[:page]).per(per_page)
   end
 

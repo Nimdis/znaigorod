@@ -5,7 +5,7 @@
 
   <div class="image">
     <% if account.avatar.present? %>
-      <%= image_tag account.avatar, size: '178x178' %>
+      <%= image_tag account.avatar, width: '178' %>
     <% else %>
       <%= image_tag 'public/stub_poster.png', size: '178x178' %>
     <% end %>
