@@ -61,6 +61,7 @@ class Afisha < ActiveRecord::Base
 
   before_save :prepare_trailer
   before_save :set_wmode_for_trailer, :if => :published?
+  after_save :update_account_rating, :if => :published?
 
   scope :available_for_edit,    -> { where(:state => [:draft, :published]) }
   scope :by_state,              ->(state) { where(:state => state) }
@@ -235,8 +236,10 @@ class Afisha < ActiveRecord::Base
     self.vk_event_url.split('/').last.gsub(/event/, '')
   end
 
-  def create_page_visit(session)
-    self.page_visits.find_or_create_by_session(session: session)
+  def create_page_visit(session, user)
+    page_visit = self.page_visits.find_or_initialize_by_session(session)
+    page_visit.user = user
+    page_visit.save
   end
 
   def update_rating
@@ -446,6 +449,10 @@ class Afisha < ActiveRecord::Base
 
   def set_wmode_for_trailer
     self.trailer_code.gsub!(/(object|embed)/, '\1 wmode="opaque"') if self.trailer_code?
+  end
+
+  def update_account_rating
+    user.account.update_rating
   end
 end
 

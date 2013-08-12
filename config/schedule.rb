@@ -20,9 +20,9 @@ every :day, :at => '7:25 am' do
   rake 'sync:kinomir'
 end
 
-every :day, :at => '3am' do
-  rake "recalculate_accounts_rating"
-end
+#every :day, :at => '3am' do
+  #rake "recalculate_accounts_rating"
+#end
 
 every :day, :at => '5am' do
   rake "refresh_sitemaps"

@@ -188,8 +188,10 @@ class Organization < ActiveRecord::Base
     text :term
   end
 
-  def create_page_visit(session)
-    self.page_visits.find_or_create_by_session(session: session)
+  def create_page_visit(session, user)
+    page_visit = self.page_visits.find_or_initialize_by_session(session)
+    page_visit.user = user
+    page_visit.save
   end
 
   def search_kind

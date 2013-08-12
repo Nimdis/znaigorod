@@ -12,6 +12,7 @@ class Vote < ActiveRecord::Base
   scope :liked, where(:like => true)
 
   after_save :update_voteable_rating
+  after_save :update_account_rating
 
   def change_vote
     self.like = (like? ? false : true)
@@ -25,6 +26,10 @@ class Vote < ActiveRecord::Base
 
     def update_voteable_rating
       voteable.update_rating if voteable.is_a?(Afisha) && (Afisha.kind.values & voteable.kind).any?
+    end
+
+    def update_account_rating
+      user.account.update_rating if user
     end
 end
 

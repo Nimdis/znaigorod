@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :roles,          dependent: :destroy
   has_many :votes
   has_many :visits
+  has_many :page_visits
   has_many :payments
   has_many :events, :class_name => 'Afisha'
 

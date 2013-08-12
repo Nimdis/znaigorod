@@ -20,7 +20,7 @@ class AfishasController < ApplicationController
   def show
     @afisha = AfishaDecorator.new Afisha.find(params[:id])
     @presenter = AfishaPresenter.new(params)
-    @afisha.create_page_visit(request.session_options[:id])
+    @afisha.create_page_visit(request.session_options[:id], current_user)
   end
 
 end

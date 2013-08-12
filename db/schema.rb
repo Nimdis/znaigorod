@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130809074955) do
+ActiveRecord::Schema.define(:version => 20130812092830) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -463,9 +463,11 @@ ActiveRecord::Schema.define(:version => 20130809074955) do
     t.string   "page_visitable_type"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.integer  "user_id"
   end
 
   add_index "page_visits", ["page_visitable_id"], :name => "index_page_visits_on_page_visitable_id"
+  add_index "page_visits", ["user_id"], :name => "index_page_visits_on_user_id"
 
   create_table "paperclip_attachments", :force => true do |t|
     t.integer  "attacheable_id"

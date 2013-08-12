@@ -8,6 +8,7 @@ class Account < ActiveRecord::Base
   has_many :roles,           through: :users
   has_many :votes,           through: :users, order: 'votes.created_at DESC'
   has_many :visits,          through: :users, order: 'visits.created_at DESC'
+  has_many :page_visits,     through: :users
   has_many :payments,        through: :users
   has_many :events,          through: :users, order: 'afisha.created_at DESC'
 
@@ -71,8 +72,8 @@ class Account < ActiveRecord::Base
   end
 
   def update_rating
-    rating = self.comments.count * 0.5 + self.votes.count * 0.25 + self.visits.count * 0.25
-    update_column(:rating, rating)
+    rating = self.afisha.count * 1 + self.comments.count * 0.5 + self.votes.count * 0.25 + self.visits.count * 0.25 + self.page_visits.count * 0.01
+    update_attribute(:rating, rating)
   end
 
   def friendly_for(account)

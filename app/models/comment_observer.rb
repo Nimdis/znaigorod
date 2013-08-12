@@ -9,5 +9,6 @@ class CommentObserver < ActiveRecord::Observer
         comment.messages.create(account: comment.parent.user.account, producer_id: comment.user.account_id, body: comment.body, kind: :reply_on_comment)
       end
     end
+    comment.user.account.update_rating
   end
 end
