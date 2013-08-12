@@ -27,8 +27,9 @@
         delete object['on']
         search = $.param(object)
         if search.length
-          window.location.search = "?#{search}"
+          window.location.replace(link.attr('href').replace(/\?.*/, '') + "?#{search}")
         else
+          window.location.replace(link.attr('href').replace(/\?.*/, ''))
           window.location.reload()
         true
     ), 1
@@ -56,7 +57,7 @@
       object.period = 'daily'
       object.on = date
       search = $.param(object)
-      window.location.search = "?#{search}"
+      window.location.replace(link.attr('href').replace(/\?.*/, '') + "?#{search}")
       true
 
   object = create_obj_from_uri()
