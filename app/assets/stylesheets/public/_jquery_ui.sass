@@ -719,38 +719,36 @@ body .ui-tooltip
  *----------------------------------
 
 .ui-widget
-  font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif
-  font-size: 1.1em
-  .ui-widget
-    font-size: 1em
+  font-size: 12px
+  +box-shadow(#888 0 0 3px)
   input, select, textarea, button
-    font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif
-    font-size: 1em
+    font-size: 12px
+    font-family: Verdana, Tahoma, Arial, sans-serif
 
 .ui-widget-content
-  border: 1px solid #dddddd
-  background: #eeeeee image_url('public/jquery_ui/ui-bg_highlight-soft_100_eeeeee_1x100.png') 50% top repeat-x
-  color: #333333
+  background: #fff
+  color: #000
   a
-    color: #333333
+    color: #06c
 
 .ui-widget-header
-  border: 1px solid #e78f08
-  background: #f6a828 image_url('public/jquery_ui/ui-bg_gloss-wave_35_f6a828_500x100.png') 50% 50% repeat-x
-  color: #ffffff
+  background: #f93
+  +background(linear-gradient(top, #f93, #f60))
+  color: #fff
   font-weight: bold
   a
-    color: #ffffff
+    color: #fff
 
 /* Interaction states
  *----------------------------------
 
 $default_link_color: #1c94c4
 $default_link_color: #06c
+$default_link_color: #000
 
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
-  border: 1px solid #cccccc
-  background: #f6f6f6 image_url('public/jquery_ui/ui-bg_glass_100_f6f6f6_1x400.png') 50% 50% repeat-x
+  border: 1px solid #ccc
+  background: #e8e8e8
   font-weight: bold
   color: $default_link_color
 
@@ -762,38 +760,47 @@ $default_link_color: #06c
     text-decoration: none
 
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus
-  border: 1px solid #fbcb09
-  background: #fdf5ce image_url('public/jquery_ui/ui-bg_glass_100_fdf5ce_1x400.png') 50% 50% repeat-x
+  border: 1px solid #ccc
+  background: #e8e8e8
   font-weight: bold
-  color: #c77405
+  color: #f60
+  &:hover, &:link, &:visited
+    text-decoration: none
 
 .ui-state-hover a
-  color: #c77405
+  color: #000
   text-decoration: none
   &:hover, &:link, &:visited
-    color: #c77405
+    color: #f60
     text-decoration: none
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active
-  border: 1px solid #fbd850
-  background: white image_url('public/jquery_ui/ui-bg_glass_65_ffffff_1x400.png') 50% 50% repeat-x
   font-weight: bold
-  color: #eb8f00
+  color: #fff
+  background: #f60
+  border-top: 1px solid #cf5300
+  border-right: 1px solid #f60
+  border-bottom: 1px solid #f60
+  border-left: 1px solid #cf5300
+  +box-shadow(#ef6000 1px 1px 1px inset)
 
 .ui-state-active a
-  color: #eb8f00
+  color: #fff
   text-decoration: none
   &:link, &:visited
-    color: #eb8f00
+    color: #fff
     text-decoration: none
 
 /* Interaction Cues
  *----------------------------------
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight
-  border: 1px solid #fed22f
-  background: #ffe45c image_url('public/jquery_ui/ui-bg_highlight-soft_75_ffe45c_1x100.png') 50% top repeat-x
-  color: #363636
+  border: 1px solid #009bdb
+  background: #009bdb
+  color: #fff
+  +box-shadow(none)
+  &.ui-state-active
+    @extend .ui-state-active
 
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a
   color: #363636
@@ -839,7 +846,7 @@ $default_link_color: #06c
   background-image: image_url('public/jquery_ui/ui-icons_ffffff_256x240.png')
 
 .ui-state-default .ui-icon, .ui-state-hover .ui-icon, .ui-state-focus .ui-icon, .ui-state-active .ui-icon
-  background-image: image_url('public/jquery_ui/ui-icons_ef8c08_256x240.png')
+  background-image: image_url('public/jquery_ui/ui-icons_ff6600_256x240.png')
 
 .ui-state-highlight .ui-icon
   background-image: image_url('public/jquery_ui/ui-icons_228ef1_256x240.png')
