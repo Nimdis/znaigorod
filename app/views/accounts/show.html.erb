@@ -27,7 +27,7 @@
   <div class="right">
     <% if @account.votes.afisha.any? %>
       <div class="votes header">
-        Нравится <%= t('account_votes', count: @account.votes.afisha.count) %>
+        <%= "#{'Нравится '}" "#{t('account_votes', count: @account.votes.afisha.count)}" %>
       </div>
       <div class="votes list">
         <%= render partial: 'account_votes', locals: { collection: @account.votes.afisha } %>
@@ -39,9 +39,7 @@
 
     <% if @account.afisha.published.any? %>
       <div class="events header">
-        <%= @account.first_name %>
-        <%= @account.male? ? 'добавил' : 'добавила' %>
-        <%= t('account_events', count: @account.afisha.published.count) %>
+        <%= "#{@account.first_name}" "#{@account.male? ? ' добавил ' : ' добавила '}" "#{t('account_events', count: @account.afisha.published.count)}" %>
       </div>
       <div class="events list">
         <%= render partial: 'account_events', locals: { collection: @account.afisha.published } %>
@@ -53,12 +51,10 @@
 
     <% if @account.comments.any? %>
       <div class="comments header">
-        <%= @account.first_name %>
-        <%= @account.male? ? 'написал' : 'написала' %>
-        <%= t(:account_comments, count: @account.comments.count) %>
+        <%= "#{@account.first_name}" "#{@account.male? ? ' написал ' : ' написала '}" "#{t(:account_comments, count: @account.comments.count)}" %>
       </div>
       <div class="comments list">
-        <%= render partial: 'account_comments', locals: { comments: @account.comments.limit(5) } %>
+        <%= render partial: 'account_comments', locals: { comments: @account.comments } %>
       </div>
       <div class="comments toggle">
         <%= link_to '', '#', remote: true, class: 'toggler closed floatr' %>
