@@ -17,9 +17,13 @@ class Account < ActiveRecord::Base
 
   has_many :roles,           through: :users
 
+  after_create :get_social_avatar
+
   alias_attribute :to_s, :title
 
   scope :ordered, -> { order('ID ASC') }
+
+  has_attached_file :avatar, :storage => :elvfs, :elvfs_url => Settings['storage.url']
 
   extend Enumerize
   enumerize :gender, in: [:male, :female], predicates: true
@@ -67,6 +71,27 @@ class Account < ActiveRecord::Base
     end
   end
 
+  def get_social_avatar
+    user = users.first
+    vk_client = VkontakteApi::Client.new
+    fb_client = Koala::Facebook::API.new
+    image_url = case user.provider
+                when 'vkontakte'
+                  vk_client.users.get(uid: user.uid,
+                                      fields: :photo_200_orig).first.photo_200_orig
+                when 'facebook'
+                  fb_client.get_picture(user.uid, type: 'large')
+                when 'google_oauth2', 'twitter'
+                  user.avatar
+                end
+    set_avatar_from_url(image_url) if image_url
+  end
+
+  def set_avatar_from_url(url)
+    self.avatar = URI.parse(url)
+    save!
+  end
+
   def get_account(uid)
     User.find_by_uid(uid).account
   end
@@ -83,6 +108,7 @@ class Account < ActiveRecord::Base
   def friends_with?(account)
     self.friends.where(friendable_id: account.id, friendly: true).any?
   end
+
 end
 
 # == Schema Information
