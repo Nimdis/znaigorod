@@ -1,0 +1,129 @@
+.ui-dialog .ui-dialog-content
+  &.payment_form_wrapper
+    background-color: #fff
+    color: #000
+
+    .ticket_info
+      +clearfix
+      border-bottom: 1px dotted #cbcbcb
+      padding: 20px 20px 15px 20px
+
+      .ticket_prices
+        float: left
+        margin-right: 30px
+
+        .ticket_original_price
+          margin-bottom: 10px
+          color: #a9a9a9
+
+          .stroke
+            +inline-block
+            position: relative
+
+            &:before
+              position: absolute
+              content: ""
+              width: 120%
+              left: -10%
+              top: 50%
+              right: 0
+              border-top: 1px solid
+              border-color: #f93
+              +rotate(-15deg)
+
+        .ticket_price
+          color: #fff
+          font-size: 20px
+          +text-shadow(#555 0 1px 2px)
+          background-color: #f60
+          padding: 10px
+
+      .ticket_description_and_tickets
+        +clearfix
+        line-height: 1.4
+
+        .ticket_description
+          font-size: 14px
+          margin-bottom: 10px
+
+        .ticket_reservation
+          margin-bottom: 10px
+
+          .ticket_price
+            color: #f60
+            font-size: 14px
+            font-weight: bold
+
+    .ticket_payment_instruction
+      border-bottom: 1px dotted #cbcbcb
+      padding: 15px 20px
+
+      li
+        color: #707070
+        line-height: 1.6
+        list-style: decimal
+        margin-left: 20px
+
+        .alert
+          color: #885050
+          font-weight: bold
+
+    form
+      margin: 15px 20px 20px 20px
+
+      abbr
+        display: none
+
+      .input
+        margin-bottom: 5px
+
+        select,
+        input
+          font-size: 12px
+          font-family: Arial, Verdana, Tahoma, sans-serif
+          border: 1px solid #bfbfbf
+          background-color: #fff
+          padding: 2px 3px
+
+        input
+          width: 110px
+          padding: 3px
+
+      .copies_with_seats
+        p
+          font-size: 14px
+          margin-bottom: 10px
+
+        ul
+          +clearfix
+
+          li
+            float: left
+            margin-right: 10px
+            width: 140px
+
+            label
+              +inline-block
+              margin-bottom: 10px
+
+            input
+              margin: 0
+
+      .submit
+        input
+          +button-style
+          cursor: pointer
+          padding: 4px 15px 5px
+
+          &:active
+            padding: 5px 15px 4px
+
+          &.disabled
+            cursor: default
+            border: 1px solid #a9a9a9
+            background-color: #b3b3b3
+            +background-image(linear-gradient(#bfbdbe, #a9a9a9))
+            &:hover
+              +text-shadow(none)
+            &:active
+              padding: 4px 15px 5px
