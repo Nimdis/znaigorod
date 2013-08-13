@@ -1,8 +1,6 @@
 @init_payment = () ->
 
-  links = $('a.payment_link')
-
-  links.each ->
+  $('a.payment_link').each ->
     link = $(this)
     link.click ->
       $.ajax
@@ -16,10 +14,7 @@
             modal: true
             resizable: false
             open: ->
-              $('input[type=submit]', $(this)).attr('disabled', 'disabled').addClass('disabled')
-              $('#copy_payment_phone', $(this)).inputmask 'mask',
-                'mask': '+7-(999)-999-9999'
-              trigger_actions()
+              init_actions_handler()
               true
             close: ->
               $(this).dialog('destroy')
@@ -38,18 +33,25 @@
     true
 
   if window.location.hash == '#buy_ticket'
-    setTimeout ->
-      $('a.payment_link:first').click()
-    , 300
+    $('a.payment_link:first').click()
 
-  trigger_actions = ->
+  init_actions_handler = ->
 
-    $('.payment_form_wrapper form').on 'submit', (event) ->
+    $('.payment_form_wrapper form input[type=submit]').attr('disabled', 'disabled').addClass('disabled')
+
+    $('.payment_form_wrapper form #copy_payment_phone').inputmask 'mask',
+      'mask': '+7-(999)-999-9999'
+
+    $('.payment_form_wrapper form input[type=submit]').click ->
+      $('.payment_form_wrapper form').submit()
+      false
+
+    $('.payment_form_wrapper form').submit ->
       return false if $('.payment_form_wrapper .copies_with_seats input').length && !$('.payment_form_wrapper .copies_with_seats input:checked').length
       return false unless $('.payment_form_wrapper #copy_payment_phone').inputmask('isComplete')
       true
 
-    $('.payment_form_wrapper #copy_payment_phone').on 'keyup', ->
+    $('.payment_form_wrapper #copy_payment_phone').keyup ->
       return false if $('.payment_form_wrapper .copies_with_seats input').length && !$('.payment_form_wrapper .copies_with_seats input:checked').length
       if $(this).inputmask 'isComplete'
         $('input[type=submit]', $(this).closest('form')).removeAttr('disabled').removeClass('disabled')
@@ -57,7 +59,7 @@
         $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
       true
 
-    $('.payment_form_wrapper .copies_with_seats input').on 'change', ->
+    $('.payment_form_wrapper .copies_with_seats input').change ->
       unless $('.payment_form_wrapper .copies_with_seats input:checked').length
         $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
         return false
