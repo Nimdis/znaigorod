@@ -23,7 +23,7 @@ class OrganizationsCatalogPresenter
 
   def categories_links
     @categories_links ||= [].tap { |array|
-      excluded_categories = %w[сауны]
+      excluded_categories = %w[сауны автомойки]
       array << {
         title: 'Все',
         klass: 'all',
@@ -32,12 +32,21 @@ class OrganizationsCatalogPresenter
         selected: categories_filter[:selected].empty?,
         count: HasSearcher.searcher(pluralized_kind.to_sym).total
       }
-      {'meal' => 'бары',
-       'sauna' => 'сауны'}.each do |kind, category|
+      [['sauna', 'сауны'],
+       ['meal', 'бары'],
+       ['meal', 'доставка еды'],
+       ['meal', 'кафе'],
+       ['meal', 'рестораны'],
+       ['sport', 'фитнес'],
+       ['salon_centers', 'визаж-студии'],
+       ['car_washes', 'автомойки']
+      ].each do |item|
+        kind = item[0]
+        category = item[1]
         parameters = excluded_categories.include?(category) ? nil : { :categories => [category] }
         searcher_parameter = excluded_categories.include?(category) ? {} : { "#{kind}_category".to_sym => [category] }
         array << {
-          title: category.capitalize,
+          title: category.mb_chars.capitalize,
           klass: Russian.translit(category).gsub(" ", "_"),
           url: "#{kind.pluralize}_path",
           parameters: parameters,

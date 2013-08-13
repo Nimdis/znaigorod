@@ -31,7 +31,7 @@ module SearchWithFacets
 
         # OPTIMIZE: special cases
         boolean(:show_in_search_results) {
-          self.is_a?(Billiard) && (self.organization.suborganizations.map(&:class) & [Entertainment]).any? ? false : true
+          (self.is_a?(Sauna) || self.is_a?(Billiard)) && (self.organization.suborganizations.map(&:class) & [Entertainment]).any? ? false : true
         } if klass == Entertainment
 
         boolean(:with_sauna_halls) { self.with_sauna_halls? } if klass == Sauna

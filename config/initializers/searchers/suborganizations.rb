@@ -1,25 +1,39 @@
 Organization.basic_suborganization_kinds.each do |kind|
-  klass = kind.classify.constantize
+  klasses = case kind
+            when 'entertainment'
+              [Entertainment, Sauna]
+            else
+              [kind.classify.constantize]
+            end
 
   HasSearcher.create_searcher kind.pluralize.to_sym do
-    models kind.to_sym
+    case kind
+    when 'entertainment'
+      models :entertainment, :sauna
+    else
+      models kind.to_sym
+    end
 
-    klass.facets.map { |facet| "#{kind}_#{facet}" }.each do |field|
-      property field do |search|
-        search.with(field, search_object.send(field)) if search_object.send(field).try(:any?)
+    klasses.each do |klass|
+      klass.facets.map { |facet| "#{kind}_#{facet}" }.each do |field|
+        property field do |search|
+          search.with(field, search_object.send(field)) if search_object.send(field).try(:any?)
+        end
       end
     end
 
     scope do
-      klass.facets.map { |facet| "#{kind}_#{facet}" }.each do |field|
-        facet field, sort: :index
+      klasses.each do |klass|
+        klass.facets.map { |facet| "#{kind}_#{facet}" }.each do |field|
+          facet field, sort: :index
+        end
       end
 
     end
 
     # OPTIMIZE: special cases
     scope :remove_duplicated do
-      with(:show_in_search_results, true) if klass == Entertainment
+      with(:show_in_search_results, true) if klasses.include?(Entertainment)
     end
 
     property :location do |search|

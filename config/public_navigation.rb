@@ -35,7 +35,8 @@ SimpleNavigation::Configuration.run do |navigation|
     #primary.item :main, 'Всё', root_path
     #primary.item :afisha, 'Афиша', afisha_index_path, highlights_on: lambda { params[:controller] == 'afishas' }
     primary.item :afisha, 'Афиша', root_path, highlights_on: lambda { params[:controller] == 'afishas' }
-    primary.item :organizations, 'Заведения', organizations_path
+    primary.item :organizations, 'Заведения', organizations_path,
+      highlights_on: lambda { %w[organizations suborganizations saunas].include? controller.class.name.underscore.split("_").first }
     #primary.item :tickets, 'Билеты', tickets_path
     primary.item :posts, 'Обзоры', posts_path
     primary.item :accounts, 'Люди', accounts_path
