@@ -5,7 +5,13 @@
       <%= t :like, :count => voteable.votes.liked.count %>
     </div>
     <% voteable.votes.liked.last(6).map(&:user).each do |user| %>
-      <%= link_to(image_tag(user.avatar, :size => '24x24', :alt => user.name, :title => user.name), user.account) %>
+      <%= link_to account_path(user.account) do %>
+        <% if user.account.avatar_url? %>
+          <%= image_tag(resized_image_url(user.account.avatar_url, 24, 24), size: '24x24', title: user.name, alt: user.name) %>
+        <% else %>
+          <%= image_tag 'public/stub_poster.png', size: '24x24' %>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
   <div class='votes_counter' title='<%= t :like, :count => voteable.votes.liked.count %>'>
