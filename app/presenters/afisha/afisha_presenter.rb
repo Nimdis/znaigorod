@@ -131,13 +131,25 @@ class AfishaPresenter
           url: url,
           class: period_value,
           parameters: {
-            :period => @period_filter.period == period_value ? nil : period_value,
+            :period => period_value,
             :order_by => @sorting_filter.order_by,
             has_tickets: has_tickets
           },
           selected: period_value == @period_filter.period
         }
       end
+      array.insert(0, {
+          title: 'Все',
+          url: url,
+          class: :all,
+          parameters: {
+            :period => nil,
+            :order_by => @sorting_filter.order_by,
+            has_tickets: has_tickets
+          },
+          selected: @period_filter.all?
+
+      })
     }
   end
 
