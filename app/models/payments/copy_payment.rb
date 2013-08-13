@@ -50,7 +50,7 @@ class CopyPayment < Payment
 
   def reserve_copies
     if number
-      MyMailer.delay.not_enough_tickets(paymentable) if number > paymentable.copies_for_sale.count
+      MyMailer.delay.not_enough_ticket_copies(paymentable) if number > paymentable.copies_for_sale.count
 
       copies << paymentable.copies_for_sale.limit(number)
     else
