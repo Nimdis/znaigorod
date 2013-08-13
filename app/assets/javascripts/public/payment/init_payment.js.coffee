@@ -1,5 +1,10 @@
 @init_payment = () ->
 
+  if window.location.hash == '#buy_ticket'
+    setTimeout ->
+      $('a.payment_link:first').click()
+    , 300
+
   links = $('a.payment_link')
 
   links.each ->
