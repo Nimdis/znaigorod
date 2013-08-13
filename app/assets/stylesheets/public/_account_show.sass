@@ -45,8 +45,63 @@
     margin: 0 0 0 220px
 
     .votes_header, .events_header, .comments_header
-      font-size: 14px
       background-color: #e8e8e8
+      font-size: 14px
+      margin-bottom: 20px
       padding: 1px 10px 2px
-      margin-bottom: 10px
 
+    .votes_list
+      +clearfix
+
+      ul
+        li
+          float: left
+          margin: 0 10px 10px 0
+          width: 315px
+
+          .item
+            .poster
+              float: left
+              margin: 0 10px 0 0
+
+            .title
+              font-size: 12px
+
+            .kind
+              color: #999
+
+    .votes_toggle
+      float: right
+      height: 17px
+      margin: -25px 5px 0 0
+      width: 17px
+
+      a.account_votes_toggle
+        +inline-block
+        white-space: nowrap
+        margin: 0 0 1px 0
+        background: transparent image_url('public/account_actions_sprite.png') no-repeat center center
+        height: 17px
+        width: 17px
+        &:hover
+          text-decoration: none
+        &:active
+          margin: 1px 0 0 0
+
+        &.closed
+          background-position: 0 0
+          &:hover
+            background-position: 0 -34px
+        &.selected
+          background-position: 0 -68px
+          &:hover
+            background-position: 0 -34px
+
+        &.opened
+          background-position: -34px 0
+          &:hover
+            background-position: -34px -34px
+        &.selected
+          background-position: -34px -68px
+          &:hover
+            background-position: -34px -34px

@@ -14,4 +14,8 @@ class AccountDecorator < ApplicationDecorator
   def image
     account.avatar? ? account.avatar : 'public/stub_poster.png'
   end
+
+  def buddies
+    friends.approved.map(&:friendable).first(5)
+  end
 end

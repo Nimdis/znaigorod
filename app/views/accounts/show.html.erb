@@ -7,7 +7,7 @@
         <%= image_tag 'public/stub_poster.png', size: '200x200' %>
       <% end %>
     </div>
-    <h1><%= @account %></h1>
+    <h1><%= @account.title %></h1>
 
     <div class="social_actions">
       <ul class="change_friendship">
@@ -19,19 +19,22 @@
           <div class="floatl">Друзья</div>
           <div class="floatr"><%= link_to t('account_friends', count: @account.friends.count), account_friends_path(@account) %></div>
         </div>
-        <%= render partial: 'friends', locals: { friends: @account.friends.approved.map(&:friendable).first(5) } %>
+        <%= render partial: 'friends', locals: { friends: @account.buddies } %>
       <% end %>
     </div>
   </div>
 
   <div class="right">
-    <% if @account.votes.any? %>
+    <% if @account.votes.afisha.any? %>
       <div class="votes_header">
         Нравится
-        <%= link_to t('account_votes', count: @account.votes.count), account_votes_path(@account) %>
+        <%= t('account_votes', count: @account.votes.afisha.count) %>
       </div>
-      <div class="votes">
-        <%= render partial: 'account_votes', locals: { votes: @account.votes.limit(3) } %>
+      <div class="votes_list">
+        <%= render partial: 'account_votes', locals: { collection: @account.votes.afisha } %>
+      </div>
+      <div class="votes_toggle">
+        <%= link_to '', '#', remote: true, class: 'account_votes_toggle closed floatr' %>
       </div>
     <% end %>
 

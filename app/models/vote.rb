@@ -10,6 +10,7 @@ class Vote < ActiveRecord::Base
   validate :authenticated_user
 
   scope :liked, where(:like => true)
+  scope :afisha, where(:voteable_type => 'Afisha')
 
   after_save :update_voteable_rating
   after_save :update_account_rating
