@@ -347,20 +347,31 @@ button.ui-button::-moz-focus-inner
       text-decoration: none
   .ui-datepicker-buttonpane
     background-image: none
-    margin: .7em 0 0 0
+    margin: 0
     padding: 0 .2em
     border-left: 0
     border-right: 0
     border-bottom: 0
     button
       float: right
-      margin: .5em .2em .4em
+      font-size: 11px
+      font-weight: normal
+      color: #000
+      margin: 0.5em 0.1em 0.4em
       cursor: pointer
-      padding: .1em .5em .2em .5em
+      padding: 0.1em 0.4em 0.2em
       width: auto
       overflow: visible
       &.ui-datepicker-current
         float: left
+      &.ui-datepicker-clear
+        float: left
+        margin-left: 0.45em
+      &:hover
+        color: #f60
+      &:active
+        padding-top: 0.2em
+        padding-bottom: 0.1em
   &.ui-datepicker-multi
     width: auto
 

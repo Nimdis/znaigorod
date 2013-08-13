@@ -18,7 +18,7 @@
     return true unless wrapper.hasClass('selected')
     setTimeout (->
       buttonPane = $(inst).datepicker('widget').find('.ui-datepicker-buttonpane')
-      btn = $("<button class='ui-datepicker-current ui-state-default ui-priority-secondary ui-corner-all' type='button'>Очистить</button>")
+      btn = $("<button class='ui-datepicker-clear ui-state-default ui-priority-secondary ui-corner-all' type='button'>Очистить</button>")
       btn.appendTo buttonPane
       btn.unbind("click").bind "click", ->
         $.datepicker._clearDate inst.input
