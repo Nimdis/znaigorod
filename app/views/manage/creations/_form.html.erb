@@ -1,6 +1,8 @@
 <%= simple_nested_form_for [@organization, resource], :url => [:manage, @organization, :creation], :html => { :novalidate => true } do |f| %>
   <%= f.input :title %>
   <%= f.input :description %>
+  <%= f.input :category_list, :as => :check_boxes, :collection => f.object.available_categories, :checked => f.object.categories, :wrapper_html =>{ :class => :category_list } %>
+  <%= f.input :feature_list, :as => :check_boxes, :collection => f.object.available_features, :checked => f.object.features %> }
 
   <%= render :partial => 'virtual_tour_form_fields', :locals => { :f => f } %>
 

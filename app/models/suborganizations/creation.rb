@@ -4,7 +4,7 @@ class Creation < ActiveRecord::Base
   include HasVirtualTour
   # include HasServices
 
-  attr_accessible :services_attributes, :title, :description
+  attr_accessible :services_attributes, :title, :description, :category, :feature
 
   belongs_to :organization
 
@@ -35,11 +35,11 @@ class Creation < ActiveRecord::Base
   # similar code --->
 
   def category
-    services.pluck(:category).compact.uniq.join(', ')
+    (@category || services.pluck(:category).compact.uniq).join(', ')
   end
 
   def feature
-    services.pluck(:feature).compact.uniq.join(', ')
+    (@feature || services.pluck(:feature).compact.uniq).join(', ')
   end
 
   def categories
@@ -53,8 +53,13 @@ class Creation < ActiveRecord::Base
   include Rating
 
   include SearchWithFacets
-
   search_with_facets :category, :feature, :stuff
+
+  include PresentsAsCheckboxes
+  presents_as_checkboxes :category,
+    :validates_presence => true,
+    :message => I18n.t('activerecord.errors.messages.at_least_one_value_should_be_checked')
+  presents_as_checkboxes :feature
 end
 
 # == Schema Information
