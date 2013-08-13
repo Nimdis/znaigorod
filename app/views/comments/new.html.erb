@@ -4,7 +4,14 @@
     <%= render :partial => "commons/social_auth" %>
   <% end %>
   <% if current_user %>
-    <%= image_tag current_user.avatar, :class => 'avatar', :title => current_user.name if current_user.avatar.present? %>
+    <%= link_to account_path(current_user.account) do %>
+      <% if current_user.account.avatar_url? %>
+        <%= image_tag(resized_image_url(current_user.account.avatar_url, 35, 35), size: '35x35', title: current_user.name, alt: current_user.name, class: :avatar) %>
+      <% else %>
+        <%= image_tag 'public/stub_poster.png', size: '35x35' %>
+      <% end %>
+    <% end %>
+
     <% if current_user.profile %>
       <%= link_to current_user.name, current_user.account, :target => '_blank', :class => 'profile_link' %>
     <% else %>

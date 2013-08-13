@@ -12,7 +12,13 @@
       <% if user_signed_in? %>
         <p class='user'>
           <%= link_to 'Добавить афишу', new_my_afisha_path, class: :new_my_afisha %>
-          <%= link_to(image_tag(current_user.avatar, size: '22x22'), current_user.profile, target: :_blank, class: :avatar) %>
+          <%= link_to account_path(current_user.account), target: :_blank, class: :avatar do %>
+            <% if current_user.account.avatar_url? %>
+              <%= image_tag(resized_image_url(current_user.account.avatar_url, 22, 22), size: '22x22', title: current_user.name, alt: current_user.name) %>
+            <% else %>
+              <%= image_tag 'public/stub_poster.png', size: '22x22' %>
+            <% end %>
+          <% end %>
           <%= link_to(current_user.name, current_user.account, class: :user_name) %>
           <%= link_to('Выйти', destroy_user_session_path, method: :delete, class: :logout) %>
         </p>
