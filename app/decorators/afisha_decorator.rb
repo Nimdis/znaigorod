@@ -199,7 +199,7 @@ class AfishaDecorator < ApplicationDecorator
   end
 
   def searcher
-    HasSearcher.searcher(:similar_affiches)
+    HasSearcher.searcher(:similar_afisha)
   end
 
   auto_html_for :trailer_code do

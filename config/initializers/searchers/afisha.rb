@@ -126,3 +126,15 @@ HasSearcher.create_searcher :showings do
     end if search_object.starts_on
   end
 end
+
+HasSearcher.create_searcher :similar_afisha do
+  models :afisha
+
+  scope do
+    with(:last_showing_time).greater_than HasSearcher.cacheable_now
+  end
+
+  scope :with_images do
+    with(:has_images, true)
+  end
+end
