@@ -32,14 +32,6 @@ namespace :account do
     accounts.each do |account|
       if account.users.any?
         user = account.users.first
-        case user.gender
-        when 1 || 'female'
-          gender = :female
-        when 2 || 'male'
-          gender = :male
-        else
-          gender = nil
-        end
         account.update_attributes(gender: gender, email: user.email)
         bar.increment!
       end
@@ -54,22 +46,21 @@ namespace :account do
     vk_client = VkontakteApi::Client.new
     bar = ProgressBar.new(accounts.count)
     accounts.each do |account|
+      bar.increment!
       begin
         if account.users.any?
           user = account.users.first
-          case user.provider
-          when 'vkontakte'
-            image = vk_client.users.get(uid: user.uid,
-                                        fields: :photo_200_orig).first.photo_200_orig
-            account.update_attributes(avatar: image)
-          when 'facebook'
-            image = fb_client.get_picture(user.uid, type: 'large')
-            account.update_attributes(avatar: image)
-          when 'google_oauth2', 'odnoklassniki', 'mailru', 'yandex', 'twitter'
-            account.update_attributes(avatar: user.avatar)
-          end
+          image_url = case user.provider
+                      when 'vkontakte'
+                        vk_client.users.get(uid: user.uid,
+                                            fields: :photo_200_orig).first.photo_200_orig
+                      when 'facebook'
+                        fb_client.get_picture(user.uid, type: 'large')
+                      when 'google_oauth2', 'twitter'
+                        user.avatar if user.avatar?
+                      end
+          account.set_avatar_from_url(image_url) if image_url
         end
-        bar.increment!
       rescue
         next
       end
