@@ -26,37 +26,42 @@
 
   <div class="right">
     <% if @account.votes.afisha.any? %>
-      <div class="votes_header">
-        Нравится
-        <%= t('account_votes', count: @account.votes.afisha.count) %>
+      <div class="votes header">
+        Нравится <%= t('account_votes', count: @account.votes.afisha.count) %>
       </div>
-      <div class="votes_list">
+      <div class="votes list">
         <%= render partial: 'account_votes', locals: { collection: @account.votes.afisha } %>
       </div>
-      <div class="votes_toggle">
-        <%= link_to '', '#', remote: true, class: 'account_votes_toggle closed floatr' %>
+      <div class="votes toggle">
+        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' %>
       </div>
     <% end %>
 
     <% if @account.afisha.published.any? %>
-      <div class="events_header">
+      <div class="events header">
         <%= @account.first_name %>
         <%= @account.male? ? 'добавил' : 'добавила' %>
+        <%= t('account_events', count: @account.afisha.published.count) %>
       </div>
-      <div class="events">
-        <%= link_to t('account_events', count: @account.afisha.published.count), account_events_path(@account) %>
-        <%= render partial: 'account_events', locals: { events: @account.afisha.published.limit(5) } %>
+      <div class="events list">
+        <%= render partial: 'account_events', locals: { collection: @account.afisha.published } %>
+      </div>
+      <div class="events toggle">
+        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' %>
       </div>
     <% end %>
 
     <% if @account.comments.any? %>
-      <div class="comments_header">
+      <div class="comments header">
         <%= @account.first_name %>
         <%= @account.male? ? 'написал' : 'написала' %>
-        <%= link_to t(:account_comments, count: @account.comments.count), account_comments_path(@account) %>
+        <%= t(:account_comments, count: @account.comments.count) %>
       </div>
-      <div class="comments">
+      <div class="comments list">
         <%= render partial: 'account_comments', locals: { comments: @account.comments.limit(5) } %>
+      </div>
+      <div class="comments toggle">
+        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' %>
       </div>
     <% end %>
   </div>

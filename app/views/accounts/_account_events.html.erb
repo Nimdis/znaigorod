@@ -1,7 +1,7 @@
 <ul>
-  <% events.each do |event| %>
+  <% collection.each do |afisha| %>
     <li>
-      <%= render partial: 'accounts/account_event', locals: { event: event } %>
+      <%= render partial: 'afishas/afisha_poster', locals: { afisha: AfishaDecorator.new(afisha) } %>
     </li>
   <% end %>
 </ul>
