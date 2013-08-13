@@ -1,7 +1,13 @@
 <li class='comment_item' id='comment_<%= comment.id %>'>
   <div class='comment_wrapper'>
     <div class="avatar">
-      <%= image_tag comment.avatar, :title => comment.name %>
+      <%= link_to account_path(comment.user.account) do %>
+        <% if comment.user.account.avatar_url? %>
+          <%= image_tag(resized_image_url(comment.user.account.avatar_url, 35, 35), size: '35x35', title: comment.name, alt: comment.name) %>
+        <% else %>
+          <%= image_tag 'public/stub_poster.png', size: '35x35' %>
+        <% end %>
+      <% end %>
     </div>
     <div class="user_info">
       <% if  comment.user_profile %>
