@@ -37,9 +37,11 @@ class User < ActiveRecord::Base
   def self.find_or_create_by_oauth(auth_raw_info)
     provider, uid = auth_raw_info.provider, auth_raw_info.uid.to_s
 
-    find_or_initialize_by_provider_and_uid(provider: provider, uid: uid).tap { |user|
-      user.update_attributes provider: provider, uid: uid, auth_raw_info: auth_raw_info
-    }
+    user = find_or_initialize_by_provider_and_uid(provider, uid)
+    user.auth_raw_info = auth_raw_info
+    user.save!
+
+    user
   end
 
   def token
@@ -59,7 +61,15 @@ class User < ActiveRecord::Base
 
   def gender
     return '' if auth_raw_info.is_a?(String)
-    auth_raw_info.try(:extra).try(:raw_info).try(:gender) || auth_raw_info.try(:extra).try(:raw_info).try(:sex)
+    user_gender = (auth_raw_info.try(:extra).try(:raw_info).try(:gender) || auth_raw_info.try(:extra).try(:raw_info).try(:sex))
+    gender =  case user_gender
+              when 1 || 'female'
+                gender = :female
+              when 2 || 'male'
+                gender = :male
+              else
+                gender = nil
+              end
   end
 
   def email
@@ -110,10 +120,6 @@ class User < ActiveRecord::Base
       auth_raw_info.try(:[], :info).try(:[], :image)
     when 'vkontakte'
       auth_raw_info.try(:[], :extra).try(:[], :raw_info).try(:[], :photo_big)
-    when 'mailru'
-      auth_raw_info.try(:[], :extra).try(:[], :raw_info).try(:[], :pic)
-    when 'odnoklassniki'
-      Settings['app.odnoklassniki_avatar_url']
     when 'twitter'
       link = auth_raw_info.try(:[], :info).try(:[], :image)
       link.gsub(/_normal/,'') if link
@@ -143,14 +149,14 @@ class User < ActiveRecord::Base
     is_sales_manager? && organization.manager == self
   end
 
-  private
 
   def create_account
     name = self.name.split(' ')
-    account = Account.create(first_name: name.first, last_name: name.last,
+    account = Account.new(first_name: name.first, last_name: name.last,
                              nickname: self.nickname, location: self.location,
                              email: self.email, gender: self.gender)
-
+    account.users = [self]
+    account.save!
     update_attributes(account_id: account.id)
   end
 end
