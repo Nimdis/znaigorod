@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130610082116) do
+ActiveRecord::Schema.define(:version => 20130813084840) do
 
   create_table "activities", :force => true do |t|
     t.text     "title"
@@ -246,6 +246,8 @@ ActiveRecord::Schema.define(:version => 20130610082116) do
     t.text     "description"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.text     "category"
+    t.text     "feature"
   end
 
   add_index "creations", ["organization_id"], :name => "index_creations_on_organization_id"
@@ -323,6 +325,20 @@ ActiveRecord::Schema.define(:version => 20130610082116) do
   end
 
   add_index "hotels", ["organization_id"], :name => "index_hotels_on_organization_id"
+
+  create_table "images", :force => true do |t|
+    t.text     "url"
+    t.integer  "imageable_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.text     "description"
+    t.string   "imageable_type"
+    t.string   "thumbnail_url"
+    t.integer  "width"
+    t.integer  "height"
+  end
+
+  add_index "images", ["imageable_id"], :name => "index_images_on_organization_id"
 
   create_table "meals", :force => true do |t|
     t.text     "category"
@@ -787,6 +803,8 @@ ActiveRecord::Schema.define(:version => 20130610082116) do
     t.integer  "organization_id"
     t.string   "title"
     t.text     "description"
+    t.text     "category"
+    t.text     "feature"
   end
 
   create_table "tickets", :force => true do |t|
