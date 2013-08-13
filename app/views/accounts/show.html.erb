@@ -1,8 +1,8 @@
 <div class="account_show">
   <div class="left">
     <div class="image">
-      <% if @account.avatar.present? %>
-        <%= image_tag @account.avatar, size: '200x200' %>
+      <% if @account.avatar_url? %>
+        <%= image_tag(resized_image_url(@account.avatar_url, 200, 200), size: '200x200', title: @account, alt: @account) %>
       <% else %>
         <%= image_tag 'public/stub_poster.png', size: '200x200' %>
       <% end %>

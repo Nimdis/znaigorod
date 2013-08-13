@@ -1,11 +1,11 @@
 <div class="item">
   <div class="title">
-    <%= link_to account, account %>
+    <%= link_to truncate(account.title, length: 24), account %>
   </div>
 
   <div class="image">
-    <% if account.avatar.present? %>
-      <%= image_tag account.avatar, width: '178' %>
+    <% if account.avatar_url? %>
+      <%= image_tag(resized_image_url(account.avatar_url, 178, 178), size: '178x178', title: account, alt: account) %>
     <% else %>
       <%= image_tag 'public/stub_poster.png', size: '178x178' %>
     <% end %>
