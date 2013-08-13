@@ -28,6 +28,7 @@ class CopyPayment < Payment
 
   def approve!
     super
+    reserve_copies if copies.empty?
     copies.map(&:sell!)
     create_sms! :phone => phone, :message => message
   end
@@ -49,6 +50,8 @@ class CopyPayment < Payment
 
   def reserve_copies
     if number
+      MyMailer.delay.not_enough_tickets(paymentable) if number > paymentable.copies_for_sale.count
+
       copies << paymentable.copies_for_sale.limit(number)
     else
       copy_for_sale_ids.each do |copy_id|

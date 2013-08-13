@@ -17,4 +17,12 @@ class MyMailer < ActionMailer::Base
     @version = version
     mail(:to => Settings['mail']['to_affiche'], :subject => 'В ЗнайГород изменилась афиша')
   end
+
+  def not_enough_ticket_copies(paymentable)
+    mail(:to => Settings['mail']['to_affiche'], :subject => 'Проблема с билетами') do |format|
+      format.text do
+        render :text => "#{paymentable.description}. Похоже, что недостаточно билетов"
+      end
+    end
+  end
 end
