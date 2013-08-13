@@ -475,10 +475,12 @@ button.ui-button::-moz-focus-inner
       margin: 1px
     &:hover, &:focus
       padding: 0
+      border: 1px solid #f60
+      background-color: #fff
   .ui-dialog-content
     position: relative
     border: 0
-    padding: .5em 1em
+    padding: 0.5em 0.2em
     background: none
     overflow: auto
     zoom: 1
@@ -731,7 +733,7 @@ body .ui-tooltip
 
 .ui-widget
   font-size: 12px
-  +box-shadow(#888 0 0 3px)
+  +box-shadow(#555 0 0 5px)
   input, select, textarea, button
     font-size: 12px
     font-family: Verdana, Tahoma, Arial, sans-serif
