@@ -30,21 +30,21 @@ class Sport < ActiveRecord::Base
   end
   # similar code --->
 
-  #def category
-    #services.pluck(:category).compact.uniq.join(', ')
-  #end
+  def category
+    (@category || services.pluck(:category).compact.uniq).join(', ')
+  end
 
-  #def feature
-    #services.pluck(:feature).compact.uniq.join(', ')
-  #end
+  def feature
+    (@feature || services.pluck(:feature).compact.uniq).join(', ')
+  end
 
-  #def categories
-    #category.split(',').map(&:squish).uniq
-  #end
+  def categories
+    category.split(',').map(&:squish).uniq
+  end
 
-  #def features
-    #feature.split(',').map(&:squish).uniq
-  #end
+  def features
+    feature.split(',').map(&:squish).uniq
+  end
 
   include Rating
 
