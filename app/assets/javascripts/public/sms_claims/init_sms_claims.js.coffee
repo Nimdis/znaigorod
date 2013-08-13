@@ -36,7 +36,7 @@
       false
     true
 
-  $('.sms_claim_form_wrapper form').live 'submit', (event) ->
+  $('.sms_claim_form_wrapper form').on 'submit', (event) ->
     form = $(this)
     $('.submit input', form).attr('disabled', 'disabled').addClass('disabled')
     $.ajax

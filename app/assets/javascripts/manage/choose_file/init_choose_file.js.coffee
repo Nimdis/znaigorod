@@ -2,7 +2,7 @@
   links = $('.choose_file')
   remove_link = $('.remove_link')
 
-  remove_link.live 'click', ->
+  remove_link.on 'click', ->
     $this = $(this)
     $('#'+$this.siblings('a').attr('class').replace('choose_file', '')).val('')
     $this.siblings('div').html('')
@@ -10,7 +10,7 @@
     $this.siblings('a').show()
     false
 
-  links.live 'click', ->
+  links.on 'click', ->
     $this = $(this)
     params = $this.attr('params')
     target_id = $this.attr('class').replace('choose_file', '')

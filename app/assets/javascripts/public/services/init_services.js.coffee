@@ -1,5 +1,5 @@
 @init_services = () ->
-  $('.services .info a').live 'click', ->
+  $('.services .info a').on 'click', ->
     link = $(this)
     link.toggleClass('opened').toggleClass('closed')
     $('.details', link.closest('.info')).slideToggle('fast')

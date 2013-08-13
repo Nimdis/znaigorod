@@ -1,6 +1,6 @@
 @init_common = () ->
 
-  $('a.disabled').live "click", ->
+  $('a.disabled').on "click", ->
     if $(this).parent('li').hasClass('disabled')
       true
     else
@@ -11,7 +11,7 @@
     td.text(td.text().squish() + ':') if !td.text().match(/:$/) && td.text() != ""
     true
 
-  $('.ui-widget-overlay').live 'click', ->
+  $('.ui-widget-overlay').on 'click', ->
     $(this).siblings('.ui-dialog').find('.ui-dialog-content').dialog('close')
     true
 

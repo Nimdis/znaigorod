@@ -23,7 +23,7 @@
         true
     false
 
-  $('.organization_show .new_contact_form_wrapper form').live 'submit', ->
+  $('.organization_show .new_contact_form_wrapper form').on 'submit', ->
     form = $(this)
     $.ajax
       type: 'POST',
@@ -40,13 +40,13 @@
         true
     false
 
-  $('.organization_show .new_contact_form_wrapper form .actions .cancel').live 'click', ->
+  $('.organization_show .new_contact_form_wrapper form .actions .cancel').on 'click', ->
     $('.organization_show .new_contact_form_wrapper').slideUp 'fast', ->
       $(this).remove()
       true
     false
 
-  $('.organization_show .contacts .info .name a').live 'click', ->
+  $('.organization_show .contacts .info .name a').on 'click', ->
     link = $(this)
     info = link.closest('.info')
     if $('.form_view', info).length && $('.details', info).is(':hidden')
@@ -55,7 +55,7 @@
     $('.details', link.closest('li')).slideToggle('fast')
     false
 
-  $('.organization_show .contacts .info .edit a').live 'click', ->
+  $('.organization_show .contacts .info .edit a').on 'click', ->
     link = $(this)
     $.ajax
       type: 'GET'
@@ -73,14 +73,14 @@
         true
     false
 
-  $('.organization_show .contacts .info .form_view .actions .cancel').live 'click', ->
+  $('.organization_show .contacts .info .form_view .actions .cancel').on 'click', ->
     $('.form_view', $(this).closest('.info')).slideUp 'fast', ->
       $(this).remove()
       true
     $('.details', $(this).closest('.info')).slideDown('fast')
     false
 
-  $('.organization_show .contacts .info .form_view form').live 'submit', ->
+  $('.organization_show .contacts .info .form_view form').on 'submit', ->
     form = $(this)
     edit_url = $('.details .edit a', form.closest('.info')).attr('href')
     $.ajax
@@ -102,7 +102,7 @@
 
     false
 
-  $('.organization_show .contacts .info .form_view .actions .destroy').live 'ajax:success', (event, data, textStatus, jqXHR) ->
+  $('.organization_show .contacts .info .form_view .actions .destroy').on 'ajax:success', (event, data, textStatus, jqXHR) ->
     right_block = $(this).closest('.right')
     $('ul.contacts', right_block).remove()
     right_block.append(data)
@@ -114,7 +114,7 @@
 
   $('.organization_show .left .info .details .additional').each ->
     additional_block = $(this)
-    $('.edit', additional_block).live 'click', ->
+    $('.edit', additional_block).on 'click', ->
       additional_edit_link = $(this)
       $.ajax
         type: 'GET'
@@ -129,12 +129,12 @@
           true
       false
 
-    $('form .actions .cancel', additional_block).live 'click', ->
+    $('form .actions .cancel', additional_block).on 'click', ->
       $('.form_view', additional_block).remove()
       $('.view', additional_block).show()
       false
 
-    $('form', additional_block).live 'submit', ->
+    $('form', additional_block).on 'submit', ->
       additional_edit_form = $(this)
       $.ajax
         type: 'POST'
@@ -172,13 +172,13 @@
         true
     false
 
-  $('.form_view form .cancel', activities_head_block).live 'click', ->
+  $('.form_view form .cancel', activities_head_block).on 'click', ->
     $('.form_view', activities_head_block).slideUp 'fast', ->
       $(this).remove()
       true
     false
 
-  $('.form_view form', activities_head_block).live 'submit', ->
+  $('.form_view form', activities_head_block).on 'submit', ->
     form = $(this)
     $.ajax
       type: 'POST'
@@ -206,7 +206,7 @@
         true
     false
 
-  $('.activities_list .edit a').live 'click', ->
+  $('.activities_list .edit a').on 'click', ->
     link = $(this)
     activities_list_block = link.closest('.activities_list')
     link_tr = link.closest('tr')
@@ -232,13 +232,13 @@
         true
     false
 
-  $('.activities_list tr.edit_block .form_view form .cancel', activities_block).live 'click', ->
+  $('.activities_list tr.edit_block .form_view form .cancel', activities_block).on 'click', ->
     $(this).closest('.form_view').slideUp 'fast', ->
       $(this).closest('tr.edit_block').remove()
       true
     false
 
-  $('.activities_list tr.edit_block .form_view form', activities_block).live 'submit', ->
+  $('.activities_list tr.edit_block .form_view form', activities_block).on 'submit', ->
     form = $(this)
     edit_block = form.closest('tr.edit_block td')
     activities_list_block = form.closest('.activities_list')
@@ -261,7 +261,7 @@
         true
     false
 
-  $('.activities_list tr.edit_block .form_view .actions .destroy').live 'ajax:success', (event, data, textStatus, jqXHR) ->
+  $('.activities_list tr.edit_block .form_view .actions .destroy').on 'ajax:success', (event, data, textStatus, jqXHR) ->
     wrapped = $("<div>#{data}</div>")
     $('h1', wrapped).remove()
     $(this).closest('.activities_list')

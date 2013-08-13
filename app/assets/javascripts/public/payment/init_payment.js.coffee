@@ -44,12 +44,12 @@
 
   trigger_actions = ->
 
-    $('.payment_form_wrapper form').live 'submit', (event) ->
+    $('.payment_form_wrapper form').on 'submit', (event) ->
       return false if $('.payment_form_wrapper .copies_with_seats input').length && !$('.payment_form_wrapper .copies_with_seats input:checked').length
       return false unless $('.payment_form_wrapper #copy_payment_phone').inputmask('isComplete')
       true
 
-    $('.payment_form_wrapper #copy_payment_phone').live 'keyup', ->
+    $('.payment_form_wrapper #copy_payment_phone').on 'keyup', ->
       return false if $('.payment_form_wrapper .copies_with_seats input').length && !$('.payment_form_wrapper .copies_with_seats input:checked').length
       if $(this).inputmask 'isComplete'
         $('input[type=submit]', $(this).closest('form')).removeAttr('disabled').removeClass('disabled')
@@ -57,7 +57,7 @@
         $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
       true
 
-    $('.payment_form_wrapper .copies_with_seats input').live 'change', ->
+    $('.payment_form_wrapper .copies_with_seats input').on 'change', ->
       unless $('.payment_form_wrapper .copies_with_seats input:checked').length
         $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
         return false
