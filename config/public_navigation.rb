@@ -39,7 +39,7 @@ SimpleNavigation::Configuration.run do |navigation|
       highlights_on: lambda { %w[organizations suborganizations saunas].include? controller.class.name.underscore.split("_").first }
     #primary.item :tickets, 'Билеты', tickets_path
     primary.item :posts, 'Обзоры', posts_path
-    primary.item :accounts, 'Люди', accounts_path
+    primary.item :accounts, 'Люди', accounts_path, highlights_on: -> { params[:controller] == 'accounts' }
 
     # Add an item to the primary navigation. The following params apply:
     # key - a symbol which uniquely defines your navigation item in the scope of the primary_navigation
