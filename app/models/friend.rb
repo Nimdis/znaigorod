@@ -13,3 +13,17 @@ class Friend < ActiveRecord::Base
     self.save
   end
 end
+
+# == Schema Information
+#
+# Table name: friends
+#
+#  id              :integer          not null, primary key
+#  account_id      :integer
+#  friendable_id   :integer
+#  friendable_type :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  friendly        :boolean          default(FALSE)
+#
+

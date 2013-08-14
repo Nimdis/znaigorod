@@ -70,5 +70,7 @@ end
 #  organization_id :integer
 #  title           :string(255)
 #  description     :text
+#  category        :text
+#  feature         :text
 #
 

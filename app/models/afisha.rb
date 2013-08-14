@@ -491,5 +491,8 @@ end
 #  poster_image_url          :text
 #  user_id                   :integer
 #  kind                      :text
+#  vk_event_url              :string(255)
+#  fb_likes                  :integer
+#  odn_likes                 :integer
 #
 

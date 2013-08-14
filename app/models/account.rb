@@ -97,7 +97,7 @@ class Account < ActiveRecord::Base
   end
 
   def update_rating
-    rating = (self.afisha.count * 0.5 + self.comments.count * 0.25 + self.votes.count * 0.125 + self.visits.count * 0.125 + self.page_visits.count * 0.01 ) / 5
+    rating = (self.afisha.count * 0.5 + self.comments.count * 0.25 + self.votes.count * 0.125 + self.visits.count * 0.125 + self.page_visits.count * 0.01) / 5
     rating *= 10 if self.avatar_url?
     update_attribute(:rating, rating)
   end
@@ -116,15 +116,21 @@ end
 #
 # Table name: accounts
 #
-#  id         :integer          not null, primary key
-#  first_name :string(255)
-#  last_name  :string(255)
-#  patronymic :string(255)
-#  email      :string(255)
-#  rating     :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  nickname   :string(255)
-#  location   :string(255)
+#  id                  :integer          not null, primary key
+#  first_name          :string(255)
+#  last_name           :string(255)
+#  patronymic          :string(255)
+#  email               :string(255)
+#  rating              :string(255)
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  nickname            :string(255)
+#  location            :string(255)
+#  gender              :string(255)
+#  avatar_file_name    :string(255)
+#  avatar_content_type :string(255)
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
+#  avatar_url          :text
 #
 

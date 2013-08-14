@@ -325,5 +325,7 @@ end
 #  ability_to_comment            :boolean          default(TRUE)
 #  phone_for_sms                 :string(255)
 #  balance                       :float
+#  fb_likes                      :integer
+#  odn_likes                     :integer
 #
 
