@@ -953,6 +953,7 @@ ActiveRecord::Schema.define(:version => 20130814081911) do
     t.string   "voteable_type"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.string   "source"
   end
 
   add_index "votes", ["user_id"], :name => "index_votes_on_user_id"

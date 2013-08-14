@@ -229,7 +229,7 @@ class Afisha < ActiveRecord::Base
   end
 
   def likes_count
-    self.votes.liked.count + (vkontakte_likes || 0) + (fb_likes || 0) + (odn_likes || 0)
+    self.votes.liked.count
   end
 
   def get_vk_event_id

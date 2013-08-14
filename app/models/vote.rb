@@ -1,16 +1,23 @@
 # encoding: utf-8
 
 class Vote < ActiveRecord::Base
+  attr_accessible :like, :user_id, :source
+
   belongs_to :user
   belongs_to :voteable, :polymorphic => true
-  attr_accessible :like, :user_id
 
   has_many :messages, :as => :messageable, :dependent => :destroy
 
   validate :authenticated_user
 
-  scope :liked, where(:like => true)
-  scope :afisha, where(:voteable_type => 'Afisha')
+  extend Enumerize
+  enumerize :source, in: [:zg, :vk, :fb, :odn], :predicates => true, :default => :zg
+
+  scope :afisha,        -> { where(:voteable_type => 'Afisha') }
+  scope :liked,         -> { where(:like => true) }
+  scope :without_user,  -> { where(:user_id => nil) }
+  scope :with_user,     -> { where('user_id IS NOT NULL') }
+  scope :source,        ->(type) { where(:source => type) }
 
   after_save :update_voteable_rating
   after_save :update_account_rating

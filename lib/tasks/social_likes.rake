@@ -3,8 +3,13 @@
 require 'progress_bar'
 require 'social_likes'
 
+def skip_callbacks
+  Vote.skip_callback(:save, :after, :update_account_rating)
+end
+
 desc 'Get social likes for afishas and organizations'
 task :social_likes => :environment do
+  skip_callbacks
   likes = SocialLikes.new
 
   ['Afisha','Organization'].each do |klass|
@@ -14,13 +19,11 @@ task :social_likes => :environment do
       collection = klass.constantize.all
     end
 
-    [:vkontakte_likes, :fb_likes, :odn_likes].each do |attr|
-      puts "Getting #{attr.to_s} for #{klass}"
-      bar = ProgressBar.new(collection.count)
-      collection.each do |item|
-        item.update_attributes(attr => likes.send(attr, item))
-        bar.increment!
-      end
+    puts "Getting likes for #{klass}"
+    bar = ProgressBar.new(collection.count)
+    collection.each do |item|
+      likes.damn_likes(item)
+      bar.increment!
     end
   end
 end
