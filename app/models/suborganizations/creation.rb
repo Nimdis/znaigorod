@@ -35,19 +35,11 @@ class Creation < ActiveRecord::Base
   # similar code --->
 
   def category
-    (@category || services.pluck(:category).compact.uniq).join(', ')
+    self[:category] || services.pluck(:category).compact.uniq.join(', ')
   end
 
   def feature
-    (@feature || services.pluck(:feature).compact.uniq).join(', ')
-  end
-
-  def categories
-    category.split(',').map(&:squish).uniq
-  end
-
-  def features
-    feature.split(',').map(&:squish).uniq
+    self[:feature] || services.pluck(:feature).compact.uniq.join(', ')
   end
 
   include Rating
