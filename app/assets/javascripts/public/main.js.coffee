@@ -2,7 +2,7 @@ $ ->
   init_common()
   init_datetime_picker()
 
-  if typeof VK != 'undefined' && window.location.href.match(/http:\/\/znaigorod.ru/)
+  if typeof VK != 'undefined'
     init_vk_like() if $('#vk_like').length
     init_vk_recommended() if $('#vk_recommended').length
     init_vk_comments() if $('#vk_comments').length
