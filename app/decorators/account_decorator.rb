@@ -12,7 +12,7 @@ class AccountDecorator < ApplicationDecorator
   end
 
   def image
-    account.avatar? ? account.avatar : 'public/stub_poster.png'
+    account.avatar_url? ? resized_image_url(account.avatar_url, 88, 88, false) : 'public/stub_poster.png'
   end
 
   def buddies
