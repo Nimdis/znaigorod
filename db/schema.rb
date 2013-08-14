@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130813092302) do
+ActiveRecord::Schema.define(:version => 20130814081911) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -86,11 +86,11 @@ ActiveRecord::Schema.define(:version => 20130813092302) do
     t.datetime "updated_at",                :null => false
     t.text     "description"
     t.string   "original_title"
-    t.string   "poster_url"
+    t.text     "poster_url"
     t.text     "trailer_code"
     t.text     "tag"
     t.string   "vfs_path"
-    t.string   "image_url"
+    t.text     "image_url"
     t.datetime "distribution_starts_on"
     t.datetime "distribution_ends_on"
     t.string   "slug"
