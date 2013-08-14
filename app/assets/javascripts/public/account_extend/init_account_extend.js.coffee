@@ -1,4 +1,4 @@
-@init_account_votes = () ->
+@init_account_extend = () ->
   $('.toggler').click (evt)->
     target = $(evt.target)
 

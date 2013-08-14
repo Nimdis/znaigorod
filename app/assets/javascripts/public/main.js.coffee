@@ -51,7 +51,7 @@ $ ->
   init_select_tags() if $('.select_tags').length
   init_messages() if $('.ajax_message_status').length
   init_change_friendship() if $('.change_friendship').length
-  init_account_votes() if $('.votes.list').length
+  init_account_extend() if $('.account_show').length
 
   true
 
