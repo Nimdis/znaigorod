@@ -452,7 +452,7 @@ class Afisha < ActiveRecord::Base
   end
 
   def update_account_rating
-    user.account.update_rating
+    user.account.update_rating if user.present? && user.account.present?
   end
 end
 
