@@ -14,7 +14,7 @@ class OrganizationsCatalogPresenter
 
 
   def self.suborganization_models
-    [Organization, Meal, Entertainment, CarWash, CarSalesCenter, Culture, Sport, Creation, SalonCenter]
+    [Organization, Meal, Entertainment, CarSalesCenter, Culture, Sport, Creation, SalonCenter]
   end
 
   def categories_filter
