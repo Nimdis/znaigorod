@@ -2,7 +2,7 @@
   <div class="left">
     <div class="image">
       <% if @account.avatar_url? %>
-        <%= image_tag(resized_image_url(@account.avatar_url, 200, 200), size: '200x200', title: @account, alt: @account) %>
+        <%= image_tag(resized_image_url(@account.avatar_url, 200, 200), size: '200x200', title: @account.title, alt: @account.title) %>
       <% else %>
         <%= image_tag 'public/stub_poster.png', size: '200x200' %>
       <% end %>
@@ -10,9 +10,11 @@
     <h1><%= @account.title %></h1>
 
     <div class="social_actions">
-      <ul class="change_friendship">
-        <%= render 'friends/friend' if current_user && current_user.account != @account %>
-      </ul>
+      <% if user_signed_in? && current_user.account != @account.model %>
+        <ul class="change_friendship">
+          <%= render 'friends/friend' %>
+        </ul>
+      <% end %>
 
       <% if @account.friends.approved.any? %>
         <div class="friends_counter">
