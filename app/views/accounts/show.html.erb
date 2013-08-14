@@ -33,7 +33,7 @@
         <%= render partial: 'account_votes', locals: { collection: @account.votes.afisha } %>
       </div>
       <div class="votes toggle">
-        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' %>
+        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.votes.afisha.count > 3 %>
       </div>
     <% end %>
 
@@ -45,7 +45,7 @@
         <%= render partial: 'account_events', locals: { collection: @account.afisha.published } %>
       </div>
       <div class="events toggle">
-        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' %>
+        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.afisha.published.count > 4 %>
       </div>
     <% end %>
 
@@ -57,7 +57,7 @@
         <%= render partial: 'account_comments', locals: { comments: @account.comments } %>
       </div>
       <div class="comments toggle">
-        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' %>
+        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.comments.count > 1 %>
       </div>
     <% end %>
   </div>

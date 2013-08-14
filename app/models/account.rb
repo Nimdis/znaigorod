@@ -37,7 +37,7 @@ class Account < ActiveRecord::Base
     text :title,     :stored => true
 
     string :gender
-    string :rating
+    float :rating,   :trie => true
     string :search_kind
     string(:kind, :multiple => true) { roles.map(&:role) }
   end
@@ -97,7 +97,8 @@ class Account < ActiveRecord::Base
   end
 
   def update_rating
-    rating = self.afisha.count * 1 + self.comments.count * 0.5 + self.votes.count * 0.25 + self.visits.count * 0.25 + self.page_visits.count * 0.01
+    rating = (self.afisha.count * 0.5 + self.comments.count * 0.25 + self.votes.count * 0.125 + self.visits.count * 0.125 + self.page_visits.count * 0.01 ) / 5
+    rating *= 10 if self.avatar_url?
     update_attribute(:rating, rating)
   end
 
