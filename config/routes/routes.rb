@@ -96,6 +96,7 @@ Znaigorod::Application.routes.draw do
 
   resources :accounts, :only => [:index, :show] do
     put 'change_friendship' => 'friends#change_friendship', :as => :change_friendship
+    get 'buddies' => 'friends#buddies', :as => :buddies
 
     resources :events, :only => :index
     resources :friends, :only => :index

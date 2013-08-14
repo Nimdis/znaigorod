@@ -2,7 +2,7 @@ class FriendsController < ApplicationController
   inherit_resources
 
   actions :index
-  custom_actions collection: :change_friendship
+  custom_actions collection: [:change_friendship, :buddies]
 
   belongs_to :account, :polymorphic => true
 
@@ -21,6 +21,13 @@ class FriendsController < ApplicationController
       end
 
       render :partial => 'friend', :locals => { friend: @friend } and return
+    }
+  end
+
+  def buddies
+    buddies! {
+      @accounts = @account.friends.approved.map(&:friendable)
+      render :partial => 'buddies', :locals => { :accounts => @accounts } and return
     }
   end
 

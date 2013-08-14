@@ -1,0 +1,16 @@
+<ul class="buddies">
+  <% @accounts.each do |account| %>
+    <li>
+      <div class="image">
+        <% if account.avatar_url? %>
+          <%= image_tag(resized_image_url(account.avatar_url, 50, 50), size: '50x50', title: account, alt: account) %>
+        <% else %>
+          <%= image_tag 'public/stub_poster.png', size: '50x50' %>
+        <% end %>
+      </div>
+      <div class="title">
+        <%= link_to account.title, account_path(account) %>
+      </div>
+    </li>
+  <% end %>
+</ul>
