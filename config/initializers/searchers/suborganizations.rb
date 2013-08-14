@@ -2,6 +2,8 @@ Organization.basic_suborganization_kinds.each do |kind|
   klasses = case kind
             when 'entertainment'
               [Entertainment, Sauna]
+            when 'car_sales_center'
+              [CarSalesCenter, CarWash]
             else
               [kind.classify.constantize]
             end
@@ -10,6 +12,8 @@ Organization.basic_suborganization_kinds.each do |kind|
     case kind
     when 'entertainment'
       models :entertainment, :sauna
+    when 'car_sales_center'
+      models :car_sales_center, :car_wash
     else
       models kind.to_sym
     end
@@ -33,7 +37,7 @@ Organization.basic_suborganization_kinds.each do |kind|
 
     # OPTIMIZE: special cases
     scope :remove_duplicated do
-      with(:show_in_search_results, true) if klasses.include?(Entertainment)
+      with(:show_in_search_results, true) if klasses.include?(Entertainment) || klasses.include?(CarSalesCenter)
     end
 
     property :location do |search|

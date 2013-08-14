@@ -34,6 +34,10 @@ module SearchWithFacets
           (self.is_a?(Sauna) || self.is_a?(Billiard)) && (self.organization.suborganizations.map(&:class) & [Entertainment]).any? ? false : true
         } if klass == Entertainment
 
+        boolean(:show_in_search_results) {
+          self.is_a?(CarWash) && (self.organization.suborganizations.map(&:class) & [CarSalesCenter]).any? ? false : true
+        } if klass == CarSalesCenter
+
         boolean(:with_sauna_halls) { self.with_sauna_halls? } if klass == Sauna
       end
     end
