@@ -11,6 +11,7 @@ namespace :account do
   task :create => :environment do
     puts 'Create accounts'
     users = User.ordered
+    Account.skip_callback(:create, :after, :get_social_avatar)
     bar = ProgressBar.new(users.count)
     users.each do |user|
       name = user.name.split(' ')
@@ -32,7 +33,7 @@ namespace :account do
     accounts.each do |account|
       if account.users.any?
         user = account.users.first
-        account.update_attributes(gender: gender, email: user.email)
+        account.update_attributes(gender: user.gender, email: user.email)
         bar.increment!
       end
     end
