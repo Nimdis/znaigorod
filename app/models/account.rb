@@ -9,13 +9,9 @@ class Account < ActiveRecord::Base
   has_many :votes,           through: :users, order: 'votes.created_at DESC'
   has_many :visits,          through: :users, order: 'visits.created_at DESC'
   has_many :page_visits,     through: :users
-  has_many :payments,        through: :users
-  has_many :events,          through: :users, order: 'afisha.created_at DESC'
 
   has_many :friends
   has_many :messages,        order: 'messages.created_at DESC'
-
-  has_many :roles,           through: :users
 
   after_create :get_social_avatar
 

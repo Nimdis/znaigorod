@@ -1,4 +1,0 @@
-<div class="content_wrapper">
-  <h1>Все приобретенные билеты пользователя <%= link_to @user, @user %></h1>
-  <%= render partial: 'users/user_payments', locals: { payments: collection.with_state(:approved) } %>
-</div>

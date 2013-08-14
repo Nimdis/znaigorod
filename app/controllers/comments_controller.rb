@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   inherit_resources
 
-  actions :index, :show, :new, :create
+  actions :show, :new, :create
 
   belongs_to :afisha, :polymorphic => true, :optional => true
   belongs_to :coupon, :polymorphic => true, :optional => true
@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
   belongs_to :work, :polymorphic => true, :optional => true
   belongs_to :account, :optional => true
 
-  layout false unless :index
+  layout false
 
   private
     alias_method :old_build_resource, :build_resource

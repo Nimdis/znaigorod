@@ -15,8 +15,6 @@ class AccountsController < ApplicationController
     show! {
       @presenter = AccountPresenter.new(params)
       @account = AccountDecorator.new Account.find(params[:id])
-
-      render partial: 'accounts/account_votes', layout: false and return if request.xhr?
     }
   end
 

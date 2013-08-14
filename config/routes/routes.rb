@@ -98,12 +98,7 @@ Znaigorod::Application.routes.draw do
     put 'change_friendship' => 'friends#change_friendship', :as => :change_friendship
     get 'buddies' => 'friends#buddies', :as => :buddies
 
-    resources :events, :only => :index
     resources :friends, :only => :index
-    resources :comments, :only => :index
-    resources :payments, :only => :index
-    resources :visits, :only => :index
-    resources :votes, :only => :index
     resources :messages, :only => :index do
       put 'change_message_status' => 'messages#change_message_status', :as => :change_message_status
     end
