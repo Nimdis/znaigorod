@@ -80,6 +80,7 @@ class MovieSyncer
     end
 
     def find_similar_movie_by(title)
+      title.gsub!('Гадкий Я 2 в', 'Гадкий я 2')
       title.gsub!('Элизиум: Рай не на Земле', 'Элизиум')
       title.gsub!('Мальчишник: часть 3', 'Мальчишник: часть III')
       title.gsub!('Гагарин.Первый в космосе', 'Гагарин. Первый в космосе')
