@@ -155,7 +155,7 @@ ru:
     other: "%{count} комментария"
 
   account_events:
-    one:   "%{count} афиша"
+    one:   "%{count} афишу"
     few:   "%{count} афиши"
     many:  "%{count} афиш"
     other: "%{count} афиш"
