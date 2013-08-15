@@ -124,8 +124,8 @@
         <% else %>
           <span class='alert'>Нет</span>
           <%= @afisha.kind.include?('movie') ? 'трейлера' : 'видео' %>
-          <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :fifth) if can? :edit, @afisha %>
         <% end %>
+        <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :fifth) if can? :edit, @afisha %>
       </div>
       <% if @afisha.trailer_code.present? %>
         <div class='trailer'>
@@ -139,8 +139,8 @@
         <% else %>
           <span class='alert'>Нет</span>
           <%= @afisha.kind.include?('movie') ? 'кадров' : 'фотографий' %>
-          <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :fourth) if can? :edit, @afisha %>
         <% end %>
+        <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :fourth) if can? :edit, @afisha %>
       </div>
       <% if @afisha.images.present? %>
         <div class='photogallery'>

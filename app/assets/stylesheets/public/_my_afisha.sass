@@ -105,6 +105,26 @@
       padding-top: 10px
       border-top: 1px solid #ccc
 
+  =gray_button_style
+    font-family: 'Verdana', 'Tahoma', sans-serif
+    font-size: 12px
+    cursor: pointer
+    color: #000
+    +inline-block
+    font-size: 12px
+    margin: 0 10px 0 0
+    border: 1px solid #ccc
+    background-color: #e8e8e8
+    +background(linear-gradient(top, #ffffff, #cfcfcf))
+    padding: 5px 15px
+
+    &:hover
+      +background(linear-gradient(top, #fff, #ddd))
+
+    &:active
+      +background(linear-gradient(top, #ddd, #fff))
+      padding: 6px 15px 4x
+
   .form_wrapper
     width: 580px
     float: left
@@ -114,6 +134,13 @@
       margin: 20px 0
 
       .input
+        +inline-block
+
+    .submit
+
+      .button
+        +gray_button_style
+      a
         +inline-block
 
   .afisha_preview
@@ -201,7 +228,12 @@
       font-weight: bold
 
     .submit
+      font-size: 12px
       margin-top: 15px
+      .button
+        +gray_button_style
+      a
+        +inline-block
 
     .form_fields
       float: left
