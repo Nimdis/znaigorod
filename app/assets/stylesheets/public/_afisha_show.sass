@@ -1,6 +1,9 @@
 .afisha_show
   +clearfix
 
+  span.alert
+    color: #f60
+
   .left
     float: left
     width: 208px
@@ -8,6 +11,8 @@
 
     .image
       position: relative
+      text-align: center
+      font-size: 12px
       width: 200px
       margin: 4px
 
@@ -380,6 +385,12 @@
         background-color: #e8e8e8
         margin: 0 5px 5px 0
         padding: 1px 5px 2px
+
+        &.transparent
+          background-color: transparent
+          color: #000
+          padding-left: 0
+          padding-right: 0
 
     .trailer_header,
     .photogallery_header

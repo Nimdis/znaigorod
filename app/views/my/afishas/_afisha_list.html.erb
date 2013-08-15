@@ -1,4 +1,4 @@
-<li class='my_affiche_item'>
+<li class='my_afisha_item'>
   <% if defined?(editable) %>
     <%= link_to my_afisha_show_path(afisha) do %>
       <%= image_tag (afisha.poster_image_url? ? resized_image_url(afisha.poster_url, 80, 108, true) : 'public/stub_poster.png'), :width => 80, :height => 108 %>

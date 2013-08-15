@@ -1,4 +1,39 @@
-.content
+.content .my_afisha_wrapper
+
+  .breadcrumbs
+    +clearfix
+    font-size: 12px
+    border-bottom: 1px solid #ccc
+    margin-bottom: 10px
+    padding-bottom: 10px
+
+    a
+      display: block
+      float: left
+
+      &:after
+        content: ""
+        width: 0
+        height: 0
+        display: block
+        float: right
+        border-top: 5px solid transparent
+        border-bottom: 5px solid transparent
+        border-left: 5px solid #06c
+        margin: 5px 10px 0
+      &:last-child:after
+        display: inline
+        float: none
+        border: none
+        margin: 0
+
+  h1
+    font-size: 22px
+    margin-bottom: 10px
+
+  .new_my_afisha
+    font-size: 18px
+    margin-bottom: 10px
 
   .help_wrapper
     position: relative
@@ -38,101 +73,9 @@
       ul li
         list-style: disc
 
-  .show_help
-    font-size: 16px
-    line-height: 14px
-
-  .public_action
-    float: left
-    padding: 5px 0 0 0
-    width: 240px
-
-    h4
-      font-size: 16px
-      line-height: 20px
-      margin: 0 0 10px 0
-      text-align: center
-
-    p
-      line-height: 1.5
-      margin: 0 0 10px 13px
-
-    .requirements
-      font-size: 14px
-      line-height: 18px
-      margin: 0 0 15px 0
-
-      color: #777
-      li
-        padding: 0 0 0 40px
-        &.enabled
-          background: image_url('done.png') no-repeat 20px center
-          font-weight: bold
-
-    a
-      +border-radius(3px)
-      +box-shadow(#ccc 1px 1px 5px)
-      color: #fff
-      display: block
-      font-size: 16px
-      font-weight: bold
-      line-height: 20px
-      margin: 0 auto
-      padding: 4px 7px
-      text-align: center
-      width: 150px
-
-      &.disabled
-        +background-image(linear-gradient(#c4c4c4, #999))
-
-        &:hover
-          cursor: default
-
-      &.enabled
-        +background-image(linear-gradient(#91ac4a, #658d34))
-
-      &:hover
-        text-decoration: none
-
-=button_style($image: false, $left-padding: 20px)
-  color: #333
-  cursor: pointer
-  font-family: Verdana, Tahoma, sans-serif
-  font-size: 14px
-  font-weight: bold
-  text-decoration: none
-  +text-shadow(#fff 1px 1px 1px)
-  +box-shadow(#fff 0px 1px 0px 0px inset)
-  @if $image == false
-    background-color: #f9f9f9
-    +background-image(linear-gradient(center top, #f9f9f9 5%, #e9e9e9 100%))
-    padding: 6px 20px
-  @else
-    background-repeat: no-repeat
-    background-position: left center
-    background-color: transparent
-    +background-image($image, linear-gradient(center top, #f9f9f9 5%, #e9e9e9 100%))
-    padding: 8px 20px 8px $left-padding
-  +border-radius
-  border: 1px solid #dcdcdc
-  +inline-block
-  margin: 0
-  &:hover
-    background-color: #e9e9e9
-    @if $image == false
-      +background-image(linear-gradient(center top, #e9e9e9 5%, #f9f9f9 100%))
-    @else
-      +background-image($image, linear-gradient(center top, #e9e9e9 5%, #f9f9f9 100%))
-  &:active
-    position: relative
-    top: 1px
-
-.content .my_afisha_wrapper
-  line-height: 1.4
-
-  .new_my_afisha
+  h2
     font-size: 18px
-    margin: 10px 0
+    margin-bottom: 10px
 
   .my_afisha_items
     +clearfix
@@ -157,25 +100,10 @@
       a
         font-size: 10px
 
-  h2
-    font-size: 18px
-    margin-bottom: 10px
-
-  .button
-    +button_style
-
-  .steps_line
-    +clearfix
-    border-bottom: 1px dotted #ccc
-    padding-bottom: 10px
-    margin-bottom: 15px
-    li
-      float: left
-      margin-right: 15px
-      &:last-child
-        margin-right: 0
-      &.selected a
-        color: #333
+  .afisha_show
+    .tags
+      padding-top: 10px
+      border-top: 1px solid #ccc
 
   .form_wrapper
     width: 580px
@@ -191,6 +119,8 @@
   .afisha_preview
     width: 580px
     float: left
+
+  /* form styles */
 
   =input_style
     font-size: 14px
@@ -393,78 +323,3 @@
 
     .my_afisha_archive
       margin: 20px 0
-
-.content
-  .social_signin_links
-    +clearfix
-    margin: 10px 0
-    text-align: center
-
-    li
-      +inline-block
-      margin: 0 15px 0 0
-
-      a
-        display: block
-        text-indent: -9999px
-        height: 33px
-        width: 33px
-
-      &.vkontakte
-        a
-          background: image_url('social_icons.png') no-repeat 0 0
-
-      &.yandex
-        a
-          background: image_url('social_icons.png') no-repeat -33px 0
-
-      &.facebook
-        a
-          background: image_url('social_icons.png') no-repeat -66px 0
-
-      &.twitter
-        a
-          background: image_url('social_icons.png') no-repeat -99px 0
-
-      &.google
-        a
-          background: image_url('social_icons.png') no-repeat -132px 0
-
-      &.mail_ru
-        a
-          background: image_url('social_icons.png') no-repeat -165px 0
-
-      &.odnoklassniki
-        a
-          background: image_url('social_icons.png') no-repeat -198px 0
-
-.content
-  .new_session
-    min-height: 220px
-
-    .flash_message
-      margin: 15px 0 25px 0
-
-    h2
-      text-align: center
-      font-size: 16px
-      line-height: 21px
-
-.tags_wrapper
-  background: #fff !important
-  color: #000
-  padding: 10px
-  .tag_lists
-    +clearfix
-
-    ul
-      float: left
-      width: 200px
-      li
-        font-size: 11px
-  .submit
-    +button_style
-    margin-top: 10px
-
-
-

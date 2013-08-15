@@ -1,18 +1,20 @@
-<%= render_navigation context: 'my', :renderer => :breadcrumbs %>
+<div class='my_afisha_wrapper'>
 
-<h1>
-  <%= t("my.edit_model.#{@step}") %>
-  <%= link_to 'помощь', '#', :class => 'show_help' if content_for?(:help) %>
-</h1>
+  <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
 
-<% if content_for?(:help) %>
-  <div class='help_wrapper'>
-    <div class='help'>
-      <%= yield :help %>
+  <h1>
+    <%= t("my.edit_model.#{@step}") %>
+    <%= link_to 'помощь', '#', :class => 'show_help' if content_for?(:help) %>
+  </h1>
+
+  <% if content_for?(:help) %>
+    <div class='help_wrapper'>
+      <div class='help'>
+        <%= yield :help %>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 
-<div class='my_affiche_wrapper'>
   <%= yield :my_content %>
+
 </div>
