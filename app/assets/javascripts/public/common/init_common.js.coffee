@@ -1,17 +1,9 @@
 @init_common = () ->
 
   $('a.disabled').on "click", ->
-    if $(this).parent('li').hasClass('disabled')
-      true
-    else
-      false
+    false
 
-  $('.content .tabs .info .description table tr').each (index, item) ->
-    td = $('td:first', this)
-    td.text(td.text().squish() + ':') if !td.text().match(/:$/) && td.text() != ""
-    true
-
-  $('.ui-widget-overlay').on 'click', ->
+  $('.ui-widget-overlay').live 'click', (event) ->
     $(this).siblings('.ui-dialog').find('.ui-dialog-content').dialog('close')
     true
 
