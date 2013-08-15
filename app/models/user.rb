@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
     visitd?(visitable) && visit_for(visitable).first.visited?
   end
 
-  def avatar
+  def social_avatar_url
     case provider
     when 'google_oauth2'
       auth_raw_info.try(:[], :info).try(:[], :image)

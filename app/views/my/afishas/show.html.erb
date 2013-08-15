@@ -81,8 +81,7 @@
             <% if @afisha.user.present? %>
               <p class='affiche_owner'>
                 <span>Автор:</span>
-                <%= image_tag @afisha.user.avatar, size: '24x24', alt: @afisha.user.name if @afisha.user.avatar.present? %>
-                <%= link_to @afisha.user.name, @afisha.user.profile %>
+                <%= link_to @afisha.user.account.title, @afisha.user.account %>
               </p>
             <% end %>
           </div>

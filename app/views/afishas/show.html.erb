@@ -135,8 +135,7 @@
       <% if @afisha.user.present? %>
         <p class='afisha_owner'>
           <span>Автор:</span>
-          <%= link_to(image_tag(@afisha.user.avatar, size: '24x24', alt: @afisha.user.name), @afisha.user.account) %>
-          <%= link_to(@afisha.user.name, @afisha.user.account) %>
+          <%= link_to(@afisha.user.account.title, @afisha.user.account) %>
         </p>
       <% else %>
         <p class='afisha_owner'>

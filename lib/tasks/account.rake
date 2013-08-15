@@ -58,7 +58,7 @@ namespace :account do
                       when 'facebook'
                         fb_client.get_picture(user.uid, type: 'large')
                       when 'google_oauth2', 'twitter'
-                        user.avatar if user.avatar?
+                        user.social_avatar_url
                       end
           account.set_avatar_from_url(image_url) if image_url
         end
