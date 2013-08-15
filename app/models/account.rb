@@ -20,9 +20,11 @@ class Account < ActiveRecord::Base
   scope :ordered, -> { order('ID ASC') }
 
   has_attached_file :avatar, :storage => :elvfs, :elvfs_url => Settings['storage.url'], :default_url => "#{Settings['storage.url']}/files/28694/200-200/default_avatar.png"
+  alias_attribute :file_url, :avatar_url
 
   extend Enumerize
   enumerize :gender, in: [:male, :female], predicates: true
+
 
   searchable do
     text :first_name

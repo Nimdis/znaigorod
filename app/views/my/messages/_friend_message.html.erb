@@ -1,10 +1,6 @@
 <div class="item">
   <div class="avatar">
-    <% if message.producer.avatar_url? %>
-      <%= image_tag(resized_image_url(message.producer.avatar_url, 35, 35), size: '35x35') %>
-    <% else %>
-      <%= image_tag 'public/stub_poster.png', size: '35x35' %>
-    <% end %>
+    <%= image_tag(resized_image_url(message.producer.avatar.url, 35, 35), size: '35x35') %>
   </div>
 
   <div class="body">
