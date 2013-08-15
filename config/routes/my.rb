@@ -4,6 +4,8 @@ Znaigorod::Application.routes.draw do
 
     get '/afisha/available_tags' => 'afishas#available_tags', :as => :available_tags, :controller => 'afishas'
 
+    resources :accounts, :only => :show
+
     resources :afisha, :except => [:index, :show], :controller => 'afishas' do
       get 'archive', :on => :collection, :as => :archive
       get 'edit/step/:step' => 'afishas#edit', :defaults => { :step => 'first' }, :on => :member, :as => :edit_step
@@ -34,6 +36,6 @@ Znaigorod::Application.routes.draw do
     get "/afisha" => "afishas#index", :as => :afisha_index, :controller => 'afishas'
     get "/afisha/:id" => "afishas#show", :as => :afisha_show, :controller => 'afishas'
 
-    root to: 'afishas#index'
+    root to: 'accounts#show'
   end
 end

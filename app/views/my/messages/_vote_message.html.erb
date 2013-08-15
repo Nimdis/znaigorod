@@ -1,0 +1,25 @@
+<div class="item">
+  <div class="avatar">
+    <% if message.producer.avatar_url? %>
+      <%= image_tag(resized_image_url(message.producer.avatar_url, 35, 35), size: '35x35') %>
+    <% else %>
+      <%= image_tag 'public/stub_poster.png', size: '35x35' %>
+    <% end %>
+  </div>
+
+  <div class="body">
+    <%= link_to message.producer.title, message.producer %>
+    <span><%= message.kind_text %>:</span>
+    <% if message.messageable.voteable.is_a?(Afisha) %>
+      <%= link_to(message.messageable.voteable.title, polymorphic_path([message.messageable.voteable, :show])) %>
+    <% elsif message.messageable.voteable.is_a?(Comment) %>
+      &laquo;<%= message.messageable.voteable.body %>&raquo;
+      <span>к мероприятию:</span>
+      <%= link_to(message.messageable.voteable.commentable.title, polymorphic_path([message.messageable.voteable.commentable, :show], anchor: "comment_#{message.messageable.voteable.id}")) %>
+    <% end %>
+
+    <div class="date">
+      <%= time_ago_in_words(message.created_at) %> назад
+    </div>
+  </div>
+</div>

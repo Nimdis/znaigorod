@@ -1,0 +1,11 @@
+<li class="<%= message.state %> ajax_message_status"
+  data-counter="<%= current_user.account.messages.with_state(:new).count %>"
+  data-messages="<%= current_user.account.messages.count %>">
+  <%= render partial: 'my/messages/afisha_message', locals: { message: message } if message.messageable.is_a?(Afisha) %>
+  <%= render partial: 'my/messages/comment_message', locals: { message: message } if message.messageable.is_a?(Comment) %>
+  <%= render partial: 'my/messages/friend_message', locals: { message: message } if message.messageable.is_a?(Friend) %>
+  <%= render partial: 'my/messages/visit_message', locals: { message: message } if message.messageable.is_a?(Visit) %>
+  <%= render partial: 'my/messages/vote_message', locals: { message: message } if message.messageable.is_a?(Vote) %>
+
+  <%= link_to t('change_message_status'), account_message_change_message_status_path(@account, message), method: :put, remote: true, class: 'change_message_status' %>
+</li>

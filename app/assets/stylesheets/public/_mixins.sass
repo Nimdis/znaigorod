@@ -67,6 +67,13 @@ $desktop_default_width: 1200px
     &:active
       padding: ($padding-bottom + 1) 8px ($padding-top + 1)
 
+=avatar-style
+  float: left
+  +clearfix
+  width: 35px
+  height: 35px
+  +border-radius
+  margin: 0 5px 0 0
 
 =avatar-list-style
   +clearfix
@@ -77,12 +84,7 @@ $desktop_default_width: 1200px
     margin-bottom: 5px
 
   .avatar
-    float: left
-    +clearfix
-    width: 35px
-    height: 35px
-    +border-radius
-    margin: 0 5px 0 0
+    +avatar-style
 
   .details
     margin-top: 8px

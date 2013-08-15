@@ -166,6 +166,12 @@ ru:
     many:  "%{count} человек"
     other: "%{count} человек"
 
+  account_messages:
+    one:   "Сообщения + %{count}"
+    few:   "Сообщения + %{count}"
+    many:  "Сообщения + %{count}"
+    other: "Сообщения + %{count}"
+
   account_votes:
     one:   "%{count} место"
     few:   "%{count} места"

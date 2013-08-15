@@ -44,7 +44,7 @@
   .right
     margin: 0 0 0 220px
 
-    .votes.header, .events.header, .comments.header
+    .votes.header, .events.header, .comments.header, .messages.header
       background-color: #e8e8e8
       font-size: 14px
       margin-bottom: 20px
@@ -224,6 +224,42 @@
 
             .body
               margin: 0 0 0 145px
+
+    .messages.list
+      border-top: 1px solid #ccc
+      margin: 0 0 10px 0
+
+      ul
+        li
+          margin: 0
+          padding: 10px
+          border-bottom: 1px solid #ccc
+          width: 960px
+
+          &.new
+            background: #e8e8e8
+          &.read
+            background: #fff
+
+          .item
+            font-size: 12px
+
+            img
+              float: left
+              margin: 0 10px 0 0
+
+            span
+              color: #999
+
+            .avatar
+              +avatar-style
+
+            .body
+              margin: 0 0 0 45px
+
+            .date
+              color: #999
+
 
     .toggle
       float: right

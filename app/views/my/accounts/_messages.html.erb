@@ -1,7 +1,5 @@
-<h1>Уведомления</h1>
-
 <ul class="account_messages">
-  <% @messages.each do |message| %>
+  <% collection.each do |message| %>
     <%= render message %>
   <% end %>
 </ul>

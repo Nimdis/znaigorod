@@ -1,0 +1,12 @@
+<div class="item">
+  <div class="avatar">
+    <%= image_tag 'public/avatar_znaigorod.jpg', size: '35x35' %>
+  </div>
+  <div class="body">
+    <%= link_to(message.messageable.title, polymorphic_path([message.messageable, :show])) %>
+    <span><%= message.kind_text %></span>
+    <div class="date">
+      <%= time_ago_in_words(message.created_at) %> назад
+    </div>
+  </div>
+</div>

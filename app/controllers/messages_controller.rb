@@ -16,7 +16,7 @@ class MessagesController < ApplicationController
       @message = Message.find(params[:message_id])
       @message.change_message_status
 
-      render :partial => 'message', :locals => { message: @message } and return
+      render partial: 'my/messages/message', locals: { message: @message } and return
     }
   end
 end

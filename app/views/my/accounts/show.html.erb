@@ -1,0 +1,72 @@
+<div class="account_show">
+  <div class="left">
+    <div class="image">
+      <% if @account.avatar_url? %>
+        <%= image_tag(resized_image_url(@account.avatar_url, 200, 200), size: '200x200', title: @account.title, alt: @account.title) %>
+      <% else %>
+        <%= image_tag 'public/stub_poster.png', size: '200x200' %>
+      <% end %>
+    </div>
+    <h1><%= @account.title %></h1>
+
+    <div class="social_actions">
+      <% if @account.friends.approved.any? %>
+        <div class="friends_counter">
+          <div class="floatl">Друзья</div>
+          <div class="floatr"><%= link_to t('account_friends', count: @account.friends.count), account_buddies_path(@account) , remote: true %></div>
+        </div>
+        <%= render partial: 'accounts/friends', locals: { friends: @account.buddies } %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="right">
+    <% if @account.messages.with_state(:new).any? %>
+      <div class="messages header">
+        <%= t('account_messages', count: @account.messages.with_state(:new).count) %>
+      </div>
+      <div class="messages list">
+        <%= render partial: 'messages', locals: { collection: @account.messages } %>
+      </div>
+      <div class="messages toggle">
+        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.messages.count > 3 %>
+      </div>
+    <% end %>
+
+    <% if @account.votes.afisha.any? %>
+      <div class="votes header">
+        <%= "#{'Нравится '}" "#{t('account_votes', count: @account.votes.afisha.count)}" %>
+      </div>
+      <div class="votes list">
+        <%= render partial: 'accounts/account_votes', locals: { collection: @account.votes.afisha } %>
+      </div>
+      <div class="votes toggle">
+        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.votes.afisha.count > 3 %>
+      </div>
+    <% end %>
+
+    <% if @account.afisha.published.any? %>
+      <div class="events header">
+        <%= "#{@account.first_name}" "#{@account.male? ? ' добавил ' : ' добавила '}" "#{t('account_events', count: @account.afisha.published.count)}" %>
+      </div>
+      <div class="events list">
+        <%= render partial: 'accounts/account_events', locals: { collection: @account.afisha.published } %>
+      </div>
+      <div class="events toggle">
+        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.afisha.published.count > 4 %>
+      </div>
+    <% end %>
+
+    <% if @account.comments.any? %>
+      <div class="comments header">
+        <%= "#{@account.first_name}" "#{@account.male? ? ' написал ' : ' написала '}" "#{t(:account_comments, count: @account.comments.count)}" %>
+      </div>
+      <div class="comments list">
+        <%= render partial: 'accounts/account_comments', locals: { comments: @account.comments } %>
+      </div>
+      <div class="comments toggle">
+        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.comments.count > 1 %>
+      </div>
+    <% end %>
+  </div>
+</div>

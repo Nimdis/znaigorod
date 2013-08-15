@@ -1,0 +1,19 @@
+<div class="item">
+  <div class="avatar">
+    <% if message.producer.avatar_url? %>
+      <%= image_tag(resized_image_url(message.producer.avatar_url, 35, 35), size: '35x35') %>
+    <% else %>
+      <%= image_tag 'public/stub_poster.png', size: '35x35' %>
+    <% end %>
+  </div>
+
+  <div class="body">
+    <%= link_to message.producer, message.producer %>
+    <span><%= message.kind_text %>:</span>
+    <%= link_to(message.messageable.visitable.title, polymorphic_path([message.messageable.visitable, :show])) %>
+
+    <div class="date">
+      <%= time_ago_in_words(message.created_at) %> назад
+    </div>
+  </div>
+</div>
