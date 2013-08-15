@@ -132,7 +132,7 @@
           render_organizations(map, $map.attr('data-id'))
           true
 
-        $('.organization_description .link a, .organization_description .image a').on 'click', (event) ->
+        $('.organization_description .link a, .organization_description .image a').live 'click', (event) ->
           window.location.href = $(this).attr('href')
           false
 

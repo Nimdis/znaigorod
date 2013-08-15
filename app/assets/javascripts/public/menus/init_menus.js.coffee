@@ -1,5 +1,5 @@
 @init_menus = () ->
-  $('.menus .info .value a').on 'click', ->
+  $('.menus .info .value a').live 'click', ->
     link = $(this)
     info = link.closest('.info')
     if $('.form_view', info).length && $('.details', info).is(':hidden')

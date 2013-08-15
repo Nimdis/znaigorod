@@ -2,7 +2,7 @@
 
   prepare_affiche_list()
 
-  $(".main_page_affiche .today_in_city_menu ul li a").on "click", (event) ->
+  $(".main_page_affiche .today_in_city_menu ul li a").live "click", (event) ->
     return false if $(this).closest("li").hasClass("current")
     return false if $(".ajax_indicator_wrapper").length
     link = $(this)

@@ -36,7 +36,7 @@ init_dialog = () ->
     init_votes()
 
   links = $('.user_actions li a')
-  link = links.on 'ajax:success', (evt, response, status, jqXHR) ->
+  link = links.live 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target).closest('.social_actions')
     target.html(jqXHR.responseText)
     init_auth()
