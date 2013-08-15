@@ -6,7 +6,7 @@ class My::GalleryImagesController < My::ApplicationController
 
   def create
     @afisha = current_user.afisha.available_for_edit.find(params[:afisha_id])
-    @gallery_image = @afisha.gallery_images.create(:file => params[:gallery_images][:file].first)
+    @gallery_image = @afisha.gallery_images.create(:file => params[:gallery_images][:file])
   end
 
   def destroy

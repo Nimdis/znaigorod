@@ -1,6 +1,6 @@
 <li>
   <div class='image_wrapper'>
-    <%= image_tag resized_image_url(gallery_image.file_url, 130, 100, true, 'n')  %>
+    <%= image_tag resized_image_url(gallery_image.file.url, 130, 100), :size => '130x100', :alt => gallery_image.description  %>
   </div>
   <%= link_to "Удалить", my_afisha_gallery_image_path(@afisha, gallery_image), :method => :delete, :remote => true, :class => 'ajax_delete' %>
 </li>

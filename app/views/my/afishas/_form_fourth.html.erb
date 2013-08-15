@@ -37,7 +37,7 @@
 
 <%= simple_form_for @afisha, :url => social_gallery_my_afisha_path(@afisha.id), :as => :afisha, :html => { :class => 'inline_form' } do |f| %>
   <%= f.input :social_gallery_url, :label => t('my.social_gallery_url') %>
-  <%= f.submit 'Добавить', :class => 'button submit' %>
+  <%= f.submit 'Добавить', :class => 'button submit add_social_gallery' %>
 <% end %>
 
 <div class='submit'>
