@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Message < ActiveRecord::Base
-  attr_accessible :account, :body, :state, :kind, :producer_id
+  attr_accessible :account, :body, :state, :kind, :producer, :messageable
 
   belongs_to :account
   belongs_to :messageable, :polymorphic => true

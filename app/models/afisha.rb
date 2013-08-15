@@ -61,7 +61,6 @@ class Afisha < ActiveRecord::Base
 
   before_save :prepare_trailer
   before_save :set_wmode_for_trailer, :if => :published?
-  after_save :update_account_rating, :if => :published?
 
   scope :available_for_edit,    -> { where(:state => [:draft, :published]) }
   scope :by_state,              ->(state) { where(:state => state) }
