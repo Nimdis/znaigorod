@@ -14,14 +14,15 @@ namespace :account do
     Account.skip_callback(:create, :after, :get_social_avatar)
     bar = ProgressBar.new(users.count)
     users.each do |user|
+      next if user.account
       name = user.name.split(' ')
+      bar.increment!
       account = Account.create(first_name: name.first,
                                last_name: name.last,
                                nickname: user.nickname,
                                location: user.location,
                                created_at: user.created_at)
       user.update_attributes(account_id: account.id)
-      bar.increment!
     end
   end
 
@@ -49,23 +50,11 @@ namespace :account do
     accounts.each do |account|
       bar.increment!
       begin
-        if account.users.any?
-          user = account.users.first
-          image_url = case user.provider
-                      when 'vkontakte'
-                        vk_client.users.get(uid: user.uid,
-                                            fields: :photo_200_orig).first.photo_200_orig
-                      when 'facebook'
-                        fb_client.get_picture(user.uid, type: 'large')
-                      when 'google_oauth2', 'twitter'
-                        user.social_avatar_url
-                      end
-          account.set_avatar_from_url(image_url) if image_url
-        end
+        account.get_social_avatar unless account.avatar?
       rescue
         next
       end
-    end
+  end
   end
 
   desc 'Get friends from vkontakte'

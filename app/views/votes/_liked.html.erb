@@ -3,7 +3,7 @@
     <% users.each do |user| %>
       <li>
         <div class='user_item'>
-          <%= link_to image_tag(resized_image_url(user.account.avatar_url, 50, 50), :size => "50x50", :title => user.account.title), user.account %>
+          <%= link_to image_tag(resized_image_url(user.account.avatar.url, 50, 50), :size => "50x50", :title => user.account.title), user.account %>
           <%= link_to truncate(user.account.title, :length => 15), user.account, :class => 'name', :title => user.account.title %>
         </div>
       </li>

@@ -4,11 +4,7 @@
   </div>
 
   <div class="image">
-    <% if account.avatar_url? %>
-      <%= image_tag(resized_image_url(account.avatar_url, 178, 178), size: '178x178', title: account, alt: account) %>
-    <% else %>
-      <%= image_tag 'public/stub_poster.png', size: '178x178' %>
-    <% end %>
+    <%= image_tag(resized_image_url(account.avatar.url, 178, 178), size: '178x178', title: account, alt: account) %>
   </div>
 
   <div class="badges"></div>

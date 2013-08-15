@@ -5,11 +5,7 @@
   <% end %>
   <% if current_user %>
     <%= link_to account_path(current_user.account) do %>
-      <% if current_user.account.avatar_url? %>
-        <%= image_tag(resized_image_url(current_user.account.avatar_url, 35, 35), size: '35x35', title: current_user.name, alt: current_user.name, class: :avatar) %>
-      <% else %>
-        <%= image_tag 'public/stub_poster.png', size: '35x35' %>
-      <% end %>
+      <%= image_tag(resized_image_url(current_user.account.avatar.url, 35, 35), size: '35x35', title: current_user.name, alt: current_user.name, class: :avatar) %>
     <% end %>
 
     <% if current_user.profile %>

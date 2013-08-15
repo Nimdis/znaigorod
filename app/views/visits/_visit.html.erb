@@ -23,11 +23,7 @@
     <% visitable.visits.visited.map(&:user).map(&:account).each do |account| %>
       <li>
         <div class='avatar'>
-          <% if account.avatar_url? %>
-            <%= link_to(image_tag(account.avatar_url, :size => '35x35', :title => account, :alt => account), account) %>
-          <% else %>
-             <%= image_tag 'public/stub_poster.png', size: '35x35' %>
-          <% end %>
+          <%= link_to(image_tag(account.avatar.url, :size => '35x35', :title => account, :alt => account), account) %>
         </div>
         <div class='details'>
           <%= link_to(account, account, :class => :name) %>

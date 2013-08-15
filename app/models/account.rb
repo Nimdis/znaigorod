@@ -19,7 +19,7 @@ class Account < ActiveRecord::Base
 
   scope :ordered, -> { order('ID ASC') }
 
-  has_attached_file :avatar, :storage => :elvfs, :elvfs_url => Settings['storage.url']
+  has_attached_file :avatar, :storage => :elvfs, :elvfs_url => Settings['storage.url'], :default_url => "#{Settings['storage.url']}/files/28694/200-200/default_avatar.png"
 
   extend Enumerize
   enumerize :gender, in: [:male, :female], predicates: true
@@ -68,19 +68,22 @@ class Account < ActiveRecord::Base
   end
 
   def get_social_avatar
-    user = users.first
-    vk_client = VkontakteApi::Client.new
-    fb_client = Koala::Facebook::API.new
-    image_url = case user.provider
-                when 'vkontakte'
-                  vk_client.users.get(uid: user.uid,
-                                      fields: :photo_200_orig).first.photo_200_orig
-                when 'facebook'
-                  fb_client.get_picture(user.uid, type: 'large')
-                when 'google_oauth2', 'twitter'
-                  user.avatar
-                end
-    set_avatar_from_url(image_url) if image_url
+    begin
+      user = users.first
+      vk_client = VkontakteApi::Client.new
+      fb_client = Koala::Facebook::API.new
+      image_url = case user.provider
+                  when 'vkontakte'
+                    vk_client.users.get(uid: user.uid,
+                                        fields: :photo_200_orig).first.photo_200_orig
+                  when 'facebook'
+                    fb_client.get_picture(user.uid, type: 'large')
+                  when 'google_oauth2', 'twitter'
+                    user.social_avatar_url
+                  end
+      set_avatar_from_url(image_url) if image_url
+    rescue
+    end
   end
 
   def set_avatar_from_url(url)

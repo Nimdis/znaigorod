@@ -3,11 +3,7 @@
     <li>
       <div class="avatar">
         <%= link_to account_path(account) do %>
-          <% if account.avatar_url? %>
-            <%= image_tag(resized_image_url(account.avatar_url, 35, 35), size: '35x35', title: account, alt: account) %>
-          <% else %>
-            <%= image_tag 'public/stub_poster.png', size: '35x35' %>
-          <% end %>
+          <%= image_tag(resized_image_url(account.avatar.url, 35, 35), size: '35x35', title: account, alt: account) %>
         <% end %>
       </div>
       <div class="details">
