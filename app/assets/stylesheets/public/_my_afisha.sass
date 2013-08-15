@@ -178,6 +178,22 @@
         textarea
           border-color: #880000
 
+      &.check_boxes
+        +clearfix
+        margin-bottom: 5px
+        label.checkbox
+          width: 115px
+          float: left
+          margin-right: 10px
+          &:nth-child(5)
+            clear: left
+          &:nth-child(4n+4)
+            clear: left
+          &:nth-child(4)
+            clear: none
+          input
+            margin-right: 5px
+
     span.error
       display: block
       color: #880000
@@ -265,8 +281,8 @@
       .poster
         float: left
         +clearfix
-        width: 180px
-        height: 242px
+        width: 200px
+        height: 269px
         margin: 0 10px 10px 0
       .text
         +clearfix

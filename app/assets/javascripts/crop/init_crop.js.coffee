@@ -22,9 +22,9 @@
   true
 
 update_crop = (coords) ->
-  rx = 180/coords.w
-  ry = 242/coords.h
-  preview = $('.affiche_preview .poster img')
+  rx = 200/coords.w
+  ry = 269/coords.h
+  preview = $('.afisha_preview .poster img')
 
   preview.css
     width: Math.round(rx * preview.attr('width')) + 'px'
