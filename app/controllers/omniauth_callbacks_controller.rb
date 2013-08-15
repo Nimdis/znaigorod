@@ -35,9 +35,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     auth_raw_info = request.env['omniauth.auth']
     @user = User.find_or_create_by_oauth(auth_raw_info)
 
-    method = "get_#{@user.provider}_friends"
-    @user.account.delay.send(method, @user) if @user.account.respond_to?(method)
-
     sign_in @user, :event => :authentication
     @after_sign_in_url = after_sign_in_path_for(@user)
 

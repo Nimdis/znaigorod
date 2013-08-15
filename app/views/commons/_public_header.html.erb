@@ -13,9 +13,9 @@
         <p class='user'>
           <%= link_to 'Добавить афишу', new_my_afisha_path, class: :new_my_afisha %>
           <%= link_to account_path(current_user.account), target: :_blank, class: :avatar do %>
-              <%= image_tag(resized_image_url(current_user.account.avatar.url, 22, 22), size: '22x22', title: current_user.name, alt: current_user.name) %>
+            <%= image_tag(resized_image_url(current_user.account.avatar.url, 22, 22), size: '22x22', title: current_user.account, alt: current_user.account) %>
           <% end %>
-          <%= link_to(current_user.name, current_user.account, class: :user_name) %>
+          <%= link_to(current_user.account, current_user.account, class: :user_name) %>
           <%= link_to('Выйти', destroy_user_session_path, method: :delete, class: :logout) %>
         </p>
         <p class='private'><%= link_to('Личный кабинет', my_root_path) %></p>
