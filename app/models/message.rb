@@ -4,6 +4,7 @@ class Message < ActiveRecord::Base
   attr_accessible :account, :body, :state, :kind, :producer, :messageable
 
   belongs_to :account
+  belongs_to :producer, class_name: 'Account'
   belongs_to :messageable, :polymorphic => true
 
   extend Enumerize
@@ -15,9 +16,6 @@ class Message < ActiveRecord::Base
     self.save
   end
 
-  def producer
-    Account.find(producer_id)
-  end
 end
 
 # == Schema Information
