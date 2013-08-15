@@ -18,7 +18,7 @@
           <%= link_to(image_tag(resized_image_url(@afisha.poster_url, 200, 269), size: '200x269', alt: @afisha.title), @afisha.poster_url) %>
         <% else %>
           <% if can? :edit, @afisha %>
-            <%= link_to image_tag('public/stub_poster.png', size: '200x269', alt: :poster), edit_step_my_afisha_path(@afisha, step: :second) %>
+            <%= link_to image_tag('public/stub_poster.png', size: '200x269', alt: :poster, class: :stub), edit_step_my_afisha_path(@afisha, step: :second) %>
           <% else %>
             <%= image_tag('public/stub_poster.png', size: '200x269', alt: :poster) %>
           <% end %>

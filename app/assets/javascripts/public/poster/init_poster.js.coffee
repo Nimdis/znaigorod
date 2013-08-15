@@ -1,5 +1,6 @@
 @init_poster = () ->
   poster = $('.content .afisha_show .left .image a img')
+  return true if poster.hasClass('stub')
   poster.each (index, item) ->
     $(item).closest('a').colorbox
       'close': 'закрыть'
