@@ -152,7 +152,7 @@ class User < ActiveRecord::Base
 
   def create_account
     name = self.name.split(' ')
-    account = Account.new(first_name: name.first, last_name: name.last,
+    account = Account.new(first_name: name.first, last_name: (name.last if name.count > 1),
                              nickname: self.nickname, location: self.location,
                              email: self.email, gender: self.gender)
     account.users = [self]

@@ -45,7 +45,7 @@ class Account < ActiveRecord::Base
   end
 
   def title
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}".gsub(/\s$/,'')
   end
 
   def get_vkontakte_friends(user)
