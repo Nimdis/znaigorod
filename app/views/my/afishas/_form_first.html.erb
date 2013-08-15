@@ -8,9 +8,9 @@
   <%= simple_form_for resource, as: :afisha, url: [:my, resource] do |f| %>
     <%= hidden_field_tag :step, @step %>
     <%= f.input :kind, required: true, as: :check_boxes %>
-    <%= f.input :title, required: true, input_html: { id: :affiche_title } %>
-    <%= f.input :description, required: true, input_html: { id: :affiche_description } %>
-    <%= f.input :tag, as: :string, input_html: { id: :affiche_tag } %>
+    <%= f.input :title, required: true, input_html: { id: :afisha_title } %>
+    <%= f.input :description, required: true, input_html: { id: :afisha_description } %>
+    <%= f.input :tag, as: :string, input_html: { id: :afisha_tag } %>
     <%= link_to 'выбрать из списка',  my_available_tags_path(:format => :html), :class => 'select_tags', :remote => true %>
     <div class='submit'>
       <%= f.button :submit, 'Создать мероприятие', class: :button %>
@@ -21,9 +21,9 @@
   <%= simple_form_for resource, as: :afisha, url: my_afisha_show_path(resource) do |f| %>
     <%= hidden_field_tag :step, @step %>
     <%= f.input :kind, required: true, as: :check_boxes %>
-    <%= f.input :title, required: true, input_html: { id: :affiche_title } %>
-    <%= f.input :description, required: true, input_html: { id: :affiche_description } %>
-    <%= f.input :tag, as: :string, input_html: { id: :affiche_tag } %>
+    <%= f.input :title, required: true, input_html: { id: :afisha_title } %>
+    <%= f.input :description, required: true, input_html: { id: :afisha_description } %>
+    <%= f.input :tag, as: :string, input_html: { id: :afisha_tag } %>
     <%= link_to 'выбрать из списка',  my_afisha_available_tags_path(resource, :format => :html), :class => 'select_tags', :remote => true %>
     <div class='submit'>
       <%= f.button :submit, 'Сохранить общее описание', class: :button %>

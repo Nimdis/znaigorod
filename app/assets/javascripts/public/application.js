@@ -73,7 +73,7 @@
  * = require ./services
  * = require ./visitors
  * = require ./sms_claims
- * = require ./my_affiche
+ * = require ./my_afisha
  * = require ./select_tags
  * = require ./messages
  * = require ./friends

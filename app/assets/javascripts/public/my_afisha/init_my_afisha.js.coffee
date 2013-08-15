@@ -1,52 +1,52 @@
-@init_my_affiche = ->
-  init_affiche_preview_title() if $('#affiche_title').length
-  init_affiche_preview_description() if $('#affiche_description').length
-  init_affiche_preview_tag() if $('#affiche_tag').length
-  init_affiche_preview_video() if $('#afisha_trailer_code').length
-  init_affiche_preview_map() if $('form.my_affiche_showings .my_affiche_map').length
-  init_autosuggest_handler() if $('form.my_affiche_showings').length
-  init_affiche_help() if $('.help').length
+@init_my_afisha = ->
+  init_afisha_preview_title() if $('#afisha_title').length
+  init_afisha_preview_description() if $('#afisha_description').length
+  init_afisha_preview_tag() if $('#afisha_tag').length
+  init_afisha_preview_video() if $('#afisha_trailer_code').length
+  init_afisha_preview_map() if $('form.my_afisha_showings .my_afisha_map').length
+  init_autosuggest_handler() if $('form.my_afisha_showings').length
+  init_afisha_help() if $('.help').length
 
   true
 
-init_affiche_preview_title = ->
-  $('#affiche_title').keyup ->
+init_afisha_preview_title = ->
+  $('#afisha_title').keyup ->
     if $(this).val()
-      $('.my_affiche_wrapper .affiche_preview .title').html($(this).val())
+      $('.my_afisha_wrapper .afisha_preview .title').html($(this).val())
     else
-      $('.my_affiche_wrapper .affiche_preview .title').html('Нет названия')
+      $('.my_afisha_wrapper .afisha_preview .title').html('Нет названия')
     true
-  $('#affiche_title').mouseup (event) ->
+  $('#afisha_title').mouseup (event) ->
     setTimeout ->
-      $('#affiche_title').keyup()
+      $('#afisha_title').keyup()
     , 1
     true
-  $('#affiche_title').keyup()
+  $('#afisha_title').keyup()
 
   true
 
-init_affiche_preview_description = ->
+init_afisha_preview_description = ->
   $.extend mySettings,
     afterInsert: ->
-      $('#affiche_description').keyup()
+      $('#afisha_description').keyup()
       true
-  $('#affiche_description').markItUp(mySettings).keyup ->
+  $('#afisha_description').markItUp(mySettings).keyup ->
     if $(this).val()
-      $('.my_affiche_wrapper .affiche_preview .description .text').html(textile($(this).val()))
+      $('.my_afisha_wrapper .afisha_preview .description .text').html(textile($(this).val()))
     else
-      $('.my_affiche_wrapper .affiche_preview .description .text').html('Нет описания')
+      $('.my_afisha_wrapper .afisha_preview .description .text').html('Нет описания')
     true
-  $('#affiche_description').mouseup (event) ->
+  $('#afisha_description').mouseup (event) ->
     setTimeout ->
-      $('#affiche_description').keyup()
+      $('#afisha_description').keyup()
     , 1
     true
-  $('#affiche_description').keyup()
+  $('#afisha_description').keyup()
 
   true
 
-init_affiche_preview_tag = ->
-  $('#affiche_tag').tagit
+init_afisha_preview_tag = ->
+  $('#afisha_tag').tagit
     allowSpaces: true
     caseSensitive: false
     closeAutocompleteOnEnter: true
@@ -54,25 +54,25 @@ init_affiche_preview_tag = ->
     autocomplete:
       delay: 0
       minLength: 1
-      source: "#{$('#affiche_tag').closest('form').attr('action')}/available_tags"
-  $('#affiche_tag').change ->
+      source: "#{$('#afisha_tag').closest('form').attr('action')}/available_tags"
+  $('#afisha_tag').change ->
     if $(this).val().length
-      $('.my_affiche_wrapper .affiche_preview .tags').html("Теги: #{$(this).val()}")
+      $('.my_afisha_wrapper .afisha_preview .tags').html("Теги: #{$(this).val()}")
     else
-      $('.my_affiche_wrapper .affiche_preview .tags').html('')
+      $('.my_afisha_wrapper .afisha_preview .tags').html('')
     true
-  $('#affiche_tag').change()
+  $('#afisha_tag').change()
 
   true
 
-init_affiche_preview_video = ->
+init_afisha_preview_video = ->
   $('#afisha_trailer_code').keyup ->
     $.ajax
       type: 'GET'
       url: "/my/afisha/#{$('#afisha_id').val()}/preview_video"
       data: $('#afisha_trailer_code').closest('form').serialize()
       success: (data, textStatus, jqXHR) ->
-        $('.my_affiche_wrapper .affiche_preview .video').html(data)
+        $('.my_afisha_wrapper .afisha_preview .video').html(data)
         true
       error: (jqXHR, textStatus, errorThrown) ->
         wrapped = $("<div>#{jqXHR.responseText}</div>")
@@ -91,10 +91,10 @@ init_affiche_preview_video = ->
   $('#afisha_trailer_code').keyup()
   true
 
-init_affiche_preview_map = ->
+init_afisha_preview_map = ->
   ymaps.ready ->
-    $form = $('form.my_affiche_showings')
-    $map = $('.my_affiche_map', $form)
+    $form = $('form.my_afisha_showings')
+    $map = $('.my_afisha_map', $form)
 
     latitude = $('.latitude', $form).val() || '56.5000000'
     longitude = $('.longitude', $form).val() || '84.9666700'
@@ -112,8 +112,8 @@ init_affiche_preview_map = ->
       left: 5
 
     if $('.latitude', $form).val() && $('.longitude', $form).val()
-      affiche_placemark = create_placemark(latitude, longitude)
-      map.geoObjects.add(affiche_placemark)
+      afisha_placemark = create_placemark(latitude, longitude)
+      map.geoObjects.add(afisha_placemark)
       map.setCenter([latitude, longitude])
       map.setZoom(16)
 
@@ -123,9 +123,9 @@ init_affiche_preview_map = ->
       longitude = coordinates[1]
       $('#showing_latitude').val(latitude)
       $('#showing_longitude').val(longitude)
-      map.geoObjects.remove(affiche_placemark) if affiche_placemark?
-      affiche_placemark = create_placemark(latitude, longitude)
-      map.geoObjects.add(affiche_placemark)
+      map.geoObjects.remove(afisha_placemark) if afisha_placemark?
+      afisha_placemark = create_placemark(latitude, longitude)
+      map.geoObjects.add(afisha_placemark)
       true
 
     $('#showing_place').on 'autocompleteselect', (event, ui) ->
@@ -137,9 +137,9 @@ init_affiche_preview_map = ->
         checkZoomRange: true
         duration: 800
         timingFunction: 'ease-in-out'
-      map.geoObjects.remove(affiche_placemark) if affiche_placemark?
-      affiche_placemark = create_placemark(latitude, longitude)
-      map.geoObjects.add(affiche_placemark)
+      map.geoObjects.remove(afisha_placemark) if afisha_placemark?
+      afisha_placemark = create_placemark(latitude, longitude)
+      map.geoObjects.add(afisha_placemark)
 
       true
 
@@ -150,21 +150,21 @@ init_affiche_preview_map = ->
   true
 
 create_placemark = (latitude, longitude) ->
-  affiche_placemark = new ymaps.GeoObject
+  afisha_placemark = new ymaps.GeoObject
     geometry:
       type: 'Point'
       coordinates: [latitude, longitude]
     properties:
-      id: 'affiche_placemark'
+      id: 'afisha_placemark'
   ,
     iconImageHref: '/assets/public/afisha_placemark.png'
     iconImageOffset: [-15, -40]
     iconImageSize: [37, 42]
     zIndex: 700
 
-  affiche_placemark
+  afisha_placemark
 
-init_affiche_help = ->
+init_afisha_help = ->
   left = $('.show_help').position().left
   $('.help').css('left', left).prepend('<a class="close" title="закрыть" href="#">X</a>')
   $('.show_help').click ->

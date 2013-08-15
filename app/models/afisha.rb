@@ -466,11 +466,11 @@ end
 #  updated_at                :datetime         not null
 #  description               :text
 #  original_title            :string(255)
-#  poster_url                :string(255)
+#  poster_url                :text
 #  trailer_code              :text
 #  tag                       :text
 #  vfs_path                  :string(255)
-#  image_url                 :string(255)
+#  image_url                 :text
 #  distribution_starts_on    :datetime
 #  distribution_ends_on      :datetime
 #  slug                      :string(255)
