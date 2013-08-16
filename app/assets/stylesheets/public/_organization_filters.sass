@@ -1,0 +1,181 @@
+.filters_wrapper
+
+  .filters.organization
+
+    .by_kind
+      float: left
+      margin-left: 10px
+
+      ul
+        +clearfix
+
+        li
+          float: left
+          margin-right: 5px
+          +toggable-links
+
+          &:last-child
+            margin-right: 0
+
+    .by_categories
+      width: 80%
+      margin: 20px auto
+      ul
+        +clearfix
+        li
+          width: percentage(1/10)
+          float: left
+          text-align: center
+          a
+            +inline-block
+            white-space: nowrap
+            padding-top: 25px
+            margin: 0 0 1px 0
+            background: transparent image_url('public/afisha_kind_sprite.png') no-repeat center center
+            .name
+              color: #000
+            .count
+              color: #a9a9a9
+              font-size: 10px
+              vertical-align: super
+              margin-left: -2px
+            &:hover
+              text-decoration: none
+              .name
+                color: #f60
+            &:active
+              margin: 1px 0 0 0
+
+          &.selected a .name
+            color: #f60
+
+          &.afisha
+            a
+              background-position: (64px/2 - 24px/2 - 0) 0
+              &:hover
+                background-position: (64px/2 - 24px/2 - 0) -76px
+            &.selected a
+              background-position: (64px/2 - 24px/2 - 0) -151px
+              &:hover
+                background-position: (64px/2 - 24px/2 - 0) -76px
+
+          &.movies
+            a
+              background-position: (29px/2 - 23px/2 - 120px) 0
+              &:hover
+                background-position: (29px/2 - 23px/2 - 120px) -76px
+            &.selected a
+              background-position: (29px/2 - 23px/2 - 120px) -151px
+              &:hover
+                background-position: (29px/2 - 23px/2 - 120px) -76px
+
+          &.concerts
+            a
+              background-position: (58px/2 - 24px/2 - 240px) 0
+              &:hover
+                background-position: (58px/2 - 24px/2 - 240px) -77px
+            &.selected a
+              background-position: (58px/2 - 24px/2 - 240px) -152px
+              &:hover
+                background-position: (58px/2 - 24px/2 - 240px) -77px
+
+          &.parties
+            a
+              background-position: (64px/2 - 34px/2 - 360px) 0
+              &:hover
+                background-position: (64px/2 - 34px/2 - 360px) -76px
+            &.selected a
+              background-position: (64px/2 - 34px/2 - 360px) -151px
+              &:hover
+                background-position: (64px/2 - 34px/2 - 360px) -76px
+
+          &.spectacles
+            a
+              background-position: (63px/2 - 29px/2 - 490px) 0
+              &:hover
+                background-position: (63px/2 - 29px/2 - 490px) -76px
+            &.selected a
+              background-position: (63px/2 - 29px/2 - 490px) -151px
+              &:hover
+                background-position: (63px/2 - 29px/2 - 490px) -76px
+
+          &.exhibitions
+            a
+              background-position: (56px/2 - 34px/2 - 620px) 0
+              &:hover
+                background-position: (56px/2 - 34px/2 - 620px) -76px
+            &.selected a
+              background-position: (56px/2 - 34px/2 - 620px) -151px
+              &:hover
+                background-position: (56px/2 - 34px/2 - 620px) -76px
+
+          &.sportsevents
+            a
+              background-position: (41px/2 - 41px/2 - 750px) 0
+              &:hover
+                background-position: (41px/2 - 41px/2 - 750px) -77px
+            &.selected a
+              background-position: (41px/2 - 41px/2 - 750px) -152px
+              &:hover
+                background-position: (41px/2 - 41px/2 - 750px) -77px
+
+          &.masterclasses
+            a
+              background-position: (88px/2 - 28px/2 - 890px) 0
+              &:hover
+                background-position: (88px/2 - 28px/2 - 890px) -78px
+            &.selected a
+              background-position: (88px/2 - 28px/2 - 890px) -153px
+              &:hover
+                background-position: (88px/2 - 28px/2 - 890px) -78px
+
+          &.competitions
+            a
+              background-position: (58px/2 - 25px/2 - 1020px) 0
+              &:hover
+                background-position: (58px/2 - 25px/2 - 1020px) -76px
+            &.selected a
+              background-position: (58px/2 - 25px/2 - 1020px) -151px
+              &:hover
+                background-position: (58px/2 - 25px/2 - 1020px) -76px
+
+          &.others
+            a
+              background-position: (42px/2 - 42px/2 - 1140px) 0
+              &:hover
+                background-position: (42px/2 - 42px/2 - 1140px) -76px
+            &.selected a
+              background-position: (42px/2 - 42px/2 - 1140px) -151px
+              &:hover
+                background-position: (42px/2 - 42px/2 - 1140px) -76px
+
+.presentation_filters.organization
+
+  .present_by
+    float: left
+    /* FIXME iconize & show it */
+    display: none
+    margin-left: 10px
+
+  .order_by
+    float: right
+    margin-right: 10px
+
+  .present_by,
+  .order_by
+    p
+      +inline-block
+    ul
+      +inline-block
+      +clearfix
+      li
+        float: left
+        margin-right: 5px
+        +toggable-links
+        &:last-child
+          margin-right: 0
+
+  .add_my_afisha
+    width: 150px
+    text-align: center
+    margin: 0 auto

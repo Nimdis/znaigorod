@@ -1,6 +1,6 @@
 <div class='filters_wrapper'>
-  <div class='filters afisha'>
-    <div class='by_date'>
+  <div class='filters organization'>
+    <div class='by_kind'>
       <ul>
         <% @presenter.kinds_links.each do |kind_link| %>
           <li<%= " class=selected" if kind_link[:selected] %>>
@@ -12,8 +12,8 @@
     </div>
   </div>
 
-  <div class='filters afisha'>
-    <div class='by_kind'>
+  <div class='filters organization'>
+    <div class='by_categories'>
       <ul>
         <% @presenter.categories_links.each do |category_link| %>
           <li class='<%= category_link[:klass] %><%= ' selected' if category_link[:selected] %>'>
