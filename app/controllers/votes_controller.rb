@@ -15,7 +15,7 @@ class VotesController < ApplicationController
 
   def index
     index! {
-      render partial: 'my/accounts/votes', locals: { votes: @votes }, layout: false and return if @account
+      render partial: 'accounts/votes', locals: { votes: @votes }, layout: false and return if @account
     }
   end
 

@@ -15,6 +15,7 @@ class AccountsController < ApplicationController
     show! {
       @presenter = AccountPresenter.new(params)
       @account = AccountDecorator.new Account.find(params[:id])
+      @votes = @account.votes.rendereable.page(1).per(3)
     }
   end
 
