@@ -19,13 +19,13 @@
               </p>
 
               <div class="poster">
-                <%= link_to image_tag_for(item.afisha.poster_url, 70, 100), manage_afisha_show_path(item.afisha) %>
+                <%= link_to image_tag(resized_image_url(item.afisha.poster_url, 70, 100), size: '70x100'), manage_afisha_show_path(item.afisha) %>
               </div>
             <% else %>
               <p><%= link_to item.title, manage_coupon_path(item) %></p>
 
               <div class='poster'>
-                <%= link_to image_tag_for(item.image_url, 70, 100), manage_coupon_path(item) %>
+                <%= link_to image_tag(resized_image_url(item.image_url, 70, 100), size: '70x100'), manage_coupon_path(item) %>
               </div>
             <% end %>
 

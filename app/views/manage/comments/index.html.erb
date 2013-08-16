@@ -6,7 +6,7 @@
   <% if collection.any? %>
     <% collection.each do |item| %>
       <li>
-        <span class='author'><%= item.user_name %>, <%= l item.created_at, :format => :long %></span>
+        <span class='author'><%= item.user.name %>, <%= l item.created_at, :format => :long %></span>
         <%= link_to "удалить", manage_comment_path(item), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete' %>
         <span class='commentable'>Комментарий для страницы
           <% if item.commentable.is_a?(Afisha) %>

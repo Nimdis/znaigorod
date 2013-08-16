@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-module PosterHelper
+module ImageHelper
 
   def resized_image_url(url, width, height, options = { crop: '!', orientation: 'n' })
     if url.match(/\d+\/region\/\d+/)
