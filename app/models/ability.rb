@@ -18,6 +18,10 @@ class Ability
         can :manage, [Organization] + Organization.available_suborganization_classes
       end
     when 'my'
+      can :show, Account do |account|
+        account.user == user
+      end
+
       can [:index, :archive, :new, :create, :available_tags, :preview_video], Afisha if user.persisted?
 
       can [:edit, :update, :destroy_image], Afisha do |afisha|

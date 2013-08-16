@@ -31,26 +31,30 @@
     <div class='right'>
 
       <div class='wrapper'>
-        <% if @afisha.draft? %>
-          <h4>Публикация мероприятия</h4>
-          <p>Для того, чтобы опубликовать созданное мероприятие, необходимо заполнить следующие поля:</p>
-          <ul class='requirements'>
-            <li class='<%= @afisha.title? ? 'enabled' : 'disabled' %>'>Название мероприятия</li>
-            <li class='<%= @afisha.description? ? 'enabled' : 'disabled' %>'>Описание</li>
-            <li class='<%= @afisha.poster_image_url? ? 'enabled' : 'disabled' %>'>Постер</li>
-            <li class='<%= @afisha.showings.any? ? 'enabled' : 'disabled' %>'>Сеансы</li>
-          </ul>
 
-          <% if current_user.is_afisha_trusted_editor? %>
-            <%= link_to t('my.send_to_public'), publish_my_afisha_path(@afisha), method: :put, class: "#{@afisha.ready_for_moderation? ? 'enabled' : 'disabled'}", confirm: 'Вы уверены?' %>
-          <% else %>
-            <% if can? :send_to_moderation, @afisha %>
-              <%= link_to t('my.send_to_public'), moderate_my_afisha_path(@afisha), method: :put, class: "#{@afisha.ready_for_moderation? ? 'enabled' : 'disabled'}", confirm: 'Вы уверены? Отправляя афишу на публикацию вы больше не сможете ее редактировать пока она не будет опубликована!' %>
+        <div class="public_action">
+          <% if @afisha.draft? %>
+            <h4>Публикация мероприятия</h4>
+            <p>Для того, чтобы опубликовать созданное мероприятие, необходимо заполнить следующие поля:</p>
+            <ul class='requirements'>
+              <li class='<%= @afisha.title? ? 'enabled' : 'disabled' %>'>Название мероприятия</li>
+              <li class='<%= @afisha.description? ? 'enabled' : 'disabled' %>'>Описание</li>
+              <li class='<%= @afisha.poster_image_url? ? 'enabled' : 'disabled' %>'>Постер</li>
+              <li class='<%= @afisha.showings.any? ? 'enabled' : 'disabled' %>'>Сеансы</li>
+            </ul>
+
+            <% if current_user.is_afisha_trusted_editor? %>
+              <%= link_to t('my.send_to_public'), publish_my_afisha_path(@afisha), method: :put, class: "#{@afisha.ready_for_moderation? ? 'enabled' : 'disabled'}", confirm: 'Вы уверены?' %>
+            <% else %>
+              <% if can? :send_to_moderation, @afisha %>
+                <%= link_to t('my.send_to_public'), moderate_my_afisha_path(@afisha), method: :put, class: "#{@afisha.ready_for_moderation? ? 'enabled' : 'disabled'}", confirm: 'Вы уверены? Отправляя афишу на публикацию вы больше не сможете ее редактировать пока она не будет опубликована!' %>
+              <% end %>
             <% end %>
+          <% else %>
+            <h4>Опубликовано</h4>
           <% end %>
-        <% else %>
-          <h4>Опубликовано</h4>
-        <% end %>
+        </div>
+
       </div>
 
     </div>

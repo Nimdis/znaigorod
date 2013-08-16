@@ -10,23 +10,21 @@
       title: 'Выбор тегов'
       modal: true
       resizable: false
-
       open: ->
         selected_tags = $.makeArray($('.tagit-label').map (index, span) -> $(span).text())
-
         selected_tags.each (tag, index) ->
           $('input[value="' + tag + '"]').attr('checked', 'checked')
-
         $('.submit', container).click ->
           tags = $.makeArray($('input:checked', container).map (index, input) -> $(input).attr('value'))
-          $('#affiche_tag').tagit('removeAll')
+          $('#afisha_tag').tagit('removeAll')
           tags.each (tag, index) ->
-            $('#affiche_tag').tagit('createTag', tag)
-
+            $('#afisha_tag').tagit('createTag', tag)
           container.dialog('close')
-
+        true
       close: ->
         $(this).dialog('destroy')
         $(this).remove()
+        true
     true
 
+  true

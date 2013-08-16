@@ -21,6 +21,7 @@
         border-bottom: 5px solid transparent
         border-left: 5px solid #06c
         margin: 5px 10px 0
+
       &:last-child:after
         display: inline
         float: none
@@ -80,28 +81,46 @@
     font-size: 18px
     margin-bottom: 10px
 
-  .my_afisha_items
-    +clearfix
+  .right .public_action
+    +background(linear-gradient(top, #ffffff, #e8e8e8))
+    padding: 10px
 
-    .my_afisha_item
-      +clearfix
-      float: left
-      margin: 5px
-      text-align: center
-      width: 120px
+    h4
+      font-size: 12px
+      margin-bottom: 10px
 
-      img
-        +inline-block
-        width: 80px
+    p
+      margin-bottom: 10px
 
-      .title
-        +inline-block
-        font-size: 12px
-        line-height: 16px
-        width: 120px
+    .requirements
+      margin-bottom: 10px
 
-      a
-        font-size: 10px
+      li
+        padding: 0 0 0 20px
+        margin-bottom: 5px
+
+        &.enabled
+          background: image_url('public/afisha_step_filled.png') no-repeat left center
+          font-weight: bold
+
+        &.disabled
+          background: image_url('public/afisha_step_unfilled.png') no-repeat 3px center
+
+    a
+      font-size: 12px
+      +inline-block
+      +button_style
+      padding: 3px 15px 4px
+      &:active
+        padding: 4px 15px 3px
+      &.disabled
+        cursor: default
+        +background(linear-gradient(top, #ccc, #999))
+        border-color: #999
+        &:hover
+          +text-shadow(none)
+        &:active
+          padding: 3px 15px 4px
 
   .afisha_show
     .tags
@@ -141,9 +160,9 @@
         +inline-block
 
     .submit
-
       .button
         +gray_button_style
+
       a
         +inline-block
 
@@ -160,6 +179,7 @@
     +border-radius(3px)
     padding: 5px
     margin: 0
+
     &:focus
       background-color: #fffbef
 
@@ -171,6 +191,7 @@
         font-size: 14px
         display: block
         margin-bottom: 5px
+
         abbr
           color: #880000
           cursor: help
@@ -196,6 +217,7 @@
         padding-left: 0
         margin-top: 1px
         margin-bottom: 3px
+
         &:focus
           background-color: transparent
 
@@ -212,21 +234,27 @@
       &.check_boxes
         +clearfix
         margin-bottom: 5px
+
         label.checkbox
           width: 115px
           float: left
           margin-right: 10px
+
           &:nth-child(5)
             clear: left
+
           &:nth-child(4n+4)
             clear: left
+
           &:nth-child(4)
             clear: none
+
           input
             margin-right: 5px
 
     span.error
       display: block
+      clear: left
       color: #880000
       font-size: 11px
       font-weight: bold
@@ -247,6 +275,7 @@
 
     .form_fields
       float: left
+
       .floatr
         margin-right: 15px
 
@@ -271,21 +300,28 @@
     &.my_afisha_showings
       .add_nested_fields
         font-size: 16px
+
       .fields
         border-bottom: 1px solid #ccc
         margin-bottom: 10px
         padding-bottom: 10px
+
       .wrapper
         +clearfix
+
         div.input
           float: left
+
           &:first-child
             margin-right: 15px
+
           input
             width: 170px
+
           input.ui-autocomplete-input
             width: 448px
             +input_style
+
         .remove_nested_fields
           +inline-block
           font-size: 14px
@@ -296,6 +332,7 @@
 
   .gallery_files
     margin-left: 30px
+
     li
       display: list-item
       list-style: disc outside
@@ -328,43 +365,56 @@
     .title
       font-size: 18px
       margin-bottom: 15px
+
     .description
+      line-height: 1.5
+
       .poster
         float: left
         +clearfix
         width: 200px
         height: 269px
         margin: 0 10px 10px 0
+
       .text
         +clearfix
-      line-height: 1.5
+
       h2, h3, h4, p, ul, ol, table
         margin-bottom: 10px
+
       h3
         font-size: 16px
+
       h4
         font-size: 14px
+
       ul li
         &:before
           content: "\2013"
           padding-right: 5px
+
         ul, ol
           margin-left: 15px
           margin-bottom: 0
+
       ol
         counter-reset: li
+
         li
           ul, ol
             margin-left: 15px
             margin-bottom: 0
+
           &:before
             content: counter(li)"."
             counter-increment: li
             padding-right: 5px
+
       table
         th, td
           border: 1px solid #dedede
           padding: 2px 4px
+
     .tags
       clear: left
       font-size: 11px
@@ -394,3 +444,74 @@
 
     .my_afisha_archive
       margin: 20px 0
+
+.tags_wrapper
+  background: #fff !important
+  color: #000
+  padding: 10px
+
+  .tag_lists
+    +clearfix
+
+    ul
+      float: left
+      width: 200px
+
+      li
+        font-size: 11px
+
+  .submit
+    +button_style
+    margin-top: 10px
+    padding: 3px 15px 4px
+    &:active
+      padding: 4px 15px 3px
+
+.content_wrapper
+  .new_session
+    margin: 100px 0
+
+    .flash_message
+      margin: 15px 0 25px 0
+
+    h2
+      text-align: center
+      font-size: 14px
+      width: 500px
+      margin: 0 auto
+
+    .social_signin_links
+      +clearfix
+      margin: 10px 0
+      text-align: center
+
+      li
+        +inline-block
+        margin: 0 15px 0 0
+
+        a
+          display: block
+          text-indent: -9999px
+          height: 33px
+          width: 33px
+
+        &.vkontakte a
+          background: image_url('social_icons.png') no-repeat 0 0
+
+        &.yandex a
+          background: image_url('social_icons.png') no-repeat -33px 0
+
+        &.facebook a
+          background: image_url('social_icons.png') no-repeat -66px 0
+
+        &.twitter a
+          background: image_url('social_icons.png') no-repeat -99px 0
+
+        &.google a
+          background: image_url('social_icons.png') no-repeat -132px 0
+
+        &.mail_ru a
+          background: image_url('social_icons.png') no-repeat -165px 0
+
+        &.odnoklassniki a
+          background: image_url('social_icons.png') no-repeat -198px 0
