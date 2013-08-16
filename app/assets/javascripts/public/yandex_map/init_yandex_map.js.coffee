@@ -4,15 +4,9 @@
 
     $map = $('.yandex_map .map')
 
-    # exclusive for aviation day event. FIX this
-    if window.location.pathname == "/other/den-aviatsii-2013-aviashou-v-tomske"
-      corrected_zoom = 14
-    else
-      corrected_zoom = 15
-
     map = new ymaps.Map $map[0],
       center: [$map.attr('data-latitude'), $map.attr('data-longitude')]
-      zoom: corrected_zoom
+      zoom: 15
       behaviors: []
     ,
       adjustZoomOnTypeChange: true
@@ -86,15 +80,9 @@
         $map.attr('data-hint', data_block.attr('data-hint'))
         $map.attr('data-id', data_block.attr('data-id'))
 
-        # exclusive for aviation day event. FIX this!
-        if window.location.pathname == "/other/den-aviatsii-2013-aviashou-v-tomske"
-          corrected_zoom = 14
-        else
-          corrected_zoom = 16
-
         map = new ymaps.Map this,
           center: [$map.attr('data-latitude'), $map.attr('data-longitude')]
-          zoom: corrected_zoom
+          zoom: 16
           behaviors: ['drag', 'scrollZoom']
         ,
           adjustZoomOnTypeChange: true
