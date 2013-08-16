@@ -21,9 +21,9 @@
         <p class='private'><%= link_to('Личный кабинет', my_root_path) %></p>
         <p class='messages'>
           <% if current_user.account.messages.with_state(:new).any? %>
-            <%= link_to current_user.account.messages.with_state(:new).count, account_messages_path(current_user.account), class: :new, title: 'Есть новые соощения' %>
+            <%= link_to current_user.account.messages.with_state(:new).count, my_root_path, class: :new, title: 'Есть новые соощения' %>
           <% else %>
-            <%= link_to current_user.account.messages.count, account_messages_path(current_user.account), class: :empty, title: 'Нет новых соощений' %>
+            <%= link_to current_user.account.messages.count, my_root_path, class: :empty, title: 'Нет новых соощений' %>
           <% end %>
         </p>
       <% else %>
