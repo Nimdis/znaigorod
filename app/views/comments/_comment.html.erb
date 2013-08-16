@@ -1,16 +1,12 @@
 <li class='comment_item' id='comment_<%= comment.id %>'>
   <div class='comment_wrapper'>
     <div class="avatar">
-      <%= link_to account_path(comment.user.account) do %>
-        <%= image_tag(resized_image_url(comment.user.account.avatar.url, 35, 35), size: '35x35', title: comment.name, alt: comment.name) %>
+      <%= link_to comment.account do %>
+        <%= image_tag(resized_image_url(comment.avatar.url, 35, 35), size: '35x35', title: comment.name, alt: comment.name) %>
       <% end %>
     </div>
     <div class="user_info">
-      <% if  comment.user_profile %>
-        <%= link_to comment.name, comment.user.account, :target => '_blank', :class => 'profile_link' %>,
-      <% else %>
-        <span class='profile_link'><%= comment.name %></span>,
-      <% end %>
+      <%= link_to comment.name, comment.account, :target => '_blank', :class => 'profile_link' %>,
       <span class="date">
         <%= l comment.created_at, :format => :long %>
       </span>

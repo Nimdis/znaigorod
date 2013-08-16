@@ -2,6 +2,7 @@
 
 class Comment < ActiveRecord::Base
   belongs_to :user
+  has_one :account, through: :user
   belongs_to :commentable, :polymorphic => true
   attr_accessible :ancestry, :body, :parent_id
 
@@ -13,14 +14,12 @@ class Comment < ActiveRecord::Base
   validates_presence_of :body
   validate :authenticated_user
 
-  delegate :name, :avatar, :profile, :to => :user, :prefix => true, :allow_nil => true
-
   def name
-    user ? user_name : 'неизвестный автор'
+    user ? account.title : 'неизвестный автор'
   end
 
   def avatar
-    user && user_avatar ? user_avatar : User.new.avatar
+    user ?  account.avatar : Account.new.avatar
   end
 
   private

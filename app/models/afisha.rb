@@ -181,8 +181,6 @@ class Afisha < ActiveRecord::Base
 
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?
-  after_save :reindex_showings
-  after_save :save_version,                   :if => :published?
 
   alias_attribute :to_s,            :title
   alias_attribute :tag_ru,          :tag
@@ -216,8 +214,6 @@ class Afisha < ActiveRecord::Base
     text :description_ru,       :boost => 0.1,                                  :stored => true   do text_description end
 
     boolean :has_images, :using => :has_images?
-
-    float :popularity,        :trie => true
 
     time :last_showing_time,  :trie => true
     date :created_at
@@ -337,10 +333,6 @@ class Afisha < ActiveRecord::Base
 
   private
 
-  def set_published
-    self.published = true if published.nil?
-  end
-
   def afisha_schedule_attributes_blank?(attributes)
     %w[ends_at ends_on starts_at starts_on].each do |attribute|
       return false unless attributes[attribute].blank?
@@ -417,6 +409,7 @@ class Afisha < ActiveRecord::Base
               :created_at,
               :id,
               :popularity,
+              :rating,
               :poster_image_content_type,
               :poster_image_file_name,
               :poster_image_file_size,
@@ -435,10 +428,6 @@ class Afisha < ActiveRecord::Base
     if self.changed? && (self.changes.keys.map(&:to_sym) - ignore_fields).any?
       self.versions.create!(:body => self.changes.to_json(:except => ignore_fields))
     end
-  end
-
-  def set_popularity
-    self.popularity = 0.3 * yandex_metrika_page_views.to_f + vkontakte_likes.to_f
   end
 
   def prepare_trailer

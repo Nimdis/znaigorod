@@ -3,19 +3,19 @@
     <p>Оставлять комментарии могут только зарегистрированные пользователи. Пожалуйста, войдите с помощью одной из социальных сетей:</p>
     <%= render :partial => "commons/social_auth" %>
   <% end %>
-  <% if current_user %>
-    <%= link_to account_path(current_user.account) do %>
-      <%= image_tag(resized_image_url(current_user.account.avatar.url, 35, 35), size: '35x35', title: current_user.name, alt: current_user.name, class: :avatar) %>
-    <% end %>
-
-    <% if current_user.profile %>
-      <%= link_to current_user.name, current_user.account, :target => '_blank', :class => 'profile_link' %>
-    <% else %>
-      <span class='profile_link'><%= current_user.name %></span>
+  <% if resource.account %>
+    <%= link_to resource.account do %>
+      <%= image_tag(resized_image_url(resource.avatar.url, 35, 35),
+                    size: '35x35',
+                    title: resource.account.title,
+                    alt: resource.account.title, class: :avatar) %>
+      <%= link_to resource.name, resource.account, :target => '_blank', :class => 'profile_link' %>
     <% end %>
   <% else %>
-    <%= image_tag 'public/default_comment_avatar.png', :class => 'avatar', :title => 'неизвестный автор' %>
-    <span class="profile_link">Неизвестный автор</span>
+    <%= image_tag(resized_image_url(resource.avatar.url, 35, 35),
+                  size: '35x35', title: resource.name,
+                  alt: resource.name, class: :avatar) %>
+    <span class="profile_link"><%= resource.name %></span>
   <% end %>
   <%= simple_form_for [association_chain, @comment].flatten, :url => polymorphic_url([association_chain, @comment].flatten), :html => { :remote => true } do |f| %>
     <%= f.input :parent_id, :as => :hidden %>

@@ -24,4 +24,9 @@ class AfishaObserver < ActiveRecord::Observer
         messageable: afisha)
     end
   end
+
+  def after_save(afisha)
+    afisha.delay.reindex_showings
+    afisha.delay.save_version if afisha.published?
+  end
 end
