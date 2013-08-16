@@ -28,6 +28,7 @@ module Znaigorod
                                 #{config.root}/app/models/crm
                                 #{config.root}/app/models/saunas
                                 #{config.root}/app/models/suborganizations
+                                #{config.root}/app/models/observers
                                 #{config.root}/app/presenters
                                 #{config.root}/app/presenters/account
                                 #{config.root}/app/presenters/afisha
