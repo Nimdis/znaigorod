@@ -19,9 +19,6 @@ class Vote < ActiveRecord::Base
   scope :with_user,     -> { where('user_id IS NOT NULL') }
   scope :source,        ->(type) { where(:source => type) }
 
-  after_save :update_voteable_rating
-  after_save :update_account_rating
-
   def change_vote
     self.like = (like? ? false : true)
     self.save
@@ -32,13 +29,6 @@ class Vote < ActiveRecord::Base
       errors.add :like, 'может быть оставлена только зарегистрированным пользователем' if user.nil?
     end
 
-    def update_voteable_rating
-      voteable.update_rating if voteable.is_a?(Afisha) && (Afisha.kind.values & voteable.kind).any?
-    end
-
-    def update_account_rating
-      user.account.update_rating if user.present? && user.account.present?
-    end
 end
 
 # == Schema Information

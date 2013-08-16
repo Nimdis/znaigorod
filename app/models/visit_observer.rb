@@ -7,7 +7,7 @@ class VisitObserver < ActiveRecord::Observer
         account: visit.visitable.user.account,
         producer: visit.user.account,
         kind: :user_visit_afisha,
-        messageable: visit)
+        messageable: visit.visitable)
     end
   end
 
