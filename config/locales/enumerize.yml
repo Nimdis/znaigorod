@@ -12,6 +12,10 @@ ru:
         competition: Конкурсы
         spectacle: Спектакли
         all: Вся афиша
+      state:
+        draft: Черновик
+        pending: На модерации
+        published: Опубликовано
 
     role:
       admin:                   Администратор

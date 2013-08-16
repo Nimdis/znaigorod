@@ -2,7 +2,7 @@
 
 SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
-    primary.item :my, 'Мои афиши', my_root_path, highlights_on: /^\/my[\/]?$|^\/my\/afisha[\/]?$/ do |my_item|
+    primary.item :my, 'Личный кабинет', my_root_path, highlights_on: /^\/my[\/]?$|^\/my\/afisha[\/]?$/ do |my_item|
       my_item.item :new_afisha, 'Создание мероприятия', new_my_afisha_path
       my_item.item :afisha, @afisha.title || 'Нет названия', my_afisha_path(@afisha) do |afisha_item|
         afisha_item.item :first_step, 'Описание', edit_step_my_afisha_path(@afisha, :first)

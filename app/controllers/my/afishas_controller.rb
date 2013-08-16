@@ -10,7 +10,7 @@ class My::AfishasController < My::ApplicationController
   custom_actions :resource => [:destroy_image, :send_to_moderation, :send_to_published, :social_gallery], :collection => [:available_tags, :preview_video]
 
   def show
-    @afisha = AfishaDecorator.new(current_user.afisha.available_for_edit.find(params[:id]))
+    @afisha = AfishaDecorator.new(current_user.afisha.find(params[:id]))
   end
 
   def create
