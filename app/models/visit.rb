@@ -12,8 +12,6 @@ class Visit < ActiveRecord::Base
 
   scope :visited, where(:visited => true)
 
-  after_save :update_visitable_rating
-
   def change_visit
     self.visited = !visited?
     self.save
@@ -23,10 +21,6 @@ class Visit < ActiveRecord::Base
 
     def authenticated_user
       errors.add :visited, 'Вы не зарегистрированы' if user.nil?
-    end
-
-    def update_visitable_rating
-      visitable.update_rating if visitable.is_a?(Afisha) && (Afisha.kind.values & visitable.kind).any?
     end
 end
 
