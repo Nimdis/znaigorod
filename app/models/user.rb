@@ -33,7 +33,6 @@ class User < ActiveRecord::Base
   scope :ordered,        -> { order('ID ASC') }
 
   after_create :create_account
-  after_save :get_friends_from_socials
 
   def self.find_or_create_by_oauth(auth_raw_info)
     provider, uid = auth_raw_info.provider, auth_raw_info.uid.to_s
@@ -163,7 +162,7 @@ class User < ActiveRecord::Base
 
   def get_friends_from_socials
     method = "get_#{provider}_friends"
-    account.delay.send(method, self) if account.respond_to?(method)
+    account.send(method, self) if account.respond_to?(method)
   end
 end
 
