@@ -1,5 +1,5 @@
 <div class="comments header">
-  <%= "#{@account.first_name}" "#{@account.male? ? ' написал ' : ' написала '}" "#{t(:account_comments, count: @account.comments.count)}" %>
+  Мои комментарии
 </div>
 <div class="comments list">
   <%= render partial: 'accounts/account_comments', locals: { comments: @account.comments } %>

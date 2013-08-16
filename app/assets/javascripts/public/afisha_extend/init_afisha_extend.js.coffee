@@ -8,3 +8,6 @@
       $.scrollTo($('.content .affiche .trailer'), 500, { offset: {top: -60} })
     , 300
   true
+
+@init_afisha_tabs = () ->
+  $('#events_filter').tabs()

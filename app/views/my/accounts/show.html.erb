@@ -18,8 +18,8 @@
 
   <div class="right">
     <%= render 'messages' if @account.messages.any? %>
-    <%= render 'votes'    if @account.votes.afisha.any? %>
     <%= render 'events'   if @account.afisha.published.any? %>
+    <%= render 'votes'    if @account.votes.afisha.any? %>
     <%= render 'comments' if @account.comments.any? %>
   </div>
 </div>

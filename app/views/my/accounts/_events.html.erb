@@ -1,9 +1,56 @@
 <div class="events header">
-  <%= "#{@account.first_name}" "#{@account.male? ? ' добавил ' : ' добавила '}" "#{t('account_events', count: @account.afisha.published.count)}" %>
+  Мои афиши
+  <%= link_to 'Добавить', new_my_afisha_path, class: 'floatr' %>
 </div>
-<div class="events list">
-  <%= render partial: 'accounts/account_events', locals: { collection: @account.afisha.published } %>
-</div>
-<div class="events toggle">
-  <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.afisha.published.count > 4 %>
+
+<div id="events_filter">
+  <ul>
+    <% if @account.afisha.draft.any? %>
+      <li>
+        <%= link_to "#draft" do %>
+          Черновики <span class="counter">(<%= @account.afisha.draft.count %>)</span>
+        <% end %>
+      </li>
+    <% end %>
+
+    <% if @account.afisha.pending.any? %>
+      <li>
+        <%= link_to "#pending" do %>
+          На модерации <span class="counter">(<%= @account.afisha.pending.count %>)</span>
+        <% end %>
+      </li>
+    <% end %>
+
+    <% if @account.afisha.published.any? %>
+      <li>
+        <%= link_to "#published" do %>
+          Опубликованные <span class="counter">(<%= @account.afisha.published.count %>)</span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <% if @account.afisha.draft.any? %>
+    <div id="draft">
+      <div class="afisha list">
+        <%= render partial: 'my/afishas/afisha_list', locals: { collection: @account.afisha.draft } %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @account.afisha.pending.any? %>
+    <div id="pending">
+      <div class="afisha list">
+        <%= render partial: 'my/afishas/afisha_list', locals: { collection: @account.afisha.pending } %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @account.afisha.published.any? %>
+    <div id="published">
+      <div class="afisha list">
+        <%= render partial: 'my/afishas/afisha_list', locals: { collection: @account.afisha.published } %>
+      </div>
+    </div>
+  <% end %>
 </div>
