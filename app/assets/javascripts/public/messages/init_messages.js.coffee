@@ -25,10 +25,12 @@
       $('.header .messages a').addClass('empty').removeClass('new')
       $('.header .messages a').attr('title','Нет новых сообщений')
       $('.header .messages a').html(messages)
+      $('#messages_filter .counter').html('')
     else
       $('.header .messages a').addClass('new').removeClass('empty')
       $('.header .messages a').attr('title','Есть новые сообщения')
-      $('.header .messages a').html(counter)
+      $('.header .messages a').html("+#{counter}")
+      $('#messages_filter .counter').html("(#{counter})")
 
     $('.change_message_status').hide()
 

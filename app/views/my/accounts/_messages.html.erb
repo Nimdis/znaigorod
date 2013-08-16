@@ -1,23 +1,23 @@
 <div class="messages header">
-  <%= t('account_messages', count: @account.messages.with_state(:new).count) %>
+  Сообщения
 </div>
 
 <div id="messages_filter">
   <ul>
-    <% if @account.messages.with_state(:new).any? %>
+    <% if @account.messages.unread.any? %>
       <li>
         <%= link_to "#new" do %>
-          Новые (<%= @account.messages.with_state(:new).count %>)
+          Новые <span class="counter">(<%= @account.messages.unread.count %>)</span>
         <% end %>
       </li>
     <% end %>
     <li><%= link_to t('notifications'), '#notifications' %></li>
   </ul>
 
-  <% if @account.messages.with_state(:new).any? %>
+  <% if @account.messages.unread.any? %>
     <div id="new">
       <div class="messages list">
-        <%= render partial: 'messages_list', locals: { collection: @account.messages.with_state(:new) } %>
+        <%= render partial: 'messages_list', locals: { collection: @account.messages.unread } %>
       </div>
     </div>
   <% end %>
