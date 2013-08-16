@@ -40,7 +40,7 @@ class My::AfishasController < My::ApplicationController
   end
 
   def destroy
-    destroy! { my_afisha_index_path }
+    destroy! { my_root_path }
   end
 
   def available_tags
