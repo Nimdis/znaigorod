@@ -17,52 +17,9 @@
   </div>
 
   <div class="right">
-    <% if @account.messages.with_state(:new).any? %>
-      <div class="messages header">
-        <%= t('account_messages', count: @account.messages.with_state(:new).count) %>
-      </div>
-      <div class="messages list">
-        <%= render partial: 'messages', locals: { collection: @account.messages } %>
-      </div>
-      <div class="messages toggle">
-        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.messages.count > 3 %>
-      </div>
-    <% end %>
-
-    <% if @account.votes.afisha.any? %>
-      <div class="votes header">
-        <%= "#{'Нравится '}" "#{t('account_votes', count: @account.votes.afisha.count)}" %>
-      </div>
-      <div class="votes list">
-        <%= render partial: 'accounts/account_votes', locals: { collection: @account.votes.afisha } %>
-      </div>
-      <div class="votes toggle">
-        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.votes.afisha.count > 3 %>
-      </div>
-    <% end %>
-
-    <% if @account.afisha.published.any? %>
-      <div class="events header">
-        <%= "#{@account.first_name}" "#{@account.male? ? ' добавил ' : ' добавила '}" "#{t('account_events', count: @account.afisha.published.count)}" %>
-      </div>
-      <div class="events list">
-        <%= render partial: 'accounts/account_events', locals: { collection: @account.afisha.published } %>
-      </div>
-      <div class="events toggle">
-        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.afisha.published.count > 4 %>
-      </div>
-    <% end %>
-
-    <% if @account.comments.any? %>
-      <div class="comments header">
-        <%= "#{@account.first_name}" "#{@account.male? ? ' написал ' : ' написала '}" "#{t(:account_comments, count: @account.comments.count)}" %>
-      </div>
-      <div class="comments list">
-        <%= render partial: 'accounts/account_comments', locals: { comments: @account.comments } %>
-      </div>
-      <div class="comments toggle">
-        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.comments.count > 1 %>
-      </div>
-    <% end %>
+    <%= render 'messages' if @account.messages.any? %>
+    <%= render 'votes'    if @account.votes.afisha.any? %>
+    <%= render 'events'   if @account.afisha.published.any? %>
+    <%= render 'comments' if @account.comments.any? %>
   </div>
 </div>

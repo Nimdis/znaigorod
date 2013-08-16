@@ -1,0 +1,9 @@
+<div class="events header">
+  <%= "#{@account.first_name}" "#{@account.male? ? ' добавил ' : ' добавила '}" "#{t('account_events', count: @account.afisha.published.count)}" %>
+</div>
+<div class="events list">
+  <%= render partial: 'accounts/account_events', locals: { collection: @account.afisha.published } %>
+</div>
+<div class="events toggle">
+  <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.afisha.published.count > 4 %>
+</div>

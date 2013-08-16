@@ -1,23 +1,36 @@
 @init_messages = () ->
   $('.change_message_status').hide()
 
+  timer = setInterval ->
+    target = $('#new a.change_message_status.new:first')
+    if target.length
+      target.click()
+    else
+      clearInterval(timer)
+  , 1000
+
+
   $('.account_messages').on 'ajax:success', (evt, response) ->
     $(evt.target).closest('li').replaceWith(response)
     counter = $(response).data('counter')
     messages = $(response).data('messages')
 
+    wrapper = $('<div/>')
+    wrapper.html(response)
+    klass = $('li', wrapper).attr('class').replace('ajax_message_status', '').replace('new', '').replace('read', '').compact()
+    $("#notifications .#{klass}").removeClass('new').addClass('read')
+    wrapper.remove()
+
     if counter == 0
-      $('.messages a').addClass('empty').removeClass('new')
-      $('.messages a').attr('title','Нет новых сообщений')
-      $('.messages a').html(messages)
+      $('.header .messages a').addClass('empty').removeClass('new')
+      $('.header .messages a').attr('title','Нет новых сообщений')
+      $('.header .messages a').html(messages)
     else
-      $('.messages a').addClass('new').removeClass('empty')
-      $('.messages a').attr('title','Есть новые сообщения')
-      $('.messages a').html(counter)
+      $('.header .messages a').addClass('new').removeClass('empty')
+      $('.header .messages a').attr('title','Есть новые сообщения')
+      $('.header .messages a').html(counter)
 
     $('.change_message_status').hide()
 
-  $('.account_messages').on 'click', (evt) ->
-    target = $(evt.target)
-    if target.is('li')
-      target.children('.change_message_status').click()
+@init_messages_tabs = () ->
+  $('#messages_filter').tabs()

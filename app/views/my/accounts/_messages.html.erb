@@ -1,5 +1,29 @@
-<ul class="account_messages">
-  <% collection.each do |message| %>
-    <%= render message %>
+<div class="messages header">
+  <%= t('account_messages', count: @account.messages.with_state(:new).count) %>
+</div>
+
+<div id="messages_filter">
+  <ul>
+    <% if @account.messages.with_state(:new).any? %>
+      <li>
+        <%= link_to "#new" do %>
+          Новые (<%= @account.messages.with_state(:new).count %>)
+        <% end %>
+      </li>
+    <% end %>
+    <li><%= link_to t('notifications'), '#notifications' %></li>
+  </ul>
+
+  <% if @account.messages.with_state(:new).any? %>
+    <div id="new">
+      <div class="messages list">
+        <%= render partial: 'messages_list', locals: { collection: @account.messages.with_state(:new) } %>
+      </div>
+    </div>
   <% end %>
-</ul>
+  <div id="notifications">
+    <div class="messages list">
+      <%= render partial: 'messages_list', locals: { collection: @account.messages } %>
+    </div>
+  </div>
+</div>

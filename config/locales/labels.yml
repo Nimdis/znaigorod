@@ -69,6 +69,7 @@ ru:
   new_sauna_hall: Добавить информацию о зале сауны
   new_sport_suborganization: Добавить информацию о спортивном заведении
   new_travel_suborganization: Добавить информацию о туристическом агенстве
+  notifications: Уведомления
   organization: Заведения
   organizations: Заведения
   our_social_link: Контакты
@@ -183,4 +184,3 @@ ru:
     few:   "%{count} мероприятия"
     many:  "%{count} мероприятий"
     other: "%{count} мероприятия"
-
