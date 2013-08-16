@@ -126,7 +126,7 @@ class Organization < ActiveRecord::Base
   scope :ordered_by_updated_at, order('updated_at DESC')
   scope :parental,              where(:organization_id => nil)
 
-  before_update :set_rating
+  before_update :update_rating
   after_save :index_suborganizations
 
   alias_attribute :to_s, :title
@@ -287,11 +287,11 @@ class Organization < ActiveRecord::Base
     gallery_images
   end
 
-  private
-
-  def set_rating
+  def update_rating
     self.recalculate_rating
   end
+
+  private
 
   include Rating
   use_for_rating :billiard, :car_sales_center, :car_service_center, :car_wash, :creation, :culture, :entertainment,

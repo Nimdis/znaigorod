@@ -409,7 +409,7 @@ class Afisha < ActiveRecord::Base
               :created_at,
               :id,
               :popularity,
-              :rating,
+              :total_rating,
               :poster_image_content_type,
               :poster_image_file_name,
               :poster_image_file_size,
