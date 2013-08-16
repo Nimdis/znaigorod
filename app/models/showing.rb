@@ -14,9 +14,6 @@ class Showing < ActiveRecord::Base
 
   delegate :address, :title, :to => :organization, :prefix => true, :allow_nil => true
 
-  #after_create  :index_afisha
-  #after_destroy :index_afisha
-
   scope :actual, -> { where('showings.starts_at >= ? OR (showings.ends_at is not null AND showings.ends_at > ?)', DateTime.now.beginning_of_day, Time.zone.now) }
 
   scope :with_organization, where('organization_id IS NOT NULL')
@@ -92,10 +89,6 @@ class Showing < ActiveRecord::Base
     latitude? ? latitude : organization_address.try(:latitude)
   end
 
-  private
-    def index_afisha
-      afisha.index
-    end
 end
 
 # == Schema Information
