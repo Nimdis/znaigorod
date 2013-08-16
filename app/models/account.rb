@@ -13,6 +13,8 @@ class Account < ActiveRecord::Base
   has_many :friends
   has_many :messages,        order: 'messages.created_at DESC'
 
+  has_many :payments, :through => :users
+
   after_create :get_social_avatar
 
   alias_attribute :to_s, :title
@@ -98,9 +100,13 @@ class Account < ActiveRecord::Base
   end
 
   def update_rating
-    rating = (self.afisha.count * 0.5 + self.comments.count * 0.25 + self.votes.count * 0.125 + self.visits.count * 0.125 + self.page_visits.count * 0.01) / 5
-    rating *= 10 if self.avatar_url?
-    update_attribute(:rating, rating)
+    update_attribute(:rating,
+                     0.5*payments.approved.where(:type=>'CopyPayment').map(&:copies).flatten.count +
+                     0.25*afisha.count +
+                     0.1*comments.count +
+                     0.1*visits.visited.count +
+                     0.01*votes.liked.count +
+                     0.01*page_visits.count)
   end
 
   def friendly_for(account)

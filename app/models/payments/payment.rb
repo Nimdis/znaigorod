@@ -8,6 +8,8 @@ class Payment < ActiveRecord::Base
 
   enumerize :state, in: [:pending, :approved, :canceled], default: :pending, scope: true
 
+  scope :approved, -> { where(:state => 'approved') }
+
   def approve!
     self.state = 'approved'
     self.save :validate => false

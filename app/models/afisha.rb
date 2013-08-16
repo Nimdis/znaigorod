@@ -27,6 +27,7 @@ class Afisha < ActiveRecord::Base
   has_many :addresses, :through => :organizations, :uniq => true, :source => :address
   has_many :comments, :as => :commentable, :dependent => :destroy
   has_many :tickets, :dependent => :destroy
+  has_many :copies, :through => :tickets
 
   has_many :versions, :as => :versionable, :dependent => :destroy
   has_many :visits, :as => :visitable, :dependent => :destroy
@@ -57,7 +58,6 @@ class Afisha < ActiveRecord::Base
 
   default_value_for :yandex_metrika_page_views, 0
   default_value_for :vkontakte_likes,           0
-  default_value_for :total_rating,              0.5
 
   before_save :prepare_trailer
   before_save :set_wmode_for_trailer, :if => :published?
@@ -238,7 +238,7 @@ class Afisha < ActiveRecord::Base
   end
 
   def update_rating
-    update_attribute :total_rating, (0.5 + 0.1*visits.visited.count + 0.05*votes.liked.count)
+    update_attribute :total_rating, (copies.sold.count + 0.5*visits.visited.count + 0.1*votes.liked.count + 0.01*page_visits.count)
   end
 
   def human_model_name
@@ -409,7 +409,6 @@ class Afisha < ActiveRecord::Base
               :created_at,
               :id,
               :popularity,
-              :total_rating,
               :poster_image_content_type,
               :poster_image_file_name,
               :poster_image_file_size,
@@ -439,9 +438,6 @@ class Afisha < ActiveRecord::Base
     self.trailer_code.gsub!(/(object|embed)/, '\1 wmode="opaque"') if self.trailer_code?
   end
 
-  def update_account_rating
-    user.account.update_rating if user.present? && user.account.present?
-  end
 end
 
 # == Schema Information
