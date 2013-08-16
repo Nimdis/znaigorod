@@ -24,8 +24,6 @@ class Copy < ActiveRecord::Base
 
   default_scope order(:id)
 
-  after_save :reindex_afisha_showings, :if => Proc.new {|copy| copy.copyable_type == 'Ticket'}
-
   enumerize :state,
     :in => [:for_sale, :reserved, :sold, :stale],
     :default => :for_sale,
@@ -81,9 +79,6 @@ class Copy < ActiveRecord::Base
     smses.create! :phone => copy_payment.phone, :message => 'Время ожидания платежа за билет истекло.'
   end
 
-  def reindex_afisha_showings
-    copyable.afisha.reindex_showings
-  end
 end
 
 # == Schema Information
