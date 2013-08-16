@@ -1,7 +1,8 @@
 next_page_handler = () ->
   $('.next_page').on 'ajax:success', (evt, response) ->
     target = $(evt.target)
-    $('.pagination').closest('ul').append(response)
+    paginator = target.closest('.pagination')
+    paginator.closest('ul').append(response)
     target.closest('.pagination').remove()
 
 @init_next_page_pagination = () ->

@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   inherit_resources
 
-  actions :show, :new, :create
+  actions :index, :show, :new, :create
 
   belongs_to :afisha, :polymorphic => true, :optional => true
   belongs_to :coupon, :polymorphic => true, :optional => true
@@ -12,7 +12,17 @@ class CommentsController < ApplicationController
 
   layout false
 
+  def index
+    index! {
+      render partial: 'accounts/comments', locals: { comments: @comments }, layout: false and return if @account
+    }
+  end
+
   private
+    def collection
+      @comments ||= end_of_association_chain.rendereable.page(params[:page]).per(3) if association_chain.first.is_a?(Account)
+    end
+
     alias_method :old_build_resource, :build_resource
 
     def build_resource

@@ -10,6 +10,8 @@ class Comment < ActiveRecord::Base
   has_many :votes, :as => :voteable, :dependent => :destroy
   has_many :messages, :as => :messageable, :dependent => :destroy
 
+  scope :rendereable,      -> { where(:commentable_type => ['Afisha', 'Organization']) }
+
   normalize_attribute :body, :ancestry
   validates_presence_of :body
   validate :authenticated_user

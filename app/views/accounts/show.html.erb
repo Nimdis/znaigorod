@@ -46,15 +46,14 @@
       </div>
     <% end %>
 
-    <% if @account.comments.any? %>
+    <% if @comments.any? %>
       <div class="comments header">
-        <%= "#{@account.first_name}" "#{@account.male? ? ' написал ' : ' написала '}" "#{t(:account_comments, count: @account.comments.count)}" %>
+        Комментарии
       </div>
       <div class="comments list">
-        <%= render partial: 'account_comments', locals: { comments: @account.comments } %>
-      </div>
-      <div class="comments toggle">
-        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.comments.count > 1 %>
+        <ul>
+          <%= render 'accounts/comments' %>
+        </ul>
       </div>
     <% end %>
   </div>
