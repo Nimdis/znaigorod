@@ -2,7 +2,7 @@
   <div class="item">
     <div class="poster">
       <%= link_to my_afisha_show_path(afisha) do %>
-        <%= image_tag (afisha.poster_image_url? ? resized_image_url(afisha.poster_url, 65, 88, true) : 'public/stub_poster.png'), :width => 65, :height => 88 %>
+        <%= image_tag (afisha.poster_url? ? resized_image_url(afisha.poster_url, 65, 88) : 'public/stub_poster.png'), :width => 65, :height => 88 %>
       <% end %>
     </div>
 

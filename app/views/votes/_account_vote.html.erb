@@ -1,0 +1,4 @@
+<li>
+  <%= render partial: 'votes/afisha_vote', locals: { vote: vote } if vote.voteable.is_a?(Afisha) %>
+  <%= render partial: 'votes/organization_vote', locals: { vote: vote } if vote.voteable.is_a?(Organization) %>
+</li>

@@ -19,7 +19,16 @@
   <div class="right">
     <%= render 'messages' if @account.messages.any? %>
     <%= render 'events'   if @account.afisha.published.any? %>
-    <%= render 'votes'    if @account.votes.afisha.any? %>
+
+    <div class="votes header">
+      Нравится
+    </div>
+    <div class="votes list">
+      <ul>
+        <%= render 'votes' if @votes.any? %>
+      </ul>
+    </div>
+
     <%= render 'comments' if @account.comments.any? %>
   </div>
 </div>

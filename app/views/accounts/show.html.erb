@@ -28,7 +28,7 @@
         <%= "#{'Нравится '}" "#{t('account_votes', count: @account.votes.afisha.count)}" %>
       </div>
       <div class="votes list">
-        <%= render partial: 'account_votes', locals: { collection: @account.votes.afisha } %>
+        <%= render partial: 'votes/account_votes', locals: { collection: @account.votes.afisha } %>
       </div>
       <div class="votes toggle">
         <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.votes.afisha.count > 3 %>

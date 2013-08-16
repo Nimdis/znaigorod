@@ -11,7 +11,13 @@ class VotesController < ApplicationController
   belongs_to :post, :polymorphic => true, :optional => true
   belongs_to :account, :optional => true
 
-  layout false unless :index
+  layout false
+
+  def index
+    index! {
+      render partial: 'my/accounts/votes', locals: { votes: @votes }, layout: false and return if @account
+    }
+  end
 
   def change_vote
     change_vote!{
@@ -31,5 +37,11 @@ class VotesController < ApplicationController
       @users = parent.votes.liked.map(&:user)
       render :partial => 'liked', :locals => { :visitable => parent } and return
     }
+  end
+
+  private
+
+  def collection
+    @votes ||= end_of_association_chain.rendereable.page(params[:page]).per(6) if association_chain.first.is_a?(Account)
   end
 end

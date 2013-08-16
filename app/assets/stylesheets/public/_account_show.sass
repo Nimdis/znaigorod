@@ -73,9 +73,6 @@
             .kind
               color: #999
 
-    .votes.list
-      height: 103px
-
     .events.list
       margin: 0 auto
       width: 800px
@@ -319,6 +316,41 @@
           &:hover
             background-position: -34px -34px
 
+.pagination
+  float: right
+  height: 17px
+  margin: -25px 5px 0 0
+  width: 17px
+
+  a.next_page
+    +inline-block
+    white-space: nowrap
+    margin: 0 0 1px 0
+    background: transparent image_url('public/account_actions_sprite.png') no-repeat center center
+    height: 17px
+    width: 17px
+    &:hover
+      text-decoration: none
+    &:active
+      margin: 1px 0 0 0
+
+    &.closed
+      background-position: 0 0
+      &:hover
+        background-position: 0 -34px
+    &.selected
+      background-position: 0 -68px
+      &:hover
+        background-position: 0 -34px
+
+    &.opened
+      background-position: -34px 0
+      &:hover
+        background-position: -34px -34px
+    &.selected
+      background-position: -34px -68px
+      &:hover
+        background-position: -34px -34px
 .buddies_box
   overflow: auto
   max-height: 520px

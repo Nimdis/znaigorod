@@ -1,9 +1,5 @@
-<div class="votes header">
-  Мне нравится
-</div>
-<div class="votes list">
-  <%= render partial: 'accounts/account_votes', locals: { collection: @account.votes.afisha } %>
-</div>
-<div class="votes toggle">
-  <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.votes.afisha.count > 3 %>
+<%= render partial: 'votes/account_votes', locals: { collection: @votes } %>
+
+<div class="pagination">
+  <%= link_to '', account_votes_path(@account, :page => @votes.current_page + 1), :remote => true, :class => 'next_page closed' unless @votes.last_page? %>
 </div>

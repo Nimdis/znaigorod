@@ -102,6 +102,7 @@ Znaigorod::Application.routes.draw do
     resources :messages, :only => :index do
       put 'change_message_status' => 'messages#change_message_status', :as => :change_message_status
     end
+    resources :votes, :only => :index
   end
 
   get 'feedback' => 'feedback#new', :as => :new_feedback

@@ -1,0 +1,12 @@
+<div class="item">
+  <div class="poster">
+    <% if vote.voteable.logotype_url? %>
+      <%= image_tag(resized_image_url(vote.voteable.logotype_url, 88, 88), size: '88x88') %>
+    <% else %>
+      <%= image_tag 'public/stub_poster.png', size: '88x88' %>
+    <% end %>
+  </div>
+  <div class="title">
+    <%= link_to vote.voteable.title, polymorphic_path(vote.voteable) %>
+  </div>
+</div>

@@ -18,6 +18,7 @@ class Vote < ActiveRecord::Base
   scope :without_user,  -> { where(:user_id => nil) }
   scope :with_user,     -> { where('user_id IS NOT NULL') }
   scope :source,        ->(type) { where(:source => type) }
+  scope :rendereable,      -> { where(:voteable_type => ['Afisha', 'Organization']).where(:like => true) }
 
   def change_vote
     self.like = (like? ? false : true)
