@@ -16,8 +16,6 @@ class Ticket < ActiveRecord::Base
   delegate :title, :to => :afisha, :prefix => true
   delegate :title, :to => :organization, :prefix => true, :allow_nil => true
 
-  after_save :reindex_afisha_showings
-
   searchable do
     text :afisha_title
     text :organization_title
@@ -27,11 +25,6 @@ class Ticket < ActiveRecord::Base
     ((original_price - (organization_price.to_f + price)) * 100 / original_price).round
   end
 
-  private
-
-  def reindex_afisha_showings
-    afisha.reindex_showings
-  end
 end
 
 # == Schema Information
