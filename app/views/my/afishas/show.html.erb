@@ -8,7 +8,7 @@
 <% end %>
 
 <div class='my_afisha_wrapper'>
-  <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
+  <%= render_navigation context: 'my', renderer: :breadcrumbs %>
 
   <div class='afisha_show'>
 
@@ -42,10 +42,10 @@
           </ul>
 
           <% if current_user.is_afisha_trusted_editor? %>
-            <%= link_to t('my.send_to_public'), publish_my_afisha_path(@afisha), :method => :put, :class => "#{@afisha.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены?' %>
+            <%= link_to t('my.send_to_public'), publish_my_afisha_path(@afisha), method: :put, class: "#{@afisha.ready_for_moderation? ? 'enabled' : 'disabled'}", confirm: 'Вы уверены?' %>
           <% else %>
             <% if can? :send_to_moderation, @afisha %>
-              <%= link_to t('my.send_to_public'), moderate_my_afisha_path(@afisha), :method => :put, :class => "#{@afisha.ready_for_moderation? ? 'enabled' : 'disabled'}", :confirm => 'Вы уверены? Отправляя афишу на публикацию вы больше не сможете ее редактировать пока она не будет опубликована!' %>
+              <%= link_to t('my.send_to_public'), moderate_my_afisha_path(@afisha), method: :put, class: "#{@afisha.ready_for_moderation? ? 'enabled' : 'disabled'}", confirm: 'Вы уверены? Отправляя афишу на публикацию вы больше не сможете ее редактировать пока она не будет опубликована!' %>
             <% end %>
           <% end %>
         <% else %>
@@ -69,7 +69,7 @@
         </h1>
       <% end %>
 
-      <%= content_tag :p, @afisha.original_title.text_gilensize, :class => 'original_title' if @afisha.original_title? %>
+      <%= content_tag :p, @afisha.original_title.text_gilensize, class: 'original_title' if @afisha.original_title? %>
 
       <div class='closest'>
         <%= @afisha.when_with_price %>
@@ -146,7 +146,7 @@
         <div class='photogallery'>
           <ul>
             <% @afisha.images.each do |image| %>
-              <li><%= render image %></li>
+              <li><%= render partial: "#{image.class.name.underscore.pluralize}/#{image.class.name.underscore}", object: image %></li>
             <% end %>
           </ul>
         </div>

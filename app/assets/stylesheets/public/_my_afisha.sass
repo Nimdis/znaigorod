@@ -40,12 +40,15 @@
 
     .help
       background-color: #fff
-      border: 2px solid #ccc
+      border: 1px solid #ccc
+      +border-radius(4px)
+      +box-shadow(#555 0 0 3px)
       display: none
+      font-size: 12px
       line-height: 1.5
-      padding: 20px 20px 10px 20px
+      padding: 10px 10px 0 10px
       position: absolute
-      top: -18px
+      top: -15px
       width: 600px
       z-index: 9999
 
@@ -54,8 +57,8 @@
         font-size: 15px
         margin: 0 0 20px 20px
         position: relative
-        right: -10px
-        top: -15px
+        right: 0
+        top: -5px
 
       h3
         font-size: 16px
@@ -65,7 +68,7 @@
         margin-bottom: 10px
 
       ol, ul
-        margin: 0 0 10px 15px
+        margin: 0 0 10px 25px
 
       ol li
         list-style: decimal
@@ -128,6 +131,7 @@
   .form_wrapper
     width: 580px
     float: left
+    font-size: 12px
     margin-right: 20px
 
     .inline_form
@@ -290,6 +294,12 @@
   .textile_syntax
     display: none
 
+  .gallery_files
+    margin-left: 30px
+    li
+      display: list-item
+      list-style: disc outside
+
   .gallery_images, .gallery_social_images
     +clearfix
 
@@ -310,6 +320,9 @@
       a
         text-transform: lowercase
         font-size: 11px
+
+  .file_upload
+    margin: 20px 0
 
   .afisha_preview
     .title
@@ -363,6 +376,7 @@
 
   .my_afisha_help
     +clearfix
+    position: relative
     font-size: 14px
     line-height: 18px
     width: 380px

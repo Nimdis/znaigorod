@@ -1,21 +1,21 @@
 .upload_wrapper
   position: fixed
-  padding: 0 20px
   top: 0
   left: 50%
-  margin-left: -220px
   width: 400px
+  background-color: #fff
+  border: 1px solid #ccc
+  border-top: none
+  +box-shadow(#555 0 0 3px)
+  padding: 0 20px 10px
+  margin-left: -220px
+  display: none
 
 .upload
   margin-top: 10px
-  padding-top: 10px
   width: 400px
 
 .progress
-  +border-radius(3px)
-  border: solid 1px #555
-  margin-top: 8px
-
-.bar
-  background: #3EC144
-  height: 10px
+  margin-top: 5px
+  padding-left: 25px
+  background: transparent image_url('public/file_upload_indicator.gif') no-repeat left 2px

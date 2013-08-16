@@ -165,7 +165,7 @@ create_placemark = (latitude, longitude) ->
   afisha_placemark
 
 init_afisha_help = ->
-  left = $('.show_help').position().left
+  left = $('.show_help').position().left - 190
   $('.help').css('left', left).prepend('<a class="close" title="закрыть" href="#">X</a>')
   $('.show_help').click ->
     $('.help').toggle()

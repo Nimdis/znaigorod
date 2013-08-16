@@ -63,6 +63,7 @@ class My::AfishasController < My::ApplicationController
     @afisha = current_user.afisha.available_for_edit.find(params[:id])
     @afisha.poster_url = nil
     @afisha.poster_image.destroy
+    @afisha.poster_image_url = nil
     @afisha.save
     redirect_to edit_step_my_afisha_path(@afisha.id, :step => :second)
   end
