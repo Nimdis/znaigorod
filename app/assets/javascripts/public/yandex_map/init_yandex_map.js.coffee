@@ -8,6 +8,8 @@
       center: [$map.attr('data-latitude'), $map.attr('data-longitude')]
       zoom: 15
       behaviors: []
+    ,
+      adjustZoomOnTypeChange: true
 
     map.cursors.push('pointer')
 
@@ -81,6 +83,7 @@
           zoom: 16
           behaviors: ['drag', 'scrollZoom']
         ,
+          adjustZoomOnTypeChange: true
           maxZoom: 23
           minZoom: 12
 
