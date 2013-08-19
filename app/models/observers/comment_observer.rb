@@ -4,14 +4,14 @@ class CommentObserver < ActiveRecord::Observer
   def after_create(comment)
     if comment.commentable.is_a?(Afisha)
       if comment.is_root? && comment.commentable.user.present?
-        Message.delay.create(
+        NotificationMessage.delay.create(
           account: comment.commentable.user.account,
           producer: comment.user.account,
           body: comment.body,
           kind: :new_comment,
           messageable: comment)
       elsif comment.parent.present? && comment.user != comment.parent.user
-        Message.delay.create(
+        NotificationMessage.delay.create(
           account: comment.parent.user.account,
           producer: comment.user.account,
           body: comment.body,

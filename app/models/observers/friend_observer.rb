@@ -2,7 +2,7 @@
 
 class FriendObserver < ActiveRecord::Observer
   def after_create(friend)
-    Message.delay.create(
+    NotificationMessage.delay.create(
       account: friend.friendable,
       producer: friend.account,
       kind: :user_add_friend,
