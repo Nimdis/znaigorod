@@ -7,5 +7,5 @@
   <%= render partial: 'my/messages/visit_message', locals: { message: message } if message.messageable.is_a?(Visit) %>
   <%= render partial: 'my/messages/vote_message', locals: { message: message } if message.messageable.is_a?(Vote) %>
 
-  <%= link_to t('change_message_status'), account_message_change_message_status_path(@account, message), method: :put, remote: true, class: "change_message_status #{message.state}" %>
+  <%= link_to '', my_account_message_change_message_status_path(@account, message), method: :put, remote: true, class: "change_message_status #{message.state}" %>
 </li>

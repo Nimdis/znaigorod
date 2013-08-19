@@ -1,0 +1,7 @@
+<% collection.each do |message| %>
+  <%= render partial: 'my/messages/message', locals: { message: message } %>
+<% end %>
+
+<div class="pagination">
+  <%= link_to '', my_account_messages_path(@account, :page => collection.current_page + 1), :remote => true, :class => 'next_page closed' unless collection.last_page? %>
+</div>

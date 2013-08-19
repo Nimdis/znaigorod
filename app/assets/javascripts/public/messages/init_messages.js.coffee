@@ -2,13 +2,12 @@
   $('.change_message_status').hide()
 
   timer = setInterval ->
-    target = $('#new a.change_message_status.new:first')
+    target = $('a.change_message_status.new:first')
     if target.length
       target.click()
     else
       clearInterval(timer)
   , 1000
-
 
   $('.account_messages').on 'ajax:success', (evt, response) ->
     $(evt.target).closest('li').replaceWith(response)

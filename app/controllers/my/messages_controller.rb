@@ -1,13 +1,13 @@
-class MessagesController < ApplicationController
+class My::MessagesController < My::ApplicationController
   inherit_resources
   actions :index
   custom_actions collection: :change_message_status
 
-  belongs_to :account, :optional => true
+  belongs_to :account
 
   def index
     index! {
-      @messages = current_user.account.messages
+      render partial: 'my/messages/messages', locals: { messages: @messages }, layout: false and return
     }
   end
 
@@ -18,5 +18,11 @@ class MessagesController < ApplicationController
 
       render partial: 'my/messages/message', locals: { message: @message } and return
     }
+  end
+
+  private
+
+  def collection
+    @messages = super.page(params[:page]).per(5)
   end
 end

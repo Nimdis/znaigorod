@@ -4,6 +4,12 @@ Znaigorod::Application.routes.draw do
 
     get '/afisha/available_tags' => 'afishas#available_tags', :as => :available_tags, :controller => 'afishas'
 
+    resources :accounts, :only => :show do
+      resources :messages, :only => :index do
+        put 'change_message_status' => 'messages#change_message_status', :as => :change_message_status
+      end
+    end
+
     resources :afisha, :except => :show, :controller => 'afishas' do
       get 'edit/step/:step' => 'afishas#edit', :defaults => { :step => 'first' }, :on => :member, :as => :edit_step
       get 'available_tags' => 'afishas#available_tags', :as => :available_tags
