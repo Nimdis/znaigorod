@@ -1,29 +1,14 @@
-<%= content_tag :div, suborganization.logo_link, :class => "image" unless suborganization.logo_link.blank? %>
-
-<div class="info">
-
-  <div class="head">
-    <h2><%= suborganization.truncated_title_link %></h2>
-    <div class="right">
-      <%= suborganization.decorated_phones %>
-      <%= suborganization.schedule_today %>
-      <%= content_tag :div, suborganization.address_link, :class => "place" unless suborganization.address_link.blank? %>
-    </div>
+<div class='info'>
+  <h2>
+    <% if suborganization.title.length > 22 %>
+      <%= link_to suborganization.title.truncated(22, nil), suborganization, title: suborganization.title %>
+    <% else %>
+      <%= link_to suborganization.title, suborganization %>
+    <% end %>
+  </h2>
+  <div class='image'>
+    <%= link_to(image_tag(resized_image_url(suborganization.logotype_url, 178, 178), size: '178x178', alt: suborganization.title), suborganization) if suborganization.logotype_url.present? %>
   </div>
-
-  <% if suborganization.organization.sms_claimable? %>
-    <ul class='sms_claims'>
-    <% suborganization.organization.claimable_suborganizations.each do |suborganization| %>
-      <li>
-        <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
-      </li>
-    <% end %>
-    </ul>
-  <% end %>
-
-  <ul class="categories">
-    <% suborganization.category_links.each do |category_link| %>
-      <li><%= category_link %></li>
-    <% end %>
-  </ul>
+  <%= content_tag :div, suborganization.address_link, :class => 'place' unless suborganization.address_link.blank? %>
+  <%= suborganization.decorated_phones %>
 </div>
