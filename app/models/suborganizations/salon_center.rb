@@ -19,9 +19,6 @@ class SalonCenter < ActiveRecord::Base
   end
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
 
-  def sunspot_index
-    index
-  end
   # similar code --->
 
   include PresentsAsCheckboxes

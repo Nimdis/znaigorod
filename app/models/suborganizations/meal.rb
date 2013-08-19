@@ -16,9 +16,6 @@ class Meal < ActiveRecord::Base
 
   validates_presence_of :organization_id
 
-  delegate :save, to: :organization, prefix: true
-  after_save :organization_save
-
   # OPTIMIZE: < --- similar code
   attr_accessor :vfs_path
   attr_accessible :vfs_path
@@ -31,9 +28,6 @@ class Meal < ActiveRecord::Base
   has_many :gallery_files,  :as => :attachable, :dependent => :destroy
   has_many :menus, :dependent => :destroy
 
-  def sunspot_index
-    index
-  end
   # similar code --->
 
   include PresentsAsCheckboxes

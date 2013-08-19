@@ -14,9 +14,6 @@ class Sport < ActiveRecord::Base
 
   delegate :title, :description, :description?, :to => :organization, :prefix => true
 
-  delegate :save, to: :organization, prefix: true
-  after_save :organization_save
-
   # OPTIMIZE: <--- similar code
   attr_accessor :vfs_path
   attr_accessible :vfs_path

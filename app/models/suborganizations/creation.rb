@@ -18,9 +18,6 @@ class Creation < ActiveRecord::Base
 
   accepts_nested_attributes_for :services, :reject_if => :all_blank, :allow_destroy =>  true
 
-  delegate :save, to: :organization, prefix: true
-  after_save :organization_save
-
   # OPTIMIZE: <--- similar code
   attr_accessor :vfs_path
   attr_accessible :vfs_path

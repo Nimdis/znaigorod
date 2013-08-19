@@ -16,9 +16,6 @@ class Entertainment < ActiveRecord::Base
 
   validates_presence_of :organization_id
 
-  delegate :save, to: :organization, prefix: true
-  after_save :organization_save
-
   # OPTIMIZE: <--- similar code
   attr_accessor :vfs_path
   attr_accessible :vfs_path
