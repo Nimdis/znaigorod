@@ -1,0 +1,7 @@
+<% collection.each do |event| %>
+  <%= render partial: 'events/account_event', locals: { event: event } %>
+<% end %>
+
+<div class="pagination">
+  <%= link_to '', account_events_path(@account, by_state: state, page: @events.current_page + 1), :remote => true, :class => 'next_page closed' unless @events.last_page? %>
+</div>

@@ -1,0 +1,31 @@
+<div class="events header">
+  Мероприятия
+</div>
+
+<div id="events_filter">
+  <ul>
+    <li><%= link_to t('draft'), '#draft' %></li>
+    <li><%= link_to t('pending'), '#pending' %></li>
+    <li><%= link_to t('published'), '#published' %></li>
+  </ul>
+
+  <div class="events list">
+    <div id="draft">
+      <ul>
+        <%= render partial: 'events/account_events', locals: { collection: @events.draft, state: :draft } %>
+      </ul>
+    </div>
+    <div id="pending">
+      <ul>
+        <%= render partial: 'events/account_events', locals: { collection: @events.pending, state: :pending } %>
+      </ul>
+    </div>
+    <div id="published">
+      <ul>
+        <%= render partial: 'events/account_events', locals: { collection: @events.published, state: :published } %>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
