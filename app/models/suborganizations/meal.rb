@@ -36,8 +36,6 @@ class Meal < ActiveRecord::Base
   end
   # similar code --->
 
-  include Rating
-
   include PresentsAsCheckboxes
 
   presents_as_checkboxes :category,

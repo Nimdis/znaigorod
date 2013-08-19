@@ -25,7 +25,7 @@ class OrganizationsController < ApplicationController
 
     @organization.delay.create_page_visit(request.session_options[:id], current_user)
 
-    @presenter = ShowingsPresenter.new(organization_ids: [@organization.id], order_by: params[:order_by], page: params[:page])
+    @presenter = AfishaPresenter.new(organization_ids: [@organization.id], order_by: params[:order_by], page: params[:page])
 
     render partial: @presenter.partial, layout: false and return if request.xhr?
     render layout: "organization_layouts/#{@organization.subdomain}" if @organization.subdomain? && template_exists?(@organization.subdomain, 'layouts/organization_layouts')

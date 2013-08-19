@@ -27,12 +27,7 @@ class Entertainment < ActiveRecord::Base
   end
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
 
-  def sunspot_index
-    index
-  end
   # similar code --->
-
-  include Rating
 
   include PresentsAsCheckboxes
 

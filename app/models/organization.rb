@@ -1,8 +1,6 @@
 # encoding: utf-8
 
 class Organization < ActiveRecord::Base
-  # ActiveSupport::Concern extentions
-  include OrganizationQualityRating
   include HasVirtualTour
 
   extend FriendlyId
@@ -36,11 +34,9 @@ class Organization < ActiveRecord::Base
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation], default: :fresh, predicates: true
 
-  after_save :update_slave_organization_statuses
   def update_slave_organization_statuses
     slave_organizations.update_all :status => status
   end
-  private :update_slave_organization_statuses
 
   ### CRM ===>
 
@@ -126,13 +122,7 @@ class Organization < ActiveRecord::Base
   scope :ordered_by_updated_at, order('updated_at DESC')
   scope :parental,              where(:organization_id => nil)
 
-  before_update :update_rating
-  after_save :index_suborganizations
-
   alias_attribute :to_s, :title
-
-  #default_value_for :yandex_metrika_page_views, 0
-  #default_value_for :vkontakte_likes,           0
 
   friendly_id :title, use: :slugged
 
@@ -232,7 +222,7 @@ class Organization < ActiveRecord::Base
   end
 
   def index_suborganizations
-    suborganizations.map(&:sunspot_index)
+    suborganizations.map(&:index)
   end
 
   def self.grouped_collection_for_select
@@ -280,22 +270,27 @@ class Organization < ActiveRecord::Base
   def rating_position
     count = self.class.count
 
-    self.class.solr_search_ids { order_by(:rating, :desc); paginate(:page => 1, :per_page => count) }.index(id) + 1
+    self.class.solr_search_ids { order_by(:total_rating, :desc); paginate(:page => 1, :per_page => count) }.index(id) + 1
   end
 
   def images
     gallery_images
   end
 
-  def update_rating
-    self.recalculate_rating
+  def sold_tickets_count
   end
 
-  private
+  def update_rating
+    OrganizationObserver.disabled = true
+    update_attribute :total_rating, ((client? ? 10 : 0) +
+                                     afisha.map {|a| a.copies.sold.count}.sum +
+                                     0.5*afisha.actual.count +
+                                     0.5*visits.visited.count +
+                                     0.1*votes.liked.count +
+                                     0.01*page_visits.count)
+    OrganizationObserver.disabled = false
+  end
 
-  include Rating
-  use_for_rating :billiard, :car_sales_center, :car_service_center, :car_wash, :creation, :culture, :entertainment,
-                 :hotel, :meal, :salon_center, :sauna, :sport, :travel, :organization_stand
 end
 
 # == Schema Information

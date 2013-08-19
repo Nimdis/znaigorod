@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class SaunaHall < ActiveRecord::Base
-  # ActiveSupport::Concern extentions
   include UsefulAttributes
   include HasVirtualTour
 
@@ -50,15 +49,6 @@ class SaunaHall < ActiveRecord::Base
     string :sauna_id
     string(:title) { organization_title }
   end
-
-  include Rating
-  use_for_rating :sauna_hall_bath, :sauna_hall_capacity, :sauna_hall_entertainment, :sauna_hall_interior, :sauna_hall_pool
-
-  def summary_rating_with_images
-    summary_rating_without_images + images.count
-  end
-
-  alias_method_chain :summary_rating, :images
 
   def capacity
     sauna_hall_capacity.maximal || sauna_hall_capacity.default

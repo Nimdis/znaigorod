@@ -29,9 +29,6 @@ class Creation < ActiveRecord::Base
   end
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
 
-  def sunspot_index
-    index
-  end
   # similar code --->
 
   def category
@@ -41,8 +38,6 @@ class Creation < ActiveRecord::Base
   def feature
     self[:feature] || services.pluck(:feature).compact.uniq.join(', ')
   end
-
-  include Rating
 
   include SearchWithFacets
   search_with_facets :category, :feature, :stuff

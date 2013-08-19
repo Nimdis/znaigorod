@@ -21,10 +21,6 @@
     </ul>
   <% end %>
 
-  <div class="rating" style='margin: 5px 10px;'>
-    <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => suborganization.organization } %>
-  </div>
-
   <ul class="categories">
     <% suborganization.category_links.each do |category_link| %>
       <li><%= category_link %></li>

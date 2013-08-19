@@ -238,7 +238,10 @@ class Afisha < ActiveRecord::Base
   end
 
   def update_rating
-    update_attribute :total_rating, (copies.sold.count + 0.5*visits.visited.count + 0.1*votes.liked.count + 0.01*page_visits.count)
+    update_attribute :total_rating, (copies.sold.count +
+                                     0.5*visits.visited.count +
+                                     0.1*votes.liked.count +
+                                     0.01*page_visits.count)
   end
 
   def human_model_name

@@ -27,11 +27,6 @@ class Sauna < ActiveRecord::Base
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
   # similar code --->
 
-  def sunspot_index
-    index and sauna_halls.map(&:index)
-  end
-
-
   attr_accessible :sauna_accessory_attributes, :sauna_alcohol_attributes,
     :sauna_broom_attributes, :sauna_massage_attributes,
     :sauna_oil_attributes, :sauna_stuff_attributes,
@@ -58,10 +53,6 @@ class Sauna < ActiveRecord::Base
   accepts_nested_attributes_for :sauna_child_stuff
   accepts_nested_attributes_for :sauna_stuff
   accepts_nested_attributes_for :sauna_massage
-
-  include Rating
-
-  use_for_rating :sauna_halls, :sauna_accessory, :sauna_broom, :sauna_alcohol, :sauna_oil, :sauna_child_stuff, :sauna_stuff, :sauna_massage
 
   include PresentsAsCheckboxes
 
