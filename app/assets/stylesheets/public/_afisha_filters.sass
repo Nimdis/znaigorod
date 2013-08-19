@@ -26,8 +26,13 @@
       margin: 20px auto
       ul
         +clearfix
+        li:first-child:nth-last-child(1)
+          width: 100%
+        @for $i from 2 through 20
+          li:first-child:nth-last-child(#{$i}),
+          li:first-child:nth-last-child(#{$i}) ~ li
+            width: percentage(1/$i)
         li
-          width: percentage(1/10)
           float: left
           text-align: center
           a
@@ -35,7 +40,7 @@
             white-space: nowrap
             padding-top: 25px
             margin: 0 0 1px 0
-            background: transparent image_url('public/afisha_kind_sprite.png') no-repeat center center
+            background: transparent image_url('public/afisha_kind.png') no-repeat center center
             .name
               color: #000
             .count

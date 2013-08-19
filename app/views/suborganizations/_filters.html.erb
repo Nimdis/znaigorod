@@ -18,7 +18,7 @@
         <% @presenter.categories_links.each do |category_link| %>
           <li class='<%= category_link[:klass] %><%= ' selected' if category_link[:selected] %>'>
             <%= link_to send(category_link[:url], category_link[:parameters]) do %>
-              <%= content_tag :span,  category_link[:title], class: :name %>
+              <%= content_tag :span,  category_link[:title].gsub('Развлекательные комплексы', 'Развл. комплексы'), class: :name %>
               <%= content_tag :span, category_link[:count], class: :count  %>
             <% end %>
           </li>

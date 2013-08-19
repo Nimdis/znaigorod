@@ -1,0 +1,869 @@
+.filters_wrapper
+
+  .filters.organization
+
+    .by_kind
+      float: left
+      margin-left: 10px
+
+      ul
+        +clearfix
+
+        li
+          float: left
+          margin-right: 5px
+          +toggable-links
+
+          &:last-child
+            margin-right: 0
+
+    .by_categories
+      margin: 20px auto 10px
+
+      ul
+        +clearfix
+        text-align: center
+
+        li
+          +inline-block
+          text-align: center
+          margin: 0 5px 10px
+
+          a
+            +inline-block
+            white-space: nowrap
+            padding-top: 25px
+            margin: 0 0 1px 0
+            background: transparent image_url('public/organizations_kind.png') no-repeat 999em 999em
+
+            .name
+              color: #000
+
+            .count
+              color: #a9a9a9
+              font-size: 10px
+              vertical-align: super
+              margin-left: -2px
+
+            &:hover
+              text-decoration: none
+
+              .name
+                color: #f60
+
+            &:active
+              margin: 1px 0 0 0
+
+          &.selected a .name
+            color: #f60
+
+          &.all
+            a
+              background-position: -50px -27px
+              &:hover
+                background-position: -50px -107px
+            &.selected a
+              background-position: -50px -177px
+              &:hover
+                background-position: -50px -107px
+
+          &.sauny
+            a
+              background-position: -149px -278px
+              &:hover
+                background-position: -149px -358px
+            &.selected a
+              background-position: -149px -428px
+              &:hover
+                background-position: -149px -358px
+
+          &.bary
+            a
+              background-position: -476px -27px
+              &:hover
+                background-position: -476px -107px
+            &.selected a
+              background-position: -476px -177px
+              &:hover
+                background-position: -476px -107px
+
+          &.dostavka_edy
+            a
+              background-position: -950px -28px
+              &:hover
+                background-position: -950px -108px
+            &.selected a
+              background-position: -950px -178px
+              &:hover
+                background-position: -950px -108px
+
+          &.kafe
+            a
+              background-position: -137px -29px
+              &:hover
+                background-position: -137px -109px
+            &.selected a
+              background-position: -137px -179px
+              &:hover
+                background-position: -137px -109px
+
+          &.restorany
+            a
+              background-position: -1308px -26px
+              &:hover
+                background-position: -1308px -106px
+            &.selected a
+              background-position: -1308px -176px
+              &:hover
+                background-position: -1308px -106px
+
+          &.fitnes
+            a
+              background-position: -251px -1278px
+              &:hover
+                background-position: -251px -1368px
+            &.selected a
+              background-position: -251px -1438px
+              &:hover
+                background-position: -251px -1368px
+
+          &.avtomoyki
+            a
+              background-position: -521px -525px
+              &:hover
+                background-position: -521px -615px
+            &.selected a
+              background-position: -521px -675px
+              &:hover
+                background-position: -521px -615px
+
+          &.banketnye_zaly
+            a
+              background-position: -638px -27px
+              &:hover
+                background-position: -638px -107px
+            &.selected a
+              background-position: -638px -177px
+              &:hover
+                background-position: -638px -107px
+
+          &.detskie_kafe
+            a
+              background-position: -1044px -27px
+              &:hover
+                background-position: -1044px -107px
+            &.selected a
+              background-position: -1044px -177px
+              &:hover
+                background-position: -1044px -107px
+
+          &.zavedeniya_bystrogo_pitaniya
+            a
+              background-position: -395px -27px
+              &:hover
+                background-position: -395px -107px
+            &.selected a
+              background-position: -395px -177px
+              &:hover
+                background-position: -395px -107px
+
+          &.keytering
+            a
+              background-position: -293px -28px
+              &:hover
+                background-position: -293px -108px
+            &.selected a
+              background-position: -293px -178px
+              &:hover
+                background-position: -293px -108px
+
+          &.konditerskie
+            a
+              background-position: -762px -28px
+              &:hover
+                background-position: -762px -108px
+            &.selected a
+              background-position: -762px -178px
+              &:hover
+                background-position: -762px -108px
+
+          &.kofeyni
+            a
+              background-position: -207px -27px
+              &:hover
+                background-position: -207px -107px
+            &.selected a
+              background-position: -207px -177px
+              &:hover
+                background-position: -207px -107px
+
+          &.pitstserii
+            a
+              background-position: -547px -29px
+              &:hover
+                background-position: -547px -109px
+            &.selected a
+              background-position: -547px -179px
+              &:hover
+                background-position: -547px -109px
+
+          &.stolovye
+            a
+              background-position: -1229px -27px
+              &:hover
+                background-position: -1229px -107px
+            &.selected a
+              background-position: -1229px -177px
+              &:hover
+                background-position: -1229px -107px
+
+          &.sushi-bary
+            a
+              background-position: -1142px -27px
+              &:hover
+                background-position: -1142px -107px
+            &.selected a
+              background-position: -1142px -177px
+              &:hover
+                background-position: -1142px -107px
+
+          &.chaynaya
+            a
+              background-position: -882px -28px
+              &:hover
+                background-position: -882px -108px
+            &.selected a
+              background-position: -882px -178px
+              &:hover
+                background-position: -882px -108px
+
+          &.antikafe
+            a
+              background-position: -1206px -278px
+              &:hover
+                background-position: -1206px -358px
+            &.selected a
+              background-position: -1206px -428px
+              &:hover
+                background-position: -1206px -358px
+
+          &.attraktsiony
+            a
+              background-position: -814px -278px
+              &:hover
+                background-position: -814px -358px
+            &.selected a
+              background-position: -814px -428px
+              &:hover
+                background-position: -814px -358px
+
+          &.sauna
+            a
+              background-position: -149px -278px
+              &:hover
+                background-position: -149px -358px
+            &.selected a
+              background-position: -149px -428px
+              &:hover
+                background-position: -149px -358px
+
+          &.bilyardnye_zaly
+            a
+              background-position: -221px -280px
+              &:hover
+                background-position: -221px -360px
+            &.selected a
+              background-position: -221px -430px
+              &:hover
+                background-position: -221px -360px
+
+          &.bouling
+            a
+              background-position: -635px -277px
+              &:hover
+                background-position: -635px -357px
+            &.selected a
+              background-position: -635px -427px
+              &:hover
+                background-position: -635px -357px
+
+          &.karaoke
+            a
+              background-position: -353px -278px
+              &:hover
+                background-position: -353px -358px
+            &.selected a
+              background-position: -353px -428px
+              &:hover
+                background-position: -353px -358px
+
+          &.kinoteatry
+            a
+              background-position: -535px -278px
+              &:hover
+                background-position: -535px -358px
+            &.selected a
+              background-position: -535px -428px
+              &:hover
+                background-position: -535px -358px
+
+          &.nochnye_kluby
+            a
+              background-position: -424px -278px
+              &:hover
+                background-position: -424px -358px
+            &.selected a
+              background-position: -424px -428px
+              &:hover
+                background-position: -424px -358px
+
+          &.peyntbol
+            a
+              background-position: -1117px -278px
+              &:hover
+                background-position: -1117px -358px
+            &.selected a
+              background-position: -1117px -428px
+              &:hover
+                background-position: -1117px -358px
+
+          &.razvlekatelnye_kompleksy
+            a
+              background-position: -904px -278px
+              &:hover
+                background-position: -904px -358px
+            &.selected a
+              background-position: -904px -428px
+              &:hover
+                background-position: -904px -358px
+
+          &.straykbol
+            a
+              background-position: -1021px -277px
+              &:hover
+                background-position: -1021px -357px
+            &.selected a
+              background-position: -1021px -427px
+              &:hover
+                background-position: -1021px -357px
+
+          &.striptiz-bary
+            a
+              background-position: -714px -278px
+              &:hover
+                background-position: -714px -358px
+            &.selected a
+              background-position: -714px -428px
+              &:hover
+                background-position: -714px -358px
+
+          &.car_wash
+            a
+              background-position: -519px -525px
+              &:hover
+                background-position: -519px -615px
+            &.selected a
+              background-position: -519px -675px
+              &:hover
+                background-position: -519px -615px
+
+          &.vodnyy_transport
+            a
+              background-position: -306px -526px
+              &:hover
+                background-position: -306px -616px
+            &.selected a
+              background-position: -306px -676px
+              &:hover
+                background-position: -306px -616px
+
+          &.gruzovye_i_spetstehnika
+            a
+              background-position: -766px -526px
+              &:hover
+                background-position: -766px -616px
+            &.selected a
+              background-position: -766px -676px
+              &:hover
+                background-position: -766px -616px
+
+          &.legkovye_avtomobili
+            a
+              background-position: -1016px -531px
+              &:hover
+                background-position: -1016px -621px
+            &.selected a
+              background-position: -1016px -681px
+              &:hover
+                background-position: -1016px -621px
+
+          &.mototehnika
+            a
+              background-position: -139px -527px
+              &:hover
+                background-position: -139px -617px
+            &.selected a
+              background-position: -139px -677px
+              &:hover
+                background-position: -139px -617px
+
+          &.biblioteki
+            a
+              background-position: -315px -1025px
+              &:hover
+                background-position: -315px -1105px
+            &.selected a
+              background-position: -315px -1175px
+              &:hover
+                background-position: -315px -1105px
+
+          &.dvortsy_kultury
+            a
+              background-position: -691px -1025px
+              &:hover
+                background-position: -691px -1105px
+            &.selected a
+              background-position: -691px -1175px
+              &:hover
+                background-position: -691px -1105px
+
+          &.muzei
+            a
+              background-position: -520px -1025px
+              &:hover
+                background-position: -520px -1105px
+            &.selected a
+              background-position: -520px -1175px
+              &:hover
+                background-position: -520px -1105px
+
+          &.planetarii
+            a
+              background-position: -416px -1025px
+              &:hover
+                background-position: -416px -1105px
+            &.selected a
+              background-position: -416px -1175px
+              &:hover
+                background-position: -416px -1105px
+
+          &.teatry
+            a
+              background-position: -147px -1025px
+              &:hover
+                background-position: -147px -1105px
+            &.selected a
+              background-position: -147px -1175px
+              &:hover
+                background-position: -147px -1105px
+
+          &.filarmonii
+            a
+              background-position: -710px -1025px
+              &:hover
+                background-position: -710px -1105px
+            &.selected a
+              background-position: -710px -1175px
+              &:hover
+                background-position: -710px -1105px
+
+          &.basseyny
+            a
+              background-position: -573px -1275px
+              &:hover
+                background-position: -573px -1365px
+            &.selected a
+              background-position: -573px -1435px
+              &:hover
+                background-position: -573px -1365px
+
+          &.boevye_iskusstva
+            a
+              background-position: -1306px -1276px
+              &:hover
+                background-position: -1306px -1366px
+            &.selected a
+              background-position: -1306px -1436px
+              &:hover
+                background-position: -1306px -1366px
+
+          &.gornolyzhnye_kompleksy
+            a
+              background-position: -1082px -1275px
+              &:hover
+                background-position: -1082px -1365px
+            &.selected a
+              background-position: -1082px -1435px
+              &:hover
+                background-position: -1082px -1365px
+
+          &.drugoe
+            a
+              background-position: -1330px -1535px
+              &:hover
+                background-position: -1330px -1611px
+            &.selected a
+              background-position: -1330px -1686px
+              &:hover
+                background-position: -1330px -1611px
+
+          &.zakalivanie
+            a
+              background-position: -1315px -1535px
+              &:hover
+                background-position: -1315px -1611px
+            &.selected a
+              background-position: -1315px -1686px
+              &:hover
+                background-position: -1315px -1611px
+
+          &.ippodromy
+            a
+              background-position: -654px -1276px
+              &:hover
+                background-position: -654px -1366px
+            &.selected a
+              background-position: -654px -1436px
+              &:hover
+                background-position: -654px -1366px
+
+          &.yoga
+            a
+              background-position: -510px -1276px
+              &:hover
+                background-position: -510px -1366px
+            &.selected a
+              background-position: -510px -1436px
+              &:hover
+                background-position: -510px -1366px
+
+          &.igrovye_vidy_sporta
+            a
+              background-position: -1027px -1008px
+              &:hover
+                background-position: -1027px -1098px
+            &.selected a
+              background-position: -1027px -1168px
+              &:hover
+                background-position: -1027px -1098px
+
+          &.konnye_kluby
+            a
+              background-position: -641px -1276px
+              &:hover
+                background-position: -641px -1366px
+            &.selected a
+              background-position: -641px -1436px
+              &:hover
+                background-position: -641px -1366px
+
+          &.katki
+            a
+              background-position: -963px -1276px
+              &:hover
+                background-position: -963px -1366px
+            &.selected a
+              background-position: -963px -1436px
+              &:hover
+                background-position: -963px -1366px
+
+          &.ledovye_dvortsy
+            a
+              background-position: -925px -1276px
+              &:hover
+                background-position: -925px -1366px
+            &.selected a
+              background-position: -925px -1436px
+              &:hover
+                background-position: -925px -1366px
+
+          &.lyzhnye_bazy
+            a
+              background-position: -1117px -1275px
+              &:hover
+                background-position: -1117px -1365px
+            &.selected a
+              background-position: -1117px -1435px
+              &:hover
+                background-position: -1117px -1365px
+
+          &.professionalnye_sportivnye_kluby
+            a
+              background-position: -1021px -1536px
+              &:hover
+                background-position: -1021px -1626px
+            &.selected a
+              background-position: -1021px -1696px
+              &:hover
+                background-position: -1021px -1626px
+
+          &.sportivno-takticheskie_kluby
+            a
+              background-position: -1046px -1536px
+              &:hover
+                background-position: -1046px -1626px
+            &.selected a
+              background-position: -1046px -1696px
+              &:hover
+                background-position: -1046px -1626px
+
+          &.sportivnye_sektsii
+            a
+              background-position: -1076px -1536px
+              &:hover
+                background-position: -1076px -1626px
+            &.selected a
+              background-position: -1076px -1696px
+              &:hover
+                background-position: -1076px -1626px
+
+          &.sportivnye_shkoly
+            a
+              background-position: -1078px -1536px
+              &:hover
+                background-position: -1078px -1626px
+            &.selected a
+              background-position: -1078px -1696px
+              &:hover
+                background-position: -1078px -1626px
+
+          &.stadiony
+            a
+              background-position: -1064px -1008px
+              &:hover
+                background-position: -1064px -1098px
+            &.selected a
+              background-position: -1064px -1168px
+              &:hover
+                background-position: -1064px -1098px
+
+          &.tantsy
+            a
+              background-position: -341px -1275px
+              &:hover
+                background-position: -341px -1365px
+            &.selected a
+              background-position: -341px -1435px
+              &:hover
+                background-position: -341px -1365px
+
+          &.trenazhyornye_zaly
+            a
+              background-position: -119px -1277px
+              &:hover
+                background-position: -119px -1367px
+            &.selected a
+              background-position: -119px -1437px
+              &:hover
+                background-position: -119px -1367px
+
+          &.hudozhestvennaya_gimnastika
+            a
+              background-position: -1052px -1536px
+              &:hover
+                background-position: -1052px -1626px
+            &.selected a
+              background-position: -1052px -1696px
+              &:hover
+                background-position: -1052px -1626px
+
+          &.shahmatnye_shkoly
+            a
+              background-position: -1292px -1535px
+              &:hover
+                background-position: -1292px -1611px
+            &.selected a
+              background-position: -1292px -1686px
+              &:hover
+                background-position: -1292px -1611px
+
+          &.izo_studii
+            a
+              background-position: -673px -1525px
+              &:hover
+                background-position: -673px -1615px
+            &.selected a
+              background-position: -673px -1685px
+              &:hover
+                background-position: -673px -1615px
+
+          &.inostrannye_yazyki
+            a
+              background-position: -443px -1525px
+              &:hover
+                background-position: -443px -1615px
+            &.selected a
+              background-position: -443px -1685px
+              &:hover
+                background-position: -443px -1615px
+
+          &.kinostudii
+            a
+              background-position: -271px -1525px
+              &:hover
+                background-position: -271px -1615px
+            &.selected a
+              background-position: -271px -1685px
+              &:hover
+                background-position: -271px -1615px
+
+          &.masterilki
+            a
+              background-position: -382px -1527px
+              &:hover
+                background-position: -382px -1617px
+            &.selected a
+              background-position: -382px -1687px
+              &:hover
+                background-position: -382px -1617px
+
+          &.muzykalnye_studii
+            a
+              background-position: 6px -1525px
+              &:hover
+                background-position: 6px -1615px
+            &.selected a
+              background-position: 6px -1685px
+              &:hover
+                background-position: 6px -1615px
+
+          &.razvivayuschie_zanyatiya
+            a
+              background-position: -753px -1525px
+              &:hover
+                background-position: -753px -1615px
+            &.selected a
+              background-position: -753px -1685px
+              &:hover
+                background-position: -753px -1615px
+
+          &.teatralnye_studii
+            a
+              background-position: -130px -1525px
+              &:hover
+                background-position: -130px -1615px
+            &.selected a
+              background-position: -130px -1685px
+              &:hover
+                background-position: -130px -1615px
+
+          &.fotoshkoly
+            a
+              background-position: -912px -1525px
+              &:hover
+                background-position: -912px -1615px
+            &.selected a
+              background-position: -912px -1685px
+              &:hover
+                background-position: -912px -1615px
+
+          &.spa-salony
+            a
+              background-position: -755px -775px
+              &:hover
+                background-position: -755px -865px
+            &.selected a
+              background-position: -755px -935px
+              &:hover
+                background-position: -755px -865px
+
+          &.vizazh-studii
+            a
+              background-position: -604px -776px
+              &:hover
+                background-position: -604px -866px
+            &.selected a
+              background-position: -604px -936px
+              &:hover
+                background-position: -604px -866px
+
+          &.kosmeticheskie_salony
+            a
+              background-position: -128px -775px
+              &:hover
+                background-position: -128px -865px
+            &.selected a
+              background-position: -128px -935px
+              &:hover
+                background-position: -128px -865px
+
+          &.massazhnye_salony
+            a
+              background-position: -304px -775px
+              &:hover
+                background-position: -304px -865px
+            &.selected a
+              background-position: -304px -935px
+              &:hover
+                background-position: -304px -865px
+
+          &.nogtevye_studii
+            a
+              background-position: -870px -775px
+              &:hover
+                background-position: -870px -865px
+            &.selected a
+              background-position: -870px -935px
+              &:hover
+                background-position: -870px -865px
+
+          &.parikmaherskie
+            a
+              background-position: -462px -776px
+              &:hover
+                background-position: -462px -866px
+            &.selected a
+              background-position: -462px -936px
+              &:hover
+                background-position: -462px -866px
+
+          &.studii_zagara
+            a
+              background-position: -1031px -775px
+              &:hover
+                background-position: -1031px -865px
+            &.selected a
+              background-position: -1031px -935px
+              &:hover
+                background-position: -1031px -865px
+
+          &.tatu-salony
+            a
+              background-position: -9px -777px
+              &:hover
+                background-position: -9px -867px
+            &.selected a
+              background-position: -9px -937px
+              &:hover
+                background-position: -9px -867px
+
+.presentation_filters.organization
+
+  .present_by
+    float: left
+    /* FIXME iconize & show it */
+    display: none
+    margin-left: 10px
+
+  .order_by
+    float: right
+    margin-right: 10px
+
+  .present_by,
+  .order_by
+    p
+      +inline-block
+    ul
+      +inline-block
+      +clearfix
+      li
+        float: left
+        margin-right: 5px
+        +toggable-links
+        &:last-child
+          margin-right: 0
+
+  .add_my_afisha
+    width: 150px
+    text-align: center
+    margin: 0 auto
