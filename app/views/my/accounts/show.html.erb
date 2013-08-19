@@ -18,7 +18,7 @@
 
   <div class="right">
     <%= render 'messages' if @messages.any? %>
-    <%= render 'events'   if @account.afisha.published.any? %>
+    <%= render 'accounts/events' if @events.any? %>
 
     <% if @votes.any? %>
       <div class="votes header">

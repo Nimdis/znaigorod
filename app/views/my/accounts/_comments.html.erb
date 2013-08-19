@@ -1,9 +1,0 @@
-<div class="comments header">
-  Мои комментарии
-</div>
-<div class="comments list">
-  <%= render partial: 'accounts/account_comments', locals: { comments: @account.comments } %>
-</div>
-<div class="comments toggle">
-  <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.comments.count > 1 %>
-</div>

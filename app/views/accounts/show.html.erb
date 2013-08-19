@@ -23,7 +23,7 @@
   </div>
 
   <div class="right">
-    <% if @account.votes.any? %>
+    <% if @votes.any? %>
       <div class="votes header">
         Нравится
       </div>
@@ -34,15 +34,14 @@
       </div>
     <% end %>
 
-    <% if @account.afisha.published.any? %>
+    <% if @events.published.any? %>
       <div class="events header">
         <%= "#{@account.first_name}" "#{@account.male? ? ' добавил ' : ' добавила '}" "#{t('account_events', count: @account.afisha.published.count)}" %>
       </div>
       <div class="events list">
-        <%= render partial: 'account_events', locals: { collection: @account.afisha.published } %>
-      </div>
-      <div class="events toggle">
-        <%= link_to '', '#', remote: true, class: 'toggler closed floatr' if @account.afisha.published.count > 4 %>
+        <ul>
+          <%= render partial: 'events/account_events', locals: { collection: @events.published, state: :published } %>
+        </ul>
       </div>
     <% end %>
 

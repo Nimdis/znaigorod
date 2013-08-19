@@ -20,6 +20,9 @@ ru:
   certificate: Сертификат
   confirm_ask: Вы уверены?
   delete: Удалить
+  draft: Черновики
+  pending: На модерации
+  published: Опубликованные
   eating: Заведения
   edit: Редактировать
   edit_afisha: Редактировать информацию о мероприятии

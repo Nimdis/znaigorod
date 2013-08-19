@@ -11,6 +11,7 @@ class Account < ActiveRecord::Base
   has_many :page_visits,     through: :users
 
   has_many :friends
+  has_many :events,          through: :users, order: 'afisha.created_at DESC'
   has_many :messages,        order: 'messages.created_at DESC'
 
   has_many :payments, :through => :users
