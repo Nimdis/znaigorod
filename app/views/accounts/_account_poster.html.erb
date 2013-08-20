@@ -4,7 +4,7 @@
   </div>
 
   <div class="image">
-    <%= image_tag(resized_image_url(account.avatar.url, 178, 178), size: '178x178', title: account, alt: account) %>
+    <%= link_to image_tag(resized_image_url(account.avatar.url, 178, 178), size: '178x178', title: account, alt: account), account_path(account) %>
   </div>
 
   <div class="badges"></div>
