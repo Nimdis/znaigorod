@@ -6,9 +6,13 @@
       <%= link_to suborganization.title, suborganization %>
     <% end %>
   </h2>
-  <div class='image'>
-    <%= link_to(image_tag(resized_image_url(suborganization.logotype_url, 178, 178), size: '178x178', alt: suborganization.title), suborganization) if suborganization.logotype_url.present? %>
-  </div>
+  <% if suborganization.logotype_url.present? %>
+    <div class='image'>
+      <%= link_to(image_tag(resized_image_url(suborganization.logotype_url, 178, 178), size: '178x178', alt: suborganization.title), suborganization) %>
+    </div>
+  <% else %>
+    <hr />
+  <% end %>
   <%= content_tag :div, suborganization.address_link, :class => 'place' unless suborganization.address_link.blank? %>
   <%= suborganization.decorated_phones %>
 </div>

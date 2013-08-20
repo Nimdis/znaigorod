@@ -3,12 +3,14 @@
 
   li
     float: left
-    margin: 0 20px 20px 0
+    margin: 0 22px 20px 0
     &:nth-child(6n)
       margin-right: 0
+    &:nth-child(6n+1)
+      clear: left
 
     .info
-      width: 180px
+      width: 178px
       text-align: center
       border: 1px solid #ccc
 
@@ -19,4 +21,16 @@
 
       .image
         width: 178px
-        height: 178px
+
+      hr
+        height: 0
+        border: none
+        border-top: 1px dotted #ccc
+        margin: 0 0 5px 0
+        padding: 0
+
+      .place
+        margin-bottom: 5px
+
+      .phone
+        margin-bottom: 5px
