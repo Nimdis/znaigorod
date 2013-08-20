@@ -4,7 +4,7 @@ class AfishaObserver < ActiveRecord::Observer
   def after_approve(afisha, transition)
     MyMailer.delay.mail_new_published_afisha(afisha)
     if afisha.user.present?
-      NotificationMessages.delay.create(
+      NotificationMessage.delay.create(
         account: afisha.user.account,
         kind: :afisha_published,
         messageable: afisha)
@@ -18,7 +18,7 @@ class AfishaObserver < ActiveRecord::Observer
 
   def after_send_to_author(afisha, transition)
     if afisha.user.present?
-      NotificationMessages.delay.create(
+      NotificationMessage.delay.create(
         account: afisha.user.account,
         kind: :afisha_returned,
         messageable: afisha)
