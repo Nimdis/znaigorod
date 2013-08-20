@@ -6,7 +6,7 @@
         <div class="virtual_tour">
           <%= link_to('#', :class => :virtual_tour_link, :'data-link' => @organization.virtual_tour.link, title: '3D-тур') do %>
             <% if @organization.virtual_tour.attachment_url? %>
-              <%= image_tag_for(@organization.virtual_tour.attachment_url, 334, 164, true, 'n') %>
+              <%= resized_image_url(@organization.virtual_tour.attachment_url, 334, 164) %>
               <span>3D<br />тур</span>
             <% else %>
               <%= image_tag "public/virtual_tour_link.png" %>
@@ -18,15 +18,11 @@
       <%= @organization.iconize_info %>
       <h1><%= @organization.title %></h1>
       <div class="left_part">
-        <%= content_tag(:div, link_to(image_tag_for(@organization.logotype_url, 180, 180), @organization.logotype_url), class: :image) if @organization.logotype_url? %>
-        <div class='social_actions'>
-          <div class="visits">
-            <%= render :partial => 'visits/visit_wrapper', :locals => { :visitable => @organization.model } %>
-          </div>
-        </div>
+        <%= content_tag :div, class: :image do %>
+          <%= link_to(image_tag(resized_image_url(@organization.logotype_url, 180, 180), :size => '180x180', :alt => @organization.title), @organization.logotype_url) %>
+        <% end if @organization.logotype_url? %>
       </div>
 
-      <%= render :partial => 'user_ratings/block', :locals => { :parent_obj => @organization } %>
       <%= content_tag(:div, @organization.address_link + @organization.office.to_s, class: :place) unless @organization.address.to_s.blank? %>
       <%= @organization.work_schedule %>
       <%= content_tag(:div, @organization.phone, class: :phone_wrapper) if @organization.phone.present? %>
@@ -66,9 +62,7 @@
     <% if @organization.has_photogallery? %>
       <div class="photogallery">
         <ul>
-          <% @organization.gallery_images.each do |image| %>
-            <li><%= link_to(image_tag_for(image.file_url, 124, 94, true, 'n'), image.file_url, rel: :info_gallery) %></li>
-          <% end %>
+          <%= render @organization.gallery_images, :rel => "organization_gallery_#{@organization.id}" %>
         </ul>
       </div>
     <% end %>

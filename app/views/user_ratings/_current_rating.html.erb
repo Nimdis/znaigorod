@@ -1,9 +1,0 @@
-<div class="current_rating">
-  <% rating = (parent_obj.total_rating*5*2).round/2.0 %>
-  <% n,m = rating.to_s.split('.') %>
-  <div class="star_wrapper" title='<%= parent_obj.is_a?(Organization) ? "Пользовательских голосов: #{parent_obj.user_ratings.count}" : t('affiche.visits', count: parent_obj.visits.visited.count) + ', ' + t('affiche.votes', count: parent_obj.votes.liked.count) %>'>
-    <% 5.times do |i| %>
-      <div class="star_<%= i %> <%= (n.to_i >= i+1) ? 'selected active' : (m.to_i > 0 && n.to_i == i) ? 'half' : '' %>"></div>
-    <% end %>
-  </div>
-</div>

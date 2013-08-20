@@ -20,9 +20,6 @@
           <%= organization.phone %>
         </div>
       </div>
-      <div class="rating">
-        <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => organization } %>
-      </div>
       <% if organization.sms_claimable? %>
         <ul class='sms_claims'>
         <% organization.claimable_suborganizations.each do |suborganization| %>

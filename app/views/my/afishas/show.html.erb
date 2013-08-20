@@ -150,7 +150,7 @@
         <div class='photogallery'>
           <ul>
             <% @afisha.images.each do |image| %>
-              <li><%= render partial: "#{image.class.name.underscore.pluralize}/#{image.class.name.underscore}", object: image %></li>
+              <%= render partial: image.partial_for_render_object, object: image, :locals => { :rel => "my_afisha_images_gallery_#{@afisha.id}" } %>
             <% end %>
           </ul>
         </div>

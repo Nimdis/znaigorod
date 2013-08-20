@@ -172,7 +172,7 @@
       <div class='photogallery'>
         <ul>
           <% @afisha.images.each do |image| %>
-            <li><%= render image %></li>
+            <%= render :partial => image.partial_for_render_object, :object => image, :locals => { :rel => "afisha_images_gallery_#{@afisha.id}" } %>
           <% end %>
         </ul>
       </div>

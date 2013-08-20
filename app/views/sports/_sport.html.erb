@@ -15,9 +15,7 @@
   <% if sport.has_photogallery? %>
     <div class="photogallery">
       <ul>
-        <% sport.gallery_images.each do |image| %>
-          <li><%= link_to(image_tag_for(image.file_url, 124, 94, true, 'n'), image.file_url, rel: :sport_gallery) %></li>
-        <% end %>
+        <%= render sport.gallery_images, :rel => "sport_gallery_#{sport_id}" %>
       </ul>
     </div>
   <% end %>

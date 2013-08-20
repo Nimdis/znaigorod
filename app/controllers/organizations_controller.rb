@@ -21,14 +21,14 @@ class OrganizationsController < ApplicationController
   end
 
   def show
-    unless request.subdomain.blank?
-      @organization = OrganizationDecorator.find_by_subdomain!(request.subdomain)
+    if request.subdomain.blank? || !Organization.exists?(:subdomain => request.subdomain)
+      @organization = Organization.find(params[:id])
     else
-      @organization = OrganizationDecorator.find(params[:id])
+      @organization = Organization.find_by_subdomain(request.subdomain)
     end
-
     @organization.delay.create_page_visit(request.session_options[:id], current_user)
 
+    @organization = OrganizationDecorator.decorate @organization
     @presenter = AfishaPresenter.new(organization_ids: [@organization.id], order_by: params[:order_by], page: params[:page])
 
     render partial: @presenter.partial, layout: false and return if request.xhr?

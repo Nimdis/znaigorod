@@ -15,9 +15,7 @@
   <% if car_wash.has_photogallery? %>
     <div class="photogallery">
       <ul>
-        <% car_wash.gallery_images.each do |image| %>
-          <li><%= link_to(image_tag_for(image.file_url, 124, 94, true, 'n'), image.file_url, rel: :car_wash_gallery) %></li>
-        <% end %>
+        <%= render car_wash.gallery_images, :rel => "car_wash_gallery_#{car_wash.id}" %>
       </ul>
     </div>
   <% end %>

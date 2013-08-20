@@ -15,9 +15,7 @@
   <% if car_service_center.has_photogallery? %>
     <div class="photogallery">
       <ul>
-        <% car_service_center.gallery_images.each do |image| %>
-          <li><%= link_to(image_tag_for(image.file_url, 124, 94, true, 'n'), image.file_url, rel: :car_service_center_gallery) %></li>
-        <% end %>
+        <%= render car_service_center.gallery_images, :rel => "car_service_center_gallery_#{car_service_center.id}" %>
       </ul>
     </div>
   <% end %>

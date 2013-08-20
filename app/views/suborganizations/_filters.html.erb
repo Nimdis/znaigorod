@@ -1,29 +1,2 @@
 <div class='filters_wrapper'>
-  <div class='filters organization'>
-    <div class='by_kind'>
-      <ul>
-        <% @presenter.kinds_links.each do |kind_link| %>
-          <li<%= " class=selected" if kind_link[:selected] %>>
-            <%= link_to kind_link[:title],
-              send(kind_link[:url], kind_link[:parameters]), :class => kind_link[:class] %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-
-  <div class='filters organization'>
-    <div class='by_categories'>
-      <ul>
-        <% @presenter.categories_links.each do |category_link| %>
-          <li class='<%= category_link[:klass] %><%= ' selected' if category_link[:selected] %>'>
-            <%= link_to send(category_link[:url], category_link[:parameters]) do %>
-              <%= content_tag :span,  category_link[:title].gsub('Развлекательные комплексы', 'Развл. комплексы'), class: :name %>
-              <%= content_tag :span, category_link[:count], class: :count  %>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
 </div>

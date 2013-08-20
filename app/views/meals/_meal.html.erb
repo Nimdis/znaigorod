@@ -21,9 +21,7 @@
   <% if meal.has_photogallery? %>
     <div class="photogallery">
       <ul>
-        <% meal.gallery_images.each do |image| %>
-          <li><%= link_to(image_tag_for(image.file_url, 124, 94, true, 'n'), image.file_url, rel: :meal_gallery) %></li>
-        <% end %>
+        <%= render meal.gallery_images, :rel => "meal_gallery_#{meal.id}" %>
       </ul>
     </div>
   <% end %>

@@ -24,6 +24,10 @@ class Attachment < ActiveRecord::Base
     time :created_at
   end
 
+  def partial_for_render_object
+    "#{self.class.name.underscore.pluralize}/#{self.class.name.underscore}"
+  end
+
 private
 
   def index_attachable

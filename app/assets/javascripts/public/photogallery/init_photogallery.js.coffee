@@ -4,7 +4,7 @@
     scroll: 4
     visible: 5
 
-  $('.photogallery a').attr('rel', 'gal').colorbox
+  $('.photogallery a').colorbox
     close: 'закрыть'
     current: '{current} из {total}'
     maxHeight: '98%'

@@ -15,9 +15,7 @@
   <% if entertainment.has_photogallery? %>
     <div class="photogallery">
       <ul>
-        <% entertainment.gallery_images.each do |image| %>
-          <li><%= link_to(image_tag_for(image.file_url, 124, 94, true, 'n'), image.file_url, rel: :entertainmen_gallery) %></li>
-        <% end %>
+        <%= render entertainment.gallery_images, :rel => "entertainment_gallery_#{entertainment.id}" %>
       </ul>
     </div>
   <% end %>

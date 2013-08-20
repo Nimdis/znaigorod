@@ -15,9 +15,7 @@
   <% if sauna.has_photogallery? %>
     <div class="photogallery">
       <ul>
-        <% sauna.gallery_images.each do |image| %>
-          <li><%= link_to(image_tag_for(image.file_url, 124, 94, true, 'n'), image.file_url, rel: :info_gallery) %></li>
-        <% end %>
+        <%= render sauna.gallery_images, :rel => "sauna_gallery_#{sauna.id}" %>
       </ul>
     </div>
   <% end %>
@@ -56,9 +54,7 @@
       <% if sauna_hall.has_photogallery? %>
         <div class='photogallery'>
           <ul>
-            <% sauna_hall.gallery_images.each do |image| %>
-              <li><%= link_to(image_tag_for(image.file_url, 124, 94), image.file_url, rel: "info_gallery_#{sauna_hall.id}") %></li>
-            <% end %>
+            <%= render sauna_hall.gallery_images, :rel => "sauna_hall_gallery_#{sauna_hall.id}" %>
           </ul>
         </div>
       <% end %>
