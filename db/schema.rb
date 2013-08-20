@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130814081911) do
+ActiveRecord::Schema.define(:version => 20130819023933) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -413,6 +413,7 @@ ActiveRecord::Schema.define(:version => 20130814081911) do
     t.string   "kind"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.string   "type"
   end
 
   add_index "messages", ["account_id"], :name => "index_messages_on_account_id"
