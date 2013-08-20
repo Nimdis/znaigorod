@@ -13,29 +13,30 @@
     h1
       font-size: 16px
       line-height: 24px
+      margin: 0 0 5px 0
       text-align: center
 
     .social_actions
       +clearfix
       +background(linear-gradient(top, #fff, #e8e8e8))
-      border-top: 1px solid #ccc
 
     .change_friendship
+      border-top: 1px solid #ccc
       font-size: 12px
-      border-bottom: 1px solid #ccc
-      padding: 5px
       margin-bottom: 5px
+      padding: 5px
 
       li
         +toggable-links(4px, 5px)
-        width: 130px
-        text-align: center
         margin: 0 auto
+        text-align: center
+        width: 130px
 
     .friends_counter
-      font-size: 12px
       +clearfix
-      margin: 5px
+      border-top: 1px solid #ccc
+      font-size: 12px
+      padding: 5px
 
     .avatars
       +avatar-list-style
