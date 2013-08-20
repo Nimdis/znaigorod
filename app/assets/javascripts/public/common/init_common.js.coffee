@@ -1,6 +1,7 @@
 @init_common = () ->
 
-  $('a.disabled').on "click", ->
+  $('a.disabled').live 'click', (event) ->
+    event.preventDefault()
     false
 
   $('.ui-widget-overlay').live 'click', (event) ->

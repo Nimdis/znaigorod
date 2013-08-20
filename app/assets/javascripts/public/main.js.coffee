@@ -55,7 +55,6 @@ $ ->
   init_afisha_tabs() if $('#events_filter').length
   init_change_friendship() if $('.change_friendship').length
   init_friends_list() if $('.friends_counter').length
-  init_account_extend() if $('.account_show').length
 
   true
 

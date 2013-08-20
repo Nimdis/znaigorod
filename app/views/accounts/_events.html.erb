@@ -10,22 +10,13 @@
   </ul>
 
   <div class="events list">
-    <div id="draft">
-      <ul>
-        <%= render partial: 'events/account_events', locals: { collection: @events.draft, state: :draft } %>
-      </ul>
-    </div>
-    <div id="pending">
-      <ul>
-        <%= render partial: 'events/account_events', locals: { collection: @events.pending, state: :pending } %>
-      </ul>
-    </div>
-    <div id="published">
-      <ul>
-        <%= render partial: 'events/account_events', locals: { collection: @events.published, state: :published } %>
-      </ul>
-    </div>
-
+    <% %w[draft pending published].each do |state| %>
+      <div id='<%= state %>'>
+        <ul>
+          <%= render partial: 'events/account_events', locals: { collection: @events.by_state(state), state: state.to_sym } %>
+        </ul>
+      </div>
+    <% end %>
   </div>
 </div>
 

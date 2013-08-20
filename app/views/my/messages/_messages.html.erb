@@ -3,5 +3,6 @@
 <% end %>
 
 <div class="pagination">
-  <%= link_to '', my_account_messages_path(@account, :page => collection.current_page + 1), :remote => true, :class => 'next_page closed' unless collection.last_page? %>
+  <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if collection.first_page? }" %>
+  <%= link_to '&darr;'.html_safe, my_account_messages_path(@account, :page => collection.current_page + 1), :remote => true, :class => "next_page #{ 'disabled' if collection.last_page? }" %>
 </div>

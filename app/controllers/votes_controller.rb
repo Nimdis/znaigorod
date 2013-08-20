@@ -42,6 +42,6 @@ class VotesController < ApplicationController
   private
 
   def collection
-    @votes ||= end_of_association_chain.rendereable.page(params[:page]).per(6) if association_chain.first.is_a?(Account)
+    @votes ||= end_of_association_chain.rendereable.page(params[:page]).per(3) if association_chain.first.is_a?(Account)
   end
 end

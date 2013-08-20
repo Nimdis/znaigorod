@@ -1,5 +1,6 @@
 <%= render partial: 'comments/account_comments', locals: { collection: @comments } %>
 
 <div class="pagination">
-  <%= link_to '', account_comments_path(@account, :page => @comments.current_page + 1), :remote => true, :class => 'next_page closed' unless @comments.last_page? %>
+  <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if @comments.first_page? }" %>
+  <%= link_to '&darr;'.html_safe, account_comments_path(@account, :page => @comments.current_page + 1), :remote => true, :class => "next_page #{ 'disabled' if @comments.last_page? }" %>
 </div>

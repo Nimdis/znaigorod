@@ -40,7 +40,6 @@
     .avatars
       +avatar-list-style
 
-
   .right
     margin: 0 0 0 220px
 
@@ -55,6 +54,8 @@
 
     .list
       +clearfix
+      min-height: 50px
+      position: relative
 
       ul
         li
@@ -72,6 +73,28 @@
 
             .kind
               color: #999
+
+      .pagination
+        position: absolute
+        bottom: 0
+        right: 0
+        height: 50px
+        width: 25px
+
+        a
+          +button-style
+          padding: 2px 5px
+          font-size: 16px
+
+          &:active
+            padding: 2px 5px
+
+          &.disabled
+            +background(linear-gradient(top, #efefef, #fff))
+            +text-shadow(#999 1px 1px 1px)
+            background-color: #efefef
+            border: 1px solid #ccc
+            color: #777
 
     .comments.list
 
@@ -153,77 +176,6 @@
               color: #999
 
 
-    .toggle
-      float: right
-      height: 17px
-      margin: -25px 5px 0 0
-      width: 17px
-
-      a.toggler
-        +inline-block
-        white-space: nowrap
-        margin: 0 0 1px 0
-        background: transparent image_url('public/account_actions_sprite.png') no-repeat center center
-        height: 17px
-        width: 17px
-        &:hover
-          text-decoration: none
-        &:active
-          margin: 1px 0 0 0
-
-        &.closed
-          background-position: 0 0
-          &:hover
-            background-position: 0 -34px
-        &.selected
-          background-position: 0 -68px
-          &:hover
-            background-position: 0 -34px
-
-        &.opened
-          background-position: -34px 0
-          &:hover
-            background-position: -34px -34px
-        &.selected
-          background-position: -34px -68px
-          &:hover
-            background-position: -34px -34px
-
-.pagination
-  float: right
-  height: 17px
-  margin: -25px 5px 0 0
-  width: 17px
-
-  a.next_page
-    +inline-block
-    white-space: nowrap
-    margin: 0 0 1px 0
-    background: transparent image_url('public/account_actions_sprite.png') no-repeat center center
-    height: 17px
-    width: 17px
-    &:hover
-      text-decoration: none
-    &:active
-      margin: 1px 0 0 0
-
-    &.closed
-      background-position: 0 0
-      &:hover
-        background-position: 0 -34px
-    &.selected
-      background-position: 0 -68px
-      &:hover
-        background-position: 0 -34px
-
-    &.opened
-      background-position: -34px 0
-      &:hover
-        background-position: -34px -34px
-    &.selected
-      background-position: -34px -68px
-      &:hover
-        background-position: -34px -34px
 .buddies_box
   overflow: auto
   max-height: 520px

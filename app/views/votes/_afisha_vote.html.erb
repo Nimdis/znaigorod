@@ -7,7 +7,7 @@
     <% end %>
   </div>
   <div class="title">
-    <%= link_to vote.voteable.title, afisha_show_path(vote.voteable) %>
+    <%= link_to truncate(vote.voteable.title, lenght: 25), afisha_show_path(vote.voteable) %>
   </div>
   <div class="kind">
     <%= vote.voteable.kind.map(&:text).join(', ') %>
