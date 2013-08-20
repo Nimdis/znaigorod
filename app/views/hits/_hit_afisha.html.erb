@@ -1,4 +1,4 @@
-<%= content_tag :div, link_to(image_tag(resized_image_url(hit.result_decorator.poster_url, 88, 120), size: '88x120', alt: hit.result_decorator.title), hit.result_decorator.poster_url), class: :image %>
+<%= content_tag :div, link_to(image_tag(resized_image_url(hit.result_decorator.poster_url, 88, 120), size: '88x120', alt: hit.result_decorator.title), afisha_show_path(hit.result_decorator)), class: :image %>
 
 <div class="title">
   <%= link_to hit.title, hit.show_url %>
