@@ -36,7 +36,7 @@ $ ->
   init_schedule_toggle() if $('.organization_info .more_schedule').length
   init_photogallery() if $('.photogallery ul li').length
   init_pagination() if $('nav.pagination').length
-  init_next_page_pagination() if $('.pagination .next_page').length
+  init_account_pagination() if $('.account_show').length
   init_affiche_list_settings() if $('.content_wrapper .affiches_list .list_settings').length
   init_sms_claims() if $('.sms_claims li').length
   init_swfkrpano() if $('#krpano').length

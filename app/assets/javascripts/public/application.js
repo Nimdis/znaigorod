@@ -38,7 +38,6 @@
  * = require ./common
  * = require ./comments
  * = require ./votes
- * = require ./account_extend
  * = require ./jscrollpane
  * = require ./main_page
  * = require ./afisha_extend

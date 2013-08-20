@@ -38,7 +38,7 @@ collapse_handler = (kind) ->
   false
 
 
-@init_next_page_pagination = () ->
+@init_account_pagination = () ->
   $('.next_page').live 'ajax:beforeSend', (xhr, settings) ->
     return false if $(this).hasClass('disabled')
     true
