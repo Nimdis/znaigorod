@@ -6,7 +6,7 @@
       </div>
     <% end %>
     <div class='item_wrapper'>
-      <div class='image'><%=link_to image_tag_for(coupon.image_url, 120, 160), coupon_path(coupon) if coupon.image_url? %></div>
+      <div class='image'><%=link_to resized_image_url(coupon.image_url, 120, 160), coupon_path(coupon) if coupon.image_url? %></div>
       <div class='column'>
         <div class='coupon_description'><%= link_to coupon.title.truncate(55).gilensize, coupon_path(coupon), title: coupon.description %></div>
         <div class='place'><%= coupon.place %></div>

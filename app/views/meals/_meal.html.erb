@@ -58,7 +58,7 @@
                     <div class="position">
                       <div class="position_info">
                         <div class="position_image">
-                          <%= link_to image_tag_for(position.image_url, 50, 50, true, 'n'), position.image_url if position.image_url %>
+                          <%= link_to resized_image_url(position.image_url, 50, 50), position.image_url if position.image_url %>
                         </div>
                         <span class="title">
                           <%= "#{position.title.strip}" %>

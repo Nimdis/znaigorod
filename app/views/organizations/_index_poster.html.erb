@@ -1,9 +1,0 @@
-<div class="poster">
-  <%= link_to item do %>
-    <% if item.logotype_url.present? %>
-      <%= image_tag_for item.logotype_url, 137, 100 %>
-    <% else %>
-      <%= image_tag "public/stub.jpg", :width => '137', :height => '100', :alt => item.title, :title => item.title %>
-    <% end %>
-  <% end %>
-</div>

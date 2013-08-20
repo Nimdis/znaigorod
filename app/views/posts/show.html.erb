@@ -2,17 +2,17 @@
 
 <div class="clearfix">
 
-  <div class="post_wrapper">
-    <div class="post">
-      <div class="post_meta">
+  <div class='post_wrapper'>
+    <div class='post'>
+      <div class='post_meta'>
         <h2><%= @post.title %></h2>
-        <span class="date"><%= l(@post.created_at, :format => "%d %B %Y") %></span>
+        <span class='date'><%= l(@post.created_at, :format => '%d %B %Y') %></span>
       </div>
 
-      <div class="post_content">
-        <div class="post_annotation">
+      <div class='post_content'>
+        <div class='post_annotation'>
           <% if @post.post_images.any? %>
-            <%= image_tag @post.post_images.first.attachment_url.gsub(/\/\d+-\d+\//, '/380-284!/'), :alt => @post.post_images.first.title, :class => 'preview' %>
+            <%= image_tag(resized_image_url(@post.post_images.first.attachment_url, 380, 284), :size => '380x284', :alt => @post.post_images.first.title, :class => 'preview') %>
           <% end %>
           <%= @post.annotation.as_html %>
         </div>
@@ -24,7 +24,7 @@
           <div class="photogallery">
             <ul>
               <% @post.post_images.each do |image| %>
-                <li><%= link_to(image_tag_for(image.attachment_url, 124, 94, true, 'n'), image.attachment_url, rel: :info_gallery) %></li>
+                <%= render :partial => image.partial_for_render_object, :object => image, :locals => { :rel => "post_images_gallery_#{@post.id}" } %>
               <% end %>
             </ul>
           </div>

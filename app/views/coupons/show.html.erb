@@ -27,7 +27,7 @@
       <div class='info'>
         <div class='left_part'>
           <div class='image'>
-            <%= link_to image_tag_for(@coupon.image_url, 160, 200), @coupon.image_url if @coupon.image_url? %>
+            <%= link_to resized_image_url(@coupon.image_url, 160, 200), @coupon.image_url if @coupon.image_url? %>
           </div>
 
         </div>
@@ -91,7 +91,7 @@
         <% organization = OrganizationDecorator.new(@coupon.organization) %>
         <div class='title'><%= link_to organization.title, organization_path(organization) %></div>
         <div class='organization_image'>
-          <%= link_to image_tag_for(organization.logotype_url, 120, 160), organization_path(organization) if organization.logotype_url? %>
+          <%= link_to resized_image_url(organization.logotype_url, 120, 160), organization_path(organization) if organization.logotype_url? %>
         </div>
         <div class="rating like_a_line">
           <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => organization } %>
@@ -122,7 +122,7 @@
             <div class='title'><%= link_to coupon.title, coupon_path(coupon) %></div>
             <div class='place'><%= coupon.place %></div>
             <div class='coupon_image'>
-              <%= link_to image_tag_for(coupon.image_url, 120, 160), coupon_path(coupon) if coupon.image_url? %>
+              <%= link_to resized_image_url(coupon.image_url, 120, 160), coupon_path(coupon) if coupon.image_url? %>
             </div>
             <div class='random_coupons_price'>
               <%= content_tag :div, content_tag(:span, "#{coupon.price_without_discount}р.", class: :stroke), class: :original_price if coupon.discount? %>

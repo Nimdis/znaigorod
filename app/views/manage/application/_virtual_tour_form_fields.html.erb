@@ -2,7 +2,7 @@
   <legend>3D-тур</legend>
   <%= f.simple_fields_for :virtual_tour do |vtf| %>
     <div class="virtual_tour_image">
-      <%= image_tag_for(vtf.object.attachment_url, 334, 164, true, 'n') if vtf.object.attachment_url? %>
+      <%= image_tag(resized_image_url(vtf.object.attachment_url, 334, 164), :size => '334x164') if vtf.object.attachment_url? %>
     </div>
     <%= vtf.input :link %>
     <%= vtf.input :attachment %>

@@ -1,6 +1,6 @@
 <li>
   <p class='image'>
-    <%= image_tag gallery_image.file_url, :width => '160', :height => '160' %>
+    <%= link_to image_tag(resized_image_url(gallery_image.file_url, 160, 160), :size => '160x160', :alt => gallery_image.description), gallery_image.file_url, :target => '_blank' %>
   </p>
   <p class='action'>
     <% if gallery_image.attachable.is_a?(SaunaHall) %>

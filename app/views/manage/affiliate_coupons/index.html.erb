@@ -8,7 +8,7 @@
       <p><%= link_to coupon.title, manage_coupon_path(coupon) %></p>
 
       <div class='poster'>
-        <%= link_to image_tag_for(coupon.image_url, 70, 100), manage_coupon_path(coupon) %>
+        <%= link_to(image_tag(resized_image_url(coupon.image_url, 70, 100), :size => '70x100', :alt => coupon.title), manage_coupon_path(coupon)) %>
       </div>
 
       <div class="details">

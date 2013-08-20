@@ -5,6 +5,10 @@ class PostImage < ActiveRecord::Base
   attr_accessible :title, :attachment
 
   has_attached_file :attachment, :storage => :elvfs, :elvfs_url => Settings['storage.url']
+
+  def partial_for_render_object
+    "#{self.class.name.underscore.pluralize}/#{self.class.name.underscore}"
+  end
 end
 
 # == Schema Information

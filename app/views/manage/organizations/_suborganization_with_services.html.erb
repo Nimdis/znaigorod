@@ -43,6 +43,6 @@
     </script>
   </div>
 
-  <%= render 'services' %>
-  <%= render 'menus' if resource.is_a?(Meal) %>
+  <%= render 'manage/services/services' %>
+  <%= render 'manage/menus/menus' if resource.is_a?(Meal) %>
 </div>

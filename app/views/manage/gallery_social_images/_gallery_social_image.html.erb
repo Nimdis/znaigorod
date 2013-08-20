@@ -1,0 +1,30 @@
+<li>
+  <p class='image'>
+    <%= link_to gallery_social_image.file_url do %>
+      <% if gallery_social_image.width? && gallery_social_image.height? %>
+        <% if 160 * gallery_social_image.height / gallery_social_image.width < 160 %>
+          <%= image_tag(gallery_social_image.thumbnail_url,
+                        :width => (gallery_social_image.width * 160 / gallery_social_image.height),
+                        :height => 160,
+                        :alt => gallery_social_image.description) %>
+        <% else %>
+          <%= image_tag(gallery_social_image.thumbnail_url,
+                        :width => 160,
+                        :height => (gallery_social_image.height * 160 / gallery_social_image.width),
+                        :alt => gallery_social_image.description) %>
+        <% end %>
+      <% else %>
+        <%= image_tag(gallery_social_image.thumbnail_url, :width => '160', :alt => gallery_social_image.description) %>
+      <% end %>
+    <% end %>
+  </p>
+  <p class='action'>
+    <% if gallery_social_image.attachable.is_a?(SaunaHall) %>
+      <%= link_to "Удалить", [:manage, gallery_social_image.attachable.organization, gallery_image.attachable, gallery_image], :method => :delete, :remote => true, :class => 'ajax_delete'  %>
+      <%= link_to "Редактировать", [:edit, :manage, gallery_social_image.attachable.organization, gallery_image.attachable, gallery_image] %>
+    <% else %>
+      <%= link_to "Удалить", [:manage, gallery_social_image.attachable, gallery_social_image], :method => :delete, :remote => true, :class => 'ajax_delete'  %>
+      <%= link_to "Редактировать", [:edit, :manage, gallery_social_image.attachable, gallery_social_image] %>
+    <% end %>
+  </p>
+</li>

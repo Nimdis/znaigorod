@@ -58,6 +58,7 @@ class Afisha < ActiveRecord::Base
 
   default_value_for :yandex_metrika_page_views, 0
   default_value_for :vkontakte_likes,           0
+  default_value_for :total_rating,              0
 
   before_save :prepare_trailer
   before_save :set_wmode_for_trailer, :if => :published?

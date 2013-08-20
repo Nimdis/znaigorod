@@ -5,7 +5,7 @@
       <span class="label"><%= VirtualTour.human_attribute_name('link') %>:</span>
       <span class="value"><%= content_tag :abbr, truncate(virtual_tour.link, :length => 20), :title => virtual_tour.link %></span>
     </div>
-    <%= image_tag_for(virtual_tour.attachment_url, 334, 164, true, 'n') if virtual_tour.attachment_url? %>
+    <%= image_tag resized_image_url(virtual_tour.attachment_url, 334, 164), :size => '334x164' if virtual_tour.attachment_url? %>
   <% else %>
     не указано
   <% end %>

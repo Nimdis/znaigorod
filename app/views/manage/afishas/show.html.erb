@@ -175,17 +175,7 @@
     <span class="value">
       <%= link_to 'Удалить все фотографии', [:destroy_all, :manage, resource, :gallery_social_images], :method => :delete %>
       <ul>
-        <% resource.gallery_social_images.each do |image| %>
-          <li>
-            <p class='image'>
-              <%= resized_link_image(image, 160, 160) %>
-            </p>
-            <p class='action'>
-              <%= link_to "Удалить", [:manage, resource, image], :method => :delete, :remote => true, :class => 'ajax_delete' %>
-              <%= link_to 'Редактировать', [:edit, :manage, resource, image] %>
-            </p>
-          </li>
-        <% end %>
+        <%= render resource.gallery_social_images %>
       </ul>
     </span>
   <% else %>
