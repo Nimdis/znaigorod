@@ -11,13 +11,12 @@
   <div class="messages list">
     <div id="private">
       <ul class="account_messages">
-        <%= render partial: 'my/messages/messages', locals: { collection: @messages } %>
       </ul>
     </div>
 
     <div id="notifications">
       <ul class="account_messages">
-        <%= render partial: 'my/messages/messages', locals: { collection: @messages } %>
+        <%= render partial: 'my/messages/messages', locals: { collection: @notification_messages } %>
       </ul>
     </div>
   </div>

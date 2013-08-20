@@ -7,8 +7,8 @@ Znaigorod::Application.routes.draw do
     resources :accounts, :only => [:show, :edit, :update] do
       delete 'destroy_image' => 'accounts#destroy_image', :on => :member, :as => :destroy_image
 
-      resources :messages, :only => :index do
-        put 'change_message_status' => 'messages#change_message_status', :as => :change_message_status
+      resources :notification_messages, :only => :index do
+        put 'change_message_status' => 'notification_messages#change_message_status', :as => :change_message_status
       end
     end
 
