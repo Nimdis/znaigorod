@@ -26,4 +26,9 @@
   cookie_value.order_by = $('.order_by li.selected a', presentation_block).attr('class')
   $.cookie(cookie_name, $.param(cookie_value))
 
+  $('a', presentation_block).click ->
+    return false if $(this).closest('li').hasClass('selected')
+
+    true
+
   true
