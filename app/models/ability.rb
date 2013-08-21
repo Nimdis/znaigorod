@@ -19,7 +19,7 @@ class Ability
       end
     when 'my'
       can :show, Account do |account|
-        account.user == user
+        user.account == account
       end
 
       can [:index, :archive, :new, :create, :available_tags, :preview_video], Afisha if user.persisted?

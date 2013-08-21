@@ -2,11 +2,12 @@
   <div class="left">
     <div class="image">
       <%= image_tag(resized_image_url(@account.avatar.url, 200, 200), size: '200x200', title: @account.title, alt: @account.title) %>
+      <%= link_to 'изменить изображение', edit_my_account_path(@account) %>
     </div>
     <h1><%= @account.title %></h1>
 
     <div class="social_actions">
-      <% if @account.friends.approved.any? %>
+      <% if @friends.any? %>
         <div class="friends_counter">
           <div class="floatl">Друзья</div>
           <div class="floatr"><%= t('account_friends', count: @friends.total_count) %></div>

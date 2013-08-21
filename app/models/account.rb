@@ -117,7 +117,6 @@ class Account < ActiveRecord::Base
   def friends_with?(account)
     self.friends.where(friendable_id: account.id, friendly: true).any?
   end
-
 end
 
 # == Schema Information

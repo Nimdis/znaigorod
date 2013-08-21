@@ -43,6 +43,7 @@
  * = require ./afisha_extend
  * = require ./afisha_filter
  * = require ./afisha_map
+ * = require ./account_extend
  * = require ./payment
  * = require ./tabs
  * = require ./trailers
