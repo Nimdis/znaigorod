@@ -5,7 +5,8 @@ class SuborganizationDecorator < ApplicationDecorator
     @decorated_organization ||= OrganizationDecorator.decorate organization
   end
 
-  delegate :logo_link, :title_link, :address_link, :html_description,
+  delegate :truncated_title_link, :logotype_link, :address_link,
+    :html_description,
     :truncated_description, :site_link, :email_link, :stand_info, :schedule_today,
     :organization_url, :to => :decorated_organization
 
@@ -33,10 +34,6 @@ class SuborganizationDecorator < ApplicationDecorator
     content << email_link unless email_link.blank?
     content << site_link unless site_link.blank?
     h.content_tag(:div, content.join(", ").html_safe, class: :contacts) unless content.blank?
-  end
-
-  def truncated_title_link
-    decorated_organization.truncated_title_link
   end
 
   def decorated_phones

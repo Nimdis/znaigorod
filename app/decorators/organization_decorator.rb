@@ -5,30 +5,22 @@ class OrganizationDecorator < ApplicationDecorator
 
   delegate :decorated_phones, :to => :decorated_priority_suborganization
 
-  def image_for_main_page
-    unless organization.logotype_url.blank?
-      h.link_to image_tag(organization.logotype_url, 100, 100, organization.title), organization_url
+  def title
+    organization.title.text_gilensize
+  end
+
+  def truncated_title_link(width = 22)
+    if organization.title.length > width
+      h.link_to h.truncate(organization.title, length: width).text_gilensize, organization_url, title: title
     else
-      h.link_to h.image_tag("public/stub.jpg", :size => "100x100", :alt => organization.title, :title => organization.title), organization_url
+      h.link_to title, organization_url
     end
   end
 
-  def logo_link(width = 80, height = 80)
-    if organization.logotype_url?
-      h.link_to h.image_tag(h.resized_image_url(organization.logotype_url, width, height, { crop: '!', orientation: 'n' }), size: "#{width}x#{height}", alt: organization.title.text_gilensize), organization_url
-    end
-  end
-
-  def title_link
-    h.link_to organization.title.text_gilensize, organization_url
-  end
-
-  def truncated_title_link
-    if title.length > 80
-      h.link_to h.truncate(title, length: 80).text_gilensize, organization_url, title: title
-    else
-      h.link_to title.text_gilensize, organization_url
-    end
+  def logotype_link(width = 178, height = 178)
+    @logotype_link ||= h.link_to(
+      h.image_tag(h.resized_image_url(organization.logotype_url, width, height), size: "#{width}x#{height}", alt: title),
+      organization_url) if organization.logotype_url?
   end
 
   def address_link(address = organization.address)

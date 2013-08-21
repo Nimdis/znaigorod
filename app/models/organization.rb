@@ -146,6 +146,7 @@ class Organization < ActiveRecord::Base
 
     float :rating
     float :total_rating
+    string :title
 
     integer :user_id
 

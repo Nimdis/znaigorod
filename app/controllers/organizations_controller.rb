@@ -8,7 +8,7 @@ class OrganizationsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @presenter = OrganizationsCatalogPresenter.new(:kind => :organization, :page => params[:page])
+        @presenter = OrganizationsCatalogPresenter.new(params)
 
         render partial: 'organizations/organizations_list', layout: false and return if request.xhr?
       end

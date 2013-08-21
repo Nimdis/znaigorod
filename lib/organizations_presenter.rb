@@ -173,6 +173,22 @@ module OrganizationsPresenter
     }
   end
 
+  def sortings_links
+    @sortings_links ||= [].tap { |array|
+      self.class.available_sortings_without_nearness.each do |sorting_value|
+        array << {
+          title: I18n.t("organization.sort.#{sorting_value}"),
+          url: "#{pluralized_kind}_path",
+          parameters: {
+            :categories => categories_filter.selected,
+            :order_by => sorting_value
+          },
+          selected: order_by == sorting_value
+        }
+      end
+    }
+  end
+
 
   def total_count
     searcher.total

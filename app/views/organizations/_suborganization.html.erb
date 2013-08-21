@@ -1,14 +1,8 @@
 <div class='info'>
-  <h2>
-    <% if suborganization.title.length > 22 %>
-      <%= link_to suborganization.title.truncated(22, nil), suborganization, title: suborganization.title %>
-    <% else %>
-      <%= link_to suborganization.title, suborganization %>
-    <% end %>
-  </h2>
-  <% if suborganization.logotype_url.present? %>
+  <h2><%= suborganization.truncated_title_link %> </h2>
+  <% if suborganization.logotype_link %>
     <div class='image'>
-      <%= link_to(image_tag(resized_image_url(suborganization.logotype_url, 178, 178), size: '178x178', alt: suborganization.title), suborganization) %>
+      <%= suborganization.logotype_link %>
     </div>
   <% else %>
     <hr />
