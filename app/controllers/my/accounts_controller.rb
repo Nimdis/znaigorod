@@ -14,14 +14,6 @@ class My::AccountsController < My::ApplicationController
     @dialogs = @account.dialogs
   end
 
-  def destroy_image
-    destroy_image! {
-      @account.avatar.destroy
-      @account.save
-      redirect_to edit_my_account_path and return
-    }
-  end
-
   protected
 
   def resource

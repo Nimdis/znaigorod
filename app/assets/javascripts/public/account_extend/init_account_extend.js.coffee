@@ -1,5 +1,15 @@
 @init_account_extend = () ->
-  $('#account_avatar').on 'change', ->
+  target = $('#account_avatar')
+  target.on 'change', ->
     $(this).parents('form').submit()
 
     true
+
+  target.hide()
+  link = $('<a href="#">изменить</a>')
+  target.closest('form').append(link)
+
+  link.click ->
+    target.click()
+
+    false

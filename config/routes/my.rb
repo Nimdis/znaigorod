@@ -14,9 +14,7 @@ Znaigorod::Application.routes.draw do
 
     resources :private_messages, :only => [:new, :create]
 
-    resource :account, :only => [:show, :edit, :update] do
-      delete 'destroy_image' => 'accounts#destroy_image', :on => :member, :as => :destroy_image
-    end
+    resource :account, :only => [:show, :edit, :update]
 
     resources :afisha, :except => :show, :controller => 'afishas' do
       get 'edit/step/:step' => 'afishas#edit', :defaults => { :step => 'first' }, :on => :member, :as => :edit_step
