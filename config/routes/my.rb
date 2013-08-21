@@ -4,15 +4,15 @@ Znaigorod::Application.routes.draw do
 
     get '/afisha/available_tags' => 'afishas#available_tags', :as => :available_tags, :controller => 'afishas'
 
-    resources :private_messages, :only => [:new, :create] do
-      put 'change_message_status' => 'private_messages#change_message_status', :as => :change_message_status
+    resources :messages, :only => [] do
+      put 'change_message_status' => 'messages#change_message_status', :on => :member, :as => :change_status
     end
+
+    resources :notification_messages, :only => :index
 
     resources :dialogs, :only => [:index, :show]
 
-    resources :notification_messages, :only => :index do
-      put 'change_message_status' => 'notification_messages#change_message_status', :as => :change_message_status
-    end
+    resources :private_messages, :only => [:new, :create]
 
     resource :account, :only => [:show, :edit, :update] do
       delete 'destroy_image' => 'accounts#destroy_image', :on => :member, :as => :destroy_image
