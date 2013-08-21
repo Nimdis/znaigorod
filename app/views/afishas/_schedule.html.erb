@@ -19,7 +19,11 @@
           <% showings_with_place.each do |place, showings| %>
             <ul>
               <li class='theater'>
-                <p class='logo'><%= showings.first.place_decorator.organization.logo_link(40, 40) %></p>
+                <p class='logo'>
+                  <%= link_to organization_path(showings.first.place_decorator.organization) do %>
+                    <%= image_tag(resized_image_url(showings.first.place_decorator.organization.logotype_url, 40, 40), :alt => showings.first.place_decorator.organization.title.text_gilensize) %>
+                  <% end %>
+                </p>
                 <p class='name'><%= showings.first.place_decorator.link_short_title %></p>
                 <p class='address'><%= showings.first.place_decorator.address_link %></p>
               </li>

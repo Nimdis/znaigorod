@@ -2,10 +2,14 @@
   <li class='sauna_item'>
     <div class="organization_attributes">
       <div class="poster">
-        <%= organization.logo_link(60,60) %>
+        <%= link_to organization_path(organization) do %>
+          <%= image_tag(resized_image_url(organization.logotype_url, 60, 60), :alt => organization.title.text_gilensize) %>
+        <% end %>
       </div>
       <div class="organization_title">
-        <%= organization.title_link %>
+        <%= link_to organization_path(organization) do %>
+          <%= organization.title.as_html %>
+        <% end %>
       </div>
       <div class="attributes">
         <% if organization.address_link.present? %>
