@@ -4,9 +4,12 @@
 
 <div id="events_filter">
   <ul>
-    <li><%= link_to t('draft'), '#draft' %></li>
-    <li><%= link_to t('pending'), '#pending' %></li>
-    <li><%= link_to t('published'), '#published' %></li>
+    <% %w[draft pending published].each do |state| %>
+      <li><%= link_to "##{state}" do %>
+        <%= t(state) %> (<%= @events.by_state(state).total_count %>)
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 
   <div class="events list">
@@ -19,4 +22,3 @@
     <% end %>
   </div>
 </div>
-
