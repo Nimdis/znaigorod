@@ -63,7 +63,7 @@ module OrganizationsPresenter
     super(args)
 
     @page ||= 1
-    @per_page = 12
+    @per_page = 18
   end
 
   def order_by

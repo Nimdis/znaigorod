@@ -9,8 +9,8 @@
   <div class='present_by'>
     <p>Вид:</p>
     <ul>
-      <li><a href='#'>Постеры</a></li>
-      <li><a href='#'>Список</a></li>
+      <li class='selected'><a href='#' class='poster'>Постеры</a></li>
+      <li><a href='#' class='list'>Список</a></li>
     </ul>
   </div>
   <div class='order_by'>
@@ -19,7 +19,7 @@
       <% @presenter.sortings_links.each do |sortings_link| %>
         <li<%= " class=selected" if sortings_link[:selected] %>>
           <%= link_to sortings_link[:title],
-            send(sortings_link[:url], sortings_link[:parameters]) %>
+            send(sortings_link[:url], sortings_link[:parameters]), :class => sortings_link[:parameters][:order_by] %>
         </li>
       <% end %>
     </ul>

@@ -38,7 +38,7 @@ $ ->
   init_pagination() if $('nav.pagination').length
   init_account_pagination() if $('.account_show').length
   init_account_extend() if $('.account_show').length
-  init_affiche_list_settings() if $('.content_wrapper .affiches_list .list_settings').length
+  init_list_settings() if $('.content_wrapper .presentation_filters').length
   init_sms_claims() if $('.sms_claims li').length
   init_swfkrpano() if $('#krpano').length
   init_trailers() if $('.afisha_show .trailer p').length
