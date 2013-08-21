@@ -13,7 +13,7 @@ class My::NotificationMessagesController < My::ApplicationController
 
   def change_message_status
     change_message_status! {
-      @notification_message = NotificationMessage.find(params[:message_id])
+      @notification_message = NotificationMessage.find(params[:notification_message_id])
       @notification_message.change_message_status
 
       render partial: 'my/messages/message', locals: { message: @notification_message } and return
