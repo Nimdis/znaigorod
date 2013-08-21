@@ -79,6 +79,7 @@ ru:
     show: Описание
     sort:
       rating: Рейтингу
+      price: Цене
       title: Названию
 
   organization_stand:

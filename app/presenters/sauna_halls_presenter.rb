@@ -42,7 +42,7 @@ class SaunaHallsPresenter
   end
 
   def self.available_sortings
-    %w[rating price title distance]
+    %w[rating price title]
   end
 
   available_sortings.each do |sorting|
@@ -51,18 +51,12 @@ class SaunaHallsPresenter
     end
 
     define_method "#{sorting}_sort_link" do
-      html_options = self.send("order_by_#{sorting}?") ? { class: "selected #{sorting}" } : {}
-
-      content_tag :li, link_to(I18n.t("sauna.sort.#{sorting}"), saunas_path(params.merge(order_by: sorting)), html_options)
+      content_tag :li, link_to(I18n.t("sauna.sort.#{sorting}"), saunas_path(params.merge('order_by' => sorting)), :class => sorting), :class => order_by == sorting ? 'selected' : nil
     end
   end
 
   def order_by
     @order_by = self.class.available_sortings.include?(@order_by) ? @order_by : self.class.available_sortings.first
-
-    if order_by_distance? && (lat.blank? || lon.blank? || radius.blank?)
-      @order_by = (self.class.available_sortings - ['distance']).include?(@order_by) ? @order_by : self.class.available_sortings.first
-    end
 
     @order_by
   end
@@ -141,11 +135,7 @@ class SaunaHallsPresenter
         with(:pool_features, feature)
       end
 
-      if order_by_distance? && lat && lon && radius
-        order_by_geodist(:location, lat, lon)
-      else
-        order_by(criterion, direction)
-      end
+      order_by(criterion, direction)
 
       with(:location).in_radius(lat, lon, radius) if lat && lon && radius
 
@@ -235,18 +225,8 @@ class SaunaHallsPresenter
     end
   end
 
-  def distance_sort_link
-    html_options = {}
-    html_options = { class: 'disabled distance', title: 'Не активно, если не определено ваше местоположение.' } unless geo_filter_used?
-    html_options = { class: 'selected distance' } if order_by_distance? && geo_filter_used?
-
-    content_tag :li, link_to( I18n.t('sauna.sort.distance'), saunas_path(params.merge(order_by: 'distance')), html_options)
-  end
-
   def sort_links
-    separator = content_tag(:li, content_tag(:span, '&nbsp;', class: 'separator')).html_safe
-
-    [rating_sort_link, price_sort_link, title_sort_link, distance_sort_link].join(separator).html_safe
+    [rating_sort_link, price_sort_link, title_sort_link].join("\n").html_safe
   end
 
   def keywords

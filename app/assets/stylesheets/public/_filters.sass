@@ -12,3 +12,30 @@
 .presentation_filters
   +clearfix
   margin-bottom: 15px
+
+  .present_by
+    float: left
+    /* FIXME iconize & show it */
+    display: none
+    margin-left: 10px
+
+  .order_by
+    float: right
+    margin-right: 10px
+
+  .present_by,
+  .order_by
+    p
+      +inline-block
+
+    ul
+      +inline-block
+      +clearfix
+
+      li
+        float: left
+        margin-right: 5px
+        +toggable-links
+
+        &:last-child
+          margin-right: 0

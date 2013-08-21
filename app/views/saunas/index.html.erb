@@ -2,15 +2,23 @@
 <% content_for :meta_description, t('meta.saunas.description') %>
 <% content_for :meta_keywords, t('meta.saunas.keywords') %>
 
-<%= render :partial => 'advanced_filters' %>
-
-<div class="list_settings">
-  <div class="presentation">
-  </div>
-  <div class="sort saunas">
-    <p>Сортировка:</p>
+<div class='presentation_filters sauna'>
+  <div class='present_by'>
+    <p>Вид:</p>
     <ul>
-      <%= @presenter.sort_links %>
+      <li class='selected'><a href='#' class='poster'>Постеры</a></li>
+      <li><a href='#' class='list'>Список</a></li>
+    </ul>
+  </div>
+  <div class='order_by'>
+    <p>Сортировать по:</p>
+    <ul>
+      <% @presenter.sortings_links.each do |sortings_link| %>
+        <li<%= " class=selected" if sortings_link[:selected] %>>
+          <%= link_to sortings_link[:title],
+            send(sortings_link[:url], sortings_link[:parameters]), :class => sortings_link[:parameters][:order_by] %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

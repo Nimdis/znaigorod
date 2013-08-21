@@ -52,11 +52,14 @@ $desktop_default_width: 1200px
     border: 1px solid #ccc
     +border-radius
     padding: $padding-top 8px $padding-bottom
+
     &:hover
       color: #f60
       text-decoration: none
+
     &:active
       padding: $padding-bottom 8px $padding-top
+
   &.selected a
     color: #fff
     line-height: 16px
@@ -64,8 +67,16 @@ $desktop_default_width: 1200px
     border: none
     +box-shadow(rgba(0, 0, 0, 0.3) 1px 1px 2px inset)
     padding: ($padding-top + 1) 8px ($padding-bottom + 1)
+
     &:active
       padding: ($padding-bottom + 1) 8px ($padding-top + 1)
+
+  &.disabled a
+    color: #ccc
+    cursor: default
+
+    &:active
+      padding: $padding-top 8px $padding-bottom
 
 =avatar-style
   float: left
