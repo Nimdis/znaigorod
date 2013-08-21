@@ -5,11 +5,18 @@ class FriendsController < ApplicationController
   custom_actions collection: [:change_friendship, :buddies]
 
   belongs_to :account, :polymorphic => true
+  has_scope :page, :default => 1
 
   def index
     index!{
       @presenter = AccountPresenter.new(params)
-      render partial: 'accounts/account_posters', layout: false and return if request.xhr?
+      render partial: 'accounts/account_posters', locals: { collection: @accounts }, layout: false and return if request.xhr?
+    }
+  end
+
+  def buddies
+    buddies!{
+      render partial: 'friends/account_friends', locals: { collection: @accounts.page(params[:page]).per(5) }, layout: false and return
     }
   end
 
@@ -20,25 +27,13 @@ class FriendsController < ApplicationController
         @friend.change_friendship
       end
 
-      render :partial => 'friend', :locals => { friend: @friend } and return
-    }
-  end
-
-  def buddies
-    buddies! {
-      @accounts = @account.friends.approved.map(&:friendable)
-      render :partial => 'buddies', :locals => { :accounts => @accounts } and return
+      render :partial => 'friendship', :locals => { friend: @friend } and return
     }
   end
 
   private
 
   def collection
-    @friends = current_user.account.friends.approved.map(&:friendable)
-    Kaminari.paginate_array(@friends).page(params[:page]).per(per_page)
-  end
-
-  def per_page
-    18
+    @accounts = Kaminari.paginate_array(current_user.account.friends.approved.map(&:friendable)).page(params[:page]).per(18)
   end
 end

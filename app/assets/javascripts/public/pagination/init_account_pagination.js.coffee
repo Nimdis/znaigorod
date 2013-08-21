@@ -1,3 +1,7 @@
+scroll = (target) ->
+  y_coord = Math.abs($(window).height() - target.offset().top - target.height())
+  $("html, body").animate({ scrollTop: y_coord })
+
 recalculate_block_height = (kind, limit = 0) ->
   prev_element_top = $('li:first', kind).position().top
   block_height = $('li:first', kind).outerHeight(true, true)
@@ -18,6 +22,7 @@ more_handler = (kind, response) ->
     , 300, ->
       $('.pagination:first', kind).remove()
       $('.pagination:last', kind).show()
+      scroll($('.pagination', kind))
       true
   true
 
@@ -33,6 +38,7 @@ collapse_handler = (kind) ->
       replaced_href = $('.next_page', kind).attr('href').replace(/page=\d+/, 'page=2')
       $('.next_page', kind).attr('href', replaced_href).removeClass('disabled')
       $('.toggler', kind).addClass('disabled')
+      scroll($('.pagination', kind))
       true
 
   false
