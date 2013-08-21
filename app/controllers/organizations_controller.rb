@@ -8,7 +8,10 @@ class OrganizationsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @presenter = OrganizationsCatalogPresenter.new(params)
+        cookie = cookies['_znaigorod_organization_list_settings'].to_s
+        settings_from_cookie = {}
+        settings_from_cookie = Rack::Utils.parse_nested_query(cookie) if cookie.present?
+        @presenter = OrganizationsCatalogPresenter.new(settings_from_cookie.merge(params))
 
         render partial: 'organizations/organizations_list', layout: false and return if request.xhr?
       end

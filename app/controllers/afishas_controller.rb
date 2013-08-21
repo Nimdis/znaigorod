@@ -2,11 +2,11 @@
 
 class AfishasController < ApplicationController
   def index
-    cookie = cookies['znaigorod_afishas_list_settings'].to_s
-    settings = {}
-    settings = JSON.parse(cookie) if cookie.present? && cookie.length > 1
+    cookie = cookies['_znaigorod_afisha_list_settings'].to_s
+    settings_from_cookie = {}
+    settings_from_cookie = Rack::Utils.parse_nested_query(cookie) if cookie.present?
 
-    @presenter = AfishaPresenter.new(params.merge(settings))
+    @presenter = AfishaPresenter.new(settings_from_cookie.merge(params))
 
     if request.xhr?
       if params[:page]
