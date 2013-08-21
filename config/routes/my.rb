@@ -10,12 +10,12 @@ Znaigorod::Application.routes.draw do
 
     resources :dialogs, :only => [:index, :show]
 
-    resources :accounts, :only => [:show, :edit, :update] do
-      delete 'destroy_image' => 'accounts#destroy_image', :on => :member, :as => :destroy_image
+    resources :notification_messages, :only => :index do
+      put 'change_message_status' => 'notification_messages#change_message_status', :as => :change_message_status
+    end
 
-      resources :notification_messages, :only => :index do
-        put 'change_message_status' => 'notification_messages#change_message_status', :as => :change_message_status
-      end
+    resource :account, :only => [:show, :edit, :update] do
+      delete 'destroy_image' => 'accounts#destroy_image', :on => :member, :as => :destroy_image
     end
 
     resources :afisha, :except => :show, :controller => 'afishas' do

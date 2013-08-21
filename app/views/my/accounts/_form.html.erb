@@ -1,18 +1,18 @@
 <% if @account.avatar? %>
   <h1>Измените изображение</h1>
-  <%= simple_form_for @account, as: :account, :url => my_account_path(@account.id) do |f| %>
+  <%= simple_form_for @account, as: :account, :url => my_account_path do |f| %>
     <div>
       <%= image_tag resized_image_url(resource.avatar_url, 200, 200) %>
     </div>
     <div class='submit'>
       <%= f.submit 'Сохранить', class: :button %>
       <%= link_to 'Отмена', my_root_path %>
-      <%= link_to 'Удалить', destroy_image_my_account_path(@account.id), :method => :delete, :confirm => 'Вы уверены что хотите удалить?' %>
+      <%= link_to 'Удалить', destroy_image_my_account_path, :method => :delete, :confirm => 'Вы уверены что хотите удалить?' %>
     </div>
   <% end %>
 <% else %>
   <h1>Загрузите изображение</h1>
-  <%= simple_form_for @account, as: :account, url: my_account_path(@account.id) do |f| %>
+  <%= simple_form_for @account, as: :account, url: my_account_path do |f| %>
     <%= f.input :avatar, label: 'Выберите изображение', required: true, class: :button %>
     <%= f.error :avatar_content_type %>
     <div class='submit'>
