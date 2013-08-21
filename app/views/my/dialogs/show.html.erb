@@ -1,0 +1,13 @@
+<ul>
+  <% @messages.each do |message| %>
+    <li>
+      <%= message.producer.title %>: 
+      <%= message.body %>
+      <%= time_ago_in_words(message.created_at) %> назад
+    </li>
+  <% end %>
+</ul>
+<div>
+  <%= render partial: "my/dialogs/form" %>
+</div>
+

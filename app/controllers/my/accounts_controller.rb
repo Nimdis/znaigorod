@@ -10,6 +10,7 @@ class My::AccountsController < My::ApplicationController
     @friends = Kaminari.paginate_array(@account.friends.approved.map(&:friendable)).page(1).per(5)
     @notification_messages = @account.notification_messages.page(1).per(5)
     @votes = @account.votes.rendereable.page(1).per(3)
+    @dialogs = @account.dialogs
   end
 
   def destroy_image

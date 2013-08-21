@@ -22,7 +22,7 @@
   </div>
 
   <div class="right">
-    <%= render 'messages' if @notification_messages.any? %>
+    <%= render 'messages' if @notification_messages.any? || @private_messages.any? %>
     <%= render 'accounts/events' if @events.any? %>
 
     <% if @votes.any? %>

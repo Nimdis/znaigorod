@@ -14,8 +14,9 @@ class Account < ActiveRecord::Base
   has_many :events,          through: :users, order: 'afisha.created_at DESC'
   has_many :messages,        order: 'messages.created_at DESC'
   has_many :notification_messages,        order: 'messages.created_at DESC'
+  has_many :produced_messages, as: :producer, class_name: 'PrivateMessage' 
 
-  has_many :payments, :through => :users
+  has_many :payments, through: :users
 
   after_create :get_social_avatar
 
@@ -117,6 +118,11 @@ class Account < ActiveRecord::Base
 
   def friends_with?(account)
     self.friends.where(friendable_id: account.id, friendly: true).any?
+  end
+
+  def dialogs
+    dialogs = PrivateMessage.from(self).order('id DESC').map(&:account_id) + PrivateMessage.to(self).order('id DESC').map(&:producer_id)
+    Account.where(id: dialogs.uniq)
   end
 end
 

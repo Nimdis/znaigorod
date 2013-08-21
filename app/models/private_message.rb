@@ -5,5 +5,7 @@ class PrivateMessage < Message
 
   scope :from, ->(account) { where(producer_id: account) }
   scope :to, ->(account) { where(account_id: account) }
-  scope :dialog, ->(from, to) { where("(account_id = #{from.id} and producer_id = #{to.id}) or (account_id = #{to.id} and producer_id = #{from.id})") }
+  scope :dialog, ->(from, to) { where("(account_id = #{from} and producer_id = #{to}) or (account_id = #{to} and producer_id = #{from})") }
+
+  validates_presence_of :body
 end
