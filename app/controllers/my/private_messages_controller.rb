@@ -1,6 +1,5 @@
 class My::PrivateMessagesController < My::ApplicationController
   actions :create
-  skip_authorization_check
   #custom_actions collection: :change_message_status
 
   def create

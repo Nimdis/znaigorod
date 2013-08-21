@@ -1,4 +1,5 @@
 class My::GallerySocialImagesController < My::ApplicationController
+  load_and_authorize_resource
   actions :destroy
   custom_actions :collection => :destroy_all
 

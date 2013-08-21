@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class My::ShowingsController < My::ApplicationController
-  inherit_resources
+  load_and_authorize_resource
 
   actions :new, :create, :destroy, :edit, :update
 

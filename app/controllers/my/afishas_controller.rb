@@ -2,6 +2,7 @@
 
 class My::AfishasController < My::ApplicationController
 
+  load_and_authorize_resource
   defaults :resource_class => Afisha
 
   before_filter :current_step

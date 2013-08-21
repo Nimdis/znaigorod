@@ -1,5 +1,6 @@
 class My::NotificationMessagesController < My::ApplicationController
-  inherit_resources
+  skip_authorization_check
+
   actions :index
   custom_actions collection: :change_message_status
 
@@ -24,5 +25,9 @@ class My::NotificationMessagesController < My::ApplicationController
 
   def collection
     @notification_messages = super.page(params[:page]).per(5)
+  end
+
+  def begin_of_association_chain
+    current_user.account
   end
 end
