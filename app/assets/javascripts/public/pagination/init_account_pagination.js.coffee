@@ -1,5 +1,5 @@
 scroll = (target) ->
-  y_coord = Math.abs($(window).height() - target.offset().top - target.height())
+  y_coord = Math.abs($(window).height() - target.offset().top - 200)
   $("html, body").animate({ scrollTop: y_coord })
 
 recalculate_block_height = (kind, limit = 0) ->
@@ -24,6 +24,9 @@ more_handler = (kind, response) ->
       $('.pagination:last', kind).show()
       scroll($('.pagination', kind))
       true
+
+  process_change_message_status()
+
   true
 
 collapse_handler = (kind) ->

@@ -2,12 +2,19 @@ class My::NotificationMessagesController < My::ApplicationController
   skip_authorization_check
 
   actions :index
-
-  belongs_to :account
+  custom_actions resource: :change_message_status
 
   def index
     index! {
       render partial: 'my/messages/messages', locals: { messages: @notification_messages }, layout: false and return
+    }
+  end
+
+  def change_message_status
+    change_message_status! {
+      @notification_message.change_message_status
+
+      render partial: 'my/messages/message', locals: { message: @notification_message } and return
     }
   end
 
