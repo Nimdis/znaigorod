@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     auth_raw_info.try(:credentials).try(:token)
   end
 
+  searchable do
+    text :name
+  end
+
   def name
     return 'Mister X' if auth_raw_info.is_a?(String)
     auth_raw_info.try(:info).try(:name) || 'Mister X'
