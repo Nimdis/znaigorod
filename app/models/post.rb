@@ -3,7 +3,7 @@
 class Post < ActiveRecord::Base
   extend FriendlyId
 
-  attr_accessible :annotation, :content, :poster_url, :status, :title, :vfs_path, :rating
+  attr_accessible :annotation, :content, :poster_url, :status, :title, :vfs_path, :rating, :tag
 
   has_many :comments, :as => :commentable, :dependent => :destroy
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
@@ -50,6 +50,14 @@ class Post < ActiveRecord::Base
 
   def poster_url
     gallery_images.any? ? gallery_images.first.file_url : 'public/stub_poster.png'
+  end
+
+  def tags
+    tag.to_s.split(/,\s+/).map(&:mb_chars).map(&:downcase).map(&:squish)
+  end
+
+  def images
+    gallery_images
   end
 end
 

@@ -1,8 +1,15 @@
 @init_photogallery = () ->
 
+  scroll_count = 4
+  visible_count = 5
+
+  if $('.photogallery').closest('.post_show').length
+    scroll_count = 5
+    visible_count = 6
+
   $('.photogallery ul').jcarousel
-    scroll: 4
-    visible: 5
+    scroll: scroll_count
+    visible: visible_count
 
   $('.photogallery a').colorbox
     close: 'закрыть'

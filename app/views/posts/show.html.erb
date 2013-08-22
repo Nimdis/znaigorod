@@ -16,10 +16,30 @@
       <div class="post_content">
         <%= strip_tags @post.content %>
       </div>
+
       <div class="share_and_likes">
         <%= render :partial => 'share_this' %>
       </div>
+
+      <% if @post.tags.any? %>
+        <ul class="tags">
+          <% @post.tags.each do |tag| %>
+            <li><%= tag %></li>
+          <%end%>
+        </ul>
+      <%end%>
     </div>
+
+    <% if @post.images.present? %>
+      <div class="photogallery_header">Фотографии</div>
+      <div class="photogallery">
+        <ul>
+          <% @post.images.each do |image| %>
+            <%= render :partial => image.partial_for_render_object, :object => image, :locals => { :rel => "post_images_gallery_#{@post.id}" } %>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
     <%= render :partial => 'comments/block', :locals => { :parent_obj => @post } %>
   </div>
