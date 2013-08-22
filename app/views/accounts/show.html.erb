@@ -10,6 +10,9 @@
         <ul class="change_friendship">
           <%= render 'friends/friendship' %>
         </ul>
+        <ul class="write_message">
+          <%= link_to 'new_message', new_my_private_message_path(account_id: @account.id) %>
+        </ul>
       <% end %>
 
       <% if @friends.any? %>
