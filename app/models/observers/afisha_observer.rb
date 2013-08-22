@@ -25,9 +25,14 @@ class AfishaObserver < ActiveRecord::Observer
     end
   end
 
+  def before_save(afisha)
+    if afisha.published? && afisha.change_versionable?
+      afisha.delay.save_version
+      MyMailer.delay.send_afisha_diff(afisha) unless afisha.user.is_admin?
+    end
+  end
+
   def after_save(afisha)
     afisha.delay.reindex_showings
-    afisha.delay.save_version if afisha.published?
-    MyMailer.delay.send_afisha_diff(afisha) unless afisha.user.is_admin?
   end
 end

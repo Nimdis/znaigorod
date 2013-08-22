@@ -1,11 +1,13 @@
 <div class="item">
   <div class="avatar">
-    <%= image_tag(resized_image_url(message.producer.avatar.url, 35, 35), size: '35x35') %>
+    <%= link_to account_path(message.producer) do %>
+      <%= image_tag(resized_image_url(message.producer.avatar.url, 35, 35), size: '35x35', title: message.producer, alt: message.producer) %>
+    <% end %>
   </div>
 
   <div class="body">
     <%= link_to message.producer, message.producer %>
-    <span><%= message.kind_text %>:</span>
+    <span><%= message.kind_text %></span>
     <%= link_to(message.messageable.visitable.title, polymorphic_path([message.messageable.visitable, :show])) %>
 
     <div class="date">

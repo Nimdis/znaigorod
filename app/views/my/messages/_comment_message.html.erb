@@ -8,7 +8,7 @@
   <div class="body">
     <%= link_to message.producer, message.producer %>
     <span><%= message.kind_text %>:</span>
-    <%= content_tag :span, message.messageable.parent.body if message.kind.reply_on_comment? %>
+    <%= message.messageable.parent.body if message.kind.reply_on_comment? %>
     <span>к
       <%= link_to(message.messageable.commentable.title, polymorphic_path([message.messageable.commentable, :show], anchor: "comment_#{message.messageable.id}")) if message.messageable.commentable.is_a?(Afisha) %>
       <%= link_to(message.messageable.commentable.title, polymorphic_path(message.messageable.commentable, anchor: "comment_#{message.messageable.id}")) if !message.messageable.commentable.is_a?(Afisha) %>

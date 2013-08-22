@@ -44,7 +44,7 @@ module Znaigorod
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
     # Activate observers that should always be running.
-    config.active_record.observers = :feedback_observer, :version_observer, :comment_observer, :visit_observer, :vote_observer, :afisha_observer,
+    config.active_record.observers = :feedback_observer, :comment_observer, :visit_observer, :vote_observer, :afisha_observer,
                                      :friend_observer, :page_visit_observer, :showing_observer, :user_observer, :copy_observer, :payment_observer,
                                      :organization_observer, :suborganization_observer
 
