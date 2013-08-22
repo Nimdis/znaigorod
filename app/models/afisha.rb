@@ -169,7 +169,7 @@ class Afisha < ActiveRecord::Base
   def set_poster_url
     if poster_image_url?
       rpl = 'region/' << [crop_width, crop_height, crop_x, crop_y].map(&:to_f).map { |v| v * resize_factor }.map(&:round).join('/')
-      self.poster_url = poster_image_url.gsub /\d+-\d+/, rpl
+      self.poster_url = poster_image_url.gsub /\/\d+-\d+\//, "/#{rpl}/"
     end
   end
   private :set_poster_url
