@@ -18,7 +18,7 @@ class CommentObserver < ActiveRecord::Observer
         producer: comment.user.account,
         body: comment.body,
         kind: :new_comment,
-        messageable: comment.commentable
+        messageable: comment
       )
     end
     comment.user.account.delay.update_rating

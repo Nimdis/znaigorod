@@ -1,14 +1,19 @@
 <div class="item">
-  <div class="avatar">
-    <%= image_tag(resized_image_url(message.producer.avatar.url, 35, 35), size: '35x35') %>
-  </div>
+    <div class="avatar">
+      <%= link_to account_path(message.producer) do %>
+        <%= image_tag(resized_image_url(message.producer.avatar.url, 35, 35), size: '35x35', title: message.producer, alt: message.producer) %>
+      <% end %>
+    </div>
 
   <div class="body">
     <%= link_to message.producer, message.producer %>
-    <span>оставил <%= message.kind_text %>:</span>
-    &laquo;<%= message.body%>&raquo;
-    <span>к мероприятию:</span>
-    <%= link_to(message.messageable.commentable.title, polymorphic_path([message.messageable.commentable, :show], anchor: "comment_#{message.messageable.id}")) %>
+    <span><%= message.kind_text %>:</span>
+    <%= content_tag :span, message.messageable.parent.body if message.kind.reply_on_comment? %>
+    <span>к
+      <%= link_to(message.messageable.commentable.title, polymorphic_path([message.messageable.commentable, :show], anchor: "comment_#{message.messageable.id}")) if message.messageable.commentable.is_a?(Afisha) %>
+      <%= link_to(message.messageable.commentable.title, polymorphic_path(message.messageable.commentable, anchor: "comment_#{message.messageable.id}")) if !message.messageable.commentable.is_a?(Afisha) %>
+      <p><%= message.messageable.body %></p>
+  </span>
 
     <div class="date">
       <%= time_ago_in_words(message.created_at) %> назад

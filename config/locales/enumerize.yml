@@ -89,12 +89,12 @@ ru:
         approved: Подтвержден
         canceled: Отменен
 
-    message:
+    notification_message:
       kind:
-        new_comment: новый комментарий
-        reply_on_comment: ответ на ваш комментарий
+        new_comment: оставил новый комментарий
+        reply_on_comment: ответил на ваш комментарий
         afisha_published: афиша опубликована
-        afisha_returned: афиша возвращена
+        afisha_returned: афиша возвращена на доработку
         user_vote_afisha: понравилась афиша
         user_vote_comment: понравился комментарий
         user_visit_afisha: собирается на мероприятие
