@@ -1,74 +1,101 @@
 <% @presenter.organizations.each do |organization| %>
-  <li class='sauna_item'>
-    <div class="organization_attributes">
-      <div class="poster">
+  <li class='sauna_item <%= cycle('item_1', 'item_2', 'item_3', :name => 'sauna_item') %>'>
+    <div class='info'>
+      <div class='title'><%= organization.truncated_title_link %> </div>
+      <div class='image'>
         <%= link_to organization_path(organization) do %>
-          <%= image_tag(resized_image_url(organization.logotype_url, 60, 60), :alt => organization.title.text_gilensize) %>
+          <% if organization.logotype_url? %>
+            <%= image_tag(resized_image_url(organization.logotype_url, 178, 178), :size => '178x178', :alt => organization.title.text_gilensize) %>
+          <% else %>
+            <span class='stub_poster <%= organization.priority_suborganization_kind %>'></span>
+          <% end %>
+        <% end %>
+        <%= link_to organization_path(organization), class: :details do %>
+          <span class='first_line'>
+            <span class='to_go'><%= organization.visits.visited.count %></span>
+            <span class='wait_invite'>0</span>
+            <span class='comments'><%= organization.comments.count %></span>
+          </span>
+          <span class='second_line'>
+            <span class='likes'><%= organization.likes_count %></span>
+            <span class='visits'><%= organization.page_visits.count %></span>
+          </span>
         <% end %>
       </div>
-      <div class="organization_title">
-        <%= link_to organization_path(organization) do %>
-          <%= organization.title.as_html %>
-        <% end %>
-      </div>
-      <div class="attributes">
-        <% if organization.address_link.present? %>
-          <div class="address">
-            <%= organization.address_link %>
-          </div>
-        <% end %>
-        <div class="schedule">
-          <%= organization.schedule_today %>
+      <% if organization.address_link.present? %>
+        <div class='address'>
+          <%= organization.address_link %>
         </div>
-        <div class="phone">
-          <%= organization.phone %>
-        </div>
+      <% end %>
+      <div class='phone'>
+        <%= organization.phone %>
       </div>
       <% if organization.sms_claimable? %>
         <ul class='sms_claims'>
-        <% organization.claimable_suborganizations.each do |suborganization| %>
-          <li>
-            <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
-          </li>
-        <% end %>
+          <% organization.claimable_suborganizations.each do |suborganization| %>
+            <li>
+              <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
+            </li>
+          <% end %>
         </ul>
       <% end %>
     </div>
 
+    <!--
     <ul class='sauna_halls'>
       <% organization.sauna.ordered_sauna_halls.each do |sauna_hall| %>
-        <li<%= " class='non-suitable'".html_safe if @presenter.sauna_hall_ids.include?(sauna_hall.id) %>>
-          <%= render :partial => 'list_item', :locals => { :sauna => OrganizationDecorator.decorate(sauna_hall.organization), :sauna_hall => sauna_hall } %>
+        <li>
+          <%= render :partial => 'sauna_hall', :locals => { :sauna => OrganizationDecorator.decorate(sauna_hall.organization), :sauna_hall => sauna_hall } %>
         </li>
       <% end %>
     </ul>
+    -->
   </li>
 <% end %>
 
 <% if @presenter.last_page? %>
-  <li class='loosers'>
-    <h3>А вот эти сауны не предоставили информацию:</h3>
-    <ul>
-      <% @presenter.organization_for_saunas_without_halls.each do |organization| %>
-        <li class="sauna_item">
-          <div class="looser_organization_attributes">
-            <div class="poster">
-              <%= organization.logo_link %>
-            </div>
-            <div class="looser_attributes">
-              <%= link_to organization.title.split(',').first, organization_path(organization) %>
-              <div class="phone">
-                <%= organization.phone %>
-              </div>
-              <% if organization.address_link.present? %>
-                <div class="address">
-                  <%= organization.address_link %>
-                </div>
-              <% end %>
-            </div>
+  <% @presenter.organization_for_saunas_without_halls.each_with_index do |organization, index| %>
+    <li class='sauna_short_item <%= cycle('item_1', 'item_2', 'item_3', 'item_4', 'item_5', 'item_6', :name => 'sauna_short_item') %><%= ' clear_left' if index.zero? %>'>
+      <div class='info'>
+      <div class='title'><%= organization.truncated_title_link %> </div>
+        <div class='image'>
+          <%= link_to organization_path(organization) do %>
+            <% if organization.logotype_url? %>
+              <%= image_tag(resized_image_url(organization.logotype_url, 178, 178), :size => '178x178', :alt => organization.title.text_gilensize) %>
+            <% else %>
+              <span class='stub_poster <%= organization.priority_suborganization_kind %>'></span>
+            <% end %>
+          <% end %>
+          <%= link_to organization_path(organization), class: :details do %>
+            <span class='first_line'>
+              <span class='to_go'><%= organization.visits.visited.count %></span>
+              <span class='wait_invite'>0</span>
+              <span class='comments'><%= organization.comments.count %></span>
+            </span>
+            <span class='second_line'>
+              <span class='likes'><%= organization.likes_count %></span>
+              <span class='visits'><%= organization.page_visits.count %></span>
+            </span>
+          <% end %>
+        </div>
+        <% if organization.address_link.present? %>
+          <div class='address'>
+            <%= organization.address_link %>
           </div>
-        </li>
-      <% end %>
-    </ul>
-  </li>
+        <% end %>
+        <div class='phone'>
+          <%= organization.phone %>
+        </div>
+        <% if organization.sms_claimable? %>
+          <ul class='sms_claims'>
+            <% organization.claimable_suborganizations.each do |suborganization| %>
+              <li>
+                <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
 <% end %>

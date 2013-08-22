@@ -91,6 +91,10 @@ class SuborganizationDecorator < ApplicationDecorator
     categories.first.mb_chars.downcase
   end
 
+  def priority_suborganization_kind
+    self.model.class.name.underscore
+  end
+
   def htmlize_text(text)
     text.blank? ? "" : text.as_html
   end

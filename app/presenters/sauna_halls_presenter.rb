@@ -101,7 +101,7 @@ class SaunaHallsPresenter
   def search(args = {})
     args[:group_by_sauna_id] ||= false
     args[:page]              ||= page
-    args[:per_page]          ||= 10
+    args[:per_page]          ||= 18
 
     SaunaHall.search(:include => [
         :organization,

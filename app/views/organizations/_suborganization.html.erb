@@ -7,13 +7,13 @@
       <% end %>
     <% else %>
       <%= link_to organization_path(suborganization.organization) do %>
-        &nbsp;
+        <span class='stub_poster <%= suborganization.priority_suborganization_kind %>'></span>
       <% end %>
     <% end %>
     <%= link_to organization_path(suborganization.organization), class: :details do %>
       <span class='first_line'>
         <span class='to_go'><%= suborganization.organization.visits.visited.count %></span>
-        <span class='wait_invite'>3</span>
+        <span class='wait_invite'>0</span>
         <span class='comments'><%= suborganization.organization.comments.count %></span>
       </span>
       <span class='second_line'>

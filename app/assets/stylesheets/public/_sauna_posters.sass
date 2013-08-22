@@ -1,20 +1,14 @@
 .content .organizations_list
 
-  .posters
+  .sauna_posters
     +clearfix
 
     li
       float: left
-      margin: 0 22px 20px 0
-      &:nth-child(6n)
-        margin-right: 0
-      &:nth-child(6n+1)
-        clear: left
 
       .info
         width: 178px
         text-align: center
-        border: 1px solid #ccc
 
         .title
           @extend .nobr
@@ -38,35 +32,8 @@
               height: 178px
               background: transparent image_url('public/organization_stub_poster_kind.png') no-repeat top left
 
-              &.billiard
-                background-position: -195px -6px
-
-              &.car_sales_center
-                background-position: -5px -196px
-
-              &.car_wash
-                background-position: -5px -196px
-
-              &.creation
-                background-position: -765px -6px
-
-              &.culture
-                background-position: -385px -6px
-
-              &.entertainment
-                background-position: -195px -6px
-
-              &.meal
-                background-position: -5px -6px
-
-              &.salon_center
-                background-position: -195px -196px
-
               &.sauna
                 background-position: -385px -196px
-
-              &.sport
-                background-position: -575px -6px
 
           .details
             color: #000
@@ -121,3 +88,28 @@
 
         .phone
           margin-bottom: 3px
+
+      &.clear_left
+        clear: left
+
+      &.sauna_item
+        width: 380px
+        border: 1px solid #ccc
+        margin: 0 22px 20px 0
+
+        &.item_1
+          clear: left
+
+        &.item_3
+          margin-right: 0
+
+      &.sauna_short_item
+        width: 178px
+        border: 1px solid #ccc
+        margin: 0 22px 20px 0
+
+        &.item_1
+          clear: left
+
+        &.item_6
+          margin-right: 0
