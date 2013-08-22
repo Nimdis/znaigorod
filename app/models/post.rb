@@ -44,8 +44,8 @@ class Post < ActiveRecord::Base
     self.class.name.underscore
   end
 
-  def similar_posts
-    HasSearcher.searcher(:similar_posts).more_like_this(self).limit(3).results
+  def similar_post
+    HasSearcher.searcher(:similar_posts).more_like_this(self).limit(6).results
   end
 
   def poster_url

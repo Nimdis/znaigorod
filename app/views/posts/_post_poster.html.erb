@@ -1,10 +1,10 @@
 <div class="item">
   <div class="title">
-    <%= link_to truncate(post.title, length: 50, separator: ' '), post %>
+    <%= link_to truncate(post.title.text_gilensize, length: 50, separator: ' '), post %>
   </div>
 
   <div class="image">
-    <%= link_to image_tag(resized_image_url(post.poster_url, 215, 164), size: '215x164', title: post.title, alt: post.title), post %>
+    <%= link_to image_tag(resized_image_url(post.poster_url, 215, 164), size: '215x164', title: post.title.text_gilensize, alt: post.title.text_gilensize), post %>
   </div>
 
   <div class="date">

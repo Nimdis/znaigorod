@@ -18,4 +18,12 @@ class PostDecorator < ApplicationDecorator
   def date
     Russian::strftime(post.created_at, "%d %B %Y")
   end
+
+  def html_annotation
+    @html_annotation ||= annotation.to_s.as_html
+  end
+
+  def html_content
+    @html_content ||= content.to_s.as_html
+  end
 end

@@ -13,8 +13,9 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
-    @posts = Post.published
+      @presenter = PostPresenter.new(params)
+      @post = PostDecorator.new(Post.find(params[:id]))
+      @posts = Post.published
   end
 
   private

@@ -15,29 +15,3 @@
     <%= @post.content.html_safe %>
   </div>
 </div>
-
-
-<div class='attachments'>
-  <h3>
-    Прикрепленные файлы:
-    <%= link_to "Добавить файл", new_manage_post_post_image_path(resource), :class => 'edit_link'  %>
-  </h3>
-
-  <% if resource.post_images.any?  %>
-    <span class="value">
-      <ul>
-        <% resource.post_images.each do |image| %>
-          <li>
-            <%= link_to(image_tag(image.attachment_url.gsub(/\/\d+-\d+\//, '/200-200/'), :alt => image.title, :title => image.title), image.attachment_url, :target => '_blank') %>
-          </li>
-          <li>
-            <%= link_to "Удалить", manage_post_post_image_path(resource, image), :method => :delete, :confirm => 'Вы уверены?' %>
-            <%= link_to 'Редактировать', edit_manage_post_post_image_path(resource, image)%>
-          </li>
-        <% end %>
-      </ul>
-    </span>
-  <% else %>
-    <span class="blank">Нет файлов</span>
-  <% end %>
-</div>

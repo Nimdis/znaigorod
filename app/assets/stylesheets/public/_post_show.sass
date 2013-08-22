@@ -1,0 +1,94 @@
+.post_show
+
+  .title
+    h1
+      font-size: 18px
+      line-height: 24px
+      margin: 0 0 5px 0
+
+  .date
+    color: #999
+    font-size: 12px
+    line-height: 14px
+    margin: 3px 0 8px 0
+
+  .left
+    float: left
+    width: 950px
+
+    .wrapper
+      margin: 0 0 10px 0
+
+      .post_annotation
+        +background(linear-gradient(top, #ffffff, #e8e8e8))
+        border: 1px solid #ccc
+        font-size: 14px
+        height: 224px
+        line-height: 20px
+        padding: 3px
+
+        .image
+          float: left
+          margin: 0 10px 0 0
+
+      .post_content
+        margin: 10px 0 0 0
+
+      .share_and_likes
+        min-height: 30px
+        border-bottom: 1px solid #ccc
+
+        .share
+          float: left
+          width: 50%
+          margin-bottom: 5px
+
+          .title
+            +inline-block
+
+          .yashare-auto-init
+            +inline-block
+
+        .likes
+          float: right
+          width: 50%
+          margin-bottom: 5px
+          margin-top: 4px
+
+          .vk_like
+            float: right
+            clear: none !important
+
+          .fb_like
+            float: right
+            margin-right: 20px
+
+          .ok_like
+            float: right
+
+  .right
+    margin: 0 0 0 970px
+    width: 210px
+
+    .more_like_this
+      border: 1px solid #ccc
+      +background(linear-gradient(top, #fff, #e8e8e8))
+      padding: 10px
+
+      > .title
+        font-size: 12px
+        text-align: center
+        margin-bottom: 10px
+
+      ul
+        li
+          +clearfix
+          margin-bottom: 10px
+
+          .image
+            float: left
+            position: relative
+            margin-right: 10px
+
+          &:last-child
+            margin-bottom: 0
