@@ -1,12 +1,27 @@
 <div class='info'>
-  <h2><%= suborganization.truncated_title_link %> </h2>
-  <% if suborganization.logotype_link %>
-    <div class='image'>
-      <%= suborganization.logotype_link %>
-    </div>
-  <% else %>
-    <hr />
-  <% end %>
+  <div class='title'><%= suborganization.truncated_title_link %> </div>
+  <div class='image'>
+    <% if suborganization.organization.logotype_url? %>
+      <%= link_to organization_path(suborganization.organization) do %>
+        <%= image_tag(resized_image_url(suborganization.organization.logotype_url, 178, 178), size: "178x178", alt: suborganization.organization.title) %>
+      <% end %>
+    <% else %>
+      <%= link_to organization_path(suborganization.organization) do %>
+        STUB!
+      <% end %>
+    <% end %>
+    <%= link_to organization_path(suborganization.organization), class: :details do %>
+      <span class='first_line'>
+        <span class='to_go'><%= suborganization.organization.visits.visited.count %></span>
+        <span class='wait_invite'>3</span>
+        <span class='comments'><%= suborganization.organization.comments.count %></span>
+      </span>
+      <span class='second_line'>
+        <span class='likes'><%= suborganization.organization.likes_count %></span>
+        <span class='visits'><%= suborganization.organization.page_visits.count %></span>
+      </span>
+    <% end %>
+  </div>
   <%= content_tag :div, suborganization.address_link, :class => 'place' unless suborganization.address_link.blank? %>
   <%= suborganization.decorated_phones %>
 </div>

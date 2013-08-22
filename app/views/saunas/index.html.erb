@@ -23,12 +23,14 @@
   </div>
 </div>
 
-<% if @presenter.saunas.any? %>
-  <ul class='sauna_list'>
-    <%= render :partial => 'sauna_list' %>
-  </ul>
-<% else %>
-  <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
-<% end %>
+<div class='organizations_list'>
+  <% if @presenter.saunas.any? %>
+    <ul class='sauna_list'>
+      <%= render :partial => 'sauna_list' %>
+    </ul>
+  <% else %>
+    <p class="empty_items_list">По заданным параметрам ничего не найдено ;(</p>
+  <% end %>
+</div>
 
 <%= paginate @presenter.paginatable_collection %>

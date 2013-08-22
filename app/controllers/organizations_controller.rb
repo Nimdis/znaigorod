@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
         settings_from_cookie = Rack::Utils.parse_nested_query(cookie) if cookie.present?
         @presenter = OrganizationsCatalogPresenter.new(settings_from_cookie.merge(params))
 
-        render partial: 'organizations/organizations_list', layout: false and return if request.xhr?
+        render partial: 'organizations/organizations_posters', layout: false and return if request.xhr?
       end
       format.json do
         searcher = HasSearcher.searcher(:manage_organization, params).paginate(:page => params[:page], :per_page => 10)

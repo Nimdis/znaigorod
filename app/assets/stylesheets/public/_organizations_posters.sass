@@ -1,0 +1,85 @@
+.content .organizations_list
+
+  .posters
+    +clearfix
+
+    li
+      float: left
+      margin: 0 22px 20px 0
+      &:nth-child(6n)
+        margin-right: 0
+      &:nth-child(6n+1)
+        clear: left
+
+      .info
+        width: 178px
+        text-align: center
+        border: 1px solid #ccc
+
+        .title
+          @extend .nobr
+          font-size: 12px
+          margin: 5px
+
+        .image
+          width: 178px
+          height: 178px
+          position: relative
+          margin-bottom: 3px
+
+          a
+            display: block
+            width: 178px
+            height: 178px
+
+          .details
+            color: #000
+            text-align: left
+
+          .first_line
+            bottom: 35px
+
+          .second_line
+            bottom: 10px
+
+          .first_line,
+          .second_line
+            display: none
+            width: 100%
+            position: absolute
+            left: 0
+
+            span
+              display: block
+              float: left
+              width: 34px
+              padding-left: 25px
+              background: transparent image_url('public/details_sprite.png') no-repeat 10px 3px
+
+              &.to_go
+                background-position: 12px 3px
+              &.wait_invite
+                background-position: 4px -17px
+              &.comments
+                background-position: 5px -36px
+              &.likes
+                background-position: 12px -57px
+              &.visits
+                background-position: 6px -77px
+              &.minimal_age
+                background: none
+                padding-left: 18px
+
+          &:hover
+            img
+              +opacity(0.15)
+            .for_sale,
+            .first_line,
+            .second_line
+              display: block
+
+        .place
+          margin-bottom: 3px
+
+        .phone
+          margin-bottom: 3px

@@ -35,17 +35,11 @@
       <% end %>
     </div>
 
-    <ul>
+    <ul class='sauna_halls'>
       <% organization.sauna.ordered_sauna_halls.each do |sauna_hall| %>
-        <% if @presenter.sauna_hall_ids.include?(sauna_hall.id) %>
-          <li>
-            <%= render :partial => 'list_item', :locals => { :sauna => OrganizationDecorator.decorate(sauna_hall.organization), :sauna_hall => sauna_hall } %>
-          </li>
-        <% else %>
-          <li class="non-suitable">
-            <%= render :partial => 'list_item', :locals => { :sauna => OrganizationDecorator.decorate(sauna_hall.organization), :sauna_hall => sauna_hall } %>
-          </li>
-        <% end %>
+        <li<%= " class='non-suitable'".html_safe if @presenter.sauna_hall_ids.include?(sauna_hall.id) %>>
+          <%= render :partial => 'list_item', :locals => { :sauna => OrganizationDecorator.decorate(sauna_hall.organization), :sauna_hall => sauna_hall } %>
+        </li>
       <% end %>
     </ul>
   </li>

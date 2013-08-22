@@ -27,8 +27,8 @@
 
 <div class='organizations_list'>
   <% if @presenter.collection.any? %>
-    <ul class='items_list'>
-      <%= render :partial => 'organizations/organizations_list' %>
+    <ul class='posters'>
+      <%= render :partial => 'organizations/organizations_posters' %>
     </ul>
   <% else %>
     <p class='empty_items_list'>По заданным параметрам ничего не найдено ;(</p>

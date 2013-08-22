@@ -26,7 +26,6 @@ $ ->
   init_filters_toggler() if $('.need_toggler li').length
   init_filter_handler() if $('.filters_wrapper').length
   init_contest() if $('.content_wrapper .contest').length
-  init_prepare_organizations() if $('.organizations_list .info .characteristics').length
   init_organization_info() if $('.organization_info .info .description').length
   init_introduction() if $('.content .introduction').length
   init_prepare_sauna() if $('.organization_info .sauna_hall_details').length

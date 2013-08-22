@@ -53,7 +53,6 @@
  * = require ./galleria
  * = require ./filters_toggler
  * = require ./filter_handler
- * = require ./prepare_organizations
  * = require ./organization_info
  * = require ./introduction
  * = require ./prepare_sauna
