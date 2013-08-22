@@ -66,6 +66,13 @@ class OrganizationDecorator < ApplicationDecorator
     content.html_safe
   end
 
+  def decorated_phones
+    return if phone.blank?
+    phones = phone.squish.split(', ')
+    return h.content_tag :div, phones.first, class: 'phone' if phones.one?
+    return h.content_tag :div, "#{phones.first}&hellip;".html_safe, class: 'phone many', title: phones.join(', ') if phones.many?
+  end
+
   # FIXME: грязный хак ;(
   def fake_kind
     %w[billiard].include?(priority_suborganization_kind) ? 'entertainment' : priority_suborganization_kind

@@ -1,0 +1,15 @@
+@init_preload_images = () ->
+  [
+    "<%= asset_path('public/ajax_loading_items_indicator.gif') %>"
+    "<%= asset_path('public/colorbox_loading.gif') %>"
+    "<%= asset_path('public/file_upload_indicator.gif') %>"
+  ].each (image, index) ->
+    $('<div />').appendTo('body').css
+      'position': 'absolute'
+      'background': "url('#{image}') no-repeat -9999px -9999px"
+      'top': '-999em'
+      'left': '-999em'
+      'z-index': '-999'
+    true
+
+  true

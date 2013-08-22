@@ -3,10 +3,12 @@
   .sauna_posters
     +clearfix
 
-    li
+    > li
       float: left
+      +clearfix
 
       .info
+        float: left
         width: 178px
         text-align: center
 
@@ -23,6 +25,9 @@
 
           a
             display: block
+            position: absolute
+            top: 0
+            left: 0
             width: 178px
             height: 178px
 
@@ -103,10 +108,18 @@
         &.item_3
           margin-right: 0
 
+        .info
+          border-right: 1px dashed #ccc
+
       &.sauna_short_item
         width: 178px
         border: 1px solid #ccc
         margin: 0 22px 20px 0
+
+        hr
+          border: none
+          border-top: 1px dashed #ccc
+          margin: 0 0 3px 0
 
         &.item_1
           clear: left

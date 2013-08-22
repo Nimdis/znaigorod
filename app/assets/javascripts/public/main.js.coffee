@@ -1,5 +1,6 @@
 $ ->
   init_common()
+  init_preload_images()
   init_datetime_picker()
 
   if typeof VK != 'undefined'
