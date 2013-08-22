@@ -97,20 +97,16 @@ class Afisha < ActiveRecord::Base
       transition :draft => :pending
     end
 
-    after_transition :draft => :pending do |afisha, transition|
-      MyMailer.delay.mail_new_pending_afisha(afisha)
-    end
-
     event :approve do
       transition [:draft, :pending] => :published
     end
 
-    after_transition [:draft, :pending] => :published do |afisha, transition|
-      MyMailer.delay.mail_new_published_afisha(afisha)
-    end
-
     event :send_to_author do
       transition :published => :draft
+    end
+
+    state :published do
+      validates_presence_of :poster_url, :showings
     end
   end
 

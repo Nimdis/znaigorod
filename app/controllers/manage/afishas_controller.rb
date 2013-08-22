@@ -10,7 +10,6 @@ class Manage::AfishasController < Manage::ApplicationController
   def create
     create! do |success, failure|
       success.html {
-        resource.approve!
         redirect_to manage_afisha_show_path(resource)
       }
       failure.html { render :new }
@@ -47,7 +46,7 @@ class Manage::AfishasController < Manage::ApplicationController
       resource.poster_url = nil
       resource.poster_image.destroy
       resource.save
-      redirect_to manage_afisha_show_path(resource) and return
+      redirect_to poster_manage_afisha_path(resource) and return
     }
   end
 

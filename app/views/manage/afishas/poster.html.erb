@@ -13,8 +13,8 @@
       <%= f.input :crop_height, :as => :hidden, :input_html => { :value => crop_height } %>
       <%= image_tag resized_image_url(resource.poster_image_url,
                                       resource.poster_image_resized_dimensions[:width],
-                                      resource.poster_image_resized_dimensions[:height],
-                                      false), :class => 'jcrop' %>
+                                      resource.poster_image_resized_dimensions[:height]),
+                                      :class => 'jcrop' %>
     </div>
     <div class='submit'>
       <%= f.button :submit, 'Обрезать постер', class: :button %>
