@@ -3,10 +3,10 @@
 class Post < ActiveRecord::Base
   extend FriendlyId
 
-  attr_accessible :annotation, :content, :poster_url, :status, :title, :vfs_path
+  attr_accessible :annotation, :content, :poster_url, :status, :title, :vfs_path, :rating
 
-  has_many :post_images, :order => 'post_images.created_at'
   has_many :comments, :as => :commentable, :dependent => :destroy
+  has_many :gallery_images, :as => :attachable, :dependent => :destroy
   has_many :votes, :as => :voteable, :dependent => :destroy
 
   validates_presence_of :annotation, :content, :title
@@ -14,6 +14,12 @@ class Post < ActiveRecord::Base
   alias_attribute :description, :annotation
 
   friendly_id :title, use: :slugged
+
+  extend Enumerize
+  serialize :kind, Array
+  enumerize :kind, in: [:review, :photoreport], multiple: true, predicates: true
+
+  normalize_attribute :kind, with: :blank_array
 
   default_scope order('id DESC')
 
@@ -25,10 +31,13 @@ class Post < ActiveRecord::Base
   end
 
   searchable do
-    text :title,                :more_like_this => true, :stored => true
     text :annotation,           :more_like_this => true
     text :content,              :more_like_this => true
+    text :title,                :more_like_this => true, :stored => true
+    date :created_at
+    float :rating,              :trie => true
     string :search_kind
+    string(:kind, :multiple => true) { kind.map(&:value) }
   end
 
   def search_kind
@@ -40,7 +49,7 @@ class Post < ActiveRecord::Base
   end
 
   def poster_url
-    post_images.any? ? post_images.first.attachment_url : 'public/stub_poster.png'
+    gallery_images.any? ? gallery_images.first.file_url : 'public/stub_poster.png'
   end
 end
 

@@ -117,6 +117,16 @@ ru:
     admin: Администраторы
     afisha_editor: Авторы афиш
 
+  post_kinds:
+    all: Все
+    review: Обзор
+    photoreport: Фоторепортаж
+
+  post:
+    sort:
+      creation: Новизне
+      rating: Рейтингу
+
   search_kinds:
     all: Все разделы
     afisha: Афиша

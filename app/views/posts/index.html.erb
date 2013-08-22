@@ -2,28 +2,31 @@
 <% content_for :meta_description, t('meta.posts.description') %>
 <% content_for :meta_keywords, t('meta.posts.keywords') %>
 
-<%= render 'breadcrumbs' %>
-<div class='contact_with_us'>
-  <%= link_to 'Добавить пост', new_feedback_path %>
+<div class='presentation_filters post'>
+  <div class='present_by'>
+    <p>Вид:</p>
+    <ul>
+      <li class='selected'><a href='#' class='poster'>Постеры</a></li>
+      <li><a href='#' class='list'>Список</a></li>
+    </ul>
+  </div>
+  <div class='order_by'>
+    <p>Сортировать по:</p>
+    <ul>
+      <% @presenter.sortings_links.each do |sortings_link| %>
+        <li<%= " class=selected" if sortings_link[:selected] %>>
+          <%= link_to sortings_link[:title],
+            send(sortings_link[:url], sortings_link[:parameters]), :class => sortings_link[:parameters][:order_by] %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
-<h1>Обзоры города</h1>
 
-<ul class="post_list">
-  <% @posts.each do |post| %>
-    <li class="post_item">
-      <div class="post_meta">
-        <h2><%= link_to post.title, post %></h2>
-        <span class="date"><%= l(post.created_at, :format => "%d %B %Y") %></span>
-      </div>
+<div class="posts_list">
+  <ul class="posters">
+    <%= render :partial => 'posts/post_posters', :locals => { collection: collection } %>
+  </ul>
+</div>
 
-      <div class="post_content">
-        <% if post.post_images.any? %>
-          <%= image_tag post.post_images.first.attachment_url.gsub(/\/\d+-\d+\//, '/200-150!/'), :alt => post.post_images.first.title, :class => 'preview' %>
-        <% end %>
-        <%= raw post.annotation %>
-      </div>
-    </li>
-  <% end %>
-</ul>
-
-<%= paginate @posts %>
+<%= paginate collection %>

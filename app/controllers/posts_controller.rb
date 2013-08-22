@@ -1,8 +1,11 @@
 class PostsController < ApplicationController
+  inherit_resources
+  actions :index, :show
   has_scope :page, :default => 1
 
   def index
-    @posts = Post.published.page(params[:page]).per(params[:per_page] || 10)
+    @presenter = PostPresenter.new(params)
+    render partial: 'posts/post_posters', layout: false and return if request.xhr?
   end
 
   def draft
@@ -12,5 +15,15 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @posts = Post.published
+  end
+
+  private
+
+  def collection
+    HasSearcher.searcher(:posts, params).paginate(:page => params[:page], :per_page => per_page)
+  end
+
+  def per_page
+    15
   end
 end

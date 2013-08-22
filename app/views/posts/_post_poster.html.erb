@@ -1,0 +1,13 @@
+<div class="item">
+  <div class="title">
+    <%= link_to truncate(post.title, length: 50, separator: ' '), post %>
+  </div>
+
+  <div class="image">
+    <%= link_to image_tag(resized_image_url(post.poster_url, 215, 164), size: '215x164', title: post.title, alt: post.title), post %>
+  </div>
+
+  <div class="date">
+    <%= l(post.created_at, :format => "%d %B %Y") %>
+  </div>
+</div>

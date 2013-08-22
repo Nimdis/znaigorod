@@ -1,9 +1,0 @@
-<ul class='breadcrumbs'>
-    <li class='crumb'><%= link_to 'ЗнайГород', root_path %></li>
-    <li class='separator'><span>&nbsp;</span></li>
-    <li class='crumb'><%= link_to 'Все обзоры', posts_path %></li>
-  <% if defined?(show) %>
-    <li class='separator'><span>&nbsp;</span></li>
-    <li class='crumb'><%= link_to @post.title, @post %></li>
-  <% end %>
-</ul>

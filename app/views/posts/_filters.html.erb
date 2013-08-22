@@ -1,0 +1,16 @@
+<div class='filters_wrapper'>
+  <div class='filters post'>
+    <div class='by_kind'>
+      <ul>
+        <% @presenter.kinds_links.each do |link| %>
+          <li class='<%= link[:klass] %><%= ' selected' if link[:current] %>'>
+            <%= link_to posts_path(link[:parameters]) do %>
+              <%= content_tag :span,  link[:title], class: :name %>
+              <%= content_tag :span, link[:count], class: :count  %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

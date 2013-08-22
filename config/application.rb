@@ -32,6 +32,7 @@ module Znaigorod
                                 #{config.root}/app/presenters
                                 #{config.root}/app/presenters/account
                                 #{config.root}/app/presenters/afisha
+                                #{config.root}/app/presenters/post
                                 #{config.root}/app/presenters/suborganizations
                                 #{config.root}/app/presenters/search
                                 #{config.root}/lib
