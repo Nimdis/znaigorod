@@ -69,20 +69,11 @@
 
   </div>
 
-  <% if Rails.env.development? && @organization.coupons.any? %>
-    <div class='coupons'>
-      <div class='coupon_header'>Сертификаты, купоны, скидки</div>
-      <ul class='coupons_list'>
-        <%= render :partial => 'coupons/coupons_list', :locals => { :collection => @organization.coupons } %>
-      </ul>
-    </div>
-  <% end %>
-
   <% @organization.decorated_suborganizations.each do |suborganization| %>
     <%= render suborganization if suborganization.viewable? %>
   <% end %>
 
-  <% if false && @presenter.collection.any? %>
+  <% if @afisha_presenter.collection.any? %>
     <div class='suborganization_info affiches_details'>
       <table>
         <tr>
@@ -97,32 +88,28 @@
         </tr>
       </table>
       <div class="affiches_list">
-        <div class="list_settings">
-          <div class="sort">
-            <p>Сортировка:</p>
+        <div class='presentation_filters afisha'>
+          <div class='present_by'>
+            <p>Вид:</p>
             <ul>
-              <li>
-                <%= link_to t('affiche.sort.rating'),
-                  organization_path(@organization, { :order_by => 'rating' }),
-                  @presenter.sort_by_rating? ? { class: 'selected' } : {} %>
-              </li>
-              <li><span class="separator">&nbsp;</span></li>
-              <li>
-                <%= link_to t('affiche.sort.creation'),
-                  organization_path(@organization, { :order_by => 'creation' }),
-                  @presenter.sort_by_creation? ? { class: 'selected' } : {} %>
-              </li>
-              <li><span class="separator">&nbsp;</span></li>
-              <li>
-                <%= link_to t('affiche.sort.starts_at'),
-                  organization_path(@organization, { :order_by => 'starts_at' }),
-                  @presenter.sort_by_starts_at? ? { class: 'selected' } : {} %>
-              </li>
+              <li class='selected'><a href='#' class='poster'>Постеры</a></li>
+              <li><a href='#' class='list'>Список</a></li>
+            </ul>
+          </div>
+          <div class='order_by'>
+            <p>Сортировать по:</p>
+            <ul>
+              <% @afisha_presenter.sortings_links.each do |sortings_link| %>
+                <li<%= " class=selected" if sortings_link[:selected] %>>
+                  <%= link_to sortings_link[:title],
+                    send(sortings_link[:url], sortings_link[:parameters]), :class => sortings_link[:parameters][:order_by] %>
+                </li>
+              <% end %>
             </ul>
           </div>
         </div>
         <ul class="items_list posters">
-          <%= render partial: @presenter.partial %>
+          <%= render partial: @afisha_presenter.partial, :locals => {:afishas => @afisha_presenter.decorated_collection} %>
         </ul>
       </div>
     </div>
