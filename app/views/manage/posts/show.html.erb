@@ -10,11 +10,6 @@
     <span class="value"><%= resource.kind.values.map(&:text).join(', ') %></span>
   </div>
 
-  <div class="annotation">
-    <h4>Аннотация</h4>
-    <%= @post.annotation.html_safe %>
-  </div>
-
   <div class="content">
     <h4>Контент</h4>
     <%= @post.content.html_safe %>

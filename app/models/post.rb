@@ -3,16 +3,14 @@
 class Post < ActiveRecord::Base
   extend FriendlyId
 
-  attr_accessible :annotation, :content, :poster_url, :status, :title, :vfs_path, :rating, :tag, :kind
+  attr_accessible :content, :poster_url, :status, :title, :vfs_path, :rating, :tag, :kind
 
   has_many :comments, :as => :commentable, :dependent => :destroy
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
   has_many :votes, :as => :voteable, :dependent => :destroy
   has_many :page_visits, :as => :page_visitable, :dependent => :destroy
 
-  validates_presence_of :annotation, :content, :title
-
-  alias_attribute :description, :annotation
+  validates_presence_of :content, :title, :kind, :tag
 
   friendly_id :title, use: :slugged
 
@@ -33,9 +31,9 @@ class Post < ActiveRecord::Base
   end
 
   searchable do
-    text :annotation,           :more_like_this => true
     text :content,              :more_like_this => true
-    text :title,                :more_like_this => true, :stored => true
+    text :title,                :more_like_this => true,  :stored => true
+    text :tag,                  :more_like_this => true,  :stored => true
     date :created_at
     float :rating,              :trie => true
     string :search_kind
@@ -73,9 +71,7 @@ class Post < ActiveRecord::Base
   end
 
   def update_rating
-    update_attribute :rating, (0.5*comments.count +
-                                     0.1*votes.liked.count +
-                                     0.01*page_visits.count)
+    update_attribute :rating, (0.5*comments.count + 0.1*votes.liked.count + 0.01*page_visits.count)
   end
 end
 
@@ -85,7 +81,6 @@ end
 #
 #  id         :integer          not null, primary key
 #  title      :text
-#  annotation :text
 #  content    :text
 #  poster_url :text
 #  vfs_path   :string(255)
@@ -93,5 +88,8 @@ end
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  status     :boolean          default(FALSE)
+#  rating     :float
+#  kind       :text
+#  tag        :text
 #
 

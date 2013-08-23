@@ -1,7 +1,3 @@
-<ul class="kind_links">
-  <li><%= link_to "Неопубликованные посты", draft_posts_path, :class => 'new_resource' %></li>
-</ul>
-
 <div class="new_link">
   <%= link_to "Добавить новый пост", new_manage_post_path('post[vfs_path]' => Post.generate_vfs_path), :class => 'new_resource' %>
 </div>
