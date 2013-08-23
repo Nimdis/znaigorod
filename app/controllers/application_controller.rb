@@ -6,12 +6,6 @@ class ApplicationController < ActionController::Base
 
   layout :resolve_layout
 
-  def main_page
-    @presenter = ShowingsPresenter.new(categories: ['movie'], period: 'today')
-    @photoreport = Photogallery.new
-    @actual_organizations = ActualOrganizations.new
-  end
-
   private
 
   def resolve_layout

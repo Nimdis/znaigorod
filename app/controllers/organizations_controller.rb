@@ -32,7 +32,14 @@ class OrganizationsController < ApplicationController
     @organization.delay.create_page_visit(request.session_options[:id], current_user)
 
     @organization = OrganizationDecorator.decorate @organization
-    @presenter = AfishaPresenter.new(organization_ids: [@organization.id], order_by: params[:order_by], page: params[:page])
+    case @organization.priority_suborganization_kind
+    when 'sauna'
+      @presenter = SaunaHallsPresenter.new
+    else
+      klass = "#{@organization.priority_suborganization_kind.pluralize}_presenter".classify.constantize
+      @presenter = klass.new(:categories => [@organization.priority_suborganization.categories.first.mb_chars.downcase])
+    end
+    @afisha_presenter = AfishaPresenter.new(organization_ids: [@organization.id], order_by: params[:order_by], page: params[:page])
 
     render partial: @presenter.partial, layout: false and return if request.xhr?
     render layout: "organization_layouts/#{@organization.subdomain}" if @organization.subdomain? && template_exists?(@organization.subdomain, 'layouts/organization_layouts')
