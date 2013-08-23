@@ -66,6 +66,7 @@
   ymaps.ready ->
 
     $('<div id=\'modal_affiche_yandex_map\'></div>').dialog
+      title: data_block.attr('data-hint')
       width: dialog_width
       height: dialog_height
       modal: true
