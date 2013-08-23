@@ -8,10 +8,15 @@
         position: absolute
         top: -999em
 
-      #amount
-        +clearfix
+      form
         border-top: 1px solid #ccc
         padding-top: 10px
+
+      .filter.used
+        +clearfix
+        border-bottom: 1px solid #ccc
+        margin-bottom: 10px
+        padding-bottom: 10px
 
         > div
           +inline-block
@@ -34,9 +39,14 @@
           +clearfix
           background: image_url('public/range_scale.png') no-repeat 9px 11px
           width: 260px
-          margin-left: 50px
           height: 31px
           padding: 0 9px
+
+          &.amount
+            margin-left: 40px
+
+          &.capacity
+            margin-left: 120px
 
           .scale_block
             +clearfix
@@ -102,12 +112,3 @@
 
             .handle1
               background: image_url('public/range_right_handle.png') no-repeat
-
-      #capacity
-        +clearfix
-        border-top: 1px solid #ccc
-        margin: 10px 0
-        padding-top: 10px 0
-
-        > div
-          +inline-block
