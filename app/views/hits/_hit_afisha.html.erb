@@ -11,15 +11,6 @@
 
   <div class='excerpt'><%= hit.excerpt %></div>
 
-  <% HitDecorator::ADDITIONAL_FIELDS.each do |field| %>
-    <% if (hit.highlights(field) + hit.highlights("#{field}_ru")).any? %>
-      <ul class="tags">
-        <li class="field_description"><%= hit.result.class.human_attribute_name(field) %>:</li>
-        <%= hit.splitted_fields(field) %>
-      </ul>
-    <% end %>
-  <% end %>
-
   <div class="details">
     <%= content_tag :span, hit.result_decorator.visits.visited.count, class: :to_go %>
     <%= content_tag :span, hit.result_decorator.comments.count, class: :comments %>
