@@ -7,6 +7,40 @@
       float: left
       +clearfix
 
+      &.clear_left
+        clear: left
+
+      &.sauna_item
+        width: 380px
+        //height: 244px
+        border: 1px solid #ccc
+        margin: 0 22px 20px 0
+
+        &.item_1
+          clear: left
+
+        &.item_3
+          margin-right: 0
+
+        .info
+          border-right: 1px dashed #ccc
+
+      &.sauna_short_item
+        width: 178px
+        border: 1px solid #ccc
+        margin: 0 22px 20px 0
+
+        hr
+          border: none
+          border-top: 1px dashed #ccc
+          margin: 0 0 3px 0
+
+        &.item_1
+          clear: left
+
+        &.item_6
+          margin-right: 0
+
       .info
         float: left
         width: 178px
@@ -14,7 +48,6 @@
 
         .title
           @extend .nobr
-          font-size: 12px
           margin: 5px
 
         .image
@@ -94,35 +127,17 @@
         .phone
           margin-bottom: 3px
 
-      &.clear_left
-        clear: left
+      .sauna_halls
+        float: left
+        width: 201px
 
-      &.sauna_item
-        width: 380px
-        border: 1px solid #ccc
-        margin: 0 22px 20px 0
+        .hall_title
+          color: #fff
+          background-color: #999
+          padding: 2px 8px 3px
 
-        &.item_1
-          clear: left
+        .hall_details
+          margin: 5px 8px
 
-        &.item_3
-          margin-right: 0
-
-        .info
-          border-right: 1px dashed #ccc
-
-      &.sauna_short_item
-        width: 178px
-        border: 1px solid #ccc
-        margin: 0 22px 20px 0
-
-        hr
-          border: none
-          border-top: 1px dashed #ccc
-          margin: 0 0 3px 0
-
-        &.item_1
-          clear: left
-
-        &.item_6
-          margin-right: 0
+          span
+            color: #f60

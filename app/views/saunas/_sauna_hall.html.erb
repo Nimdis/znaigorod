@@ -1,40 +1,21 @@
-<div class="top_info_block">
-  <div class="hall_title">
-    <% if sauna_hall.title.present? %>
-      <%= sauna_hall.title %>
-    <% else %>
-      Зал без названия
-    <% end %>
-  </div>
-  <div class="prices">
+<%= content_tag :div, sauna_hall.title, :class => 'hall_title' if sauna_hall.title.present? %>
+<div class='hall_details'>
+  <p>
     <% price_min = sauna_hall.sauna_hall_schedules.map(&:price).min %>
     <% price_max = sauna_hall.sauna_hall_schedules.map(&:price).max %>
-    <% if price_min == price_max %>
-      <span><%= price_min %></span> руб.,
-    <% else %>
-      <span><%= price_min %></span> &mdash; <span><%= price_max %></span> руб.,
-    <% end %>
-  </div>
-  <div class="capacity">
-    <% if sauna_hall.sauna_hall_capacity.default == sauna_hall.sauna_hall_capacity.maximal %>
-      <span class='bold'><%= sauna_hall.sauna_hall_capacity.default %></span> чел.</span>
-    <% else %>
-      <span class='bold'><%= sauna_hall.sauna_hall_capacity.default %></span> чел. <span class='light'>Максимум <%= sauna_hall.sauna_hall_capacity.maximal %> чел. Дополнительная плата &mdash; <%= sauna_hall.sauna_hall_capacity.extra_guest_cost %> руб./чел.</span>
-    <% end %>
-  </div>
-  <div class="features">
-    <% sauna_hall.features.each do |feature|%>
-      <div class='<%= I18n.transliterate(feature).gsub(/\W+/,'_').gsub(/^\d+/, '') %>' title='<%= feature %>'></div>
-    <% end %>
-  </div>
-</div>
-<div class="bottom_info_block">
+    <%= content_tag :span, price_min == price_max ? "#{price_min} руб." : "#{price_min} &mdash; #{price_max} руб.".html_safe %>,
+    <%= sauna_hall.sauna_hall_capacity.default %> чел.
+  </p>
   <% if sauna_hall.baths.any? %>
-    <div class="baths"><span>Парная:</span> <%= sauna_hall.baths.join(', ') %></div>
+    <p class='hall_baths'>
+      <span>Парная:</span>
+      <%= sauna_hall.baths.join(', ') %>
+    </p>
   <% end %>
   <% if sauna_hall.pool_features.any? || sauna_hall.pool_size.gsub(/-/,'').present? %>
-    <div class="pool">
-      <%= content_tag(:span, 'Бассейн:') unless sauna_hall.pool_size.blank? %> <%= [sauna_hall.pool_size.gsub(/-/,''), sauna_hall.pool_features].flatten.delete_if(&:blank?).join(', ') %>
-    </div>
+    <p>
+      <%= content_tag(:span, 'Бассейн:') unless sauna_hall.pool_size.blank? %>
+      <%= [sauna_hall.pool_size.gsub(/-/,''), sauna_hall.pool_features].flatten.delete_if(&:blank?).join(', ') %>
+    </p>
   <% end %>
 </div>
