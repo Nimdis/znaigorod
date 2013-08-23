@@ -5,7 +5,13 @@ class SocialLikes
   end
 
   def url(item)
-    URI.escape("#{Settings[:app][:url]}/#{item.class.name.underscore}/#{item.slug}")
+    case item.class.name
+    when 'Afisha'
+      class_name = item.class.name.underscore
+    else
+      class_name = item.class.name.underscore.pluralize
+    end
+    URI.escape("#{Settings[:app][:url]}/#{class_name}/#{item.slug}")
   end
 
   def damn_likes(item)

@@ -3,16 +3,11 @@
 require 'progress_bar'
 require 'social_likes'
 
-def skip_callbacks
-  Vote.skip_callback(:save, :after, :update_account_rating)
-end
-
-desc 'Get social likes for afishas and organizations'
+desc 'Get social likes for afishas,organizations and posts'
 task :social_likes => :environment do
-  skip_callbacks
   likes = SocialLikes.new
 
-  ['Afisha','Organization'].each do |klass|
+  ['Afisha','Organization', 'Post'].each do |klass|
     if klass == 'Afisha'
       collection = klass.constantize.with_showings
     else
