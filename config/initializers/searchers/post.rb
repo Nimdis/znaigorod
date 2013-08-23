@@ -8,6 +8,12 @@ HasSearcher.create_searcher :posts do
     search.with(:kind, search_object.kind) if search_object.kind.try(:present?) unless search_object.kind == 'all'
   end
 
+  property :status do |search|
+    search.any_of do
+      with(:status, true)
+    end
+  end
+
   scope do
     order_by(:created_at, :desc)
   end
