@@ -1,3 +1,4 @@
-<% collection.each do |post| %>
+<% collection.each do |item| %>
+  <% post = PostDecorator.new(item) %>
   <li><%= render partial: 'posts/post_poster', locals: { post: post } %></li>
 <% end %>

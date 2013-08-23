@@ -1,20 +1,15 @@
 <div class="post_show">
   <div class="title">
     <h1><%= @post.title %></h1>
-    <div class="date"><%= @post.date %></div>
+    <%= @post.date %>
   </div>
 
   <div class="left">
     <div class="wrapper">
-      <div class="post_annotation">
-        <div class="image">
-          <%= image_tag resized_image_url(@post.poster_url, 300, 224), :size => '300x224', :alt => @post.title.text_gilensize %>
-        </div>
-        <%= strip_tags @post.annotation %>
-      </div>
 
       <div class="post_content">
-        <%= strip_tags @post.content %>
+        <%= @post.annotation_image(300, 224) if @post.annotation_image? %>
+        <%= @post.html_content %>
       </div>
 
       <div class="share_and_likes">
@@ -30,7 +25,7 @@
       <%end%>
     </div>
 
-    <% if @post.images.present? %>
+    <% if @post.images.many? %>
       <div class="photogallery_header">Фотографии</div>
       <div class="photogallery">
         <ul>
@@ -49,21 +44,17 @@
       <div class="more_like_this">
         <p class="title">Другие обзоры</p>
         <ul>
-          <% @post.similar_post.each do |post| %>
+          <% @post.similar_post.each do |item| %>
+            <% post = PostDecorator.new(item) %>
             <li>
-              <div class="image">
-                <%= link_to post do %>
-                  <%= image_tag resized_image_url(post.poster_url, 87, 65), :size => '87x65', :alt => post.title.text_gilensize %>
-                <% end %>
-              </div>
-              <div class="title"><%= link_to truncate(post.title.text_gilensize, length: 40, separator: ' '), post %></div>
-              <div class="date"><%= l(post.created_at, :format => "%d %B %Y") %></div>
+              <%= post.annotation_image(87, 65) if post.annotation_image? %>
+              <div class="title"><%= link_to truncate(post.title.text_gilensize, length: 30), post %></div>
+              <%= post.date %>
             </li>
           <% end %>
         </ul>
       </div>
     <% end %>
   </div>
-
 
 </div>

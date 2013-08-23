@@ -20,6 +20,7 @@ class Post < ActiveRecord::Base
   enumerize :kind, in: [:review, :photoreport], multiple: true, predicates: true
 
   normalize_attribute :kind, with: :blank_array
+  normalize_attribute :annotation, :content, :with => [:sanitize, :gilensize_as_html, :strip, :blank]
 
   default_scope order('id DESC')
 

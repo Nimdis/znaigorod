@@ -3,11 +3,13 @@
     <%= link_to truncate(post.title.text_gilensize, length: 50, separator: ' '), post %>
   </div>
 
-  <div class="image">
-    <%= link_to image_tag(resized_image_url(post.poster_url, 215, 164), size: '215x164', title: post.title.text_gilensize, alt: post.title.text_gilensize), post %>
-  </div>
+  <% if post.annotation_image? %>
+    <%= post.annotation_image(215, 164) %>
+  <% else %>
+    <div class="text">
+      <%= post.html_content.excerpt %>
+    </div>
+  <% end %>
 
-  <div class="date">
-    <%= l(post.created_at, :format => "%d %B %Y") %>
-  </div>
+  <%= post.date %>
 </div>

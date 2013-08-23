@@ -57,6 +57,7 @@ group :default do
   gem 'rails'
   gem 'recaptcha',                  :require => 'recaptcha/rails'
   gem 'russian'
+  gem 'sanitize'
   gem 'sass-rails'
   gem 'simple-navigation'
   gem 'simple_form'
