@@ -9,3 +9,22 @@ class PrivateMessage < Message
 
   validates_presence_of :body
 end
+
+# == Schema Information
+#
+# Table name: messages
+#
+#  id               :integer          not null, primary key
+#  messageable_id   :integer
+#  messageable_type :string(255)
+#  account_id       :integer
+#  producer_id      :integer
+#  body             :text
+#  state            :string(255)
+#  kind             :string(255)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  type             :string(255)
+#  producer_type    :string(255)
+#
+

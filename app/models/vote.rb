@@ -43,5 +43,6 @@ end
 #  voteable_type :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  source        :string(255)
 #
 

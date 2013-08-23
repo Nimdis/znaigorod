@@ -33,5 +33,7 @@ end
 #  kind             :string(255)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  type             :string(255)
+#  producer_type    :string(255)
 #
 

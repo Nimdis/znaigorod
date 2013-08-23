@@ -40,5 +40,8 @@ end
 #  visited        :boolean
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  gender         :string(255)
+#  description    :text
+#  acts_as        :string(255)
 #
 
