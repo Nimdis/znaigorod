@@ -6,7 +6,7 @@
     true
 
   target.hide()
-  link = $('<a href="#">изменить</a>')
+  link = $('<a href="#">изменить фото</a>')
   target.closest('form').append(link)
 
   link.click ->
