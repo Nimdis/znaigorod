@@ -8,6 +8,7 @@ class Post < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
   has_many :votes, :as => :voteable, :dependent => :destroy
+  has_many :page_visits, :as => :page_visitable, :dependent => :destroy
 
   validates_presence_of :annotation, :content, :title
 
@@ -59,6 +60,18 @@ class Post < ActiveRecord::Base
 
   def images
     gallery_images
+  end
+
+  def create_page_visit(session, user)
+    page_visit = self.page_visits.find_or_initialize_by_session(session)
+    page_visit.user = user
+    page_visit.save
+  end
+
+  def update_rating
+    update_attribute :rating, (0.5*comments.count +
+                                     0.1*votes.liked.count +
+                                     0.01*page_visits.count)
   end
 end
 

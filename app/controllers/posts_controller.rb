@@ -13,9 +13,9 @@ class PostsController < ApplicationController
   end
 
   def show
-      @presenter = PostPresenter.new(params)
-      @post = PostDecorator.new(Post.find(params[:id]))
-      @posts = Post.published
+    @presenter = PostPresenter.new(params)
+    @post = PostDecorator.new(Post.find(params[:id]))
+    @post.delay.create_page_visit(request.session_options[:id], current_user)
   end
 
   private
