@@ -56,9 +56,7 @@ class SaunaHallsPresenter
   end
 
   def order_by
-    @order_by = self.class.available_sortings.include?(@order_by) ? @order_by : self.class.available_sortings.first
-
-    @order_by
+    @order_by ||= self.class.available_sortings.include?(@order_by) ? @order_by : self.class.available_sortings.first
   end
   alias_method :criterion, :order_by
 
@@ -83,6 +81,11 @@ class SaunaHallsPresenter
       available: { minimum: SaunaHallCapacity.minimum(:default), maximum: SaunaHallCapacity.maximum(:maximal) },
       selected: capacity
     )
+  end
+
+  def sauna_halls_order
+    return :min_sauna_hall_schedules_price if order_by == 'price'
+    :title
   end
 
   def price
