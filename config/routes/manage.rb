@@ -40,7 +40,9 @@ Znaigorod::Application.routes.draw do
 
 
     resources :posts do
-      resources :post_images
+      resources :gallery_images, :except => [:index, :show] do
+        delete 'destroy_file', :on => :member, :as => :destroy_file
+      end
     end
 
     get 'organizations/rated' => 'organizations#index', :defaults => { :rated => true }

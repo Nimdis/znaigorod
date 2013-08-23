@@ -8,7 +8,7 @@ class Manage::GalleryFilesController < Manage::ApplicationController
   belongs_to :afisha, :organization, :polymorphic => true, :optional => true
 
   def create
-    @gallery_file = parent.gallery_files.create(:file => params[:gallery_files][:file].first)
+    @gallery_file = parent.gallery_files.create(:file => params[:gallery_files][:file])
   end
 
   def update

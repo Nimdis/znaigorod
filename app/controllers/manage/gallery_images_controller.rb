@@ -5,10 +5,10 @@ class Manage::GalleryImagesController < Manage::ApplicationController
   belongs_to *Organization.available_suborganization_kinds,
     :polymorphic => true, :optional => true
 
-  belongs_to :afisha, :organization, :sauna_hall, :polymorphic => true, :optional => true
+  belongs_to :afisha, :organization, :sauna_hall, :post, :polymorphic => true, :optional => true
 
   def create
-    @gallery_image = parent.gallery_images.create(:file => params[:gallery_images][:file].first)
+    @gallery_image = parent.gallery_images.create(:file => params[:gallery_images][:file])
   end
 
   def update
@@ -37,6 +37,8 @@ class Manage::GalleryImagesController < Manage::ApplicationController
         manage_organization_sauna_sauna_hall_path(@organization, parent)
       when *Organization.available_suborganization_classes
         manage_organization_path(parent.organization)
+      when Post
+        manage_post_path(parent)
       end
     end
 end
