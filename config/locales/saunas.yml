@@ -1,5 +1,11 @@
 ru:
   sauna:
+    found_total_count:
+      zero: "Не найдено ни одной сауны"
+      one: "Найдена %{count} сауна"
+      few: "Найдено %{count} сауны"
+      many: "Найдено %{count} саун"
+      other: "Найдено %{count} сауны"
     sauna_accessory:
       sheets:
         zero: "Простыни бесплатно"

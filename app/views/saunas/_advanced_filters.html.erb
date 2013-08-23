@@ -103,7 +103,7 @@
         <input type='submit' value='Применить фильтр' class='submit' />
       </div>
       <div class='results_counter'>
-        Найдено саун: <span class='counter'><%= @presenter.total_count %></span>
+        <span class='counter'><%= t('sauna.found_total_count', :count => @presenter.total_count) %></span>
       </div>
       <div class='clear_wrapper'>
         <%= link_to 'Очистить', '#' %>
