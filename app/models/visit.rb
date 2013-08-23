@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Visit < ActiveRecord::Base
-  attr_accessible :visited, :user_id
+  attr_accessible :visited, :user_id, :gender, :acts_as, :description
 
   belongs_to :visitable, :polymorphic => true
   belongs_to :user
@@ -10,7 +10,12 @@ class Visit < ActiveRecord::Base
 
   validate :authenticated_user
 
-  scope :visited, where(:visited => true)
+  scope :visited, -> { where(:visited => true) }
+  scope :wanted_to, ->(act) { where('acts_as = ?', act) }
+
+  extend Enumerize
+  enumerize :gender, in: [:all, :male, :female], default: :all, predicates: true
+  enumerize :acts_as, in: [:inviter, :invited], predicates: true
 
   def change_visit
     self.visited = !visited?
@@ -19,9 +24,9 @@ class Visit < ActiveRecord::Base
 
   private
 
-    def authenticated_user
-      errors.add :visited, 'Вы не зарегистрированы' if user.nil?
-    end
+  def authenticated_user
+    errors.add :visited, 'Вы не зарегистрированы' if user.nil?
+  end
 end
 
 # == Schema Information

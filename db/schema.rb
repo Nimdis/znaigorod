@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130822081911) do
+ActiveRecord::Schema.define(:version => 20130822051826) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -932,6 +932,9 @@ ActiveRecord::Schema.define(:version => 20130822081911) do
     t.boolean  "visited"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "gender"
+    t.text     "description"
+    t.string   "acts_as"
   end
 
   add_index "visits", ["user_id"], :name => "index_visits_on_user_id"

@@ -79,6 +79,8 @@
 
   afisha:
     join: "Я пойду"
+    inviter: "Пригласить"
+    invited: "Жду приглашения"
     visitors:
       one: "%{count} человек"
       few: "%{count} человека"

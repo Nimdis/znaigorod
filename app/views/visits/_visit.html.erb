@@ -2,6 +2,7 @@
   <li<%= " class='selected'".html_safe if current_user && current_user.visited?(visitable) %>>
     <%= link_to t('afisha.join'), polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true %>
   </li>
+  <%= render partial: 'visits/acts_visit', locals: { visitable: visitable, acts_as: [:inviter, :invited] } %>
 </ul>
 
 <% if @visit && @visit.errors.any? %>
