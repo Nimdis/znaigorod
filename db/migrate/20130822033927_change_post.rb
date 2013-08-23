@@ -1,6 +1,6 @@
 class ChangePost < ActiveRecord::Migration
   def up
-    add_column :posts, :rating, :string
+    add_column :posts, :rating, :float
     add_column :posts, :kind, :text
 
     # normalize content

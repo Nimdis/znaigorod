@@ -544,7 +544,7 @@ ActiveRecord::Schema.define(:version => 20130822081911) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "status",     :default => false
-    t.string   "rating"
+    t.float    "rating"
     t.text     "kind"
     t.text     "tag"
   end

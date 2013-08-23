@@ -16,7 +16,7 @@
             white-space: nowrap
             padding-top: 25px
             margin: 0 0 1px 0
-            background: transparent image_url('public/account_kind_sprite.png') no-repeat center center
+            background: transparent image_url('public/post_kind_sprite.png') no-repeat center center
             width: 65%
             .name
               color: #000
@@ -36,6 +36,26 @@
             color: #f60
 
           &.all
+            a
+              background-position: 16px 0
+              &:hover
+                background-position: 16px -67px
+            &.selected a
+              background-position: 16px -136px
+              &:hover
+                background-position: 16px -67px
+
+          &.photoreport
+            a
+              background-position: -74px 0
+              &:hover
+                background-position: -74px -60px
+            &.selected a
+              background-position: -74px -110px
+              &:hover
+                background-position: -74px -0px
+
+          &.review
             a
               background-position: 16px 0
               &:hover

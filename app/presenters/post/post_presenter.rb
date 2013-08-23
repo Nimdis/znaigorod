@@ -51,7 +51,7 @@ class PostKindFilter
   end
 
   def self.available_kind_values
-    %w[all review photoreport]
+    %w[all photoreport review]
   end
 
   def available_kind_values
