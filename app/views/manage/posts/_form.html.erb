@@ -4,8 +4,10 @@
 <%= simple_form_for [:manage, @post] do |f| %>
   <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path' } %>
   <%= f.input :title %>
+  <%= f.input :kind, as: :check_boxes %>
   <%= f.input :annotation, :as => :ckeditor, :label => false %>
   <%= f.input :content, :as => :ckeditor, :label => false %>
+  <%= f.input :tag %>
   <%= f.input :status, :as => :boolean %>
   <div class='actions'>
     <%= f.submit "Сохранить" %>

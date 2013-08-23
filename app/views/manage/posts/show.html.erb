@@ -5,6 +5,11 @@
     <%= link_to "Посмотреть в публичном виде", post_path(@post), :class => 'edit_link', :target => '_blank' %>
   </h1>
 
+  <div class="kind">
+    <span class="label">Тип обзора:</span>
+    <span class="value"><%= resource.kind.values.map(&:text).join(', ') %></span>
+  </div>
+
   <div class="annotation">
     <h4>Аннотация</h4>
     <%= @post.annotation.html_safe %>
@@ -13,6 +18,15 @@
   <div class="content">
     <h4>Контент</h4>
     <%= @post.content.html_safe %>
+  </div>
+
+  <div class="tags">
+    <span class="label">Тэги:</span>
+    <% if resource.tag.present? %>
+      <span class="value"><%= resource.tags.join(', ') %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
   </div>
 
 <div class="upload_wrapper">

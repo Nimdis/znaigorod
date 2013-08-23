@@ -3,7 +3,7 @@
 class Post < ActiveRecord::Base
   extend FriendlyId
 
-  attr_accessible :annotation, :content, :poster_url, :status, :title, :vfs_path, :rating, :tag
+  attr_accessible :annotation, :content, :poster_url, :status, :title, :vfs_path, :rating, :tag, :kind
 
   has_many :comments, :as => :commentable, :dependent => :destroy
   has_many :gallery_images, :as => :attachable, :dependent => :destroy

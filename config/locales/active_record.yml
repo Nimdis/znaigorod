@@ -162,10 +162,8 @@ ru:
       post:
         <<: *common_attributes
         status: Опубликовать
-
-      post_image:
-        <<: *common_attributes
-        attachment: Изображение
+        kind: Тип обзора
+        tag: Теги через запятую
 
       image:
         <<: *common_attributes
