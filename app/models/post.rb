@@ -10,6 +10,8 @@ class Post < ActiveRecord::Base
   has_many :votes, :as => :voteable, :dependent => :destroy
   has_many :page_visits, :as => :page_visitable, :dependent => :destroy
 
+  alias_attribute :description, :content
+
   validates_presence_of :content, :title, :kind, :tag
 
   friendly_id :title, use: :slugged
