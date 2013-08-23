@@ -8,5 +8,106 @@
         position: absolute
         top: -999em
 
-      .amount
+      #amount
+        +clearfix
         border-top: 1px solid #ccc
+        padding-top: 10px
+
+        > div
+          +inline-block
+
+        .wide
+          width: 120px
+
+        .input
+          +inline-block
+
+          input
+            width: 40px
+            font-size: 11px
+            text-align: center
+            border: 1px solid #ccc
+            padding: 2px
+            margin: 0 5px
+
+        .filter_slider_wrapper
+          +clearfix
+          background: image_url('public/range_scale.png') no-repeat 9px 11px
+          width: 260px
+          margin-left: 50px
+          height: 31px
+          padding: 0 9px
+
+          .scale_block
+            +clearfix
+            height: 16px
+            font-size: 10px
+            margin-left: -9px
+            position: relative
+            width: 272px
+
+            span
+              display: block
+              position: absolute
+              width: 30px
+              top: -1px
+
+            .min
+              left: 0
+
+            .middle
+              left: 42%
+              text-align: center
+
+            .max
+              right: 5px
+              text-align: center
+
+          .filter_slider
+            background: #ffd4b9
+            +background(linear-gradient(#fed5b7, #ffb381))
+            +box-shadow(none)
+            border: 1px solid #000
+            height: 4px
+            width: 241px
+
+            &:hover
+              cursor: pointer
+
+            .ui-slider-range
+              background: #fe893a
+              +background(linear-gradient(#ffa970, #f60))
+              padding-right: 0.5px
+
+              &:hover
+                cursor: pointer
+
+            .ui-slider-handle
+              border: none
+              height: 9px
+              margin: 0
+              top: 5px
+              width: 10px
+
+              &:hover
+                cursor: pointer
+
+              &.ui-state-active
+                border: none
+                +box-shadow(none)
+
+            .handle0
+              background: image_url('public/range_left_handle.png') no-repeat
+              margin: 0 0 0 -10px
+
+            .handle1
+              background: image_url('public/range_right_handle.png') no-repeat
+
+      #capacity
+        +clearfix
+        border-top: 1px solid #ccc
+        margin: 10px 0
+        padding-top: 10px 0
+
+        > div
+          +inline-block
