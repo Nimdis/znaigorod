@@ -46,6 +46,7 @@
           init_photogallery() if $('.content_wrapper .was_in_city_photos li').length && data.length
           init_payment() if $('.content_wrapper .tickets_list li').length && data.length
           init_sms_claims() if $('.content_wrapper .sms_claims li').length && data.length
+          init_sauna_halls_scroll() if $('.content_wrapper .organizations_list > ul .sauna_halls').length
           true
         error: (jqXHR, textStatus, errorThrown) ->
           wrapped = $("<div>" + jqXHR.responseText + "</div>")
