@@ -11,10 +11,6 @@ class PostDecorator < ApplicationDecorator
     h.post_url(post)
   end
 
-  def image
-    post.poster_url
-  end
-
   def annotation_image?
     return true if gallery_images.any?
   end

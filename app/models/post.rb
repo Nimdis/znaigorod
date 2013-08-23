@@ -62,6 +62,10 @@ class Post < ActiveRecord::Base
     gallery_images
   end
 
+  def likes_count
+    self.votes.liked.count
+  end
+
   def create_page_visit(session, user)
     page_visit = self.page_visits.find_or_initialize_by_session(session)
     page_visit.user = user

@@ -3,13 +3,18 @@
     <%= link_to truncate(post.title.text_gilensize, length: 50, separator: ' '), post %>
   </div>
 
-  <% if post.annotation_image? %>
-    <%= post.annotation_image(215, 164) %>
-  <% else %>
-    <div class="text">
-      <%= post.html_content.excerpt %>
-    </div>
-  <% end %>
+  <%= post.annotation_image(215, 164) if post.annotation_image? %>
+  <div class="<%= post.annotation_image? ? 'text_with_image' : 'text' %>">
+    <%= link_to truncate(post.html_content.excerpt, length: 180, separator: '  '), post_path(post) %>
+
+    <%= link_to post_path(post), class: :details do %>
+      <span class="first_line">
+        <span class="comments"><%= post.comments.count %></span>
+        <span class="likes"><%= post.likes_count %></span>
+        <span class="visits"><%= post.page_visits.count %></span>
+      </span>
+    <% end %>
+  </div>
 
   <%= post.date %>
 </div>

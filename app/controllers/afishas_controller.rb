@@ -22,5 +22,4 @@ class AfishasController < ApplicationController
     @presenter = AfishaPresenter.new(params)
     @afisha.delay.create_page_visit(request.session_options[:id], current_user)
   end
-
 end

@@ -29,15 +29,63 @@
           position: relative
           width: 215px
 
-        .text
+        .text, .text_with_image
           font-size: 12px
           line-height: 1.4
           padding: 5px 10px
-          text-align: justify
           min-height: 164px
+          position: absolute
+          top: 42px
+
+          a
+            color: #000
+
+            &:hover
+              text-decoration: none
+
+          .details
+            color: #000
+
+            .first_line
+              width: 100%
+              position: absolute
+              left: 28px
+              top: 140px
+
+              span
+                display: block
+                float: left
+                width: 34px
+                padding-left: 25px
+                background: transparent image_url('public/details_sprite.png') no-repeat 10px 3px
+
+                &.comments
+                  background-position: 5px -36px
+                &.likes
+                  background-position: 12px -57px
+                &.visits
+                  background-position: 6px -77px
+
+        .text_with_image
+          display: none
+
+        .text
+          .details
+            display: none
 
         .date
           bottom: 5px
           left: 71px
           line-height: 20px
           position: absolute
+
+        &:hover
+          img
+            +opacity(0.15)
+
+          .text_with_image
+            display: block
+
+          .text
+            .details
+              display: block
