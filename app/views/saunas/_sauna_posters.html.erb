@@ -42,8 +42,8 @@
     </div>
 
     <ul class='sauna_halls'>
-      <% organization.sauna.ordered_sauna_halls(@presenter.sauna_halls_order).each do |sauna_hall| %>
-        <li>
+      <% organization.sauna.ordered_sauna_halls.each do |sauna_hall| %>
+        <li<%= ' class=non_suitable' unless @presenter.sauna_hall_ids.include?(sauna_hall.id) %>>
           <%= render :partial => 'sauna_hall', :locals => { :sauna => OrganizationDecorator.decorate(sauna_hall.organization), :sauna_hall => sauna_hall } %>
         </li>
       <% end %>
