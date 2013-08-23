@@ -112,3 +112,64 @@
 
             .handle1
               background: image_url('public/range_right_handle.png') no-repeat
+
+      .filter.hide
+        display: none
+        +clearfix
+        border-bottom: 1px solid #ccc
+        margin-bottom: 10px
+        padding-bottom: 5px
+
+        .remove_filter_link
+          float: right
+
+        > div
+          +inline-block
+
+        .filter_label
+          width: 115px
+
+        .filter_checkboxes
+          width: 1000px
+          +clearfix
+
+          .checkbox
+            float: left
+            width: 195px
+            margin: 0 5px 5px 0
+            input,
+            label
+              +inline-block
+
+      .criteria_list
+        +clearfix
+        margin-bottom: 10px
+
+        .criteria_label
+          +inline-block
+
+        ul
+          +inline-block
+          li
+            +inline-block
+            margin-left: 15px
+
+      .submit_action
+        +clearfix
+        margin-bottom: 15px
+
+        > div
+          +inline-block
+          margin-right: 10px
+
+        input.submit
+          cursor: pointer
+          font-family: Verdana, Tahoma, sans-serif
+          +button_style
+          margin: 0
+
+        .results_counter
+          color: #999
+
+        .clear_wrapper a
+          color: #f60
