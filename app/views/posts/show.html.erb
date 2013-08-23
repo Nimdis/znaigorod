@@ -16,13 +16,19 @@
         <%= render :partial => 'share_this' %>
       </div>
 
-      <% if @post.tags.any? %>
-        <ul class="tags">
-          <% @post.tags.each do |tag| %>
-            <li><%= tag %></li>
-          <%end%>
-        </ul>
-      <%end%>
+      <div class="post_meta">
+        <% if @post.tags.any? %>
+          <ul class="tags">
+            <% @post.tags.each do |tag| %>
+              <li><%= tag %></li>
+            <%end%>
+          </ul>
+        <%end%>
+
+        <span class="details">
+          <span class="visits"><%= @post.page_visits.count %></span>
+        </span>
+      </div>
     </div>
 
     <% if @post.images.many? %>

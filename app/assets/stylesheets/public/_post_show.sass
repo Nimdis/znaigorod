@@ -64,18 +64,34 @@
           .ok_like
             float: right
 
-      .tags
+      .post_meta
         +clearfix
-        margin: 10px 0 5px
+        width: 950px
 
-        li
-          float: left
-          font-size: 11px
-          color: #999
-          +border-radius(3px)
-          background-color: #e8e8e8
-          margin: 0 5px 5px 0
-          padding: 1px 5px 2px
+        .tags
+          margin: 10px 0 5px
+
+          li
+            float: left
+            font-size: 11px
+            color: #999
+            +border-radius(3px)
+            background-color: #e8e8e8
+            margin: 0 5px 5px 0
+            padding: 1px 5px 2px
+
+        .details
+          float: right
+          color: #777
+
+          span
+            display: block
+            float: left
+            padding-left: 25px
+            background: transparent image_url('public/details_sprite.png') no-repeat 10px 3px
+
+            &.visits
+              background-position: 6px -78px
 
     .photogallery_header
       font-size: 14px
