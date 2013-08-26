@@ -12,9 +12,10 @@ class Account < ActiveRecord::Base
 
   has_many :friends
   has_many :events,          through: :users, order: 'afisha.created_at DESC'
-  has_many :messages,        order: 'messages.created_at DESC'
+
+  has_many :messages,                     order: 'messages.created_at DESC'
   has_many :notification_messages,        order: 'messages.created_at DESC'
-  has_many :produced_messages, as: :producer, class_name: 'PrivateMessage' 
+  has_many :produced_messages,            as: :producer, class_name: 'PrivateMessage'
 
   has_many :payments, through: :users
 

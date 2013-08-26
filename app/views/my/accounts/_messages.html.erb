@@ -10,8 +10,8 @@
 
   <div class="messages list">
     <div id="private">
-      <ul class="account_messages">
-        <%= render partial: 'my/dialogs/list' %>
+      <ul class="dialogs">
+        <%= render partial: 'my/dialogs/messages', locals: { collection: @dialogs } %>
       </ul>
     </div>
 

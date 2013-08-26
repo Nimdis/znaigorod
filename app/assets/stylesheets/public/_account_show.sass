@@ -199,18 +199,45 @@
             .date
               color: #999
 
+      ul.dialogs
+        li
+          margin: 0
+          padding: 10px
+          border-bottom: 1px solid #ccc
+          width: 960px
 
-.buddies_box
-  overflow: auto
-  max-height: 520px
+          &.new
+            background: #e8e8e8
+          &.read
+            background: #fff
 
-  ul.buddies
-    li
-      height: 50px
-      margin: 0 0 10px 0
+          a.change_message_status
+            display: none
 
-      .image
-        float: left
+          .item
+            font-size: 12px
 
-      .title
-        margin: 0 0 0 55px
+            img
+              float: left
+              margin: 0 10px 0 0
+
+            span
+              color: #999
+
+            .avatar
+              +avatar-style
+
+            .name
+              font-weight: bold
+
+            .info
+              float: left
+
+              .date
+                color: #999
+
+                .to_dialog
+                  margin: 0 0 0 8px
+
+            .body
+              margin: 0 0 0 300px
