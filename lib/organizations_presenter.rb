@@ -162,6 +162,7 @@ module OrganizationsPresenter
         }
       end
       add_edvanced_categories_links(array)
+      array.sort_by! {|c| c[:count]}.reverse!
       array.insert(0, {
         title: 'Все',
         klass: 'all',

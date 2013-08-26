@@ -30,7 +30,7 @@
   <%= render :partial => 'advertisment' if DateTime.now <= DateTime.new(2013, 6, 23, 22, 00, 00, '+7') %>
   <% if @presenter.collection.any? %>
     <ul class='<%= @presenter.view %>'>
-      <%= render :partial => @presenter.partial %>
+      <%= render :partial => @presenter.partial, locals: { :afishas => nil } %>
     </ul>
   <% else %>
     <p class='empty_items_list'>По заданным параметрам ничего не найдено ;(</p>
