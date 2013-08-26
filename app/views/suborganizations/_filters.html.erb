@@ -16,7 +16,7 @@
   <div class='filters organization'>
     <div class='by_categories'>
       <ul>
-        <% @presenter.categories_links.each do |category_link| %>
+        <% @presenter.categories_links.take(8).each do |category_link| %>
           <li class='<%= category_link[:klass] %><%= ' selected' if category_link[:selected] %>'>
             <%= link_to send(category_link[:url], category_link[:parameters]) do %>
               <%= content_tag :span, category_link[:title], class: :name %>
@@ -24,11 +24,29 @@
             <% end %>
           </li>
         <% end %>
+        <% if @presenter.categories_links.count > 9 %>
+          <li class='more_link'>
+            <a href='#'>&darr; Ещё заведения</a>
+          </li>
+        <% end %>
       </ul>
     </div>
 
     <%= yield :advanced_filters %>
   </div>
+
+  <% if @presenter.categories_links.count > 9 %>
+    <ul class='more'>
+      <% @presenter.categories_links[9..@presenter.categories_links.count].each do |category_link| %>
+        <li class='<%= category_link[:klass] %><%= ' selected' if category_link[:selected] %>'>
+          <%= link_to send(category_link[:url], category_link[:parameters]) do %>
+            <%= content_tag :span, category_link[:title], class: :name %>
+            <%= content_tag :span, category_link[:count], class: :count  %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 
   <% if content_for?(:advanced_filters) %>
     <div class='advanced_filters_toggler'>

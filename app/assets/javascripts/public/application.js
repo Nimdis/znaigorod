@@ -37,6 +37,7 @@
  * = require ./yandex_map
  * = require ./common
  * = require ./preload_images
+ * = require ./more_main_menu
  * = require ./comments
  * = require ./votes
  * = require ./jscrollpane
