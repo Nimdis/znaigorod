@@ -30,12 +30,14 @@
     <%= yield :advanced_filters %>
   </div>
 
-  <div class='advanced_filters_toggler'>
-    <% if params[:utf8].present? %>
-      <a href='#'>&uarr; Расширенный поиск</a>
-    <% else %>
-      <a href='#'>&darr; Расширенный поиск</a>
-    <% end %>
-  </div>
+  <% if content_for?(:advanced_filters) %>
+    <div class='advanced_filters_toggler'>
+      <% if params[:utf8].present? %>
+        <a href='#'>&uarr; Расширенный поиск</a>
+      <% else %>
+        <a href='#'>&darr; Расширенный поиск</a>
+      <% end %>
+    </div>
+  <% end %>
 
 </div>
