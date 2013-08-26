@@ -1,8 +1,8 @@
 <% content_for :extra_meta do %>
-  <link rel="canonical" href="<%= @presenter.canonical_link %>" />
+  <link rel='canonical' href="<%= @presenter.canonical_link %>" />
 <% end %>
 
-<div class='advanced'>
+<div class='advanced <%= params[:utf8].present? ? 'opened' : 'closed' %>'>
 
   <div class='introduction'>
     <%= t('meta.saunas.introduction').as_html %>

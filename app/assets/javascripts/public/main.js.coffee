@@ -29,6 +29,7 @@ $ ->
   init_contest() if $('.content_wrapper .contest').length
   init_organization_info() if $('.organization_info .info .description').length
   init_introduction() if $('.content .introduction').length
+  init_sauna_advanced_filter() if $('.filters_wrapper .advanced_filters_toggler').length
   init_sauna_halls_scroll() if $('.organizations_list .sauna_halls').length
   init_iconize_info() if $('.organization_info .iconize_info li').length
   init_virtual_tour_link() if $('.organization_info .virtual_tour_link').length

@@ -180,6 +180,7 @@ clear_form_handler = () ->
     $('.filters_wrapper .filter_inputs input').val('').change()
     $('.filters_wrapper .filter_checkboxes input').attr('checked', false).change()
     $('.filters_wrapper .remove_filter_link:visible').click()
+    window.location.href = window.location.href.replace(/\?.*/, '')
     false
 
 $.fn.draw_scale = (min, max) ->

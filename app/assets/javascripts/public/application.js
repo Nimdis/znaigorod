@@ -56,6 +56,7 @@
  * = require ./filter_handler
  * = require ./organization_info
  * = require ./introduction
+ * = require ./sauna_advanced_filter
  * = require ./sauna_halls_scroll
  * = require ./iconize_info
  * = require ./virtual_tour_link
