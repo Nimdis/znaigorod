@@ -23,7 +23,7 @@
 
   <div class="right">
     <%= render 'messages' if @notification_messages.any? || @dialogs.any? %>
-    <%= render 'accounts/events' if @events.any? %>
+    <%= render 'accounts/events' %>
 
     <% if @votes.any? %>
       <div class="votes header">

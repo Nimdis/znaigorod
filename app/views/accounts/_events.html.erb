@@ -1,12 +1,13 @@
 <div class="events header">
   Мероприятия
+  <%= link_to 'Добавить', new_my_afisha_path, class: :floatr if can? :new, Afisha %>
 </div>
 
 <div id="events_filter">
   <ul>
     <% %w[draft pending published].each do |state| %>
       <li><%= link_to "##{state}" do %>
-        <%= t(state) %> (<%= @events.by_state(state).total_count %>)
+        <%= t(state, count: @events.by_state(state).total_count) %>
         <% end %>
       </li>
     <% end %>

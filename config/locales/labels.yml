@@ -20,9 +20,6 @@ ru:
   certificate: Сертификат
   confirm_ask: Вы уверены?
   delete: Удалить
-  draft: Черновики
-  pending: На модерации
-  published: Опубликованные
   eating: Заведения
   edit: Редактировать
   edit_afisha: Редактировать информацию о мероприятии
@@ -175,6 +172,27 @@ ru:
     few:   "%{count} афиши"
     many:  "%{count} афиш"
     other: "%{count} афиш"
+
+  draft:
+    one:   "Черновики (%{count})"
+    few:   "Черновики %{count}"
+    many:  "Черновики (%{count})"
+    other: "Черновики (%{count})"
+    zero:  "Черновики"
+
+  pending:
+    one:   "На модерации (%{count})"
+    few:   "На модерации %{count}"
+    many:  "На модерации (%{count})"
+    other: "На модерации (%{count})"
+    zero:  "Опубликованные"
+
+  published:
+    one:   "Опубликованные (%{count})"
+    few:   "Опубликованные %{count}"
+    many:  "Опубликованные (%{count})"
+    other: "Опубликованные (%{count})"
+    zero:  "Опубликованные"
 
   account_friends:
     one:   "%{count} человек"
