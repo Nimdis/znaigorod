@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130827033935) do
+ActiveRecord::Schema.define(:version => 20130827092643) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -415,6 +415,7 @@ ActiveRecord::Schema.define(:version => 20130827033935) do
     t.datetime "updated_at",       :null => false
     t.string   "type"
     t.string   "producer_type"
+    t.string   "invite_kind"
   end
 
   add_index "messages", ["account_id"], :name => "index_messages_on_account_id"

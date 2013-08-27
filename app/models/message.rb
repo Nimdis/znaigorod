@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Message < ActiveRecord::Base
-  attr_accessible :account, :account_id, :body, :state, :kind, :producer, :producer_id, :producer_type, :messageable
+  attr_accessible :account, :account_id, :body, :state, :kind, :producer, :producer_id, :producer_type, :messageabl, :messageable_id, :messageable_type, :invite_kind
 
   belongs_to :account
   belongs_to :producer, class_name: 'Account'
