@@ -536,7 +536,6 @@ ActiveRecord::Schema.define(:version => 20130827033935) do
 
   create_table "posts", :force => true do |t|
     t.text     "title"
-    t.text     "annotation"
     t.text     "content"
     t.text     "poster_url"
     t.string   "vfs_path"
