@@ -22,11 +22,9 @@
           </span>
         <% end %>
       </div>
-      <% if organization.address_link.present? %>
-        <div class='address'>
-          <%= organization.address_link %>
-        </div>
-      <% end %>
+      <div class='address'>
+        <%= organization.truncated_address_link.present? ? organization.truncated_address_link : "&nbsp;".html_safe %>
+      </div>
       <div class='phone'>
         <%= organization.decorated_phones %>
       </div>
@@ -57,11 +55,7 @@
       <div class='info'>
         <div class='title'><%= organization.truncated_title_link %> </div>
         <hr />
-        <% if organization.address_link.present? %>
-          <div class='address'>
-            <%= organization.address_link %>
-          </div>
-        <% end %>
+        <%= content_tag :div, organization.truncated_address_link, :class => :address if organization.truncated_address_link.present? %>
         <div class='phone'>
           <%= organization.decorated_phones %>
         </div>

@@ -22,6 +22,8 @@
       </span>
     <% end %>
   </div>
-  <%= content_tag :div, suborganization.address_link, :class => 'place' unless suborganization.address_link.blank? %>
+  <div class="place">
+    <%= suborganization.truncated_address_link.present? ? suborganization.truncated_address_link : "&nbsp;".html_safe %>
+  </div>
   <%= suborganization.decorated_phones %>
 </div>

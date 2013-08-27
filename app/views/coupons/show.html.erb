@@ -97,7 +97,7 @@
           <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => organization } %>
         </div>
         <div class='organization_info'>
-          <%= content_tag(:div, organization.address_link + organization.office.to_s, class: :place) unless organization.address.to_s.blank? %>
+          <%= content_tag(:div, organization.address_link, class: :place) if organization.address_link.present? %>
           <div class='schedule'>
             <%= organization.work_schedule %>
           </div>

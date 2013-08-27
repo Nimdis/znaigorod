@@ -67,7 +67,7 @@
                 </div>
                 <div class='clearfix'>
                   <div class='title'><%= link_to organization.title.text_gilensize, organization_path(organization) %></div>
-                  <%= content_tag :div, organization.address_link, :class => 'places' if organization.address_link.present? %>
+                  <%= content_tag :div, organization.truncated_address_link, :class => 'places' if organization.truncated_address_link.present? %>
                 </div>
               </li>
             <% end %>
@@ -80,8 +80,7 @@
 
   <div class='center'>
     <h1><%= @organization.title %></h1>
-
-    <%= content_tag(:div, @organization.address_link + @organization.office.to_s, class: :place) unless @organization.address.to_s.blank? %>
+    <%= content_tag(:div, @organization.address_link, class: :place) if @organization.address_link.present? %>
     <%= @organization.work_schedule %>
     <%= content_tag(:div, @organization.phone, class: :phone_wrapper) if @organization.phone.present? %>
     <%= content_tag(:div, @organization.contact_links, class: :links) if @organization.contact_links.present? %>

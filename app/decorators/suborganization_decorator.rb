@@ -5,7 +5,7 @@ class SuborganizationDecorator < ApplicationDecorator
     @decorated_organization ||= OrganizationDecorator.decorate organization
   end
 
-  delegate :truncated_title_link, :logotype_link, :address_link,
+  delegate :truncated_title_link, :logotype_link, :address_link, :truncated_address_link,
     :html_description,
     :truncated_description, :site_link, :email_link, :stand_info, :schedule_today,
     :organization_url, :to => :decorated_organization
