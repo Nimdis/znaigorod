@@ -1,6 +1,6 @@
 <%= simple_form_for @private_message, :url => my_private_messages_path, html: { remote: true } do |f| %>
   <%= f.input :account_id, as: :hidden %>
-  <%= f.input :body, label: false %>
+  <%= f.input :body, label: false, autofocus: true %>
   <%= f.submit 'Отправить' %>
   <%= link_to 'Отмена', '#', class: 'close' %>
 <% end %>
