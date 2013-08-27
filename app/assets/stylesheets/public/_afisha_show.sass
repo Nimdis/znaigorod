@@ -373,24 +373,64 @@
         .ok_like
           float: right
 
-    .tags
+    .tags_and_visits
+      width: 100%
       +clearfix
-      margin: 10px 0 5px
 
-      li
+      .tags
         float: left
-        font-size: 11px
-        color: #999
-        +border-radius(3px)
-        background-color: #e8e8e8
-        margin: 0 5px 5px 0
-        padding: 1px 5px 2px
+        width: 565px
+        +clearfix
+        margin: 10px 0 5px
 
-        &.transparent
-          background-color: transparent
-          color: #000
-          padding-left: 0
-          padding-right: 0
+        li
+          float: left
+          font-size: 11px
+          color: #999
+          +border-radius(3px)
+          background-color: #e8e8e8
+          margin: 0 5px 5px 0
+          padding: 1px 5px 2px
+
+          &.transparent
+            background-color: transparent
+            color: #000
+            padding-left: 0
+            padding-right: 0
+
+      .details
+        float: right
+        color: #999
+        font-size: 11px
+
+        span
+          +inline-block
+          background: transparent url(/assets/public/details_sprite.png) no-repeat 10px 3px
+          margin-left: 5px
+
+          &.to_go
+            background-position: 0 4px
+            padding-left: 13px
+
+          &.wait_invite
+            background-position: 0 -16px
+            padding-left: 20px
+
+          &.comments
+            background-position: 0 -35px
+            padding-left: 19px
+            margin-bottom: 0
+
+          &.likes
+            background-position: 0 -56px
+            padding-left: 13px
+
+          &.visits
+            background-position: 0 -76px
+            padding-left: 19px
+
+          &.minimal_age
+            background: none
 
     .trailer_header,
     .photogallery_header
