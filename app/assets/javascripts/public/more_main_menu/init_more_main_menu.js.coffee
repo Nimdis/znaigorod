@@ -6,7 +6,7 @@
 
   block.css
     left: link.position().left - link.outerWidth(true, true) + 15
-    top: link.position().top + link.outerHeight() - 2
+    top: link.position().top + link.outerHeight() - 20
 
   link.click ->
     block.toggle()

@@ -183,6 +183,10 @@ class Organization < ActiveRecord::Base
     self.votes.liked.count
   end
 
+  def visit_for_user(user)
+    self.visits.find_by_user_id(user.id)
+  end
+
   def create_page_visit(session, user)
     page_visit = self.page_visits.find_or_initialize_by_session(session)
     page_visit.user = user
