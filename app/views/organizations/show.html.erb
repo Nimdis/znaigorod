@@ -11,32 +11,68 @@
 <div class='organization_show'>
 
   <div class='left'>
-    <%= content_tag :div, class: :image do %>
-    <% if @organization.logotype_url? %>
-      <%= link_to(image_tag(resized_image_url(@organization.logotype_url, 200, 200), :size => '200x200', :alt => @organization.title), @organization.logotype_url) %>
-    <% else %>
+    <div class='image'>
+      <% if @organization.logotype_url? %>
+        <%= link_to(image_tag(resized_image_url(@organization.logotype_url, 200, 200), :size => '200x200', :alt => @organization.title), @organization.logotype_url) %>
+      <% else %>
         <span class='stub_poster <%= @organization.priority_suborganization_kind %>'></span>
       <% end %>
-    <% end %>
+    </div>
     <div class='social_actions'>
       <%#= render :partial => 'visits/visit', :locals => { :visitable => @organization.model } %>
     </div>
   </div>
 
   <div class='right'>
-    <div class="wrapper">
+    <div class='wrapper'>
+
       <% if @organization.has_tour? %>
         <div class='virtual_tour'>
           <%= link_to('#', :class => :virtual_tour_link, :'data-link' => @organization.virtual_tour.link, title: '3D-тур') do %>
             <% if @organization.virtual_tour.attachment_url? %>
-              <%= resized_image_url(@organization.virtual_tour.attachment_url, 200, 150) %>
+              <%= image_tag resized_image_url(@organization.virtual_tour.attachment_url, 196, 150), :size => '196x150' %>
               <span>3D<br />тур</span>
             <% else %>
-              <%= image_tag 'public/virtual_tour_link.png', :size => '200x150', :alt => '3D тур' %>
+              <%= image_tag 'public/virtual_tour_link.png', :size => '196x150', :alt => '3D тур' %>
             <% end %>
           <% end %>
         </div>
       <% end %>
+
+      <% if @organization.address.latitude && @organization.address.longitude %>
+        <div class='yandex_map'>
+          <div class='map'
+            data-latitude='<%= @organization.address.latitude %>'
+            data-longitude='<%= @organization.address.longitude %>'
+            data-hint='<%= @organization.title.text_gilensize %>'
+            data-id='<%= @organization.id %>'>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @organization.similar_organizations.present? %>
+        <div class='more_like_this'>
+          <p class='title'>Другие заведения</p>
+          <ul>
+            <% @organization.similar_organizations.each do |organization| %>
+              <li>
+                <div class='image'>
+                  <%= link_to organization_path(organization) do %>
+                    <% if organization.logotype_url? %>
+                      <%= image_tag resized_image_url(organization.poster_url, 65, 65), :size => '65x65', :alt => organization.title.text_gilensize %>
+                    <% else %>
+                      <span class='stub_poster <%= organization.priority_suborganization_kind %>'></span>
+                    <% end %>
+                  <% end %>
+                </div>
+                <div class='title'><%= link_to organization.title.text_gilensize, organization_path(organization) %></div>
+                <%= content_tag :div, organization.address_link, :class => 'places' if organization.address_link.present? %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
     </div>
   </div>
 

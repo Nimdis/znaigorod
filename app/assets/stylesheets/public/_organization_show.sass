@@ -153,74 +153,34 @@
     float: right
     width: 208px
 
-    .tickets
-
-      li
-        font-size: 12px
-        border: 1px solid #f60
-        margin-bottom: 10px
-
-        .wrapper
-          border-top: none
-          border-right: 1px dashed #f60
-          border-bottom: none
-          border-left: 1px dashed #f60
-          margin: 0 10px
-
-        .has_items_for_sale
-          text-align: center
-
-          .discount
-            font-size: 18px
-            font-weight: bold
-            color: #f60
-
-          .percentage
-            color: #f60
-
-        .ticket_prices
-          text-align: center
-
-          .original_price
-            +inline-block
-            color: #a9a9a9
-            margin-right: 10px
-            position: relative
-
-            &:before
-              position: absolute
-              content: ""
-              width: 120%
-              left: -10%
-              top: 50%
-              right: 0
-              border-top: 1px solid
-              border-color: #f93
-              +rotate(-15deg)
-
-          .price
-            +inline-block
-            font-weight: bold
-            margin-left: 10px
-
-        .ticket_for_sale
-          font-size: 11px
-          text-align: center
-          margin: 5px 0
-
-        .buy_ticket
-          text-align: center
-          a
-            +inline-block
-            +button-style
-            padding: 3px 15px 4px
-            &:active
-              padding: 4px 15px 3px
-
     .wrapper
       border: 1px solid #ccc
       > div:last-child
         border-bottom: none !important
+
+    .virtual_tour
+      width: 196px
+      height: 150px
+      position: relative
+      border-bottom: 1px solid #ccc
+      +background(linear-gradient(top, #fff, #e8e8e8))
+      padding: 5px
+
+      a
+        +opacity(0.5)
+        &:hover
+          +opacity(1)
+
+      span
+        color: #fff
+        font-size: 26px
+        font-weight: bold
+        text-align: center
+        +text-shadow(#000 0 0 5px)
+        line-height: 20px
+        top: 55px
+        left: 75px
+        position: absolute
 
     .yandex_map
       border-bottom: 1px solid #ccc
@@ -269,23 +229,51 @@
           +clearfix
           margin-bottom: 10px
 
+          &:last-child
+            margin-bottom: 0
+
           .image
+            width: 65px
+            height: 65px
             float: left
             position: relative
             margin-right: 10px
 
-            .ribbon
-              position: absolute
-              left: 0
-              bottom: 4px
-              color: #fff
-              font-size: 10px
-              background-color: #f60
-              padding: 1px 4.5px 2px 4.5px
+            .stub_poster
+              display: block
+              width: 65px
+              height: 65px
+              background: #ccc image_url('public/organization_stub_poster_kind_small.png') no-repeat top left
 
-          &:last-child
-            margin-bottom: 0
+              &.billiard
+                background-position: -70px -2px
 
+              &.car_sales_center
+                background-position: -1px -71px
+
+              &.car_wash
+                background-position: -1px -71px
+
+              &.creation
+                background-position: -279px -2px
+
+              &.culture
+                background-position: -140px -2px
+
+              &.entertainment
+                background-position: -70px -2px
+
+              &.meal
+                background-position: -1px -2px
+
+              &.salon_center
+                background-position: -70px -71px
+
+              &.sauna
+                background-position: -140px -71px
+
+              &.sport
+                background-position: -209px -2px
 
   .center
     font-size: 12px
