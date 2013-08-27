@@ -1,4 +1,4 @@
-<% if !visit.invited_gender.all? && visit.acts_as_invited?  %>
+<% if !visit.invited_gender.all? && visit.acts_as_invited? %>
   <div class="info">
     <span>Ждет приглашения от <%= I18n.t("visit.invited.#{visit.invited_gender}") %></span>
    <% if visit.invited_description %>

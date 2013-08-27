@@ -38,7 +38,7 @@
           <%= link_to(user.account, user.account, :class => :name) %>
           <div class="wanted">
             <% visit = visitable.visit_for_user(user) %>
-            <%= render partial: 'visits/invite_links', locals: { visit: visit } if user_signed_in? && visit && (visit.acts_as_inviter? || visit.acts_as_invited?) %>
+            <%= render partial: 'visits/invite_links', locals: { visit: visit } if user_signed_in? && current_user != user && visit && (visit.acts_as_inviter? || visit.acts_as_invited?) %>
           </div>
         </div>
       </li>
