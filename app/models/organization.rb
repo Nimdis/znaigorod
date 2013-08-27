@@ -286,7 +286,7 @@ class Organization < ActiveRecord::Base
     update_attribute :total_rating, ((client? ? 10 : 0) +
                                      afisha.map {|a| a.copies.sold.count}.sum +
                                      0.5*afisha.actual.count +
-                                     0.5*visits.visited.count +
+                                     0.5*visits.count +
                                      0.1*votes.liked.count +
                                      0.01*page_visits.count)
     OrganizationObserver.disabled = false

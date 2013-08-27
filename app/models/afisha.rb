@@ -240,7 +240,7 @@ class Afisha < ActiveRecord::Base
 
   def update_rating
     update_attribute :total_rating, (copies.sold.count +
-                                     0.5*visits.visited.count +
+                                     0.5*visits.count +
                                      0.1*votes.liked.count +
                                      0.01*page_visits.count)
   end

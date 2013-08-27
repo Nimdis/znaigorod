@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826073136) do
+ActiveRecord::Schema.define(:version => 20130827033935) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -536,6 +536,7 @@ ActiveRecord::Schema.define(:version => 20130826073136) do
 
   create_table "posts", :force => true do |t|
     t.text     "title"
+    t.text     "annotation"
     t.text     "content"
     t.text     "poster_url"
     t.string   "vfs_path"
@@ -928,7 +929,6 @@ ActiveRecord::Schema.define(:version => 20130826073136) do
     t.integer  "user_id"
     t.integer  "visitable_id"
     t.string   "visitable_type"
-    t.boolean  "visited"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.boolean  "acts_as_inviter"

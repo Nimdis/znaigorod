@@ -107,7 +107,7 @@ class Account < ActiveRecord::Base
                      0.5*payments.approved.where(:type=>'CopyPayment').map(&:copies).flatten.count +
                      0.25*afisha.count +
                      0.1*comments.count +
-                     0.1*visits.visited.count +
+                     0.1*visits.count +
                      0.01*votes.liked.count +
                      0.01*page_visits.count)
   end

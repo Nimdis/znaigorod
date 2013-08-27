@@ -9,7 +9,7 @@
   <div class='excerpt'><%= hit.excerpt %></div>
 
   <div class="details">
-    <%= content_tag :span, hit.result_decorator.visits.visited.count, class: :to_go %>
+    <%= content_tag :span, hit.result_decorator.visits.count, class: :to_go %>
     <%= content_tag :span, hit.result_decorator.comments.count, class: :comments %>
     <%= content_tag :span, hit.result_decorator.votes.liked.count, class: :likes %>
   </div>

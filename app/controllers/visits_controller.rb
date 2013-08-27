@@ -69,7 +69,7 @@ class VisitsController < ApplicationController
 
   def visitors
     visitors!{
-      @users = parent.visits.visited.map(&:user)
+      @users = parent.visits.map(&:user)
       render :partial => 'visitors', :locals => { :visitable => parent } and return
     }
   end
