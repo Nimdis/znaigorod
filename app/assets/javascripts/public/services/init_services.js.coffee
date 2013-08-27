@@ -8,7 +8,7 @@
     if link.hasClass('closed')
       link.text('подробнее')
     false
-  
+
   $('.services .info .multi_price abbr').tipsy() if $.fn.tipsy
 
   true

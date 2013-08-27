@@ -80,5 +80,6 @@
  * = require ./select_tags
  * = require ./messages
  * = require ./friends
+ * = require ./invites
  * = require ./main
  */
