@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Visit < ActiveRecord::Base
-  attr_accessible :visited, :user_id, :gender, :acts_as, :description
+  attr_accessible :visited, :user_id, :inviter_gender, :invited_gender, :acts_as_inviter, :acts_as_invited, :inviter_description, :invited_description
 
   belongs_to :visitable, :polymorphic => true
   belongs_to :user
@@ -11,16 +11,11 @@ class Visit < ActiveRecord::Base
   validate :authenticated_user
 
   scope :visited, -> { where(:visited => true) }
-  scope :wanted_to, ->(act) { where('acts_as = ?', act) }
+  scope :rendereable,      -> { where(:visitable_type => ['Afisha', 'Organization']) }
 
   extend Enumerize
-  enumerize :gender, in: [:all, :male, :female], default: :all, predicates: true
-  enumerize :acts_as, in: [:inviter, :invited], predicates: true
-
-  def change_visit
-    self.visited = !visited?
-    self.save
-  end
+  enumerize :inviter_gender, in: [:all, :male, :female], default: :all, predicates: true
+  enumerize :invited_gender, in: [:all, :male, :female], default: :all, predicates: true
 
   private
 

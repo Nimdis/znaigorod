@@ -1,0 +1,17 @@
+<div class="item">
+  <div class="poster">
+    <%= link_to polymorphic_path(visit.visitable) do %>
+      <% if visit.visitable.logotype_url? %>
+        <%= image_tag(resized_image_url(visit.visitable.logotype_url, 88, 88), size: '88x88', alt: visit.visitable, title: visit.visitable) %>
+      <% else %>
+        <%= image_tag 'public/stub_poster.png', size: '88x88' %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="title">
+    <%= link_to visit.visitable.title, polymorphic_path(visit.visitable) %>
+  </div>
+  <div class="wanted">
+    <%= render partial: 'visits/invite_links', locals: { visit: visit } if user_signed_in? && (visit.acts_as_inviter? || visit.acts_as_invited?) %>
+  </div>
+</div>

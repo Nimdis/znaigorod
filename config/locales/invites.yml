@@ -1,0 +1,22 @@
+ru:
+  afisha:
+    join: "Я пойду"
+    acts_as_inviter: "Пригласить"
+    acts_as_invited: "Жду приглашения"
+    visitors:
+      one: "%{count} человек"
+      few: "%{count} человека"
+      many: "%{count} человек"
+      zero: "Еще нет"
+
+  visit:
+    invited:
+      male: парня
+      female: девушки
+    inviter:
+      male: парня
+      female: девушку
+
+  private_message:
+    invited_message: "Привет, пошли гулять"
+    inviter_message: "Привет, пригласи меня гулять"

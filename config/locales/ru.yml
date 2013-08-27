@@ -77,16 +77,6 @@
       next: "Следующая &gt;&gt;"
       truncate: "&hellip;"
 
-  afisha:
-    join: "Я пойду"
-    inviter: "Пригласить"
-    invited: "Жду приглашения"
-    visitors:
-      one: "%{count} человек"
-      few: "%{count} человека"
-      many: "%{count} человек"
-      zero: "Еще нет"
-
   organization:
     join: "Я здесь был"
     leave: "Я здесь не был"

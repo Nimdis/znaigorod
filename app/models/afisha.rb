@@ -220,6 +220,10 @@ class Afisha < ActiveRecord::Base
     self.class.name.underscore
   end
 
+  def visit_for_user(user)
+    self.visits.find_by_user_id(user.id)
+  end
+
   def likes_count
     self.votes.liked.count
   end

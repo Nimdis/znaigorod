@@ -19,6 +19,7 @@ class AccountsController < ApplicationController
       @friends = Kaminari.paginate_array(@account.friends.approved.map(&:friendable)).page(1).per(5)
       @events = @account.afisha.page(1).per(3)
       @votes = @account.votes.rendereable.page(1).per(3)
+      @visits = @account.visits.rendereable.page(1).per(3)
     }
   end
 

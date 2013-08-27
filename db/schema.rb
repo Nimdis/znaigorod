@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130822081911) do
+ActiveRecord::Schema.define(:version => 20130826073136) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -929,11 +929,14 @@ ActiveRecord::Schema.define(:version => 20130822081911) do
     t.integer  "visitable_id"
     t.string   "visitable_type"
     t.boolean  "visited"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.string   "gender"
-    t.text     "description"
-    t.string   "acts_as"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.boolean  "acts_as_inviter"
+    t.boolean  "acts_as_invited"
+    t.text     "inviter_description"
+    t.text     "invited_description"
+    t.string   "invited_gender"
+    t.string   "inviter_gender"
   end
 
   add_index "visits", ["user_id"], :name => "index_visits_on_user_id"

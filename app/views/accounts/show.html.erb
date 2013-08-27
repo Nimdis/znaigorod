@@ -28,6 +28,17 @@
   </div>
 
   <div class="right">
+    <% if @visits.any? %>
+      <div class="visits header">
+         Хочет посетить
+      </div>
+      <div class="visits list">
+        <ul>
+          <%= render 'accounts/visits' %>
+        </ul>
+      </div>
+    <% end %>
+
     <% if @votes.any? %>
       <div class="votes header">
         Нравится

@@ -1,7 +1,9 @@
 <% acts_as.each do |act| %>
-  <% if current_user && visitable.visits.wanted_to(act).find_by_user_id(current_user.id) %>
-    <li class="selected"><%= link_to t("afisha.#{act.to_s}"), edit_afisha_visit_path(visitable, visitable.visits.wanted_to(act).find_by_user_id(current_user.id), acts_as: act) %></li>
+  <% if current_user && visitable.visits.find_by_user_id(current_user.id) %>
+    <li<%= " class='selected'".html_safe if (visitable.visits.find_by_user_id(current_user.id).send act)  %>>
+      <%= link_to t("afisha.#{act.to_s}"), edit_afisha_visit_path(visitable, visitable.visits.find_by_user_id(current_user.id), act => true) %>
+    </li>
   <% else %>
-    <li><%= link_to t("afisha.#{act.to_s}"), new_afisha_visit_path(visitable, acts_as: act) %></li>
+      <li><%= link_to t("afisha.#{act.to_s}"), new_afisha_visit_path(visitable, act => true) %></li>
   <% end %>
 <% end %>

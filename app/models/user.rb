@@ -104,18 +104,6 @@ class User < ActiveRecord::Base
     voted?(voteable) && vote_for(voteable).first.like?
   end
 
-  def visit_for(visitable)
-    visitable.visits.where(:user_id => self.id)
-  end
-
-  def visitd?(visitable)
-    visit_for(visitable).one?
-  end
-
-  def visited?(visitable)
-    visitd?(visitable) && visit_for(visitable).first.visited?
-  end
-
   def social_avatar_url
     case provider
     when 'google_oauth2'

@@ -1,8 +1,0 @@
-<%= simple_form_for [@afisha, @visit] do |f| %>
-  <%= f.input :description %>
-  <%= f.input :gender, as: :radio_buttons %>
-  <%= f.input :acts_as, as: :hidden %>
-  <%= f.submit %>
-<% end %>
-<%= link_to "delete", afisha_visit_path(@afisha, @visit), method: :delete, confirm: 'Вы уверены?' unless resource.new_record? %>
-

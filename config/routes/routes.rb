@@ -23,7 +23,7 @@ Znaigorod::Application.routes.draw do
     get "trailer" => "afisha#trailer", :as => :trailer
 
     get "visitors" => "visits#visitors", :as => :visitors
-    put "change_visit" => "visits#change_visit", :as => :change_visit
+    put 'destroy_visits' => 'visits#destroy_visits', :as => :destroy_visits
     put "change_vote" => "votes#change_vote", :as => :change_vote
     get "liked" => "votes#liked", :as => :liked
     resources :visits, :only => [:new, :create, :show, :update, :destroy, :edit]
@@ -55,7 +55,7 @@ Znaigorod::Application.routes.draw do
     get :in_bounding_box, :on => :collection
     get :details_for_balloon, :on => :member
     put 'change_vote' => 'votes#change_vote', :as => :change_vote
-    put 'change_visit' => 'visits#change_visit', :as => :change_visit
+    put 'destroy_visits' => 'visits#destroy_visits', :as => :destroy_visits
     get 'visitors' => 'visits#visitors', :as => :visitors
     get 'liked' => 'votes#liked', :as => :liked
 
@@ -102,6 +102,7 @@ Znaigorod::Application.routes.draw do
     resources :comments, :only => :index
     resources :friends, :only => :index
     resources :votes, :only => :index
+    resources :visits, :only => :index
   end
 
   get 'feedback' => 'feedback#new', :as => :new_feedback

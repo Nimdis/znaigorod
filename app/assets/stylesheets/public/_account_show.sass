@@ -30,7 +30,6 @@
             font-size: 11px
             width: 165px
 
-
     .pagination
       position: absolute
       bottom: 0
@@ -98,15 +97,25 @@
   .right
     margin: 0 0 0 220px
 
-    .votes.header, .events.header, .comments.header, .messages.header
+    .visits.header, .votes.header, .events.header, .comments.header, .messages.header
       background-color: #e8e8e8
       font-size: 14px
       margin-bottom: 20px
       padding: 1px 10px 2px
 
+    .votes.header
+      margin-top: 10px 
+
     .messages.header, .events.header
       margin-bottom: 10px
 
+    .visits.list
+      .item
+        .wanted
+          margin: 4px 0 0 0
+
+          a.invite
+            +grey-button-style
 
     .comments.list
 

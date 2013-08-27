@@ -1,8 +1,14 @@
 <ul class='user_actions'>
-  <li<%= " class='selected'".html_safe if current_user && current_user.visited?(visitable) %>>
-    <%= link_to t('afisha.join'), polymorphic_url([visitable, :change_visit]), :method => :put, :remote => true %>
-  </li>
-  <%= render partial: 'visits/acts_visit', locals: { visitable: visitable, acts_as: [:inviter, :invited] } %>
+  <% if current_user && visitable.visit_for_user(current_user) %>
+    <li class="selected">
+    <%= link_to t('afisha.join'), polymorphic_url([visitable, :destroy_visits]), :method => :put, :remote => true, :confirm => 'Are you shure?' %>
+    </li>
+  <% else %>
+    <li>
+    <%= link_to t('afisha.join'), afisha_visits_path(visitable), :method => :post, :remote => true %>
+    </li>
+  <% end %>
+  <%= render partial: 'visits/acts_visit', locals: { visitable: visitable, acts_as: [:acts_as_inviter, :acts_as_invited] } %>
 </ul>
 
 <% if @visit && @visit.errors.any? %>
@@ -16,18 +22,22 @@
 
 <div class='visits_counter'>
   <div class='floatl'>Участники</div>
-  <div class='floatr'><%= t('afisha.visitors', :count => visitable.visits.visited.count) %></div>
+  <div class='floatr'><%= t('afisha.visitors', :count => visitable.visits.count) %></div>
 </div>
 
-<% if visitable.visits.visited.any? %>
+<% if visitable.visits.any? %>
   <ul class='avatars'>
-    <% visitable.visits.visited.map(&:user).map(&:account).each do |account| %>
+    <% visitable.visits.map(&:user).each do |user| %>
       <li>
         <div class='avatar'>
-          <%= link_to(image_tag(account.avatar.url, :size => '35x35', :title => account, :alt => account), account) %>
+          <%= link_to(image_tag(user.account.avatar.url, :size => '35x35', :title => user.account, :alt => user.account), user.account) %>
         </div>
         <div class='details'>
-          <%= link_to(account, account, :class => :name) %>
+          <%= link_to(user.account, user.account, :class => :name) %>
+          <div class="wanted">
+            <% visit = visitable.visit_for_user(user) %>
+            <%= render partial: 'visits/invite', locals: { visit: visit } if user_signed_in? && visit && (visit.acts_as_inviter? || visit.acts_as_invited?) %>
+          </div>
         </div>
       </li>
     <% end %>

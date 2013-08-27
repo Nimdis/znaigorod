@@ -4,6 +4,9 @@ class My::PrivateMessagesController < My::ApplicationController
 
   def new
     @private_message = begin_of_association_chain.produced_messages.new(account_id: params[:account_id])
+    if params[:afisha_id]
+      @private_message.body = I18n.t("private_message.#{params[:acts_as]}_message")
+    end
     render partial: 'my/private_messages/form'
   end
 

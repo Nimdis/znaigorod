@@ -1,0 +1,14 @@
+<% if !visit.invited_gender.all? && visit.acts_as_invited?  %>
+  <span>Ждет приглашения от <%= I18n.t("visit.invited.#{visit.invited_gender}") %></span>
+<% end %>
+<%= link_to "Пригласить", new_my_private_message_path(account_id: visit.user.account.id,
+                                                      afisha_id: visit.visitable.id,
+                                                      acts_as: :invited), class: 'invite' %>
+
+<% if !visit.inviter_gender.all? && visit.acts_as_inviter?  %>
+  <span>Приглашает <%= I18n.t("visit.inviter.#{visit.inviter_gender}") %></span>
+<% end %>
+<%= link_to "Пригласи меня", new_my_private_message_path(account_id: visit.user.account.id,
+                                                         afisha_id: visit.visitable.id,
+                                                         acts_as: :inviter), class: 'invite' %>
+

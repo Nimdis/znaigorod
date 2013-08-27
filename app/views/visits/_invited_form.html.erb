@@ -1,0 +1,15 @@
+<%= simple_form_for [@afisha, @visit] do |f| %>
+  <%= f.input :invited_description %>
+  <%= f.input :invited_gender, as: :radio_buttons %>
+  <%= f.input :acts_as_invited, as: :hidden, input_html: { value: true } %>
+  <%= f.submit %>
+<% end %>
+
+<% if @visit.acts_as_invited %>
+  <%= simple_form_for [@afisha, @visit] do |sf| %>
+    <%= sf.input :invited_description, as: :hidden, input_html: { value: nil } %>
+    <%= sf.input :invited_gender, as: :hidden, input_html: { value: nil } %>
+    <%= sf.input :acts_as_invited, as: :hidden, input_html: { value: nil } %>
+    <%= sf.submit 'Удалить' %>
+  <% end %>
+<% end %>

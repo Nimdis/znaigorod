@@ -1,25 +1,55 @@
 class VisitsController < ApplicationController
   inherit_resources
 
-  actions :all, except: :index 
+  actions :all
 
-  custom_actions :collection => [:change_visit, :visitors]
+  custom_actions :collection => [:destroy_visits, :visitors]
 
-  belongs_to :afisha, :organization, :polymorphic => true, :optional => true
+  belongs_to :afisha, :organization, :post, :polymorphic => true, :optional => true
   belongs_to :account, :optional => true
 
   layout false unless :index
 
+  def index
+    index! {
+      render partial: 'accounts/visits', locals: { visits: @visits }, layout: false and return if @account
+    }
+  end
+
   def new
     @afisha = Afisha.find(params[:afisha_id])
-    @visit = @afisha.visits.new(user_id: current_user.id, description: params[:description], gender: params[:gender], acts_as: params[:acts_as])
-    render partial: 'visits/form'
+    if params[:acts_as_invited]
+      @visit = @afisha.visits.new(user_id: current_user.id,
+                                  invited_description: params[:invited_description],
+                                  invited_gender: params[:invited_gender])
+      render partial: 'visits/invited_form'
+
+    elsif params[:acts_as_inviter]
+      @visit = @afisha.visits.new(user_id: current_user.id,
+                                  inviter_description: params[:inviter_description],
+                                  inviter_gender: params[:inviter_gender])
+      render partial: 'visits/inviter_form'
+    end
+  end
+
+  def create
+    create! {
+      if request.xhr?
+        render :partial => 'visit', :locals => { :visitable => parent } and return
+      else
+        redirect_to (parent.is_a?(Afisha) ? afisha_show_path(parent) : polymorphic_url(parent)) and return
+      end
+    }
   end
 
   def edit
     @afisha = Afisha.find(params[:afisha_id])
     @visit = Visit.find(params[:id])
-    render partial: 'visits/form'
+    if params[:acts_as_invited]
+      render partial: 'visits/invited_form'
+    elsif params[:acts_as_inviter]
+      render partial: 'visits/inviter_form'
+    end
   end
 
   def update
@@ -28,21 +58,11 @@ class VisitsController < ApplicationController
     }
   end
 
-  def create
-    create! {
-      redirect_to (parent.is_a?(Afisha) ? afisha_show_path(parent) : polymorphic_url(parent)) and return
-    }
-  end
+  def destroy_visits
+    destroy_visits!{
+      @visits = current_user.visits.where(visitable_id: parent.id)
+      @visits.destroy_all
 
-  def change_visit
-    change_visit!{
-      if current_user
-        @visit = current_user.visit_for(parent).first || parent.visits.new(:user_id => current_user.id)
-      else
-        @visit = parent.visits.new
-      end
-
-      @visit.change_visit
       render :partial => 'visit', :locals => { :visitable => parent } and return
     }
   end
@@ -55,11 +75,15 @@ class VisitsController < ApplicationController
   end
 
   private
-    alias_method :old_build_resource, :build_resource
+  alias_method :old_build_resource, :build_resource
 
-    def build_resource
-      old_build_resource.tap do |object|
-        object.user = current_user
-      end
+  def build_resource
+    old_build_resource.tap do |object|
+      object.user = current_user
     end
+  end
+
+  def collection
+    @visits ||= end_of_association_chain.rendereable.page(params[:page]).per(3) if association_chain.first.is_a?(Account)
+  end
 end
