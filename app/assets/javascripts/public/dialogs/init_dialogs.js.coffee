@@ -1,5 +1,21 @@
-@init_dialogs = () ->
+close_tab_handler = () ->
+  $('#messages_filter span.ui-icon-close').live 'click', (evt) ->
+    target = $(evt.target)
 
+    dialog_id = $(target.siblings('a').attr('href'))
+    link = target.siblings('a').attr('href').replace('#', '.')
+
+    $("#dialogs #{link}").removeClass('disabled')
+
+    dialog_id.remove()
+    target.closest('li').remove()
+
+    $('#messages_filter').tabs "select", "#dialogs"
+
+    true
+  true
+
+@init_dialogs = () ->
   $('.to_dialog').live 'click', ->
     block_id = "##{$(this).attr('class').replace('to_dialog', '').replace('disabled', '').trim()}"
     $('#messages_filter').tabs("select", block_id)
@@ -22,21 +38,11 @@
 
     $('#messages_filter').tabs "select", "#dialog_#{account_id}"
 
-    $('#messages_filter span.ui-icon-close').live 'click', (evt) ->
-      target = $(evt.target)
+    close_tab_handler()
 
-      dialog_id = $(target.siblings('a').attr('href'))
-      link = target.siblings('a').attr('href').replace('#', '.')
-
-      $("#dialogs #{link}").removeClass('disabled')
-
-      dialog_id.remove()
-      target.closest('li').remove()
-
-      $('#messages_filter').tabs "select", "#dialogs"
-
-      true
-
+    $('.private_message .close').live 'click', ->
+      $('#messages_filter .ui-tabs-selected span.ui-icon-close').click()
+      false
     true
 
   true

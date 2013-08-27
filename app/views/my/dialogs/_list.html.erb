@@ -1,6 +1,0 @@
-<% @dialogs.each do |with_account| %>
-  <% last_message = PrivateMessage.dialog(current_user.account.id, with_account.id).order('id DESC').last %>
-  <%= link_to with_account.title, with_account %> <%= last_message.body %> <%= time_ago_in_words(last_message.created_at) %>
-  <%= link_to "to_dialog", my_dialog_path(with_account) %>
-<% end %>
-
