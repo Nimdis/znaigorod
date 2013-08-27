@@ -27,14 +27,17 @@ end
 #
 # Table name: visits
 #
-#  id             :integer          not null, primary key
-#  user_id        :integer
-#  visitable_id   :integer
-#  visitable_type :string(255)
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  gender         :string(255)
-#  description    :text
-#  acts_as        :string(255)
+#  id                  :integer          not null, primary key
+#  user_id             :integer
+#  visitable_id        :integer
+#  visitable_type      :string(255)
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  acts_as_inviter     :boolean
+#  acts_as_invited     :boolean
+#  inviter_description :text
+#  invited_description :text
+#  invited_gender      :string(255)
+#  inviter_gender      :string(255)
 #
 

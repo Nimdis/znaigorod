@@ -15,7 +15,6 @@ task :storage => :environment do
     'MenuPosition'  => 'image_url',
     'Organization'  => 'logotype_url',
     'Post'          => 'poster_url',
-    'PostImage'     => 'attachment_url',
     'Work'          => 'image_url',
   }
 
