@@ -37,6 +37,7 @@ $ ->
   init_post_photos() if $('.post a[rel="colorbox"]').length
   init_schedule_toggle() if $('.organization_info .more_schedule').length
   init_photogallery() if $('.photogallery ul li').length
+  init_back_to_top() if $('nav.pagination').length
   init_pagination() if $('nav.pagination').length
   init_account_pagination() if $('.account_show').length
   init_account_extend() if $('.account_show').length

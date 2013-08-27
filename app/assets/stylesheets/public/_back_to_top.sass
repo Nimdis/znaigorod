@@ -1,0 +1,28 @@
+body
+
+  $width: 100px
+
+  .back_to_top
+    display: none
+    width: $width
+    position: fixed
+    text-align: center
+    bottom: 0
+    left: 50%
+    +border-top-left-radius
+    +border-top-right-radius
+    +box-shadow(#555 0 0 5px)
+    background-color: #fff
+    margin-left: - $width / 2 - 20px
+
+    a
+      +clearfix
+      display: block
+      width: 60px
+      height: 16px
+      text-indent: -9999em
+      background: transparent image_url('public/back_to_top.png') no-repeat center 10px
+      padding: 10px 20px
+
+      &:hover
+        background-position: center -75px

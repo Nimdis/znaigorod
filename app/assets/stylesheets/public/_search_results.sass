@@ -1,5 +1,6 @@
 .search_results
   em
+    font-style: normal
     background: #019bdb
     color: #fff
     padding: 2px 4px
@@ -7,8 +8,9 @@
   ul.items_list
     li
       +clearfix
-      border-top: 1px solid #ccc
-      padding: 5px 0
+      border-bottom: 1px solid #ccc
+      padding-bottom: 10px
+      margin-bottom: 10px
 
       .image
         float: left
@@ -57,6 +59,7 @@
             background-position: 4px -17px
           &.comments
             background-position: 5px -36px
+            margin-bottom: 0
           &.likes
             background-position: 12px -57px
           &.visits
@@ -70,5 +73,3 @@
           border: none
           display: inline
           margin: 0 5px 0 0
-
-
