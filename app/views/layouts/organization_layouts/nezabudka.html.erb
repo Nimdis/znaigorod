@@ -12,16 +12,8 @@
 <% end %>
 
 <%= content_for :content do %>
-  <div class='nezabudka_wrapper'>
-    <div class='nezabudka_logo_wrapper'>
-      <div class='nezabudka_logo'></div>
-    </div>
-    <div class='nezabudka'>
-      <%= render :partial => 'commons/public_header' %>
-      <%= render :partial => 'commons/public_menu' %>
-      <%= render :partial => 'commons/public_content' %>
-    </div>
-  </div>
+  <%= render :partial => 'commons/public_header' %>
+  <%= render :partial => 'commons/public_content' %>
   <%= render :partial => 'commons/public_footer' %>
   <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
   <%= yield :yandex_map_scripts %>
