@@ -1,7 +1,30 @@
-<% content_for :organization_content do  %>
-  <div class='info'>
-    <div class='clearfix'>
+<% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.33/?load=package.full&lang=ru-RU') %>
 
+<% content_for :page_title, @organization.title.text_gilensize + " - " + I18n.t("organization.list_title.#{@organization.fake_kind}") + " Томска" %>
+<% content_for :meta_keywords, @organization.meta_keywords %>
+<% content_for :meta_description, @organization.meta_description %>
+
+<% content_for :extra_meta do %>
+  <%= @organization.tags_for_vk %>
+<% end %>
+
+<div class='organization_show'>
+
+  <div class='left'>
+    <%= content_tag :div, class: :image do %>
+    <% if @organization.logotype_url? %>
+      <%= link_to(image_tag(resized_image_url(@organization.logotype_url, 200, 200), :size => '200x200', :alt => @organization.title), @organization.logotype_url) %>
+    <% else %>
+        <span class='stub_poster <%= @organization.priority_suborganization_kind %>'></span>
+      <% end %>
+    <% end %>
+    <div class='social_actions'>
+      <%#= render :partial => 'visits/visit', :locals => { :visitable => @organization.model } %>
+    </div>
+  </div>
+
+  <div class='right'>
+    <div class="wrapper">
       <% if @organization.has_tour? %>
         <div class='virtual_tour'>
           <%= link_to('#', :class => :virtual_tour_link, :'data-link' => @organization.virtual_tour.link, title: '3D-тур') do %>
@@ -14,44 +37,40 @@
           <% end %>
         </div>
       <% end %>
+    </div>
+  </div>
 
-      <%= @organization.iconize_info %>
-      <h1><%= @organization.title %></h1>
-      <div class="left_part">
-        <%= content_tag :div, class: :image do %>
-          <%= link_to(image_tag(resized_image_url(@organization.logotype_url, 180, 180), :size => '180x180', :alt => @organization.title), @organization.logotype_url) %>
-        <% end if @organization.logotype_url? %>
-      </div>
+  <div class='center'>
+    <h1><%= @organization.title %></h1>
 
-      <%= content_tag(:div, @organization.address_link + @organization.office.to_s, class: :place) unless @organization.address.to_s.blank? %>
-      <%= @organization.work_schedule %>
-      <%= content_tag(:div, @organization.phone, class: :phone_wrapper) if @organization.phone.present? %>
-      <%= content_tag(:div, @organization.contact_links, class: :links) if @organization.contact_links.present? %>
+    <%= content_tag(:div, @organization.address_link + @organization.office.to_s, class: :place) unless @organization.address.to_s.blank? %>
+    <%= @organization.work_schedule %>
+    <%= content_tag(:div, @organization.phone, class: :phone_wrapper) if @organization.phone.present? %>
+    <%= content_tag(:div, @organization.contact_links, class: :links) if @organization.contact_links.present? %>
 
-      <% if @organization.social_links.present? %>
-        <ul class='social_links'>
-          <% @organization.social_links.each do |link| %>
-            <li><%= link_to link.title, link.url, :target => '_blank' %></li>
-          <% end %>
-        </ul>
-      <% end %>
-
-      <ul class='categories'>
-        <li class='title'>Категории:</li>
-        <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
+    <% if @organization.social_links.present? %>
+      <ul class='social_links'>
+        <% @organization.social_links.each do |link| %>
+          <li><%= link_to link.title, link.url, :target => '_blank' %></li>
+        <% end %>
       </ul>
+    <% end %>
 
-      <% if @organization.sms_claimable? %>
-        <ul class='sms_claims'>
+    <ul class='categories'>
+      <li class='title'>Категории:</li>
+      <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
+    </ul>
+
+    <% if @organization.sms_claimable? %>
+      <ul class='sms_claims'>
         <% @organization.claimable_suborganizations.each do |suborganization| %>
           <li>
             <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
           </li>
         <% end %>
-        </ul>
-      <% end %>
+      </ul>
+    <% end %>
 
-    </div>
 
     <% if @organization.description.present? %>
       <div class='description'>
@@ -67,64 +86,61 @@
       </div>
     <% end %>
 
-  </div>
+    <% @organization.decorated_suborganizations.each do |suborganization| %>
+      <%= render suborganization if suborganization.viewable? %>
+    <% end %>
 
-  <% @organization.decorated_suborganizations.each do |suborganization| %>
-    <%= render suborganization if suborganization.viewable? %>
-  <% end %>
-
-  <% if @afisha_presenter.collection.any? %>
-    <div class='suborganization_info affiches_details'>
-      <table>
-        <tr>
-          <td class='border'>
-            <h1>Афиша</h1>
-          </td>
-          <td>
-            <div class="details">
-              &nbsp;
+    <% if @afisha_presenter.collection.any? %>
+      <div class='suborganization_info affiches_details'>
+        <table>
+          <tr>
+            <td class='border'>
+              <h1>Афиша</h1>
+            </td>
+            <td>
+              <div class="details">
+                &nbsp;
+              </div>
+            </td>
+          </tr>
+        </table>
+        <div class="affiches_list">
+          <div class='presentation_filters afisha'>
+            <div class='present_by'>
+              <p>Вид:</p>
+              <ul>
+                <li class='selected'><a href='#' class='poster'>Постеры</a></li>
+                <li><a href='#' class='list'>Список</a></li>
+              </ul>
             </div>
-          </td>
-        </tr>
-      </table>
-      <div class="affiches_list">
-        <div class='presentation_filters afisha'>
-          <div class='present_by'>
-            <p>Вид:</p>
-            <ul>
-              <li class='selected'><a href='#' class='poster'>Постеры</a></li>
-              <li><a href='#' class='list'>Список</a></li>
-            </ul>
+            <div class='order_by'>
+              <p>Сортировать по:</p>
+              <ul>
+                <% @afisha_presenter.sortings_links.each do |sortings_link| %>
+                  <li<%= " class=selected" if sortings_link[:selected] %>>
+                    <%= link_to sortings_link[:title],
+                      send(sortings_link[:url], sortings_link[:parameters]), :class => sortings_link[:parameters][:order_by] %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
           </div>
-          <div class='order_by'>
-            <p>Сортировать по:</p>
-            <ul>
-              <% @afisha_presenter.sortings_links.each do |sortings_link| %>
-                <li<%= " class=selected" if sortings_link[:selected] %>>
-                  <%= link_to sortings_link[:title],
-                    send(sortings_link[:url], sortings_link[:parameters]), :class => sortings_link[:parameters][:order_by] %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
+          <ul class="items_list posters">
+            <%= render partial: @afisha_presenter.partial, :locals => {:afishas => @afisha_presenter.decorated_collection} %>
+          </ul>
         </div>
-        <ul class="items_list posters">
-          <%= render partial: @afisha_presenter.partial, :locals => {:afishas => @afisha_presenter.decorated_collection} %>
-        </ul>
+      </div>
+    <% end %>
+
+    <div class="share_organization">
+      <div class="votes">
+        <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @organization.model, :button => true } %>
+      </div>
+      <div class='share'>
+        <%= render :partial => "commons/share_this" %>
       </div>
     </div>
-  <% end %>
 
-  <div class="share_organization">
-    <div class="votes">
-      <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @organization.model, :button => true } %>
-    </div>
-    <div class='share'>
-      <%= render :partial => "commons/share_this" %>
-    </div>
+    <%= render :partial => 'comments/block', :locals => { :parent_obj => @organization } if @organization.ability_to_comment? %>
   </div>
-
-  <%= render :partial => 'comments/block', :locals => { :parent_obj => @organization } if @organization.ability_to_comment? %>
-
-<% end %>
-<%= render :file => 'organizations/wrapper' %>
+</div>

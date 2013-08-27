@@ -9,7 +9,8 @@
     doc = document.documentElement
     body = document.body
     top = (doc && doc.scrollTop  || body && body.scrollTop  || 0)
-    if top > 1200
+    console.log top
+    if top > 300
       block.fadeIn()
     else
       block.fadeOut()
