@@ -1,6 +1,6 @@
 <% last_message = PrivateMessage.dialog(current_user.account.id, with_account.id).order('id DESC').first %>
 
-<li class="<%= last_message.state %>">
+<li class="<%= last_message.state %>" data-account="<%= with_account.title %>">
   <div class="item">
     <div class="avatar">
       <%= link_to account_path(with_account) do %>
@@ -12,7 +12,7 @@
       <%= link_to with_account.title, with_account %>
       <div class="date">
         <%= time_ago_in_words(last_message.created_at) %> назад
-        <%= link_to "К диалогу", my_dialog_path(with_account), class: 'to_dialog', remote: true %>
+        <%= link_to "К диалогу", my_dialog_path(with_account), class: "to_dialog dialog_#{with_account.id}", remote: true %>
       </div>
     </div>
 

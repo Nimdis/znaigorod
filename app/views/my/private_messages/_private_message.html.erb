@@ -1,0 +1,20 @@
+<li>
+  <div class="item">
+    <div class="avatar">
+      <%= link_to account_path(@private_message.producer) do %>
+        <%= image_tag(resized_image_url(@private_message.producer.avatar.url, 35, 35), size: '35x35') %>
+      <% end %>
+    </div>
+
+    <div class="info">
+      <%= link_to @private_message.producer, account_path(@private_message.producer) %>
+      <div class="date">
+        <%= time_ago_in_words(@private_message.created_at) %> назад
+      </div>
+    </div>
+
+    <div class="body">
+      <%= @private_message.body %>
+    </div>
+  </div>
+</li>

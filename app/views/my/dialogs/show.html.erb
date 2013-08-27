@@ -1,13 +1,33 @@
-<ul>
+<ul class="dialog">
   <% @messages.each do |message| %>
-    <li>
-      <%= message.producer.title %>: 
-      <%= message.body %>
-      <%= time_ago_in_words(message.created_at) %> назад
+    <li class="<%= message.state %>" data-account="<%= @dialog_with.title %>" data-account_id="<%= @dialog_with.id %>">
+      <div class="item">
+        <div class="avatar">
+          <%= link_to account_path(message.producer) do %>
+            <%= image_tag(resized_image_url(message.producer.avatar.url, 35, 35), size: '35x35') %>
+          <% end %>
+        </div>
+
+        <div class="info">
+          <%= link_to message.producer, account_path(message.producer) %>
+          <div class="date">
+            <%= time_ago_in_words(message.created_at) %> назад
+          </div>
+        </div>
+
+        <div class="body">
+          <%= message.body %>
+        </div>
+      </div>
     </li>
   <% end %>
 </ul>
-<div>
+
+<div class="private_message">
+  <div class="avatar">
+    <%= link_to account_path(current_user.account) do %>
+      <%= image_tag(resized_image_url(current_user.account.avatar.url, 35, 35), size: '35x35') %>
+    <% end %>
+  </div>
   <%= render partial: "my/private_messages/form" %>
 </div>
-

@@ -2,19 +2,15 @@ class My::PrivateMessagesController < My::ApplicationController
   load_and_authorize_resource
   actions :create
 
+  layout false
+  respond_to :js, only: :create
+
   def new
     @private_message = begin_of_association_chain.produced_messages.new(account_id: params[:account_id])
     if params[:afisha_id]
       @private_message.body = I18n.t("private_message.#{params[:acts_as]}_message")
     end
     render partial: 'my/private_messages/form'
-  end
-
-  def create
-    create! do |success, failure|
-      success.html { redirect_to my_dialog_path(@private_message.account)}
-      failure.html { render partial: 'my/private_messages/form' }
-    end
   end
 
   protected

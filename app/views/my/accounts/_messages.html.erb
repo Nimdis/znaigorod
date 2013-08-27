@@ -4,21 +4,19 @@
 
 <div id="messages_filter">
   <ul>
-    <li><%= link_to t('private'), '#private' %></li>
-    <li><%= link_to t('notifications'), '#notifications' %></li>
+    <li><%= link_to t('dialogs', count: @dialogs.count), '#dialogs' %></li>
+    <li><%= link_to t('notifications', count: @notification_messages.count), '#notifications' %></li>
   </ul>
 
-  <div class="messages list">
-    <div id="private">
-      <ul class="dialogs">
-        <%= render partial: 'my/dialogs/messages', locals: { collection: @dialogs } %>
-      </ul>
-    </div>
+  <div id="dialogs">
+    <ul class="dialogs">
+      <%= render partial: 'my/dialogs/messages', locals: { collection: @dialogs } %>
+    </ul>
+  </div>
 
-    <div id="notifications">
-      <ul class="account_messages">
-        <%= render partial: 'my/messages/messages', locals: { collection: @notification_messages } %>
-      </ul>
-    </div>
+  <div id="notifications">
+    <ul class="account_messages">
+      <%= render partial: 'my/messages/messages', locals: { collection: @notification_messages } %>
+    </ul>
   </div>
 </div>

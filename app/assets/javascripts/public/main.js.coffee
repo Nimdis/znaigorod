@@ -41,6 +41,7 @@ $ ->
   init_pagination() if $('nav.pagination').length
   init_account_pagination() if $('.account_show').length
   init_account_extend() if $('.account_show').length
+  init_dialogs() if $('.to_dialog').length
   init_list_settings() if $('.content_wrapper .presentation_filters').length
   init_sms_claims() if $('.sms_claims li').length
   init_swfkrpano() if $('#krpano').length

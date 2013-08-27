@@ -149,7 +149,6 @@
       margin: 0 0 10px 0
 
       ul
-        height: 30px
         padding: 0
 
       .ui-widget-header
@@ -161,15 +160,26 @@
       .ui-tabs-hide
         display: none
 
-    .messages.list
-      border-top: 1px solid #ccc
+      .ui-tabs-nav
+        height: 30px
+
+        .close
+          margin: 5px 5px 0 0
+
+        .ui-state-active
+          .close
+            background-color: #fff
+
+    #dialogs, #notifications
+      +clearfix
       margin: 10px 0 0 0
 
       ul.account_messages
         li
+          border-bottom: 1px solid #ccc
+          height: 37px
           margin: 0
           padding: 10px
-          border-bottom: 1px solid #ccc
           width: 960px
 
           &.new
@@ -201,9 +211,10 @@
 
       ul.dialogs
         li
+          border-bottom: 1px solid #ccc
+          height: 37px
           margin: 0
           padding: 10px
-          border-bottom: 1px solid #ccc
           width: 960px
 
           &.new
@@ -241,3 +252,58 @@
 
             .body
               margin: 0 0 0 300px
+
+    ul.dialog
+      border: 1px solid #ccc
+      margin: 10px 0 0 0
+      padding: 5px
+
+      li
+        height: 37px
+        margin: 0
+        padding: 10px
+        width: 960px
+
+        .item
+          font-size: 12px
+
+          img
+            float: left
+            margin: 0 10px 0 0
+
+          span
+            color: #999
+
+          .avatar
+            +avatar-style
+
+          .name
+            font-weight: bold
+
+          .info
+            float: left
+
+            .date
+              color: #999
+
+          .body
+            margin: 0 0 0 180px
+
+    .private_message
+      background: #e8e8e8
+      border-left: 1px solid #ccc
+      border-bottom: 1px solid #ccc
+      border-right: 1px solid #ccc
+      padding: 10px
+
+      .avatar
+        +avatar-style
+
+      form
+        margin: 0 0 0 45px
+
+        textarea
+          border: 1px solid #ccc
+          width: 905px
+          height: 70px
+
