@@ -65,8 +65,10 @@
                     <% end %>
                   <% end %>
                 </div>
-                <div class='title'><%= link_to organization.title.text_gilensize, organization_path(organization) %></div>
-                <%= content_tag :div, organization.address_link, :class => 'places' if organization.address_link.present? %>
+                <div class='clearfix'>
+                  <div class='title'><%= link_to organization.title.text_gilensize, organization_path(organization) %></div>
+                  <%= content_tag :div, organization.address_link, :class => 'places' if organization.address_link.present? %>
+                </div>
               </li>
             <% end %>
           </ul>
