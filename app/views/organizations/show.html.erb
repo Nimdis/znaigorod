@@ -150,41 +150,30 @@
     <% end %>
 
     <% if @afisha_presenter.collection.any? %>
-      <div class='suborganization_info affiches_details'>
-        <table>
-          <tr>
-            <td class='border'>
-              <h1>Афиша</h1>
-            </td>
-            <td>
-              <div class="details">
-                &nbsp;
-              </div>
-            </td>
-          </tr>
-        </table>
-        <div class="affiches_list">
-          <div class='presentation_filters afisha'>
-            <div class='present_by'>
-              <p>Вид:</p>
-              <ul>
-                <li class='selected'><a href='#' class='poster'>Постеры</a></li>
-                <li><a href='#' class='list'>Список</a></li>
-              </ul>
-            </div>
-            <div class='order_by'>
-              <p>Сортировать по:</p>
-              <ul>
-                <% @afisha_presenter.sortings_links.each do |sortings_link| %>
-                  <li<%= " class=selected" if sortings_link[:selected] %>>
-                    <%= link_to sortings_link[:title],
-                      send(sortings_link[:url], sortings_link[:parameters]), :class => sortings_link[:parameters][:order_by] %>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
+      <div class='suborganization_info afisha_details'>
+        <div class='title'>Афиша</div>
+        <div class='presentation_filters afisha'>
+          <div class='present_by'>
+            <p>Вид:</p>
+            <ul>
+              <li class='selected'><a href='#' class='poster'>Постеры</a></li>
+              <li><a href='#' class='list'>Список</a></li>
+            </ul>
           </div>
-          <ul class="items_list posters">
+          <div class='order_by'>
+            <p>Сортировать по:</p>
+            <ul>
+              <% @afisha_presenter.sortings_links.each do |sortings_link| %>
+                <li<%= " class=selected" if sortings_link[:selected] %>>
+                  <%= link_to sortings_link[:title],
+                    send(sortings_link[:url], sortings_link[:parameters]), :class => sortings_link[:parameters][:order_by] %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class='afisha_list'>
+          <ul class='posters'>
             <%= render partial: @afisha_presenter.partial, :locals => {:afishas => @afisha_presenter.decorated_collection} %>
           </ul>
         </div>
