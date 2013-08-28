@@ -59,7 +59,6 @@ $ ->
   init_messages_tabs() if $('#messages_filter').length
   init_afisha_tabs() if $('#events_filter').length
   init_change_friendship() if $('.change_friendship').length
-  init_friends_list() if $('.friends_counter').length
 
   true
 

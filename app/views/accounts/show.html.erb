@@ -7,8 +7,8 @@
 
     <div class="social_actions">
       <% if user_signed_in? && current_user.account != @account.model %>
-        <ul class="change_friendship">
-          <li class="selected"><%= link_to t('new_message'), new_my_private_message_path(account_id: @account.id) %></li>
+        <ul class="actions">
+          <li><%= link_to t('new_message'), new_my_private_message_path(account_id: @account.id) %></li>
           <%= render 'friends/friendship' %>
         </ul>
       <% end %>
