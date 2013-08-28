@@ -121,10 +121,19 @@
       <%= render :partial => 'commons/share_this', :locals => { :url => organization_url(@organization) } %>
     </div>
 
-    <ul class='categories'>
-      <li class='title'>Категории:</li>
-      <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
-    </ul>
+    <div class='categories_and_visits'>
+      <ul class='categories'>
+        <li class='title'>Категории:</li>
+        <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
+      </ul>
+      <div class='details'>
+        <span class='to_go'><%= @organization.visits.count %></span>
+        <span class='wait_invite'>0</span>
+        <span class='comments'><%= @organization.comments.count %></span>
+        <span class='likes'><%= @organization.likes_count %></span>
+        <span class='visits'><%= @organization.page_visits.count %></span>
+      </div>
+    </div>
 
     <% if @organization.sms_claimable? %>
       <ul class='sms_claims'>

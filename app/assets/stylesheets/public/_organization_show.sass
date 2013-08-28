@@ -356,15 +356,6 @@
         &:last-child
           margin-bottom: 0
 
-    .categories
-      +clearfix
-      font-size: 11px
-      margin: 10px 0
-
-      li
-        float: left
-        margin-right: 10px
-
     .description
       margin-top: 10px
 
@@ -444,36 +435,26 @@
         .ok_like
           float: right
 
-    .tags_and_visits
+    .categories_and_visits
       width: 100%
       +clearfix
 
-      .tags
+      .categories
         float: left
-        width: 565px
         +clearfix
-        margin: 10px 0 5px
+        width: 590px
+        font-size: 11px
+        margin: 10px 0
 
         li
           float: left
-          font-size: 11px
-          color: #999
-          +border-radius(3px)
-          background-color: #e8e8e8
-          margin: 0 5px 5px 0
-          padding: 1px 5px 2px
-
-          &.transparent
-            background-color: transparent
-            color: #000
-            padding-left: 0
-            padding-right: 0
+          margin-right: 10px
 
       .details
         float: right
         color: #999
         font-size: 11px
-        margin-top: 5px
+        margin: 10px 0
 
         span
           +inline-block
