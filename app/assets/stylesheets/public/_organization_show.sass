@@ -387,22 +387,6 @@
           vertical-align: top
           padding: 0 10px 2px 0
 
-          &:first-child
-            @extend .nobr
-            font-weight: bold
-
-            &:first-letter
-              text-transform: capitalize
-
-      .afisha_owner
-
-        span, a
-          +inline-block
-          line-height: 10px
-
-        a img
-          +border-radius(50%)
-
     .share_and_likes
       min-height: 30px
       border-bottom: 1px solid #ccc
@@ -485,28 +469,45 @@
           &.minimal_age
             background: none
 
-    .trailer_header,
-    .photogallery_header
-      font-size: 14px
-      background-color: #e8e8e8
-      padding: 1px 10px 2px
-      margin-bottom: 10px
-
-    .trailer
-      +clearfix
-
-      p
-        float: left
-        width: 240px
-        height: 146px
-        margin: 0 20px 10px 0
-
-        &:nth-child(3n)
-          margin-right: 0
-
-        iframe
-          width: 240px
-          height: 146px
 
     .photogallery
       margin: 10px 0
+
+    .suborganization_info
+
+      &.meal .menus
+        display: none
+
+      .title
+        font-size: 14px
+        background-color: #e8e8e8
+        padding: 1px 10px 2px
+        margin-bottom: 10px
+
+        &:first-letter
+          text-transform: capitalize
+
+      > .cuisines
+        +clearfix
+        font-size: 11px
+        margin-bottom: 10px
+
+        strong
+          +inline-block
+          font-weight: normal
+          color: #f60
+
+        ul
+          display: inline
+
+          li
+            +inline-block
+
+      > .offers_and_features
+        +clearfix
+        font-size: 11px
+        margin-bottom: 10px
+
+        li
+          width: 190px
+          float: left

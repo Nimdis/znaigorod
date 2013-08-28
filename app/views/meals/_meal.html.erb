@@ -1,23 +1,18 @@
 <div class="suborganization_info meal">
-  <table>
-    <tr>
-      <td class='border'>
-        <%= meal.htmlise_title_on_show %>
-      </td>
-      <td>
-        <%= meal.iconize_info %>
-        <div class="details">
-          <% if meal.htmlise_cuisines_on_show.present? %>
-            <div class="cuisines">
-              <strong>Кухня:</strong>
-              <%= meal.htmlise_cuisines_on_show %>
-            </div>
-          <% end %>
-          <%= meal.htmlise_offers_and_features_on_show %>
-        </div>
-      </td>
-    </tr>
-  </table>
+
+  <div class='title'><%= meal.title.as_html %></div>
+
+  <% if meal.htmlise_cuisines_on_show.present? %>
+    <div class="cuisines">
+      <strong>Кухня:</strong>
+      <%= meal.htmlise_cuisines_on_show %>
+    </div>
+  <% end %>
+
+  <%= meal.htmlise_offers_and_features_on_show %>
+
+  <%= content_tag :div, meal.description.as_html, :class => :description if meal.description.present? %>
+
   <% if meal.has_photogallery? %>
     <div class="photogallery">
       <ul>
@@ -26,63 +21,65 @@
     </div>
   <% end %>
 
-  <div class="menus">
-    <% meal.menus.group_by(&:category).sort.each do |category, menus| %>
-      <div class="menu_header">
-        <h2><%= category %></h2>
-        <% menus.each do |menu| %>
-          <% if menu.description? %>
-            <ul class="iconize_info">
-              <li>
-                <a href="#" class="description_icon" data-link="service_text" title='информация'>информация</a>
-                <div class="description_text">
-                  <p><%= menu.description %></p>
-                </div>
-              </li>
-            </ul>
-          <% end %>
-        <% end %>
-      </div>
-
-      <% menus.each do |menu| %>
-        <div class="info">
-          <ul>
-            <% menu.menu_positions.group_by(&:position).each do |position, menu_positions| %>
-              <li>
-                <div class="value">
-                  <h3> <%= position %></h3>
-                  <%= link_to 'развернуть', '#', class: :closed %>
-                </div>
-                <div class="details">
-                  <% menu_positions.each do |position|  %>
-                    <div class="position">
-                      <div class="position_info">
-                        <div class="position_image">
-                          <%= link_to resized_image_url(position.image_url, 50, 50), position.image_url if position.image_url %>
-                        </div>
-                        <span class="title">
-                          <%= "#{position.title.strip}" %>
-                        </span>
-                        <span class="count">
-                          <%= "#{position.count.strip}" %>
-                        </span>
-                        <div class="position_description">
-                          <%= position.description %>
-                          <%= I18n.t("cooking_time_kind", count: position.cooking_time) if position.cooking_time? %>
-                        </div>
-                      </div>
-                      <div class="position_price">
-                        <span class="price"><%= "#{position.price} р." %></span>
-                      </div>
-
-                    </div>
-                  <% end %>
-                </div>
-              </li>
+  <% if meal.menus.present? %>
+    <div class="menus">
+      <% meal.menus.group_by(&:category).sort.each do |category, menus| %>
+        <div class="menu_header">
+          <h2><%= category %></h2>
+          <% menus.each do |menu| %>
+            <% if menu.description? %>
+              <ul class="iconize_info">
+                <li>
+                  <a href="#" class="description_icon" data-link="service_text" title='информация'>информация</a>
+                  <div class="description_text">
+                    <p><%= menu.description %></p>
+                  </div>
+                </li>
+              </ul>
             <% end %>
-          </ul>
+          <% end %>
         </div>
+
+        <% menus.each do |menu| %>
+          <div class="info">
+            <ul>
+              <% menu.menu_positions.group_by(&:position).each do |position, menu_positions| %>
+                <li>
+                  <div class="value">
+                    <h3> <%= position %></h3>
+                    <%= link_to 'развернуть', '#', class: :closed %>
+                  </div>
+                  <div class="details">
+                    <% menu_positions.each do |position|  %>
+                      <div class="position">
+                        <div class="position_info">
+                          <div class="position_image">
+                            <%= link_to resized_image_url(position.image_url, 50, 50), position.image_url if position.image_url %>
+                          </div>
+                          <span class="title">
+                            <%= "#{position.title.strip}" %>
+                          </span>
+                          <span class="count">
+                            <%= "#{position.count.strip}" %>
+                          </span>
+                          <div class="position_description">
+                            <%= position.description %>
+                            <%= I18n.t("cooking_time_kind", count: position.cooking_time) if position.cooking_time? %>
+                          </div>
+                        </div>
+                        <div class="position_price">
+                          <span class="price"><%= "#{position.price} р." %></span>
+                        </div>
+
+                      </div>
+                    <% end %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>

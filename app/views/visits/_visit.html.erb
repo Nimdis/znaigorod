@@ -30,7 +30,9 @@
     <% visitable.visits.map(&:user).each do |user| %>
       <li>
         <div class='avatar'>
-          <%= link_to(image_tag(user.account.avatar.url, :size => '35x35', :title => user.account, :alt => user.account), user.account) %>
+          <%= link_to user.account do %>
+            <%= image_tag resized_image_url(user.account.avatar.url, 35, 35), :size => '35x35', :alt => user.account %>
+          <% end%>
         </div>
         <div class='details'>
           <%= link_to(user.account, user.account, :class => :name) %>
