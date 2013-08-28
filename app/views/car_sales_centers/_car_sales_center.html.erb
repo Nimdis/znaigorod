@@ -1,4 +1,4 @@
-<div class="suborganization_info car_sales_center">
+<div class='suborganization_info car_sales_center'>
 
   <div class='title'><%= car_sales_center.title.text_gilensize %></div>
 
@@ -7,7 +7,7 @@
   <%= content_tag :div, car_sales_center.description.as_html, :class => :description if car_sales_center.description.present? %>
 
   <% if car_sales_center.has_photogallery? %>
-    <div class="photogallery">
+    <div class='photogallery'>
       <ul>
         <%= render car_sales_center.gallery_images, :rel => "car_sales_center_gallery_#{car_sales_center.id}" %>
       </ul>

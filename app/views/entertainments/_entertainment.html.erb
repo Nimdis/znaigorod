@@ -1,4 +1,4 @@
-<div class="suborganization_info entertainment">
+<div class='suborganization_info entertainment'>
 
   <div class='title'><%= entertainment.title.text_gilensize %></div>
 
@@ -7,7 +7,7 @@
   <%= content_tag :div, entertainment.description.as_html, :class => :description if entertainment.description.present? %>
 
   <% if entertainment.has_photogallery? %>
-    <div class="photogallery">
+    <div class='photogallery'>
       <ul>
         <%= render entertainment.gallery_images, :rel => "entertainment_gallery_#{entertainment.id}" %>
       </ul>

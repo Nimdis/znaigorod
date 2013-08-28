@@ -1,4 +1,4 @@
-<div class="suborganization_info car_wash">
+<div class='suborganization_info car_wash'>
 
   <div class='title'><%= car_wash.title.text_gilensize %></div>
 
@@ -7,16 +7,16 @@
   <%= content_tag :div, car_wash.description.as_html, :class => :description if car_wash.description.present? %>
 
   <% if car_wash.has_photogallery? %>
-    <div class="photogallery">
+    <div class='photogallery'>
       <ul>
         <%= render car_wash.gallery_images, :rel => "car_wash_gallery_#{car_wash.id}" %>
       </ul>
     </div>
   <% end %>
 
-  <div class="services">
+  <div class='services'>
     <% car_wash.services.group_by(&:category).each do |category, services| %>
-      <div class="service_header">
+      <div class='service_header'>
         <h2><%= category %></h2>
         <%= render :partial => 'organizations/services', :locals => { :services => services } %>
       </div>

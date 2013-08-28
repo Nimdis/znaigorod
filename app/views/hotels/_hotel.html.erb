@@ -1,4 +1,4 @@
-<div class="suborganization_info hotel">
+<div class='suborganization_info hotel'>
 
   <div class='title'><%= hotel.title.text_gilensize %></div>
 
@@ -7,7 +7,7 @@
   <%= content_tag :div, hotel.description.as_html, :class => :description if hotel.description.present? %>
 
   <% if hotel.has_photogallery? %>
-    <div class="photogallery">
+    <div class='photogallery'>
       <ul>
         <%= render hotel.gallery_images, :rel => "hotel_gallery_#{hotel.id}" %>
       </ul>

@@ -1,4 +1,4 @@
-<div class="suborganization_info billiard">
+<div class='suborganization_info billiard'>
 
   <div class='title'><%= billiard.title.text_gilensize %></div>
 
@@ -7,21 +7,21 @@
   <%= content_tag :div, billiard.description.as_html, :class => :description if billiard.description.present? %>
 
   <% if billiard.has_photogallery? %>
-    <div class="photogallery">
+    <div class='photogallery'>
       <ul>
         <%= render billiard.gallery_images, :rel => "billiard_gallery_#{billiard.id}" %>
       </ul>
     </div>
   <% end %>
 
-  <div class="pool_tables">
+  <div class='pool_tables'>
     <% billiard.grouped_decorated_pool_tables.each do |kind, pool_tables| %>
-      <ul class="pool_table">
+      <ul class='pool_table'>
         <li>
           <h2><%= kind %></h2>
-          <div class="pools">
+          <div class='pools'>
             <% pool_tables.each do |pool_table| %>
-              <div class="pool_details">
+              <div class='pool_details'>
                 <span class='count'><%= pool_table.count %> x</span>
                 <span class='size'><%= pool_table.ft %></span>
                 <span class='price'><%= pool_table.price %></span>

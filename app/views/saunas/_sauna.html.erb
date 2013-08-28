@@ -7,7 +7,7 @@
   <%= content_tag :div, sauna.description.as_html, :class => :description if sauna.description.present? %>
 
   <% if sauna.has_photogallery? %>
-    <div class="photogallery">
+    <div class='photogallery'>
       <ul>
         <%= render sauna.gallery_images, :rel => "sauna_gallery_#{sauna.id}" %>
       </ul>
@@ -22,11 +22,11 @@
           <%= sauna_hall.price %>
           <%= sauna_hall.schedule %>
         </div>
-          <ul class="iconize_info">
+          <ul class='iconize_info'>
             <% if sauna_hall.virtual_tour.link? %>
               <li>
                 <%= link_to '3D-тур', '#', :class => 'tour_icon', 'data-link' => 'virtual_tour_link', :title => '3D-тур'  %>
-                <div class="virtual_tour_link">
+                <div class='virtual_tour_link'>
                   <%= sauna_hall.virtual_tour_link %>
                 </div>
               </li>

@@ -1,4 +1,4 @@
-<div class="suborganization_info creation">
+<div class='suborganization_info creation'>
 
   <div class='title'><%= creation.title.text_gilensize %></div>
 
@@ -7,7 +7,7 @@
   <%= content_tag :div, creation.description.as_html, :class => :description if creation.description.present? %>
 
   <% if creation.has_photogallery? %>
-    <div class="photogallery">
+    <div class='photogallery'>
       <ul>
         <%= render creation.gallery_images, :rel => "creation_gallery_#{creation.id}" %>
       </ul>
@@ -15,21 +15,21 @@
   <% end %>
 
   <% if creation.services.any? %>
-    <div class="services_tables">
+    <div class='services_tables'>
       <% creation.grouped_decorated_services.each do |kind, services| %>
-        <ul class="services_table">
+        <ul class='services_table'>
           <li>
             <h2><%= kind %></h2>
-            <div class="services">
+            <div class='services'>
               <% services.each do |service| %>
-                <div class="services_details">
+                <div class='services_details'>
                   <div class='service_title'>
                     <div class='title'><%= service.title %></div>
                     <% if service.description? %>
-                      <ul class="iconize_info">
+                      <ul class='iconize_info'>
                         <li>
-                          <a href="#" class="description_icon" data-link="service_text" title='информация'>информация</a>
-                          <div class="description_text">
+                          <a href='#' class='description_icon' data-link='service_text' title='информация'>информация</a>
+                          <div class='description_text'>
                             <p><%= service.description %></p>
                           </div>
                         </li>
