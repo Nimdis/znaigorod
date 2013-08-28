@@ -18,7 +18,7 @@
     <% billiard.grouped_decorated_pool_tables.each do |kind, pool_tables| %>
       <ul class='pool_table'>
         <li>
-          <h2><%= kind %></h2>
+          <div class='title'><%= kind %></div>
           <div class='pools'>
             <% pool_tables.each do |pool_table| %>
               <div class='pool_details'>

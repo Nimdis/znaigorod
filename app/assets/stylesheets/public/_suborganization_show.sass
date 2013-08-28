@@ -70,3 +70,67 @@
 
           .place
             display: none
+
+    .pool_tables
+      margin-bottom: 10px
+
+    .pool_table
+      +clearfix
+
+      .title
+        float: left
+        width: 230px
+        font-size: 14px
+        color: #fff
+        position: relative
+        background-color: #009bdb
+        padding: 2px 10px
+        margin: 5px 28px 0 0
+
+        &:after
+          left: 100%
+          border: solid transparent
+          content: ' '
+          height: 0
+          width: 0
+          position: absolute
+          pointer-events: none
+          border-color: rgba(0, 155, 219, 0)
+          border-left-color: #009bdb
+          border-width: 13px
+          top: 50%
+          margin-top: -13px
+
+      .pools
+        +clearfix
+
+        .pool_details
+          > span,
+          > div
+            +inline-block
+            margin-bottom: 5px
+
+          > .count
+            font-size: 14px
+            margin-bottom: 5px
+
+          > .size
+            width: 60px
+            color: #fff
+            text-align: center
+            font-size: 14px
+            font-weight: bold
+            background: transparent image_url('public/pool_size_bg.png') no-repeat center center
+            padding: 7px 0
+
+          > .price
+            color: #f60
+            font-size: 14px
+            margin: 0 15px 5px
+
+          .work_schedule
+            background: none
+            padding: 0
+
+            .show_more_schedule
+              font-size: 11px
