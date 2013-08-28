@@ -2,10 +2,10 @@ add_tab_handler = (response, stored) ->
   account = $(response).closest('ul.dialog').children('li:first').data('account')
   account_id = $(response).closest('ul.dialog').children('li:first').data('account_id')
 
+  $('#messages_filter').tabs
+    tabTemplate: "<li><a href='\#{href}\'><span class='with_close'>\#{label}\</span></a><span class='ui-icon ui-icon-close ui-corner-all close'>x</span></li>"
   $('#messages_filter').tabs "add", "#dialog_#{account_id}", "#{account}"
-  $("#messages_filter a[href='#dialog_#{account_id}']").after("<span class='ui-icon ui-icon-close ui-corner-all close'>x</span>")
   $("#dialog_#{account_id}").append(response)
-
   $('#messages_filter').tabs "select", "#dialog_#{account_id}"
 
   stored.push(account_id) if stored.indexOf(account_id) < 0
