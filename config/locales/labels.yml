@@ -215,9 +215,11 @@ ru:
     few:   "Уведомления +%{count}"
     many:  "Уведомления +%{count}"
     other: "Уведомления +%{count}"
+    zero:  "Уведомления"
 
   dialogs:
     one:   "Диалоги +%{count}"
     few:   "Диалоги +%{count}"
     many:  "Диалоги +%{count}"
     other: "Диалоги +%{count}"
+    zero:  "Диалоги"
