@@ -681,6 +681,8 @@ button.ui-button::-moz-focus-inner
     padding: .2em .2em 0
     li
       +border-radius(4px)
+      +box-shadow(none)
+      border: none
       list-style: none
       float: left
       position: relative
@@ -691,8 +693,9 @@ button.ui-button::-moz-focus-inner
       white-space: nowrap
       a
         float: left
-        padding: .5em 1em
+        padding: 5px 10px
         text-decoration: none
+        font-weight: normal !important
       &.ui-tabs-active
         margin-bottom: -1px
         padding-bottom: 1px
