@@ -290,29 +290,83 @@
       font-size: 22px
       margin-bottom: 5px
 
-    .original_title
-      color: #999
-      font-size: 14px
-      margin-bottom: 10px
-
-    .closest
-      margin-bottom: 10px
-
-      p
-        +inline-block
-        font-size: 14px
-        color: #fff
-        background-color: #019bdb
-        padding: 1px 8px 2px
-
     .place
+      margin-bottom: 5px
+
+      a
+        background: transparent image_url('public/icon_address.png') no-repeat 2px 2px
+        padding-left: 18px
+
+    .work_schedule
+      background: transparent image_url('public/icon_work_schedule.png') no-repeat 1px 3px
+      padding-left: 18px
+      margin-bottom: 5px
+
+      .show_more_schedule
+        cursor: pointer
+        border-bottom: 1px dashed
+
+        &:hover
+          border: none
+
+    .more_schedule
+      display: none
+      position: absolute
+      font-size: 11px
+      +border-radius
+      background-color: #fff
+      +box-shadow(#555 0 0 3px)
+      padding: 5px 8px
+
+      &:after,
+      &:before
+        right: 100%
+        border: solid transparent
+        content: " "
+        height: 0
+        width: 0
+        position: absolute
+        pointer-events: none
+
+      &:after
+        border-color: rgba(255, 255, 255, 0)
+        border-right-color: #fff
+        border-width: 5px
+        top: 50%
+        margin-top: -5px
+
+      &:before
+        border-color: rgba(204, 204, 204, 0)
+        border-right-color: #ccc
+        border-width: 6px
+        top: 50%
+        margin-top: -6px
+
+    .phone_wrapper
+      background: transparent image_url('public/icon_phone.png') no-repeat 0 4px
+      padding-left: 18px
+      margin-bottom: 5px
+
+    .links
       margin-bottom: 10px
 
-      .address a
-        background: transparent image_url('public/address.png') no-repeat 2px 2px
-        padding-left: 13px
+      li
+        margin-bottom: 5px
 
-    .text
+        &:last-child
+          margin-bottom: 0
+
+    .categories
+      +clearfix
+      font-size: 11px
+      margin: 10px 0
+
+      li
+        float: left
+        margin-right: 10px
+
+    .description
+      margin-top: 10px
 
       h3, p, ul, ol, table
         margin-bottom: 10px
@@ -474,4 +528,4 @@
           height: 146px
 
     .photogallery
-      margin-bottom: 10px
+      margin: 10px 0

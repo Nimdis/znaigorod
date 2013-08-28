@@ -79,11 +79,21 @@
   </div>
 
   <div class='center'>
+    <% if current_user && (current_user.is_organizations_editor? || current_user.is_admin?) %>
+      <%= link_to 'изменить', edit_manage_organization_path(@organization), :class => :icon_edit %>
+    <% end %>
+
     <h1><%= @organization.title %></h1>
     <%= content_tag(:div, @organization.address_link, class: :place) if @organization.address_link.present? %>
     <%= @organization.work_schedule %>
     <%= content_tag(:div, @organization.phone, class: :phone_wrapper) if @organization.phone.present? %>
-    <%= content_tag(:div, @organization.contact_links, class: :links) if @organization.contact_links.present? %>
+
+    <% if @organization.contact_links.present? %>
+      <ul class='links'>
+        <%= content_tag(:li, "Сайт: #{@organization.site_link}".html_safe) if @organization.site_link.present? %>
+        <%= content_tag(:li, "Email: #{@organization.email_link}".html_safe) if @organization.email_link.present? %>
+      </ul>
+    <% end %>
 
     <% if @organization.social_links.present? %>
       <ul class='social_links'>
@@ -92,22 +102,6 @@
         <% end %>
       </ul>
     <% end %>
-
-    <ul class='categories'>
-      <li class='title'>Категории:</li>
-      <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
-    </ul>
-
-    <% if @organization.sms_claimable? %>
-      <ul class='sms_claims'>
-        <% @organization.claimable_suborganizations.each do |suborganization| %>
-          <li>
-            <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-
 
     <% if @organization.description.present? %>
       <div class='description'>
@@ -121,6 +115,30 @@
           <%= render @organization.gallery_images, :rel => "organization_gallery_#{@organization.id}" %>
         </ul>
       </div>
+    <% end %>
+
+    <ul class='categories'>
+      <li class='title'>Категории:</li>
+      <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
+    </ul>
+
+    <div class="share_organization">
+      <div class="votes">
+        <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @organization.model, :button => true } %>
+      </div>
+      <div class='share'>
+        <%= render :partial => "commons/share_this" %>
+      </div>
+    </div>
+
+    <% if @organization.sms_claimable? %>
+      <ul class='sms_claims'>
+        <% @organization.claimable_suborganizations.each do |suborganization| %>
+          <li>
+            <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
 
     <% @organization.decorated_suborganizations.each do |suborganization| %>
@@ -168,15 +186,6 @@
         </div>
       </div>
     <% end %>
-
-    <div class="share_organization">
-      <div class="votes">
-        <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => @organization.model, :button => true } %>
-      </div>
-      <div class='share'>
-        <%= render :partial => "commons/share_this" %>
-      </div>
-    </div>
 
     <%= render :partial => 'comments/block', :locals => { :parent_obj => @organization } if @organization.ability_to_comment? %>
   </div>

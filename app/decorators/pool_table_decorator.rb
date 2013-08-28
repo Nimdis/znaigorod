@@ -35,9 +35,9 @@ class PoolTableDecorator < ApplicationDecorator
     orderly_grouped_schedule.each do |days, schedules|
       timely_content = ""
       schedules.each do |schedule|
-        timely_content << h.content_tag(:li, "<span class='time'>#{schedule.keys.first}</span><span class='price'>#{schedule.values.first} руб.</span>".html_safe)
+        timely_content << "<span class='time'>#{schedule.keys.first}</span>, <span class='price'>#{schedule.values.first} руб.</span>; "
       end
-      content << h.content_tag(:li, (days + h.content_tag(:ul, timely_content.html_safe)).html_safe)
+      content << h.content_tag(:li, "#{days}: #{timely_content.squish.gsub(/;$/, '')}".html_safe).html_safe
     end
     h.content_tag(:div, "<span class='show_more_schedule'>расписание</span>".html_safe, class: "work_schedule") + h.content_tag(:ul, content.html_safe, class: :more_schedule).html_safe
   end

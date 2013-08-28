@@ -10,7 +10,7 @@ class AfishasController < ApplicationController
 
     if request.xhr?
       if params[:page]
-        render partial: @presenter.partial, layout: false and return
+        render partial: @presenter.partial, :locals => { :afishas => nil }, layout: false and return
       end
 
       render :partial => 'afisha_today', :layout => false and return

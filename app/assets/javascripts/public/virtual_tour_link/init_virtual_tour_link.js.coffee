@@ -1,8 +1,8 @@
 @init_virtual_tour_link = () ->
-  block = $('.organization_info .virtual_tour_link').click (event) ->
-    box_width = '790px'
-    box_height = '760px'
-    data = "<h1>#{$('h1', $(this).closest('.info')).text()}</h1>"
+  block = $('.organization_show .virtual_tour_link').click (event) ->
+    box_width = '760px'
+    box_height = '700px'
+    data = "<h1>#{$('.organization_show .center h1:first').text()}</h1>"
     data += "
       <div id='krpano'>
         <noscript><center>ERROR: Javascript not activated</center></noscript>

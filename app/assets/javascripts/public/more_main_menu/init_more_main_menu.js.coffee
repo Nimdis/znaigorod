@@ -12,8 +12,5 @@
     block.toggle()
     block.addClass('need_close_by_click')
     false
-  true
 
-$(document).click ->
-  $(".need_close_by_click").removeClass('need_close_by_click').hide()
   true
