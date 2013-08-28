@@ -1,17 +1,11 @@
 <div class="suborganization_info sport">
-  <table>
-    <tr>
-      <td class='border'>
-        <%= sport.htmlise_title_on_show %>
-      </td>
-      <td>
-        <%= sport.iconize_info %>
-        <div class="details">
-          <%= sport.htmlise_features_on_show %>
-        </div>
-      </td>
-    </tr>
-  </table>
+
+  <div class="title"><%= sport.title.text_gilensize %></div>
+
+  <%= sport.htmlise_features_on_show %>
+
+  <%= content_tag :div, sport.description.as_html, :class => :description if sport.description.present? %>
+
   <% if sport.has_photogallery? %>
     <div class="photogallery">
       <ul>
@@ -19,8 +13,8 @@
       </ul>
     </div>
   <% end %>
-  <% if sport.services.first.offer? %>
 
+  <% if sport.services.first.offer? %>
     <div class="services">
       <% sport.services.group_by(&:category).each do |category, services| %>
         <div class="service_header">
@@ -60,4 +54,5 @@
       <% end %>
     </div>
   <% end %>
+
 </div>

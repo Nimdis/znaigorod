@@ -1,17 +1,11 @@
 <div class="suborganization_info hotel">
-  <table>
-    <tr>
-      <td class='border'>
-        <%= hotel.htmlise_title_on_show %>
-      </td>
-      <td>
-        <%= hotel.iconize_info %>
-        <div class="details">
-          <%= hotel.htmlise_offers_and_features_on_show %>
-        </div>
-      </td>
-    </tr>
-  </table>
+
+  <div class='title'><%= hotel.title.text_gilensize %></div>
+
+  <%= hotel.htmlise_offers_and_features_on_show %>
+
+  <%= content_tag :div, hotel.description.as_html, :class => :description if hotel.description.present? %>
+
   <% if hotel.has_photogallery? %>
     <div class="photogallery">
       <ul>
@@ -19,5 +13,5 @@
       </ul>
     </div>
   <% end %>
-</div>
 
+</div>

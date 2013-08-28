@@ -1,6 +1,6 @@
 <div class="suborganization_info meal">
 
-  <div class='title'><%= meal.title.as_html %></div>
+  <div class='title'><%= meal.title.text_gilensize %></div>
 
   <% if meal.htmlise_cuisines_on_show.present? %>
     <div class="cuisines">
@@ -82,4 +82,5 @@
       <% end %>
     </div>
   <% end %>
+
 </div>

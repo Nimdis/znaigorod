@@ -5,7 +5,7 @@
     &.meal .menus
       display: none
 
-    .title
+    > .title
       font-size: 14px
       background-color: #e8e8e8
       padding: 1px 10px 2px
@@ -30,14 +30,19 @@
         li
           +inline-block
 
-    > .offers_and_features
+    > .offers_and_features,
+    > .features
       +clearfix
       font-size: 11px
-      margin-bottom: 10px
+      margin-bottom: 5px
 
       li
         width: 190px
         float: left
+        margin-bottom: 5px
+
+        &:nth-child(4n+1)
+          clear: left
 
     &.afisha_details
 

@@ -1,17 +1,11 @@
 <div class="suborganization_info car_service_center">
-  <table>
-    <tr>
-      <td class='border'>
-        <%= car_service_center.htmlise_title_on_show %>
-      </td>
-      <td>
-        <%= car_service_center.iconize_info %>
-        <div class="details">
-          <%= car_service_center.htmlise_offers_and_features_on_show %>
-        </div>
-      </td>
-    </tr>
-  </table>
+
+  <div class='title'><%= car_service_center.title.text_gilensize %></div>
+
+  <%= car_service_center.htmlise_offers_and_features_on_show %>
+
+  <%= content_tag :div, car_service_center.description.as_html, :class => :description if car_service_center.description.present? %>
+
   <% if car_service_center.has_photogallery? %>
     <div class="photogallery">
       <ul>
@@ -19,4 +13,5 @@
       </ul>
     </div>
   <% end %>
+
 </div>

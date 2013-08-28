@@ -11,10 +11,6 @@ class BilliardDecorator < SuborganizationDecorator
     billiard.title? ? billiard.title : "Бильярдный зал"
   end
 
-  def htmlise_title_on_show
-    h.content_tag :h1, title, :class => 'billiard'
-  end
-
   def htmlise_features_on_show
     h.content_tag(:ul, features.map {|f| h.content_tag(:li, f)}.join("\n").html_safe, :class => 'features')
   end

@@ -1,17 +1,10 @@
 <div class="suborganization_info salon_center">
-  <table>
-    <tr>
-      <td class='border'>
-        <%= salon_center.htmlise_title_on_show %>
-      </td>
-      <td>
-        <%= salon_center.iconize_info %>
-        <div class="details">
-          <%= salon_center.htmlise_offers_and_features_on_show %>
-        </div>
-      </td>
-    </tr>
-  </table>
+
+  <div class='title'><%= salon_center.title.text_gilensize %></div>
+
+  <%= salon_center.htmlise_offers_and_features_on_show %>
+
+  <%= content_tag :div, salon_center.description.as_html, :class => :description if salon_center.description.present? %>
 
   <% if salon_center.has_photogallery? %>
     <div class="photogallery">

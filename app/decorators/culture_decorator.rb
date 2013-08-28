@@ -19,10 +19,6 @@ class CultureDecorator < SuborganizationDecorator
     culture.title? ? culture.title : categories.first
   end
 
-  def htmlise_title_on_show
-    h.content_tag :h1, title, :class => I18n.transliterate(categories.first).downcase
-  end
-
   def htmlise_offers_and_features_on_show
     content = htmlise_offers_on_show.to_s + htmlise_features_on_show.to_s
     h.content_tag(:ul, content.html_safe, class: :offers_and_features) if content. present?

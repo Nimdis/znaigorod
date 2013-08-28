@@ -279,7 +279,7 @@ class OrganizationDecorator < ApplicationDecorator
     res << "<meta property='og:url' content='#{organization_url}' />\n"
     res << "<meta property='og:title' content='#{title.text_gilensize}' />\n"
     if logotype_url
-      image = resized_image_url(logotype_url, 180, 242, false)
+      image = h.resized_image_url(logotype_url, 180, 242)
       res << "<meta property='og:image' content='#{image}' />\n"
       res << "<meta name='image' content='#{image}' />\n"
       res << "<link rel='image_src' href='#{image}' />\n"

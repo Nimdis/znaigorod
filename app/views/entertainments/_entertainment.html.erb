@@ -1,17 +1,11 @@
 <div class="suborganization_info entertainment">
-  <table>
-    <tr>
-      <td class='border'>
-        <%= entertainment.htmlise_title_on_show %>
-      </td>
-      <td>
-        <%= entertainment.iconize_info %>
-        <div class="details">
-          <%= entertainment.htmlise_offers_and_features_on_show %>
-        </div>
-      </td>
-    </tr>
-  </table>
+
+  <div class='title'><%= entertainment.title.text_gilensize %></div>
+
+  <%= entertainment.htmlise_offers_and_features_on_show %>
+
+  <%= content_tag :div, entertainment.description.as_html, :class => :description if entertainment.description.present? %>
+
   <% if entertainment.has_photogallery? %>
     <div class="photogallery">
       <ul>
@@ -19,4 +13,5 @@
       </ul>
     </div>
   <% end %>
+
 </div>

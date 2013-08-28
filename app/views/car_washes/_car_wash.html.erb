@@ -1,17 +1,11 @@
 <div class="suborganization_info car_wash">
-  <table>
-    <tr>
-      <td class='border'>
-        <%= car_wash.htmlise_title_on_show %>
-      </td>
-      <td>
-        <%= car_wash.iconize_info %>
-        <div class="details">
-          <%= car_wash.htmlise_offers_and_features_on_show %>
-        </div>
-      </td>
-    </tr>
-  </table>
+
+  <div class='title'><%= car_wash.title.text_gilensize %></div>
+
+  <%= car_wash.htmlise_offers_and_features_on_show %>
+
+  <%= content_tag :div, car_wash.description.as_html, :class => :description if car_wash.description.present? %>
+
   <% if car_wash.has_photogallery? %>
     <div class="photogallery">
       <ul>
@@ -19,6 +13,7 @@
       </ul>
     </div>
   <% end %>
+
   <div class="services">
     <% car_wash.services.group_by(&:category).each do |category, services| %>
       <div class="service_header">
@@ -27,4 +22,5 @@
       </div>
     <% end %>
   </div>
+
 </div>

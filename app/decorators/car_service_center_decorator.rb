@@ -7,10 +7,6 @@ class CarServiceCenterDecorator < SuborganizationDecorator
     car_service_center.title? ? car_service_center.title : 'Автосервис'
   end
 
-  def htmlise_title_on_show
-    h.content_tag :h1, title, :class => 'car_service_center'
-  end
-
   def htmlise_features_on_show
     features.map {|f| h.content_tag(:li, f)}.join("\n").html_safe if features.any?
   end

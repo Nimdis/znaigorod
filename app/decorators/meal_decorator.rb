@@ -19,10 +19,6 @@ class MealDecorator < SuborganizationDecorator
     meal.title? ? meal.title : categories.first
   end
 
-  def htmlise_title_on_show
-    h.content_tag :h1, title, :class => I18n.transliterate(categories.first).downcase
-  end
-
   def htmlise_cuisines_on_show
     h.content_tag(:ul, cuisines.map {|f| h.content_tag(:li, f)}.join("\n").html_safe, :class => 'cuisines') if cuisines.any?
   end

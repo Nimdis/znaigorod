@@ -1,17 +1,11 @@
 <div class='suborganization_info sauna'>
-  <table>
-    <tr>
-      <td class='border'>
-        <%= sauna.htmlise_title_on_show %>
-      </td>
-      <td>
-        <%= sauna.iconize_info %>
-        <div class='details'>
-          <%= sauna.characteristics_on_show %>
-        </div>
-      </td>
-    </tr>
-  </table>
+
+  <div class='title'><%= sauna.title.text_gilensize %></div>
+
+  <%= sauna.characteristics_on_show %>
+
+  <%= content_tag :div, sauna.description.as_html, :class => :description if sauna.description.present? %>
+
   <% if sauna.has_photogallery? %>
     <div class="photogallery">
       <ul>
@@ -19,6 +13,7 @@
       </ul>
     </div>
   <% end %>
+
   <% sauna.decorated_halls.each_with_index do |sauna_hall| %>
     <div class='sauna_hall_info'>
       <div class='sauna_hall_header'>
@@ -60,4 +55,5 @@
       <% end %>
     </div>
   <% end %>
+
 </div>

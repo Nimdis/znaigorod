@@ -1,17 +1,11 @@
 <div class="suborganization_info billiard">
-  <table>
-    <tr>
-      <td class='border'>
-        <%= billiard.htmlise_title_on_show %>
-      </td>
-      <td>
-        <%= billiard.iconize_info %>
-        <div class="details">
-          <%= billiard.htmlise_features_on_show %>
-        </div>
-      </td>
-    </tr>
-  </table>
+
+  <div class='title'><%= billiard.title.text_gilensize %></div>
+
+  <%= billiard.htmlise_features_on_show %>
+
+  <%= content_tag :div, billiard.description.as_html, :class => :description if billiard.description.present? %>
+
   <% if billiard.has_photogallery? %>
     <div class="photogallery">
       <ul>
@@ -19,6 +13,7 @@
       </ul>
     </div>
   <% end %>
+
   <div class="pool_tables">
     <% billiard.grouped_decorated_pool_tables.each do |kind, pool_tables| %>
       <ul class="pool_table">
@@ -38,4 +33,5 @@
       </ul>
     <% end %>
   </div>
+
 </div>

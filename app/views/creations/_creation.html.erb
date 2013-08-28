@@ -1,17 +1,11 @@
 <div class="suborganization_info creation">
-  <table>
-    <tr>
-      <td class='border'>
-        <%= creation.htmlise_title_on_show %>
-      </td>
-      <td>
-        <%= creation.iconize_info %>
-        <div class="details">
-          <%= creation.htmlise_features_on_show %>
-        </div>
-      </td>
-    </tr>
-  </table>
+
+  <div class='title'><%= creation.title.text_gilensize %></div>
+
+  <%= creation.htmlise_features_on_show %>
+
+  <%= content_tag :div, creation.description.as_html, :class => :description if creation.description.present? %>
+
   <% if creation.has_photogallery? %>
     <div class="photogallery">
       <ul>
@@ -51,4 +45,5 @@
       <% end %>
     </div>
   <% end %>
+
 </div>
