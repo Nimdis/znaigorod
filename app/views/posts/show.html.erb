@@ -16,7 +16,7 @@
         <%= render :partial => 'share_this' %>
       </div>
 
-      <div class="post_meta">
+      <div class="tags_and_visits">
         <% if @post.tags.any? %>
           <ul class="tags">
             <% @post.tags.each do |tag| %>
@@ -26,6 +26,8 @@
         <%end%>
 
         <span class="details">
+          <span class='comments'><%= @post.comments.count %></span>
+          <span class='likes'><%= @post.likes_count %></span>
           <span class="visits"><%= @post.page_visits.count %></span>
         </span>
       </div>

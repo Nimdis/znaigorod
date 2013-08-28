@@ -64,11 +64,14 @@
           .ok_like
             float: right
 
-      .post_meta
+      .tags_and_visits
         +clearfix
-        width: 950px
+        width: 100%
 
         .tags
+          +clearfix
+          float: left
+          width: 565px
           margin: 10px 0 5px
 
           li
@@ -82,16 +85,27 @@
 
         .details
           float: right
-          color: #777
+          color: #999
+          font-size: 11px
+          margin-top: 5px
 
           span
-            display: block
-            float: left
-            padding-left: 25px
+            +inline-block
             background: transparent image_url('public/details_sprite.png') no-repeat 10px 3px
+            margin-left: 5px
+
+            &.comments
+              background-position: 0 -36px
+              padding-left: 19px
+              margin-bottom: 0
+
+            &.likes
+              background-position: 0 -57px
+              padding-left: 13px
 
             &.visits
-              background-position: 6px -78px
+              background-position: 0 -77px
+              padding-left: 19px
 
     .photogallery_header
       font-size: 14px
