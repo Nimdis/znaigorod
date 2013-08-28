@@ -57,6 +57,9 @@ class Ability
       can :manage, Showing do |showing|
         showing.afisha.state != 'pending' && showing.afisha.user == user
       end
+
+      can [:new, :create], PrivateMessage if user.persisted?
+
     when 'crm'
       return false if user.new_record?
 
