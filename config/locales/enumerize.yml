@@ -106,6 +106,6 @@ ru:
         user_add_friend: добавил в вас друзья
 
       state:
-        new: Новое
+        unread: Новое
         read: Прочитанное
 

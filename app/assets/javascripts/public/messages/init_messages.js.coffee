@@ -1,6 +1,6 @@
 @process_change_message_status = () ->
   timer = setInterval ->
-    target = $('a.change_message_status.new:first')
+    target = $('a.change_message_status.unread:first')
     if target.length
       console.log target.click()
     else
@@ -21,17 +21,17 @@
 
     wrapper = $('<div/>')
     wrapper.html(response)
-    klass = $('li', wrapper).attr('class').replace('ajax_message_status', '').replace('new', '').replace('read', '').compact()
-    $("#notifications .#{klass}").removeClass('new').addClass('read')
+    klass = $('li', wrapper).attr('class').replace('ajax_message_status', '').replace('unread', '').replace('read', '').compact()
+    $("#notifications .#{klass}").removeClass('unread').addClass('read')
     wrapper.remove()
 
     if counter == 0
-      $('.header .messages a').addClass('empty').removeClass('new')
+      $('.header .messages a').addClass('empty').removeClass('unread')
       $('.header .messages a').attr('title','Нет новых сообщений')
       $('.header .messages a').html(messages)
       $('#messages_filter .counter').html('')
     else
-      $('.header .messages a').addClass('new').removeClass('empty')
+      $('.header .messages a').addClass('unread').removeClass('empty')
       $('.header .messages a').attr('title','Есть новые сообщения')
       $('.header .messages a').html("+#{counter}")
       $('#messages_filter .counter').html("(#{counter})")

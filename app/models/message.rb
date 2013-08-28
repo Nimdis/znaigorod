@@ -7,13 +7,13 @@ class Message < ActiveRecord::Base
   belongs_to :producer, class_name: 'Account'
   belongs_to :messageable, :polymorphic => true
 
-  scope :unread, -> { where(state: :new) }
+  scope :unread, -> { where(state: :unread) }
 
   extend Enumerize
-  enumerize :state, in: [:new, :read], default: :new, predicates: true, scope: true
+  enumerize :state, in: [:unread, :read], default: :unread, predicates: true, scope: true
 
   def change_message_status
-    self.new? ? self.state = :read : self.state = :new
+    self.unread? ? self.state = :read : self.state = :unread
     self.save
   end
 

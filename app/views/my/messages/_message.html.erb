@@ -1,5 +1,5 @@
 <li class="ajax_message_status <%= message.state %> message_<%= message.id %>"
-  data-counter="<%= current_user.account.messages.with_state(:new).count %>"
+  data-counter="<%= current_user.account.messages.with_state(:unread).count %>"
   data-messages="<%= current_user.account.messages.count %>">
   <%= render partial: 'my/messages/afisha_message', locals: { message: message } if message.messageable.is_a?(Afisha) %>
   <%= render partial: 'my/messages/comment_message', locals: { message: message } if message.messageable.is_a?(Comment) %>
