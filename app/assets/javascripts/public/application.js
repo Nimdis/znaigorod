@@ -37,6 +37,7 @@
  * = require ./yandex_map
  * = require ./common
  * = require ./preload_images
+ * = require ./show_tipsy
  * = require ./more_main_menu
  * = require ./comments
  * = require ./votes
@@ -78,6 +79,5 @@
  * = require ./my_afisha
  * = require ./select_tags
  * = require ./messages
- * = require ./invites
  * = require ./main
  */

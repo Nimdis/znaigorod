@@ -1,110 +1,97 @@
 .tipsy
   font-size: 10px
   position: absolute
-  padding: 5px
   z-index: 100000
 
-.tipsy-inner
-  background-color: #FFF
-  color: #000
-  max-width: 200px
-  padding: 5px 8px 4px 8px
-  text-align: center
-  border-radius: 3px
-  -moz-border-radius: 3px
-  -webkit-border-radius: 3px
-  box-shadow: 0 0 5px #000000
-  -webkit-box-shadow: 0 0 5px #000000
-  -moz-box-shadow: 0 0 5px #000000
+  .tipsy-inner
+    position: relative
+    background-color: #fff
+    color: #000
+    max-width: 200px
+    padding: 5px 8px 4px 8px
+    text-align: center
+    +border-radius(3px)
+    +box-shadow(#555 0 0 3px)
 
-/* Rounded corners
+  /* common arrow */
 
+  &:after,
+  &:before
+    border: solid transparent
+    content: " "
+    height: 0
+    width: 0
+    position: absolute
+    pointer-events: none
 
-.tipsy-arrow
-  position: absolute
-  width: 0
-  height: 0
-  line-height: 0
-  border: 5px dashed #FFF
+  &:after
+    border-color: rgba(255, 255, 255, 0)
+    border-width: 5px
 
-/* Rules to colour arrows
+  &:before
+    border-color: rgba(204, 204, 204, 0)
+    border-width: 6px
 
-.tipsy-arrow-n
-  border-bottom-color: #FFF
+  /* top arrow # tipsy-n */
 
-.tipsy-arrow-s
-  border-top-color: #FFF
+  &.tipsy-n:after,
+  &.tipsy-n:before
+    bottom: 100%
 
-.tipsy-arrow-e
-  border-left-color: #FFF
+  &.tipsy-n:after
+    border-bottom-color: #ffffff
+    left: 50%
+    margin-left: -5px
 
-.tipsy-arrow-w
-  border-right-color: #FFF
+  &.tipsy-n:before
+    border-bottom-color: #ccc
+    left: 50%
+    margin-left: -6px
 
-.tipsy-n .tipsy-arrow
-  top: 0px
-  left: 50%
-  margin-left: -5px
-  border-bottom-style: solid
-  border-top: none
-  border-left-color: transparent
-  border-right-color: transparent
+  /* bottom arrow # tipsy-s */
 
-.tipsy-nw .tipsy-arrow
-  top: 0
-  left: 10px
-  border-bottom-style: solid
-  border-top: none
-  border-left-color: transparent
-  border-right-color: transparent
+  &.tipsy-s:after,
+  &.tipsy-s:before
+    top: 100%
 
-.tipsy-ne .tipsy-arrow
-  top: 0
-  right: 10px
-  border-bottom-style: solid
-  border-top: none
-  border-left-color: transparent
-  border-right-color: transparent
+  &.tipsy-s:after
+    border-top-color: #ffffff
+    left: 50%
+    margin-left: -5px
 
-.tipsy-s .tipsy-arrow
-  bottom: 0
-  left: 50%
-  margin-left: -5px
-  border-top-style: solid
-  border-bottom: none
-  border-left-color: transparent
-  border-right-color: transparent
+  &.tipsy-s:before
+    border-top-color: #ccc
+    left: 50%
+    margin-left: -6px
 
-.tipsy-sw .tipsy-arrow
-  bottom: 0
-  left: 10px
-  border-top-style: solid
-  border-bottom: none
-  border-left-color: transparent
-  border-right-color: transparent
+  /* left arrow # tipsy-e */
 
-.tipsy-se .tipsy-arrow
-  bottom: 0
-  right: 10px
-  border-top-style: solid
-  border-bottom: none
-  border-left-color: transparent
-  border-right-color: transparent
+  &.tipsy-e:after,
+  &.tipsy-e:before
+    left: 100%
 
-.tipsy-e .tipsy-arrow
-  right: 0
-  top: 50%
-  margin-top: -5px
-  border-left-style: solid
-  border-right: none
-  border-top-color: transparent
-  border-bottom-color: transparent
+  &.tipsy-e:after
+    border-left-color: #ffffff
+    top: 50%
+    margin-top: -5px
 
-.tipsy-w .tipsy-arrow
-  left: 0
-  top: 50%
-  margin-top: -5px
-  border-right-style: solid
-  border-left: none
-  border-top-color: transparent
-  border-bottom-color: transparent
+  &.tipsy-e:before
+    border-left-color: #ccc
+    top: 50%
+    margin-top: -6px
+
+  /* right arrow # tipsy-w */
+
+  &.tipsy-w:after,
+  &.tipsy-w:before
+    right: 100%
+
+  &.tipsy-w:after
+    border-right-color: #ffffff
+    top: 50%
+    margin-top: -5px
+
+  &.tipsy-w:before
+    border-right-color: #ccc
+    top: 50%
+    margin-top: -6px

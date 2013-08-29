@@ -16,7 +16,7 @@ class Price < ActiveRecord::Base
   default_scope order('value ASC')
 
   def to_s
-      "#{I18n.t("price_kind.#{service.kind}", count: count || 1)}"
+    "#{I18n.t("price_kind.#{service.kind}", count: count || 1)}"
   end
 
   def price_value
@@ -24,7 +24,7 @@ class Price < ActiveRecord::Base
       if self.value == self.max_value
         "#{self.value}"
       else
-        "#{self.value} - #{self.max_value}"
+        "#{self.value}&ndash;#{self.max_value}".html_safe
       end
     else
       "от #{self.value}"

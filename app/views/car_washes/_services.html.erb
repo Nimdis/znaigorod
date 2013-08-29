@@ -1,0 +1,58 @@
+<% services.group_by(&:offer).sort.each do |offer, services| %>
+  <div class='info'>
+
+    <div class='head'>
+      <h3><%= "#{offer} #{I18n.t("service_min_price.#{services.first.kind}", count: services.map(&:min_value).compact.min)}" %></h3>
+      <%= link_to 'подробнее', '#', class: :closed %>
+    </div>
+
+    <div class='details'>
+      <table>
+        <% services.each do |service| %>
+          <tr>
+
+            <td class='name'>
+              <div class='title'><%= service.title %></div>
+              <% if service.description? %>
+                <div class='service_description'>
+                  <%= simple_format service.description.text_gilensize %>
+                </div>
+              <% end %>
+            </td>
+
+            <td class='price'>
+              <% if service.prices.many? %>
+                <ul>
+                  <% service.prices.each do |price| %>
+                    <li>
+                      <% if price.description? %>
+                        <abbr title='<%= price.description %>' class='show_tipsy'>
+                          <%= price.price_value %>
+                          <span class='small'>руб.</span>
+                        </abbr>
+                      <% else %>
+                        <abbr title='<%= price %>' class='show_tipsy'>
+                          <%= price.price_value %>
+                          <span class='small'>руб.</span>
+                        </abbr>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <% price = service.prices.first %>
+                <div class='price'>
+                  <%= price.price_value %>
+                  <span class='small'>руб.</span>
+                </div>
+                <%= content_tag :div, price, :class => :service_price_info if price.count? %>
+              <% end %>
+            </td>
+
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+<% end %>

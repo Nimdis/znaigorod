@@ -1,8 +1,7 @@
 <% services.group_by(&:offer).sort.each do |offer, services| %>
   <div class='info'>
-    <h3>
-      <%= "#{offer} #{I18n.t("service_min_price.#{services.first.kind}", count: services.map(&:min_value).compact.min)}" %>
-    </h3>
+
+    <h3><%= "#{offer} #{I18n.t("service_min_price.#{services.first.kind}", count: services.map(&:min_value).compact.min)}" %></h3>
     <%= link_to "подробнее", '#', class: :closed %>
 
     <div class="details">

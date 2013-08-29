@@ -13,6 +13,8 @@ $ ->
     init_vk_group_news() if $('#vk_group_news').length
     init_vk_group_subscribers() if $('#vk_group_subscribers').length
 
+  init_show_tipsy() if $('.show_tipsy') && $.fn.tipsy
+
   init_main_page() if $('.main_page_affiche').length
   init_afisha_extend() if $('.content .affiche .photogallery')
   init_afisha_extend() if $('.content .affiche .trailer')
@@ -83,7 +85,6 @@ $(window).load ->
   init_comments() if $('.comments').length
   init_auth() if ('.auth_links').length
   init_services() if $('.services')
-  init_invites() if $('.wanted')
   init_menus() if $('.menus')
 
   init_move_to_top() if $('a.move_to_top').length

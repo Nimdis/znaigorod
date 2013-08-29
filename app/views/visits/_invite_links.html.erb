@@ -1,8 +1,8 @@
 <% if !visit.invited_gender.all? && visit.acts_as_invited? %>
-  <div class="info">
+  <div class='info'>
     <span>Ждет приглашения от <%= I18n.t("visit.invited.#{visit.invited_gender}") %></span>
    <% if visit.invited_description %>
-     <abbr title="<%= visit.invited_description %>"><%= image_tag 'public/icon_question.png' %></abbr>
+     <abbr title='<%= visit.invited_description %>' class='show_tipsy'><%= image_tag 'public/icon_question.png' %></abbr>
    <% end %>
   </div>
 <% end %>
@@ -10,18 +10,18 @@
                                                   messageable_type: visit.visitable.class.name,
                                                   account_id: visit.user.account.id,
                                                   invite_kind: :inviter).any? %>
-  <span class="sended"><%= I18n.t("invite.sended.inviter") %></span>
+  <span class='sended'><%= I18n.t('invite.sended.inviter') %></span>
 <% else %>
-  <%= link_to "Пригласить", new_my_private_message_path(account_id: visit.user.account.id,
+  <%= link_to 'Пригласить', new_my_private_message_path(account_id: visit.user.account.id,
                                                         afisha_id: visit.visitable.id,
                                                         acts_as: :inviter), class: 'invite' %>
 <% end %>
 
 <% if !visit.inviter_gender.all? && visit.acts_as_inviter?  %>
-  <div class="info">
+  <div class='info'>
     <span>Приглашает <%= I18n.t("visit.inviter.#{visit.inviter_gender}") %></span>
     <% if visit.inviter_description %>
-      <abbr title="<%= visit.inviter_description %>"><%= image_tag 'public/icon_question.png' %></abbr>
+      <abbr title='<%= visit.inviter_description %>' class='show_tipsy'><%= image_tag 'public/icon_question.png' %></abbr>
     <% end %>
   </div>
 <% end %>
@@ -29,9 +29,9 @@
                                                   messageable_type: visit.visitable.class.name,
                                                   account_id: visit.user.account.id,
                                                   invite_kind: :invited).any? %>
-  <span class="sended"><%= I18n.t("invite.sended.invited") %></span>
+  <span class='sended'><%= I18n.t('invite.sended.invited') %></span>
 <% else %>
-  <%= link_to "Пригласи меня", new_my_private_message_path(account_id: visit.user.account.id,
+  <%= link_to 'Пригласи меня', new_my_private_message_path(account_id: visit.user.account.id,
                                                            afisha_id: visit.visitable.id,
                                                            acts_as: :invited), class: 'invite' %>
 <% end %>
