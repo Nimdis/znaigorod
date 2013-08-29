@@ -336,7 +336,34 @@
           padding: 5px 15px
           &:hover
             +background(linear-gradient(top, #fff, #ddd))
-          &:active
+            &:active
             +background(linear-gradient(top, #ddd, #fff))
             padding: 6px 15px 4px
+
+
+.private_message_form_wrapper
+  form
+    textarea
+      border: 1px solid #ccc
+      height: 200px
+      outline: none
+      width: 488px
+
+    input
+      font-family: 'Verdana', 'Tahoma', sans-serif
+      font-size: 12px
+      cursor: pointer
+      +inline-block
+      font-size: 12px
+      margin: 0 10px 0 0
+      border: 1px solid #ccc
+      background-color: #e8e8e8
+      +background(linear-gradient(top, #ffffff, #cfcfcf))
+      padding: 5px 15px
+      &:hover
+        +background(linear-gradient(top, #fff, #ddd))
+        &:active
+        +background(linear-gradient(top, #ddd, #fff))
+        padding: 6px 15px 4px
+
 

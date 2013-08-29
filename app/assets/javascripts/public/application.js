@@ -79,7 +79,6 @@
  * = require ./my_afisha
  * = require ./select_tags
  * = require ./messages
- * = require ./friends
  * = require ./invites
  * = require ./main
  */

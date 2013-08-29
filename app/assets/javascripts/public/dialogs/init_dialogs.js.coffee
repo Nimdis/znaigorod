@@ -11,6 +11,8 @@ add_tab_handler = (response, stored) ->
   stored.push(account_id) if stored.indexOf(account_id) < 0
   window.localStorage.setItem("dialogs", JSON.stringify(stored))
 
+  $('.private_message .open_dialog').hide()
+
 close_tab_handler = (stored) ->
   close_buttons = $('#messages_filter span.ui-icon-close:not(.charged)')
   close_buttons.each (index, item) ->
@@ -39,9 +41,14 @@ load_tabs_handler = (stored) ->
   stored.each (index) ->
     $("ul.dialogs a.dialog_#{index}").click()
 
+$.fn.submit_form = (response) ->
+  account_id = $(response).closest('li').data('account_id')
+
+  $('ul.dialog', "#dialog_#{account_id}").append(response)
+  $('.private_message textarea').attr("value", "")
+
 @init_dialogs = () ->
   stored = JSON.parse(window.localStorage.getItem('dialogs')) || []
-
   load_tabs_handler(stored)
 
   $('.to_dialog').on 'click', ->
@@ -51,14 +58,20 @@ load_tabs_handler = (stored) ->
 
   $('.to_dialog').on 'ajax:beforeSend', (xhr, settings) ->
     return false if $(this).hasClass('disabled')
-
     true
 
-  $('.to_dialog').on 'ajax:success', (evt, response) ->
-    $(evt.target).addClass('disabled')
 
-    add_tab_handler(response, stored)
-    close_tab_handler(stored)
+  $('#messages_filter').on 'ajax:success', (evt, response, status, jqXHR) ->
+    target = $(evt.target)
+
+    if target.hasClass('to_dialog')
+      $(evt.target).addClass('disabled')
+
+      add_tab_handler(response, stored)
+      close_tab_handler(stored)
+
+    else
+      target.submit_form(jqXHR.responseText)
 
     $('.private_message .close').on 'click', ->
       $('#messages_filter .ui-tabs-selected span.ui-icon-close').click()
@@ -66,3 +79,4 @@ load_tabs_handler = (stored) ->
     true
 
   true
+

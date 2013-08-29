@@ -41,6 +41,7 @@ $ ->
   init_pagination() if $('nav.pagination').length
   init_account_pagination() if $('.account_show').length
   init_account_extend() if $('.account_show').length
+  init_social_actions() if $('.account_show').length
   init_dialogs() if $('.to_dialog').length
   init_list_settings() if $('.content_wrapper .presentation_filters').length
   init_sms_claims() if $('.sms_claims li').length
@@ -58,7 +59,6 @@ $ ->
   init_messages() if $('.ajax_message_status').length
   init_messages_tabs() if $('#messages_filter').length
   init_afisha_tabs() if $('#events_filter').length
-  init_change_friendship() if $('.change_friendship').length
 
   true
 

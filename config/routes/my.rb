@@ -10,7 +10,7 @@ Znaigorod::Application.routes.draw do
 
     resources :dialogs, :only => [:index, :show]
 
-    resources :private_messages, :only => [:new, :create]
+    resources :private_messages, :only => [:new, :create, :show]
 
     resource :account, :only => [:show, :edit, :update]
 
