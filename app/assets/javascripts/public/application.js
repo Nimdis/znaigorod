@@ -74,7 +74,6 @@
  * = require ./menus
  * = require ./stream_buro_service
  * = require ./services
- * = require ./visitors
  * = require ./sms_claims
  * = require ./my_afisha
  * = require ./select_tags

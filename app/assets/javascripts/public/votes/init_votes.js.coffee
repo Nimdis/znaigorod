@@ -24,8 +24,6 @@ init_dialog = () ->
         $(event.target).html(jqXHR.responseText)
     ).dialog('open')
 
-  init_visitors()
-
   links = $('.votes_wrapper .user_like a').not('.charged')
   link = links.addClass('charged').on 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target).closest('.votes_wrapper')
