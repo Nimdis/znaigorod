@@ -11,8 +11,6 @@ add_tab_handler = (response, stored) ->
   stored.push(account_id) if stored.indexOf(account_id) < 0
   window.localStorage.setItem("dialogs", JSON.stringify(stored))
 
-  $('.private_message .open_dialog').hide()
-
   scroll($('ul.dialog', "#dialog_#{account_id}"))
 
 close_tab_handler = (stored) ->

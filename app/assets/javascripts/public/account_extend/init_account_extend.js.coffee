@@ -37,16 +37,5 @@
 
         $('.message_wrapper').replaceWith('<div class="message_wrapper">Сообщение успешно отправлено!</div>')
         $('.message_wrapper').delay(5000).slideUp 'slow'
-
       false
-
-      $('.private_message_form_wrapper .open_dialog').on 'click', ->
-        account_id = parseInt($('#private_message_account_id').val())
-
-        stored = JSON.parse(window.localStorage.getItem('dialogs')) || []
-        stored.push(account_id) if stored.indexOf(account_id) < 0
-        window.localStorage.setItem("dialogs", JSON.stringify(stored))
-
-      false
-
   true
