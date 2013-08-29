@@ -35,17 +35,16 @@ class SaunaHallDecorator < ApplicationDecorator
     orderly_grouped_schedule.each do |days, schedules|
       timely_content = ""
       schedules.each do |schedule|
-        timely_content << h.content_tag(:li, "<span class='time'>#{schedule.keys.first}</span><span class='price'>#{schedule.values.first} руб.</span>".html_safe)
+        timely_content << "<span class='time'>#{schedule.keys.first}</span>, <span class='price'>#{schedule.values.first} руб.</span>; ".html_safe
       end
-      content << h.content_tag(:li, (days + h.content_tag(:ul, timely_content.html_safe)).html_safe)
+      content << h.content_tag(:li, ("#{days}: " + timely_content.squish.gsub(/;$/, '')).html_safe)
     end
     h.content_tag(:div, "<span class='show_more_schedule'>расписание</span>".html_safe, class: "work_schedule") + h.content_tag(:ul, content.html_safe, class: :more_schedule).html_safe
   end
 
   def htmlise_capacity_on_show
     return "" unless sauna_hall_capacity.present?
-    content = h.content_tag(:span, "#{I18n.t('sauna.sauna_hall_capacity.default', count: sauna_hall_capacity.default.to_i)}.\n", class: :capacity_default)
-    content << h.content_tag(:span, "#{I18n.t('sauna.sauna_hall_capacity.maximal', count: sauna_hall_capacity.maximal.to_i)}.\n", class: :capacity_maximal)
+    content = h.content_tag(:span, "#{I18n.t('sauna.sauna_hall_capacity.maximal', count: sauna_hall_capacity.maximal.to_i)}.\n", class: :capacity_maximal)
     content << h.content_tag(:span, "#{I18n.t('sauna.sauna_hall_capacity.extra_guest_cost', count: sauna_hall_capacity.extra_guest_cost.to_i)}", class: :capacity_extra_guest_cost)
   end
 
