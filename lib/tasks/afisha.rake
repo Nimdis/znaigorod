@@ -16,7 +16,7 @@ namespace :afisha do
         uids = vk_client.groups.get_members(group_id: afisha.get_vk_event_id).users
         uids.each do |uid|
           if User.where(uid: uid.to_s).any?
-            afisha.visits.find_or_create_by_user_id(user_id: User.find_by_uid(uid.to_s).id, visited: true)
+            afisha.visits.find_or_create_by_user_id(user_id: User.find_by_uid(uid.to_s).id)
           end
         end
         bar.increment!
