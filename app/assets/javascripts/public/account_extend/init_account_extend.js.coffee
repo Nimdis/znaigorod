@@ -35,6 +35,9 @@
       $('.private_message_form_wrapper .close_dialog').on 'click', ->
         $('.private_message_form_wrapper').dialog('close')
 
+        $('.message_wrapper').replaceWith('<div class="message_wrapper">Сообщение успешно отправлено!</div>')
+        $('.message_wrapper').delay(5000).slideUp 'slow'
+
       false
 
       $('.private_message_form_wrapper .open_dialog').on 'click', ->

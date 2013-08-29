@@ -20,9 +20,7 @@ class My::PrivateMessagesController < My::ApplicationController
   end
 
   def create
-    create!{
-      render @private_message and return
-    }
+    create! { render @private_message and return }
   end
 
   protected
