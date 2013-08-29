@@ -20,16 +20,17 @@ class VisitsController < ApplicationController
     @afisha = Afisha.find(params[:afisha_id])
     @users = User.ordered.page(params[:page]).per(10)
     if params[:acts_as_invited]
+      @acts_as = 'invited'
       @visit = @afisha.visits.new(user_id: current_user.id,
                                   invited_description: params[:invited_description],
                                   invited_gender: params[:invited_gender])
-      render partial: 'visits/invited'
-
+      render partial: 'invites/invited'
     elsif params[:acts_as_inviter]
+      @acts_as = 'inviter'
       @visit = @afisha.visits.new(user_id: current_user.id,
                                   inviter_description: params[:inviter_description],
                                   inviter_gender: params[:inviter_gender])
-      render partial: 'visits/inviter'
+      render partial: 'invites/inviter'
     end
   end
 
@@ -48,9 +49,11 @@ class VisitsController < ApplicationController
     @users = User.ordered.page(params[:page]).per(10)
     @visit = Visit.find(params[:id])
     if params[:acts_as_invited]
-      render partial: 'visits/invited'
+      @acts_as = 'invited'
+      render partial: 'invites/invited'
     elsif params[:acts_as_inviter]
-      render partial: 'visits/inviter'
+      @acts_as = 'inviter'
+      render partial: 'invites/inviter'
     end
   end
 

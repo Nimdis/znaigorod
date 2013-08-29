@@ -9,6 +9,14 @@ ru:
       many: "%{count} человек"
       zero: "Еще нет"
 
+  invite:
+    invited: Пригласи меня
+    inviter: Пригласить
+
+    sended:
+      invited: Запрос отправлен
+      inviter: Приглашен
+
   visit:
     invited:
       male: парня
