@@ -103,6 +103,10 @@ ru:
       work: Конкурсная работа
       post: Обзор
 
+  account_acts_as:
+    inviter: Приглашает
+    invited: Ждет приглашения
+
   account_genders:
     male: Парни
     female: Девушки

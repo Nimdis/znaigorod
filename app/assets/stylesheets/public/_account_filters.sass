@@ -2,6 +2,17 @@
 
   .filters.account
 
+    .by_acts_as
+      ul
+        +clearfix
+        li
+          float: right
+          margin-left: 5px
+          margin-bottom: 10px
+          +toggable-links
+          &:last-child
+            margin-left: 0
+
     .by_gender
       ul
         +clearfix

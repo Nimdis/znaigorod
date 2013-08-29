@@ -10,7 +10,9 @@ class Visit < ActiveRecord::Base
 
   validate :authenticated_user
 
-  scope :rendereable,      -> { where(:visitable_type => ['Afisha', 'Organization']) }
+  scope :rendereable,       -> { where(:visitable_type => ['Afisha', 'Organization']) }
+  scope :inviter,           -> { where('acts_as_inviter IS NOT NULL') }
+  scope :invited,           -> { where('acts_as_invited IS NOT NULL') }
 
   extend Enumerize
   enumerize :inviter_gender, in: [:all, :male, :female], default: :all, predicates: true

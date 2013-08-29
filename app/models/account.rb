@@ -44,10 +44,21 @@ class Account < ActiveRecord::Base
     float :rating,   :trie => true
     string :search_kind
     string(:kind, :multiple => true) { roles.map(&:role) }
+    string(:acts_as, :multiple => true) { self.acts_as }
   end
 
   def search_kind
     self.class.name.underscore
+  end
+
+  def acts_as
+    if self.visits.inviter.any? && self.visits.invited.any?
+      [:inviter, :invited] 
+    elsif self.visits.inviter.any?
+      :inviter
+    elsif self.visits.invited.any?
+      :invited
+    end
   end
 
   def title
