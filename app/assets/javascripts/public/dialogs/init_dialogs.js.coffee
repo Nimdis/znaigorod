@@ -13,6 +13,8 @@ add_tab_handler = (response, stored) ->
 
   $('.private_message .open_dialog').hide()
 
+  scroll($('ul.dialog', "#dialog_#{account_id}"))
+
 close_tab_handler = (stored) ->
   close_buttons = $('#messages_filter span.ui-icon-close:not(.charged)')
   close_buttons.each (index, item) ->
@@ -37,6 +39,10 @@ close_tab_handler = (stored) ->
       true
   true
 
+scroll = (target) ->
+  y_coord = Math.abs(target[0].scrollHeight)
+  target.animate({ scrollTop: y_coord }, 'fast')
+
 load_tabs_handler = (stored) ->
   stored.each (index) ->
     $("ul.dialogs a.dialog_#{index}").click()
@@ -46,6 +52,7 @@ $.fn.submit_form = (response) ->
 
   $('ul.dialog', "#dialog_#{account_id}").append(response)
   $('.private_message textarea').attr("value", "")
+  scroll($('ul.dialog', "#dialog_#{account_id}"))
 
 @init_dialogs = () ->
   stored = JSON.parse(window.localStorage.getItem('dialogs')) || []
