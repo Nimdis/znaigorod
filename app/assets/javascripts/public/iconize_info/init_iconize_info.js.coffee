@@ -1,46 +1,20 @@
 @init_iconize_info = () ->
-  block = $('.organization_info .iconize_info')
+  block = $('.organization_show .show_description_link')
   block.each (index, item) ->
-    block_item = $(item)
-    $('a', block_item).click (event) ->
-      if block_item.next('h1').length
-        title = block_item.next('h1').html()
-      else if block_item.next('span').text()
-        title = block_item.next('span').text()
-      else
-        title = $('h1', block_item.closest('tr')).text()
-
-      data = "<h1>#{title}</h1>"
-      if $(this).attr('data-link') == 'description_text'
-        box_width = '700px'
-        box_height = 'auto'
-        data += $('.description_text', block_item).html()
-
-      if $(this).attr('data-link') == 'service_text'
-        box_width = '500px'
-        box_height = 'auto'
-        data += $('.description_text', block_item).html()
-
-      if $(this).attr('data-link') == 'virtual_tour_link'
-        box_width = '790px'
-        box_height = '760px'
-        data += "
-          <div id='krpano'>
-            <noscript><center>ERROR: Javascript not activated</center></noscript>
-            <a href='#{$('.virtual_tour_link', block_item).text()}' class='virtual_tour_link'>#{$('.virtual_tour_link', block_item).text()}</a>
-          </div>
-          <div class='ad'>
-            <a href='http://tomsk.3dtour.me/' class='3dtourme' rel='nofollow' target='_blank'>
-              <img alt='Изготовление и размещение виртуальных туров' height='69' src='/assets/public/3dtour.png' width='740' />
-            </a>
-          </div>"
-      $.colorbox
-        height: box_height
-        html: data
-        opacity: 0.6
-        width: box_width
-        onComplete: () ->
-          init_swfkrpano()
+    $(this).click ->
+      title = $(this).siblings('.title').text() + '. Описание'
+      description = $(this).siblings('.description').html()
+      container = $('<div class="tags_wrapper" />').appendTo('body').hide().html(description)
+      container.dialog
+        width: 500
+        title: title
+        modal: true
+        resizable: false
+        close: ->
+          $(this).dialog('destroy')
+          $(this).remove()
           true
+
       false
+    true
   true

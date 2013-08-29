@@ -13,7 +13,7 @@ class CreationDecorator < SuborganizationDecorator
   end
 
   def htmlise_features_on_show
-    h.content_tag(:ul, features.map {|f| h.content_tag(:li, f)}.join("\n").html_safe, :class => 'features')
+    h.content_tag(:ul, features.map {|f| h.content_tag(:li, f)}.join("\n").html_safe, :class => 'features') if features.present?
   end
 
   def characteristics_on_list

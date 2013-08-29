@@ -37,6 +37,15 @@ class Service < ActiveRecord::Base
 
   enumerize :kind, in: [:visiting, :lesson, :washing], predicates: true
 
+  def humanize_age
+    content = ''
+    age.split(';').each do |period|
+      from, to = period.squish.gsub(/\s+/, '').split('-')
+      content << "от #{from} до #{I18n.t('service.age', :count => to.to_f).gsub('.0', '')}, "
+    end
+    content.squish.gsub(/,$/, '')
+  end
+
   private
 
   def set_min_value

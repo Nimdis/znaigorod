@@ -13,6 +13,7 @@
 
             <td class='name'>
               <div class='title'><%= service.title %></div>
+              <%= content_tag :div, "(#{service.prices.first})", :class => :service_price_info if service.prices.first.present? && service.prices.first.count? %>
               <% if service.description? %>
                 <div class='service_description'>
                   <%= simple_format service.description.text_gilensize %>
@@ -46,7 +47,6 @@
                     <%= price.price_value %>
                     <span class='small'>руб.</span>
                   </div>
-                  <%= content_tag :div, price, :class => :service_price_info if price.count? %>
                 <% end %>
               <% end %>
             </td>

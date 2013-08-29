@@ -15,11 +15,10 @@
   <% end %>
 
   <div class='services'>
-    <% salon_center.services.group_by(&:category).each do |category, services| %>
-      <div class='service_header'>
-        <h2><%= category %></h2>
-        <%= render :partial => 'organizations/services', :locals => { :services => services } %>
-      </div>
+    <% grouped_services = salon_center.services.group_by(&:category) %>
+    <% grouped_services.each do |category, services| %>
+      <%= content_tag(:div, content_tag(:h2, category), :class => :service_header) if grouped_services.count > 1 %>
+      <%= render :partial => 'salon_centers/services', :locals => { :services => services } %>
     <% end %>
   </div>
 

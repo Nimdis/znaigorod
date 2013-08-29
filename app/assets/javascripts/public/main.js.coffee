@@ -34,7 +34,7 @@ $ ->
   init_more_main_menu() if $('.filters .by_categories .more_link').length
   init_sauna_advanced_filter() if $('.filters_wrapper .advanced_filters_toggler').length
   init_sauna_halls_scroll() if $('.organizations_list .sauna_halls').length
-  init_iconize_info() if $('.organization_info .iconize_info li').length
+  init_iconize_info() if $('.organization_show .show_description_link').length
   init_virtual_tour_link() if $('.organization_show .virtual_tour_link').length
   init_post_photos() if $('.post a[rel="colorbox"]').length
   init_schedule_toggle() if $('.organization_show .show_more_schedule').length

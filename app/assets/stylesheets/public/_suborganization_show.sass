@@ -245,67 +245,148 @@
         &:nth-child(4n+1)
           clear: none
 
-      .services .info
+    &.car_wash,
+    &.sport,
+    &.salon_center
 
-        .head
-          +clearfix
+      .services
 
-          h3
-            color: #f60
-            +inline-block
-            margin-right: 10px
+        .info
 
-          a
-            +inline-block
+          .head
+            +clearfix
 
-            &:after
-              display: block
-              float: right
-              margin-left: 3px
+            h3
+              color: #f60
+              +inline-block
+              margin-right: 10px
 
-            &.closed:after
-              content: '\25BE'
+            a
+              +inline-block
 
-            &.opened:after
-              content: '\25B4'
+              &:after
+                display: block
+                float: right
+                margin-left: 3px
 
-        .details
-          display: none
-          position: relative
+              &.closed:after
+                content: '\25BE'
 
-          table
-            width: 100%
-            margin: 10px 0
+              &.opened:after
+                content: '\25B4'
 
-            td
-              vertical-align: top
-              border: 1px solid #ccc
-              padding: 5px 8px
+          .details
+            display: none
+            position: relative
 
-              &.name
-                width: 40%
+            table
+              width: 100%
+              margin: 10px 0
 
-                .service_description
+              td
+                vertical-align: top
+                border: 1px solid #ccc
+                padding: 5px 8px
+
+                &.name
+                  width: 40%
+
+                  .service_description
+                    font-size: 11px
+                    color: #999
+
+                &.price
+                  color: #f60
+                  width: 60%
+
+                span.small
                   font-size: 11px
-                  color: #999
 
-              &.price
-                color: #f60
-                width: 60%
+                ul
+                  +clearfix
 
-              span.small
-                font-size: 11px
+                  li
+                    width: percentage(1/4)
+                    float: left
 
-              ul
-                +clearfix
+                    abbr
+                      cursor: help
+                      border-bottom: 1px dashed
 
-                li
-                  width: percentage(1/4)
-                  float: left
+                      &:hover
+                        border: none
+    &.salon_center
+      .service_header
+        +clearfix
+        background-color: #e8e8e8
+        margin: 10px 0
 
-                  abbr
-                    cursor: help
-                    border-bottom: 1px dashed
+        h2
+          +inline-block
+          font-size: 14px
+          color: #fff
+          position: relative
+          background-color: #009bdb
+          padding: 2px 10px
 
-                    &:hover
-                      border: none
+          &:after
+            left: 100%
+            border: solid transparent
+            content: ' '
+            height: 0
+            width: 0
+            position: absolute
+            pointer-events: none
+            border-color: rgba(0, 155, 219, 0)
+            border-left-color: #009bdb
+            border-width: 13px
+            top: 50%
+            margin-top: -13px
+
+      .services
+        .info
+          .details
+            table
+              td
+
+                &.name
+
+                  .title
+                    +inline-block
+
+                  .service_price_info
+                    +inline-block
+
+    .services_table
+      width: 100%
+      margin: 10px 0
+
+      td
+        vertical-align: top
+        border: 1px solid #ccc
+        padding: 5px 8px
+
+        &.name
+          width: 20%
+          color: #f60
+
+        &.details
+          width: 80%
+
+          .title
+            +inline-block
+
+          .age
+            color: #999
+            +inline-block
+
+          .show_description_link
+            +inline-block
+            +clearfix
+            width: 14px
+            height: 14px
+            text-indent: -9999em
+            background: transparent image_url('public/icon_question.png') no-repeat center center
+
+          .description
+            display: none

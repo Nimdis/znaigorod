@@ -85,3 +85,11 @@
       few: "%{count} посетителя"
       many: "%{count} посетителей"
       zero: "Здесь никто не отметился, станьте первым."
+
+  service:
+    age:
+      zero: "%{count} лет"
+      one: "%{count} года"
+      few: "%{count} лет"
+      many: "%{count} лет"
+      other: "%{count} лет"

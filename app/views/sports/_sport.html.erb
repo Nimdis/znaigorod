@@ -14,45 +14,34 @@
     </div>
   <% end %>
 
-  <% if sport.services.first.offer? %>
-    <div class='services'>
+  <div class='services'>
+    <% if sport.services.first.offer? %>
       <% sport.services.group_by(&:category).each do |category, services| %>
-        <div class='service_header'>
-          <h2><%= category %></h2>
-          <%= render :partial => 'organizations/services', :locals => { :services => services } %>
-        </div>
+        <%= render :partial => 'sports/services', :locals => { :services => services } %>
       <% end %>
-    </div>
-  <% elsif sport.services.any? %>
-    <div class='services_tables'>
-      <% sport.grouped_decorated_services.each do |kind, services| %>
-        <ul class='services_table'>
-          <li>
-            <h2><%= kind %></h2>
-            <div class='services'>
+    <% elsif sport.services.any? %>
+      <table class='services_table'>
+        <% sport.grouped_decorated_services.each do |kind, services| %>
+          <tr>
+            <td class='name'><%= kind %></td>
+            <td class='details'>
               <% services.each do |service| %>
-                <div class='services_details'>
-                  <div class='service_title'>
-                    <div class='title'><%= service.title %></div>
-                    <% if service.description? %>
-                      <ul class='iconize_info'>
-                        <li>
-                          <a href='#' class='description_icon' data-link='service_text' title='информация'>информация</a>
-                          <div class='description_text'>
-                            <p><%= service.description %></p>
-                          </div>
-                        </li>
-                      </ul>
-                    <% end %>
-                  </div>
-                  <div class='ages'><%= service.age %></div>
+                <div class='detail'>
+                  <div class='title'><%= service.title.text_gilensize %></div>
+                  <div class='age'>(<%= service.humanize_age %>)</div>
+                  <% if service.description? %>
+                    <%= link_to 'информация', '#', :class => :show_description_link %>
+                    <div class='description'>
+                      <%= service.description.as_html %>
+                    </div>
+                  <% end %>
                 </div>
               <% end %>
-            </div>
-          </li>
-        </ul>
-      <% end %>
-    </div>
-  <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
 
 </div>
