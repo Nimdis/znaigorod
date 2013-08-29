@@ -7,7 +7,7 @@ class ApplicationDecorator < Draper::Base
     return "бесплатно".hyphenate if price_min == 0 && (price_max.nil? || price_max == 0)
     return "#{price_min} руб.".hyphenate if price_max == price_min && price_min > 0
     return "от #{price_min} руб.".hyphenate if price_min && (price_max.nil? || price_max == 0) && price_min > 0
-    return "#{price_min} &ndash; #{price_max} руб.".hyphenate.html_safe if price_min && price_max && price_min > 0 && price_max > 0
+    return "#{price_min}&ndash;#{price_max} руб.".hyphenate.html_safe if price_min && price_max && price_min > 0 && price_max > 0
     return "от 0 до #{price_max} руб.".hyphenate.html_safe if price_min == 0 && price_max > 0
     return "до #{price_max} руб.".hyphenate.html_safe if price_min.nil? && price_max
   end

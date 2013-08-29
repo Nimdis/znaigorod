@@ -19,7 +19,13 @@
       <div class='sauna_hall_header'>
 
         <div class='left'>
-          <div class='title'><%= sauna_hall.title %></div>
+          <div class='title'>
+            <% if sauna_hall.title.length > 20 %>
+              <%= content_tag :span, truncate(sauna_hall.title, :length => 20), :title => sauna_hall.title %>
+            <% else %>
+              <%= sauna_hall.title %>
+            <% end %>
+          </div>
           <%= sauna_hall.price %>,
           <div class='capacity'><%= sauna_hall.sauna_hall_capacity.default %> чел.</div>
           <%= sauna_hall.schedule %>
@@ -27,12 +33,7 @@
 
         <div class='right'>
           <%= sauna_hall.htmlise_capacity_on_show %>
-          <% if sauna_hall.virtual_tour.link? %>
-            <%= link_to '3D-тур', '#', :class => 'tour_icon', 'data-link' => 'virtual_tour_link', :title => '3D-тур'  %>
-            <div class='virtual_tour_link'>
-              <%= sauna_hall.virtual_tour_link %>
-            </div>
-          <% end %>
+          <%= link_to '3D-тур', '#', :class => 'virtual_tour_link', 'data-link' => sauna_hall.virtual_tour_link, :title => '3D-тур' if sauna_hall.virtual_tour.link? %>
         </div>
 
       </div>

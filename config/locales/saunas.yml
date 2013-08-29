@@ -134,10 +134,10 @@ ru:
         other: "%{count} человека"
       maximal:
         zero: "Максимум ???"
-        one: "Максимум %{count} человек"
-        few: "Максимум %{count} человека"
-        many: "Максимум %{count} человек"
-        other: "Максимум %{count} человека"
+        one: "Максимум %{count} чел"
+        few: "Максимум %{count} чел"
+        many: "Максимум %{count} чел"
+        other: "Максимум %{count} чел"
       extra_guest_cost:
         zero: "Дополнительный человек - 0"
         one: "Дополнительный человек - %{count} руб."

@@ -9,7 +9,7 @@
   <% if sport.has_photogallery? %>
     <div class='photogallery'>
       <ul>
-        <%= render sport.gallery_images, :rel => "sport_gallery_#{sport_id}" %>
+        <%= render sport.gallery_images, :rel => "sport_gallery_#{sport.id}" %>
       </ul>
     </div>
   <% end %>
