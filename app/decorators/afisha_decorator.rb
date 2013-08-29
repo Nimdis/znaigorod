@@ -125,7 +125,7 @@ class AfishaDecorator < ApplicationDecorator
     desc << ". "
     desc << html_description
     desc = desc.without_table.gsub(/<\/?\w+.*?>/m, '').gsub(' ,', ',').squish.html_safe
-    image = resized_image_url(poster_url, 180, 242, false)
+    image = h.resized_image_url(poster_url, 180, 242)
     res = ""
     res << "<meta property='og:description' content='#{desc.truncate(350, :separator => ' ').html_safe}'/>\n"
     res << "<meta property='og:site_name' content='#{I18n.t('meta.default.title')}' />\n"
