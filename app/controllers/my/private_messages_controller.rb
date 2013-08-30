@@ -27,7 +27,7 @@ class My::PrivateMessagesController < My::ApplicationController
   protected
 
   def begin_of_association_chain
-    authorize! current_user, PrivateMessage.new
+    authorize! current_user, PrivateMessage.new(producer: current_user.try(:account))
     current_user.account
   end
 

@@ -6,8 +6,22 @@ class Ability
   def initialize(user, namespace=nil)
     user ||= User.new
 
+    can :index, [Visit, Friend]
+
     can :manage, :all     if user.is_admin?
     can :manage, :crm     if user.is_admin? || user.is_sales_manager?
+
+    can :manage, Visit do |visit|
+      visit.user == user
+    end
+
+    can :manage, Friend do |friend|
+      friend.account == user.account
+    end
+
+    can :manage, PrivateMessage do |private_message|
+      private_message.producer == user.account
+    end
 
     case namespace
     when 'manage'

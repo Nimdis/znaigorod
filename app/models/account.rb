@@ -47,6 +47,13 @@ class Account < ActiveRecord::Base
     string(:acts_as, :multiple => true) { self.acts_as }
   end
 
+  def sended_message(messageable, account_id, invite)
+    self.produced_messages.where(messageable_id: messageable.id,
+                                 messageable_type: messageable.class.name,
+                                 account_id: account_id,
+                                 invite_kind: invite).any?
+  end 
+
   def search_kind
     self.class.name.underscore
   end
