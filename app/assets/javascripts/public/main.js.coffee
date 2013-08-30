@@ -16,8 +16,8 @@ $ ->
   init_show_tipsy() if $('.show_tipsy') && $.fn.tipsy
 
   init_main_page() if $('.main_page_affiche').length
-  init_afisha_extend() if $('.content .affiche .photogallery')
-  init_afisha_extend() if $('.content .affiche .trailer')
+  init_afisha_extend() if $('.content .photogallery')
+  init_afisha_extend() if $('.content .trailer')
   init_afisha_filter() if $('.filters .by_date .daily').length
   init_afisha_social_actions() if $('.afisha_show').length
   init_payment() if $('a.payment_link').length
