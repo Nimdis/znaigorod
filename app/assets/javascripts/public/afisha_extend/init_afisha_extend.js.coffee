@@ -1,11 +1,11 @@
 @init_afisha_extend = () ->
   if window.location.hash == '#photogallery' && $.fn.scrollTo
     setTimeout ->
-      $.scrollTo($('.content .photogallery'), 500, { offset: {top: -50} })
+      $.scrollTo($('.afisha_show .photogallery'), 500, { offset: {top: -50} })
     , 300
   if window.location.hash == '#trailer' && $.fn.scrollTo
     setTimeout ->
-      $.scrollTo($('.content .trailer'), 500, { offset: {top: -60} })
+      $.scrollTo($('.afisha_show .trailer'), 500, { offset: {top: -60} })
     , 300
   true
 

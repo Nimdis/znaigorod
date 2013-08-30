@@ -16,8 +16,8 @@ $ ->
   init_show_tipsy() if $('.show_tipsy') && $.fn.tipsy
 
   init_main_page() if $('.main_page_affiche').length
-  init_afisha_extend() if $('.content .photogallery')
-  init_afisha_extend() if $('.content .trailer')
+  init_afisha_extend() if $('.afisha_show .photogallery')
+  init_afisha_extend() if $('.afisha_show .trailer')
   init_afisha_filter() if $('.filters .by_date .daily').length
   init_afisha_social_actions() if $('.afisha_show').length
   init_payment() if $('a.payment_link').length
@@ -30,7 +30,7 @@ $ ->
   init_filters_toggler() if $('.need_toggler li').length
   init_filter_handler() if $('.filters_wrapper').length
   init_contest() if $('.content_wrapper .contest').length
-  init_organization_info() if $('.organization_info .info .description').length
+  init_organization_social_actions() if $('.organization_show').length
   init_introduction() if $('.content .introduction').length
   init_more_main_menu() if $('.filters .by_categories .more_link').length
   init_sauna_advanced_filter() if $('.filters_wrapper .advanced_filters_toggler').length
