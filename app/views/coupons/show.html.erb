@@ -93,9 +93,6 @@
         <div class='organization_image'>
           <%= link_to resized_image_url(organization.logotype_url, 120, 160), organization_path(organization) if organization.logotype_url? %>
         </div>
-        <div class="rating like_a_line">
-          <%= render :partial => 'user_ratings/current_rating', :locals => { :parent_obj => organization } %>
-        </div>
         <div class='organization_info'>
           <%= content_tag(:div, organization.address_link, class: :place) if organization.address_link.present? %>
           <div class='schedule'>

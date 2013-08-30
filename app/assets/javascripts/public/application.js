@@ -21,7 +21,6 @@
  * = require crop
  * = require ajax_delete
  * = require ./auth
- * = require ./rating
  * = require ./md5
  * = require ./twitter
  * = require ./vk

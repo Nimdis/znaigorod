@@ -12,17 +12,11 @@ save_comment = () ->
     else
       window.localStorage.setItem('comment_id', 'new_comment')
 
-save_rating = () ->
-  unless (typeof(window.localStorage) == 'undefined')
-    window.localStorage.clear()
-    window.localStorage.setItem('rating', $('.user_rating .star_wrapper div.selected').attr('class').match(/star_\d/)[0])
-
 @init_auth = () ->
   $('.auth_links a').not('.charged').addClass('charged').on 'click', (evt) ->
     target = $(evt.target)
 
     save_comment() if target.parent().parent().parent().hasClass('comment_form')
-    save_rating() if target.closest('form').prev('.star_wrapper').length
 
     draw_popup(target.attr('href'), 700, 400, 'Авторизация')
 

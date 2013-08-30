@@ -68,7 +68,6 @@ $ ->
 $(window).load ->
   init_comments() if $('.comments').length
   init_auth() if ('.auth_links').length
-  init_rating() if ('.rating').length
   init_votes() if $('.votes_wrapper').length
   init_votes() if $('.user_actions').length
 
