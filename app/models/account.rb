@@ -74,22 +74,29 @@ class Account < ActiveRecord::Base
 
   def get_vkontakte_friends(user)
     vk_client = VkontakteApi::Client.new
-    uids = vk_client.friends.get(user_id: user.uid)
 
-    uids.each do |uid|
-      if User.vkontakte.where(uid: uid.to_s).any?
-        self.friends.create(friendable: get_account(uid.to_s), friendly: true) unless self.friends_with?(get_account(uid.to_s))
+    begin
+      uids = vk_client.friends.get(user_id: user.uid)
+
+      uids.each do |uid|
+        if User.vkontakte.where(uid: uid.to_s).any?
+          self.friends.create(friendable: get_account(uid.to_s), friendly: true) unless self.friends_with?(get_account(uid.to_s))
+        end
       end
+    rescue VkontakteApi::Error => e
     end
   end
 
   def get_facebook_friends(user)
     fb_client = Koala::Facebook::API.new(user.token)
-    friends = fb_client.get_connections(user.uid, "friends")
-    friends.each do |friend|
-      if User.facebook.where(uid: friend['id']).any?
-        self.friends.create(friendable: get_account(friend['id']), friendly: true) unless self.friends_with?(get_account(friend['id']))
+    begin
+      friends = fb_client.get_connections(user.uid, "friends")
+      friends.each do |friend|
+        if User.facebook.where(uid: friend['id']).any?
+          self.friends.create(friendable: get_account(friend['id']), friendly: true) unless self.friends_with?(get_account(friend['id']))
+        end
       end
+    rescue
     end
   end
 
