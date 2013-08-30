@@ -1,40 +1,29 @@
 class FriendsController < ApplicationController
   inherit_resources
-  authorize_resource
+  load_and_authorize_resource
 
   actions :index
-  custom_actions collection: [:change_friendship, :buddies]
+  custom_actions resource: :change_friendship
 
   belongs_to :account, :polymorphic => true
   has_scope :page, :default => 1
 
   def index
-    index!{
-      @presenter = AccountPresenter.new(params)
-      render partial: 'accounts/account_posters', locals: { collection: @accounts }, layout: false and return if request.xhr?
-    }
-  end
-
-  def buddies
-    buddies!{
-      render partial: 'friends/account_friends', locals: { collection: @accounts.page(params[:page]).per(5) }, layout: false and return
+    index! {
+      render partial: 'friends/account_friends', locals: { collection: @accounts }, layout: false and return
     }
   end
 
   def change_friendship
-    change_friendship!{
-      if current_user
-        @friend = current_user.account.friendly_for(parent).first || current_user.account.friends.create(friendable: parent)
-        @friend.change_friendship
-      end
-
-      render :partial => 'friendship', :locals => { friend: @friend } and return
-    }
+    raise CanCan::AccessDenied unless current_user
+    @friend = current_user.account.friendly_for(parent).first || current_user.account.friends.create(friendable: parent)
+    @friend.change_friendship
+    render :partial => 'friendship' and return
   end
 
   private
 
   def collection
-    @accounts = Kaminari.paginate_array(current_user.account.friends.approved.map(&:friendable)).page(params[:page]).per(18)
+    @accounts = Kaminari.paginate_array(@account.friends.approved.map(&:friendable)).page(params[:page]).per(5)
   end
 end
