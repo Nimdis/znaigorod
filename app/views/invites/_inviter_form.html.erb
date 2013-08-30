@@ -1,4 +1,4 @@
-<%= simple_form_for [@afisha, @visit], html: { remote: true } do |f| %>
+<%= simple_form_for [parent, @visit], html: { remote: true } do |f| %>
   <h2>Хочу пригласить</h2>
   <%= f.input :inviter_gender, as: :radio_buttons, label: false %>
   <%= f.input :inviter_description, input_html: { placeholder: 'Здесь вы можете указать дополнительную информацию'}, autofocus: true, label: false %>
@@ -7,7 +7,7 @@
 <% end %>
 
 <% if @visit.acts_as_inviter %>
-  <%= simple_form_for [@afisha, @visit] do |sf| %>
+  <%= simple_form_for [parent, @visit] do |sf| %>
     <%= sf.input :inviter_description, as: :hidden, input_html: { value: nil } %>
     <%= sf.input :inviter_gender, as: :hidden, input_html: { value: nil } %>
     <%= sf.input :acts_as_inviter, as: :hidden, input_html: { value: nil } %>

@@ -15,6 +15,7 @@
     <%= visit.visitable.kind.map(&:text).join(', ') %>
   </div>
   <div class="wanted">
-    <%= render partial: 'visits/invite_links', locals: { visit: visit } if (current_user.nil? ||  current_user != visit.user) && (visit.acts_as_inviter? || visit.acts_as_invited?) %>
+    <%= render partial: 'visits/invite_links',
+      locals: { visit: visit } if (current_user.nil? ||  current_user != visit.user) && (visit.acts_as_inviter? || visit.acts_as_invited?) %>
   </div>
 </div>

@@ -1,10 +1,10 @@
-<% if current_user.account.produced_messages.where(messageable_id: @afisha.id,
-                                                  messageable_type: @afisha.class.name,
+<% if current_user.account.produced_messages.where(messageable_id: parent.id,
+                                                  messageable_type: parent.class.name,
                                                   account_id: user.account.id,
                                                   invite_kind: @acts_as).any? %>
   <span class="sended"><%= I18n.t("invite.sended.#{@acts_as}") %></span>
 <% else %>
   <%= link_to t("invite.#{@acts_as}"), new_my_private_message_path(account_id: user.account.id,
-                                                        afisha_id: @afisha.id,
+                                                        afisha_id: parent.id,
                                                         acts_as: @acts_as), class: @acts_as %>
 <% end %>

@@ -9,7 +9,7 @@
     </li>
   <% else %>
     <li>
-    <%= link_to t('afisha.join'), afisha_visits_path(visitable), :method => :post, :remote => true, class: 'change_visit' %>
+    <%= link_to t('afisha.join'), send("#{visitable.class.name.underscore}_visits_path", visitable), :method => :post, :remote => true, class: 'change_visit' %>
     </li>
   <% end %>
   <%= render partial: 'visits/acts_visit', locals: { visitable: visitable, acts_as: [:acts_as_inviter, :acts_as_invited] } %>

@@ -60,7 +60,7 @@ Znaigorod::Application.routes.draw do
     get 'liked' => 'votes#liked', :as => :liked
 
     resources :comments, :only => [:new, :create, :show]
-    resources :visits, :only => [:new, :create, :show, :update]
+    resources :visits, :only => [:new, :create, :show, :update, :destroy, :edit]
 
     resources :user_ratings, :only => [:new, :create, :edit, :update, :show]
   end
