@@ -16,7 +16,7 @@
 </ul>
 
 <div class='visits_counter'>
-  <div class='floatl'>Участники</div>
+  <%= content_tag :div, I18n.t("visit.#{visitable.class.name.underscore}"), class: :floatl %>
   <div class='floatr'><%= t('afisha.visitors', :count => visitable.visits.map(&:user).compact.count) %></div>
 </div>
 
