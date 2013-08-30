@@ -24,14 +24,13 @@
         left: target.position().left + target.outerWidth(true, true) + 9
         top: target.position().top + target.outerHeight(true, true) / 2 - block.outerHeight(true, true) / 2
 
+      init_auth()
+
       return false
 
     if target.hasClass('change_visit')
       target = $(evt.target).closest('.social_actions')
-      target.html(jqXHR.responseText)
-
-      init_auth()
-      cloud_handler()
+      target.html(response)
 
     if target.hasClass('acts_as_inviter')
       container = $('<div class="inviter_form_wrapper" />').appendTo('body').hide().html(response)
