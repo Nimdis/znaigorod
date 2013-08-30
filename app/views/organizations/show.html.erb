@@ -39,7 +39,7 @@
         </div>
       <% end %>
 
-      <% if @organization.address.latitude && @organization.address.longitude %>
+      <% if @organization.address && @organization.address.latitude && @organization.address.longitude %>
         <div class='yandex_map'>
           <div class='map'
             data-latitude='<%= @organization.address.latitude %>'
