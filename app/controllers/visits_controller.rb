@@ -18,21 +18,17 @@ class VisitsController < ApplicationController
   end
 
   def new
-    @afisha = Afisha.find(params[:afisha_id])
-    @users = User.ordered.page(params[:page]).per(5)
-    if params[:acts_as_invited]
-      @acts_as = 'invited'
-      @visit = @afisha.visits.new(user_id: current_user.id,
-                                  invited_description: params[:invited_description],
-                                  invited_gender: params[:invited_gender])
-      render partial: 'invites/invited'
-    elsif params[:acts_as_inviter]
-      @acts_as = 'inviter'
-      @visit = @afisha.visits.new(user_id: current_user.id,
-                                  inviter_description: params[:inviter_description],
-                                  inviter_gender: params[:inviter_gender])
-      render partial: 'invites/inviter'
-    end
+    new! {
+      @users = User.ordered.page(params[:page]).per(5)
+      @visit.user_id = current_user.id
+      if params[:acts_as_invited]
+        @acts_as = 'invited'
+        render partial: 'invites/invited' and return
+      elsif params[:acts_as_inviter]
+        @acts_as = 'inviter'
+        render partial: 'invites/inviter' and return
+      end
+    }
   end
 
   def create
@@ -46,16 +42,16 @@ class VisitsController < ApplicationController
   end
 
   def edit
-    @afisha = Afisha.find(params[:afisha_id])
-    @users = User.ordered.page(params[:page]).per(5)
-    @visit = Visit.find(params[:id])
-    if params[:acts_as_invited]
-      @acts_as = 'invited'
-      render partial: 'invites/invited'
-    elsif params[:acts_as_inviter]
-      @acts_as = 'inviter'
-      render partial: 'invites/inviter'
-    end
+    edit! {
+      @users = User.ordered.page(params[:page]).per(5)
+      if params[:acts_as_invited]
+        @acts_as = 'invited'
+        render partial: 'invites/invited' and return
+      elsif params[:acts_as_inviter]
+        @acts_as = 'inviter'
+        render partial: 'invites/inviter' and return
+      end
+    }
   end
 
   def update
