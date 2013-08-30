@@ -1,12 +1,11 @@
 class AccountPresenter
+  attr_accessor :gender_filter, :kind_filter, :acts_as_filter
 
   def initialize(params)
     @kind_filter = AccountKindFilter.new(params['kind'])
     @gender_filter = AccountGenderFilter.new(params['gender'])
     @acts_as_filter = AccountActsAsFilter.new(params['acts_as'])
-    @page = params['page']
-    @page ||= 1
-    @per_page = 18
+    @page = params['page'] || 1
   end
 
   def kinds_links
@@ -16,7 +15,8 @@ class AccountPresenter
           title: I18n.t("account_kinds.#{kind}"),
           klass: kind,
           parameters: {
-            kind: kind
+            kind: kind,
+            gender: @gender_filter.gender
           },
           current: kind == @kind_filter.kind,
           count: AccountCounter.new(self, kind).count
@@ -32,7 +32,8 @@ class AccountPresenter
           title: I18n.t("account_genders.#{gender}"),
           klass: gender,
           parameters: {
-            gender: gender
+            gender: gender == 'all' ? nil : gender,
+            kind: kind_filter.kind
           },
           current: gender == @gender_filter.gender,
         }
@@ -47,12 +48,26 @@ class AccountPresenter
           title: I18n.t("account_acts_as.#{acts_as}"),
           klass: acts_as,
           parameters: {
-            acts_as: acts_as
+            kind: @kind_filter.kind,
+            gender: @gender_filter.gender,
+            acts_as: acts_as == @acts_as_filter.acts_as ? nil : acts_as,
           },
           current: acts_as == @acts_as_filter.acts_as,
         }
       end
     }
+  end
+
+  def searcher_params(kind = kind_filter.kind)
+    @searcher_params ||= {}.tap do |searcher_params|
+      searcher_params[:kind] = kind if kind != 'all'
+      searcher_params[:gender] = gender_filter.gender if gender_filter.used?
+      searcher_params[:acts_as] = acts_as_filter if acts_as_filter.used?
+    end
+  end
+
+  def collection
+    HasSearcher.searcher(:accounts, searcher_params).paginate(:page => @page, :per_page => 18)
   end
 end
 
@@ -76,6 +91,10 @@ class AccountKindFilter
     available_kind_values.include?(@kind) ? @kind : 'all'
   end
 
+  def used?
+    kind != 'all'
+  end
+
   available_kind_values.each do |kind|
     define_method "search_#{kind}?" do
       kind == kind
@@ -92,7 +111,7 @@ class AccountGenderFilter
   end
 
   def self.available_gender_values
-    %w[female male]
+    %w[all female male]
   end
 
   def available_gender_values
@@ -101,6 +120,10 @@ class AccountGenderFilter
 
   def gender
     available_gender_values.include?(@gender) ? @gender : 'all'
+  end
+
+  def used?
+    gender != 'all'
   end
 
   available_gender_values.each do |gender|
@@ -130,6 +153,10 @@ class AccountActsAsFilter
     available_acts_as_values.include?(@acts_as) ? @acts_as : 'all'
   end
 
+  def used?
+    acts_as != 'all'
+  end
+
   available_acts_as_values.each do |acts_as|
     define_method "search_#{acts_as}?" do
       acts_as == acts_as
@@ -147,6 +174,6 @@ class AccountCounter
   end
 
   def count
-    HasSearcher.searcher(:accounts, kind: kind).total
+    HasSearcher.searcher(:accounts, presenter.searcher_params(@kind)).total
   end
 end

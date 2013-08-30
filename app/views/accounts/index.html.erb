@@ -1,7 +1,7 @@
 <div class="accounts_list">
   <ul class="posters">
-    <%= render :partial => 'accounts/account_posters', :locals => { collection: collection } %>
+    <%= render :partial => 'accounts/account_posters', :locals => { collection: @presenter.collection } %>
   </ul>
 </div>
 
-<%= paginate collection %>
+<%= paginate @presenter.collection %>

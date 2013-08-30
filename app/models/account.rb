@@ -43,7 +43,7 @@ class Account < ActiveRecord::Base
     string :gender
     float :rating,   :trie => true
     string :search_kind
-    string(:kind, :multiple => true) { roles.map(&:role) }
+    string(:kind, :multiple => true) { indexing_kinds }
     string(:acts_as, :multiple => true) { self.acts_as }
   end
 
@@ -52,7 +52,13 @@ class Account < ActiveRecord::Base
                                  messageable_type: messageable.class.name,
                                  account_id: account_id,
                                  invite_kind: invite).any?
-  end 
+  end
+
+  def indexing_kinds
+    array = roles.map(&:role)
+    array << 'afisha_editor' if afisha.published.any?
+    array
+  end
 
   def search_kind
     self.class.name.underscore
@@ -60,7 +66,7 @@ class Account < ActiveRecord::Base
 
   def acts_as
     if self.visits.inviter.any? && self.visits.invited.any?
-      [:inviter, :invited] 
+      [:inviter, :invited]
     elsif self.visits.inviter.any?
       :inviter
     elsif self.visits.invited.any?

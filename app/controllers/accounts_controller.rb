@@ -22,14 +22,4 @@ class AccountsController < ApplicationController
       @visits = @account.visits.rendereable.page(1).per(3)
     }
   end
-
-  private
-
-  def collection
-    HasSearcher.searcher(:accounts, params).paginate(:page => params[:page], :per_page => per_page)
-  end
-
-  def per_page
-    18
-  end
 end
