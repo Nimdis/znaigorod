@@ -15,18 +15,14 @@
   <%= render partial: 'visits/acts_visit', locals: { visitable: visitable, acts_as: [:acts_as_inviter, :acts_as_invited] } %>
 </ul>
 
-<% if @visit && @visit.errors.any? %>
-  <%= render :partial => 'commons/social_auth' %>
-<% end %>
-
 <div class='visits_counter'>
   <div class='floatl'>Участники</div>
-  <div class='floatr'><%= t('afisha.visitors', :count => visitable.visits.count) %></div>
+  <div class='floatr'><%= t('afisha.visitors', :count => visitable.visits.map(&:user).compact.count) %></div>
 </div>
 
 <% if visitable.visits.any? %>
   <ul class='avatars'>
-    <% visitable.visits.map(&:user).each do |user| %>
+    <% visitable.visits.map(&:user).compact.each do |user| %>
       <li>
         <div class='avatar'>
           <%= link_to user.account do %>
