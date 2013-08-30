@@ -1,5 +1,6 @@
 class VisitsController < ApplicationController
   inherit_resources
+  authorize_resource
 
   actions :all
 

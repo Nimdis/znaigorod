@@ -21,7 +21,7 @@ class Visit < ActiveRecord::Base
   private
 
   def authenticated_user
-    #errors.add :visited, 'Вы не зарегистрированы' if user.nil?
+    errors.add :user_id, 'Вы не зарегистрированы' if user.nil?
   end
 end
 

@@ -1,5 +1,6 @@
 class FriendsController < ApplicationController
   inherit_resources
+  authorize_resource
 
   actions :index
   custom_actions collection: [:change_friendship, :buddies]

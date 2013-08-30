@@ -6,7 +6,7 @@
    <% end %>
   </div>
 <% end %>
-<% if current_user.account.produced_messages.where(messageable_id: visit.visitable.id,
+<% if current_user && current_user.account.produced_messages.where(messageable_id: visit.visitable.id,
                                                   messageable_type: visit.visitable.class.name,
                                                   account_id: visit.user.account.id,
                                                   invite_kind: :inviter).any? %>
@@ -14,7 +14,7 @@
 <% else %>
   <%= link_to 'Пригласить', new_my_private_message_path(account_id: visit.user.account.id,
                                                         afisha_id: visit.visitable.id,
-                                                        acts_as: :inviter), class: 'invite' %>
+                                                        acts_as: :inviter), remote: true, class: 'invite' %>
 <% end %>
 
 <% if !visit.inviter_gender.all? && visit.acts_as_inviter?  %>
@@ -25,7 +25,7 @@
     <% end %>
   </div>
 <% end %>
-<% if current_user.account.produced_messages.where(messageable_id: visit.visitable.id,
+<% if current_user && current_user.account.produced_messages.where(messageable_id: visit.visitable.id,
                                                   messageable_type: visit.visitable.class.name,
                                                   account_id: visit.user.account.id,
                                                   invite_kind: :invited).any? %>
@@ -33,6 +33,6 @@
 <% else %>
   <%= link_to 'Пригласи меня', new_my_private_message_path(account_id: visit.user.account.id,
                                                            afisha_id: visit.visitable.id,
-                                                           acts_as: :invited), class: 'invite' %>
+                                                           acts_as: :invited), remote: true, class: 'invite' %>
 <% end %>
 

@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
 
   layout :resolve_layout
 
+  rescue_from CanCan::AccessDenied do |exception|
+    render :partial => 'commons/social_auth', layout: false and return unless current_user
+    redirect_to :back, :notice => "У вас не хватает прав для выполнения этого действия"
+  end
+
   private
 
   def resolve_layout
