@@ -8,7 +8,6 @@ namespace :afisha do
   task :event_users => :environment do
     puts 'Get users for afisha`s vkontakte event'
     afishas = Afisha.with_event_url
-    users = User.all
     vk_client = VkontakteApi::Client.new(User.find(9).token)
     bar = ProgressBar.new(afishas.count)
     afishas.each do |afisha|
