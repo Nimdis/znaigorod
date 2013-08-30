@@ -18,7 +18,7 @@ class VisitsController < ApplicationController
 
   def new
     @afisha = Afisha.find(params[:afisha_id])
-    @users = User.ordered.page(params[:page]).per(10)
+    @users = User.ordered.page(params[:page]).per(5)
     if params[:acts_as_invited]
       @acts_as = 'invited'
       @visit = @afisha.visits.new(user_id: current_user.id,
@@ -46,7 +46,7 @@ class VisitsController < ApplicationController
 
   def edit
     @afisha = Afisha.find(params[:afisha_id])
-    @users = User.ordered.page(params[:page]).per(10)
+    @users = User.ordered.page(params[:page]).per(5)
     @visit = Visit.find(params[:id])
     if params[:acts_as_invited]
       @acts_as = 'invited'
@@ -58,7 +58,7 @@ class VisitsController < ApplicationController
   end
 
   def update
-    update! { 
+    update! {
       redirect_to (parent.is_a?(Afisha) ? afisha_show_path(parent) : polymorphic_url(parent)) and return
     }
   end

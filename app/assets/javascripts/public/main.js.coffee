@@ -19,6 +19,7 @@ $ ->
   init_afisha_extend() if $('.content .affiche .photogallery')
   init_afisha_extend() if $('.content .affiche .trailer')
   init_afisha_filter() if $('.filters .by_date .daily').length
+  init_afisha_social_actions() if $('.afisha_show').length
   init_payment() if $('a.payment_link').length
   init_tabs() if $('.content .tabs').length
   init_poster() if $('.content .left .image a img').length
@@ -43,7 +44,7 @@ $ ->
   init_pagination() if $('nav.pagination').length
   init_account_pagination() if $('.account_show').length
   init_account_extend() if $('.account_show').length
-  init_social_actions() if $('.account_show').length
+  init_account_social_actions() if $('.account_show').length
   init_dialogs() if $('.to_dialog').length
   init_list_settings() if $('.content_wrapper .presentation_filters').length
   init_sms_claims() if $('.sms_claims li').length

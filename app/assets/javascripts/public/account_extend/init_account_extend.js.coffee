@@ -14,7 +14,7 @@
 
     false
 
-@init_social_actions = () ->
+@init_account_social_actions = () ->
   $('.social_actions').on 'ajax:success', (evt, response, status, jqXHR) ->
     if $(evt.target).hasClass('change_friendship')
       $(evt.target).closest('li').replaceWith(response)

@@ -11,3 +11,36 @@
 
 @init_afisha_tabs = () ->
   $('#events_filter').tabs()
+
+@init_afisha_social_actions = () ->
+  $('.social_actions').on 'ajax:success', (evt, response, status, jqXHR) ->
+    target = $(evt.target)
+    if target.hasClass('change_visit')
+      target = $(evt.target).closest('.social_actions')
+      target.html(jqXHR.responseText)
+
+      init_auth()
+      cloud_handler()
+
+    if target.hasClass('acts_as_inviter')
+      container = $('<div class="inviter_form_wrapper" />').appendTo('body').hide().html(response)
+      container.dialog
+        autoOpen: true
+        draggable: false
+        modal: true
+        resizable: false
+        title: 'Хочу пригласить'
+        width: '780px'
+
+      $('.inviter_form_wrapper input:last').addClass('close_dialog')
+
+      $('.inviter_form_wrapper .close_dialog').on 'click', ->
+        $('.inviter_form_wrapper').dialog('close')
+
+        $('.message_wrapper').replaceWith('<div class="message_wrapper">Приглашение успешно отправлено!</div>')
+        $('.message_wrapper').delay(5000).slideUp 'slow'
+      false
+
+    if target.hasClass('acts_as_invited')
+      target = $(evt.target).closest('.social_actions')
+      target.html(jqXHR.responseText)
