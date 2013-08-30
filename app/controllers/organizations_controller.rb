@@ -42,7 +42,7 @@ class OrganizationsController < ApplicationController
     cookie = cookies['_znaigorod_afisha_list_settings'].to_s
     settings_from_cookie = {}
     settings_from_cookie = Rack::Utils.parse_nested_query(cookie) if cookie.present?
-    @afisha_presenter = AfishaPresenter.new(organization_ids: [@organization.id], order_by: settings_from_cookie.merge(params)[:order_by], page: params[:page])
+    @afisha_presenter = AfishaPresenter.new(organization_ids: [@organization.id], order_by: settings_from_cookie.merge(params)['order_by'], page: params[:page])
 
     render partial: @presenter.partial, layout: false and return if request.xhr?
     render layout: "organization_layouts/#{@organization.subdomain}" if @organization.subdomain? && template_exists?(@organization.subdomain, 'layouts/organization_layouts')
