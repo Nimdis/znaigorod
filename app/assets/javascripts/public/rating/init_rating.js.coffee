@@ -22,11 +22,13 @@ init_state = () ->
 @cloud_handler = () ->
   if $('.cloud_wrapper:visible').length
     $(document).on 'keydown', (e) ->
+      return false if $('.cloud_wrapper').closest('.comment_form').length
       if e.keyCode == 27
-        $('.cloud_wrapper').hide()
+        $('.cloud_wrapper').remove()
 
     $(document).on 'click', ->
-      $('.cloud_wrapper').hide()
+      return false if $('.cloud_wrapper').closest('.comment_form').length
+      $('.cloud_wrapper').remove()
 
 restore_rating = () ->
   unless (typeof(window.localStorage) == 'undefined')
