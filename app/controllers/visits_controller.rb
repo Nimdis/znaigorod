@@ -65,7 +65,7 @@ class VisitsController < ApplicationController
       @visits = current_user.visits.where(visitable_id: parent.id)
       @visits.destroy_all
 
-      render :partial => 'visit', :locals => { :visitable => parent } and return
+      render :partial => 'visit', :locals => { :visitable => parent.reload } and return
     }
   end
 
