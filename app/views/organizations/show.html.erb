@@ -166,7 +166,7 @@
               <% @afisha_presenter.sorting_filter.available_sortings_values.each do |sorting_value| %>
                 <li<%= " class=selected" if @afisha_presenter.sorting_filter.order_by.eql?(sorting_value) %>>
                   <%= link_to I18n.t("afisha.sort.#{sorting_value}"),
-                  organization_path(@organization, :order_by => sorting_value) %>
+                  organization_path(@organization, :order_by => sorting_value), :class => sorting_value %>
                 </li>
               <% end %>
             </ul>

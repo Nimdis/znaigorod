@@ -2,10 +2,12 @@
   if window.location.hash == '#photogallery' && $.fn.scrollTo
     setTimeout ->
       $.scrollTo($('.afisha_show .photogallery'), 500, { offset: {top: -50} })
+      true
     , 300
   if window.location.hash == '#trailer' && $.fn.scrollTo
     setTimeout ->
       $.scrollTo($('.afisha_show .trailer'), 500, { offset: {top: -60} })
+      true
     , 300
   true
 
@@ -13,6 +15,9 @@
   $('#events_filter').tabs()
 
 @init_afisha_social_actions = () ->
+
+  #$('.social_actions .acts_as_inviter').click()
+
   $('.social_actions').on 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target)
 

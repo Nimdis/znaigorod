@@ -8,11 +8,11 @@
     $(this).siblings('.ui-dialog').find('.ui-dialog-content').dialog('close')
     true
 
-  true
-
   $(document).click ->
     $(".need_close_by_click").removeClass('need_close_by_click').hide()
     true
+
+  true
 
 randomize = (number) ->
   Math.floor(Math.random() * Math.round(number) + 1)
