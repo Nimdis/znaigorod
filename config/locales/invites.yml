@@ -25,6 +25,13 @@ ru:
       male: парня
       female: девушку
 
+    place:
+      zero: "%{count} мест"
+      one: "%{count} место"
+      few: "%{count} места"
+      many: "%{count} мест"
+      other: "%{count} места"
+
   private_message:
     invited_message: "Привет, пошли гулять"
     inviter_message: "Привет, пригласи меня гулять"
