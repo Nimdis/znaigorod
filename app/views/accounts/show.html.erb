@@ -7,7 +7,7 @@
 
     <div class="social_actions">
       <% if current_user.nil? || (current_user.account != @account.model) %>
-        <ul class="actions">
+        <ul class="user_actions">
           <li><%= link_to t('new_message'), new_my_private_message_path(account_id: @account.id), class: 'add_private_message', remote: true %></li>
           <%= render 'friends/friendship' %>
         </ul>
