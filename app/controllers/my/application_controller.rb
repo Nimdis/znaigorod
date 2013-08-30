@@ -7,10 +7,6 @@ class My::ApplicationController < ApplicationController
 
   check_authorization
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to new_my_session_path, :notice => "У вас не хватает прав для выполнения этого действия"
-  end
-
   def namespace
     params[:controller].split('/').first
   end
