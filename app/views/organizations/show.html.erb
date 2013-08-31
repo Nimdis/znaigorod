@@ -176,6 +176,7 @@
           <ul class='posters'>
             <%= render partial: @afisha_presenter.partial, :locals => {:afishas => @afisha_presenter.decorated_collection} %>
           </ul>
+          <%= paginate @afisha_presenter.paginated_collection %>
         </div>
       </div>
     <% end %>
