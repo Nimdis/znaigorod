@@ -57,4 +57,24 @@
         $('.message_wrapper').delay(5000).slideUp 'slow'
       false
 
+    if target.hasClass('invite')
+      invite_container = $('<div class="invite_message_form_wrapper" />').appendTo('body').hide().html(response)
+      invite_container.dialog
+        autoOpen: true
+        draggable: false
+        modal: true
+        resizable: false
+        title: 'Приглашение'
+        width: '500px'
+
+      $('.invite_message_form_wrapper .close').hide()
+      $('.invite_message_form_wrapper input:last').addClass('close_dialog')
+
+      $('.invite_message_form_wrapper .close_dialog').on 'click', ->
+        $('.invite_message_form_wrapper').dialog('close')
+
+        $('.message_wrapper').replaceWith('<div class="message_wrapper">Сообщение успешно отправлено!</div>')
+        $('.message_wrapper').delay(5000).slideUp 'slow'
+      false
+
   true
