@@ -9,9 +9,10 @@
       <%= submit_tag 'Найти', :class => :submit %>
     <% end %>
   </div>
+
   <ul class='filter'>
-    <li class='selected'><a href='#'>Все участники (1234)</a></li>
-    <li><a href='#'>Мой друзья (16)</a></li>
-  </ul>
+    <%= link_to "Все участники (#{Account.count})", accounts_search_path(:q => params[:q]) %>
+    <%= link_to "Мои друзья (#{current_user.account.friends.count})", accounts_search_path(:only_friends => true, :q => params[:q]) %>
+  </div>
   <%= render partial: 'accounts/list' %>
 </div>

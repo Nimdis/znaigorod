@@ -8,6 +8,16 @@ class Friend < ActiveRecord::Base
 
   scope :approved, -> { where(friendly: true) }
 
+  delegate :first_name, :last_name, :patronymic, :nickname, :to => :friendable
+  searchable do
+    integer :account_id
+
+    text :first_name
+    text :last_name
+    text :patronymic
+    text :nickname
+  end
+
   def change_friendship
     self.friendly = !friendly?
     self.save
