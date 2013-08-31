@@ -4,6 +4,5 @@
   <%= f.input :messageable_id, as: :hidden %>
   <%= f.input :messageable_type, as: :hidden %>
   <%= f.input :invite_kind, as: :hidden %>
-  <%= f.submit 'Отправить' %>
-  <%= link_to 'Отмена', '#', class: 'close' %>
+  <%= f.submit 'Отправить', class: 'submit_dialog' %>
 <% end %>

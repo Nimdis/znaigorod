@@ -9,9 +9,9 @@ class My::PrivateMessagesController < My::ApplicationController
     new! {
       @private_message.account_id = params[:account_id]
       if params[:afisha_id] || params[:organization_id]
-        @source = if params[:afisha_id] 
-                    Afisha.find(params[:afisha_id]) 
-                  elsif params[:organization_id] 
+        @source = if params[:afisha_id]
+                    Afisha.find(params[:afisha_id])
+                  elsif params[:organization_id]
                     Organization.find(params[:organization_id])
                   end
         @private_message.messageable = @source
@@ -25,7 +25,10 @@ class My::PrivateMessagesController < My::ApplicationController
   end
 
   def create
-    create! { render @private_message and return }
+    create! do |success, failure|
+      success.html { render @private_message }
+      failure.html { render partial: 'my/private_messages/form' }
+    end
   end
 
   protected

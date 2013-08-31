@@ -205,3 +205,25 @@
     if target.hasClass('acts_as_invited')
       target = $(evt.target).closest('.social_actions')
       target.html(jqXHR.responseText)
+
+    if target.hasClass('invite')
+      invite_container = $('<div class="invite_message_form_wrapper" />').appendTo('body').hide().html(response)
+      form = $('form', invite_container)
+      invite_container.dialog
+        autoOpen: true
+        draggable: false
+        modal: true
+        resizable: false
+        title: 'Приглашение'
+        width: '500px'
+
+      $('.submit_dialog', form).click ->
+        invite_container.dialog('close')
+
+        $('.message_wrapper')
+          .replaceWith('<div class="message_wrapper">Приглашение успешно отправлено!</div>')
+          .delay(5000)
+          .slideUp('slow')
+
+        false
+

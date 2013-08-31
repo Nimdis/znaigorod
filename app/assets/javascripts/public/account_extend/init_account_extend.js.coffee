@@ -47,18 +47,20 @@
         title: 'Новое сообщение'
         width: '500px'
 
-      $('.private_message_form_wrapper .close').hide()
-      $('.private_message_form_wrapper input:last').addClass('close_dialog')
+      $('.submit_dialog', form).click ->
+        container.dialog('close')
+        form = $('form', container)
 
-      $('.private_message_form_wrapper .close_dialog').on 'click', ->
-        $('.private_message_form_wrapper').dialog('close')
+        $('.message_wrapper')
+          .replaceWith('<div class="message_wrapper">Приглашение успешно отправлено!</div>')
+          .delay(5000)
+          .slideUp('slow')
 
-        $('.message_wrapper').replaceWith('<div class="message_wrapper">Сообщение успешно отправлено!</div>')
-        $('.message_wrapper').delay(5000).slideUp 'slow'
-      false
+        false
 
     if target.hasClass('invite')
       invite_container = $('<div class="invite_message_form_wrapper" />').appendTo('body').hide().html(response)
+      form = $('form', invite_container)
       invite_container.dialog
         autoOpen: true
         draggable: false
@@ -67,14 +69,13 @@
         title: 'Приглашение'
         width: '500px'
 
-      $('.invite_message_form_wrapper .close').hide()
-      $('.invite_message_form_wrapper input:last').addClass('close_dialog')
+      $('.submit_dialog', form).click ->
+        invite_container.dialog('close')
 
-      $('.invite_message_form_wrapper .close_dialog').on 'click', ->
-        $('.invite_message_form_wrapper').dialog('close')
+        $('.message_wrapper')
+          .replaceWith('<div class="message_wrapper">Приглашение успешно отправлено!</div>')
+          .delay(5000)
+          .slideUp('slow')
 
-        $('.message_wrapper').replaceWith('<div class="message_wrapper">Сообщение успешно отправлено!</div>')
-        $('.message_wrapper').delay(5000).slideUp 'slow'
-      false
-
+        false
   true
