@@ -10,6 +10,12 @@ class PrivateMessage < Message
   enumerize :invite_kind, in: [:inviter, :invited], predicates: true
 
   validates_presence_of :body
+
+  auto_html_for :body do
+    html_escape
+    simple_format
+    znaigorod_link :target => "_blank", :rel => 'nofollow'
+  end
 end
 
 # == Schema Information
