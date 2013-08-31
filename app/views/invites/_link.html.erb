@@ -1,4 +1,4 @@
-<% if visit = @afisha.visit_for_user(account.users.first) %>
+<% if visit = parent.visit_for_user(account.users.first) %>
   <% if acts_as == :inviter && visit.acts_as_inviter? %>
     <div class='info'>
       <span>Ждет приглашения<%= " от "+I18n.t("visit.invited.#{visit.invited_gender}") unless visit.invited_gender.all? %></span>
