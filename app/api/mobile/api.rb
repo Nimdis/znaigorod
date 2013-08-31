@@ -16,20 +16,22 @@ module Mobile
       end
 
       def api_version
-        DateTime.new(2013, 7, 15, 16, 10, 00, '+7')
+        DateTime.new(2013, 8, 31, 21, 00, 00, '+7')
       end
 
-      def subcategories(kind)
+      def periods
         [
-          { category: 'Все',  url:  "#{base_path}/#{kind}/all"},
-          { category: 'Сегодня',  url:  "#{base_path}/#{kind}/today"},
-          { category: 'На неделе',  url:  "#{base_path}/#{kind}/week"},
-          { category: 'На выходных',  url:  "#{base_path}/#{kind}/weekend"}
+          { period: 'Все',  urlModifier:  "period=all"},
+          { period: 'Сегодня',  urlModifier:  "period=today"},
+          { period: 'На неделе',  urlModifier:  "period=week"},
+          { period: 'На выходных',  urlModifier:  "period=weekend"}
         ]
       end
 
       def affishes(kind, period, sorting, page)
-        ShowingsPresenter.new(:categories => (kind == 'all' ?  [] : [kind.singularize]), :period => period, :order_by => sorting, :page => page )
+        period ||= 'all'
+        sorting ||= 'creation'
+        AfishaPresenter.new(:categories => (kind == 'all' ?  [] : [kind]), :period => period, :order_by => sorting, :page => page )
       end
 
       def affisha_updated_at(affisha)
@@ -44,16 +46,19 @@ module Mobile
     resource :affisha do
 
       get '/categories' do
-        categories = [ {category: 'Все мероприятия', url: "#{base_path}/all/all", subcategories: subcategories('all') }]
-        categories += Affiche.ordered_descendants.map do |affiche_class|
+        categories = [ {category: 'Все мероприятия', url: "#{base_path}/list/all" }]
+        categories += Afisha.kind.values.map do |kind|
           {
-            category: affiche_class.model_name.human,
-            url: "#{base_path}/#{affiche_class.name.downcase.pluralize}/all",
-            subcategories: subcategories(affiche_class.name.downcase.pluralize)
+            category: kind.text,
+            url: "#{base_path}/list/#{kind}",
           }
         end
 
         { lastUpdate: api_version, categories: categories }
+      end
+
+      get '/periods' do
+        { lastUpdate: api_version, periods: periods }
       end
 
       get '/sortings' do
@@ -69,31 +74,34 @@ module Mobile
 
       params do
         optional :page, :type => Integer
+        optional :period, :type => String
+        optional :sorting, :type => String
       end
 
-      get ':kind/:period/:sorting' do
+      get 'list/:kind' do
         affishes = affishes(params[:kind], params[:period], params[:sorting], params[:page] || 1)
         {
-          lastUpdate: affishes.collection.map { |affisha| affisha_updated_at(affisha.affiche) }.max,
+          lastUpdate: affishes.decorated_collection.map { |affisha| affisha_updated_at(affisha.afisha) }.max,
           urlModifier: affishes.paginated_collection.next_page ? "?page=#{affishes.paginated_collection.next_page}" : '',
-          affishes: affishes.collection.map do |affisha|
+          affishes: affishes.decorated_collection.map do |affisha|
             {
               :url => "#{base_path}/#{affisha.slug}",
               :name => affisha.title,
               :when => affisha.human_when.replace_special_html_chars,
               :price => affisha.human_price.replace_special_html_chars,
               :place => affisha.places.map(&:title).join("; "),
-              :image => affisha.poster_url.gsub(/\/\d+-\d+\//, '/74-100!n/'),
+              :image => affisha.poster_url.gsub(/(\/files\/\d+\/)\d+-\d+\//){"#{$1}74-100!n/"}.gsub(/(\/files\/\d+\/region\/(\d+|\/){8})/){"#{$1}74-100/"},
               :expires => affisha.distribution_ends_on? ? affisha.distribution_ends_on : affisha.showings.map(&:starts_at).max,
-              lastUpdate: affisha_updated_at(affisha.affiche)
+              lastUpdate: affisha_updated_at(affisha.afisha),
+              :ticket_link => affisha.tickets.map(&:copies_for_sale).flatten.any? ? "#{site_url}/afisha/#{affisha.slug}#buy_ticket" : nil,
             }
           end
         }
       end
 
       get ':slug' do
-        affisha = Affiche.find(params[:slug])
-        decorated_affisha = AfficheDecorator.new affisha
+        affisha = Afisha.find(params[:slug])
+        decorated_affisha = AfishaDecorator.new affisha
         {
           id: affisha.slug,
           link: "#{site_url}/#{affisha.class.name.downcase}/#{affisha.slug}",
