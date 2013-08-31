@@ -70,6 +70,11 @@ ru:
         male: Парня
         female: Девушку
 
+      invited_gender:
+        all: Неважно
+        male: От парня
+        female: От девушки
+
     service:
       kind:
         lesson:                занятие

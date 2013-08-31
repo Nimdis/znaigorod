@@ -1,9 +1,10 @@
 <%= simple_form_for [parent, @visit], html: { remote: true } do |f| %>
-  <%= f.input :invited_description %>
-  <%= f.input :invited_gender, as: :radio_buttons %>
+  <h2>Жду приглашения</h2>
+  <%= f.input :invited_gender, as: :radio_buttons, label: false %>
+  <%= f.input :invited_description, input_html: { placeholder: 'Здесь вы можете указать дополнительную информацию'}, autofocus: true, label: false %>
   <%= f.input :acts_as_invited, as: :hidden, input_html: { value: true } %>
   <div class='submit'>
-    <%= f.submit %>
+    <%= f.submit 'Жду приглошения', :class => :submit_dialog %>
   </div>
 <% end %>
 

@@ -1,4 +1,4 @@
-.inviter_form_wrapper
+.invite_form_wrapper
   width: 780px
 
   .left
@@ -56,6 +56,35 @@
 
             &.checked
               background-position: -72px -215px
+
+          &.visit_invited_gender_all
+            background-position: 12px 0
+            margin-right: 25px
+
+            &:hover
+              background-position: 12px -107px
+
+            &.checked
+              background-position: 12px -215px
+
+          &.visit_invited_gender_male
+            background-position: -152px 0
+
+            &:hover
+              background-position: -152px -107px
+
+            &.checked
+              background-position: -152px -215px
+
+          &.visit_invited_gender_female
+            background-position: -62px 0
+            margin-left: 25px
+
+            &:hover
+              background-position: -62px -107px
+
+            &.checked
+              background-position: -62px -215px
 
       textarea
         border: 1px solid #ccc
@@ -145,6 +174,54 @@
         .details
           +clearfix
 
+          .wanted
+            .invite
+              font-size: 11px
+              +inline-block
+              +grey-button-style
+              margin-top: 10px
+
+          .sended
+            color: #f60
+            +inline-block
+            margin-top: 10px
+
+          .simple_form
+            textarea
+              width: 355px
+              height: 90px
+              line-height: 1.5
+              border: 1px solid #ccc
+              outline: none
+              resize: none
+              padding: 5px 8px
+              margin: 5px 0
+
+            .close
+              +inline-block
+
+            > input
+              +button_style
+              +inline-block
+              cursor: pointer
+              padding: 5px 10px 6px
+              margin: 0 10px 0 0
+
+              &:active
+                padding: 6px 10px 5px
+
+              &.disabled
+                cursor: default
+                +background(linear-gradient(top, #ccc, #999))
+                border-color: #999
+
+                &:hover
+                  +text-shadow(none)
+
+                &:active
+                  padding: 5px 10px 6px
+
+
       &.jspScrollable
         border: none
 
@@ -154,6 +231,9 @@
 
         .jspPane
           position: absolute
+          outline: none
+          border: none
+          +box-shadow(none)
 
         .jspVerticalBar
           position: absolute

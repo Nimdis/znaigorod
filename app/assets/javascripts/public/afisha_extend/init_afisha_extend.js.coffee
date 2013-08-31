@@ -16,8 +16,6 @@
 
 @init_afisha_social_actions = () ->
 
-  #$('.social_actions .acts_as_inviter').click()
-
   $('.social_actions').on 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target)
 
@@ -40,8 +38,9 @@
       target = $(evt.target).closest('.social_actions')
       target.html(response)
 
-    if target.hasClass('acts_as_inviter')
-      container = $('<div class="inviter_form_wrapper" />').appendTo('body').hide().html(response)
+    if target.hasClass('acts_as_inviter') || target.hasClass('acts_as_invited')
+
+      container = $('<div class="invite_form_wrapper" />').appendTo('body').hide().html(response)
       form = $('form', container)
       radio_buttons_block = $('.radio_buttons', form)
 
@@ -59,9 +58,51 @@
       $.fn.initialize_invite = () ->
         list = $('.accounts_list', this)
         $('li .details .invite', list).each ->
-          $(this).click ->
-
+          invite_link = $(this)
+          invite_link.click ->
+            $.ajax
+              url: invite_link.attr('href')
+              success: (response, textStatus, jqXHR) ->
+                invite_link.hide().after(response)
+                form = invite_link.siblings('form')
+                $('textarea', form).keyup ->
+                  if $(this).val()
+                    $('input:last', form).removeAttr('disabled', 'disabled').removeClass('disabled')
+                  else
+                    $('input:last', form).attr('disabled', 'disabled').addClass('disabled')
+                  true
+                $('textarea', form).keyup()
+                form.submit ->
+                  $.ajax
+                    url: form.attr('action')
+                    type: 'POST'
+                    data: form.serialize()
+                    success: (response, textStatus, jqXHR) ->
+                      invite_link.after('<span class="sended">Приглашен</span>').remove()
+                      form.remove()
+                      true
+                    error: (jqXHR, textStatus, errorThrown) ->
+                      wrapped = $("<div>#{jqXHR.responseText}</div>")
+                      wrapped.find('title').remove()
+                      wrapped.find('style').remove()
+                      wrapped.find('head').remove()
+                      console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
+                      true
+                  false
+                $('.close', form).click ->
+                  invite_link.show()
+                  form.remove()
+                  false
+                true
+              error: (jqXHR, textStatus, errorThrown) ->
+                wrapped = $("<div>#{jqXHR.responseText}</div>")
+                wrapped.find('title').remove()
+                wrapped.find('style').remove()
+                wrapped.find('head').remove()
+                console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
+                true
             false
+          true
         true
 
       $.fn.initialize_pagination = () ->
@@ -122,6 +163,7 @@
                 link_wrapper.addClass('selected')
                 $('#q', block).val('')
                 block.initialize_pagination()
+                block.initialize_invite()
                 true
               error: (jqXHR, textStatus, errorThrown) ->
                 wrapped = $("<div>#{jqXHR.responseText}</div>")
@@ -153,6 +195,7 @@
               $('.pagination', wrapped).appendTo(block)
               $('.filter li', block).removeClass('selected')
               block.initialize_pagination()
+              block.initialize_invite()
               true
             error: (jqXHR, textStatus, errorThrown) ->
               wrapped = $("<div>#{jqXHR.responseText}</div>")
@@ -170,7 +213,7 @@
         draggable: false
         modal: true
         resizable: false
-        title: 'Хочу пригласить'
+        title: $('h2', container).text()
         width: 780
         create: (event, ui) ->
           $('body').css
@@ -199,10 +242,6 @@
 
         false
 
-    if target.hasClass('acts_as_invited')
-      target = $(evt.target).closest('.social_actions')
-      target.html(jqXHR.responseText)
-
     if target.hasClass('invite')
       invite_container = $('<div class="message_form_wrapper" />').appendTo('body').hide().html(response)
       form = $('form', invite_container)
@@ -213,6 +252,7 @@
           type: 'POST'
           data: form.serialize()
           success: (response, textStatus, jqXHR) ->
+            target.after('<span class="sended">Приглашен</span>').remove()
             form.remove()
             true
 
@@ -243,3 +283,4 @@
 
         false
 
+  true
