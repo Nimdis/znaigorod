@@ -35,11 +35,44 @@
               &:nth-child(#{$i})
                 top: (25px * $i) + 35px
 
+          .first_line
+            bottom: 35px
+
+          .second_line
+            bottom: 10px
+
+          .first_line,
+          .second_line
+            display: none
+            width: 100%
+            position: absolute
+            color: #000
+            left: 0
+
+            span
+              display: block
+              float: left
+              width: 34px
+              padding-left: 25px
+              background: transparent image_url('public/details_sprite.png') no-repeat 10px 3px
+
+              &.to_go
+                background-position: 12px 3px
+              &.wait_invite
+                background-position: 4px -17px
+              &.comments
+                background-position: 5px -36px
+              &.likes
+                background-position: 12px -57px
+              &.visits
+                background-position: 6px -77px
+
           &:hover
             img
               +opacity(0.15)
-            .for_sale,
-            .line
+            .line,
+            .first_line,
+            .second_line
               display: block
 
         .badges

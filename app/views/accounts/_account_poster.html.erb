@@ -9,6 +9,15 @@
       <%= content_tag :span, "Хочет посетить #{I18n.t("visit.place", count: account.visits.count)}", :class => :line if account.visits.count > 0 %>
       <%= content_tag :span, "Приглашает в #{I18n.t("visit.place", count: account.visits.inviter.count)}", :class => :line if account.visits.inviter.count > 0 %>
       <%= content_tag :span, "Ждет приглашения в #{I18n.t("visit.place", count: account.visits.invited.count)}", :class => :line if account.visits.invited.count > 0 %>
+      <span class='first_line'>
+        <span class='to_go'><%= account.friends.count %></span>
+        <span class='wait_invite'><%= account.visits.invited.count %></span>
+        <span class='comments'><%= account.comments.count %></span>
+      </span>
+      <span class='second_line'>
+        <span class='likes'><%= account.votes.liked.count %></span>
+        <span class='visits'><%= account.page_visits.count %></span>
+      </span>
     <% end %>
   </div>
 
