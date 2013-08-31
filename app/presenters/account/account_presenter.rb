@@ -62,7 +62,7 @@ class AccountPresenter
     @searcher_params ||= {}.tap do |searcher_params|
       searcher_params[:kind] = kind if kind != 'all'
       searcher_params[:gender] = gender_filter.gender if gender_filter.used?
-      searcher_params[:acts_as] = acts_as_filter if acts_as_filter.used?
+      searcher_params[:acts_as] = acts_as_filter.acts_as if acts_as_filter.used?
     end
   end
 
