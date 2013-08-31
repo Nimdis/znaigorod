@@ -83,7 +83,51 @@
     margin: 0 0 0 15px
     width: 480px
 
-    ul
+    .search_form
+      margin-bottom: 10px
+
+      #q
+        +inline-block
+        width: 200px
+        font-size: 11px
+        border: 1px solid #ccc
+        outline: none
+        margin: 0
+        padding: 4px 8px
+
+      .submit
+        +inline-block
+        width: 16px
+        height: 17px
+        cursor: pointer
+        outline: none
+        overflow: hidden
+        border: none
+        text-indent: -9999em
+        background: #fff image_url('public/search_submit.png') no-repeat center top
+        margin: 0 3px 0 0
+        padding: 0
+
+        &:hover
+          background-position: center -64px
+
+        &:active
+          background-position: center -63px
+
+    .filter
+      +clearfix
+      margin-bottom: 20px
+
+      li
+        float: left
+        font-size: 11px
+        +toggable-links
+        margin-right: 10px
+
+        &:last-child
+          margin-right: 0
+
+    .accounts_list
       li
         height: 70px
         margin: 0 0 15px 0

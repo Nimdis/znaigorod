@@ -5,13 +5,13 @@
 <div class='right'>
   <div class='search_form'>
     <%= form_tag accounts_search_path, :method => :get do %>
-      <%= text_field_tag :q, params[:q] %>
-      <%= submit_tag 'Найти' %>
+      <%= text_field_tag :q, params[:q], :placeholder => 'Найти...' %>
+      <%= submit_tag 'Найти', :class => :submit %>
     <% end %>
   </div>
-  <div class='filter'>
-    <a class='selected' href='#'>Все участники (1234)</a>
-    <a href='#'>Мой друзья (16)</a>
-  </div>
+  <ul class='filter'>
+    <li class='selected'><a href='#'>Все участники (1234)</a></li>
+    <li><a href='#'>Мой друзья (16)</a></li>
+  </ul>
   <%= render partial: 'accounts/list' %>
 </div>
