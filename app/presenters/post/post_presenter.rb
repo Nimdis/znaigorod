@@ -47,7 +47,7 @@ class PostPresenter
 
   def searcher_params
     @searcher_params ||= {}.tap do |searcher_params|
-      searcher_params[:kind] = kind if @kind_filter.used?
+      searcher_params[:kind] = @kind_filter.kind if @kind_filter.used?
     end
   end
 
