@@ -56,8 +56,9 @@
       $.fn.initialize_pagination = () ->
         page = 1
         busy = false
-        next_link = $('nav.pagination .next a', container)
         list = $('.accounts_list', this)
+        pagination = $('nav.pagination', this)
+        next_link = $('.next a', pagination)
 
         list.jScrollPane
           autoReinitialise: true
@@ -69,15 +70,17 @@
           list.bind 'jsp-scroll-y', (event, scrollPositionY, isAtTop, isAtBottom) ->
             if block_offset < scrollPositionY && !busy
               busy = true
-              page += 1
               $.ajax
-                url: next_link.attr('href').replace(/page=\d+/, "page=#{page}")
+                url: next_link.attr('href')
                 success: (response, textStatus, jqXHR) ->
                   return true if response.match(/empty_items_list/)
                   return true if response.trim().isBlank()
-                  $('.jspPane', event.target).append(response)
-                  busy = false
+                  wrapped = $("<div>#{response}</div>")
+                  $('.jspPane', event.target).append($('.accounts_list li', wrapped))
+                  pagination.html($('nav.pagination', wrapped).html())
+                  next_link = $('.next a', pagination)
                   block_offset = $('li:last', event.target).outerHeight(true, true) * ($('li', event.target).length - 3) - $('.jspContainer', list).outerHeight(true, true)
+                  busy = false
                   true
 
             true
