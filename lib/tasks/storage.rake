@@ -20,7 +20,7 @@ task :storage => :environment do
 
   models.map do |klass, field|
     puts "Update #{klass}##{field}"
-    items = klass.classify.constantize.where("#{field} IS NOT NULL AND #{field} LIKE 'http://storage%'")
+    items = klass.classify.constantize.where("#{field} IS NOT NULL AND #{field} LIKE 'http://dev-storage%'")
     bar = ProgressBar.new(items.count)
     items.each do |item|
       item.update_column(field.to_sym, item.send(field).gsub('http://dev-storage', 'http://storage'))
