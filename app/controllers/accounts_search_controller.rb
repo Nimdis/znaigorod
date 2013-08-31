@@ -1,7 +1,7 @@
 class AccountsSearchController < ApplicationController
   layout false
 
-  respond_to :json
+  helper_method :parent
 
   def show
     page = params[:page].to_i.zero? ? 1 : params[:page]
@@ -18,10 +18,21 @@ class AccountsSearchController < ApplicationController
     else
       @accounts = Account.search {
         keywords params[:q]
+        without current_user.account
         paginate :page => page, :per_page => per_page
       }.results
     end
 
-    render :partial => 'results'
+    acts_as = :invited if params[:acts_as_invited]
+    acts_as = :inviter if params[:acts_as_inviter]
+
+    render partial: 'accounts/list', :locals => { :acts_as => acts_as } and return
+  end
+
+  def parent
+    klass, id = params[:parent].split('_')
+    klass = %w[afisha organization].include?(klass) ? klass : 'afisha'
+
+    @parent = klass.classify.constantize.find(id)
   end
 end

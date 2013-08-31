@@ -56,6 +56,14 @@
 
         true
 
+      $.fn.initialize_invite = () ->
+        list = $('.accounts_list', this)
+        $('li .details .invite', list).each ->
+          $(this).click ->
+
+            false
+        true
+
       $.fn.initialize_pagination = () ->
         page = 1
         busy = false
@@ -99,7 +107,7 @@
       $.fn.initialize_filter = () ->
         block = $(this)
         $('.filter a', block).each ->
-          $(this).on 'click', ->
+          $(this).click ->
             link_wrapper = $(this).closest('li')
             return false if link_wrapper.hasClass('selected')
             $.ajax
@@ -173,6 +181,7 @@
           block.initialize_pagination()
           block.initialize_filter()
           block.initialize_search()
+          block.initialize_invite()
           true
         beforeClose: (event, ui) ->
           $("body").css
