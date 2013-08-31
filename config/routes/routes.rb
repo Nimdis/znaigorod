@@ -9,6 +9,8 @@ Znaigorod::Application.routes.draw do
     delete '/users/sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
   end
 
+  get 'accounts_search'   => 'accounts_search#show', :as => :accounts_search
+
   get 'cooperation'       => 'cooperation#index'
   get 'geocoder'          => 'geocoder#get_coordinates'
   get 'yamp_geocoder'     => 'geocoder#get_yamp_coordinates'

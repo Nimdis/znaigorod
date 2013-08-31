@@ -3,8 +3,8 @@
 </div>
 
 <div class='right'>
-  <%= form_tag '/', :method => :get do %>
-    <%= text_field_tag :q %>
+  <%= form_tag accounts_search_path, :method => :get do %>
+    <%= text_field_tag :q, params[:q] %>
 
     <%= submit_tag 'Найти' %>
   <% end %>
