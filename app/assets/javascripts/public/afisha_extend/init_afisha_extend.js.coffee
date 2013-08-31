@@ -35,8 +35,7 @@
       return false
 
     if target.hasClass('change_visit')
-      target = $(evt.target).closest('.social_actions')
-      target.html(response)
+      target.closest('.social_actions').html(response)
 
     if target.hasClass('acts_as_inviter') || target.hasClass('acts_as_invited')
 
@@ -235,10 +234,23 @@
           $(this).remove()
           true
 
-      $('.submit_dialog', form).click ->
-        container.dialog('close')
-
-        $('.message_wrapper').text('Приглашение успешно отправлено!').show().delay(5000).slideUp('slow')
+      form.submit ->
+        $.ajax
+          url: form.attr('action')
+          type: 'POST'
+          data: form.serialize()
+          success: (response, textStatus, jqXHR) ->
+            target.closest('.social_actions').html(response)
+            container.dialog('close')
+            $('.message_wrapper').text('Приглашение успешно отправлено!').show().delay(5000).slideUp('slow')
+            true
+          error: (jqXHR, textStatus, errorThrown) ->
+            wrapped = $("<div>#{jqXHR.responseText}</div>")
+            wrapped.find('title').remove()
+            wrapped.find('style').remove()
+            wrapped.find('head').remove()
+            console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
+            true
 
         false
 

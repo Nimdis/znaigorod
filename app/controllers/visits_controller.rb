@@ -58,7 +58,8 @@ class VisitsController < ApplicationController
 
   def update
     update! {
-      redirect_to (parent.is_a?(Afisha) ? afisha_show_path(parent) : polymorphic_url(parent)) and return
+      render :partial => 'visit', :locals => { :visitable => parent } and return if request.xhr?
+      redirect_to (parent.is_a?(Afisha) ? afisha_show_path(parent) : polymorphic_url(parent))
     }
   end
 

@@ -13,6 +13,8 @@
     <%= sf.input :invited_description, as: :hidden, input_html: { value: nil } %>
     <%= sf.input :invited_gender, as: :hidden, input_html: { value: nil } %>
     <%= sf.input :acts_as_invited, as: :hidden, input_html: { value: nil } %>
-    <%= sf.submit 'Удалить' %>
+    <div class='submit gray'>
+      <%= sf.submit 'Удалить', :class => :submit_dialog %>
+    </div>
   <% end %>
 <% end %>
