@@ -3,12 +3,22 @@
 class PostDecorator < ApplicationDecorator
   decorates :post
 
-  def title
-    post.title
+  delegate :title, :html_content, to: :post
+
+  def truncated_title_link(length, options = { separator: ' ', anchor: nil })
+    if title.length > length
+      h.link_to(title.text_gilensize.truncated(length, options[:separator]), h.post_path(post, anchor: options[:anchor]), :title => title)
+    else
+      h.link_to(title.text_gilensize, h.post_path(post, anchor: options[:anchor]))
+    end
+  end
+
+  def truncated_description(length)
+    Sanitize.clean(html_content).truncated(length, ' ')
   end
 
   def show_url
-    h.post_url(post)
+    @show_url ||= h.post_url(post)
   end
 
   def annotation_image?
@@ -22,7 +32,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def date
-    h.content_tag :div, Russian::strftime(post.created_at, "%d %B %Y"), class: :date
+    h.content_tag :div, I18n.l(post.created_at, format: "%d %B %Y"), class: :date
   end
 
   def html_content

@@ -15,7 +15,8 @@ class PostPresenter
           title: I18n.t("post_kinds.#{kind}"),
           klass: kind,
           parameters: {
-            kind: kind
+            kind: kind,
+            order_by: @sorting_filter.order_by
           },
           current: kind == @kind_filter.kind,
           count: PostCounter.new(self, kind).count
@@ -40,6 +41,22 @@ class PostPresenter
     }
   end
 
+  def collection
+    PostDecorator.decorate searcher.paginate(:page => @page, :per_page => @per_page)
+  end
+
+  def searcher_params
+    @searcher_params ||= {}.tap do |searcher_params|
+      searcher_params[:kind] = kind if @kind_filter.used?
+    end
+  end
+
+  def searcher
+    @searcher ||= HasSearcher.searcher(:posts, searcher_params).send("order_by_#{@sorting_filter.order_by}")
+  end
+
+
+
 end
 
 class PostKindFilter
@@ -60,6 +77,10 @@ class PostKindFilter
 
   def kind
     available_kind_values.include?(@kind) ? @kind : 'all'
+  end
+
+  def used?
+    kind != 'all'
   end
 
   available_kind_values.each do |kind|
@@ -89,7 +110,7 @@ class PostSortingFilter
   end
 
   def order_by
-    @order_by = available_sortings_values.include?(@order_by) ? @order_by : 'creation'
+    @order_by ||= available_sortings_values.include?(@order_by) ? @order_by : 'creation'
   end
 end
 

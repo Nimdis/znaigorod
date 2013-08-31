@@ -18,13 +18,4 @@ class PostsController < ApplicationController
     @post.delay.create_page_visit(request.session_options[:id], current_user)
   end
 
-  private
-
-  def collection
-    HasSearcher.searcher(:posts, params).paginate(:page => params[:page], :per_page => per_page)
-  end
-
-  def per_page
-    15
-  end
 end
