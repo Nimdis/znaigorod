@@ -39,6 +39,20 @@
 
     if target.hasClass('acts_as_inviter')
       container = $('<div class="inviter_form_wrapper" />').appendTo('body').hide().html(response)
+      form = $('form', container)
+      radio_buttons_block = $('.radio_buttons', form)
+
+      $('label', radio_buttons_block).each (index, item) ->
+        $(item).addClass($('input', item).attr('id'))
+        $(item).addClass('checked') if $('input', item).is(':checked')
+        $(item).click ->
+          return false if $(this).hasClass('checked')
+          $('label', radio_buttons_block).removeClass('checked')
+          $(this).addClass('checked') if $('input', this).is(':checked')
+          true
+
+        true
+
       container.dialog
         autoOpen: true
         draggable: false
@@ -46,15 +60,20 @@
         resizable: false
         title: 'Хочу пригласить'
         width: '780px'
+        close: ->
+          $(this).dialog('destroy')
+          $(this).remove()
+          true
 
-      $('.inviter_form_wrapper input:last').addClass('close_dialog')
+      $('.submit_dialog', form).click ->
+        container.dialog('close')
 
-      $('.inviter_form_wrapper .close_dialog').on 'click', ->
-        $('.inviter_form_wrapper').dialog('close')
+        $('.message_wrapper')
+          .replaceWith('<div class="message_wrapper">Приглашение успешно отправлено!</div>')
+          .delay(5000)
+          .slideUp('slow')
 
-        $('.message_wrapper').replaceWith('<div class="message_wrapper">Приглашение успешно отправлено!</div>')
-        $('.message_wrapper').delay(5000).slideUp 'slow'
-      false
+        false
 
     if target.hasClass('acts_as_invited')
       target = $(evt.target).closest('.social_actions')

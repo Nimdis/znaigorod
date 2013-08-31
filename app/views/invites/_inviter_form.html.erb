@@ -3,7 +3,9 @@
   <%= f.input :inviter_gender, as: :radio_buttons, label: false %>
   <%= f.input :inviter_description, input_html: { placeholder: 'Здесь вы можете указать дополнительную информацию'}, autofocus: true, label: false %>
   <%= f.input :acts_as_inviter, as: :hidden, input_html: { value: true } %>
-  <%= f.submit 'Пригласить' %>
+  <div class='submit'>
+    <%= f.submit 'Пригласить', :class => :submit_dialog %>
+  </div>
 <% end %>
 
 <% if @visit.acts_as_inviter %>

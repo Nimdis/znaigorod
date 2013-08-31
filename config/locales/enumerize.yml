@@ -64,6 +64,12 @@ ru:
         car_wash: Автомойки
         car_service_center: Автосервис
 
+    visit:
+      inviter_gender:
+        all: Неважно
+        male: Парня
+        female: Девушку
+
     service:
       kind:
         lesson:                занятие

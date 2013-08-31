@@ -10,7 +10,6 @@
       container.show().css
         'width': dialog_width
       container_height = container.outerHeight(true, true)
-      #alert "max_height: #{dialog_max_height}\nheight: #{container_height}"
       if container_height > dialog_max_height
         dialog_height = dialog_max_height
       else
