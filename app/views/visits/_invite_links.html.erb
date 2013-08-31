@@ -10,7 +10,7 @@
   <span class='sended'><%= I18n.t('invite.sended.inviter') %></span>
 <% else %>
   <%= link_to 'Пригласить', new_my_private_message_path(account_id: visit.user.account.id,
-                                                        afisha_id: visit.visitable.id,
+                                                        "#{visit.visitable.class.name.underscore}_id".to_sym => visit.visitable.id,
                                                         acts_as: :inviter), remote: true, class: 'invite' %>
 <% end %>
 
@@ -26,7 +26,7 @@
   <span class='sended'><%= I18n.t('invite.sended.invited') %></span>
 <% else %>
   <%= link_to 'Пригласи меня', new_my_private_message_path(account_id: visit.user.account.id,
-                                                           afisha_id: visit.visitable.id,
+                                                           "#{visit.visitable.class.name.underscore}_id".to_sym => visit.visitable.id,
                                                            acts_as: :invited), remote: true, class: 'invite' %>
 <% end %>
 

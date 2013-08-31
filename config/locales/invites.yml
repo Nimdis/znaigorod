@@ -35,5 +35,9 @@ ru:
       other: "%{count} места"
 
   private_message:
-    invited_message: "Привет, пошли гулять"
-    inviter_message: "Привет, пригласи меня гулять"
+    afisha:
+      invited_message: "Привет! Приглашаю тебя сходить на %{url}"
+      inviter_message: "Привет! Пригласи меня на %{url}"
+    organization:
+      invited_message: "Привет! Приглашаю тебя сходить в %{url}"
+      inviter_message: "Привет! Пригласи меня в %{url}"
