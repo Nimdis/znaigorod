@@ -67,8 +67,6 @@ Znaigorod::Application.routes.draw do
     resources :user_ratings, :only => [:new, :create, :edit, :update, :show]
   end
 
-  get 'photogalleries/:period/(*query)' => 'photogalleries#index',  :as => :photogalleries, :period => /all|month|week/
-
   Organization.basic_suborganization_kinds.each do |kind|
     get "/#{kind.pluralize}" => 'suborganizations#index', :as => kind.pluralize, :constraints => { :kind => kind }, :defaults => { :kind => kind }
   end
