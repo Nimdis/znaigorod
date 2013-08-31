@@ -252,7 +252,10 @@
           type: 'POST'
           data: form.serialize()
           success: (response, textStatus, jqXHR) ->
-            target.after('<span class="sended">Приглашен</span>').remove()
+            if $('#private_message_invite_kind', form).val().match(/invited/)
+              target.after('<span class="sended">Запрос отправлено</span>').remove()
+            else
+              target.after('<span class="sended">Приглашен</span>').remove()
             form.remove()
             true
 
