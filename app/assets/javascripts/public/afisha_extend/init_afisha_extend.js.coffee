@@ -57,7 +57,7 @@
         page = 1
         busy = false
         list = $('.accounts_list', this)
-        pagination = $('nav.pagination', this)
+        pagination = $('.pagination', this)
         next_link = $('.next a', pagination)
 
         list.jScrollPane
@@ -77,20 +77,53 @@
                   return true if response.trim().isBlank()
                   wrapped = $("<div>#{response}</div>")
                   $('.jspPane', event.target).append($('.accounts_list li', wrapped))
-                  pagination.html($('nav.pagination', wrapped).html())
+                  pagination.html($('.pagination', wrapped).html())
                   next_link = $('.next a', pagination)
                   block_offset = $('li:last', event.target).outerHeight(true, true) * ($('li', event.target).length - 3) - $('.jspContainer', list).outerHeight(true, true)
                   busy = false
+                  true
+                error: (jqXHR, textStatus, errorThrown) ->
+                  wrapped = $("<div>#{jqXHR.responseText}</div>")
+                  wrapped.find('title').remove()
+                  wrapped.find('style').remove()
+                  wrapped.find('head').remove()
+                  console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
                   true
 
             true
         true
 
       $.fn.initialize_filter = () ->
-        $('.filter a', this).each ->
+        block = $(this)
+        $('.filter a', block).each ->
           $(this).on 'click', ->
+            link_wrapper = $(this).closest('li')
+            return false if link_wrapper.hasClass('selected')
+            $.ajax
+              url: $(this).attr('href')
+              success: (response, textStatus, jqXHR) ->
+                wrapped = $("<div>#{response}</div>")
+                $('.accounts_list', block).remove()
+                $('.accounts_list', wrapped).appendTo(block)
+                $('.pagination', block).remove()
+                $('.pagination', wrapped).appendTo(block)
+                link_wrapper.siblings().removeClass('selected')
+                link_wrapper.addClass('selected')
+                $('#q', block).val('')
+                block.initialize_pagination()
+                true
+              error: (jqXHR, textStatus, errorThrown) ->
+                wrapped = $("<div>#{jqXHR.responseText}</div>")
+                wrapped.find('title').remove()
+                wrapped.find('style').remove()
+                wrapped.find('head').remove()
+                console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
+                true
+
             false
+
           true
+
         true
 
       container.dialog
