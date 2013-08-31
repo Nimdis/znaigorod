@@ -22,7 +22,6 @@ class AccountsSearchController < ApplicationController
       }.results
     end
 
-
     render :partial => 'results'
   end
 end

@@ -59,10 +59,25 @@
         modal: true
         resizable: false
         title: 'Хочу пригласить'
-        width: '780px'
-        close: ->
+        width: 780
+        open: (event, ui) ->
+          console.log 'open'
+          console.log this
+          console.log $('.accounts_list', this)
+          $('.accounts_list', this).jScrollPane
+            verticalGutter: 0
+            showArrows: true
+          .bind 'jsp-scroll-y', (event, scrollPositionY, isAtTop, isAtBottom) ->
+            #console.log event
+            #console.log isAtTop
+            #console.log isAtBottom
+            true
+
+          true
+        close: (event, ui) ->
           $(this).dialog('destroy')
           $(this).remove()
+
           true
 
       $('.submit_dialog', form).click ->

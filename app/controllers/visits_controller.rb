@@ -19,7 +19,7 @@ class VisitsController < ApplicationController
 
   def new
     new! {
-      @users = User.ordered.page(params[:page]).per(5)
+      @users = User.ordered.page(params[:page]).per(10)
       @visit.user_id = current_user.id
       if params[:acts_as_invited]
         @acts_as = 'invited'
