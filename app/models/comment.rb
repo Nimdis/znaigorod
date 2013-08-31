@@ -24,6 +24,12 @@ class Comment < ActiveRecord::Base
     user ?  account.avatar : Account.new.avatar
   end
 
+  auto_html_for :body do
+    html_escape
+    simple_format
+    znaigorod_link :target => "_blank", :rel => 'nofollow'
+  end
+
   private
     def authenticated_user
       errors.add :body, 'Комментарии могут оставлять только зарегистрированные пользователи' if user.nil?

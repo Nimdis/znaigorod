@@ -12,7 +12,7 @@ class CommentObserver < ActiveRecord::Observer
         messageable: comment)
     end
     # уведомление автору афиши о комментариях
-    if comment.commentable.is_a?(Afisha) && comment.commentable.user != comment.user
+    if comment.commentable.is_a?(Afisha) && comment.commentable.user && comment.commentable.user != comment.user
       NotificationMessage.delay.create(
         account: comment.commentable.user.account,
         producer: comment.user.account,

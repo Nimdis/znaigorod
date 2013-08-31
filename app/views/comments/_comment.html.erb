@@ -14,7 +14,7 @@
       <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => comment } %>
     </div>
     <div class="body">
-      <%= strip_tags comment.body %>
+      <%= comment.body_html %>
     </div>
   </div>
 
