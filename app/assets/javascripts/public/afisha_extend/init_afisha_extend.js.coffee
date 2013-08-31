@@ -207,8 +207,18 @@
       target.html(jqXHR.responseText)
 
     if target.hasClass('invite')
-      invite_container = $('<div class="invite_message_form_wrapper" />').appendTo('body').hide().html(response)
+      invite_container = $('<div class="message_form_wrapper" />').appendTo('body').hide().html(response)
       form = $('form', invite_container)
+
+      form.submit () ->
+        $.ajax
+          url: form.attr('action')
+          type: 'POST'
+          data: form.serialize()
+          success: (response, textStatus, jqXHR) ->
+            form.remove()
+            true
+
       invite_container.dialog
         autoOpen: true
         draggable: false
@@ -216,14 +226,23 @@
         resizable: false
         title: 'Приглашение'
         width: '500px'
+        close: (event, ui) ->
+          form.submit()
+          $(this).dialog('destroy')
+          $(this).remove()
+          true
+
+      $('textarea', invite_container).keyup ->
+        if $(this).val()
+          $('input[type=submit]', $(this).closest('form')).removeAttr('disabled').removeClass('disabled')
+        else
+          $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
+        true
 
       $('.submit_dialog', form).click ->
         invite_container.dialog('close')
 
-        $('.message_wrapper')
-          .replaceWith('<div class="message_wrapper">Приглашение успешно отправлено!</div>')
-          .delay(5000)
-          .slideUp('slow')
+        $('.message_wrapper').replaceWith('<div class="message_wrapper">Приглашение успешно отправлено!</div>').slideUp('slow')
 
         false
 

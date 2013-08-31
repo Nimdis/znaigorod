@@ -37,8 +37,19 @@
     if target.hasClass('change_friendship')
       target.closest('li').replaceWith(response)
 
-    if target.hasClass('add_private_message')
-      container = $('<div class="private_message_form_wrapper" />').appendTo('body').hide().html(response)
+    if target.hasClass('add_private_message') || target.hasClass('invite')
+      container = $('<div class="message_form_wrapper" />').appendTo('body').hide().html(response)
+      form = $('form', container)
+
+      form.submit () ->
+        $.ajax
+          url: form.attr('action')
+          type: 'POST'
+          data: form.serialize()
+          success: (response, textStatus, jqXHR) ->
+            form.remove()
+            true
+
       container.dialog
         autoOpen: true
         draggable: false
@@ -46,36 +57,24 @@
         resizable: false
         title: 'Новое сообщение'
         width: '500px'
+        close: (event, ui) ->
+          form.submit()
+          $(this).dialog('destroy')
+          $(this).remove()
+          true
+
+      $('textarea', container).keyup ->
+        if $(this).val()
+          $('input[type=submit]', $(this).closest('form')).removeAttr('disabled').removeClass('disabled')
+        else
+          $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
+        true
 
       $('.submit_dialog', form).click ->
         container.dialog('close')
-        form = $('form', container)
 
-        $('.message_wrapper')
-          .replaceWith('<div class="message_wrapper">Приглашение успешно отправлено!</div>')
-          .delay(5000)
-          .slideUp('slow')
+        $('.message_wrapper').replaceWith('<div class="message_wrapper">Сообщение успешно отправлено!</div>').slideUp('slow')
 
         false
 
-    if target.hasClass('invite')
-      invite_container = $('<div class="invite_message_form_wrapper" />').appendTo('body').hide().html(response)
-      form = $('form', invite_container)
-      invite_container.dialog
-        autoOpen: true
-        draggable: false
-        modal: true
-        resizable: false
-        title: 'Приглашение'
-        width: '500px'
-
-      $('.submit_dialog', form).click ->
-        invite_container.dialog('close')
-
-        $('.message_wrapper')
-          .replaceWith('<div class="message_wrapper">Приглашение успешно отправлено!</div>')
-          .delay(5000)
-          .slideUp('slow')
-
-        false
   true
