@@ -23,7 +23,7 @@ task :storage => :environment do
     items = klass.classify.constantize.where("#{field} IS NOT NULL AND #{field} LIKE 'http://storage%'")
     bar = ProgressBar.new(items.count)
     items.each do |item|
-      item.update_column(field.to_sym, item.send(field).gsub('http://storage', 'http://dev-storage'))
+      item.update_column(field.to_sym, item.send(field).gsub('http://dev-storage', 'http://storage'))
       bar.increment!
     end
   end
