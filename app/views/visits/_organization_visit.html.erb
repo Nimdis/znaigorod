@@ -11,7 +11,13 @@
   <div class="title">
     <%= link_to visit.visitable.title, polymorphic_path(visit.visitable) %>
   </div>
-  <div class="wanted">
-    <%= render partial: 'visits/invite_links', locals: { visit: visit } if user_signed_in? && current_user != visit.user && (visit.acts_as_inviter? || visit.acts_as_invited?) %>
-  </div>
+  <% if visit.inviting? && visit.actual? %>
+    <div class="wanted">
+      <% if current_user == visit.user %>
+        <%= render partial: 'visits/self_invite_links', locals: { visit: visit } %>
+      <% else %>
+        <%= render partial: 'visits/invite_links', locals: { visit: visit } %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

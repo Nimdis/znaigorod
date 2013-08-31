@@ -216,6 +216,10 @@ class Afisha < ActiveRecord::Base
     date :created_at
   end
 
+  def actual?
+    self.showings.actual.any?
+  end
+
   def search_kind
     self.class.name.underscore
   end

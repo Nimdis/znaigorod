@@ -5,13 +5,13 @@
      <abbr title='<%= visit.invited_description %>' class='show_tipsy'><%= image_tag 'public/icon_question.png' %></abbr>
    <% end %>
   </div>
-<% end %>
-<% if current_user && current_user.account.sended_message(visit.visitable, visit.user.account.id, :inviter) %>
-  <span class='sended'><%= I18n.t('invite.sended.inviter') %></span>
-<% else %>
-  <%= link_to 'Пригласить', new_my_private_message_path(account_id: visit.user.account.id,
-                                                        "#{visit.visitable.class.name.underscore}_id".to_sym => visit.visitable.id,
-                                                        acts_as: :inviter), remote: true, class: 'invite' %>
+  <% if current_user && current_user.account.sended_message(visit.visitable, visit.user.account.id, :inviter) %>
+    <span class='sended'><%= I18n.t('invite.sended.inviter') %></span>
+  <% else %>
+    <%= link_to 'Пригласить', new_my_private_message_path(account_id: visit.user.account.id,
+                                                          "#{visit.visitable.class.name.underscore}_id".to_sym => visit.visitable.id,
+                                                          acts_as: :inviter), remote: true, class: 'invite' %>
+  <% end %>
 <% end %>
 
 <% if visit.acts_as_inviter?  %>
@@ -21,12 +21,12 @@
       <abbr title='<%= visit.inviter_description %>' class='show_tipsy'><%= image_tag 'public/icon_question.png' %></abbr>
     <% end %>
   </div>
-<% end %>
-<% if current_user && current_user.account.sended_message(visit.visitable, visit.user.account.id, :invited) %>
-  <span class='sended'><%= I18n.t('invite.sended.invited') %></span>
-<% else %>
-  <%= link_to 'Пригласи меня', new_my_private_message_path(account_id: visit.user.account.id,
-                                                           "#{visit.visitable.class.name.underscore}_id".to_sym => visit.visitable.id,
-                                                           acts_as: :invited), remote: true, class: 'invite' %>
+  <% if current_user && current_user.account.sended_message(visit.visitable, visit.user.account.id, :invited) %>
+    <span class='sended'><%= I18n.t('invite.sended.invited') %></span>
+  <% else %>
+    <%= link_to 'Пригласи меня', new_my_private_message_path(account_id: visit.user.account.id,
+                                                             "#{visit.visitable.class.name.underscore}_id".to_sym => visit.visitable.id,
+                                                             acts_as: :invited), remote: true, class: 'invite' %>
+  <% end %>
 <% end %>
 

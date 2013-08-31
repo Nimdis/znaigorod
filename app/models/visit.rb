@@ -18,6 +18,18 @@ class Visit < ActiveRecord::Base
   enumerize :inviter_gender, in: [:all, :male, :female], default: :all, predicates: true
   enumerize :invited_gender, in: [:all, :male, :female], default: :all, predicates: true
 
+  def inviting?
+   self.acts_as_inviter? || self.acts_as_invited? 
+  end
+
+  def actual?
+    if self.visitable.is_a?(Afisha)
+      self.visitable.actual?
+    else
+      true
+    end
+  end
+
   private
 
   def authenticated_user

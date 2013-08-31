@@ -1,0 +1,24 @@
+<% if visit.acts_as_invited? %>
+  <div class='info'>
+    <span>Жду приглашения<%= " от "+I18n.t("visit.invited.#{visit.invited_gender}") unless visit.invited_gender.all? %></span>
+   <% if visit.invited_description %>
+     <abbr title='<%= visit.invited_description %>' class='show_tipsy'><%= image_tag 'public/icon_question.png' %></abbr>
+   <% end %>
+  </div>
+  <%= link_to t("Изменить решение"), send("edit_#{visit.visitable.class.name.underscore}_visit_path",
+                                            visit.visitable, visit,
+                                            acts_as_invited: true), remote: true, class: :invite %>
+<% end %>
+
+<% if visit.acts_as_inviter? %>
+  <div class='info'>
+    <span>Приглашаю <%= I18n.t("visit.inviter.#{visit.inviter_gender}") unless visit.inviter_gender.all? %></span>
+    <% if visit.inviter_description %>
+      <abbr title='<%= visit.inviter_description %>' class='show_tipsy'><%= image_tag 'public/icon_question.png' %></abbr>
+    <% end %>
+  </div>
+  <%= link_to t("Изменить решение"), send("edit_#{visit.visitable.class.name.underscore}_visit_path",
+                                            visit.visitable, visit,
+                                            acts_as_inviter: true), remote: true, class: :invite %>
+<% end %>
+
