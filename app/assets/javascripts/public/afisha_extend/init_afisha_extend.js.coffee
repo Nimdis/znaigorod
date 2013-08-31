@@ -129,6 +129,34 @@
 
         true
 
+      $.fn.initialize_search = () ->
+        block = $(this)
+        $('form', block).on 'submit', ->
+          form = $(this)
+          return false unless $('#q', block).val()
+          $.ajax
+            url: form.attr('action')
+            data: form.serialize()
+            success: (response, textStatus, jqXHR) ->
+              wrapped = $("<div>#{response}</div>")
+              $('.accounts_list', block).remove()
+              $('.accounts_list', wrapped).appendTo(block)
+              $('.pagination', block).remove()
+              $('.pagination', wrapped).appendTo(block)
+              $('.filter li', block).removeClass('selected')
+              block.initialize_pagination()
+              true
+            error: (jqXHR, textStatus, errorThrown) ->
+              wrapped = $("<div>#{jqXHR.responseText}</div>")
+              wrapped.find('title').remove()
+              wrapped.find('style').remove()
+              wrapped.find('head').remove()
+              console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
+              true
+          false
+
+        true
+
       container.dialog
         autoOpen: true
         draggable: false
@@ -136,19 +164,23 @@
         resizable: false
         title: 'Хочу пригласить'
         width: 780
+        create: (event, ui) ->
+          $('body').css
+            overflow: 'hidden'
+          true
         open: (event, ui) ->
-
           block = $('.right', this)
-
           block.initialize_pagination()
           block.initialize_filter()
-
+          block.initialize_search()
           true
-
+        beforeClose: (event, ui) ->
+          $("body").css
+            overflow: 'inherit'
+          true
         close: (event, ui) ->
           $(this).dialog('destroy')
           $(this).remove()
-
           true
 
       $('.submit_dialog', form).click ->
