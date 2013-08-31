@@ -3,10 +3,15 @@
 </div>
 
 <div class='right'>
-  <%= form_tag accounts_search_path, :method => :get do %>
-    <%= text_field_tag :q, params[:q] %>
-
-    <%= submit_tag 'Найти' %>
-  <% end %>
+  <div class='search_form'>
+    <%= form_tag accounts_search_path, :method => :get do %>
+      <%= text_field_tag :q, params[:q] %>
+      <%= submit_tag 'Найти' %>
+    <% end %>
+  </div>
+  <div class='filter'>
+    <a class='selected' href='#'>Все участники (1234)</a>
+    <a href='#'>Мой друзья (16)</a>
+  </div>
   <%= render partial: 'accounts/list' %>
 </div>
