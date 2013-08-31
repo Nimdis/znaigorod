@@ -58,9 +58,9 @@ class AccountPresenter
     }
   end
 
-  def searcher_params(kind = kind_filter.kind)
+  def searcher_params
     @searcher_params ||= {}.tap do |searcher_params|
-      searcher_params[:kind] = kind if kind != 'all'
+      searcher_params[:kind] = kind_filter.kind if kind != 'all'
       searcher_params[:gender] = gender_filter.gender if gender_filter.used?
       searcher_params[:acts_as] = acts_as_filter.acts_as if acts_as_filter.used?
     end
@@ -174,6 +174,6 @@ class AccountCounter
   end
 
   def count
-    HasSearcher.searcher(:accounts, presenter.searcher_params(@kind)).total
+    HasSearcher.searcher(:accounts, presenter.searcher_params.merge(:kind => @kind)).total
   end
 end
