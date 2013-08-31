@@ -22,20 +22,18 @@ end
 
 every :day, :at => '5am' do
   rake "refresh_sitemaps"
-end
-
-every 5.minutes do
-  rake 'refresh_copies'
-end
-
-every 2.hours do
-  rake 'afisha:event_users'
-end
-
-every :day, :at => '3am' do
   rake 'account:get_friends'
 end
 
 every 2.hours do
+  rake 'afisha:event_users'
   rake 'social_likes'
+end
+
+every 1.hours do
+  rake 'account:reindex'
+end
+
+every 5.minutes do
+  rake 'refresh_copies'
 end

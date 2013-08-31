@@ -29,4 +29,11 @@ namespace :account do
     end
   end
 
+  desc 'Реиндекс аккаунтов для приглашений'
+  task :reindex => :environment do
+    puts 'Account reindex'
+    Account.index
+    Sunspot.commit
+  end
+
 end
