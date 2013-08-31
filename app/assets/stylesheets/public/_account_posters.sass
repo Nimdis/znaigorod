@@ -24,17 +24,6 @@
           position: relative
           width: 178px
 
-          .line
-            display: none
-            width: 100%
-            position: absolute
-            color: #000
-            text-align: center
-
-            @for $i from 1 through 5
-              &:nth-child(#{$i})
-                top: (25px * $i) + 35px
-
           .first_line
             bottom: 35px
 
@@ -70,7 +59,6 @@
           &:hover
             img
               +opacity(0.15)
-            .line,
             .first_line,
             .second_line
               display: block
