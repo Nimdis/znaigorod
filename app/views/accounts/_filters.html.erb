@@ -11,6 +11,17 @@
         <% end %>
       </ul>
     </div>
+    <div class='by_acts_as'>
+      <ul>
+        <% @presenter.acts_as_links.each do |link| %>
+          <li class='<%= link[:klass] %><%= ' selected' if link[:current] %>'>
+            <%= link_to accounts_path(link[:parameters]) do %>
+              <%= content_tag :span,  link[:title], class: :name %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 
   <div class='filters account'>
@@ -21,20 +32,6 @@
             <%= link_to accounts_path(link[:parameters]) do %>
               <%= content_tag :span,  link[:title], class: :name %>
               <%= content_tag :span, link[:count], class: :count  %>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-
-  <div class='filters account'>
-    <div class='by_acts_as'>
-      <ul>
-        <% @presenter.acts_as_links.each do |link| %>
-          <li class='<%= link[:klass] %><%= ' selected' if link[:current] %>'>
-            <%= link_to accounts_path(link[:parameters]) do %>
-              <%= content_tag :span,  link[:title], class: :name %>
             <% end %>
           </li>
         <% end %>
