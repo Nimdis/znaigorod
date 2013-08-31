@@ -1,7 +1,7 @@
 <% if visit.acts_as_invited? %>
   <div class='info'>
     <span>Ждет приглашения<%= " от "+I18n.t("visit.invited.#{visit.invited_gender}") unless visit.invited_gender.all? %></span>
-   <% if visit.invited_description %>
+   <% unless visit.invited_description.blank? %>
      <abbr title='<%= visit.invited_description %>' class='show_tipsy'><%= image_tag 'public/icon_question.png' %></abbr>
    <% end %>
   </div>
@@ -17,7 +17,7 @@
 <% if visit.acts_as_inviter?  %>
   <div class='info'>
     <span>Приглашает <%= I18n.t("visit.inviter.#{visit.inviter_gender}") unless visit.inviter_gender.all? %></span>
-    <% if visit.inviter_description %>
+    <% unless visit.inviter_description.blank? %>
       <abbr title='<%= visit.inviter_description %>' class='show_tipsy'><%= image_tag 'public/icon_question.png' %></abbr>
     <% end %>
   </div>
