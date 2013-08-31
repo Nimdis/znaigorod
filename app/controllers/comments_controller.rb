@@ -14,7 +14,8 @@ class CommentsController < ApplicationController
 
   def index
     index! {
-      render partial: 'accounts/comments', locals: { comments: end_of_association_chain.rendereable.page(params[:page]).per(3) }, layout: false and return if @account
+      @comments = end_of_association_chain.rendereable.page(params[:page]).per(3)
+      render partial: 'accounts/comments', locals: { comments: @comments }, layout: false and return if @account
     }
   end
 

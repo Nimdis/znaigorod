@@ -6,6 +6,6 @@
     <%= link_to comment.commentable.contest.title, contest_work_path(comment.commentable.contest, comment.commentable) %>
   </div>
   <div class="body">
-    <%= strip_tags comment.body %>
+    <%= comment.body_html %>
   </div>
 </div>

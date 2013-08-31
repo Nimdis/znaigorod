@@ -6,6 +6,6 @@
     <%= link_to comment.commentable.title, comment.commentable %>
   </div>
   <div class="body">
-    <%= strip_tags comment.body %>
+    <%= comment.body_html %>
   </div>
 </div>
