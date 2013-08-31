@@ -47,10 +47,8 @@ class VisitsController < ApplicationController
     edit! {
       @accounts = Account.ordered.page(params[:page]).per(5)
       if params[:acts_as_invited]
-        @acts_as = 'invited'
         render partial: 'invites/invited' and return
       elsif params[:acts_as_inviter]
-        @acts_as = 'inviter'
         render partial: 'invites/inviter' and return
       end
     }

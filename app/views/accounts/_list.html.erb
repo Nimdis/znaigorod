@@ -9,7 +9,7 @@
       <div class='details'>
         <%= link_to(account, account, :class => :name) %>
         <div class="wanted">
-          <%= render partial: 'invites/link', locals: { account: account } if @acts_as %>
+          <%= render partial: 'invites/link', locals: { account: account, acts_as: acts_as } %>
         </div>
       </div>
     </li>
