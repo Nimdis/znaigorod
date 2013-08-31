@@ -14,15 +14,11 @@ class CommentsController < ApplicationController
 
   def index
     index! {
-      render partial: 'accounts/comments', locals: { comments: @comments }, layout: false and return if @account
+      render partial: 'accounts/comments', locals: { comments: end_of_association_chain.rendereable.page(params[:page]).per(3) }, layout: false and return if @account
     }
   end
 
   private
-    def collection
-      @comments ||= end_of_association_chain.rendereable.page(params[:page]).per(3) if association_chain.first.is_a?(Account)
-    end
-
     alias_method :old_build_resource, :build_resource
 
     def build_resource
