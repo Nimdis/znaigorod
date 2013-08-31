@@ -33,7 +33,7 @@
           <%= link_to(user.account, user.account, :class => :name) %>
           <% visit = visitable.visit_for_user(user) %>
           <% if visit.inviting? && visit.actual? %>
-            <div class="wanted social_actions">
+            <div class="wanted">
               <% if current_user == visit.user %>
                 <%= render partial: 'visits/self_invite_links', locals: { visit: visit } %>
               <% else %>
