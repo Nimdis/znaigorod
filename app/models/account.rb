@@ -44,7 +44,7 @@ class Account < ActiveRecord::Base
     float :rating,   :trie => true
     string :search_kind
     string(:kind, :multiple => true) { indexing_kinds }
-    string(:acts_as, :multiple => true) { self.acts_as }
+    string(:acts_as, :multiple => true) { acts_as }
   end
 
   def sended_message(messageable, account_id, invite)
@@ -65,12 +65,9 @@ class Account < ActiveRecord::Base
   end
 
   def acts_as
-    if self.visits.inviter.any? && self.visits.invited.any?
-      [:inviter, :invited]
-    elsif self.visits.inviter.any?
-      :inviter
-    elsif self.visits.invited.any?
-      :invited
+    @acts_as ||= [].tap do |array|
+      array << :inviter if visits.inviter.select {|v| v.actual?}.any?
+      array << :invited if visits.invited.select {|v| v.actual?}.any?
     end
   end
 
