@@ -23,9 +23,11 @@ class VisitsController < ApplicationController
       @visit.user_id = current_user.id
       if params[:acts_as_invited]
         @acts_as = 'invited'
+        render partial: 'accounts/list' and return params[:page].present?
         render partial: 'invites/invited' and return
       elsif params[:acts_as_inviter]
         @acts_as = 'inviter'
+        render partial: 'accounts/list' and return if params[:page].present?
         render partial: 'invites/inviter' and return
       end
     }

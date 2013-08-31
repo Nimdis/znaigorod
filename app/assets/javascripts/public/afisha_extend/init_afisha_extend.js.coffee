@@ -42,15 +42,52 @@
       form = $('form', container)
       radio_buttons_block = $('.radio_buttons', form)
 
-      $('label', radio_buttons_block).each (index, item) ->
-        $(item).addClass($('input', item).attr('id'))
-        $(item).addClass('checked') if $('input', item).is(':checked')
-        $(item).click ->
+      $('label', radio_buttons_block).each ->
+        $(this).addClass($('input', this).attr('id'))
+        $(this).addClass('checked') if $('input', this).is(':checked')
+        $(this).click ->
           return false if $(this).hasClass('checked')
           $('label', radio_buttons_block).removeClass('checked')
           $(this).addClass('checked') if $('input', this).is(':checked')
           true
 
+        true
+
+      $.fn.initialize_pagination = () ->
+        page = 1
+        busy = false
+        next_link = $('nav.pagination .next a', container)
+        list = $('.accounts_list', this)
+
+        list.jScrollPane
+          autoReinitialise: true
+          verticalGutter: 0
+          showArrows: true
+
+        block_offset = $('li:last', list).outerHeight(true, true) * ($('li', list).length - 3) - $('.jspContainer', list).outerHeight(true, true)
+        if next_link.length
+          list.bind 'jsp-scroll-y', (event, scrollPositionY, isAtTop, isAtBottom) ->
+            if block_offset < scrollPositionY && !busy
+              busy = true
+              page += 1
+              $.ajax
+                url: next_link.attr('href').replace(/page=\d+/, "page=#{page}")
+                success: (response, textStatus, jqXHR) ->
+                  return true if response.match(/empty_items_list/)
+                  return true if response.trim().isBlank()
+                  $('.jspPane', event.target).append(response)
+                  busy = false
+                  block_offset = $('li:last', event.target).outerHeight(true, true) * ($('li', event.target).length - 3) - $('.jspContainer', list).outerHeight(true, true)
+                  true
+
+            true
+        true
+
+      $.fn.initialize_filter = () ->
+        $('.filter a', this).each ->
+          $(this).on 'click', ->
+            false
+          true
         true
 
       container.dialog
@@ -61,19 +98,14 @@
         title: 'Хочу пригласить'
         width: 780
         open: (event, ui) ->
-          console.log 'open'
-          console.log this
-          console.log $('.accounts_list', this)
-          $('.accounts_list', this).jScrollPane
-            verticalGutter: 0
-            showArrows: true
-          .bind 'jsp-scroll-y', (event, scrollPositionY, isAtTop, isAtBottom) ->
-            #console.log event
-            #console.log isAtTop
-            #console.log isAtBottom
-            true
+
+          block = $('.right', this)
+
+          block.initialize_pagination()
+          block.initialize_filter()
 
           true
+
         close: (event, ui) ->
           $(this).dialog('destroy')
           $(this).remove()

@@ -11,8 +11,14 @@
   </div>
 
   <ul class='filter'>
-    <%= link_to "Все участники (#{Account.count})", accounts_search_path(:q => params[:q]) %>
-    <%= link_to "Мои друзья (#{current_user.account.friends.count})", accounts_search_path(:only_friends => true, :q => params[:q]) %>
-  </div>
+    <li<%= " class='selected'".html_safe if params[:only_friends].blank? %>>
+      <%= link_to "Все пользователи (#{Account.count})", accounts_search_path(:q => params[:q]) %>
+    </li>
+    <li<%= " class='selected'".html_safe if params[:only_friends].present? %>>
+      <%= link_to "Мои друзья (#{current_user.account.friends.count})", accounts_search_path(:only_friends => true, :q => params[:q]) %>
+    </li>
+  </ul>
+
   <%= render partial: 'accounts/list' %>
+
 </div>
