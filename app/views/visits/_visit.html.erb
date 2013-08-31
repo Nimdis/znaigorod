@@ -31,10 +31,16 @@
         </div>
         <div class='details'>
           <%= link_to(user.account, user.account, :class => :name) %>
-          <div class="wanted">
-            <% visit = visitable.visit_for_user(user) %>
-            <%= render partial: 'visits/invite_links', locals: { visit: visit } if user_signed_in? && current_user != user && visit && (visit.acts_as_inviter? || visit.acts_as_invited?) %>
-          </div>
+          <% visit = visitable.visit_for_user(user) %>
+          <% if visit.inviting? && visit.actual? %>
+            <div class="wanted social_actions">
+              <% if current_user == visit.user %>
+                <%= render partial: 'visits/self_invite_links', locals: { visit: visit } %>
+              <% else %>
+                <%= render partial: 'visits/invite_links', locals: { visit: visit } %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </li>
     <% end %>
