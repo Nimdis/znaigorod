@@ -110,7 +110,7 @@ class PostSortingFilter
   end
 
   def order_by
-    @order_by ||= available_sortings_values.include?(@order_by) ? @order_by : 'creation'
+    @order_by ||= available_sortings_values.include?(@order_by) ? @order_by : 'rating'
   end
 end
 
