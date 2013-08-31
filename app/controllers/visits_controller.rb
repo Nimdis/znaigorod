@@ -19,7 +19,7 @@ class VisitsController < ApplicationController
 
   def new
     new! {
-      @users = User.ordered.page(params[:page]).per(10)
+      @accounts = Account.ordered.page(params[:page]).per(5)
       @visit.user_id = current_user.id
       if params[:acts_as_invited]
         @acts_as = 'invited'
@@ -43,7 +43,7 @@ class VisitsController < ApplicationController
 
   def edit
     edit! {
-      @users = User.ordered.page(params[:page]).per(5)
+      @accounts = Account.ordered.page(params[:page]).per(5)
       if params[:acts_as_invited]
         @acts_as = 'invited'
         render partial: 'invites/invited' and return
