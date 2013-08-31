@@ -195,10 +195,7 @@
       $('.submit_dialog', form).click ->
         container.dialog('close')
 
-        $('.message_wrapper')
-          .replaceWith('<div class="message_wrapper">Приглашение успешно отправлено!</div>')
-          .delay(5000)
-          .slideUp('slow')
+        $('.message_wrapper').text('Приглашение успешно отправлено!').show().delay(5000).slideUp('slow')
 
         false
 
@@ -242,7 +239,7 @@
       $('.submit_dialog', form).click ->
         invite_container.dialog('close')
 
-        $('.message_wrapper').replaceWith('<div class="message_wrapper">Приглашение успешно отправлено!</div>').slideUp('slow')
+        $('.message_wrapper').text('Приглашение успешно отправлено!').show().delay(5000).slideUp('slow')
 
         false
 

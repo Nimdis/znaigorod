@@ -73,7 +73,7 @@
       $('.submit_dialog', form).click ->
         container.dialog('close')
 
-        $('.message_wrapper').replaceWith('<div class="message_wrapper">Сообщение успешно отправлено!</div>').slideUp('slow')
+        $('.message_wrapper').text('Сообщение успешно отправлено!').show().delay(5000).slideUp('slow')
 
         false
 
