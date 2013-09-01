@@ -12,7 +12,7 @@ class AccountDecorator < ApplicationDecorator
   end
 
   def image
-    resized_image_url(account.avatar.url, 88, 88, false)
+    h.resized_image_url(account.avatar.url, 88, 88)
   end
 
   def buddies
