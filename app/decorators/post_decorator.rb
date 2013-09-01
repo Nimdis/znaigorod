@@ -14,7 +14,7 @@ class PostDecorator < ApplicationDecorator
   end
 
   def truncated_description(length)
-    Sanitize.clean(html_content).truncated(length, ' ')
+    Sanitize.clean(html_content).gsub('&nbsp;', '').truncated(length, ' ')
   end
 
   def show_url
