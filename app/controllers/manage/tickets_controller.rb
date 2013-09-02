@@ -1,7 +1,7 @@
 class Manage::TicketsController < Manage::ApplicationController
   actions :new, :create, :edit, :update, :destroy
 
-  belongs_to :affiche, optional: true
+  belongs_to :afisha, optional: true
 
   def index
     @state = state = params[:state].present? ? params[:state] : nil

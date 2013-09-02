@@ -1,0 +1,16 @@
+<%= simple_nested_form_for resource, :url => form_url_for_resource, :html => { :novalidate => true } do |f| %>
+  <%= f.input :vfs_path, :as => :hidden, :input_html => { :class => 'vfs_path' } if f.object.respond_to?(:vfs_path) %>
+  <% if resource_class.superclass == Afisha %>
+    <%= render :partial => 'manage/affiches/form', :locals => { :f => f } %>
+  <% elsif resource_class == Organization %>
+    <%= render :partial => 'manage/organizations/form', :locals => { :f => f } %>
+  <% else %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+  <% end %>
+
+  <div class="actions">
+    <%= link_to "&larr; Назад".html_safe, :back %>
+    <%= button_tag 'Сохранить'.html_safe %>
+    <%= link_to 'Удалить'.html_safe, resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? || resource.is_a?(GalleryImage) %>
+  </div>
+<% end %>

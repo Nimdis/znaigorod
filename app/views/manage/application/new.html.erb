@@ -1,0 +1,6 @@
+<div class='form_view'>
+  <h2><%= parent.title if respond_to?(:parent) && parent %></h2>
+  <h1><%= t "manage.add_#{resource.class.model_name.underscore}" %></h1>
+
+  <%= render :partial => 'form_wrapper' %>
+</div>
