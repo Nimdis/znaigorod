@@ -8,7 +8,7 @@ class AfishaObserver < ActiveRecord::Observer
         account: afisha.user.account,
         kind: :afisha_published,
         messageable: afisha)
-      afisha.user.account.delay.account_rating
+      afisha.user.account.delay.update_rating if afisha.user.present?
     end
   end
 
@@ -28,7 +28,7 @@ class AfishaObserver < ActiveRecord::Observer
   def before_save(afisha)
     if afisha.published? && afisha.change_versionable?
       afisha.delay.save_version
-      MyMailer.delay.send_afisha_diff(afisha) unless afisha.user.is_admin?
+      MyMailer.delay.send_afisha_diff(afisha) if afisha.user.present? && !afisha.user.is_admin?
     end
   end
 
