@@ -19,7 +19,8 @@
       <% @presenter.sortings_links.each do |sortings_link| %>
         <li<%= " class=selected" if sortings_link[:selected] %>>
           <%= link_to sortings_link[:title],
-            send(sortings_link[:url], sortings_link[:parameters]), :class => sortings_link[:parameters][:order_by] %>
+            send(sortings_link[:url], sortings_link[:parameters]),
+            :class => sortings_link[:parameters][:order_by] %>
         </li>
       <% end %>
     </ul>

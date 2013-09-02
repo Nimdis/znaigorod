@@ -161,9 +161,9 @@ class AfishaPresenter
           url: url,
           parameters: {
             :period => @period_filter.period,
-            on: @period_filter.date,
+            :on => @period_filter.date,
             :order_by => sorting_value,
-            has_tickets: has_tickets
+            :has_tickets => has_tickets
           },
           selected: @sorting_filter.order_by == sorting_value
         }
