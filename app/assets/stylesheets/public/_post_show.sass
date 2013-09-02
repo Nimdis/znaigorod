@@ -17,6 +17,7 @@
     width: 950px
 
     .wrapper
+      +clearfix
       margin: 0 0 10px 0
 
       .post_content
@@ -26,7 +27,17 @@
         min-height: 224px
 
         p
+          clear: left
           margin: 0 0 15px 0
+
+        img
+          &.float_left
+            float: left
+            margin: 0 15px 15px 0
+
+          &.float_right
+            float: right
+            margin: 0 0 15px 15px
 
         .image
           float: left
