@@ -2,7 +2,7 @@
   timer = setInterval ->
     target = $('a.change_message_status.unread:first')
     if target.length
-      console.log target.click()
+      target.click()
     else
       clearInterval(timer)
   , 1000

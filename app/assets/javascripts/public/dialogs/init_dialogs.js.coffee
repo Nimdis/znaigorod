@@ -49,8 +49,6 @@
   $.fn.submit_form = (response) ->
     account_id = $(response).closest('li').data('account_id')
 
-    console.log 'account_id'
-
     $('ul.dialog', "#dialog_#{account_id}").append(response)
     $('.private_message textarea').attr("value", "")
     scroll($('ul.dialog', "#dialog_#{account_id}"))
@@ -78,7 +76,7 @@
       add_tab_handler(response, stored)
       close_tab_handler(stored)
 
-    else
+    if target.hasClass('simple_form new_private_message')
       account_id = $(response).closest('li').data('account_id')
 
       $('ul.dialog', "#dialog_#{account_id}").append(response)
