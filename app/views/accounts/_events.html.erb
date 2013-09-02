@@ -16,9 +16,7 @@
   <div class="events list">
     <% %w[draft pending published].each do |state| %>
       <div id='<%= state %>'>
-        <ul>
-          <%= render partial: 'events/account_events', locals: { collection: @events.by_state(state), state: state.to_sym } %>
-        </ul>
+        <%= render partial: 'events/account_events', locals: { collection: @events.by_state(state), state: state.to_sym } %>
       </div>
     <% end %>
   </div>

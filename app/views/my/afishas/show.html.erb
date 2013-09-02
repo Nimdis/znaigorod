@@ -106,21 +106,23 @@
         <% end %>
       </div>
 
-      <ul class='tags'>
-        <% if @afisha.tags.any? %>
-          <% @afisha.tags.each do |tag| %>
-            <li><%= tag %></li>
-          <%end%>
-          <li class='transparent'>
-            <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %>
-          </li>
-        <% else %>
-          <li class='transparent'>
-            <span class='alert'>Нет</span> тэгов
-            <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %>
-          </li>
-        <% end %>
-      </ul>
+      <div class="tags_and_visits">
+        <ul class='tags'>
+          <% if @afisha.tags.any? %>
+            <% @afisha.tags.each do |tag| %>
+              <li><%= tag %></li>
+            <%end%>
+            <li class='transparent'>
+              <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %>
+            </li>
+          <% else %>
+            <li class='transparent'>
+              <span class='alert'>Нет</span> тэгов
+              <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
 
       <div class='trailer_header'>
         <% if @afisha.trailer_code.present? %>

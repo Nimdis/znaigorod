@@ -1,19 +1,22 @@
 <li>
-  <div class="item">
-    <div class="poster">
-      <% if event.poster_url? %>
-        <%= image_tag(resized_image_url(event.poster_url, 65, 88), size: '65x88') %>
-      <% else %>
-        <%= image_tag 'public/stub_poster.png', size: '65x88' %>
+  <div class='item'>
+    <div class='poster'>
+        <%  %>
+          <%= link_to can?(:edit, event) ? my_afisha_show_path(event) : afisha_show_path(event) do %>
+        <% if event.poster_url? %>
+          <%= image_tag(resized_image_url(event.poster_url, 65, 88), size: '65x88') %>
+        <% else %>
+          <%= image_tag 'public/stub_poster.png', size: '65x88' %>
+        <% end %>
       <% end %>
     </div>
-    <div class="title">
-      <%= link_to event.title, afisha_show_path(event) %>
+    <div class='title'>
+      <%= link_to event.title, can?(:edit, event) ? my_afisha_show_path(event) : afisha_show_path(event) %>
     </div>
-    <div class="kind">
+    <div class='kind'>
       <%= event.kind.map(&:text).join(', ') %>
     </div>
-    <div class="actions">
+    <div class='actions'>
       <%= link_to 'Редактировать', edit_my_afisha_path(event) if (event.published? || event.draft?) && (can? :edit, event) %>
       <%= link_to 'Удалить', my_afisha_path(event), method: :delete, confirm: "Вы уверены, что хотите удалить?" if event.draft? && (can? :delete, event) %>
     </div>
