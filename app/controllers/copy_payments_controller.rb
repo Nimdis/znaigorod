@@ -7,12 +7,7 @@ class CopyPaymentsController < ApplicationController
 
   def create
     create! do |success, failure|
-      success.html do
-        integration_module = ActiveMerchant::Billing::Integrations::Robokassa
-        integration_helper = integration_module::Helper.new(@copy_payment.id, Settings['robokassa.login'], secret: Settings['robokassa.secret_1'], amount: @copy_payment.amount)
-
-        redirect_to "#{integration_module.service_url}?#{integration_helper.form_fields.to_query}"
-      end
+      success.html { redirect_to @copy_payment.service_url and return }
     end
   end
 

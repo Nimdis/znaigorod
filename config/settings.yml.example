@@ -67,6 +67,9 @@ robokassa:
   secret_1:             secret1
   secret_2:             secret2
 
+rbkmoney:
+  account:              account
+
 mainsms:
   project:              project
   api_key:              api_key

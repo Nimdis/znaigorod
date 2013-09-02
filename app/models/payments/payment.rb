@@ -19,6 +19,34 @@ class Payment < ActiveRecord::Base
     self.state = 'canceled'
     self.save! :validate => false
   end
+
+  def service_url
+    "#{integration_module.service_url}?#{integration_helper.form_fields.to_query}"
+  end
+
+  private
+
+  def payment_system
+    return :robokassa unless paymentable
+
+    paymentable.payment_system
+  end
+
+  def integration_module
+    "active_merchant/billing/integrations/#{payment_system}".classify.constantize
+  end
+
+  def robokassa_args
+    [id, Settings['robokassa.login'], secret: Settings['robokassa.secret_1'], amount: amount]
+  end
+
+  def rbkmoney_args
+    [id, Settings['rbkmoney.account'], :amount => amount, :currency => 'RUR']
+  end
+
+  def integration_helper
+    integration_module::Helper.new *send("#{payment_system}_args")
+  end
 end
 
 # == Schema Information
