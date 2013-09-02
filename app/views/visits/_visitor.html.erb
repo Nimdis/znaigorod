@@ -1,0 +1,19 @@
+<li>
+  <div class='avatar'>
+    <%= link_to visit.user.account do %>
+      <%= image_tag resized_image_url(visit.user.account.avatar.url, 35, 35), :size => '35x35', :alt => visit.user.account %>
+    <% end%>
+  </div>
+  <div class='details'>
+    <%= link_to(visit.user.account, visit.user.account, :class => :name) %>
+    <% if visit.inviting? && visit.actual? %>
+      <div class="wanted">
+        <% if current_user == visit.user %>
+          <%= render partial: 'visits/self_invite_links', locals: { visit: visit } %>
+        <% else %>
+          <%= render partial: 'visits/invite_links', locals: { visit: visit } %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</li>

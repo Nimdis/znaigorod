@@ -4,7 +4,7 @@ class VisitsController < ApplicationController
 
   actions :all
 
-  custom_actions :collection => [:destroy_visits, :visitors]
+  custom_actions :collection => :destroy_visits
 
   belongs_to :afisha, :organization, :post, :polymorphic => true, :optional => true
   belongs_to :account, :optional => true
@@ -14,6 +14,8 @@ class VisitsController < ApplicationController
   def index
     index! {
       render partial: 'accounts/visits', locals: { visits: @visits }, layout: false and return if @account
+      render partial: 'afishas/visits', locals: { visits: @visits }, layout: false and return if @afisha
+      render partial: 'organizations/visits', locals: { visits: @visits }, layout: false and return if @organization
     }
   end
 
@@ -29,6 +31,7 @@ class VisitsController < ApplicationController
   def create
     create! {
       if request.xhr?
+        @visits = collection
         render :partial => 'visit', :locals => { :visitable => parent } and return
       else
         redirect_to (parent.is_a?(Afisha) ? afisha_show_path(parent) : polymorphic_url(parent)) and return
@@ -46,24 +49,21 @@ class VisitsController < ApplicationController
 
   def update
     update! {
-      render :partial => 'visit', :locals => { :visitable => parent } and return if request.xhr?
-      redirect_to (parent.is_a?(Afisha) ? afisha_show_path(parent) : polymorphic_url(parent))
+      if request.xhr?
+        @visits = collection
+        render :partial => 'visit', :locals => { :visitable => parent } and return
+      else
+        redirect_to (parent.is_a?(Afisha) ? afisha_show_path(parent) : polymorphic_url(parent))
+      end
     }
   end
 
   def destroy_visits
     destroy_visits!{
-      @visits = current_user.visits.where(visitable_id: parent.id)
-      @visits.destroy_all
-
+      @visit = parent.visit_for_user(current_user)
+      @visit.destroy
+      @visits = collection
       render :partial => 'visit', :locals => { :visitable => parent.reload } and return
-    }
-  end
-
-  def visitors
-    visitors!{
-      @users = parent.visits.map(&:user)
-      render :partial => 'visitors', :locals => { :visitable => parent } and return
     }
   end
 
@@ -78,5 +78,6 @@ class VisitsController < ApplicationController
 
   def collection
     @visits ||= end_of_association_chain.rendereable.page(params[:page]).per(3) if association_chain.first.is_a?(Account)
+    @visits ||= end_of_association_chain.page(params[:page]).per(15) if association_chain.first.is_a?(Afisha) || association_chain.first.is_a?(Organization)
   end
 end

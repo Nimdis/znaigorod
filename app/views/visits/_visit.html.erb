@@ -20,30 +20,8 @@
   <div class='floatr'><%= t('afisha.visitors', :count => visitable.visits.map(&:user).compact.count) %></div>
 </div>
 
-<% if visitable.visits.any? %>
-  <ul class='avatars'>
-    <% visitable.visits.map(&:user).compact.each do |user| %>
-      <li>
-        <div class='avatar'>
-          <%= link_to user.account do %>
-            <%= image_tag resized_image_url(user.account.avatar.url, 35, 35), :size => '35x35', :alt => user.account %>
-          <% end%>
-        </div>
-        <div class='details'>
-          <%= link_to(user.account, user.account, :class => :name) %>
-          <% visit = visitable.visit_for_user(user) %>
-          <% if visit.inviting? && visit.actual? %>
-            <div class="wanted">
-              <% if current_user == visit.user %>
-                <%= render partial: 'visits/self_invite_links', locals: { visit: visit } %>
-              <% else %>
-                <%= render partial: 'visits/invite_links', locals: { visit: visit } %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+<% if @visits.any? %>
+  <%= render 'afishas/visits' if visitable.is_a?(Afisha) %>
+  <%= render 'organizations/visits' if visitable.is_a?(Organization) %>
 <% end %>
 
