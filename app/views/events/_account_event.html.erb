@@ -15,7 +15,7 @@
     </div>
     <div class="actions">
       <%= link_to 'Редактировать', edit_my_afisha_path(event) if (event.published? || event.draft?) && (can? :edit, event) %>
-      <%= link_to 'Удалить', my_afisha_path(event), method: :delete if event.draft? && (can? :delete, event) %>
+      <%= link_to 'Удалить', my_afisha_path(event), method: :delete, confirm: "Вы уверены, что хотите удалить?" if event.draft? && (can? :delete, event) %>
     </div>
   </div>
 </li>
