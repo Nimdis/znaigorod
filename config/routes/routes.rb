@@ -36,9 +36,7 @@ Znaigorod::Application.routes.draw do
 
   resources :saunas,   :only => :index
 
-  resources :tickets,  :only => :index do
-    get 'page/:page', :action => :index, :on => :collection
-  end
+  get '/tickets' => redirect('/afisha?has_tickets=true')
 
   resources :coupons,  :only => [:index, :show] do
     get 'page/:page', :action => :index, :on => :collection

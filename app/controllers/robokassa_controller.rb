@@ -23,7 +23,7 @@ class RobokassaController < ApplicationController
 
     if payment.paymentable
       if payment.paymentable.is_a?(Ticket)
-        redirect_to tickets_path
+        redirect_to afisha_index_path(:has_tickets => true)
       else
         redirect_to coupons_path
       end
@@ -43,7 +43,7 @@ class RobokassaController < ApplicationController
 
     if paymentable
       if paymentable.is_a?(Ticket)
-        redirect_to tickets_path
+        redirect_to afisha_index_path(:has_tickets => true)
       else
         redirect_to coupons_path
       end
