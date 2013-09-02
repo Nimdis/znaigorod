@@ -1,0 +1,41 @@
+<%= simple_form_for [parent, @visit], html: { remote: true } do |f| %>
+  <% if params[:acts_as_invited] %>
+    <h2>Жду приглашения</h2>
+    <%= f.input :invited_gender, as: :radio_buttons, label: false %>
+    <%= f.input :invited_description, input_html: { placeholder: 'Здесь вы можете указать дополнительную информацию'}, autofocus: true, label: false %>
+    <%= f.input :acts_as_invited, as: :hidden, input_html: { value: true } %>
+    <div class='submit'>
+      <%= f.submit 'Жду приглашения', :class => :submit_dialog %>
+    </div>
+  <% end %>
+  <% if params[:acts_as_inviter] %>
+    <h2>Хочу пригласить</h2>
+    <%= f.input :inviter_gender, as: :radio_buttons, label: false %>
+    <%= f.input :inviter_description, input_html: { placeholder: 'Здесь вы можете указать дополнительную информацию'}, autofocus: true, label: false %>
+    <%= f.input :acts_as_inviter, as: :hidden, input_html: { value: true } %>
+    <div class='submit'>
+      <%= f.submit 'Пригласить', :class => :submit_dialog %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @visit.acts_as_inviter || @visit.acts_as_invited %>
+  <%= simple_form_for [parent, @visit] do |sf| %>
+    <% if params[:acts_as_invited] %>
+      <%= sf.input :invited_description, as: :hidden, input_html: { value: nil } %>
+      <%= sf.input :invited_gender, as: :hidden, input_html: { value: :all } %>
+      <%= sf.input :acts_as_invited, as: :hidden, input_html: { value: nil } %>
+      <div class='submit gray'>
+        <%= sf.submit 'Удалить', :class => :submit_dialog %>
+      </div>
+    <% end %>
+    <% if params[:acts_as_inviter] %>
+      <%= sf.input :inviter_description, as: :hidden, input_html: { value: nil } %>
+      <%= sf.input :inviter_gender, as: :hidden, input_html: { value: :all } %>
+      <%= sf.input :acts_as_inviter, as: :hidden, input_html: { value: nil } %>
+      <div class='submit gray'>
+        <%= sf.submit 'Удалить', :class => :submit_dialog %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

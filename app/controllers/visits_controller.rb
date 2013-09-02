@@ -21,14 +21,8 @@ class VisitsController < ApplicationController
     new! {
       @accounts = Account.where('id != ?', current_user.account.id).ordered.page(params[:page]).per(10)
       @visit.user_id = current_user.id
-      if params[:acts_as_invited]
-        render partial: 'accounts/list', :locals => { :acts_as => :invited } and return if params[:page].present?
-        render partial: 'invites/invited' and return
-      end
-      if params[:acts_as_inviter]
-        render partial: 'accounts/list', :locals => { :acts_as => :inviter } and return if params[:page].present?
-        render partial: 'invites/inviter' and return
-      end
+      render partial: 'accounts/list' and return if params[:page].present?
+      render partial: 'invites/invite' and return
     }
   end
 
@@ -45,14 +39,8 @@ class VisitsController < ApplicationController
   def edit
     edit! {
       @accounts = Account.where('id != ?', current_user.account.id).ordered.page(params[:page]).per(10)
-      if params[:acts_as_invited]
-        render partial: 'accounts/list', :locals => { :acts_as => :invited } and return if params[:page].present?
-        render partial: 'invites/invited' and return
-      end
-      if params[:acts_as_inviter]
-        render partial: 'accounts/list', :locals => { :acts_as => :inviter } and return if params[:page].present?
-        render partial: 'invites/inviter' and return
-      end
+      render partial: 'accounts/list' and return if params[:page].present?
+      render partial: 'invites/invite' and return
     }
   end
 
