@@ -19,23 +19,21 @@
   <% end %>
 <% end %>
 
-<% if @visit.acts_as_inviter || @visit.acts_as_invited %>
-  <%= simple_form_for [parent, @visit] do |sf| %>
-    <% if params[:acts_as_invited] %>
-      <%= sf.input :invited_description, as: :hidden, input_html: { value: nil } %>
-      <%= sf.input :invited_gender, as: :hidden, input_html: { value: :all } %>
-      <%= sf.input :acts_as_invited, as: :hidden, input_html: { value: nil } %>
-      <div class='submit gray'>
-        <%= sf.submit 'Удалить', :class => :submit_dialog %>
-      </div>
-    <% end %>
-    <% if params[:acts_as_inviter] %>
-      <%= sf.input :inviter_description, as: :hidden, input_html: { value: nil } %>
-      <%= sf.input :inviter_gender, as: :hidden, input_html: { value: :all } %>
-      <%= sf.input :acts_as_inviter, as: :hidden, input_html: { value: nil } %>
-      <div class='submit gray'>
-        <%= sf.submit 'Удалить', :class => :submit_dialog %>
-      </div>
-    <% end %>
+<%= simple_form_for [parent, @visit] do |sf| %>
+  <% if @visit.acts_as_invited && params[:acts_as_invited] %>
+    <%= sf.input :invited_description, as: :hidden, input_html: { value: nil } %>
+    <%= sf.input :invited_gender, as: :hidden, input_html: { value: :all } %>
+    <%= sf.input :acts_as_invited, as: :hidden, input_html: { value: nil } %>
+    <div class='submit gray'>
+      <%= sf.submit 'Удалить', :class => :submit_dialog %>
+    </div>
+  <% end %>
+  <% if @visit.acts_as_inviter && params[:acts_as_inviter] %>
+    <%= sf.input :inviter_description, as: :hidden, input_html: { value: nil } %>
+    <%= sf.input :inviter_gender, as: :hidden, input_html: { value: :all } %>
+    <%= sf.input :acts_as_inviter, as: :hidden, input_html: { value: nil } %>
+    <div class='submit gray'>
+      <%= sf.submit 'Удалить', :class => :submit_dialog %>
+    </div>
   <% end %>
 <% end %>
