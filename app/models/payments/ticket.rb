@@ -2,6 +2,7 @@
 
 class Ticket < ActiveRecord::Base
   include Copies
+  include PaymentSystems
 
   attr_accessible :number, :original_price, :price, :description, :stale_at, :organization_price
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130827092643) do
+ActiveRecord::Schema.define(:version => 20130902053918) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -257,6 +257,7 @@ ActiveRecord::Schema.define(:version => 20130827092643) do
     t.datetime "complete_at"
     t.text     "categories"
     t.text     "affiliate_url"
+    t.string   "payment_system"
   end
 
   add_index "coupons", ["organization_id"], :name => "index_coupons_on_organization_id"
@@ -856,6 +857,7 @@ ActiveRecord::Schema.define(:version => 20130827092643) do
     t.text     "description"
     t.datetime "stale_at"
     t.float    "organization_price"
+    t.string   "payment_system"
   end
 
   add_index "tickets", ["afisha_id"], :name => "index_ticket_infos_on_affiche_id"

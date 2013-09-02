@@ -1,9 +1,10 @@
 # encoding: utf-8
 
 class Coupon < ActiveRecord::Base
-  include Copies
-
   extend Enumerize
+
+  include Copies
+  include PaymentSystems
 
   attr_accessible :description, :discount, :title, :organization_id, :price_with_discount,
                   :price_without_discount, :price, :organization_quota,
