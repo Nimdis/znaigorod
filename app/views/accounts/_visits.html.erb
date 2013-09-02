@@ -1,4 +1,6 @@
-<%= render partial: 'visits/account_visits', locals: { collection: @visits } %>
+<ul>
+  <%= render partial: 'visits/account_visits', locals: { collection: @visits } %>
+</ul>
 
 <div class="pagination">
   <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if @visits.first_page? }" %>

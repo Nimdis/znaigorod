@@ -1,6 +1,8 @@
-<% collection.each do |event| %>
-  <%= render partial: 'events/account_event', locals: { event: event } %>
-<% end %>
+<ul>
+  <% collection.each do |event| %>
+    <%= render partial: 'events/account_event', locals: { event: event } %>
+  <% end %>
+</ul>
 
 <div class="pagination">
   <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if collection.first_page? }" %>

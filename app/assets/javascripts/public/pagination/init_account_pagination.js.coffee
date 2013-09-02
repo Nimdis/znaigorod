@@ -15,8 +15,11 @@ recalculate_block_height = (kind, limit = 0) ->
 
 more_handler = (kind, response) ->
   kind.css('height', recalculate_block_height(kind))
-  $('ul', kind).append(response)
+  wrapped = $("<div>#{response}</div>")
+  $('ul', kind).append($('ul', wrapped).html())
   $('.pagination:last', kind).hide()
+  $('.pagination', kind).after($('.pagination', wrapped))
+  wrapped.remove()
   kind.animate
     height: recalculate_block_height(kind)
     , 300, ->

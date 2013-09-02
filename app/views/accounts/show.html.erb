@@ -19,9 +19,7 @@
           <div class="floatr"><%= t('account_friends', count: @friends.total_count) %></div>
         </div>
         <div class="friends list">
-          <ul class="avatars">
-            <%= render partial: 'friends/account_friends', locals: { collection: @friends } %>
-          </ul>
+          <%= render partial: 'friends/account_friends', locals: { collection: @friends } %>
         </div>
       <% end %>
     </div>
@@ -30,12 +28,10 @@
   <div class="right">
     <% if @visits.any? %>
       <div class="visits header">
-         Хочет посетить/посетил
+        Хочет посетить/посетил
       </div>
       <div class="visits list">
-        <ul>
-          <%= render 'accounts/visits' %>
-        </ul>
+        <%= render 'accounts/visits' %>
       </div>
     <% end %>
 
@@ -44,9 +40,7 @@
         Нравится
       </div>
       <div class="votes list">
-        <ul>
-          <%= render 'accounts/votes' %>
-        </ul>
+        <%= render 'accounts/votes' %>
       </div>
     <% end %>
 
@@ -55,9 +49,7 @@
         <%= "#{@account.first_name}" "#{@account.male? ? ' добавил ' : ' добавила '}" "#{t('account_events', count: @account.afisha.published.count)}" %>
       </div>
       <div class="events list">
-        <ul>
-          <%= render partial: 'events/account_events', locals: { collection: @events.published, state: :published } %>
-        </ul>
+        <%= render partial: 'events/account_events', locals: { collection: @events.published, state: :published } %>
       </div>
     <% end %>
 
@@ -66,9 +58,7 @@
         Комментарии
       </div>
       <div class="comments list">
-        <ul>
-          <%= render 'accounts/comments' %>
-        </ul>
+        <%= render 'accounts/comments' %>
       </div>
     <% end %>
   </div>

@@ -1,6 +1,8 @@
-<% collection.each do |account| %>
-  <%= render partial: 'friends/account_friend', locals: { account: account } %>
-<% end %>
+<ul class="avatars">
+  <% collection.each do |account| %>
+    <%= render partial: 'friends/account_friend', locals: { account: account } %>
+  <% end %>
+</ul>
 
 <div class="pagination">
   <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if collection.first_page? }" %>
