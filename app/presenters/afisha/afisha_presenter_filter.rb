@@ -4,8 +4,8 @@ class CategoriesFilter
   attr_accessor :selected, :available, :human_names
 
   def initialize(categories, hidden = false)
-    @selected    = (categories || []).delete_if(&:blank?)
     @available   = Afisha.kind.values
+    @selected    = (categories || []).delete_if(&:blank?) & @available
     @human_names = Afisha.kind.values.map(&:text)
     @hidden = !!hidden
   end
