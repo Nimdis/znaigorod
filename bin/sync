@@ -2,9 +2,9 @@
 
 bin/rake db:drop db:create
 
-yes | bin/cap v3 db:pull
+yes | bin/cap db:pull
 #yes | bin/cap development db:pull
-bin/cap v3 sunspot:pull
+bin/cap sunspot:pull
 #bin/cap development sunspot:pull
 
 bin/rake db:migrate
