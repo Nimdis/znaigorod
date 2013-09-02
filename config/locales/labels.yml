@@ -178,21 +178,21 @@ ru:
 
   draft:
     one:   "Черновики (%{count})"
-    few:   "Черновики %{count}"
+    few:   "Черновики (%{count})"
     many:  "Черновики (%{count})"
     other: "Черновики (%{count})"
     zero:  "Черновики"
 
   pending:
     one:   "На модерации (%{count})"
-    few:   "На модерации %{count}"
+    few:   "На модерации (%{count})"
     many:  "На модерации (%{count})"
     other: "На модерации (%{count})"
     zero:  "На модерации"
 
   published:
     one:   "Опубликованные (%{count})"
-    few:   "Опубликованные %{count}"
+    few:   "Опубликованные (%{count})"
     many:  "Опубликованные (%{count})"
     other: "Опубликованные (%{count})"
     zero:  "Опубликованные"
