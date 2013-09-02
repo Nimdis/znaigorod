@@ -1,5 +1,8 @@
 ru:
   enumerize:
+    payment_system:
+      robokassa: Robokassa
+      rbkmoney: RBK Money
     afisha:
       kind:
         party: Вечеринки

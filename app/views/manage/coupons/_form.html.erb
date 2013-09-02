@@ -3,6 +3,7 @@
   <%= f.input :categories, :as => :check_boxes , :wrapper_html => { :class => :category_list } %>
   <%= f.input :title %>
   <%= f.input :description, input_html: { class: 'coupon_description' } %>
+  <%= f.input :payment_system %>
   <%  unless f.object.image_url? %>
     <%= f.input :image %>
   <% else %>

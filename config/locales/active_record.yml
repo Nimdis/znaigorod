@@ -129,6 +129,7 @@ ru:
         price_without_discount: Сумма услуг без скидки
         stale_at: Продажа заканчивается
         title: Название
+        payment_system: Платежная система
 
       afisha:
         <<: *common_attributes
@@ -406,6 +407,7 @@ ru:
         organization_price: Сколько заплатит заведению
         description:    Описание
         stale_at:       Актуально до
+        payment_system: Платежная система
 
       copy:
         row:           Ряд
