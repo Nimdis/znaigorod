@@ -61,7 +61,7 @@ collapse_handler = (kind) ->
 
     if tab.length
       more_handler(tab, response)
-    else
+    if list.length
       more_handler(list, response)
 
   $('.toggler').live 'click', (event) ->
@@ -71,7 +71,7 @@ collapse_handler = (kind) ->
 
     if tab.length
       collapse_handler(tab)
-    else
+    if list.height
       collapse_handler(list)
 
     false
