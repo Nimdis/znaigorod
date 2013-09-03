@@ -2,6 +2,8 @@ scroll = (target) ->
   y_coord = Math.abs($(window).height() - target.offset().top - 200)
   $("html, body").animate({ scrollTop: y_coord })
 
+  true
+
 recalculate_block_height = (kind, limit = 0) ->
   prev_element_top = $('li:first', kind).position().top
   block_height = $('li:first', kind).outerHeight(true, true)
@@ -11,6 +13,7 @@ recalculate_block_height = (kind, limit = 0) ->
       block_height += $(this).outerHeight(true, true)
     return false if limit > 0 && (limit - 1) == index
     true
+
   block_height
 
 more_handler = (kind, response) ->

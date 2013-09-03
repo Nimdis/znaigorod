@@ -78,6 +78,6 @@ class VisitsController < ApplicationController
 
   def collection
     @visits ||= end_of_association_chain.rendereable.page(params[:page]).per(3) if association_chain.first.is_a?(Account)
-    @visits ||= end_of_association_chain.page(params[:page]).per(15) if association_chain.first.is_a?(Afisha) || association_chain.first.is_a?(Organization)
+    @visits ||= end_of_association_chain.page(params[:page]).per(5) if association_chain.first.is_a?(Afisha) || association_chain.first.is_a?(Organization)
   end
 end
