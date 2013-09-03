@@ -14,6 +14,52 @@
 
     scroll($('ul.dialog', "#dialog_#{account_id}"))
 
+    timer = setInterval ->
+      target = $('a.change_message_status.unread:first')
+      if target.length
+        target.click()
+        true
+      else
+        clearInterval(timer)
+    , 1000
+
+    $("#dialog_#{account_id} a.change_message_status.unread").click ->
+      link = $(this)
+
+      $.ajax
+        url: link.attr('href')
+        type: 'PUT'
+        data: '?_method=put'
+        success: (response, textStatus, jqXHR) ->
+          $('.change_message_status.unread:first').closest('li').replaceWith(response)
+          counter = $(response).data('counter')
+          notification_counter = $(response).data('notification_counter')
+          messages = $(response).data('messages')
+
+          link = $('.header .messages a')
+
+          if counter == 0
+            link.addClass('empty').removeClass('unread').attr('title','Нет новых сообщений').html(messages)
+          else
+            link.addClass('unread').removeClass('empty').attr('title','Есть новые сообщения').html("+#{counter}")
+
+          if notification_counter == 0
+            $('#messages_filter a.notifications').html('Уведомления')
+          else
+            $('#messages_filter a.notifications').html("Уведомления +#{notification_counter}")
+
+        true
+
+        error: (jqXHR, textStatus, errorThrown) ->
+          wrapped = $("<div>#{jqXHR.responseText}</div>")
+          wrapped.find('title').remove()
+          wrapped.find('style').remove()
+          wrapped.find('head').remove()
+          console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
+          true
+
+      false
+
   close_tab_handler = (stored) ->
     close_buttons = $('#messages_filter span.ui-icon-close:not(.charged)')
     close_buttons.each (index, item) ->

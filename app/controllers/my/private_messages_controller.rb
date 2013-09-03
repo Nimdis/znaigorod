@@ -2,6 +2,7 @@ class My::PrivateMessagesController < My::ApplicationController
   load_and_authorize_resource
 
   actions :create, :new, :show
+  custom_actions resource: :change_message_status
 
   layout false
 
@@ -29,6 +30,14 @@ class My::PrivateMessagesController < My::ApplicationController
       success.html { render @private_message }
       failure.html { render partial: 'my/private_messages/form' }
     end
+  end
+
+  def change_message_status
+    change_message_status! {
+      @private_message.change_message_status
+
+      render partial: 'my/private_messages/private_message', locals: { message: @private_message } and return
+    }
   end
 
   protected

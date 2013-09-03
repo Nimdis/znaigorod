@@ -1,4 +1,7 @@
-<li data-account_id="<%= @private_message.account_id %>">
+<li class="ajax_message_status <%= @private_message.state %> message_<%= @private_message.id %>"
+  data-counter="<%= current_user.account.messages.unread.count %>"
+  data-messages="<%= current_user.account.messages.count %>"
+  data-account_id="<%= @private_message.account_id %>">
   <div class="item">
     <div class="avatar">
       <%= link_to account_path(@private_message.producer) do %>
@@ -17,4 +20,5 @@
       <%= @private_message.body_html %>
     </div>
   </div>
+  <%= link_to 'read', change_status_my_private_message_path(@private_message), class: "change_message_status #{@private_message.state}" %>
 </li>

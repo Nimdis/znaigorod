@@ -3,6 +3,7 @@
     target = $('a.change_message_status.unread:first')
     if target.length
       target.click()
+      true
     else
       clearInterval(timer)
   , 1000
@@ -10,13 +11,12 @@
   true
 
 @init_messages = () ->
-  $('.change_message_status').hide()
-
   process_change_message_status()
 
   $('.account_messages').on 'ajax:success', (evt, response) ->
     $(evt.target).closest('li').replaceWith(response)
     counter = $(response).data('counter')
+    notification_counter = $(response).data('notification_counter')
     messages = $(response).data('messages')
 
     wrapper = $('<div/>')
@@ -25,18 +25,17 @@
     $("#notifications .#{klass}").removeClass('unread').addClass('read')
     wrapper.remove()
 
-    if counter == 0
-      $('.header .messages a').addClass('empty').removeClass('unread')
-      $('.header .messages a').attr('title','Нет новых сообщений')
-      $('.header .messages a').html(messages)
-      $('#messages_filter .counter').html('')
-    else
-      $('.header .messages a').addClass('unread').removeClass('empty')
-      $('.header .messages a').attr('title','Есть новые сообщения')
-      $('.header .messages a').html("+#{counter}")
-      $('#messages_filter .counter').html("(#{counter})")
+    link = $('.header .messages a')
 
-    $('.change_message_status').hide()
+    if counter == 0
+      link.addClass('empty').removeClass('unread').attr('title','Нет новых сообщений').html(messages)
+    else
+      link.addClass('unread').removeClass('empty').attr('title','Есть новые сообщения').html("+#{counter}")
+
+    if notification_counter == 0
+      $('#messages_filter a.notifications').html('Уведомления')
+    else
+      $('#messages_filter a.notifications').html("Уведомления +#{notification_counter}")
 
 @init_messages_tabs = () ->
   $('#messages_filter').tabs()

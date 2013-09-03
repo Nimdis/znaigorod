@@ -1,6 +1,11 @@
 <ul class="dialog">
   <% @messages.each do |message| %>
-    <li class="<%= message.state %>" data-account="<%= @dialog_with.title %>" data-account_id="<%= @dialog_with.id %>">
+    <li class="ajax_message_status <%= message.state %> message_<%= message.id %>"
+      data-account="<%= @dialog_with.title %>"
+      data-account_id="<%= @dialog_with.id %>"
+      data-counter="<%= current_user.account.messages.unread.count %>"
+      data-messages="<%= current_user.account.messages.count %>">
+
       <div class="item">
         <div class="avatar">
           <%= link_to account_path(message.producer) do %>
@@ -19,6 +24,9 @@
           <%= message.body_html %>
         </div>
       </div>
+      <% if message.producer != current_user.account %>
+        <%= link_to 'read', change_status_my_private_message_path(message), class: "change_message_status #{message.state}" %>
+      <% end %>
     </li>
   <% end %>
 </ul>

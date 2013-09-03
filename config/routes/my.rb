@@ -10,7 +10,9 @@ Znaigorod::Application.routes.draw do
 
     resources :dialogs, :only => [:index, :show]
 
-    resources :private_messages, :only => [:new, :create, :show]
+    resources :private_messages, :only => [:new, :create, :show] do
+      put 'change_message_status' => 'private_messages#change_message_status', :on => :member, :as => :change_status
+    end
 
     resource :account, :only => [:show, :edit, :update]
 

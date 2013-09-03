@@ -4,8 +4,8 @@
 
 <div id="messages_filter">
   <ul>
-    <li><%= link_to t('dialogs', count: @dialogs.count), '#dialogs' %></li>
-    <li><%= link_to t('notifications', count: @notification_messages.unread.count), '#notifications' %></li>
+    <li><%= link_to t('dialogs', count: @dialogs.count), '#dialogs', class: 'dialogs' %></li>
+    <li><%= link_to t('notifications', count: current_user.account.notification_messages.unread.count), '#notifications', class: 'notifications' %></li>
   </ul>
 
   <div id="dialogs">

@@ -15,6 +15,7 @@ class Account < ActiveRecord::Base
 
   has_many :messages,                     order: 'messages.created_at DESC'
   has_many :notification_messages,        order: 'messages.created_at DESC'
+  has_many :private_messages,             order: 'messages.created_at DESC'
   has_many :produced_messages,            as: :producer, class_name: 'PrivateMessage'
 
   has_many :payments, through: :users
