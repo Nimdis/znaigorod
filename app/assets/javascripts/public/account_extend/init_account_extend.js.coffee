@@ -50,6 +50,8 @@
             form.remove()
             true
 
+        false
+
       container.dialog
         autoOpen: true
         draggable: false
