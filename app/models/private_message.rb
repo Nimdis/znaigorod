@@ -34,5 +34,6 @@ end
 #  updated_at       :datetime         not null
 #  type             :string(255)
 #  producer_type    :string(255)
+#  invite_kind      :string(255)
 #
 
