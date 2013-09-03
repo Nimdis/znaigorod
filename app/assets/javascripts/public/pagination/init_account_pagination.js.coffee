@@ -49,6 +49,7 @@ collapse_handler = (kind) ->
 
   false
 
+  #delimiter
 
 @init_account_pagination = () ->
   $('.next_page').live 'ajax:beforeSend', (xhr, settings) ->
