@@ -56,7 +56,7 @@ class SaunaHallsPresenter
   end
 
   def order_by
-    @order_by ||= self.class.available_sortings.include?(@order_by) ? @order_by : self.class.available_sortings.first
+    @order_byy ||= self.class.available_sortings.include?(@order_by) ? @order_by : self.class.available_sortings.first
   end
   alias_method :criterion, :order_by
 
