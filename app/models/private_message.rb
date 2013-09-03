@@ -1,4 +1,21 @@
 # encoding: utf-8
+
+class PrivateMessage < Message
+  attr_accessible :account, :body, :state, :producer
+
+  scope :from, ->(account) { where(producer_id: account) }
+  scope :to, ->(account) { where(account_id: account) }
+  scope :dialog, ->(from, to) { where("(account_id = #{from} and producer_id = #{to}) or (account_id = #{to} and producer_id = #{from})") }
+
+  validates_presence_of :body
+
+  auto_html_for :body do
+    html_escape
+    simple_format
+    znaigorod_link :target => "_blank", :rel => 'nofollow'
+  end
+end
+
 # == Schema Information
 #
 # Table name: messages
@@ -19,19 +36,3 @@
 #  agreement        :string(255)
 #
 
-
-class PrivateMessage < Message
-  attr_accessible :account, :body, :state, :producer
-
-  scope :from, ->(account) { where(producer_id: account) }
-  scope :to, ->(account) { where(account_id: account) }
-  scope :dialog, ->(from, to) { where("(account_id = #{from} and producer_id = #{to}) or (account_id = #{to} and producer_id = #{from})") }
-
-  validates_presence_of :body
-
-  auto_html_for :body do
-    html_escape
-    simple_format
-    znaigorod_link :target => "_blank", :rel => 'nofollow'
-  end
-end

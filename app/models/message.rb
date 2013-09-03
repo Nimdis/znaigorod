@@ -1,4 +1,24 @@
 # encoding: utf-8
+
+class Message < ActiveRecord::Base
+  attr_accessible :account, :account_id, :body, :state, :kind, :producer, :producer_id, :producer_type, :messageable, :messageable_id, :messageable_type, :invite_kind
+
+  belongs_to :account
+  belongs_to :producer, class_name: 'Account'
+  belongs_to :messageable, :polymorphic => true
+
+  scope :unread, -> { where(state: :unread) }
+
+  extend Enumerize
+  enumerize :state, in: [:unread, :read], default: :unread, predicates: true, scope: true
+
+  def change_message_status
+    self.unread? ? self.state = :read : self.state = :unread
+    self.save
+  end
+
+end
+
 # == Schema Information
 #
 # Table name: messages
@@ -19,22 +39,3 @@
 #  agreement        :string(255)
 #
 
-
-class Message < ActiveRecord::Base
-  attr_accessible :account, :account_id, :body, :state, :kind, :producer, :producer_id, :producer_type, :messageable, :messageable_id, :messageable_type, :invite_kind
-
-  belongs_to :account
-  belongs_to :producer, class_name: 'Account'
-  belongs_to :messageable, :polymorphic => true
-
-  scope :unread, -> { where(state: :unread) }
-
-  extend Enumerize
-  enumerize :state, in: [:unread, :read], default: :unread, predicates: true, scope: true
-
-  def change_message_status
-    self.unread? ? self.state = :read : self.state = :unread
-    self.save
-  end
-
-end
