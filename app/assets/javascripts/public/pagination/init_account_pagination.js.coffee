@@ -14,6 +14,9 @@ recalculate_block_height = (kind, limit = 0) ->
   block_height
 
 more_handler = (kind, response) ->
+  unless $('li.delimiter', kind).length
+    $('li:last', kind).addClass('delimiter')
+
   kind.css('height', recalculate_block_height(kind))
   wrapped = $("<div>#{response}</div>")
   $('ul', kind).append($('ul', wrapped).html())
@@ -33,13 +36,16 @@ more_handler = (kind, response) ->
   true
 
 collapse_handler = (kind) ->
-  min_height = recalculate_block_height(kind, 3)
+
+  delimiter_index = $('li.delimiter', kind).index()
+
+  min_height = recalculate_block_height(kind, delimiter_index + 1)
 
   kind.animate
     height: min_height
     , 300, ->
       $('ul li', kind).each (index) ->
-        $(this).remove() if index > 2
+        $(this).remove() if index > delimiter_index
         true
       replaced_href = $('.next_page', kind).attr('href').replace(/page=\d+/, 'page=2')
       $('.next_page', kind).attr('href', replaced_href).removeClass('disabled')
@@ -48,8 +54,6 @@ collapse_handler = (kind) ->
       true
 
   false
-
-  #delimiter
 
 @init_account_pagination = () ->
   $('.next_page').live 'ajax:beforeSend', (xhr, settings) ->
