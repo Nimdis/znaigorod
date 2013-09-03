@@ -8,7 +8,7 @@ class AfishaObserver < ActiveRecord::Observer
         account: afisha.user.account,
         kind: :afisha_published,
         messageable: afisha)
-      afisha.user.account.delay.update_rating if afisha.user.present?
+      #afisha.user.account.delay.update_rating if afisha.user.present?
     end
   end
 

@@ -18,8 +18,8 @@ class VoteObserver < ActiveRecord::Observer
   end
 
   def after_save(vote)
-    vote.user.account.delay.update_rating if vote.user.present? && vote.user.account.present?
-    vote.voteable.delay.update_rating if vote.voteable.respond_to?(:update_rating)
-    vote.voteable.user.account.delay.update_rating if vote.voteable.respond_to?(:user) && vote.voteable.user && vote.voteable.user.account
+    #vote.user.account.delay.update_rating if vote.user.present? && vote.user.account.present?
+    #vote.voteable.delay.update_rating if vote.voteable.respond_to?(:update_rating)
+    #vote.voteable.user.account.delay.update_rating if vote.voteable.respond_to?(:user) && vote.voteable.user && vote.voteable.user.account
   end
 end
