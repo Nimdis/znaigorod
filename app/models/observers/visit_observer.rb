@@ -12,12 +12,12 @@ class VisitObserver < ActiveRecord::Observer
   end
 
   def after_save(visit)
-    visit.visitable.delay.update_rating if visit.visitable.present?
-    visit.user.account.delay.update_rating if visit.user.present? && visit.user.account.present?
+   # visit.visitable.delay.update_rating if visit.visitable.present?
+   # visit.user.account.delay.update_rating if visit.user.present? && visit.user.account.present?
   end
 
   def after_destroy(visit)
-    visit.visitable.delay.update_rating if visit.visitable.present?
-    visit.user.account.delay.update_rating if visit.user.present? && visit.user.account.present?
+   # visit.visitable.delay.update_rating if visit.visitable.present?
+   # visit.user.account.delay.update_rating if visit.user.present? && visit.user.account.present?
   end
 end
