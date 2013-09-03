@@ -31,7 +31,9 @@ every 2.hours do
 end
 
 every 1.hours do
-  rake 'account:reindex'
+  rake 'update_rating:accounts'
+  rake 'update_rating:afisha'
+  rake 'update_rating:organizations'
 end
 
 every 5.minutes do

@@ -13,7 +13,7 @@ namespace :update_rating do
   end
 
   desc "Обновление рейтинга организаций"
-  task :organization => :environment do
+  task :organizations => :environment do
     Organization.all.map(&:update_rating)
   end
 end
