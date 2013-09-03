@@ -318,11 +318,11 @@
 
     true
 
-  $('.next_page').live 'ajax:beforeSend', (xhr, settings) ->
+  $('.left .afisha_avatars .next_page').live 'ajax:beforeSend', (xhr, settings) ->
     return false if $(this).hasClass('disabled')
     true
 
-  $('.next_page').live 'ajax:success', (event, response, status, xhr) ->
+  $('.left .afisha_avatars .next_page').live 'ajax:success', (event, response, status, xhr) ->
 
     more_handler = (kind, response) ->
       unless $('li.delimiter', kind).length
