@@ -20,7 +20,7 @@ class Ability
     end
 
     can :manage, PrivateMessage do |private_message|
-      user.persisted? && private_message.producer == user.account
+      user.persisted? && (private_message.producer == user.account || private_message.account == user.account)
     end
 
     case namespace
