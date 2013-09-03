@@ -82,7 +82,7 @@ module Mobile
         affishes = affishes(params[:kind], params[:period], params[:sorting], params[:page] || 1)
         {
           lastUpdate: affishes.decorated_collection.map { |affisha| affisha_updated_at(affisha.afisha) }.max,
-          urlModifier: affishes.paginated_collection.next_page ? "?page=#{affishes.paginated_collection.next_page}" : '',
+          next_page: affishes.paginated_collection.next_page ? "page=#{affishes.paginated_collection.next_page}" : '',
           affishes: affishes.decorated_collection.map do |affisha|
             {
               :url => "#{base_path}/#{affisha.slug}",
