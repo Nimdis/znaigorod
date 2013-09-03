@@ -1,8 +1,7 @@
 <li>
   <div class='item'>
     <div class='poster'>
-        <%  %>
-          <%= link_to can?(:edit, event) ? my_afisha_show_path(event) : afisha_show_path(event) do %>
+      <%= link_to (can?(:edit, event) && event.user == current_user) ? my_afisha_show_path(event) : afisha_show_path(event) do %>
         <% if event.poster_url? %>
           <%= image_tag(resized_image_url(event.poster_url, 65, 88), size: '65x88') %>
         <% else %>
@@ -11,7 +10,7 @@
       <% end %>
     </div>
     <div class='title'>
-      <%= link_to event.title, can?(:edit, event) ? my_afisha_show_path(event) : afisha_show_path(event) %>
+      <%= link_to event.title, (can?(:edit, event) && event.user == current_user) ? my_afisha_show_path(event) : afisha_show_path(event) %>
     </div>
     <div class='kind'>
       <%= event.kind.map(&:text).join(', ') %>

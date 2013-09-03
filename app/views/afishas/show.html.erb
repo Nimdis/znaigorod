@@ -134,7 +134,7 @@
         <p>Нет описания</p>
       <% end %>
       <%= @afisha.html_attachments %>
-      <% if @afisha.user.present? %>
+      <% if @afisha.user.present? && ![4, 13, 2303].include?(@afisha.user.account.id) %>
         <p class='afisha_owner'>
           <span>Автор:</span>
           <%= link_to(@afisha.user.account.title, @afisha.user.account) %>
