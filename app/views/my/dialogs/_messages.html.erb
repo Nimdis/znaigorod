@@ -1,3 +1,5 @@
-<% collection.each do |with_account| %>
-  <%= render partial: 'my/dialogs/message', locals: { with_account: with_account } %>
-<% end %>
+<ul class="dialogs">
+  <% collection.each do |with_account| %>
+    <%= render partial: 'my/dialogs/message', locals: { with_account: with_account } %>
+  <% end %>
+</ul>

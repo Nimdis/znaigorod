@@ -9,14 +9,10 @@
   </ul>
 
   <div id="dialogs">
-    <ul class="dialogs">
-      <%= render partial: 'my/dialogs/messages', locals: { collection: @dialogs } %>
-    </ul>
+    <%= render partial: 'my/dialogs/messages', locals: { collection: @dialogs } %>
   </div>
 
   <div id="notifications" class="list">
-    <ul class="account_messages">
-      <%= render partial: 'my/messages/messages', locals: { collection: @notification_messages } %>
-    </ul>
+    <%= render partial: 'my/messages/messages', locals: { collection: @notification_messages } %>
   </div>
 </div>

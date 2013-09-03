@@ -1,6 +1,8 @@
-<% collection.each do |message| %>
-  <%= render partial: 'my/messages/message', locals: { message: message } %>
-<% end %>
+<ul class="account_messages">
+  <% collection.each do |message| %>
+    <%= render partial: 'my/messages/message', locals: { message: message } %>
+  <% end %>
+</ul>
 
 <div class="pagination">
   <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if collection.first_page? }" %>
