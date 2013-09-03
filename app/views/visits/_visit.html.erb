@@ -1,11 +1,7 @@
 <ul class='user_actions'>
   <% if current_user && visitable.visit_for_user(current_user) %>
     <li class="selected">
-    <% if visitable.visit_for_user(current_user).acts_as_inviter || visitable.visit_for_user(current_user).acts_as_invited %>
-      <%= link_to t('afisha.join'), polymorphic_url([visitable, :destroy_visits]), :method => :put, :remote => true, :confirm => 'Are you shure?', class: 'change_visit' %>
-    <% else %>
       <%= link_to t('afisha.join'), polymorphic_url([visitable, :destroy_visits]), :method => :put, :remote => true, class: 'change_visit' %>
-    <% end %>
     </li>
   <% else %>
     <li>
