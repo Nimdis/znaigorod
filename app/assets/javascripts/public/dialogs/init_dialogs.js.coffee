@@ -114,6 +114,9 @@
   $('.to_dialog').on 'click', ->
     block_id = "##{$(this).attr('class').replace('to_dialog', '').replace('disabled', '').trim()}"
     $('#messages_filter').tabs("select", block_id)
+
+    $(this).closest('li').toggleClass('unread', 'read')
+
     true
 
   $('.to_dialog').on 'ajax:beforeSend', (xhr, settings) ->
