@@ -1,18 +1,12 @@
 # encoding: utf-8
 
-class PrivateMessage < Message
-  attr_accessible :account, :body, :state, :producer
+class InviteMessage < Message
+  enumerize :invite_kind, in: [:inviter, :invited], predicates: true
+  before_create :set_body
 
-  scope :from, ->(account) { where(producer_id: account) }
-  scope :to, ->(account) { where(account_id: account) }
-  scope :dialog, ->(from, to) { where("(account_id = #{from} and producer_id = #{to}) or (account_id = #{to} and producer_id = #{from})") }
-
-  validates_presence_of :body
-
-  auto_html_for :body do
-    html_escape
-    simple_format
-    znaigorod_link :target => "_blank", :rel => 'nofollow'
+private
+  def set_body
+    #I18n.t("invite_message.#{messageable.class.name.underscore}.#{invite_kind}_message", url: messageable.is_a?(Afisha) ? afisha_show_url(messageable) : organization_url(messageable))
   end
 end
 

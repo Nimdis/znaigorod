@@ -5,11 +5,17 @@
 <div id="messages_filter">
   <ul>
     <li><%= link_to t('dialogs', count: PrivateMessage.unread.to(current_user.account).count), '#dialogs', class: 'dialogs' %></li>
+    <li><%= link_to t('invites', count: @invite_messages.total_count), '#invites', class: 'invites' %></li>
     <li><%= link_to t('notifications', count: current_user.account.notification_messages.unread.count), '#notifications', class: 'notifications' %></li>
   </ul>
 
   <div id="dialogs">
     <%= render partial: 'my/dialogs/messages', locals: { collection: @dialogs } %>
+  </div>
+
+
+  <div id="invites" class='list'>
+    <%= render file: 'my/invite_messages/index' %>
   </div>
 
   <div id="notifications" class="list">

@@ -9,18 +9,7 @@ class My::PrivateMessagesController < My::ApplicationController
   def new
     new! {
       @private_message.account_id = params[:account_id]
-      if params[:afisha_id] || params[:organization_id]
-        @source = if params[:afisha_id]
-                    Afisha.find(params[:afisha_id])
-                  elsif params[:organization_id]
-                    Organization.find(params[:organization_id])
-                  end
-        @private_message.messageable = @source
-        @private_message.invite_kind = params[:acts_as]
-        @private_message.body = I18n.t("private_message.#{@source.class.name.underscore}.#{params[:acts_as]}_message", url: @source.is_a?(Afisha) ? afisha_show_url(@source) : organization_url(@source))
-      else
-        @dialog_with = Account.find(@private_message.account_id)
-      end
+      @dialog_with = Account.find(@private_message.account_id)
       render partial: 'my/private_messages/form' and return
     }
   end

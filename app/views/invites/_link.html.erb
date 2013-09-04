@@ -16,13 +16,14 @@
     </div>
   <% end %>
 <% end %>
-<% if current_user.account.produced_messages.where(messageable_id: parent.id,
-                                                  messageable_type: parent.class.name,
-                                                  account_id: account.id,
-                                                  invite_kind: acts_as).any? %>
+<% if current_user.account.sended_invite_message(parent, account.id, acts_as) %>
   <span class="sended"><%= I18n.t("invite.sended.#{acts_as}") %></span>
 <% else %>
-  <%= link_to t("invite.#{acts_as}"), new_my_private_message_path(account_id: account.id,
-                                                        afisha_id: parent.id,
-                                                        acts_as: acts_as), class: :invite %>
+  <%= simple_form_for current_user.account.produced_invite_messages.build, :url => my_invite_messages_path, html: { remote: true } do |f| %>
+    <%= f.input :account_id, as: :hidden, :input_html => { :value => account.id } %>
+    <%= f.input :messageable_id, as: :hidden, :input_html => { :value => parent.id } %>
+    <%= f.input :messageable_type, as: :hidden, :input_html => { :value => parent.class.name } %>
+    <%= f.input :invite_kind, as: :hidden, :input_html => { :value => acts_as } %>
+    <%= f.submit t("invite.#{acts_as}"), class: 'submit_dialog' %>
+  <% end %>
 <% end %>

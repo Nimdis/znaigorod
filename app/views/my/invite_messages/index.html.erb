@@ -1,0 +1,8 @@
+<ul class="account_messages">
+  <%= render @invite_messages %>
+</ul>
+
+<div class="pagination">
+  <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if @invite_messages.first_page? }" %>
+  <%= link_to '&darr;'.html_safe, my_invite_messages_path(:page => @invite_messages.current_page + 1), :remote => true, :class => "next_page #{ 'disabled' if @invite_messages.last_page? }" %>
+</div>
