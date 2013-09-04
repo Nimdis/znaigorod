@@ -106,7 +106,8 @@ class Afisha < ActiveRecord::Base
     end
 
     state :published do
-      validates_presence_of :poster_url, :showings
+      validates_presence_of :poster_url
+      validates_presence_of :showings, :unless => Proc.new { |afisha| afisha.movie? }
     end
   end
 
@@ -333,6 +334,10 @@ class Afisha < ActiveRecord::Base
   # Afisha movie kind #
   def premiere?
     distribution_starts_on && distribution_starts_on >= Date.today.beginning_of_week && distribution_starts_on <= Date.today.end_of_week && showings.count > 5
+  end
+
+  def movie?
+    kind.include?('movie')
   end
 
   def reindex_showings
