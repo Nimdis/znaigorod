@@ -1,10 +1,16 @@
 <li>
+  <div class="avatar">
   <%= link_to account_path(bet.user.account), target: :_blank, class: :avatar do %>
-    <%= image_tag(resized_image_url(bet.user.account.avatar.url, 22, 22), size: '22x22', title: bet.user.account, alt: bet.user.account) %>
+    <%= image_tag(resized_image_url(bet.user.account.avatar.url, 35, 35), size: '35x35', title: bet.user.account, alt: bet.user.account) %>
   <% end %>
-  <%= link_to(bet.user.account, my_root_path, class: :user_name) %>
-  <p>
-    Хочет купить <%= bet.number %> билетов за <%= bet.amount %> рублей
-  </p>
-  <%= Bet.human_state_name(bet.state) %>
+  </div>
+  <div class="details">
+    <%= link_to(bet.user.account, my_root_path, class: :user_name) %>
+    <div class="info">
+      Хочет купить <%= bet.number %> билетов за <%= bet.amount %> рублей
+    </div>
+    <div class="<%= bet.state %>">
+      <%= Bet.human_state_name(bet.state) %>
+    </div>
+  </div>
 </li>
