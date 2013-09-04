@@ -59,6 +59,9 @@
         resizable: false
         title: 'Новое сообщение'
         width: '500px'
+        create: (event, ui) ->
+          $('.submit_dialog', form).attr('disabled', 'disabled')
+          true
         close: (event, ui) ->
           form.submit()
           $(this).dialog('destroy')
