@@ -1,5 +1,11 @@
 <ul class="account_messages">
-  <%= render @invite_messages %>
+  <% if @invite_messages.any? %>
+    <%= render @invite_messages %>
+  <% else %>
+    <li class='empty'>
+      Пока нет приглашений
+    </li>
+  <% end %>
 </ul>
 
 <div class="pagination">
