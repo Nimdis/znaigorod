@@ -1,4 +1,4 @@
-@init_account_pagination = () ->
+@init_visitors_pagination = () ->
 
   scroll = (target) ->
     y_coord = Math.abs($(window).height() - target.offset().top - 200)
@@ -19,9 +19,6 @@
     block_height
 
   more_handler = (kind, response) ->
-    unless $('li.delimiter', kind).length
-      $('li:last', kind).addClass('delimiter')
-
     kind.css('height', recalculate_block_height(kind))
     wrapped = $("<div>#{response}</div>")
     $('ul', kind).append($('ul', wrapped).html())
@@ -41,11 +38,8 @@
     true
 
   collapse_handler = (kind) ->
-
     delimiter_index = $('li.delimiter', kind).index()
-
     min_height = recalculate_block_height(kind, delimiter_index + 1)
-
     kind.animate
       height: min_height
       , 300, ->
@@ -60,7 +54,11 @@
 
     false
 
-  $('.content .account_show .right .next_page').live 'click', (event) ->
+  unless $('.content .left .social_actions .list li.delimiter').length
+    $('.content .left .social_actions .list li:last').addClass('delimiter')
+
+
+  $('.content .left .social_actions .pagination .next_page').live 'click', (event) ->
     link = $(this)
     return false if link.hasClass('disabled')
 
@@ -79,15 +77,10 @@
 
     false
 
-  $('.toggler').live 'click', (event) ->
-    return false if $(this).hasClass('disabled')
-    list = $(event.target).closest('.list')
-    tab = $(event.target).closest('.ui-widget-content')
-
-    if tab.length
-      collapse_handler(tab)
-    if list.height
-      collapse_handler(list)
+  $('.content .left .social_actions .pagination .toggler').live 'click', (event) ->
+    link = $(this)
+    return false if link.hasClass('disabled')
+    collapse_handler(link.closest('.list'))
 
     false
 

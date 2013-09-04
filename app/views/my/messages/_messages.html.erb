@@ -4,7 +4,9 @@
   <% end %>
 </ul>
 
-<div class="pagination">
-  <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if collection.first_page? }" %>
-  <%= link_to '&darr;'.html_safe, my_notification_messages_path(:page => collection.current_page + 1), :remote => true, :class => "next_page #{ 'disabled' if collection.last_page? }" %>
-</div>
+<% unless collection.first_page? && collection.last_page? %>
+  <div class="pagination">
+    <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if collection.first_page? }" %>
+    <%= link_to '&darr;'.html_safe, my_notification_messages_path(:page => collection.current_page + 1), :class => "next_page #{ 'disabled' if collection.last_page? }" %>
+  </div>
+<% end %>

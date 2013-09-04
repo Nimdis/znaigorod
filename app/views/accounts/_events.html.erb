@@ -1,9 +1,9 @@
-<div class="events header">
+<div class='events header'>
   Мероприятия
   <%= link_to 'Добавить', new_my_afisha_path, class: :floatr if can? :new, Afisha %>
 </div>
 
-<div id="events_filter">
+<div id='events_filter'>
   <ul>
     <% %w[draft pending published].each do |state| %>
       <li><%= link_to "##{state}" do %>
@@ -13,9 +13,9 @@
     <% end %>
   </ul>
 
-  <div class="events list">
+  <div class='events list'>
     <% %w[draft pending published].each do |state| %>
-      <div id='<%= state %>'>
+      <div id='<%= state %>' class='list'>
         <%= render partial: 'events/account_events', locals: { collection: @events.by_state(state), state: state.to_sym } %>
       </div>
     <% end %>

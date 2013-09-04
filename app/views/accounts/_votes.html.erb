@@ -2,7 +2,9 @@
   <%= render partial: 'votes/account_votes', locals: { collection: @votes } %>
 </ul>
 
-<div class="pagination">
-  <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if @votes.first_page? }" %>
-  <%= link_to '&darr;'.html_safe, account_votes_path(@account, :page => @votes.current_page + 1), :remote => true, :class => "next_page #{ 'disabled' if @votes.last_page? }" %>
-</div>
+<% unless @votes.first_page? && @votes.last_page? %>
+  <div class="pagination">
+    <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if @votes.first_page? }" %>
+    <%= link_to '&darr;'.html_safe, account_votes_path(@account, :page => @votes.current_page + 1), :class => "next_page #{ 'disabled' if @votes.last_page? }" %>
+  </div>
+<% end %>
