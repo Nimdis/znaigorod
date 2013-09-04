@@ -10,7 +10,7 @@ HasSearcher.create_searcher :posts do
 
   property :status do |search|
     search.any_of do
-      with(:status, true)
+      with(:status, :published)
     end
   end
 
