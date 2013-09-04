@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20130906023715) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "state"
   end
 
   add_index "bets", ["afisha_id"], :name => "index_bets_on_afisha_id"

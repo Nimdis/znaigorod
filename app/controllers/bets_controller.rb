@@ -5,6 +5,15 @@ class BetsController < ApplicationController
 
   belongs_to :afisha
 
+  layout false
+
+  def create
+    create! { |success, failure|
+      success.html { render @bet and return }
+      failure.html { render :partial => 'form' and return }
+    }
+  end
+
   protected
 
   def build_resource

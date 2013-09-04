@@ -20,5 +20,6 @@ class AfishasController < ApplicationController
     @presenter = AfishaPresenter.new(params.merge(:categories => [@afisha.kind.first]))
     @afisha.delay.create_page_visit(request.session_options[:id], current_user)
     @visits = @afisha.visits.page(1).per(5)
+    @bet = @afisha.bets.build
   end
 end

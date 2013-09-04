@@ -180,7 +180,7 @@ class Afisha < ActiveRecord::Base
   # >>>>>>>>>>>> Auction >>>>>>>>>>>
   attr_accessible :allow_auction
 
-  has_many :bets, :dependent => :destroy
+  has_many :bets, :dependent => :destroy, :order => 'bets.id DESC'
 
   default_value_for :allow_auction, false
 

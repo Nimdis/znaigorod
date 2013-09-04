@@ -1,0 +1,9 @@
+ru:
+  activerecord:
+    state_machines:
+      bet:
+        state:
+          states:
+            fresh: 'На рассмотрении'
+            approved: 'Принято'
+            canceled: 'Отклонено'
