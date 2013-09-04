@@ -47,7 +47,15 @@
           type: 'POST'
           data: form.serialize()
           success: (response, textStatus, jqXHR) ->
-            form.remove()
+            container.dialog('close')
+            $('.message_wrapper').text('Сообщение успешно отправлено!').show().delay(5000).slideUp('slow')
+            true
+          error: (jqXHR, textStatus, errorThrown) ->
+            wrapped = $("<div>#{jqXHR.responseText}</div>")
+            wrapped.find('title').remove()
+            wrapped.find('style').remove()
+            wrapped.find('head').remove()
+            console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
             true
 
         false
@@ -63,7 +71,6 @@
           $('.submit_dialog', form).attr('disabled', 'disabled')
           true
         close: (event, ui) ->
-          form.submit()
           $(this).dialog('destroy')
           $(this).remove()
           true
@@ -74,12 +81,5 @@
         else
           $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
         true
-
-      $('.submit_dialog', form).click ->
-        container.dialog('close')
-
-        $('.message_wrapper').text('Сообщение успешно отправлено!').show().delay(5000).slideUp('slow')
-
-        false
 
   true
