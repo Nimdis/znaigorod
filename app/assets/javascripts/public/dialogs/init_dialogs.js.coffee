@@ -12,11 +12,12 @@
     stored.push(account_id) if stored.indexOf(account_id) < 0
     window.localStorage.setItem("dialogs", JSON.stringify(stored))
 
-    scroll($('ul.dialog', "#dialog_#{account_id}"))
-
-    $('ul.dialog', "#dialog_#{account_id}").jScrollPane
+    pane = $('ul.dialog', "#dialog_#{account_id}").jScrollPane
       verticalGutter: 2
       showArrows: true
+      mouseWheelSpeed: 10
+
+    pane.data('jsp').scrollToBottom()
 
     timer = setInterval ->
       target = $('a.change_message_status.unread:first')

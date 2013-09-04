@@ -115,6 +115,7 @@
           autoReinitialise: true
           verticalGutter: 0
           showArrows: true
+          mouseWheelSpeed: 10
 
         block_offset = $('li:last', list).outerHeight(true, true) * ($('li', list).length - 3) - $('.jspContainer', list).outerHeight(true, true)
         if next_link.length
