@@ -46,6 +46,7 @@
  * = require ./afisha_filter
  * = require ./afisha_map
  * = require ./account_extend
+ * = require ./social_actions
  * = require ./dialogs
  * = require ./payment
  * = require ./tabs
