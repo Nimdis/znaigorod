@@ -132,6 +132,7 @@ ru:
 
       afisha:
         <<: *common_attributes
+        allow_auction: Позволять пользователям предлагать свою цену
         age_max: Максимальный возраст
         age_min: Минимальный возраст
         constant: Постоянная экспозиция

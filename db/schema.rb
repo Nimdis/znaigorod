@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130827092643) do
+ActiveRecord::Schema.define(:version => 20130903095142) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20130827092643) do
     t.string   "vk_event_url"
     t.integer  "fb_likes"
     t.integer  "odn_likes"
+    t.boolean  "allow_auction"
   end
 
   add_index "afisha", ["slug"], :name => "index_affiches_on_slug", :unique => true
@@ -135,6 +136,18 @@ ActiveRecord::Schema.define(:version => 20130827092643) do
     t.datetime "file_updated_at"
     t.text     "file_url"
   end
+
+  create_table "bets", :force => true do |t|
+    t.integer  "afisha_id"
+    t.integer  "number"
+    t.integer  "amount"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "bets", ["afisha_id"], :name => "index_bets_on_afisha_id"
+  add_index "bets", ["user_id"], :name => "index_bets_on_user_id"
 
   create_table "car_sales_centers", :force => true do |t|
     t.text     "category"
