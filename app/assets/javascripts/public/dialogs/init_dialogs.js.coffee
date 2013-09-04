@@ -14,6 +14,10 @@
 
     scroll($('ul.dialog', "#dialog_#{account_id}"))
 
+    $('ul.dialog', "#dialog_#{account_id}").jScrollPane
+      verticalGutter: 2
+      showArrows: true
+
     timer = setInterval ->
       target = $('a.change_message_status.unread:first')
       if target.length
@@ -122,7 +126,6 @@
   $('.to_dialog').on 'ajax:beforeSend', (xhr, settings) ->
     return false if $(this).hasClass('disabled')
     true
-
 
   $('#messages_filter').on 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target)
