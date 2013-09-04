@@ -42,13 +42,15 @@
 
   <div class='right'>
     <% if @afisha.allow_auction? %>
-      <div class="auction">
-        <%= render :partial => 'bets/form' %>
-      </div>
+      <div class="wrapper">
+        <div class="auction">
+          <%= render :partial => 'bets/form' %>
 
-      <ul class="bets">
-        <%= render @afisha.bets.reload %>
-      </ul>
+          <ul class="bets">
+            <%= render @afisha.bets.reload %>
+          </ul>
+        </div>
+      </div>
     <% end %>
 
 
