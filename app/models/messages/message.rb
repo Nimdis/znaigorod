@@ -38,4 +38,3 @@ end
 #  invite_kind      :string(255)
 #  agreement        :string(255)
 #
-

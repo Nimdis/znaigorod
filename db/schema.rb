@@ -431,6 +431,7 @@ ActiveRecord::Schema.define(:version => 20130909043100) do
     t.string   "type"
     t.string   "producer_type"
     t.string   "invite_kind"
+    t.string   "agreement"
   end
 
   add_index "messages", ["account_id"], :name => "index_messages_on_account_id"
