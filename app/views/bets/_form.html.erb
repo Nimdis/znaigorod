@@ -1,8 +1,8 @@
 <%= simple_form_for [@afisha, @afisha.bets.build] do |f| %>
   <div>
-    Куплю
+    <span>Куплю</span>
     <%= f.input :number, :label => false, :as => :select, :collection => (1..10), :include_blank => false %>
-    билетов
+    <span>билетов</span>
   </div>
 
   <div>

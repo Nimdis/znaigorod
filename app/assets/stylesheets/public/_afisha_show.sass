@@ -97,6 +97,19 @@
     float: right
     width: 208px
 
+    .auction
+      form
+
+        input.string
+          border: 1px solid #999
+          padding: 2px 4px
+          width: 60px
+
+        input[type='submit']
+          +button-style
+          padding: 2px 0 4px 0
+          width: 120px
+
     .tickets
 
       li
@@ -173,6 +186,7 @@
 
     .wrapper
       border: 1px solid #ccc
+      margin: 0 0 10px 0
       > div:last-child
         border-bottom: none !important
 
@@ -208,7 +222,7 @@
         .ymaps-copyrights-pane
           display: none
 
-    .more_like_this
+    .more_like_this, .auction
       border-bottom: 1px solid #ccc
       +background(linear-gradient(top, #fff, #e8e8e8))
       padding: 10px
