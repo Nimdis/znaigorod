@@ -124,3 +124,8 @@ ru:
         unread: Новое
         read: Прочитанное
 
+    invite_message:
+      invite_kind:
+        inviter: приглашает
+        invited: ждет приглашения от
+

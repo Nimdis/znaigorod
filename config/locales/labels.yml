@@ -215,6 +215,13 @@ ru:
     many:  "%{count} мероприятий"
     other: "%{count} мероприятия"
 
+  invites:
+    one:   "Приглашения +%{count}"
+    few:   "Приглашения +%{count}"
+    many:  "Приглашения +%{count}"
+    other: "Приглашения +%{count}"
+    zero:  "Приглашения"
+
   notifications:
     one:   "Уведомления +%{count}"
     few:   "Уведомления +%{count}"

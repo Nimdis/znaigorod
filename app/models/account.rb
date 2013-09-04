@@ -16,6 +16,8 @@ class Account < ActiveRecord::Base
   has_many :messages,                     order: 'messages.created_at DESC'
   has_many :notification_messages,        order: 'messages.created_at DESC'
   has_many :private_messages,             order: 'messages.created_at DESC'
+  has_many :invite_messages,              order: 'messages.created_at DESC'
+  has_many :produced_invite_messages,     as: :producer, class_name: 'InviteMessage'
   has_many :produced_messages,            as: :producer, class_name: 'PrivateMessage'
 
   has_many :payments, through: :users
@@ -47,8 +49,8 @@ class Account < ActiveRecord::Base
     string(:acts_as, :multiple => true) { acts_as }
   end
 
-  def sended_message(messageable, account_id, invite)
-    self.produced_messages.where(messageable_id: messageable.id,
+  def sended_invite_message(messageable, account_id, invite)
+    self.produced_invite_messages.where(messageable_id: messageable.id,
                                  messageable_type: messageable.class.name,
                                  account_id: account_id,
                                  invite_kind: invite).any?

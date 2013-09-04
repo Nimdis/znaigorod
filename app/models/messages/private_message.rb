@@ -7,8 +7,6 @@ class PrivateMessage < Message
   scope :to, ->(account) { where(account_id: account) }
   scope :dialog, ->(from, to) { where("(account_id = #{from} and producer_id = #{to}) or (account_id = #{to} and producer_id = #{from})") }
 
-  enumerize :invite_kind, in: [:inviter, :invited], predicates: true
-
   validates_presence_of :body
 
   auto_html_for :body do
