@@ -10,7 +10,7 @@ Znaigorod::Application.routes.draw do
 
     resources :dialogs, :only => [:index, :show]
 
-    resources :invite_messages, :only => [:index, :new, :create, :show] do
+    resources :invite_messages, :only => [:index, :update, :create, :show] do
       put 'change_message_status' => 'invite_messages#change_message_status', :on => :member, :as => :change_status
     end
 

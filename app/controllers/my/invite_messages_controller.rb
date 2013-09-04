@@ -1,7 +1,7 @@
 class My::InviteMessagesController < My::ApplicationController
   load_and_authorize_resource
 
-  actions :create, :new, :show, :index
+  actions :create, :update, :show, :index
   custom_actions resource: :change_message_status
 
   layout false

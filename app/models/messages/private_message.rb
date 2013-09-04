@@ -33,5 +33,6 @@ end
 #  type             :string(255)
 #  producer_type    :string(255)
 #  invite_kind      :string(255)
+#  agreement        :string(255)
 #
 

@@ -41,3 +41,12 @@ ru:
     organization:
       inviter_message: "Привет! Приглашаю тебя сходить в %{url}"
       invited_message: "Привет! Пригласи меня в %{url}"
+
+  invite_message:
+    inbox:
+      invited: приглашает вас
+      inviter: ждет вашего приглашения
+    sended:
+      invited: был приглашен вами
+      inviter: желаемый приглашатель
+
