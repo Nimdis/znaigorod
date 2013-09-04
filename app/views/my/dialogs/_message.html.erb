@@ -1,6 +1,6 @@
 <% last_message = PrivateMessage.dialog(current_user.account.id, with_account.id).order('id DESC').first %>
 
-<li class="<%= last_message.state %>" data-account="<%= with_account.title %>">
+<li class="<%= (last_message.producer != current_user.account)? last_message.state : 'read' %>" data-account="<%= with_account.title %>">
   <div class="item">
     <div class="avatar">
       <%= link_to account_path(with_account) do %>

@@ -28,7 +28,7 @@
     link = $('.header .messages a')
 
     if counter == 0
-      link.addClass('empty').removeClass('unread').attr('title','Нет новых сообщений').html(messages)
+      link.addClass('empty').removeClass('new').attr('title','Нет новых сообщений').html(messages)
     else
       link.addClass('unread').removeClass('empty').attr('title','Есть новые сообщения').html("+#{counter}")
 

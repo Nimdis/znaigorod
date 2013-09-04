@@ -4,7 +4,8 @@
       data-account="<%= @dialog_with.title %>"
       data-account_id="<%= @dialog_with.id %>"
       data-counter="<%= current_user.account.messages.unread.count %>"
-      data-messages="<%= current_user.account.messages.count %>">
+      data-messages="<%= current_user.account.messages.count %>"
+      data-dialog_counter="<%= PrivateMessage.unread.to(current_user.account).count %>">
 
       <div class="item">
         <div class="avatar">

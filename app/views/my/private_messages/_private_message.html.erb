@@ -1,7 +1,10 @@
 <li class="ajax_message_status <%= @private_message.state %> message_<%= @private_message.id %>"
   data-counter="<%= current_user.account.messages.unread.count %>"
   data-messages="<%= current_user.account.messages.count %>"
-  data-account_id="<%= @private_message.account_id %>">
+  data-account_id="<%= @private_message.account_id %>"
+  data-notification_counter="<%= current_user.account.notification_messages.unread.count %>"
+  data-dialog_counter="<%= current_user.account.private_messages.unread.count %>">
+
   <div class="item">
     <div class="avatar">
       <%= link_to account_path(@private_message.producer) do %>

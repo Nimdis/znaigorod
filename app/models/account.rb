@@ -32,7 +32,6 @@ class Account < ActiveRecord::Base
   extend Enumerize
   enumerize :gender, in: [:male, :female], predicates: true
 
-
   searchable do
     text :first_name
     text :last_name
