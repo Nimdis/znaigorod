@@ -24,6 +24,7 @@
     <%= f.input :title, required: true, input_html: { id: :afisha_title } %>
     <%= f.input :description, required: true, input_html: { id: :afisha_description } %>
     <%= f.input :tag, as: :string, input_html: { id: :afisha_tag } %>
+    <%= f.input :allow_auction %>
     <%= link_to 'выбрать из списка',  my_afisha_available_tags_path(resource, :format => :html), :class => 'select_tags', :remote => true %>
     <div class='submit'>
       <%= f.button :submit, 'Сохранить общее описание', class: :button %>

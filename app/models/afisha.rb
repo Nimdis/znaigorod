@@ -4,8 +4,11 @@ require 'vkontakte_api'
 require 'curb'
 
 class Afisha < ActiveRecord::Base
-  include HasVirtualTour
+  extend Enumerize
+  extend FriendlyId
+
   include AutoHtml
+  include HasVirtualTour
 
   attr_accessible :description, :poster_url, :image_url, :showings_attributes,
                   :tag, :title, :vfs_path, :affiche_schedule_attributes,
@@ -38,7 +41,6 @@ class Afisha < ActiveRecord::Base
 
   has_one :affiche_schedule, :dependent => :destroy
 
-  extend Enumerize
   serialize :kind, Array
   enumerize :kind, in: [:movie, :concert, :party, :spectacle, :exhibition, :sportsevent, :masterclass, :competition, :other], multiple: true, predicates: true
 
@@ -72,9 +74,7 @@ class Afisha < ActiveRecord::Base
   scope :actual,                -> { joins(:showings).where('showings.starts_at >= ? OR (showings.ends_at is not null AND showings.ends_at > ?)', DateTime.now.beginning_of_day, Time.zone.now) }
   scope :archive,               -> { joins(:showings).where('showings.starts_at < ? OR (showings.ends_at is not null AND showings.ends_at < ?)', DateTime.now.beginning_of_day, Time.zone.now) }
 
-  extend FriendlyId
   friendly_id :title, use: :slugged
-
   normalize_attribute :image_url
 
   # >>>>>>>>>>>> Wizard  >>>>>>>>>>>>
@@ -176,6 +176,18 @@ class Afisha < ActiveRecord::Base
   end
 
   # <<<<<<<<<<<< Wizard  <<<<<<<<<<<
+
+  # >>>>>>>>>>>> Auction >>>>>>>>>>>
+  attr_accessible :allow_auction
+
+  has_many :bets, :dependent => :destroy
+
+  default_value_for :allow_auction, false
+
+  def price_min
+    @price_min ||= showings.where('showings.starts_at > :date OR showings.ends_at > :date', { :date => Date.today }).pluck(:price_min).min
+  end
+  # <<<<<<<<<<<< Auction <<<<<<<<<<<
 
   after_save :save_images_from_vk,            :if => :vk_aid?
   after_save :save_images_from_yandex_fotki,  :if => :yandex_fotki_url?

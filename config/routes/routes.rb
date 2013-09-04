@@ -9,29 +9,28 @@ Znaigorod::Application.routes.draw do
     delete '/users/sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
   end
 
-  get 'accounts_search'   => 'accounts_search#show', :as => :accounts_search
-
-  get 'cooperation'       => 'cooperation#index'
-  get 'geocoder'          => 'geocoder#get_coordinates'
-  get 'yamp_geocoder'     => 'geocoder#get_yamp_coordinates'
-  get 'search'            => 'search#search',              :as => :search
-  get 'webcams'           => 'webcams#index'
+  get 'accounts_search' => 'accounts_search#show',         :as => :accounts_search
+  get 'cooperation'     => 'cooperation#index'
+  get 'geocoder'        => 'geocoder#get_coordinates'
+  get 'search'          => 'search#search',                :as => :search
+  get 'webcams'         => 'webcams#index'
+  get 'yamp_geocoder'   => 'geocoder#get_yamp_coordinates'
 
   resources :afisha, :only => [], :controller => 'afishas' do
-
+    resources :bets,     :only => :create
     resources :comments, :only => [:new, :show, :create]
-
-    get "photogallery" => "afisha#photogallery", :as => :photogallery
-    get "trailer" => "afisha#trailer", :as => :trailer
-
-    put 'destroy_visits' => 'visits#destroy_visits', :as => :destroy_visits
-    put "change_vote" => "votes#change_vote", :as => :change_vote
-    get "liked" => "votes#liked", :as => :liked
     resources :visits
+
+    get 'liked'        => 'votes#liked',         :as => :liked
+    get 'photogallery' => 'afisha#photogallery', :as => :photogallery
+    get 'trailer'      => 'afisha#trailer',      :as => :trailer
+
+    put 'change_vote'    => 'votes#change_vote',     :as => :change_vote
+    put 'destroy_visits' => 'visits#destroy_visits', :as => :destroy_visits
   end
 
-  get "/afisha" => "afishas#index", :as => :afisha_index, :controller => 'afishas'
-  get "/afisha/:id" => "afishas#show", :as => :afisha_show, :controller => 'afishas'
+  get '/afisha' => 'afishas#index', :as => :afisha_index, :controller => 'afishas'
+  get '/afisha/:id' => 'afishas#show', :as => :afisha_show, :controller => 'afishas'
 
   resources :saunas,   :only => :index
 
