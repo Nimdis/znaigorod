@@ -25,7 +25,9 @@
           <%= current_user.account %>
         </div>
       <% end %>
-      <%= last_message.body_html %>
+      <div class="message">
+        <%= last_message.body_html %>
+      </div>
     </div>
   </div>
 </li>
