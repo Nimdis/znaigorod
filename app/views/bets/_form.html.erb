@@ -1,0 +1,15 @@
+<%= simple_form_for [@afisha, @afisha.bets.build] do |f| %>
+  <div>
+    Куплю
+    <%= f.input :number, :label => false, :as => :select, :collection => (1..10), :include_blank => false %>
+    билетов
+  </div>
+
+  <div>
+    за
+    <%= f.input :amount, :label => false, :as => :string, :input_html => { :value => f.object.price_min } %>
+    рублей
+  </div>
+
+  <%= f.submit 'Предложить' %>
+<% end %>
