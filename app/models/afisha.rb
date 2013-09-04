@@ -185,6 +185,8 @@ class Afisha < ActiveRecord::Base
   default_value_for :allow_auction, false
 
   def price_min
+    return tickets.pluck(:price).min if tickets.any?
+
     @price_min ||= showings.where('showings.starts_at > :date OR showings.ends_at > :date', { :date => Date.today }).pluck(:price_min).min
   end
   # <<<<<<<<<<<< Auction <<<<<<<<<<<
