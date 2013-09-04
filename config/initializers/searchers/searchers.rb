@@ -128,6 +128,10 @@ HasSearcher.create_searcher :global do
     )
   end
   scope do
+    without :state, :draft
+    without :state, :pending
+    without :status, :draft
+
     adjust_solr_params do |params|
       (params[:qf] || '').gsub! /\bterm_text\b/, ''
       params[:fl] = 'id score'

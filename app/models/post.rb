@@ -39,7 +39,7 @@ class Post < ActiveRecord::Base
     date :created_at
     float :rating,              :trie => true
     string :search_kind
-    string :status
+    string(:status) { status? ? 'published' : 'draft' }
     string(:kind, :multiple => true) { kind.map(&:value) }
   end
 
