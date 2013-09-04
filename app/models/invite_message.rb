@@ -24,7 +24,8 @@ class InviteMessage < Message
     end
   end
 
-private
+  private
+
   def process_message
     self.state = :read
     NotificationMessage.create :producer => account, :account => producer, :messageable => self, :kind => "#{self.agreement}d_invite"
@@ -50,5 +51,4 @@ end
 #  invite_kind      :string(255)
 #  agreement        :string(255)
 #
-
 

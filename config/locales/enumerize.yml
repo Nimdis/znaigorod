@@ -137,4 +137,6 @@ ru:
       agreement:
         agree: Вы согласились
         disagree: Вы отказались
-
+      invite_kind:
+        inviter: приглашает
+        invited: ждет приглашения от
