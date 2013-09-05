@@ -4,8 +4,8 @@
 
 <div id="messages_filter">
   <ul>
-    <li><%= link_to t('dialogs', count: PrivateMessage.unread.to(current_user.account).count), '#dialogs', class: 'dialogs' %></li>
-    <li><%= link_to t('invites', count: @invite_messages.total_count), '#invites', class: 'invites' %></li>
+    <li><%= link_to t('dialogs', count: current_user.account.private_messages.unread.to(current_user.account).count), '#dialogs', class: 'dialogs' %></li>
+    <li><%= link_to t('invites', count: current_user.account.invite_messages.unread.count), '#invites', class: 'invites' %></li>
     <li><%= link_to t('notifications', count: current_user.account.notification_messages.unread.count), '#notifications', class: 'notifications' %></li>
   </ul>
 

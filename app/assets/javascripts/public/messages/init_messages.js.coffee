@@ -14,13 +14,12 @@
   process_change_message_status()
 
   $('.account_messages a.change_message_status.unread').on 'ajax:success', (evt, response) ->
-    $(evt.target)
-
     return if $(evt.target).hasClass('to_dialog')
-
     $(evt.target).closest('li').replaceWith(response)
     counter = $(response).data('counter')
     notification_counter = $(response).data('notification_counter')
+    invite_counter = $(response).data('invite_counter')
+    dialog_counter = $(response).data('dialog_counter')
     messages = $(response).data('messages')
 
     wrapper = $('<div/>')
@@ -36,10 +35,23 @@
     else
       link.addClass('unread').removeClass('empty').attr('title','Есть новые сообщения').html("+#{counter}")
 
+    notification = $('#messages_filter a.notifications')
     if notification_counter == 0
-      $('#messages_filter a.notifications').html('Уведомления')
+      notification.html('Уведомления')
     else
-      $('#messages_filter a.notifications').html("Уведомления +#{notification_counter}")
+      notification.html("Уведомления +#{notification_counter}")
+
+    dialog = $('#messages_filter a.dialogs')
+    if dialog_counter == 0
+      dialog.html('Диалоги')
+    else
+      dialog.html("Диалоги +#{dialog_counter}")
+
+    invite = $('#messages_filter a.invites')
+    if invite_counter == 0
+      invite.html('Приглашения')
+    else
+      invite.html("Приглашения +#{invite_counter}")
 
 @init_messages_tabs = () ->
   $('#messages_filter').tabs

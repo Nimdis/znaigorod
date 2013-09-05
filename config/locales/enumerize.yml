@@ -132,7 +132,7 @@ ru:
         read: Прочитанное
 
     invite_message:
-      invite_kind:
-        inviter: приглашает
-        invited: ждет приглашения от
+      agreement:
+        agree: Вы согласились
+        disagree: Вы отказались
 

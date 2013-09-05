@@ -1,7 +1,7 @@
 @init_dialogs = () ->
   add_tab_handler = (response, stored) ->
-    account = $(response).closest('ul.dialog').children('li:first').data('account')
-    account_id = $(response).closest('ul.dialog').children('li:first').data('account_id')
+    account = $(response).data('account')
+    account_id = $(response).data('account_id')
 
     $('#messages_filter').tabs
       tabTemplate: "<li><a href='\#{href}\'><span class='with_close'>\#{label}\</span></a><span class='ui-icon ui-icon-close ui-corner-all close'>x</span></li>"
@@ -39,6 +39,7 @@
           $('.change_message_status.unread:first').closest('li').replaceWith(response)
           counter = $(response).data('counter')
           notification_counter = $(response).data('notification_counter')
+          invite_counter = $(response).data('invite_counter')
           dialog_counter = $(response).data('dialog_counter')
           messages = $(response).data('messages')
 
@@ -61,6 +62,12 @@
           else
             dialog.html("Диалоги +#{dialog_counter}")
 
+          invite = $('#messages_filter a.invites')
+          if invite_counter == 0
+            invite.html('Приглашения')
+          else
+            invite.html("Приглашения +#{invite_counter}")
+
         true
 
       false
@@ -75,7 +82,7 @@
         account_id = target.siblings('a').attr('href').replace('#dialog_', '')
         link = target.siblings('a').attr('href').replace('#', '.')
 
-        $("#dialogs #{link}").removeClass('disabled')
+        $(link, '#messages_filter').removeClass('disabled')
 
         dialog_id.remove()
         target.closest('li').remove()
@@ -112,7 +119,7 @@
     block_id = "##{$(this).attr('class').replace('to_dialog', '').replace('disabled', '').trim()}"
     $('#messages_filter').tabs("select", block_id)
 
-    $(this).closest('li').toggleClass('unread', 'read')
+    $(this).closest('li:not(.invite_message_list)').addClass('read').removeClass('unread')
 
     true
 
@@ -130,7 +137,7 @@
     target = $(evt.target)
 
     if target.hasClass('to_dialog')
-      $(evt.target).addClass('disabled')
+      $('.'+target.attr('class').match(/dialog_\d+/), '#messages_filter').addClass('disabled')
 
       add_tab_handler(response, stored)
       close_tab_handler(stored)
@@ -148,4 +155,3 @@
     true
 
   true
-

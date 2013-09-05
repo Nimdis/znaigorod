@@ -23,6 +23,10 @@ class Ability
       user.persisted? && (private_message.producer == user.account || private_message.account == user.account)
     end
 
+    can :manage, InviteMessage do |invite_message|
+      user.persisted? && (invite_message.producer == user.account || invite_message.account == user.account)
+    end
+
     case namespace
     when 'manage'
       can :manage, Afisha if user.is_afisha_editor?
@@ -73,6 +77,7 @@ class Ability
       end
 
       can [:new, :create], PrivateMessage if user.persisted?
+      can [:create], InviteMessage if user.persisted?
 
     when 'crm'
       return false if user.new_record?
