@@ -4,6 +4,10 @@ class My::AccountsController < My::ApplicationController
   skip_authorization_check
   custom_actions :resource => [:destroy_image]
 
+  def update
+    update!{ redirect_to my_root_path and return }
+  end
+
   def show
     @account = AccountDecorator.new(current_user.account)
     @comments = @account.comments.rendereable.page(1).per(3)

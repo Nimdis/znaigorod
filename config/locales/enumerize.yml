@@ -17,6 +17,13 @@ ru:
         pending: На модерации
         published: Опубликовано
 
+    account:
+      gender:
+        undefined: Не указан
+        male: Мужской
+        female: Женский
+
+
     role:
       admin:                   Администратор
       afisha_editor:         Редактор афиши

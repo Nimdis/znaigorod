@@ -71,6 +71,10 @@ ru:
       visit:
         voted: Присоединиться
 
+      account:
+        gender: Пол
+        birthday: Дата рождения
+
       activity:
         activity_at: Когда
         contact: Контактное лицо организации
