@@ -143,7 +143,7 @@
         true
 
       close: (event, ui) ->
-        $(this).parent().remove()
+        $(this).dialog('destroy')
         $(this).remove()
         true
 

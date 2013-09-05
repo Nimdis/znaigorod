@@ -1,5 +1,6 @@
 @init_trailers = () ->
   trailers = $('.afisha_show .trailer p')
+
   if trailers.length == 1
     $(trailers).css
       'float': 'none'
@@ -10,8 +11,8 @@
       'width': 760
       'height': 462
     return true
+
   trailers.each ->
-  $('.afisha_show .trailer p').each ->
     wrapper = $(this).css('position', 'relative')
     iframe = $('iframe', wrapper)
     overlay = $('<div />').prependTo(wrapper)

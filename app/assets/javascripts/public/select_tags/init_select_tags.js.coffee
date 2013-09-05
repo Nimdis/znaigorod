@@ -21,10 +21,11 @@
             $('#afisha_tag').tagit('createTag', tag)
           container.dialog('close')
         true
-      close: ->
+      close: (event, ui) ->
         $(this).dialog('destroy')
         $(this).remove()
         true
+
     true
 
   true
