@@ -22,9 +22,6 @@ class Bet < ActiveRecord::Base
     after_transition :fresh => :approved, :do => :handle_approval
   end
 
-  scope :approved, -> { with_state :approved }
-  scope :canceled, -> { with_state :canceled }
-
   def price_min
     afisha_price_min = afisha.price_min
 

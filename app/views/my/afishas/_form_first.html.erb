@@ -4,33 +4,24 @@
   <p>Тэги можно добавить либо набрав в поле и воспользовавшись подсказками, либо выбрать из списка, кликнув по ссылке.</p>
 <% end %>
 
-<% if resource.new_record? %>
-  <%= simple_form_for resource, as: :afisha, url: [:my, resource] do |f| %>
-    <%= hidden_field_tag :step, @step %>
-    <%= f.input :kind, required: true, as: :check_boxes %>
-    <%= f.input :title, required: true, input_html: { id: :afisha_title } %>
-    <%= f.input :description, required: true, input_html: { id: :afisha_description } %>
-    <%= f.input :tag, as: :string, input_html: { id: :afisha_tag } %>
-    <%= link_to 'выбрать из списка',  my_available_tags_path(:format => :html), :class => 'select_tags', :remote => true %>
-    <div class='submit'>
-      <%= f.button :submit, 'Создать мероприятие', class: :button %>
-      <%= link_to 'Отмена', my_afisha_index_path %>
-    </div>
-  <% end %>
-<% else %>
-  <%= simple_form_for resource, as: :afisha, url: my_afisha_show_path(resource) do |f| %>
-    <%= hidden_field_tag :step, @step %>
-    <%= f.input :kind, required: true, as: :check_boxes %>
-    <%= f.input :title, required: true, input_html: { id: :afisha_title } %>
-    <%= f.input :description, required: true, input_html: { id: :afisha_description } %>
-    <%= f.input :tag, as: :string, input_html: { id: :afisha_tag } %>
-    <%= f.input :allow_auction %>
-    <%= link_to 'выбрать из списка',  my_afisha_available_tags_path(resource, :format => :html), :class => 'select_tags', :remote => true %>
-    <div class='submit'>
-      <%= f.button :submit, 'Сохранить общее описание', class: :button %>
-      <%= link_to 'Отмена', my_afisha_show_path(resource) %>
-    </div>
-  <% end %>
+<%= simple_form_for resource, as: :afisha, url: resource.new_record? ? [:my, resource] : my_afisha_show_path(resource) do |f| %>
+  <%= hidden_field_tag :step, @step %>
+
+  <%= f.input :kind, required: true, as: :check_boxes %>
+  <%= f.input :title, required: true, input_html: { id: :afisha_title } %>
+  <%= f.input :description, required: true, input_html: { id: :afisha_description } %>
+  <%= f.input :allow_auction %>
+
+  <%= f.input :tag, as: :string, input_html: { id: :afisha_tag } %>
+  <%= link_to 'выбрать из списка',
+    resource.new_record? ? my_available_tags_path(:format => :html) : my_afisha_available_tags_path(resource, :format => :html),
+    :class => 'select_tags',
+    :remote => true %>
+
+  <div class='submit'>
+    <%= f.button :submit, resource.new_record? ? 'Создать мероприятие' : 'Сохранить общее описание', class: :button %>
+    <%= link_to 'Отмена', resource.new_record? ? :back : my_afisha_show_path(resource) %>
+  </div>
 <% end %>
 
 <%= render :partial => 'textile_syntax' %>
