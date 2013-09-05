@@ -325,7 +325,7 @@ class OrganizationDecorator < ApplicationDecorator
     radius = 3
 
     search = priority_suborganization.class.search do
-      with(:location).in_radius(lat, lon, radius) if lat && lon
+      with(:location).in_radius(lat, lon, radius) if lat.present? && lon.present?
       without(priority_suborganization)
 
       any_of do
@@ -335,7 +335,7 @@ class OrganizationDecorator < ApplicationDecorator
         with("#{fake_kind}_cuisine", priority_suborganization.cuisines.map(&:mb_chars).map(&:downcase)) if priority_suborganization.respond_to?(:cuisines) && priority_suborganization.cuisines.any?
       end
 
-      order_by_geodist(:location, lat, lon) if lat && lon
+      order_by_geodist(:location, lat, lon) if lat.present? && lon.present?
       paginate(page: 1, per_page: 5)
     end
 
