@@ -44,9 +44,9 @@ ru:
 
   invite_message:
     inbox:
-      invited: приглашает вас
-      inviter: ждет вашего приглашения
+      invited: ждет вашего приглашения
+      inviter: приглашает вас
     sended:
-      invited: был приглашен вами
-      inviter: желаемый приглашатель
+      invited: желаемый приглашатель
+      inviter: был приглашен вами
 

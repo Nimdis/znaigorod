@@ -3,7 +3,8 @@
   data-messages="<%= current_user.account.messages.count %>"
   data-account_id="<%= @private_message.account_id %>"
   data-notification_counter="<%= current_user.account.notification_messages.unread.count %>"
-  data-dialog_counter="<%= current_user.account.private_messages.unread.count %>">
+  data-dialog_counter="<%= current_user.account.private_messages.unread.count %>"
+  data-invite_counter="<%= current_user.account.invite_messages.unread.count %>">
 
   <div class="item">
     <div class="avatar">

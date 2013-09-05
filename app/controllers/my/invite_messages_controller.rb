@@ -12,6 +12,12 @@ class My::InviteMessagesController < My::ApplicationController
     end
   end
 
+  def update
+    update! do
+      render @invite_message and return
+    end
+  end
+
   def change_message_status
     change_message_status! {
       @invite_message.change_message_status

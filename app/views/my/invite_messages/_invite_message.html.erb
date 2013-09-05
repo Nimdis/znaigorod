@@ -1,28 +1,41 @@
-<li class='<%= invite_message.state %>'>
+<li class='<%= invite_message.state if invite_message.relation_at(current_user.account) == 'inbox' %> fake invite_message_list'
+  data-counter="<%= current_user.account.messages.unread.count %>"
+  data-messages="<%= current_user.account.messages.count %>"
+  data-account_id="<%= invite_message.account_id %>"
+  data-notification_counter="<%= current_user.account.notification_messages.unread.count %>"
+  data-dialog_counter="<%= current_user.account.private_messages.unread.count %>"
+  data-invite_counter="<%= current_user.account.invite_messages.unread.count %>">
+
   <div class="item <%= invite_message.relation_at(current_user.account) %>">
     <div class="avatar">
       <%= link_to account_path(invite_message.opponent_of(current_user.account)) do %>
         <%= image_tag(resized_image_url(invite_message.opponent_of(current_user.account).avatar.url, 35, 35), size: '35x35') %>
       <% end %>
     </div>
-    <%= link_to invite_message.opponent_of(current_user.account), account_path(invite_message.opponent_of(current_user.account)) %>, <span class='date'><%= l invite_message.created_at, :format => '%e %B %Y, %H:%M' %></span>
-
-    <div><%= t "invite_message.#{invite_message.relation_at(current_user.account)}.#{invite_message.invite_kind}" %> на <%= link_to invite_message.messageable, invite_message.messageable.is_a?(Afisha) ? afisha_show_path(invite_message.messageable) : organization_path(invite_message.messageable) %> </div>
-
-    <div class='invite_message_actions'>
-      <% if invite_message.relation_at(current_user.account) == 'inbox' %>
-        <%= link_to "Согласиться", my_invite_message_path(invite_message, :params => { 'invite_message[agreement]' => true }), :method => :put, :remote => true, :class => 'agreement' %>
-        <%= link_to "Отказать",  my_invite_message_path(invite_message, :params => { 'invite_message[agreement]' => false }), :method => :put, :remote => true, :class => 'agreement' %>
-      <% else %>
-        <% if invite_message.agreement == true %>
-          согласие получено
-        <% elsif invite_message.agreement == false %>
-          получен отказ
-        <% else %>
-          нет ответа
-        <% end %>
-      <% end %>
+    <div class="right_wrapper">
+      <%= link_to invite_message.opponent_of(current_user.account), account_path(invite_message.opponent_of(current_user.account)) %>, <span class='date'><%= l invite_message.created_at, :format => '%e %B %Y, %H:%M' %></span>
       <%= link_to "К диалогу", my_dialog_path(invite_message.opponent_of(current_user.account)), class: "to_dialog dialog_#{invite_message.opponent_of(current_user.account).id}", remote: true %>
+
+      <div><%= t "invite_message.#{invite_message.relation_at(current_user.account)}.#{invite_message.invite_kind}" %> на <%= link_to invite_message.messageable, invite_message.messageable.is_a?(Afisha) ? afisha_show_path(invite_message.messageable) : organization_path(invite_message.messageable) %> </div>
+
+      <div class='invite_message_actions'>
+        <% if invite_message.relation_at(current_user.account) == 'inbox' %>
+          <% if invite_message.agreement.nil? %>
+            <%= link_to "Согласиться", my_invite_message_path(invite_message, :params => { 'invite_message[agreement]' => :agree }), :method => :put, :remote => true, :class => 'agreement' %>
+            <%= link_to "Отказать",  my_invite_message_path(invite_message, :params => { 'invite_message[agreement]' => :disagree }), :method => :put, :remote => true, :class => 'agreement' %>
+          <% else %>
+            <%= invite_message.agreement_text %>
+          <% end %>
+        <% else %>
+          <% if invite_message.agreement.nil? %>
+            нет ответа
+          <% elsif invite_message.agreement.agree? %>
+            согласие получено
+          <% elsif invite_message.agreement.disagree? %>
+            получен отказ
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </li>

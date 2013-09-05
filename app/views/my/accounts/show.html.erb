@@ -23,7 +23,7 @@
   </div>
 
   <div class="right">
-    <%= render 'messages' if @notification_messages.any? || @dialogs.any? || @invites.any? %>
+    <%= render 'messages' if @notification_messages.any? || @dialogs.any? || @invite_messages.any? %>
     <%= render 'accounts/events' %>
 
     <% if @visits.any? %>

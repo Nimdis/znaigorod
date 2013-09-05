@@ -1,3 +1,33 @@
+class InviteMessage < Message
+  attr_accessible :agreement, :account_id, :messageable_id, :messageable_type, :producer_id, :invite_kind, :producer_type, :state, :kind
+  enumerize :invite_kind, in: [:inviter, :invited], predicates: true
+  enumerize :agreement, :in => [:agree, :disagree], :predicates => true
+  before_update :read_message, :if => ->(m) { m.changes.keys.include?('agreement') }
+
+  def relation_at(account_obj)
+    if account_obj.id == account_id
+      'inbox'
+    elsif account_obj.id == producer_id
+      'sended'
+    else
+      'undefined'
+    end
+  end
+
+  def opponent_of(account_obj)
+    if relation_at(account_obj) == 'inbox'
+      producer
+    elsif relation_at(account_obj) == 'sended'
+      account
+    end
+  end
+
+private
+  def read_message
+    self.state = :read
+  end
+end
+
 # encoding: utf-8
 # == Schema Information
 #
@@ -20,31 +50,3 @@
 #
 
 
-class InviteMessage < Message
-  attr_accessible :agreement
-  enumerize :invite_kind, in: [:inviter, :invited], predicates: true
-  before_create :set_body
-
-  def relation_at(account_obj)
-    if account_obj.id == account_id
-      'inbox'
-    elsif account_obj.id == producer_id
-      'sended'
-    else
-      'undefined'
-    end
-  end
-
-  def opponent_of(account_obj)
-    if relation_at(account_obj) == 'inbox'
-      producer
-    elsif relation_at(account_obj) == 'sended'
-      account
-    end
-  end
-
-private
-  def set_body
-    #I18n.t("invite_message.#{messageable.class.name.underscore}.#{invite_kind}_message", url: messageable.is_a?(Afisha) ? afisha_show_url(messageable) : organization_url(messageable))
-  end
-end
