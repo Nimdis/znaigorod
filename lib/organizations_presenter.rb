@@ -161,7 +161,7 @@ module OrganizationsPresenter
           count: row.count
         }
       end
-      add_edvanced_categories_links(array)
+      add_advanced_categories_links(array)
       array.sort_by! {|c| c[:count]}.reverse!
       array.insert(0, {
         title: 'Все',
@@ -235,7 +235,7 @@ module OrganizationsPresenter
     }
   end
 
-  def add_edvanced_categories_links(links)
+  def add_advanced_categories_links(links)
     links
   end
 end
