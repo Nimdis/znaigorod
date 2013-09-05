@@ -126,6 +126,8 @@ ru:
         auction_bet_cancel: не согласен на
         auction_bet_approve: согласен на
         auction_bet_pay: оплатил
+        agreed_invite: принял приглашение посетить
+        disagreed_invite: отказался от приглашения посетить
 
       state:
         unread: Новое

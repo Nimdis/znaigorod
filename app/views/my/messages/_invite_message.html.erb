@@ -1,0 +1,19 @@
+<div class="item">
+  <div class="avatar">
+    <%= link_to account_path(message.producer) do %>
+      <%= image_tag(resized_image_url(message.producer.avatar.url, 35, 35), size: '35x35', title: message.producer, alt: message.producer) %>
+    <% end %>
+  </div>
+
+  <div class="body">
+    <%= link_to message.producer, message.producer %>
+    <span><%= message.kind_text %></span>
+
+    <%= link_to(message.messageable.messageable.title, message.messageable.messageable.is_a?(Afisha) ? polymorphic_path([message.messageable.messageable, :show]) : message.messageable.messageable) %>
+
+    <div class="date">
+      <%= time_ago_in_words(message.created_at) %> назад
+    </div>
+  </div>
+</div>
+
