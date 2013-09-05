@@ -1,9 +1,9 @@
 <% @users.each_slice(6) do |users| %>
-  <ul class="liked">
+  <ul class='liked'>
     <% users.each do |user| %>
       <li>
         <div class='user_item'>
-          <%= link_to image_tag(resized_image_url(user.account.avatar.url, 50, 50), :size => "50x50", :title => user.account.title), user.account %>
+          <%= link_to image_tag(resized_image_url(user.account.avatar.url, 50, 50), :size => '50x50', :title => user.account.title), user.account %>
           <%= link_to truncate(user.account.title, :length => 15), user.account, :class => 'name', :title => user.account.title %>
         </div>
       </li>
