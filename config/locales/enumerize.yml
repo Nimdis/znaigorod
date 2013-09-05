@@ -122,6 +122,8 @@ ru:
         user_vote_comment: понравился комментарий
         user_visit_afisha: собирается на
         user_add_friend: добавил в вас друзья
+        agreed_invite: принял приглашение посетить
+        disagreed_invite: отказался от приглашения посетить
 
       state:
         unread: Новое

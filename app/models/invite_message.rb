@@ -1,8 +1,10 @@
+# encoding: utf-8
+
 class InviteMessage < Message
   attr_accessible :agreement, :account_id, :messageable_id, :messageable_type, :producer_id, :invite_kind, :producer_type, :state, :kind
   enumerize :invite_kind, in: [:inviter, :invited], predicates: true
   enumerize :agreement, :in => [:agree, :disagree], :predicates => true
-  before_update :read_message, :if => ->(m) { m.changes.keys.include?('agreement') }
+  before_update :process_message, :if => ->(m) { m.changes.keys.include?('agreement') }
 
   def relation_at(account_obj)
     if account_obj.id == account_id
@@ -23,12 +25,12 @@ class InviteMessage < Message
   end
 
 private
-  def read_message
+  def process_message
     self.state = :read
+    NotificationMessage.create :producer => account, :account => producer, :messageable => self, :kind => "#{self.agreement}d_invite"
   end
 end
 
-# encoding: utf-8
 # == Schema Information
 #
 # Table name: messages
