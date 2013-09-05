@@ -30,6 +30,7 @@
  * = require ./scroll_to
  * = require ./sugar
  * = require ./swfobject
+ * = require ./jwplayer
  * = require ./limit
  * = require ./urlify
  * = require ./yandex_stat

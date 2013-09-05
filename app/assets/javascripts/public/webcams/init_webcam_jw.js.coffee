@@ -1,4 +1,4 @@
-@init_webcam_uppod = () ->
+@init_webcam_jw = () ->
 
   init_webcam_dialog = () ->
     unless $("#webcam_dialog").length
@@ -54,7 +54,7 @@
       "id":"swfobject_container"
       "name":"swfobject_container"
 
-  $(".webcams_list .webcam_uppod").each (index, item) ->
+  $(".webcams_list .webcam_jw").each (index, item) ->
     block = $(this)
     link = $("a", block)
     link.click (event) ->
