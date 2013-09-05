@@ -4,6 +4,9 @@ ru:
       bet:
         state:
           states:
-            fresh: 'На рассмотрении'
-            approved: 'Принято'
-            canceled: 'Отклонено'
+            fresh: На рассмотрении
+            approved: Принято
+            canceled: Отклонено
+          events:
+            approve: Принять
+            cancel: Отклонить

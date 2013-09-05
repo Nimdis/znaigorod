@@ -11,8 +11,8 @@ class Bet < ActiveRecord::Base
   default_value_for :number, 1
 
   state_machine :state, :initial => :fresh do
-    event(:to_approved) { transition :fresh => :approved }
-    event(:to_canceled) { transition :fresh => :canceled }
+    event(:approve) { transition :fresh => :approved }
+    event(:cancel) { transition :fresh => :canceled }
 
     after_transition :fresh => :canceled, :do => :handle_cancel
     after_transition :fresh => :approved, :do => :handle_approval
@@ -30,7 +30,7 @@ class Bet < ActiveRecord::Base
   private
 
   def send_notification_to_afisha_author
-    # отправлять автору афишу уведомление о новой ставке
+    NotificationMessage.delay.create account: afisha.user.account, kind: :auction_bet, messageable: self
   end
 
   def handle_cancel
