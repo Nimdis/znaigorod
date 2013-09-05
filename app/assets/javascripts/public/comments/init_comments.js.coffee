@@ -65,6 +65,34 @@
   $(".ajaxed").on "ajax:success", (evt, response, status, jqXHR) ->
     target = $(evt.target)
 
+    if $('.social_signin_links', $(response)).length
+      $('.cloud_wrapper', target.closest('.social_actions')).remove()
+
+      wrapped = $("<div>#{response}</div>")
+      $('img.avatar', wrapped).remove()
+      $('span.profile_link', wrapped).remove()
+      $('form.new_comment', wrapped).remove()
+      $('h4', wrapped).remove()
+      $('p:first', wrapped).css('text-align', 'center')
+      wrapped = $('li.ajaxed_item', wrapped).html()
+
+      signin_container = $('<div class="sign_in_with" />').appendTo('body').hide().html(wrapped)
+      signin_container.dialog
+        autoOpen: true
+        draggable: false
+        modal: true
+        resizable: false
+        title: 'Необходима авторизация'
+        width: '500px'
+        close: (event, ui) ->
+          $(this).dialog('destroy')
+          $(this).remove()
+          true
+
+      init_auth()
+
+      return false
+
     switch target.attr('class')
       when 'new_comment' then target.new_comment(jqXHR.responseText)
       when 'new_answer'  then target.new_answer(jqXHR.responseText)
@@ -72,4 +100,7 @@
 
     cancel_handler()
     init_auth()
+
   restore_comment()
+
+  true
