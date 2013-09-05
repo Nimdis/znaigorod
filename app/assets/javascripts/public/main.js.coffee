@@ -32,7 +32,6 @@ $ ->
   init_filter_handler() if $('.filters_wrapper').length
   init_contest() if $('.content_wrapper .contest').length
   init_organization_jump_to_afisha() if $('.organization_show').length
-  init_organization_social_actions() if $('.organization_show').length
   init_introduction() if $('.content .introduction').length
   init_more_main_menu() if $('.filters .by_categories .more_link').length
   init_sauna_advanced_filter() if $('.filters_wrapper .advanced_filters_toggler').length
