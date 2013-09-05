@@ -26,13 +26,6 @@
               true
           link.removeClass('busy')
           true
-        error: (jqXHR, textStatus, errorThrown) ->
-          wrapped = $("<div>" + jqXHR.responseText + "</div>")
-          wrapped.find('title').remove()
-          wrapped.find('style').remove()
-          wrapped.find('head').remove()
-          console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
-          true
       false
     true
 
@@ -52,13 +45,6 @@
         else
           $('.sms_claim_form_wrapper').dialog('close')
           alert("Ваша заявка принята!\nСотрудник заведения свяжется с Вами.\nСпасибо за использования сервиса.")
-        true
-      error: (jqXHR, textStatus, errorThrown) ->
-        wrapped = $("<div>" + jqXHR.responseText + "</div>")
-        wrapped.find('title').remove()
-        wrapped.find('style').remove()
-        wrapped.find('head').remove()
-        console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
         true
     false
   true

@@ -12,6 +12,14 @@
     $(".need_close_by_click").removeClass('need_close_by_click').hide()
     true
 
+  $(document).ajaxError (event, jqXHR, settings, exception) ->
+    wrapped = $("<div>#{jqXHR.responseText}</div>")
+    wrapped.find('title').remove()
+    wrapped.find('style').remove()
+    wrapped.find('head').remove()
+    console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
+    true
+
   true
 
 randomize = (number) ->

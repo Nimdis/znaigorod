@@ -68,25 +68,11 @@
                       invite_link.after('<span class="sended">Приглашен</span>').remove()
                       form.remove()
                       true
-                    error: (jqXHR, textStatus, errorThrown) ->
-                      wrapped = $("<div>#{jqXHR.responseText}</div>")
-                      wrapped.find('title').remove()
-                      wrapped.find('style').remove()
-                      wrapped.find('head').remove()
-                      console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
-                      true
                   false
                 $('.close', form).click ->
                   invite_link.show()
                   form.remove()
                   false
-                true
-              error: (jqXHR, textStatus, errorThrown) ->
-                wrapped = $("<div>#{jqXHR.responseText}</div>")
-                wrapped.find('title').remove()
-                wrapped.find('style').remove()
-                wrapped.find('head').remove()
-                console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
                 true
             false
           true
@@ -122,13 +108,6 @@
                   block_offset = $('li:last', event.target).outerHeight(true, true) * ($('li', event.target).length - 3) - $('.jspContainer', list).outerHeight(true, true)
                   busy = false
                   true
-                error: (jqXHR, textStatus, errorThrown) ->
-                  wrapped = $("<div>#{jqXHR.responseText}</div>")
-                  wrapped.find('title').remove()
-                  wrapped.find('style').remove()
-                  wrapped.find('head').remove()
-                  console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
-                  true
 
             true
         true
@@ -152,13 +131,6 @@
                 $('#q', block).val('')
                 block.initialize_pagination()
                 block.initialize_invite()
-                true
-              error: (jqXHR, textStatus, errorThrown) ->
-                wrapped = $("<div>#{jqXHR.responseText}</div>")
-                wrapped.find('title').remove()
-                wrapped.find('style').remove()
-                wrapped.find('head').remove()
-                console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
                 true
 
             false
@@ -185,13 +157,7 @@
               block.initialize_pagination()
               block.initialize_invite()
               true
-            error: (jqXHR, textStatus, errorThrown) ->
-              wrapped = $("<div>#{jqXHR.responseText}</div>")
-              wrapped.find('title').remove()
-              wrapped.find('style').remove()
-              wrapped.find('head').remove()
-              console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
-              true
+
           false
 
         true
@@ -234,13 +200,6 @@
               target.closest('.social_actions').html(response)
               container.dialog('close')
               $('.message_wrapper').text('Приглашение успешно отправлено!').show().delay(5000).slideUp('slow')
-              true
-            error: (jqXHR, textStatus, errorThrown) ->
-              wrapped = $("<div>#{jqXHR.responseText}</div>")
-              wrapped.find('title').remove()
-              wrapped.find('style').remove()
-              wrapped.find('head').remove()
-              console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
               true
 
           false

@@ -1,4 +1,5 @@
 @init_webcam_map = () ->
+
   ymaps.ready ->
     $map = $('.webcams .webcam_map')
 
