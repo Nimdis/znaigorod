@@ -1,3 +1,7 @@
 <%= simple_form_for @account, as: :account, url: my_account_path do |f| %>
-  <%= f.input :avatar, required: true, label: false %>
+  <%= f.input :gender, as: :select %>
+  <%= f.input :birthday, as: :date, start_year: Date.today.year - 90,
+                         end_year: Date.today.year, order: [:day, :month, :year] %>
+  <%= f.submit 'Сохранить' %>
 <% end %>
+

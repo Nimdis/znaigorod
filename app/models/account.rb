@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  attr_accessible :avatar, :email, :first_name, :gender, :last_name, :patronymic, :rating, :nickname, :location, :created_at
+  attr_accessible :avatar, :birthday, :email, :first_name, :gender, :last_name, :patronymic, :rating, :nickname, :location, :created_at
 
   has_many :users,           order: 'id ASC'
   has_many :afisha,          through: :users
@@ -32,7 +32,7 @@ class Account < ActiveRecord::Base
   alias_attribute :file_url, :avatar_url
 
   extend Enumerize
-  enumerize :gender, in: [:male, :female], predicates: true
+  enumerize :gender, in: [:undefined, :male, :female], default: :undefined, predicates: true
 
   searchable do
     text :first_name
