@@ -28,7 +28,7 @@ render_mjpeg_dialog = (width, height, file, dialog_title) ->
     title: dialog_title
     modal: true
     width: width.toNumber() + 36
-    height: height.toNumber() + 44
+    height: height.toNumber() + 46
     resizable: false
     close: (event, ui) ->
       $(this).dialog('destroy')

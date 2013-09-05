@@ -49,12 +49,7 @@
           init_sms_claims() if $('.content_wrapper .sms_claims li').length && data.length
           init_sauna_halls_scroll() if $('.content_wrapper .organizations_list > ul .sauna_halls').length
           true
-        error: (jqXHR, textStatus, errorThrown) ->
-          wrapped = $("<div>" + jqXHR.responseText + "</div>")
-          wrapped.find('title').remove()
-          wrapped.find('style').remove()
-          wrapped.find('head').remove()
-          console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
-          true
+
     true
+
   true

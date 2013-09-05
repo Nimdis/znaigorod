@@ -82,9 +82,6 @@
           busy = false
           initialize_vk_likes()
           true
-        error: (jqXHR, textStatus, errorThrown) ->
-          console.log jqXHR.responseText.strip_tags() if console && console.log
-          true
     true
   true
 

@@ -54,13 +54,6 @@
             container.dialog('close')
             $('.message_wrapper').text('Сообщение успешно отправлено!').show().delay(5000).slideUp('slow')
             true
-          error: (jqXHR, textStatus, errorThrown) ->
-            wrapped = $("<div>#{jqXHR.responseText}</div>")
-            wrapped.find('title').remove()
-            wrapped.find('style').remove()
-            wrapped.find('head').remove()
-            console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
-            true
 
         false
 

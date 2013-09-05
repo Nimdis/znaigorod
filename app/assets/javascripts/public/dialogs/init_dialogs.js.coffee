@@ -70,14 +70,6 @@
 
         true
 
-        error: (jqXHR, textStatus, errorThrown) ->
-          wrapped = $("<div>#{jqXHR.responseText}</div>")
-          wrapped.find('title').remove()
-          wrapped.find('style').remove()
-          wrapped.find('head').remove()
-          console.error wrapped.html().stripTags().unescapeHTML().trim() if console && console.error
-          true
-
       false
 
   close_tab_handler = (stored) ->

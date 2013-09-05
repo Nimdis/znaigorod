@@ -41,7 +41,6 @@
  * = require ./comments
  * = require ./votes
  * = require ./jscrollpane
- * = require ./main_page
  * = require ./afisha_extend
  * = require ./afisha_filter
  * = require ./afisha_map
@@ -73,7 +72,6 @@
  * = require ./webcams
  * = require ./contest
  * = require ./menus
- * = require ./stream_buro_service
  * = require ./services
  * = require ./sms_claims
  * = require ./my_afisha
