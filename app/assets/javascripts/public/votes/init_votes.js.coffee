@@ -30,5 +30,4 @@ init_dialog = () ->
     $('.cloud_wrapper:visible').not(target.children('.cloud_wrapper')).hide()
     target.html(jqXHR.responseText)
     init_auth()
-    cloud_handler()
     init_votes()
