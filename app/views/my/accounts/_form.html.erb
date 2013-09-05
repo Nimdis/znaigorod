@@ -1,7 +1,17 @@
 <%= simple_form_for @account, as: :account, url: my_account_path do |f| %>
-  <%= f.input :gender, as: :select %>
-  <%= f.input :birthday, as: :date, start_year: Date.today.year - 90,
-                         end_year: Date.today.year, order: [:day, :month, :year] %>
-  <%= f.submit 'Сохранить' %>
+  <div class="properties_place">
+    <div class="line">
+      <span>Пол</span>
+      <%= f.input :gender, label: false, as: :select, include_blank: false %>
+    </div>
+    <div class="line">
+      <span>Дата рождения</span>
+      <%= f.input :birthday, label: false, as: :date_picker, start_year: Date.today.year - 90,
+                             end_year: Date.today.year, order: [:day, :month, :year] %>
+    </div>
+  </div>
+  <div class="button_place">
+    <%= f.submit 'Сохранить', class: :properties_submit %>
+  </div>
 <% end %>
 
