@@ -4,6 +4,10 @@ class Bet < ActiveRecord::Base
   belongs_to :afisha
   belongs_to :user
 
+  has_many :notification_messages, :as => :messageable, :dependent => :destroy
+
+  has_one :account, :through => :user
+
   validates_presence_of :amount, :number
 
   after_create :send_notification_to_afisha_author
@@ -30,11 +34,13 @@ class Bet < ActiveRecord::Base
   private
 
   def send_notification_to_afisha_author
-    NotificationMessage.delay.create account: afisha.user.account, kind: :auction_bet, messageable: self
+    notification_messages.create! :producer => account,
+      :account => afisha.user.account, :kind => :auction_bet
   end
 
   def handle_cancel
-    # отправлять пользователю уведомление об отказе
+    notification_messages.create! :producer => afisha.user.account,
+      :account => account, :kind => :auction_bet_cancel
   end
 
   def handle_approval
