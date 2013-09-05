@@ -29,7 +29,7 @@ class EntertainmentsPresenter
     }
   end
 
-  def add_edvanced_categories_links(links)
+  def add_advanced_categories_links(links)
     links.insert(2, {
         title: I18n.t("organization.kind.sauna"),
         klass: 'sauna',

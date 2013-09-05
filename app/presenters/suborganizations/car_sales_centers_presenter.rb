@@ -13,7 +13,7 @@ class CarSalesCentersPresenter
 
   acts_as_organizations_presenter kind: :car_sales_center, filters: [:categories, :features, :offers]
 
-  def add_edvanced_categories_links(links)
+  def add_advanced_categories_links(links)
     links.insert(0, {
         title: I18n.t("organization.kind.car_wash"),
         klass: 'car_wash',
