@@ -52,13 +52,17 @@
         padding: 0 0 3px 0
 
         .wanted
-          margin: 0 5px 0 40px
 
           .sended
-            color: #ff6600
+            color: #f60
 
           a.invite
             +grey-button-style
+            +inline-block
+            margin-bottom: 5px
+
+            &:last-child
+              margin-bottom: 0
 
     .pagination
       position: absolute
