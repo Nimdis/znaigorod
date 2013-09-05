@@ -103,7 +103,7 @@
   .right
     margin: 0 0 0 220px
 
-    .visits.header, .votes.header, .events.header, .comments.header, .messages.header
+    .header
       background-color: #e8e8e8
       font-size: 14px
       margin-bottom: 20px
@@ -112,7 +112,7 @@
     .votes.header
       margin-top: 10px
 
-    .messages.header, .events.header
+    .messages.header, .events.header, .properties.header
       margin-bottom: 10px
 
     .visits.list
@@ -381,6 +381,39 @@
             &:active
             +background(linear-gradient(top, #ddd, #fff))
             padding: 6px 15px 4px
+
+    .properties_form
+      border: 1px solid #ccc 
+
+      .properties_place, .button_place
+        padding: 12px 0 12px 10px
+
+        .line
+          margin-bottom: 5px
+          +clearfix
+
+          > span,
+          > div
+            +inline-block
+
+          span
+            font-size: 12px
+
+          input
+            margin-left: 20px
+
+          select
+            margin-left: 91px
+
+          &:last-child
+            margin-bottom: 0
+
+      .button_place
+        border-top: 1px solid #ccc
+        background-color: #e6e6e6
+
+        .properties_submit
+          +button-style
 
 .message_form_wrapper
   form

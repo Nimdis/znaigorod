@@ -5,9 +5,25 @@
       <%= render 'avatar_form' %>
     </div>
     <h1><%= @account.title %></h1>
+    <div class="social_actions">
+      <% if @friends.any? %>
+        <div class="friends_counter">
+          <div class="floatl">Друзья</div>
+          <div class="floatr"><%= t('account_friends', count: @friends.total_count) %></div>
+        </div>
+        <div class="friends list">
+          <%= render partial: 'friends/account_friends', locals: { collection: @friends } %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div class="right">
-    <%= render 'form' %>
+    <div class="properties header">
+      Редактирование профиля
+    </div>
+    <div class="properties_form">
+      <%= render 'form' %>
+    </div>
   </div>
 </div>
