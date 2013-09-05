@@ -124,6 +124,7 @@ ru:
         user_add_friend: добавил в вас друзья
         agreed_invite: принял приглашение посетить
         disagreed_invite: отказался от приглашения посетить
+        auction_bet: хочет купить
 
       state:
         unread: Новое
