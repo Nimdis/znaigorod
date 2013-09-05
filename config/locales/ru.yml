@@ -1,4 +1,11 @@
  ru:
+  bet:
+    tickets:
+      one: '%{count} билет'
+      few: '%{count} билета'
+      many: '%{count} билетов'
+      other: '%{count} билета'
+
   contest:
     votes:
       zero: "нет голосов"

@@ -1,15 +1,17 @@
 <div class="item">
   <div class="avatar">
-    <%= link_to account_path(message.messageable.user.account) do %>
-      <%= image_tag(resized_image_url(message.messageable.user.account.avatar.url, 35, 35), size: '35x35', title: message.messageable.user.account, alt: message.messageable.user.account) %>
+    <%= link_to account_path(message.messageable.account) do %>
+      <%= image_tag(resized_image_url(message.messageable.account.avatar.url, 35, 35), size: '35x35', title: message.messageable.account, alt: message.messageable.account) %>
     <% end %>
   </div>
   <div class="body">
+    <%= link_to message.messageable.account, account_path(message.messageable.account) %>
     <span>
       <%= message.kind_text %>
-      <%= message.messageable.number %> билетов за <%= message.messageable.amount %> рублей на
+      <%= t 'bet.tickets', :count => message.messageable.number %> за <%= message.messageable.amount %> руб. на
     </span>
     <%= link_to(message.messageable.afisha.title, polymorphic_path([message.messageable.afisha, :show])) %>
+    <span>(<%= Bet.human_state_name message.messageable.state %>)</span>
 
     <div class="date">
       <%= time_ago_in_words(message.created_at) %> назад
