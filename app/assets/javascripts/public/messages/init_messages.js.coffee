@@ -42,4 +42,6 @@
       $('#messages_filter a.notifications').html("Уведомления +#{notification_counter}")
 
 @init_messages_tabs = () ->
-  $('#messages_filter').tabs()
+  $('#messages_filter').tabs
+    show: () ->
+      process_change_message_status()
