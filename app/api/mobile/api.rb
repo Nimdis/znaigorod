@@ -16,7 +16,7 @@ module Mobile
       end
 
       def api_version
-        DateTime.new(2013, 8, 31, 21, 00, 00, '+7')
+        DateTime.new(2013, 9, 5, 21, 00, 00, '+7')
       end
 
       def periods
@@ -65,9 +65,9 @@ module Mobile
         {
           lastUpdate: api_version,
           methods: [
-            { name: 'По новизне', urlModifier: 'creation' },
-            { name: 'По рейтингу', urlModifier: 'rating' },
-            { name: 'По ближайшему сеансу', urlModifier: 'starts_at' }
+            { name: 'По новизне', urlModifier: 'sorting=creation' },
+            { name: 'По рейтингу', urlModifier: 'sorting=rating' },
+            { name: 'По ближайшему сеансу', urlModifier: 'sorting=starts_at' }
           ]
         }
       end
