@@ -3,11 +3,8 @@
   data-messages="<%= current_user.account.messages.count %>"
   data-notification_counter="<%= current_user.account.notification_messages.unread.count %>">
 
-  <%= render partial: 'my/messages/afisha_message', locals: { message: message } if message.messageable.is_a?(Afisha) %>
-  <%= render partial: 'my/messages/comment_message', locals: { message: message } if message.messageable.is_a?(Comment) %>
-  <%= render partial: 'my/messages/friend_message', locals: { message: message } if message.messageable.is_a?(Friend) %>
-  <%= render partial: 'my/messages/visit_message', locals: { message: message } if message.messageable.is_a?(Visit) %>
-  <%= render partial: 'my/messages/vote_message', locals: { message: message } if message.messageable.is_a?(Vote) %>
+  <%= render :partial => "my/messages/#{message.messageable.class.name.underscore}_message",
+   :locals => { :message => message } if message.messageable %>
 
   <%= link_to 'read', change_status_my_notification_message_path(message), method: :put, remote: true, class: "change_message_status #{message.state}" %>
 </li>

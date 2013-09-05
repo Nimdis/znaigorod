@@ -115,6 +115,7 @@ ru:
         user_vote_comment: понравился комментарий
         user_visit_afisha: собирается на
         user_add_friend: добавил в вас друзья
+        auction_bet: хочет купить
 
       state:
         unread: Новое

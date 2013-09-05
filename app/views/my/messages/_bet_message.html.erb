@@ -1,0 +1,24 @@
+<div class="item">
+  <div class="avatar">
+    <%= link_to account_path(message.messageable.user.account) do %>
+      <%= image_tag(resized_image_url(message.messageable.user.account.avatar.url, 35, 35), size: '35x35', title: message.messageable.user.account, alt: message.messageable.user.account) %>
+    <% end %>
+  </div>
+  <div class="body">
+    <span>
+      <%= message.kind_text %>
+      <%= message.messageable.number %> билетов за <%= message.messageable.amount %> рублей на
+    </span>
+    <%= link_to(message.messageable.afisha.title, polymorphic_path([message.messageable.afisha, :show])) %>
+
+    <div class="date">
+      <%= time_ago_in_words(message.created_at) %> назад
+    </div>
+  </div>
+
+  <div class="actions">
+    <% message.messageable.state_paths.events.each do |event| %>
+      <%= link_to Bet.human_state_event_name(event), send("#{event}_my_afisha_bet_path", message.messageable.afisha, message.messageable), :method => :put %>
+    <% end %>
+  </div>
+</div>

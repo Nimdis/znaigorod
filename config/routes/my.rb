@@ -40,6 +40,11 @@ Znaigorod::Application.routes.draw do
       end
 
       resources :showings
+
+      resources :bets, :only => [] do
+        put :approve, :on => :member
+        put :cancel, :on => :member
+      end
     end
 
     get "/afisha/:id" => "afishas#show", :as => :afisha_show, :controller => 'afishas'
