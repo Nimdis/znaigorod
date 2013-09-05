@@ -1,6 +1,6 @@
 @process_change_message_status = () ->
   timer = setInterval ->
-    target = $('a.change_message_status.unread:first')
+    target = $('a.change_message_status.unread:first', '#dialogs:visible, #invites:visible, #notifications:visible')
     if target.length
       target.click()
       true
@@ -38,4 +38,6 @@
       $('#messages_filter a.notifications').html("Уведомления +#{notification_counter}")
 
 @init_messages_tabs = () ->
-  $('#messages_filter').tabs()
+  $('#messages_filter').tabs
+    show: () ->
+      process_change_message_status()
