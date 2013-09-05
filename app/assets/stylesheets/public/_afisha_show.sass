@@ -114,6 +114,9 @@
         .has_items_for_sale
           text-align: center
 
+          &.without_discount
+            padding-top: 9px
+
           .discount
             font-size: 18px
             font-weight: bold
@@ -121,6 +124,13 @@
 
           .percentage
             color: #f60
+
+        .ticket_price
+          text-align: center
+
+          .price
+            +inline-block
+            font-weight: bold
 
         .ticket_prices
           text-align: center

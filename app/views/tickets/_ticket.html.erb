@@ -5,7 +5,9 @@
 </ol>
 <div class='ticket_info'>
   <div class='ticket_prices'>
-    <p class='ticket_original_price'><span class='stroke'><%= @ticket.original_price.to_i %> р.</span></p>
+    <% if @ticket.original_price != @ticket.price %>
+      <p class='ticket_original_price'><span class='stroke'><%= @ticket.original_price.to_i %> р.</span></p>
+    <% end %>
     <p class='ticket_price'><%= @ticket.price.to_i %> р.</p>
   </div>
   <div class='ticket_description_and_tickets'>
