@@ -20,7 +20,7 @@
                 'mask': '+7-(999)-999-9999'
               $('#sms_claim_details').limit('220','#chars_left')
               true
-            close: ->
+            close: (event, ui) ->
               $(this).dialog('destroy')
               $(this).remove()
               true

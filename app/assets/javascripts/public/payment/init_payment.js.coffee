@@ -16,7 +16,7 @@
             open: ->
               init_actions_handler()
               true
-            close: ->
+            close: (event, ui) ->
               $(this).dialog('destroy')
               $(this).remove()
               true

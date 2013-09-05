@@ -8,6 +8,10 @@ init_dialog = () ->
     resizable: false
     title: 'Понравилось'
     width: 'auto'
+    close: (event, ui) ->
+      $(this).dialog('destroy')
+      $(this).remove()
+      true
 
 @init_votes = () ->
   init_dialog() unless $('.liked_box').length

@@ -29,6 +29,10 @@
         resizable: false
         title: 'Необходима авторизация'
         width: '500px'
+        close: (event, ui) ->
+          $(this).dialog('destroy')
+          $(this).remove()
+          true
 
       init_auth()
 

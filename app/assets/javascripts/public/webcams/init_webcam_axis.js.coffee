@@ -31,8 +31,8 @@ render_axis_dialog = (width, height, cab_url, cgi_url, dialog_title) ->
     width: width.toNumber() + 36
     height: height.toNumber() + 44
     resizable: false
-    close: ->
-      $(this).parent().remove()
+    close: (event, ui) ->
+      $(this).dialog('destroy')
       $(this).remove()
       true
   true

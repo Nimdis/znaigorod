@@ -20,7 +20,7 @@
         title: title
         modal: true
         resizable: false
-        close: ->
+        close: (event, ui) ->
           $(this).dialog('destroy')
           $(this).remove()
           true
