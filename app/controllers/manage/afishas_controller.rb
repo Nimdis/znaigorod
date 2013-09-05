@@ -17,12 +17,6 @@ class Manage::AfishasController < Manage::ApplicationController
   end
 
   def update
-    if resource.poster_url.present? && resource.poster_image_url.present?
-      resource.poster_url = nil
-      resource.poster_image.destroy
-      resource.poster_image_url = nil
-      resource.save
-    end
     update! do |success, failure|
       success.html {
         if params[:crop]
