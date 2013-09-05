@@ -2,9 +2,15 @@
   <div class='title'><%= afisha.truncated_title_link(24, separator: '') %></div>
   <div class='image'>
     <% if afisha.has_tickets_for_sale? %>
-      <div class='has_items_for_sale' title='У нас вы можете купить билеты на мероприятие со скидкой!'>
-        Скидка на билет <%= afisha.max_tickets_discount %>%
-      </div>
+      <% if afisha.max_tickets_discount > 0 %>
+        <div class='has_items_for_sale' title='У нас вы можете купить билеты на мероприятие со скидкой!'>
+          Скидка на билет <%= afisha.max_tickets_discount %>%
+        </div>
+      <% else %>
+        <div class='has_items_for_sale' title='У нас вы можете купить билеты на мероприятие!'>
+          Есть билет в продаже
+        </div>
+      <% end %>
     <% end %>
     <%= afisha.poster_with_link(178, 240) %>
     <%= content_tag(:div, 'Премьера', class: :ribbon) if afisha.premiere?  %>

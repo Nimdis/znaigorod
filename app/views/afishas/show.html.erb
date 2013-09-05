@@ -48,17 +48,29 @@
           <% if ticket.copies_for_sale.any? %>
             <li>
               <div class='wrapper'>
-                <div class='has_items_for_sale'>
-                  Скидка на билет
-                  <span class='discount'><%= ticket.discount %></span><span class='percentage'>%</span></div>
-                <div class='ticket_prices'>
-                  <div class='original_price'><%= ticket.original_price.to_i %>р.</div>
-                  <div class='price'><%= ticket.price.to_i %>р.<%= "+#{ticket.organization_price.to_i}р." if ticket.organization_price %></div>
-                </div>
-                <div class='ticket_for_sale'><%= t 'copy.for_sale', count: ticket.copies_for_sale.count %></div>
-                <div class='buy_ticket'>
-                  <%= link_to 'Купить', new_ticket_copy_payment_path(ticket), class: :payment_link %>
-                </div>
+                <% if ticket.original_price == ticket.price %>
+                  <div class='has_items_for_sale without_discount'>
+                    Купить билет
+                  <div class='ticket_price'>
+                    <div class='price'><%= ticket.price.to_i %>р.<%= "+#{ticket.organization_price.to_i}р." if ticket.organization_price %></div>
+                  </div>
+                  <div class='ticket_for_sale'><%= t 'copy.for_sale', count: ticket.copies_for_sale.count %></div>
+                  <div class='buy_ticket'>
+                    <%= link_to 'Купить', new_ticket_copy_payment_path(ticket), class: :payment_link %>
+                  </div>
+                <% else %>
+                  <div class='has_items_for_sale'>
+                    Скидка на билет
+                    <span class='discount'><%= ticket.discount %></span><span class='percentage'>%</span></div>
+                  <div class='ticket_prices'>
+                    <div class='original_price'><%= ticket.original_price.to_i %>р.</div>
+                    <div class='price'><%= ticket.price.to_i %>р.<%= "+#{ticket.organization_price.to_i}р." if ticket.organization_price %></div>
+                  </div>
+                  <div class='ticket_for_sale'><%= t 'copy.for_sale', count: ticket.copies_for_sale.count %></div>
+                  <div class='buy_ticket'>
+                    <%= link_to 'Купить', new_ticket_copy_payment_path(ticket), class: :payment_link %>
+                  </div>
+                <% end %>
               </div>
             </li>
           <% end %>
