@@ -21,7 +21,7 @@ Znaigorod::Application.routes.draw do
     resource :account, :only => [:show, :update]
     match 'edit', to: 'accounts#edit', as: :edit, via: :get
 
-    resources :afisha, :except => :show, :controller => 'afishas' do
+    resources :afisha, :except => [:index, :show], :controller => 'afishas' do
       get 'edit/step/:step' => 'afishas#edit', :defaults => { :step => 'first' }, :on => :member, :as => :edit_step
       get 'available_tags' => 'afishas#available_tags', :as => :available_tags
       get 'preview_video'
@@ -47,7 +47,6 @@ Znaigorod::Application.routes.draw do
       resources :showings
     end
 
-    get "/afisha" => "afishas#index", :as => :afisha_index, :controller => 'afishas'
     get "/afisha/:id" => "afishas#show", :as => :afisha_show, :controller => 'afishas'
 
     root to: 'accounts#show'

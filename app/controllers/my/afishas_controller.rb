@@ -7,7 +7,7 @@ class My::AfishasController < My::ApplicationController
 
   before_filter :current_step
 
-  actions :all
+  actions :all, :except => [:index]
   custom_actions :resource => [:destroy_image, :send_to_moderation, :send_to_published, :social_gallery], :collection => [:available_tags, :preview_video]
 
   def show
