@@ -34,22 +34,29 @@
   $('.account_messages .bet_actions').on 'ajax:success', (evt, response, status, jqXHR) ->
     return unless $(evt.target).hasClass('bet')
 
-    # диалоговое окно покупки билета в личном кабинете
-    container = $('<div class="payment_form_wrapper" />').appendTo('body').hide().html(response)
-    form = $('form', container)
+    target = $(evt.target)
 
-    container.dialog
-      autoOpen: true
-      draggable: false
-      modal: true
-      resizable: false
-      title: 'Форма заказа'
-      width: '640px'
-      open: ->
-        # init_payments.js
-        init_actions_handler()
-        true
-      close: (event, ui) ->
-        $(this).dialog('destroy')
-        $(this).remove()
-        true
+    # диалоговое окно покупки билета в личном кабинете (в респонсе пришла форма)
+    if $(response).filter('.ticket_payment_instruction').length
+      container = $('<div class="payment_form_wrapper" />').appendTo('body').hide().html(response)
+      form = $('form', container)
+
+      container.dialog
+        autoOpen: true
+        draggable: false
+        modal: true
+        resizable: false
+        title: 'Форма заказа'
+        width: '640px'
+        open: ->
+          # init_payments.js
+          init_actions_handler()
+          true
+        close: (event, ui) ->
+          $(this).dialog('destroy')
+          $(this).remove()
+          true
+
+    # кнопки принять/отклонить ставку в личном кабинете (в респонсе пришла li.message)
+    else
+      target.closest('li').replaceWith(response)

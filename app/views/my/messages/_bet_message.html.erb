@@ -21,8 +21,13 @@
   <% unless message.messageable.paid? %>
     <div class="bet_actions">
       <% if message.auction_bet? && message.messageable.fresh? %>
-        <%= link_to Bet.human_state_event_name(:approve), approve_my_afisha_bet_path(message.messageable.afisha, message.messageable), :method => :put, class: 'bet' %>
-        <%= link_to Bet.human_state_event_name(:cancel), cancel_my_afisha_bet_path(message.messageable.afisha, message.messageable), :method => :put, class: 'bet' %>
+        <%= link_to Bet.human_state_event_name(:approve),
+          approve_my_afisha_bet_path(message.messageable.afisha, message.messageable, :message_id => message.id),
+          :method => :put, class: 'bet', remote: true %>
+
+        <%= link_to Bet.human_state_event_name(:cancel),
+          cancel_my_afisha_bet_path(message.messageable.afisha, message.messageable, :message_id => message.id),
+          :method => :put, class: 'bet', remote: true %>
       <% end %>
 
       <% if message.auction_bet_approve? %>
