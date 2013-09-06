@@ -18,4 +18,9 @@
 
       return false
 
-    target.siblings('ul').prepend(response)
+    if $(response).filter('form').length
+      $('.auction form').replaceWith(response)
+
+    else
+      target.siblings('ul').prepend(response)
+      $('.auction form .errors').remove()
