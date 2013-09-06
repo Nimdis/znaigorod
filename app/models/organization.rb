@@ -77,7 +77,7 @@ class Organization < ActiveRecord::Base
   has_many :showings,       :dependent => :destroy
   has_many :social_links,   :dependent => :destroy
 
-  has_many :visits,         :as => :visitable, :dependent => :destroy
+  has_many :visits,         :as => :visitable, :dependent => :destroy, order: 'acts_as_inviter, acts_as_invited'
   has_many :votes,          :as => :voteable, :dependent => :destroy
 
   has_one :address,             :dependent => :destroy
