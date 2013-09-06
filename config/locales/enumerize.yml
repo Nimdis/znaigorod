@@ -125,7 +125,8 @@ ru:
         agreed_invite: принял приглашение посетить
         disagreed_invite: отказался от приглашения посетить
         auction_bet: хочет купить
-        auction_bet_cancel: отклонил
+        auction_bet_cancel: не согласен на
+        auction_bet_approve: согласен на
 
       state:
         unread: Новое

@@ -1,0 +1,9 @@
+<p>
+  Вы собираетесь купить <%= t 'bet.tickets', :count => @bet.number %> за <%= @bet.amount %> руб. на <%= link_to(@afisha.title, polymorphic_path([@afisha, :show])) %>
+</p>
+
+<%= simple_form_for [:my, @afisha, @bet, @bet_payment] do |f| %>
+  <%= f.input :phone %>
+
+  <%= f.submit 'Перейти к оплате' %>
+<% end %>
