@@ -19,14 +19,18 @@ class My::BetsController < My::ApplicationController
   def approve
     approve! {
       @bet.approve!
-      render :nothing => true and return
+      @message = @bet.notification_messages.find(params[:message_id])
+
+      render :partial => 'my/messages/message', :locals => { :message => @message } and return
     }
   end
 
   def cancel
     cancel! {
       @bet.cancel!
-      render :nothing => true and return
+      @message = @bet.notification_messages.find(params[:message_id])
+
+      render :partial => 'my/messages/message', :locals => { :message => @message } and return
     }
   end
 
