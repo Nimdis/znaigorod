@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Bet < ActiveRecord::Base
   attr_accessible :amount, :number
 
@@ -9,12 +11,13 @@ class Bet < ActiveRecord::Base
   has_one :account, :through => :user
   has_one :bet_payment, :as => :paymentable, :dependent => :destroy
 
-  validates_presence_of :amount, :number
-  validates_numericality_of :amount, :number
+  validates :number, :presence => true, :numericality => true
+  validates :amount, :numericality => { :message => 'неверное значение' }
 
   after_create :send_notification_to_afisha_author
 
   default_value_for :number, 1
+  default_value_for(:amount) { |bet| bet.price_min }
 
   state_machine :state, :initial => :fresh do
     event(:approve) { transition :fresh => :approved }
