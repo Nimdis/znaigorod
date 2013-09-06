@@ -36,3 +36,12 @@
 </div>
 
 <%= paginate @presenter.paginated_collection %>
+
+<%# p @presenter.categories_links.map { |h| h[:klass] } %>
+<% category = @presenter.categories_links.select{|c| c[:selected]}.first[:klass] %>
+
+<%# unless t("meta.#{category}.introduction", default: '').blank? %>
+  <div class='introduction'>
+    <%= t("meta.#{category}.introduction").as_html %>
+  </div>
+<%# end %>
