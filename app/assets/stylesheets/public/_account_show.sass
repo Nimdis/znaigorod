@@ -231,15 +231,20 @@
       ul.dialogs
         li
           +clearfix
+          cursor: pointer
           border-top: 1px solid #ccc
           margin: 0
           padding: 10px
           width: 960px
 
           &.unread
-            background: #e8e8e8
+            background-color: #e8e8e8
+
           &.read
-            background: #fff
+            background-color: #fff
+
+          &:hover
+            background-color: #eee
 
           .item
             font-size: 12px

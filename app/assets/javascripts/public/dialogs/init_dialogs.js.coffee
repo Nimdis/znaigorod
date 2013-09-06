@@ -116,6 +116,10 @@
 
     true
 
+  $('#dialogs ul.dialogs > li').on 'click', (event) ->
+    $('a.to_dialog', $(event.target)).click() if $(event.target).is('li')
+    true
+
   $('.to_dialog').on 'ajax:beforeSend', (xhr, settings) ->
     return false if $(this).hasClass('disabled')
     true
