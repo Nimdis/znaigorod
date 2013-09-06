@@ -116,7 +116,8 @@ ru:
         user_visit_afisha: собирается на
         user_add_friend: добавил в вас друзья
         auction_bet: хочет купить
-        auction_bet_cancel: отклонил
+        auction_bet_cancel: не согласен на
+        auction_bet_approve: согласен на
 
       state:
         unread: Новое
