@@ -21,17 +21,18 @@ class RobokassaController < ApplicationController
     notification = Robokassa::Notification.new(request.raw_post, secret: Settings['robokassa.secret_1'])
     payment = Payment.find(notification.item_id)
 
-    if payment.paymentable
-      if payment.paymentable.is_a?(Ticket)
-        redirect_to afisha_index_path(:has_tickets => true)
-      else
-        redirect_to coupons_path
-      end
-
-      return
+    case payment.paymentable
+    when Ticket
+      redirect_to afisha_index_path(:has_tickets => true)
+    when Coupon
+      redirect_to coupons_path
+    when Bet
+      redirect_to my_root_path
+    when nil
+      redirect_to cooperation_path
+    else
+      redirect_to root_path
     end
-
-    redirect_to cooperation_path
   end
 
   # TODO: надо сделать и проверить
