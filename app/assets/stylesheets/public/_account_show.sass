@@ -228,6 +228,24 @@
             .date
               color: #999
 
+            .bet_actions
+              margin: 10px 0 0 0
+
+              .bet
+                +background(linear-gradient(#fdfefd, #ccc))
+                +inline-block
+                border: 1px solid #ccc
+                color: #000
+                margin: 0 5px 0 0
+                padding: 1px 8px
+                text-decoration: none
+
+                &:hover
+                  border: 1px solid #aaa
+
+                &:active
+                  +background(linear-gradient(#ccc, #fdfefd))
+
       ul.dialogs
         li
           +clearfix

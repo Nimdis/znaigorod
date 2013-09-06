@@ -5,7 +5,7 @@
   <% end %>
   </div>
   <div class="details">
-    <%= link_to(bet.account, my_root_path, class: :user_name) %>
+    <%= link_to(bet.account, account_path(bet.account), class: :user_name) %>
     <div class="info">
       Хочет купить <%= t 'bet.tickets', :count => bet.number %> за <%= bet.amount %> руб.
     </div>

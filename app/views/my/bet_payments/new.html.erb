@@ -1,9 +1,27 @@
-<p>
-  Вы собираетесь купить <%= t 'bet.tickets', :count => @bet.number %> за <%= @bet.amount %> руб. на <%= link_to(@afisha.title, polymorphic_path([@afisha, :show])) %>
-</p>
+<ol class="ticket_payment_instruction">
+  <li>Укажи номер сотового телефона</li>
+  <li>Оплати наиболее удобным для тебя способом: банковской картой, через интернет-банк, электронными деньгами, в терминале или салоне сотовой связи</li>
+  <li>Мы пришлем SMS с кодами, эти коды и есть входные билеты, просто покажи это SMS на входе</li>
+</ol>
+
+<div class="ticket_info">
+  <div class="ticket_prices">
+    <p class="ticket_original_price">
+      <span class="stroke"><%= @afisha.price_min %> руб.</span>
+    </p>
+    <p class="ticket_price"><%= @bet.amount %> руб.</p>
+  </div>
+  <div class="ticket_description_and_tickets">
+    <p>
+      Вы собираетесь купить <%= t 'bet.tickets', :count => @bet.number %> за <%= @bet.amount %> руб. на <%= link_to(@afisha.title, polymorphic_path([@afisha, :show])) %>
+    </p>
+  </div>
+</div>
 
 <%= simple_form_for [:my, @afisha, @bet, @bet_payment] do |f| %>
-  <%= f.input :phone %>
+  <%= f.input :phone, label: 'Введите номер мобильного телефона', input_html: { id: 'copy_payment_phone' } %>
 
-  <%= f.submit 'Перейти к оплате' %>
+  <div class="submit">
+    <%= f.submit 'Купить' %>
+  </div>
 <% end %>
