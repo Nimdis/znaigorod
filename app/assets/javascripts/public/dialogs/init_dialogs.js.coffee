@@ -116,8 +116,10 @@
 
     true
 
-  $('#dialogs ul.dialogs > li').on 'click', (event) ->
-    $('a.to_dialog', $(event.target)).click() if $(event.target).is('li')
+  $('#dialogs ul.dialogs > li').each (index, item) ->
+    $(this).on 'click', (event) ->
+      $('a.to_dialog', $(event.target).closest('li')).click() unless $(event.target).is('a')
+      true
     true
 
   $('.to_dialog').on 'ajax:beforeSend', (xhr, settings) ->
