@@ -11,12 +11,12 @@ class BetPayment < Payment
 
   after_validation :set_amount
 
-  private
-
   def approve!
     super
     create_sms! :phone => phone, :message => message
   end
+
+  private
 
   def message
     'MESSAGE'
