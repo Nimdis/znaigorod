@@ -4,11 +4,11 @@
     <% if afisha.has_tickets_for_sale? %>
       <% if afisha.max_tickets_discount > 0 %>
         <div class='has_items_for_sale' title='У нас вы можете купить билеты на мероприятие со скидкой!'>
-          Скидка на билет <%= afisha.max_tickets_discount %>%
+          Скидка на билеты <%= afisha.max_tickets_discount %>%
         </div>
       <% else %>
         <div class='has_items_for_sale' title='У нас вы можете купить билеты на мероприятие!'>
-          Есть билет в продаже
+          Есть билеты в продаже
         </div>
       <% end %>
     <% end %>
