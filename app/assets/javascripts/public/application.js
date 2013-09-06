@@ -20,6 +20,7 @@
  * = require file_upload
  * = require crop
  * = require ajax_delete
+ * = require ./share_to_vk_wall
  * = require ./auth
  * = require ./md5
  * = require ./twitter

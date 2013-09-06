@@ -152,6 +152,11 @@ class User < ActiveRecord::Base
     update_attributes(account_id: account.id)
   end
 
+  def vk_uid
+    return nil unless provider == 'vkontakte'
+    uid
+  end
+
   def get_friends_from_socials
     method = "get_#{provider}_friends"
     account.send(method, self) if account.respond_to?(method)
