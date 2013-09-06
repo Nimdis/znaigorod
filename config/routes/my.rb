@@ -42,6 +42,8 @@ Znaigorod::Application.routes.draw do
       resources :showings
 
       resources :bets, :only => [] do
+        resources :bet_payments, :only => [:new, :create]
+
         put :approve, :on => :member
         put :cancel, :on => :member
       end

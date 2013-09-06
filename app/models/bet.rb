@@ -7,6 +7,7 @@ class Bet < ActiveRecord::Base
   has_many :notification_messages, :as => :messageable, :dependent => :destroy
 
   has_one :account, :through => :user
+  has_one :bet_payment, :as => :paymentable, :dependent => :destroy
 
   validates_presence_of :amount, :number
 
@@ -41,6 +42,7 @@ class Bet < ActiveRecord::Base
   end
 
   def handle_approval
-    # отправлять пользователю уведомление со ссылкой на оплату
+    notification_messages.create :producer => afisha.user.account,
+      :account => account, :kind => :auction_bet_approve
   end
 end
