@@ -37,3 +37,11 @@
 </div>
 
 <%= paginate @presenter.paginatable_collection %>
+
+<% category = @presenter.categories_links.select{|c| c[:selected]}.first[:klass] %>
+
+<% if t("meta.#{category}.introduction", default: '').present? %>
+  <div class='introduction'>
+    <%= t("meta.#{category}.introduction").as_html %>
+  </div>
+<% end %>
