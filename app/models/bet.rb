@@ -10,6 +10,7 @@ class Bet < ActiveRecord::Base
   has_one :bet_payment, :as => :paymentable, :dependent => :destroy
 
   validates_presence_of :amount, :number
+  validates_numericality_of :amount, :number
 
   after_create :send_notification_to_afisha_author
 
