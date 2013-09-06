@@ -44,10 +44,10 @@
     <% if @afisha.allow_auction? %>
       <div class="wrapper">
         <div class="auction">
-          <%= render :partial => 'bets/form' %>
+          <%= render :partial => 'my/bets/form' %>
 
           <ul class="bets">
-            <%= render @afisha.bets.reload %>
+            <%= render :collection => @afisha.bets.reload, :partial => 'my/bets/bet' %>
           </ul>
         </div>
       </div>

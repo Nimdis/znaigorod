@@ -41,7 +41,7 @@ Znaigorod::Application.routes.draw do
 
       resources :showings
 
-      resources :bets, :only => [] do
+      resources :bets, :only => :create do
         resources :bet_payments, :only => [:new, :create]
 
         put :approve, :on => :member

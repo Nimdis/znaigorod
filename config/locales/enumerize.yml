@@ -118,6 +118,7 @@ ru:
         auction_bet: хочет купить
         auction_bet_cancel: не согласен на
         auction_bet_approve: согласен на
+        auction_bet_pay: оплатил
 
       state:
         unread: Новое

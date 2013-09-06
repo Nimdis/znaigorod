@@ -18,15 +18,16 @@
     </div>
   </div>
 
-  <div class="actions">
-    <% if message.auction_bet? %>
-      <% message.messageable.state_paths.events.each do |event| %>
-        <%= link_to Bet.human_state_event_name(event), send("#{event}_my_afisha_bet_path", message.messageable.afisha, message.messageable), :method => :put %>
+  <% unless message.messageable.paid? %>
+    <div class="actions">
+      <% if message.auction_bet? && message.messageable.fresh? %>
+        <%= link_to Bet.human_state_event_name(:approve), approve_my_afisha_bet_path(message.messageable.afisha, message.messageable), :method => :put %>
+        <%= link_to Bet.human_state_event_name(:cancel), cancel_my_afisha_bet_path(message.messageable.afisha, message.messageable), :method => :put %>
       <% end %>
-    <% end %>
 
-    <% if message.auction_bet_approve? %>
-      <%= link_to 'оплатить', new_my_afisha_bet_bet_payment_path(message.messageable.afisha, message.messageable) %>
-    <% end %>
-  </div>
+      <% if message.auction_bet_approve? %>
+        <%= link_to 'оплатить', new_my_afisha_bet_bet_payment_path(message.messageable.afisha, message.messageable) %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

@@ -13,6 +13,7 @@ class BetPayment < Payment
 
   def approve!
     super
+    paymentable.pay!
     create_sms! :phone => phone, :message => message
   end
 

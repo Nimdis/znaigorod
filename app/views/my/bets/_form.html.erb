@@ -1,4 +1,4 @@
-<%= simple_form_for [@afisha, @afisha.bets.build], html: { remote: true } do |f| %>
+<%= simple_form_for [:my, @afisha, @afisha.bets.build], html: { remote: true } do |f| %>
   <div class="line">
     <span>Куплю</span>
     <%= f.input :number, :label => false, :as => :select, :collection => (1..10), :include_blank => false %>
