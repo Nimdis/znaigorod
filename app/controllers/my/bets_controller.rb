@@ -1,6 +1,4 @@
-class BetsController < ApplicationController
-  inherit_resources
-
+class My::BetsController < My::ApplicationController
   actions :create
 
   belongs_to :afisha
@@ -8,6 +6,8 @@ class BetsController < ApplicationController
   custom_actions :resource => [:approve, :cancel]
 
   layout false
+
+  skip_authorization_check
 
   def create
     create! { |success, failure|
