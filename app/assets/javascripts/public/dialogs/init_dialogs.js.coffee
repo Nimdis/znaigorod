@@ -113,11 +113,10 @@
 
 
   stored = JSON.parse(window.localStorage.getItem('dialogs')) || []
-  load_tabs_handler(stored)
 
   $('.to_dialog').on 'click', ->
-    block_id = "##{$(this).attr('class').replace('to_dialog', '').replace('disabled', '').trim()}"
-    $('#messages_filter').tabs("select", block_id)
+    block_id = $(this).attr('class').match(/dialog_\d+/)
+    $('#messages_filter').tabs("select", '#'+block_id)
 
     $(this).closest('li:not(.invite_message_list)').addClass('read').removeClass('unread')
 
@@ -131,14 +130,15 @@
 
   $('.to_dialog').on 'ajax:beforeSend', (xhr, settings) ->
     return false if $(this).hasClass('disabled')
+    $('.'+$(this).attr('class').match(/dialog_\d+/), '#messages_filter').addClass('disabled')
     true
+
+  load_tabs_handler(stored)
 
   $('#messages_filter #dialogs').on 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target)
 
     if target.hasClass('to_dialog')
-      $('.'+target.attr('class').match(/dialog_\d+/), '#messages_filter').addClass('disabled')
-
       add_tab_handler(response, stored)
       close_tab_handler(stored)
 
