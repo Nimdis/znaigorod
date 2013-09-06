@@ -17,10 +17,12 @@ class Bet < ActiveRecord::Base
 
   state_machine :state, :initial => :fresh do
     event(:approve) { transition :fresh => :approved }
-    event(:cancel) { transition :fresh => :canceled }
+    event(:cancel)  { transition :fresh => :canceled }
+    event(:pay)     { transition :approved => :paid }
 
     after_transition :fresh => :canceled, :do => :handle_cancel
     after_transition :fresh => :approved, :do => :handle_approval
+    after_transition :approved => :paid,  :do => :handle_pay
   end
 
   def price_min
@@ -42,7 +44,12 @@ class Bet < ActiveRecord::Base
   end
 
   def handle_approval
-    notification_messages.create :producer => afisha.user.account,
+    notification_messages.create! :producer => afisha.user.account,
       :account => account, :kind => :auction_bet_approve
+  end
+
+  def handle_pay
+    notification_messages.create! :producer => account,
+      :account => afisha.user.account, :kind => :auction_bet_pay
   end
 end

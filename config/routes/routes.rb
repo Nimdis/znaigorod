@@ -17,7 +17,6 @@ Znaigorod::Application.routes.draw do
   get 'yamp_geocoder'   => 'geocoder#get_yamp_coordinates'
 
   resources :afisha, :only => [], :controller => 'afishas' do
-    resources :bets,     :only => :create
     resources :comments, :only => [:new, :show, :create]
     resources :visits
 

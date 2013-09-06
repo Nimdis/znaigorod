@@ -4,9 +4,10 @@ ru:
       bet:
         state:
           states:
-            fresh: На рассмотрении
+            fresh:    На рассмотрении
             approved: Принято
             canceled: Отклонено
+            paid:     Оплачено
           events:
             approve: Принять
-            cancel: Отклонить
+            cancel:  Отклонить
