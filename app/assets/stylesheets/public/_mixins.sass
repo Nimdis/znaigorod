@@ -97,40 +97,7 @@ $desktop_default_width: 1200px
       padding: $padding-top 8px $padding-bottom
 
 =social_actions_popup
-  +background(linear-gradient(top, #fff, #e8e8e8))
-  position: relative
-
   .cloud_wrapper
-    width: 475px
-    margin: 10px 0 0 0
-    font-size: 12px
-    text-align: center
-    padding: 10px
-    z-index: 1
-
-    &:after,
-    &:before
-      right: 100%
-      border: solid transparent
-      content: " "
-      height: 0
-      width: 0
-      position: absolute
-      pointer-events: none
-
-    &:after
-      border-color: rgba(255, 255, 255, 0)
-      border-right-color: #fff
-      border-width: 8px
-      top: 50%
-      margin-top: -8px
-
-    &:before
-      border-color: rgba(204, 204, 204, 0)
-      border-right-color: #ccc
-      border-width: 9px
-      top: 50%
-      margin-top: -9px
 
     .social_signin_links
       +clearfix
