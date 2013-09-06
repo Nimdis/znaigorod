@@ -1,5 +1,4 @@
 @init_social_actions = () ->
-
   $('.social_actions').on 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target)
 
@@ -24,6 +23,9 @@
 
     if target.hasClass('change_visit')
       target.closest('.social_actions').html(response)
+      console.log 'попал'
+      console.log target
+      #init_share_to_vk_wall(target.data('owner_id'), target.data('message')) if target.parent('li:not(.selected)').length
 
     if target.hasClass('acts_as_inviter') || target.hasClass('acts_as_invited')
 
