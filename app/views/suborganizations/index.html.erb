@@ -37,7 +37,6 @@
 
 <%= paginate @presenter.paginated_collection %>
 
-<%# p @presenter.categories_links.map { |h| h[:klass] } %>
 <% category = @presenter.categories_links.select{|c| c[:selected]}.first[:klass] %>
 
 <% if t("meta.#{category}.introduction", default: '').present? %>
