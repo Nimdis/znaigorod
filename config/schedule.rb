@@ -30,7 +30,7 @@ every 2.hours do
   rake 'social_likes'
 end
 
-every 1.hours do
+every 6.hours do
   rake 'update_rating:accounts'
   rake 'update_rating:afisha'
   rake 'update_rating:organizations'
