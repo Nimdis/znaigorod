@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(:version => 20130909043100) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.text     "avatar_url"
-    t.date     "birthday"
   end
 
   create_table "activities", :force => true do |t|
@@ -432,7 +431,6 @@ ActiveRecord::Schema.define(:version => 20130909043100) do
     t.string   "type"
     t.string   "producer_type"
     t.string   "invite_kind"
-    t.string   "agreement"
   end
 
   add_index "messages", ["account_id"], :name => "index_messages_on_account_id"
