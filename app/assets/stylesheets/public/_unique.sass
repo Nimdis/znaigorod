@@ -1,3 +1,14 @@
+=unique_content_style
+  .content_wrapper
+    margin-bottom: 0
+
+  .content
+    +border-top-left-radius
+    +border-top-right-radius
+    +box-shadow(#555 0 0 3px)
+    background-color: #fff
+    padding: 5px
+
 .anapa_header_wrapper
   .header_wrapper
     margin-bottom: 0
@@ -15,12 +26,23 @@
     background: transparent image_url('public/anapa/logo.png') no-repeat center center
     margin: 0 auto
 
-  .content_wrapper
+  +unique_content_style
+
+.forum_header_wrapper
+  .header_wrapper
     margin-bottom: 0
 
-  .content
-    +border-top-left-radius
-    +border-top-right-radius
-    +box-shadow(#555 0 0 3px)
-    background-color: #fff
-    padding: 5px
+  .filters_wrapper
+    display: none
+
+.forum_content_wrapper
+  background: #000
+  +background(linear-gradient(top, #000, #603a8d))
+
+  .forum_logo
+    width: 1200px
+    height: 110px
+    background: transparent image_url('public/forum/logo.png') no-repeat center center
+    margin: 0 auto
+
+  +unique_content_style
