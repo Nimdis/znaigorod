@@ -1,7 +1,10 @@
+require 'sidekiq/web'
+
 Znaigorod::Application.routes.draw do
   mount Affiches::API => '/'
   mount Mobile::API => '/'
   mount ElVfsClient::Engine => '/'
+  mount Sidekiq::Web, at: "/sidekiq"
 
   devise_for :users, :controllers => { :omniauth_callbacks =>  'omniauth_callbacks' }
 
