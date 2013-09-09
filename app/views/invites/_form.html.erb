@@ -2,19 +2,33 @@
   <% if params[:acts_as_invited] %>
     <h2>Жду приглашения</h2>
     <%= f.input :invited_gender, as: :radio_buttons, label: false %>
-    <%= f.input :invited_description, input_html: { placeholder: 'Здесь вы можете указать дополнительную информацию'}, autofocus: true, label: false %>
+    <%= f.input :invited_description, input_html: { placeholder: 'Здесь вы можете указать дополнительную информацию'}, autofocus: true, label: false, :input_html => { :class => 'additional_message' } %>
     <%= f.input :acts_as_invited, as: :hidden, input_html: { value: true } %>
     <div class='submit'>
-      <%= f.submit 'Жду приглашения', :class => :submit_dialog %>
+      <%= f.submit 'Жду приглашения',
+                   :class => 'submit_dialog share_to_vk',
+                   :onClick => 'share_on_click(this);',
+                   'data-owner_id' => current_user.try(:vk_uid),
+                   'data-message' => "Жду приглашения %text% посетить \"#{parent}\"",
+                   'data-attachments' => "#{parent.is_a?(Afisha) ? afisha_show_url(parent) : organization_url(parent)}",
+                   'data-insert_to_message' => 'input.radio_buttons:checked',
+                   'data-additinal_message' => '.additional_message' %>
     </div>
   <% end %>
   <% if params[:acts_as_inviter] %>
     <h2>Хочу пригласить</h2>
     <%= f.input :inviter_gender, as: :radio_buttons, label: false %>
-    <%= f.input :inviter_description, input_html: { placeholder: 'Здесь вы можете указать дополнительную информацию'}, autofocus: true, label: false %>
+    <%= f.input :inviter_description, input_html: { placeholder: 'Здесь вы можете указать дополнительную информацию'}, autofocus: true, label: false, :input_html => { :class => 'additional_message' } %>
     <%= f.input :acts_as_inviter, as: :hidden, input_html: { value: true } %>
     <div class='submit'>
-      <%= f.submit 'Пригласить', :class => :submit_dialog %>
+      <%= f.submit 'Пригласить',
+                   :class => 'submit_dialog share_to_vk',
+                   :onClick => 'share_on_click(this);',
+                   'data-owner_id' => current_user.try(:vk_uid),
+                   'data-message' => "Приглашаю %text% посетить \"#{parent}\"",
+                   'data-insert_to_message' => 'input.radio_buttons:checked',
+                   'data-attachments' => "#{parent.is_a?(Afisha) ? afisha_show_url(parent) : organization_url(parent)}",
+                   'data-additinal_message' => '.additional_message' %>
     </div>
   <% end %>
 <% end %>
