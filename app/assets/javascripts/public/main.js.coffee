@@ -20,7 +20,6 @@ $ ->
   init_afisha_filter() if $('.filters .by_date .daily').length
   init_social_actions() if $('.afisha_show').length
   init_social_actions() if $('.organization_show').length
-  init_afisha_social_actions() if $('.afisha_show').length
   init_bets() if $('.afisha_show .auction').length
   init_bets_payment() if $('.account_show .bet_actions').length
   init_payment() if $('a.payment_link').length
