@@ -1,0 +1,31 @@
+body.error
+
+  .content
+    font-size: 14px
+    margin-top: 20px
+    padding: 10px 0 0 270px
+
+    h1
+      font-size: 60px
+      font-weight: bold
+      color: #f60
+
+    p
+      margin: 0 150px 5px 5px
+
+    &.error_403
+      background: transparent image_url('public/error_404.png') no-repeat left top
+
+    &.error_404
+      background: transparent image_url('public/error_404.png') no-repeat left top
+
+    &.error_422
+      background: transparent image_url('public/error_500.png') no-repeat left top
+
+    &.error_500
+      background: transparent image_url('public/error_500.png') no-repeat left top
+
+  .footer_wrapper
+    width: 100%
+    position: absolute
+    bottom: 0

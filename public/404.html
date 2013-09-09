@@ -7,44 +7,59 @@
   <link href="/assets/public/application.css?body=1" media="all" rel="stylesheet" type="text/css" />
 </head>
 <body class="error">
+  <div class="promo_wrapper">
+    <div class="promo">
+      <a href="/afisha?has_tickets=true">Неприлично дешевые билеты на все развлечения Томска! Купи в 2 клика! Только на сайте znaigorod.ru</a>
+    </div>
+  </div>
   <div class="header_wrapper">
     <div class="header">
-      <div class="search_form">
-        <form accept-charset="UTF-8" action="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-          <input class="search" id="q" name="q" placeholder="Поиск по городу" type="text" />
-          <input class="submit" name="" type="submit" value="" />
-      </form>      </div>
-      <div class="logo">
-        <a href="/">ЗнайГород</a>
-      </div>
-      <div class="tomsk">
-        <a href="/">Томск</a>
+      <div class="logo"><a href="/">Афиша Томска, заведения и мероприятия - ЗнайГород</a></div>
+      <div class="tomsk"><a href="/">Томск</a></div>
+      <div class="main_menu">
+        <ul>
+          <li id="afisha"><a href="/">Афиша</a></li>
+          <li id="organizations"><a href="/organizations">Заведения</a></li>
+          <li id="posts"><a href="/posts">Обзоры</a></li>
+          <li id="accounts"><a href="/accounts">Люди</a></li>
+        </ul>
+        <div class="search_form">
+          <form accept-charset="UTF-8" action="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div>
+            <input class="search" id="q" name="q" placeholder="Поиск" type="text">
+            <input class="submit" type="submit" value="">
+          </form>
+        </div>
       </div>
     </div>
   </div>
-  <div class="main_menu_wrapper">
-    <ul class="main_menu">
-      <li><a href="/affiches/all">Афиша</a></li>
-      <li><a href="/organizations">Заведения</a></li>
-      <li><a href="/photogalleries/all">Фотогалереи</a></li>
-    </ul>
-  </div>
   <div class="content_wrapper">
-    <div class="content">
-      <h1>Страница не найдена (404 ошибка)</h1>
+    <div class="content error_404">
+      <h1>404</h1>
       <p>Страница, которую Вы ищете, не найдена. Возможно она была удалена или перемещена.</p>
       <p>Попробуйте начать с <a href="/">главной страницы</a> или воспользоваться общим поиском по сайту.</p>
     </div>
   </div>
   <div class="footer_wrapper">
     <div class="footer">
-      <div class="our_social_link">
-        <h5>Контакты</h5>
+      <div class="contacts">
+        <h5>Как с нами связаться</h5>
         <ul>
-          <li class='vk'><a href='http://vk.com/znaigorod' class='solid_dark_gray'>vk.com/znaigorod</a></li>
-          <li class='twitter'><a href='http://twitter.com/znaigorod' class='solid_dark_gray'>twitter.com/znaigorod</a></li>
-          <li class='email'><a href='mailto:team@znaigorod.ru' class='solid_dark_gray'>team@znaigorod.ru</a></li>
+          <li>Информацию о предстоящих событиях присылайте на <a href="mailto:afisha@znaigorod.ru">afisha@znaigorod.ru</a></li>
+          <li>Чтобы ваше заведение появилось в каталоге отправьте письмо на <a href="mailto:info@znaigorod.ru">info@znaigorod.ru</a></li>
+          <li>Если хотите сотрудничать с нами напишите на <a href="mailto:office@znaigorod.ru">office@znaigorod.ru</a></li>
+          <li class="telephone">+7-909-548-5422</li>
         </ul>
+      </div>
+      <div class="our_social_link">
+        <h5>Мы в социальных сетях</h5>
+        <ul>
+          <li class="vk"><a href="http://vk.com/znaigorod" title="ВКонтакте" target="_blank">vk.com/znaigorod</a></li>
+          <li class="fb"><a href="https://www.facebook.com/znai.gorod" title="Facebook" target="_blank">facebook.com/znai.gorod</a></li>
+          <li class="odnoklassniki"><a href="http://odnoklassniki.ru/group/54186972610564" title="Одноклассники" target="_blank">odnoklassniki.ru</a></li>
+          <li class="twitter"><a href="http://twitter.com/znaigorod" title="Twitter" target="_blank">twitter.com/znaigorod</a></li>
+        </ul>
+      </div>
+      <div class="counters">
       </div>
     </div>
   </div>
