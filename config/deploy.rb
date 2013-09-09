@@ -1,4 +1,4 @@
 require 'openteam/capistrano/recipes'
+require 'sidekiq/capistrano'
 
 set :default_stage, 'production'
-set :delayed_job_args, "-n 8"

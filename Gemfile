@@ -22,7 +22,6 @@ group :default do
   gem 'curb',                       :require => false
   gem 'daemons'
   gem 'default_value_for'
-  gem 'delayed_job_active_record'
   gem 'devise'
   gem 'devise-russian'
   gem 'draper'
@@ -59,8 +58,10 @@ group :default do
   gem 'russian'
   gem 'sanitize'
   gem 'sass-rails'
+  gem 'sidekiq'
   gem 'simple-navigation'
   gem 'simple_form'
+  gem 'sinatra',                    :require => false
   gem 'sitemap_generator'
   gem 'state_machine'
   gem 'sunspot_rails'
