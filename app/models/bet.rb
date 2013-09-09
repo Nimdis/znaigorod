@@ -11,10 +11,14 @@ class Bet < ActiveRecord::Base
   has_one :account, :through => :user
   has_one :bet_payment, :as => :paymentable, :dependent => :destroy
 
-  validates :number, :presence => true, :numericality => true
+  validates :number, :presence => true, :numericality => { :greater_than => 0 }
   validates :amount, :numericality => { :message => 'неверное значение' }
 
+  before_create :set_codes
+
   after_create :send_notification_to_afisha_author
+
+  serialize :codes, Array
 
   default_value_for :number, 1
   default_value_for(:amount) { |bet| bet.price_min }
@@ -24,9 +28,9 @@ class Bet < ActiveRecord::Base
     event(:cancel)  { transition :fresh => :canceled }
     event(:pay)     { transition :approved => :paid }
 
-    after_transition :fresh => :canceled, :do => :handle_cancel
-    after_transition :fresh => :approved, :do => :handle_approval
-    after_transition :approved => :paid,  :do => :handle_pay
+    after_transition :fresh    => :canceled, :do => :handle_cancel
+    after_transition :fresh    => :approved, :do => :handle_approval
+    after_transition :approved => :paid,     :do => :handle_pay
   end
 
   def price_min
@@ -35,7 +39,17 @@ class Bet < ActiveRecord::Base
     (afisha_price_min - afisha_price_min * 0.3).round
   end
 
+  def message
+    "#{afisha.description}. " << (number > 1 ? 'Коды: ' : 'Код: ') << codes.join(', ')
+  end
+
   private
+
+  def set_codes
+    self.codes = number.times.map do
+      4.times.map { Random.rand(10) }.join
+    end
+  end
 
   def send_notification_to_afisha_author
     notification_messages.create! :producer => account,
