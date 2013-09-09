@@ -36,8 +36,8 @@
     </div>
   <% else %>
     <% if message.auction_bet_pay? %>
-      <div>
-        <%= message.messageable.codes %>
+      <div class="codes">
+        Коды для входа: <%= message.messageable.codes.join(', ') %>
       </div>
     <% end %>
   <% end %>
