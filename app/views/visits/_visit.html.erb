@@ -1,11 +1,19 @@
 <ul class='user_actions'>
   <% if current_user && visitable.visit_for_user(current_user) %>
     <li class="selected">
-      <%= link_to t('afisha.join'), polymorphic_url([visitable, :destroy_visits]), :method => :put, :remote => true, class: 'change_visit', 'data-owner_id' => current_user.vk_uid, 'message' => "Собираюсь посетить #{link_to(visitable, visitable.is_a?(Afisha) ? afisha_show_url(visitable) : organization_url(visitable) )}"%>
+      <%= link_to t('afisha.join'), polymorphic_url([visitable, :destroy_visits]), :method => :put, :remote => true, class: 'change_visit' %>
     </li>
   <% else %>
     <li>
-    <%= link_to t('afisha.join'), send("#{visitable.class.name.underscore}_visits_path", visitable), :method => :post, :remote => true, class: 'change_visit' %>
+      <%= link_to t('afisha.join'),
+                  send("#{visitable.class.name.underscore}_visits_path", visitable),
+                  :method => :post,
+                  :remote => true,
+                  :class => 'share_to_vk change_visit',
+                  :onClick => 'share_on_click(this);',
+                  'data-owner_id' => current_user.try(:vk_uid),
+                  'data-message' => "Собираюсь посетить \"#{visitable}\"",
+                  'data-attachments' => "#{visitable.is_a?(Afisha) ? afisha_show_url(visitable) : organization_url(visitable)}" %>
     </li>
   <% end %>
   <%= render partial: 'visits/acts_visit', locals: { visitable: visitable, acts_as: [:acts_as_inviter, :acts_as_invited] } %>
