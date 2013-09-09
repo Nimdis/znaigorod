@@ -3,6 +3,7 @@
   VK.Api.call('wall.post', { owner_id: owner_id, message: message, attachments: attachments }, (r) ->
     r
   )
+  VK.init({apiId: 3136085})
 
 @share_on_click = (target) ->
   $this = $(target)
