@@ -20,6 +20,7 @@ class My::BetsController < My::ApplicationController
     approve! {
       @bet.approve!
       @message = @bet.notification_messages.find(params[:message_id])
+      @message.change_message_status
 
       render :partial => 'my/messages/message', :locals => { :message => @message } and return
     }
@@ -29,6 +30,7 @@ class My::BetsController < My::ApplicationController
     cancel! {
       @bet.cancel!
       @message = @bet.notification_messages.find(params[:message_id])
+      @message.change_message_status
 
       render :partial => 'my/messages/message', :locals => { :message => @message } and return
     }

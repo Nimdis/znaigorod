@@ -1,6 +1,6 @@
 @process_change_message_status = () ->
   timer = setInterval ->
-    target = $('a.change_message_status.unread:first')
+    target = $('a.change_message_status.unread:first', '#dialogs:visible, #invites:visible, #notifications:visible')
     if target.length
       target.click()
       true
@@ -13,8 +13,10 @@
 @init_messages = () ->
   process_change_message_status()
 
-  $('.account_messages').on 'ajax:success', (evt, response) ->
-    return if $(evt.target).hasClass('to_dialog') || $(evt.target).hasClass('bet')
+  $('.account_messages a.change_message_status.unread').on 'ajax:success', (evt, response) ->
+    $(evt.target)
+
+    return if $(evt.target).hasClass('to_dialog')
 
     $(evt.target).closest('li').replaceWith(response)
     counter = $(response).data('counter')
