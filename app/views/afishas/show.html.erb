@@ -98,8 +98,10 @@
             <% @afisha.similar_afisha.each do |afisha| %>
               <li>
                 <div class='image'>
-                  <%= link_to afisha_show_path(afisha) do %>
-                    <%= image_tag resized_image_url(afisha.poster_url, 65, 87), :size => '65x87', :alt => afisha.title.text_gilensize %>
+                  <% if afisha.poster_url.present? %>
+                    <%= link_to afisha_show_path(afisha) do %>
+                      <%= image_tag resized_image_url(afisha.poster_url, 65, 87), :size => '65x87', :alt => afisha.title.text_gilensize %>
+                    <% end %>
                   <% end %>
                   <%= content_tag(:div, 'Премьера', class: :ribbon) if @afisha.premiere? %>
                 </div>
