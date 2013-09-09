@@ -13,8 +13,8 @@
 @init_messages = () ->
   process_change_message_status()
 
-  $('.account_messages').on 'ajax:success', (evt, response) ->
-    return if $(evt.target).hasClass('to_dialog') || $(evt.target).hasClass('bet')
+  $('.account_messages a.change_message_status.unread').on 'ajax:success', (evt, response) ->
+    return if $(evt.target).hasClass('to_dialog')
     $(evt.target).closest('li').replaceWith(response)
     counter = $(response).data('counter')
     notification_counter = $(response).data('notification_counter')

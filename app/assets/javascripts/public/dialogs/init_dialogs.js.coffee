@@ -135,7 +135,7 @@
 
   load_tabs_handler(stored)
 
-  $('#messages_filter').on 'ajax:success', (evt, response, status, jqXHR) ->
+  $('#messages_filter #dialogs').on 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target)
 
     if target.hasClass('to_dialog')
