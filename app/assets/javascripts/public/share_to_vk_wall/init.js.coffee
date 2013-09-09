@@ -8,6 +8,7 @@
 
 @share_on_click = (target) ->
   $this = $(target)
+  return unless $this.data('owner_id')
   additional_message = $this.closest('form').find($this.data('additinal_message')).val()
   insert_to_message = $($this.data('insert_to_message')).parent().text()
   message = $this.data('message').replace(/%text%/, insert_to_message.toLocaleLowerCase())
