@@ -11,6 +11,7 @@ class BetPayment < Payment
 
   after_validation :set_amount
 
+  delegate :message, :to => :paymentable
   def approve!
     super
     paymentable.pay!
@@ -18,10 +19,6 @@ class BetPayment < Payment
   end
 
   private
-
-  def message
-    'MESSAGE'
-  end
 
   def set_amount
     self.amount = paymentable.amount
