@@ -1,4 +1,5 @@
 @init_share_to_vk_wall = (owner_id, message, attachments) ->
+  VK.init({apiId: 3556288})
   VK.Api.call('wall.post', { owner_id: owner_id, message: message, attachments: attachments }, (r) ->
     r
   )
