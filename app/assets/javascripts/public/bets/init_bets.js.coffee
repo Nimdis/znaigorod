@@ -37,7 +37,7 @@
     target = $(evt.target)
 
     # диалоговое окно покупки билета в личном кабинете (в респонсе пришла форма)
-    if $(response).filter('.ticket_payment_instruction').length
+    if $(response).filter('form').length
       container = $('<div class="payment_form_wrapper" />').appendTo('body').hide().html(response)
       form = $('form', container)
 
@@ -60,3 +60,4 @@
     # кнопки принять/отклонить ставку в личном кабинете (в респонсе пришла li.message)
     else
       target.closest('li').replaceWith(response)
+
