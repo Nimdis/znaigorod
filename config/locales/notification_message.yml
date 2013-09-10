@@ -1,0 +1,73 @@
+ru:
+  notification_message:
+    new_comment:
+      undefined:
+        оставил новый комментарий
+      male:
+        оставил новый комментарий
+      female:
+        оставила новый комментарий
+
+    reply_on_comment:
+      undefined:
+        ответил на ваш комментарий
+      male:
+        ответил на ваш комментарий
+      female:
+        ответила на ваш комментарий
+
+    user_add_friend:
+      undefined:
+        добавил вас в друзья
+      male:
+        добавил вас в друзья
+      female:
+        добавила вас в друзья
+
+    auction_bet:
+      undefined:
+        хочет купить
+      male:
+        хочет купить
+      female:
+        хочет купить
+
+    auction_bet_cancel:
+      undefined:
+        не согласен на
+      male:
+        не согласен на
+      female:
+        не согласна на
+
+    auction_bet_approve:
+      undefined:
+        согласен на
+      male:
+        согласен на
+      female:
+        согласна на
+
+    auction_bet_pay:
+      undefined:
+        оплатил
+      male:
+        оплатил
+      female:
+        оплатила
+
+    agreed_invite:
+      undefined:
+        принял приглашение посетить
+      male:
+        принял приглашение посетить
+      female:
+        приняла приглашение посетить
+
+    disagreed_invite:
+      undefined:
+        отказался от приглашения посетить
+      male:
+        отказался от приглашения посетить
+      female:
+        отказалась от приглашения посетить

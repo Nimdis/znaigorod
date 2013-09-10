@@ -14,8 +14,15 @@ ru:
     inviter: Пригласить
 
     sended:
-      invited: Запрос отправлен
-      inviter: Приглашен
+      undefined:
+        invited: Запрос отправлен
+        inviter: Приглашен
+      male:
+        invited: Запрос отправлен
+        inviter: Приглашен
+      female:
+        invited: Запрос отправлен
+        inviter: Приглашена
 
   visit:
     afisha: Участники
@@ -34,19 +41,27 @@ ru:
       many: "%{count} мест"
       other: "%{count} места"
 
-  private_message:
-    afisha:
-      inviter_message: "Привет! Приглашаю тебя сходить на %{url}"
-      invited_message: "Привет! Пригласи меня на %{url}"
-    organization:
-      inviter_message: "Привет! Приглашаю тебя сходить в %{url}"
-      invited_message: "Привет! Пригласи меня в %{url}"
-
   invite_message:
     inbox:
-      invited: ждет вашего приглашения
-      inviter: приглашает вас
+      commoni_inbox: &common_inbox
+        invited: ждет вашего приглашения
+        inviter: приглашает вас
+      undefined:
+        <<: *common_inbox
+      male:
+        <<: *common_inbox
+      female:
+        <<: *common_inbox
+
     sended:
-      invited: желаемый приглашатель
-      inviter: был приглашен вами
+      common_sended: &common_sended
+        invited: получил запрос на приглашение
+        inviter: был приглашен вами
+      undefined:
+        <<: *common_sended
+      male:
+        <<: *common_sended
+      female:
+        invited: получила запрос на приглашение
+        inviter: была приглашенa вами
 

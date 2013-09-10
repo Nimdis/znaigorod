@@ -16,7 +16,12 @@
       <%= link_to invite_message.opponent_of(current_user.account), account_path(invite_message.opponent_of(current_user.account)) %>, <span class='date'><%= l invite_message.created_at, :format => '%e %B %Y, %H:%M' %></span>
       <%= link_to "К диалогу", my_dialog_path(invite_message.opponent_of(current_user.account)), class: "to_dialog dialog_#{invite_message.opponent_of(current_user.account).id}", remote: true %>
 
-      <div><%= t "invite_message.#{invite_message.relation_at(current_user.account)}.#{invite_message.invite_kind}" %> на <%= link_to invite_message.messageable, invite_message.messageable.is_a?(Afisha) ? afisha_show_path(invite_message.messageable) : organization_path(invite_message.messageable) %> </div>
+      <div>
+        <%= t "invite_message.#{invite_message.relation_at(current_user.account)}.#{invite_message.opponent_of(current_user.account).gender}.#{invite_message.invite_kind}" %> 
+        на 
+        <%= link_to invite_message.messageable,
+            invite_message.messageable.is_a?(Afisha) ? afisha_show_path(invite_message.messageable) : organization_path(invite_message.messageable) %>
+      </div>
 
       <div class='invite_message_actions'>
         <% if invite_message.relation_at(current_user.account) == 'inbox' %>

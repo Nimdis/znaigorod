@@ -7,7 +7,7 @@
   <div class="body">
     <%= link_to message.producer, account_path(message.producer) %>
     <span>
-      <%= message.kind_text %>
+      <%= t "notification_message.#{message.kind}.#{message.producer.gender}" %>
       <%= t 'bet.tickets', :count => message.messageable.number %> за <%= message.messageable.amount %> руб. на
     </span>
     <%= link_to(message.messageable.afisha.title, polymorphic_path([message.messageable.afisha, :show])) %>

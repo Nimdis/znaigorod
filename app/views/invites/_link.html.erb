@@ -17,7 +17,7 @@
   <% end %>
 <% end %>
 <% if current_user.account.sended_invite_message(parent, account.id, acts_as) %>
-  <span class="sended"><%= I18n.t("invite.sended.#{acts_as}") %></span>
+  <span class="sended"><%= I18n.t("invite.sended.#{account.gender}.#{acts_as}") %></span>
 <% else %>
   <%= simple_form_for current_user.account.produced_invite_messages.build, :url => my_invite_messages_path do |f| %>
     <%= f.input :account_id, as: :hidden, :input_html => { :value => account.id } %>

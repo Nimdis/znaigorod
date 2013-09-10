@@ -7,7 +7,7 @@
 
   <div class="body">
     <%= link_to message.producer.title, message.producer %>
-    <span><%= message.kind_text %></span>
+    <span><%= t "notification_message.#{message.kind}.#{message.producer.gender}" %></span>
 
     <div class="date">
       <%= time_ago_in_words(message.created_at) %> назад

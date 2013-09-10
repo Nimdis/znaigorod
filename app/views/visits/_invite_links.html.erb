@@ -7,7 +7,7 @@
   </div>
   <% if current_user %>
     <% if current_user.account.sended_invite_message(visit.visitable, visit.user.account.id, :inviter) %>
-      <span class='sended'><%= I18n.t('invite.sended.inviter') %></span>
+      <span class='sended'><%= I18n.t("invite.sended.#{visit.user.account.gender}.inviter") %></span>
     <% else %>
       <%= simple_form_for current_user.account.produced_invite_messages.build, :url => my_invite_messages_path, html: { remote: true } do |f| %>
         <%= f.input :account_id, as: :hidden, :input_html => { :value => visit.user.account.id } %>
@@ -29,7 +29,7 @@
   </div>
   <% if current_user %>
     <% if current_user.account.sended_invite_message(visit.visitable, visit.user.account.id, :invited) %>
-      <span class='sended'><%= I18n.t('invite.sended.invited') %></span>
+      <span class='sended'><%= I18n.t("invite.sended.#{visit.user.account.gender}.invited") %></span>
     <% else %>
       <%= simple_form_for current_user.account.produced_invite_messages.build, :url => my_invite_messages_path, html: { remote: true } do |f| %>
         <%= f.input :account_id, as: :hidden, :input_html => { :value => visit.user.account.id } %>

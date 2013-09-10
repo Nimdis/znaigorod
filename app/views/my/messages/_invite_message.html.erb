@@ -7,7 +7,7 @@
 
   <div class="body">
     <%= link_to message.producer, message.producer %>
-    <span><%= message.kind_text %></span>
+    <span><%= t "notification_message.#{message.kind}.#{message.producer.gender}" %></span>
 
     <%= link_to(message.messageable.messageable.title, message.messageable.messageable.is_a?(Afisha) ? polymorphic_path([message.messageable.messageable, :show]) : message.messageable.messageable) %>
 
