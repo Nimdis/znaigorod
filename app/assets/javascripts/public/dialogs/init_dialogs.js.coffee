@@ -15,7 +15,7 @@
     pane = $('ul.dialog', "#dialog_#{account_id}").jScrollPane
       verticalGutter: 2
       showArrows: true
-      mouseWheelSpeed: 10
+      mouseWheelSpeed: 30
 
     pane.data('jsp').scrollToBottom()
 

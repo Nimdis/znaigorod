@@ -1,4 +1,5 @@
 @init_social_actions = () ->
+
   $('.social_actions').on 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target)
 
@@ -28,38 +29,20 @@
 
       $.fn.initialize_invite = () ->
         list = $('.accounts_list', this)
-        $('li .details .invite', list).each ->
-          invite_link = $(this)
-          invite_link.click ->
-            $.ajax
-              url: invite_link.attr('href')
-              success: (response, textStatus, jqXHR) ->
-                invite_link.hide().after(response)
-                form = invite_link.siblings('form')
-                $('textarea', form).keyup ->
-                  if $(this).val()
-                    $('input:last', form).removeAttr('disabled', 'disabled').removeClass('disabled')
-                  else
-                    $('input:last', form).attr('disabled', 'disabled').addClass('disabled')
-                  true
-                $('textarea', form).keyup()
-                form.submit ->
-                  $.ajax
-                    url: form.attr('action')
-                    type: 'POST'
-                    data: form.serialize()
-                    success: (response, textStatus, jqXHR) ->
-                      invite_link.after('<span class="sended">Приглашен</span>').remove()
-                      form.remove()
-                      true
-                  false
-                $('.close', form).click ->
-                  invite_link.show()
-                  form.remove()
-                  false
-                true
-            false
-          true
+        $('li .details form', list).live 'submit', ->
+          invite_form = $(this)
+          console.log target.hasClass('acts_as_inviter')
+          console.log target.hasClass('acts_as_invited')
+          $.ajax
+            type: 'POST'
+            url: invite_form.attr('action')
+            data: invite_form.serialize()
+            success: (response, textStatus, jqXHR) ->
+              invite_form.after('<span class="sended">Приглашен</span>').remove() if target.hasClass('acts_as_inviter')
+              invite_form.after('<span class="sended">Запрос отправлен</span>').remove() if target.hasClass('acts_as_invited')
+              true
+          false
+
         true
 
       $.fn.initialize_pagination = () ->
@@ -73,7 +56,7 @@
           autoReinitialise: true
           verticalGutter: 0
           showArrows: true
-          mouseWheelSpeed: 10
+          mouseWheelSpeed: 30
 
         block_offset = $('li:last', list).outerHeight(true, true) * ($('li', list).length - 3) - $('.jspContainer', list).outerHeight(true, true)
         if next_link.length
@@ -125,7 +108,7 @@
 
       $.fn.initialize_search = () ->
         block = $(this)
-        $('form', block).on 'submit', ->
+        $('.search_form form', block).on 'submit', ->
           form = $(this)
           return false unless $('#q', block).val()
           $.ajax
