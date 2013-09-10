@@ -1,3 +1,9 @@
+invitation:
+  categories:
+    - Кино
+    - Театр
+    - Другое
+
 billiard:
   categories:
     - Бильярдные залы

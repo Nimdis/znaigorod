@@ -138,3 +138,8 @@ ru:
         agree: Вы согласились
         disagree: Вы отказались
 
+    invitation:
+      gender:
+        all: Неважно
+        male: Парня
+        female: Девушку
