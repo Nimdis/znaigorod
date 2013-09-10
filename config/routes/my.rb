@@ -19,7 +19,7 @@ Znaigorod::Application.routes.draw do
     end
 
     resource :account, :only => [:show, :edit, :update]
-    resources :invitations, :except => [:index, :show]
+    resources :invitations, :except => [:index, :edit, :update]
 
     resources :afisha, :except => [:index, :show], :controller => 'afishas' do
       get 'edit/step/:step' => 'afishas#edit', :defaults => { :step => 'first' }, :on => :member, :as => :edit_step

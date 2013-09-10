@@ -1,9 +1,13 @@
 class My::InvitationsController < My::ApplicationController
-  actions :all, :except => [:index, :show]
+  actions :all, :except => [:index, :edit, :update]
 
   skip_authorization_check
 
   layout false
+
+  def destroy
+    destroy! { render :nothing => true and return }
+  end
 
   protected
 

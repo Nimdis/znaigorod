@@ -30,16 +30,7 @@
     <%= link_to 'добавить', new_my_invitation_path('invitation[kind]' => :inviter) %>
     <% if @account.invitations.inviter.any? %>
       <ul>
-        <% @account.invitations.inviter.each do |invitation| %>
-          <li>
-            <%= invitation.gender_text %>
-            <% invitation.categories.each do |category| %>
-              <%= link_to category %>
-            <% end %>
-            <%= invitation.description %>
-            <%= link_to 'удалить', my_invitation_path(invitation), :method => :delete %>
-          </li>
-        <% end %>
+        <%= render @account.invitations.inviter %>
       </ul>
     <% end %>
 
@@ -47,16 +38,7 @@
     <%= link_to 'добавить', new_my_invitation_path('invitation[kind]' => :invited) %>
     <% if @account.invitations.invited.any? %>
       <ul>
-        <% @account.invitations.invited.each do |invitation| %>
-          <li>
-            <%= invitation.gender_text %>
-            <% invitation.categories.each do |category| %>
-              <%= link_to category %>
-            <% end %>
-            <%= invitation.description %>
-            <%= link_to 'удалить', my_invitation_path(invitation), :method => :delete %>
-          </li>
-        <% end %>
+        <%= render @account.invitations.invited %>
       </ul>
     <% end %>
 
