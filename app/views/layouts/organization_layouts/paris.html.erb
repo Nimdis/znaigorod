@@ -12,8 +12,15 @@
 <% end %>
 
 <%= content_for :content do %>
-  <%= render :partial => 'commons/public_header' %>
-  <%= render :partial => 'commons/public_content' %>
+  <div class='unique_header_wrapper'>
+    <%= render :partial => 'commons/public_header' %>
+  </div>
+  <div class='paris_content_wrapper'>
+    <div class='paris_logo_wrapper'>
+      <div class='paris_logo'></div>
+    </div>
+    <%= render :partial => 'commons/public_content' %>
+  </div>
   <%= render :partial => 'commons/public_footer' %>
   <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
   <%= yield :yandex_map_scripts %>
