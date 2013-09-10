@@ -26,21 +26,6 @@
 
     if target.hasClass('acts_as_inviter') || target.hasClass('acts_as_invited')
 
-      container = $('<div class="invite_form_wrapper" />').appendTo('body').hide().html(response)
-      left_form = $('.left form', container)
-      radio_buttons_block = $('.radio_buttons', form)
-
-      $('label', radio_buttons_block).each ->
-        $(this).addClass($('input', this).attr('id'))
-        $(this).addClass('checked') if $('input', this).is(':checked')
-        $(this).click ->
-          return false if $(this).hasClass('checked')
-          $('label', radio_buttons_block).removeClass('checked')
-          $(this).addClass('checked') if $('input', this).is(':checked')
-          true
-
-        true
-
       $.fn.initialize_invite = () ->
         list = $('.accounts_list', this)
         $('li .details .invite', list).each ->
@@ -161,6 +146,8 @@
 
         true
 
+      container = $('<div class="invite_form_wrapper" />').appendTo('body').hide().html(response)
+
       container.dialog
         autoOpen: true
         draggable: false
@@ -188,6 +175,20 @@
           $(this).remove()
           true
 
+      left_form = $('.left form', container)
+      radio_buttons_block = $('.radio_buttons', left_form)
+
+      $('label', radio_buttons_block).each ->
+        $(this).addClass($('input', this).attr('id'))
+        $(this).addClass('checked') if $('input', this).is(':checked')
+        $(this).click ->
+          return false if $(this).hasClass('checked')
+          $('label', radio_buttons_block).removeClass('checked')
+          $(this).addClass('checked') if $('input', this).is(':checked')
+          true
+
+        true
+
       left_form.each ->
         $form = $(this)
         $form.submit ->
@@ -200,7 +201,11 @@
               container.dialog('close')
               unless $('.message_wrapper').length
                 $('body').prepend('<div class=\'message_wrapper\'>')
-              $('.message_wrapper').text('Приглашение успешно отправлено!').show().delay(5000).slideUp('slow')
+              if $('.radio_buttons', $form).length
+                $('.message_wrapper').text('Приглашение успешно отправлено!')
+              else
+                $('.message_wrapper').text('Приглашение удалено!')
+              $('.message_wrapper').show().delay(5000).slideUp('slow')
               true
 
           false
