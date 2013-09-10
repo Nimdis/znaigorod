@@ -1,19 +1,21 @@
 <% if visit.acts_as_invited? %>
   <div class='info'>
     <span>Ждет приглашения<%= " от "+I18n.t("visit.invited.#{visit.invited_gender}") unless visit.invited_gender.all? %></span>
-   <% unless visit.invited_description.blank? %>
-     <abbr title='<%= visit.invited_description %>' class='show_tipsy'><%= image_tag 'public/icon_question.png' %></abbr>
-   <% end %>
+    <% unless visit.invited_description.blank? %>
+      <abbr title='<%= visit.invited_description %>' class='show_tipsy'><%= image_tag 'public/icon_question.png' %></abbr>
+    <% end %>
   </div>
-  <% if current_user && current_user.account.sended_invite_message(visit.visitable, visit.user.account.id, :inviter) %>
-    <span class='sended'><%= I18n.t('invite.sended.inviter') %></span>
-  <% else %>
-    <%= simple_form_for current_user.account.produced_invite_messages.build, :url => my_invite_messages_path, html: { remote: true } do |f| %>
-      <%= f.input :account_id, as: :hidden, :input_html => { :value => visit.user.account.id } %>
-      <%= f.input :messageable_id, as: :hidden, :input_html => { :value => visit.visitable.id } %>
-      <%= f.input :messageable_type, as: :hidden, :input_html => { :value => visit.visitable.class.name } %>
-      <%= f.input :invite_kind, as: :hidden, :input_html => { :value => :inviter } %>
-      <%= f.submit t("invite.inviter"), class: 'submit_dialog' %>
+  <% if current_user %>
+    <% if current_user.account.sended_invite_message(visit.visitable, visit.user.account.id, :inviter) %>
+      <span class='sended'><%= I18n.t('invite.sended.inviter') %></span>
+    <% else %>
+      <%= simple_form_for current_user.account.produced_invite_messages.build, :url => my_invite_messages_path, html: { remote: true } do |f| %>
+        <%= f.input :account_id, as: :hidden, :input_html => { :value => visit.user.account.id } %>
+        <%= f.input :messageable_id, as: :hidden, :input_html => { :value => visit.visitable.id } %>
+        <%= f.input :messageable_type, as: :hidden, :input_html => { :value => visit.visitable.class.name } %>
+        <%= f.input :invite_kind, as: :hidden, :input_html => { :value => :inviter } %>
+        <%= f.submit t("invite.inviter"), class: 'submit_dialog' %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
@@ -25,15 +27,17 @@
       <abbr title='<%= visit.inviter_description %>' class='show_tipsy'><%= image_tag 'public/icon_question.png' %></abbr>
     <% end %>
   </div>
-  <% if current_user && current_user.account.sended_invite_message(visit.visitable, visit.user.account.id, :invited) %>
-    <span class='sended'><%= I18n.t('invite.sended.invited') %></span>
-  <% else %>
-    <%= simple_form_for current_user.account.produced_invite_messages.build, :url => my_invite_messages_path, html: { remote: true } do |f| %>
-      <%= f.input :account_id, as: :hidden, :input_html => { :value => visit.user.account.id } %>
-      <%= f.input :messageable_id, as: :hidden, :input_html => { :value => visit.visitable.id } %>
-      <%= f.input :messageable_type, as: :hidden, :input_html => { :value => visit.visitable.class.name } %>
-      <%= f.input :invite_kind, as: :hidden, :input_html => { :value => :invited } %>
-      <%= f.submit t("invite.invited"), class: 'submit_dialog' %>
+  <% if current_user %>
+    <% if current_user.account.sended_invite_message(visit.visitable, visit.user.account.id, :invited) %>
+      <span class='sended'><%= I18n.t('invite.sended.invited') %></span>
+    <% else %>
+      <%= simple_form_for current_user.account.produced_invite_messages.build, :url => my_invite_messages_path, html: { remote: true } do |f| %>
+        <%= f.input :account_id, as: :hidden, :input_html => { :value => visit.user.account.id } %>
+        <%= f.input :messageable_id, as: :hidden, :input_html => { :value => visit.visitable.id } %>
+        <%= f.input :messageable_type, as: :hidden, :input_html => { :value => visit.visitable.class.name } %>
+        <%= f.input :invite_kind, as: :hidden, :input_html => { :value => :invited } %>
+        <%= f.submit t("invite.invited"), class: 'submit_dialog' %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
