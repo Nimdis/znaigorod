@@ -198,10 +198,14 @@
             success: (response, textStatus, jqXHR) ->
               target.closest('.social_actions').html(response)
               container.dialog('close')
+              unless $('.message_wrapper').length
+                $('body').prepend('<div class=\'message_wrapper\'>')
               $('.message_wrapper').text('Приглашение успешно отправлено!').show().delay(5000).slideUp('slow')
               true
 
           false
+
+        true
 
     if target.hasClass('invite')
       invite_container = $('<div class="message_form_wrapper" />').appendTo('body').hide().html(response)
@@ -243,6 +247,8 @@
       $('.submit_dialog', form).click ->
         invite_container.dialog('close')
 
+        unless $('.message_wrapper').length
+          $('body').prepend('<div class=\'message_wrapper\'>')
         $('.message_wrapper').text('Приглашение успешно отправлено!').show().delay(5000).slideUp('slow')
 
         false

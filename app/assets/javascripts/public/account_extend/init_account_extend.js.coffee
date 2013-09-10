@@ -52,6 +52,8 @@
           data: form.serialize()
           success: (response, textStatus, jqXHR) ->
             container.dialog('close')
+            unless $('.message_wrapper').length
+              $('body').prepend('<div class=\'message_wrapper\'>')
             $('.message_wrapper').text('Сообщение успешно отправлено!').show().delay(5000).slideUp('slow')
             true
 
