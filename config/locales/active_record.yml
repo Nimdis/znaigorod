@@ -17,6 +17,7 @@ ru:
       comment:                            Комментарий
       feedback:                           Обратная связь
       vote:                               Голос
+      invitation:                         Приглашение
 
       afisha:                             Вся афиша
       concert:                            Концерты
@@ -74,6 +75,11 @@ ru:
       account:
         gender: Пол
         birthday: Дата рождения
+
+      invitation:
+        gender: Пол
+        category: Категория
+        description: Дополнительно
 
       activity:
         activity_at: Когда

@@ -18,8 +18,8 @@ Znaigorod::Application.routes.draw do
       put 'change_message_status' => 'private_messages#change_message_status', :on => :member, :as => :change_status
     end
 
-    resource :account, :only => [:show, :update]
-    match 'edit', to: 'accounts#edit', as: :edit, via: :get
+    resource :account, :only => [:show, :edit, :update]
+    resources :invitations
 
     resources :afisha, :except => [:index, :show], :controller => 'afishas' do
       get 'edit/step/:step' => 'afishas#edit', :defaults => { :step => 'first' }, :on => :member, :as => :edit_step

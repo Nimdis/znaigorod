@@ -10,4 +10,5 @@ class Values
   end
 
   delegate *Organization.available_suborganization_kinds, to: :values
+  delegate :invitation, to: :values
 end
