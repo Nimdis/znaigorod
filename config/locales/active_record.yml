@@ -77,9 +77,11 @@ ru:
         birthday: Дата рождения
 
       invitation:
-        gender: Пол
+        category:      Категория
         category_list: Категория
-        description: Дополнительно
+        description:   Дополнительно
+        gender:        Пол
+        kind:          Тип
 
       activity:
         activity_at: Когда
