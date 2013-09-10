@@ -47,22 +47,24 @@
 
     .avatars
       +avatar-list-style
+
       .details
         margin: 0
         padding: 0 0 3px 0
 
-        .wanted
+        .sended
+          color: #f60
 
-          .sended
-            color: #f60
+        .simple_form
+          margin-bottom: 5px
 
-          a.invite
+          &:last-child
+            margin-bottom: 0
+
+          .submit_dialog
+            font-size: 11px
             +grey-button-style
             +inline-block
-            margin-bottom: 5px
-
-            &:last-child
-              margin-bottom: 0
 
     .pagination
       position: absolute
