@@ -27,7 +27,7 @@ module PresentsAsCheckboxes
       end
 
       define_method "normalize_#{field}_list" do
-        self.send "#{field}_list=", [*options[:default_value]] if options[:default_value]
+        self.send "#{field}_list=", [*options[:default_value]] and return if options[:default_value]
 
         self.send "#{field}_list=", [*self.send("#{field}_list")].delete_if(&:blank?)
       end
