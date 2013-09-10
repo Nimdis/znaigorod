@@ -78,7 +78,7 @@ ru:
 
       invitation:
         gender: Пол
-        category: Категория
+        category_list: Категория
         description: Дополнительно
 
       activity:

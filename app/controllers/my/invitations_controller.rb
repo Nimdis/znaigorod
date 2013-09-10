@@ -1,5 +1,5 @@
 class My::InvitationsController < My::ApplicationController
-  actions :all
+  actions :all, :except => [:index, :show]
 
   skip_authorization_check
 

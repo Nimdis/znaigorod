@@ -26,6 +26,40 @@
     <%= render 'messages' if @notification_messages.any? || @dialogs.any? || @invite_messages.any? %>
     <%= render 'accounts/events' %>
 
+    <h3>Приглашаю</h3>
+    <%= link_to 'добавить', new_my_invitation_path('invitation[kind]' => :inviter) %>
+    <% if @account.invitations.inviter.any? %>
+      <ul>
+        <% @account.invitations.inviter.each do |invitation| %>
+          <li>
+            <%= invitation.gender_text %>
+            <% invitation.categories.each do |category| %>
+              <%= link_to category %>
+            <% end %>
+            <%= invitation.description %>
+            <%= link_to 'удалить', my_invitation_path(invitation), :method => :delete %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <h3>Жду приглашения</h3>
+    <%= link_to 'добавить', new_my_invitation_path('invitation[kind]' => :invited) %>
+    <% if @account.invitations.invited.any? %>
+      <ul>
+        <% @account.invitations.invited.each do |invitation| %>
+          <li>
+            <%= invitation.gender_text %>
+            <% invitation.categories.each do |category| %>
+              <%= link_to category %>
+            <% end %>
+            <%= invitation.description %>
+            <%= link_to 'удалить', my_invitation_path(invitation), :method => :delete %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+
     <% if @visits.any? %>
       <div class="visits header">
         <%= t "account.want_to_visit.#{@account.gender}" %>
