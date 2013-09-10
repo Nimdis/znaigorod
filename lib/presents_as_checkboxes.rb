@@ -20,19 +20,21 @@ module PresentsAsCheckboxes
         end
       end
 
-      define_method "set_#{field}" do
+      define_method "normalize_#{field}_list" do
         self.send "#{field}_list=", [*options[:default_value]] if options[:default_value]
-        self.send "#{field}=", [*self.send("#{field}_list")].delete_if(&:blank?).join(', ') if self.send("#{field}_list")
+
+        self.send "#{field}_list=", [*self.send("#{field}_list")].delete_if(&:blank?)
       end
 
+      define_method "set_#{field}" do
+        self.send "#{field}=", self.send("#{field}_list").join(', ')
+      end
+
+      before_validation "normalize_#{field}_list"
       before_validation "set_#{field}"
 
       define_method field.to_s.pluralize do
         (self.send(field) || '').split(',').map(&:squish)
-      end
-
-      define_method "#{field}_list?" do
-        !!self.send("#{field}_list")
       end
 
       if options[:validates_presence]
