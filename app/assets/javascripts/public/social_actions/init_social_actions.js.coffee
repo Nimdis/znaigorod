@@ -27,7 +27,7 @@
     if target.hasClass('acts_as_inviter') || target.hasClass('acts_as_invited')
 
       container = $('<div class="invite_form_wrapper" />').appendTo('body').hide().html(response)
-      form = $('form', container)
+      left_form = $('.left form', container)
       radio_buttons_block = $('.radio_buttons', form)
 
       $('label', radio_buttons_block).each ->
@@ -188,7 +188,7 @@
           $(this).remove()
           true
 
-      form.each ->
+      left_form.each ->
         $form = $(this)
         $form.submit ->
           $.ajax
