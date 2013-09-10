@@ -2,7 +2,7 @@
 
 class AfishaObserver < ActiveRecord::Observer
   def after_approve(afisha, transition)
-    MyMailer.delay.mail_new_published_afisha(afisha) unless afisha.user.is_admin?
+    MyMailer.delay.mail_new_published_afisha(afisha) unless afisha.user.is_admin? || afisha.user.email.blank?
     if afisha.user.present? && !afisha.user.is_admin?
       NotificationMessage.delay.create(
         account: afisha.user.account,
