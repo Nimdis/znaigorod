@@ -11,6 +11,7 @@ class Account < ActiveRecord::Base
   has_many :votes,           through: :users, order: 'votes.id DESC'
   has_many :visits,          through: :users, order: 'visits.created_at DESC'
   has_many :page_visits,     through: :users
+  has_many :invitations,     as: :inviteable, dependent: :destroy
 
   has_many :friends
   has_many :friendable,      as: :friendable, class_name: 'Friend'
