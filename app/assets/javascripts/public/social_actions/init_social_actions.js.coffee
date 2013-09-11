@@ -195,51 +195,11 @@
 
         true
 
-    if target.hasClass('invite')
-      invite_container = $('<div class="message_form_wrapper" />').appendTo('body').hide().html(response)
-      form = $('form', invite_container)
+    if target.hasClass('new_inviter_message')
+      target.after('<span class="sended">Приглашен</span>').remove()
 
-      form.submit () ->
-        $.ajax
-          url: form.attr('action')
-          type: 'POST'
-          data: form.serialize()
-          success: (response, textStatus, jqXHR) ->
-            if $('#private_message_invite_kind', form).val().match(/invited/)
-              target.after('<span class="sended">Запрос отправлено</span>').remove()
-            else
-              target.after('<span class="sended">Приглашен</span>').remove()
-            form.remove()
-            true
-
-      invite_container.dialog
-        autoOpen: true
-        draggable: false
-        modal: true
-        resizable: false
-        title: 'Приглашение'
-        width: '500px'
-        close: (event, ui) ->
-          form.submit()
-          $(this).dialog('destroy')
-          $(this).remove()
-          true
-
-      $('textarea', invite_container).keyup ->
-        if $(this).val()
-          $('input[type=submit]', $(this).closest('form')).removeAttr('disabled').removeClass('disabled')
-        else
-          $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
-        true
-
-      $('.submit_dialog', form).click ->
-        invite_container.dialog('close')
-
-        unless $('.message_wrapper').length
-          $('body').prepend('<div class=\'message_wrapper\'>')
-        $('.message_wrapper').text('Приглашение успешно отправлено!').show().delay(5000).slideUp('slow')
-
-        false
+    if target.hasClass('new_invited_message')
+      target.after('<span class="sended">Запрос отправлен</span>').remove()
 
   recalculate_block_height = (kind, limit = 0) ->
     prev_element_top = $('li:first', kind).position().top
