@@ -5,6 +5,7 @@ class Invitation < ActiveRecord::Base
 
   attr_accessible :category, :category_list, :description, :kind, :gender
 
+  belongs_to :account
   belongs_to :inviteable, :polymorphic => true
 
   validates_presence_of :kind
