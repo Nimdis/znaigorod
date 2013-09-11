@@ -21,26 +21,22 @@ class Afisha < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :gallery_images, :as => :attachable, :dependent => :destroy
-  has_many :gallery_social_images, :as => :attachable, :dependent => :destroy
-  has_many :gallery_files,  :as => :attachable, :dependent => :destroy
+  has_many :comments,               :dependent => :destroy, :as => :commentable
+  has_many :gallery_files,          :dependent => :destroy, :as => :attachable
+  has_many :gallery_images,         :dependent => :destroy, :as => :attachable
+  has_many :gallery_social_images,  :dependent => :destroy, :as => :attachable
+  has_many :invitations,            :dependent => :destroy, :as => :inviteable
+  has_many :messages,               :dependent => :destroy, :as => :messageable
+  has_many :page_visits,            :dependent => :destroy, :as => :page_visitable
+  has_many :showings,               :dependent => :destroy, :order => :starts_at
+  has_many :tickets,                :dependent => :destroy
+  has_many :versions,               :dependent => :destroy, :as => :versionable, :order => 'id ASC'
+  has_many :visits,                 :dependent => :destroy, :as => :visitable
+  has_many :votes,                  :dependent => :destroy, :as => :voteable
 
-  has_many :showings, :dependent => :destroy, :order => :starts_at
-
+  has_many :addresses,     :through => :organizations, :uniq => true, :source => :address
+  has_many :copies,        :through => :tickets
   has_many :organizations, :through => :showings, :uniq => true
-  has_many :addresses, :through => :organizations, :uniq => true, :source => :address
-  has_many :comments, :as => :commentable, :dependent => :destroy
-  has_many :tickets, :dependent => :destroy
-  has_many :copies, :through => :tickets
-
-  has_many :versions, :as => :versionable, :dependent => :destroy, :order => 'id ASC'
-  has_many :visits, :as => :visitable, :dependent => :destroy, order: 'acts_as_inviter, acts_as_invited'
-  has_many :votes, :as => :voteable, :dependent => :destroy
-  has_many :page_visits, :as => :page_visitable, :dependent => :destroy
-
-  has_many :messages, :as => :messageable, :dependent => :destroy
-
-  has_many :invitations, :as => :inviteable, :dependent => :destroy
 
   has_one :affiche_schedule, :dependent => :destroy
 
@@ -243,8 +239,25 @@ class Afisha < ActiveRecord::Base
     self.class.name.underscore
   end
 
+  # TODO: выпилить этот метод
   def visit_for_user(user)
     self.visits.find_by_user_id(user.id)
+  end
+
+  def has_visit_for?(user)
+    visits.where(:user_id => user).any?
+  end
+
+  def visit_for(user)
+    visits.find_by_user_id(user)
+  end
+
+  def has_invitation_for?(user, kind)
+    invitations.send(kind).where(:account_id => user.account).any?
+  end
+
+  def invitation_for(user, kind)
+    invitations.send(kind).find_by_account_id(user.account)
   end
 
   def likes_count
