@@ -382,6 +382,10 @@ class Afisha < ActiveRecord::Base
     self.changed? && (self.changes.keys.map(&:to_sym) - ignore_fields).any?
   end
 
+  def save_version
+    self.versions.create!(:body => self.changes.to_json(:except => ignore_fields)) if change_versionable?
+  end
+
   private
 
   def afisha_schedule_attributes_blank?(attributes)
@@ -453,10 +457,6 @@ class Afisha < ActiveRecord::Base
 
   def get_images_from_yandex_fotki
     JSON.parse(Curl.get("http://api-fotki.yandex.ru/api/users/#{yandex_fotki_url}/photos/?format=json").body_str)['entries']
-  end
-
-  def save_version
-    self.versions.create!(:body => self.changes.to_json(:except => ignore_fields)) if change_versionable?
   end
 
   def prepare_trailer
