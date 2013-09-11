@@ -23,6 +23,8 @@ Znaigorod::Application.routes.draw do
     resources :comments, :only => [:new, :show, :create]
     resources :visits
 
+    resources :invitations, :only => [:new, :create, :destroy]
+
     get 'liked'        => 'votes#liked',         :as => :liked
     get 'photogallery' => 'afisha#photogallery', :as => :photogallery
     get 'trailer'      => 'afisha#trailer',      :as => :trailer
@@ -30,6 +32,8 @@ Znaigorod::Application.routes.draw do
     put 'change_vote'    => 'votes#change_vote',     :as => :change_vote
     put 'destroy_visits' => 'visits#destroy_visits', :as => :destroy_visits
   end
+
+  resources :afisha, :only => :show, :controller => :afishas
 
   get '/afisha' => 'afishas#index', :as => :afisha_index, :controller => 'afishas'
   get '/afisha/:id' => 'afishas#show', :as => :afisha_show, :controller => 'afishas'

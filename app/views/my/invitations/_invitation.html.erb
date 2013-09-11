@@ -1,8 +1,15 @@
 <li>
   <%= invitation.gender_text %>
+
   <% invitation.categories.each do |category| %>
     <%= link_to category %>
   <% end %>
+
+  <% if invitation.inviteable %>
+    <%= link_to invitation.inviteable.title, invitation.inviteable %>
+  <% end %>
+
   <%= invitation.description %>
+
   <%= link_to 'удалить', my_invitation_path(invitation), :method => :delete %>
 </li>

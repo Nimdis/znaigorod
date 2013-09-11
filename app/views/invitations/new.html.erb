@@ -1,0 +1,9 @@
+<h3><%= @invitation.kind_text %></h3>
+
+<%= simple_form_for [parent, @invitation] do |f| %>
+  <%= f.input :kind, :as => :hidden %>
+  <%= f.input :gender %>
+  <%= f.input :description %>
+
+  <%= f.submit @invitation.kind_text %>
+<% end %>
