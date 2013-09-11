@@ -10,6 +10,14 @@ class InvitationsController < ApplicationController
 
   layout false
 
+  def create
+    create! { render :partial => 'invitation', :locals => { :inviteable => parent, :kind => @invitation.kind } and return }
+  end
+
+  def destroy
+    destroy! { render :partial => 'invitation', :locals => { :inviteable => parent, :kind => @invitation.kind } and return }
+  end
+
   protected
 
   def build_resource
