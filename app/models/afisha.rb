@@ -360,30 +360,32 @@ class Afisha < ActiveRecord::Base
     showings.actual.map(&:index)
   end
 
-  def change_versionable?
-    ignore_fields = [
-              :created_at,
-              :id,
-              :popularity,
-              :poster_image_content_type,
-              :poster_image_file_name,
-              :poster_image_file_size,
-              :poster_image_updated_at,
-              :poster_image_url,
-              :slug,
-              :state,
-              :total_rating,
-              :updated_at,
-              :user_id,
-              :vkontakte_likes,
-              :yandex_metrika_page_views,
-              :vfs_path
+  def ignore_fields
+    [ :created_at,
+      :id,
+      :popularity,
+      :poster_image_content_type,
+      :poster_image_file_name,
+      :poster_image_file_size,
+      :poster_image_updated_at,
+      :poster_image_url,
+      :slug,
+      :state,
+      :total_rating,
+      :updated_at,
+      :user_id,
+      :vkontakte_likes,
+      :yandex_metrika_page_views,
+      :vfs_path
     ]
+  end
+
+  def change_versionable?
     self.changed? && (self.changes.keys.map(&:to_sym) - ignore_fields).any?
   end
 
   def save_version
-    self.versions.create!(:body => self.changes.to_json(:except => ignore_fields)) if change_versionable?
+    self.versions.create!(:body => self.changes.to_json(:except => ignore_fields))
   end
 
   private
