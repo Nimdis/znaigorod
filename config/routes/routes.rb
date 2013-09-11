@@ -64,6 +64,7 @@ Znaigorod::Application.routes.draw do
 
     resources :comments, :only => [:new, :create, :show]
     resources :visits
+    resources :invitations, :only => [:new, :create, :destroy]
 
     resources :user_ratings, :only => [:new, :create, :edit, :update, :show]
   end
