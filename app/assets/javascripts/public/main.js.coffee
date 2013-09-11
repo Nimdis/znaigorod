@@ -48,7 +48,8 @@ $ ->
   init_account_pagination() if $('.content .account_show .right').length
   init_account_extend() if $('.account_show').length
   init_account_social_actions() if $('.account_show').length
-  init_dialogs() if $('.to_dialog').length
+  init_messages() if $('#messages_filter').length
+  init_messages_tabs() if $('#messages_filter').length
   init_list_settings() if $('.content_wrapper .presentation_filters').length
   init_sms_claims() if $('.sms_claims li').length
   init_swfkrpano() if $('#krpano').length
@@ -63,8 +64,6 @@ $ ->
   init_file_upload() if $('.file_upload').length
   init_ajax_delete() if $('.ajax_delete').length
   init_select_tags() if $('.select_tags').length
-  init_messages() if $('.ajax_message_status').length
-  init_messages_tabs() if $('#messages_filter').length
   init_afisha_tabs() if $('#events_filter').length
 
   true

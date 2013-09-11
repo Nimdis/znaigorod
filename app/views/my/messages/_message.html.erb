@@ -1,10 +1,10 @@
 <li class="ajax_message_status <%= message.state %> message_<%= message.id %>"
+  data-account_id="<%= message.account_id %>"
   data-counter="<%= current_user.account.messages.unread.count %>"
   data-messages="<%= current_user.account.messages.count %>"
-  data-account_id="<%= message.account_id %>"
-  data-notification_counter="<%= current_user.account.notification_messages.unread.count %>"
   data-dialog_counter="<%= current_user.account.private_messages.unread.count %>"
-  data-invite_counter="<%= current_user.account.invite_messages.unread.count %>">
+  data-invite_counter="<%= current_user.account.invite_messages.unread.count %>"
+  data-notification_counter="<%= current_user.account.notification_messages.unread.count %>">
 
   <%= render :partial => "my/messages/#{message.messageable.class.name.underscore}_message",
    :locals => { :message => message } if message.messageable %>

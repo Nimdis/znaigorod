@@ -1,14 +1,14 @@
 <ul class="dialog"
   data-account="<%= @dialog_with.title %>"
-  data-account_id="<%= @dialog_with.id %>">
+  data-account_id="<%= @dialog_with.id %>"
+  data-counter="<%= current_user.account.messages.unread.count %>"
+  data-messages="<%= current_user.account.messages.count %>"
+  data-dialog_counter="<%= current_user.account.private_messages.unread.count %>"
+  data-invite_counter="<%= current_user.account.invite_messages.unread.count %>"
+  data-notification_counter="<%= current_user.account.notification_messages.unread.count %>">
 
   <% @messages.each do |message| %>
-    <li class="ajax_message_status <%= message.state %> message_<%= message.id %>"
-      data-counter="<%= current_user.account.messages.unread.count %>"
-      data-messages="<%= current_user.account.messages.count %>"
-      data-dialog_counter="<%= PrivateMessage.unread.to(current_user.account).count %>"
-      data-invite_counter="<%= current_user.account.invite_messages.unread.count %>">
-
+    <li class="ajax_message_status <%= message.state %> message_<%= message.id %>">
       <div class="item">
         <div class="avatar">
           <%= link_to account_path(message.producer) do %>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <% if message.producer != current_user.account %>
-        <%= link_to 'read', change_status_my_private_message_path(message), class: "change_message_status #{message.state}" %>
+        <%= link_to 'read', change_status_my_private_message_path(message), class: "change_message_status #{message.state}", remote: true, method: :put %>
       <% end %>
     </li>
   <% end %>
