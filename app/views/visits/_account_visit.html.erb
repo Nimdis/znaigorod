@@ -1,4 +1,0 @@
-<li>
-  <%= render partial: 'visits/account_afisha_visit', locals: { visit: visit } if visit.visitable.is_a?(Afisha) %>
-  <%= render partial: 'visits/account_organization_visit', locals: { visit: visit } if visit.visitable.is_a?(Organization) %>
-</li>
