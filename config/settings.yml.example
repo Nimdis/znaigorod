@@ -6,6 +6,9 @@ app:
 solr:
   url:                  http://localhost:8982/solr
 
+redis:
+  url:                  redis://localhost:6379/12
+
 2gis:
   api_key:              api_key
 
