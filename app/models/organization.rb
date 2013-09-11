@@ -185,8 +185,17 @@ class Organization < ActiveRecord::Base
     self.votes.liked.count
   end
 
+  # TODO: выпилить этот метод
   def visit_for_user(user)
     self.visits.find_by_user_id(user.id)
+  end
+
+  def has_visit_for?(user)
+    visits.where(:user_id => user).any?
+  end
+
+  def visit_for(user)
+    visits.find_by_user_id(user)
   end
 
   def create_page_visit(session, user_agent, user)
