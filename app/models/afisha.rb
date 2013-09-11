@@ -40,6 +40,8 @@ class Afisha < ActiveRecord::Base
 
   has_many :messages, :as => :messageable, :dependent => :destroy
 
+  has_many :invitations, :as => :inviteable, :dependent => :destroy
+
   has_one :affiche_schedule, :dependent => :destroy
 
   serialize :kind, Array

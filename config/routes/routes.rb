@@ -14,7 +14,33 @@ Znaigorod::Application.routes.draw do
     get method => "cooperation##{method}"
   end
 
+  get 'accounts_search' => 'accounts_search#show',         :as => :accounts_search
   get '/cooperation' => redirect('/services')
+  get 'geocoder'        => 'geocoder#get_coordinates'
+  get 'search'          => 'search#search',                :as => :search
+  get 'webcams'         => 'webcams#index'
+  get 'yamp_geocoder'   => 'geocoder#get_yamp_coordinates'
+
+  resources :afisha, :only => [], :controller => 'afishas' do
+    resources :comments, :only => [:new, :show, :create]
+    resources :visits
+
+    resources :invitations, :only => [:new, :create, :destroy]
+
+    get 'liked'        => 'votes#liked',         :as => :liked
+    get 'photogallery' => 'afisha#photogallery', :as => :photogallery
+    get 'trailer'      => 'afisha#trailer',      :as => :trailer
+
+    put 'change_vote'    => 'votes#change_vote',     :as => :change_vote
+    put 'destroy_visits' => 'visits#destroy_visits', :as => :destroy_visits
+  end
+
+  resources :afisha, :only => :show, :controller => :afishas
+
+  get '/afisha' => 'afishas#index', :as => :afisha_index, :controller => 'afishas'
+  get '/afisha/:id' => 'afishas#show', :as => :afisha_show, :controller => 'afishas'
+
+  resources :saunas,   :only => :index
 
   get 'accounts_search' => 'accounts_search#show',         :as => :accounts_search
   get 'geocoder' => 'geocoder#get_coordinates'

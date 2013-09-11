@@ -27,7 +27,15 @@ module PresentsAsCheckboxes
       end
 
       define_method "normalize_#{field}_list" do
-        self.send "#{field}_list=", [*options[:default_value]] and return if options[:default_value]
+        if options[:default_value]
+          self.send("#{field}_list=", [*options[:default_value]])
+          return
+        end
+
+        if self.send("#{field}_list").nil?
+          self.send("#{field}_list=", nil)
+          return
+        end
 
         self.send "#{field}_list=", [*self.send("#{field}_list")].delete_if(&:blank?)
       end
@@ -37,15 +45,20 @@ module PresentsAsCheckboxes
       end
 
       before_validation "normalize_#{field}_list"
-      before_validation "set_#{field}"
+      before_validation "set_#{field}", :if => "#{field}_list?"
 
       define_method field.to_s.pluralize do
         (self.send(field) || '').split(',').map(&:squish)
       end
 
+      define_method "#{field}_list?" do
+        p send "#{field}_list"
+        send "#{field}_list"
+      end
+
       if options[:validates_presence]
         message = options[:message] || I18n.t('activerecord.errors.messages.blank')
-        validates_presence_of "#{field}_list", :message => message
+        validates_presence_of "#{field}_list", :message => message, :if => "#{field}_list?"
       end
     end
   end

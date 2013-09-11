@@ -36,6 +36,12 @@
       <%= content_tag(:div, 'Премьера', class: :ribbon) if @afisha.premiere? %>
     </div>
     <div class='social_actions'>
+      <ul>
+        <li><%= link_to 'пригласить', new_afisha_invitation_path(@afisha, 'invitation[kind]' => :inviter) %></li>
+        <li><%= link_to 'жду приглашения', new_afisha_invitation_path(@afisha, 'invitation[kind]' => :invited) %></li>
+      </ul>
+      <hr />
+
       <%= render :partial => 'visits/visit', :locals => { :visitable => @afisha.model } %>
     </div>
   </div>
