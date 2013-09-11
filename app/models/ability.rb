@@ -80,6 +80,11 @@ class Ability
         showing.afisha.state != 'pending' && showing.afisha.user == user
       end
 
+      can [:new, :create], Invitation
+      can :destroy, Invitation do |invitation|
+        invitation.account == user.account
+      end
+
       can [:new, :create], PrivateMessage if user.persisted?
       can [:create], InviteMessage if user.persisted?
 
