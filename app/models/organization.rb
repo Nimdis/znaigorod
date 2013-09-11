@@ -31,6 +31,7 @@ class Organization < ActiveRecord::Base
   has_many :gallery_files,  :as => :attachable, :dependent => :destroy
 
   has_many :page_visits, :as => :page_visitable, :dependent => :destroy
+  has_many :invitations, :as => :inviteable, :dependent => :destroy
 
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation], default: :fresh, predicates: true
