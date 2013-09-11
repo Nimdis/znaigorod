@@ -383,7 +383,7 @@
             padding: 6px 15px 4px
 
     .properties_form
-      border: 1px solid #ccc 
+      border: 1px solid #ccc
 
       .properties_place, .button_place
         padding: 12px 0 12px 10px
@@ -456,22 +456,12 @@
               background: image_url('public/invite_message_type.png') no-repeat left -100px
 
             .agreement
-              +background(linear-gradient(#fdfefd, #ccc))
+              font-size: 11px
+              +grey-button-style
               +inline-block
-              border: 1px solid #ccc
-              color: #000
-              margin: 0 5px 0 0
-              padding: 1px 8px
-              text-decoration: none
-
-              &:hover
-                border: 1px solid #aaa
-
-              &:active
-                +background(linear-gradient(#ccc, #fdfefd))
+              margin-right: 5px
 
             .invite_message_actions
-              line-height: 22px
               margin: 10px 0 0 0
 
             .right_wrapper
