@@ -23,7 +23,7 @@
       return false
 
     if target.hasClass('change_visit')
-      target.closest('.social_actions').html(response)
+      target.closest('li').replaceWith(response)
 
     if target.hasClass('acts_as_inviter') || target.hasClass('acts_as_invited')
 
