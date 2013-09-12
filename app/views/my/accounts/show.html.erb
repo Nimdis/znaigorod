@@ -38,12 +38,16 @@
 
     <div class="invitations_wrapper">
       <div class="invitations header">
-        <%= link_to 'Добавить', new_my_invitation_path('invitation[kind]' => :inviter), :remote => true, :class => 'invitation_link', :data => { :title => 'Приглашаю' } %>
+        <%= link_to 'Добавить',
+          new_my_invitation_path('invitation[kind]' => :inviter),
+          :remote => true,
+          :class => 'invitation_link',
+          :data => { :title => 'Приглашаю', :target => '.inviter' } %>
         <h3>Приглашаю</h3>
       </div>
 
       <div class="invitations list">
-        <ul>
+        <ul class="inviter">
           <% if @account.invitations.inviter.any? %>
             <%= render @account.invitations.inviter %>
           <% else %>
@@ -53,12 +57,16 @@
       </div>
 
       <div class="invitations header">
-        <%= link_to 'Добавить', new_my_invitation_path('invitation[kind]' => :invited), :remote => true, :class => 'invitation_link', :data => { :title => 'Жду приглашения'} %>
+        <%= link_to 'Добавить',
+          new_my_invitation_path('invitation[kind]' => :invited),
+          :remote => true,
+          :class => 'invitation_link',
+          :data => { :title => 'Жду приглашения', :target => '.invited' } %>
         <h3>Жду приглашения</h3>
       </div>
 
       <div class="invitations list">
-        <ul>
+        <ul class="invited">
           <% if @account.invitations.invited.any? %>
             <%= render @account.invitations.invited %>
           <% else %>

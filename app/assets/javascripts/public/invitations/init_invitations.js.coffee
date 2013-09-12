@@ -1,5 +1,5 @@
-init_dialog = (selector, title) ->
-  $("<div id='" + selector + "_dialog'/>").dialog
+init_form_dialog = (title, target) ->
+  dialog = $("<div'/>").dialog
     draggable: false
     height: 'auto'
     modal: true
@@ -8,18 +8,17 @@ init_dialog = (selector, title) ->
     title: title
     width: 'auto'
     close: (event, ui) ->
-      $(this).dialog('destroy')
-      $(this).remove()
+      $(this).dialog('destroy').remove()
+
+  dialog.on 'ajax:success', (evt, response) ->
+    if $(response).is('form')
+      $(this).html(response)
+    else
+      $(this).dialog('destroy').remove()
+      target.append(response).find('.empty').remove()
 
 @init_invitations = ->
   $('.invitations_wrapper').on 'ajax:success', (evt, response) ->
     target = $(evt.target)
 
-    if target.hasClass('invitation_link')
-      dialog = init_dialog(target.attr('class'), target.data('title')).html(response)
-
-      dialog.on 'ajax:success', (evt, response) ->
-        if $(response).is('form')
-          $(this).html(response)
-        else
-          console.log $(response)
+    init_form_dialog(target.data('title'), $(target.data('target'))).html(response) if target.hasClass('invitation_link')
