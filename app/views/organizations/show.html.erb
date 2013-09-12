@@ -19,12 +19,12 @@
       <% end %>
     </div>
     <div class='social_actions'>
-      <ul>
+      <ul class="user_actions">
+        <%= render :partial => 'visits/visit', :locals => { :visitable => @organization.model } %>
+
         <li><%= link_to 'пригласить', new_organization_invitation_path(@organization, 'invitation[kind]' => :inviter) %></li>
         <li><%= link_to 'жду приглашения', new_organization_invitation_path(@organization, 'invitation[kind]' => :invited) %></li>
       </ul>
-      <hr />
-      <%= render :partial => 'visits/visit', :locals => { :visitable => @organization.model } %>
     </div>
   </div>
 
