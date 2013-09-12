@@ -1,7 +1,7 @@
 <li <%= 'class="selected"'.html_safe if visitable.has_visit_for?(current_user) %>>
   <% if visitable.has_visit_for?(current_user) %>
-    <%= link_to 'Я пойду', [visitable, visitable.visit_for(current_user)], :method => :delete %>
+    <%= link_to 'Я пойду', [visitable, visitable.visit_for(current_user)], :method => :delete, :remote => true, :class => 'change_visit' %>
   <% else %>
-    <%= link_to 'Я пойду', [visitable, :visits], :method => :post %>
+    <%= link_to 'Я пойду', [visitable, :visits], :method => :post, :remote => true, :class => 'change_visit' %>
   <% end %>
 </li>
