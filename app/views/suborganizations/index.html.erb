@@ -1,8 +1,8 @@
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.33/?load=package.full&lang=ru-RU') %>
 
 <% content_for :page_title, @presenter.page_title %>
-<% content_for :meta_description, t("meta.#{@presenter.pluralized_kind}.description") %>
 <% content_for :meta_keywords, t("meta.#{@presenter.pluralized_kind}.keywords") %>
+<% content_for :meta_description, t("meta.#{@presenter.pluralized_kind}.description") %>
 
 <div class='presentation_filters organization'>
   <div class='present_by'>

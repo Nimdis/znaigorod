@@ -187,11 +187,11 @@ class AfishaPresenter
   end
 
   def meta_description
-    I18n.t("meta.#{kind}.description", default: I18n.t('meta.default.description'))
+    I18n.t("meta.#{kind}.description", default: '')
   end
 
   def meta_keywords
-    I18n.t("meta.#{kind}.keywords", default: I18n.t('meta.default.description'))
+    I18n.t("meta.#{kind}.keywords", default: '')
   end
 
   def searcher_params(categories = [])
