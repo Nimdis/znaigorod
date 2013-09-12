@@ -81,5 +81,6 @@
  * = require ./sms_claims
  * = require ./my_afisha
  * = require ./select_tags
+ * = require ./invitations
  * = require ./main
  */
