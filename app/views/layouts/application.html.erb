@@ -11,15 +11,15 @@
     <meta name='description' content='<%= content_for?(:meta_description) ? "#{yield(:meta_description)}. #{I18n.t('meta.default.description')}".squish.html_safe : I18n.t('meta.default.description') %>' />
     <%= yield(:extra_meta) %>
     <%= favicon_link_tag %>
-    <%= yield :stylesheets %>
-    <%= yield :javascripts %>
-    <%= yield :extra_javascripts %>
-    <%= yield :twitter_cards %>
+    <%= yield(:stylesheets) %>
+    <%= yield(:javascripts) %>
+    <%= yield(:extra_javascripts) %>
+    <%= yield(:twitter_cards) %>
     <%= csrf_meta_tags %>
-    <%= yield :metrics %>
+    <%= yield(:metrics) %>
   </head>
   <body>
-    <%= yield :flash_messages %>
-    <%= yield :content %>
+    <%= yield(:flash_messages) %>
+    <%= yield(:content) %>
   </body>
 </html>
