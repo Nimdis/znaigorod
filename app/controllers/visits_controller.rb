@@ -11,11 +11,11 @@ class VisitsController < ApplicationController
   layout false
 
   def create
-    create! { render :partial => 'visit', :locals => { :visitable => parent } and return }
+    create! { render 'visit_with_visitors' and return }
   end
 
   def destroy
-    destroy! { render :partial => 'visit', :locals => { :visitable => parent } and return }
+    destroy! { render 'visit_with_visitors' and return }
   end
 
   protected
