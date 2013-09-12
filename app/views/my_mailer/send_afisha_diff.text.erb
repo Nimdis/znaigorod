@@ -11,10 +11,16 @@
 Описание: <%= @version.versionable.description.present? ? @version.versionable.description : 'Нет описания' %>
 
 Изменения:
+==============================================================================================================
 <% @version.what_changed.each do |key,value| %>
-  <%= t("activerecord.attributes.afisha.#{key}") %>
-  <%= value.first %> -> <%= value.last %>
+<%= t("activerecord.attributes.afisha.#{key}") %>
+--------------------------------------------------------------------------------------------------------------
+<%= value.first %>
 
+----------------->
+
+<%= value.last %>
 <% end %>
+==============================================================================================================
 
 Помотреть эту афишу в manage: <%= polymorphic_url([:manage, @version.versionable], :host => Settings['app']['host']) %>

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Version < ActiveRecord::Base
   extend HTMLDiff
 
@@ -7,7 +9,7 @@ class Version < ActiveRecord::Base
   belongs_to :versionable, :polymorphic => true
 
   def what_changed
-    JSON.parse(self.body)
+    body
   end
 end
 
