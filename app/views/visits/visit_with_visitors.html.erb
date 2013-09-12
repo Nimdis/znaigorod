@@ -1,0 +1,9 @@
+<%= render :partial => 'visit', :locals => { :visitable => parent } %>
+
+<div class='visitors list'>
+  <ul class='avatars'>
+    <% parent.visits.each do |visit| %>
+      <%= render partial: 'visitor', locals: { visit: visit } %>
+    <% end %>
+  </ul>
+</div>

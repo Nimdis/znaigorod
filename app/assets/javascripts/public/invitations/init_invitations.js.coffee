@@ -1,5 +1,5 @@
 init_form_dialog = (title, target) ->
-  dialog = $("<div'/>").dialog
+  dialog = $("<div class='form_dialog'/>").dialog
     draggable: false
     height: 'auto'
     modal: true
