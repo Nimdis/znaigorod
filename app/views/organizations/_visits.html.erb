@@ -1,7 +1,6 @@
 <div class='visitors list'>
-
   <ul class='avatars'>
-    <% @visits.each do |visit| %>
+    <% @organization.visits.each do |visit| %>
       <%= render partial: 'visits/visitor', locals: { visit: visit } %>
     <% end %>
   </ul>
@@ -12,5 +11,4 @@
       <%= link_to '&darr;'.html_safe, organization_visits_path(@organization, :page => @visits.current_page + 1), :class => "next_page #{ 'disabled' if @visits.last_page? }" %>
     </div>
   <% end %>
-
 </div>
