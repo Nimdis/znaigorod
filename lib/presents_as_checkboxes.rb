@@ -46,7 +46,6 @@ module PresentsAsCheckboxes
       end
 
       define_method "#{field}_list?" do
-        p send "#{field}_list"
         send "#{field}_list"
       end
 
