@@ -36,7 +36,7 @@
     <ul>
       <% resource.works.each do |work| %>
         <li>
-          <%= link_to image_tag(resized_image_url(work.image_url, 100, 125, false)), [:edit, :manage, resource, work] %>
+          <%= link_to image_tag(resized_image_url(work.image_url, 100, 125), :size => '100x125'), [:edit, :manage, resource, work] %>
           <div>
             <span class="label">Название:</span>
             <% if work.title? %>

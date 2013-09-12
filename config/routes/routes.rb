@@ -78,7 +78,7 @@ Znaigorod::Application.routes.draw do
     resources :comments, :only => [:new, :create, :show]
   end
 
-  resources :contests, :only => :show do
+  resources :contests, :only => [:index, :show] do
     resources :works, :only => :show do
       put 'change_vote' => 'votes#change_vote', :as => :change_vote
       get 'liked' => 'votes#liked', :as => :liked
