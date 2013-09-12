@@ -5,6 +5,10 @@ class My::InvitationsController < My::ApplicationController
 
   layout false
 
+  #def create
+    #create! { render @invitation and return }
+  #end
+
   def destroy
     destroy! { render :nothing => true and return }
   end

@@ -15,6 +15,7 @@ $ ->
 
   init_show_tipsy() if $('.show_tipsy') && $.fn.tipsy
 
+  init_invitations()
   init_afisha_extend() if $('.afisha_show .photogallery')
   init_afisha_extend() if $('.afisha_show .trailer')
   init_afisha_filter() if $('.filters .by_date .daily').length
