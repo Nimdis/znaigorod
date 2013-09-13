@@ -16,4 +16,9 @@ namespace :update_rating do
   task :organizations => :environment do
     Organization.all.map(&:update_rating)
   end
+
+  desc "Обновление рейтинга обзоров"
+  task :organizations => :environment do
+    Post.all.map(&:update_rating)
+  end
 end
