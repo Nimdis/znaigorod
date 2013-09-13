@@ -34,6 +34,7 @@ every 6.hours do
   rake 'update_rating:accounts'
   rake 'update_rating:afisha'
   rake 'update_rating:organizations'
+  rake 'update_rating:posts'
 end
 
 every 5.minutes do
