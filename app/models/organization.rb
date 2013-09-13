@@ -187,8 +187,9 @@ class Organization < ActiveRecord::Base
     self.visits.find_by_user_id(user.id)
   end
 
-  def create_page_visit(session, user)
+  def create_page_visit(session, user_agent, user)
     page_visit = self.page_visits.find_or_initialize_by_session(session)
+    page_visit.user_agent = user_agent
     page_visit.user = user
     page_visit.save
   end

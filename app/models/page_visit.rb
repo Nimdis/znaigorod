@@ -1,5 +1,5 @@
 class PageVisit < ActiveRecord::Base
-  attr_accessible :session, :user
+  attr_accessible :session, :user_agent, :user
 
   belongs_to :page_visitable, :polymorphic => true
   belongs_to :user
@@ -17,5 +17,6 @@ end
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  user_id             :integer
+#  user_agent          :text
 #
 

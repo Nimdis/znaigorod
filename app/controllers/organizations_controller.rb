@@ -29,7 +29,7 @@ class OrganizationsController < ApplicationController
     else
       @organization = Organization.find_by_subdomain(request.subdomain)
     end
-    @organization.delay.create_page_visit(request.session_options[:id], current_user)
+    @organization.delay.create_page_visit(request.session_options[:id], request.user_agent, current_user)
 
     @organization = OrganizationDecorator.decorate @organization
     @visits = @organization.visits.page(1).per(5)

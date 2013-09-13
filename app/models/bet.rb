@@ -71,3 +71,19 @@ class Bet < ActiveRecord::Base
       :account => afisha.user.account, :kind => :auction_bet_pay
   end
 end
+
+# == Schema Information
+#
+# Table name: bets
+#
+#  id         :integer          not null, primary key
+#  afisha_id  :integer
+#  number     :integer
+#  amount     :integer
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  state      :string(255)
+#  codes      :string(255)
+#
+

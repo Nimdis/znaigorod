@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130910074858) do
+ActiveRecord::Schema.define(:version => 20130913031156) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -490,6 +490,7 @@ ActiveRecord::Schema.define(:version => 20130910074858) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "user_id"
+    t.text     "user_agent"
   end
 
   add_index "page_visits", ["page_visitable_id"], :name => "index_page_visits_on_page_visitable_id"

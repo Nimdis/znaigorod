@@ -67,8 +67,9 @@ class Post < ActiveRecord::Base
     self.votes.liked.count
   end
 
-  def create_page_visit(session, user)
+  def create_page_visit(session, user_agent, user)
     page_visit = self.page_visits.find_or_initialize_by_session(session)
+    page_visit.user_agent = user_agent
     page_visit.user = user
     page_visit.save
   end

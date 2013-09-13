@@ -177,5 +177,6 @@ end
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #  avatar_url          :text
+#  birthday            :date
 #
 
