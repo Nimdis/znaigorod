@@ -97,7 +97,6 @@
         .image
           float: left
           position: relative
-          margin-right: 30px
           img
             width: 350px
             border: 1px solid #ccc
@@ -130,16 +129,17 @@
           margin-left: 380px
 
           li
-            font-size: 16px
-            background-color: #ccf2ff
-            +border-radius
-            padding: 15px 20px
-            margin-bottom: 15px
+            font-size: 14px
+            background: image_url('public/bullet.png') no-repeat left 7px
+            padding-left: 20px
+            margin-bottom: 10px
+
             &.indicate
-              font-size: 17px
-              background-color: #f1ecf3
+              font-weight: bold
+
             .important
-              color: #a922c7
+              color: #f60
+
       .details
         +clearfix
         background-color: #f8f8f8
