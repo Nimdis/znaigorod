@@ -18,7 +18,7 @@ class AfishasController < ApplicationController
   def show
     @afisha = AfishaDecorator.new Afisha.find(params[:id])
     @presenter = AfishaPresenter.new(params.merge(:categories => [@afisha.kind.first]))
-    @afisha.delay.create_page_visit(request.session_options[:id], request.user_agent, current_user)
+    @afisha.delay.create_page_visit(request.session_options[:id], request.user_agent, current_user) unless request.user_agent.match(/\(.*https?:\/\/.*\)/)
     @visits = @afisha.visits.page(1).per(5)
     @bet = @afisha.bets.build
   end
