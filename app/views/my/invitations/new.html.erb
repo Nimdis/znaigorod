@@ -1,9 +1,20 @@
-<%= simple_form_for [:my, @invitation], :remote => true do |f| %>
-  <%= f.input :kind, :as => :hidden %>
+<div class="invite_form_wrapper">
+  <div class="left">
+    <%= simple_form_for [:my, @invitation], :remote => true do |f| %>
+      <%= f.input :kind, :as => :hidden %>
 
-  <%= f.input :gender, :include_blank => false %>
-  <%= f.input :category_list, :as => :check_boxes, :collection => f.object.available_categories, :checked => f.object.categories %>
-  <%= f.input :description %>
+      <%= f.input :gender,
+        :as => :radio_buttons,
+        :label => false,
+        :label_method => lambda { |item| t("enumerize.invitation.gender.form.#{@invitation.kind}.#{item.last}") } %>
 
-  <%= f.submit 'Сохранить' %>
-<% end %>
+      <%= f.input :category_list, :as => :check_boxes, :collection => f.object.available_categories, :label => false %>
+      <%= f.input :description, :label => false %>
+
+      <div class="actions">
+        <%= f.submit 'Сохранить', :class => 'button' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

@@ -10,7 +10,7 @@ class Invitation < ActiveRecord::Base
 
   validates_presence_of :kind
 
-  enumerize :gender, :in => [:all, :female, :male], :default => :all, :predicates => true
+  enumerize :gender, :in => [:all, :male, :female], :default => :all, :predicates => true
   enumerize :kind, :in => [:inviter, :invited], :scope => true
 
   presents_as_checkboxes :category,
