@@ -10,7 +10,11 @@
     float: none !important
 
     .like_box
-      margin-top: -70px
+      width: 200px
+      height: 46px
+      text-align: center
+      margin-top: -68px
+      margin-right: -50px
 
     a
       border: none
@@ -18,9 +22,6 @@
       height: 18px
       line-height: 18px
       padding: 3px 0 3px 5px
-
-      &:hover
-        padding: 0 0 0 5px
 
     .votes_counter
       +background-image(linear-gradient(#ff9832, #fe6500))
@@ -172,9 +173,11 @@
       ul
         +clearfix
         li
+          +clearfix
           border: 1px solid #ccc
           float: left
           margin: 0 20px 20px 0
+          padding-bottom: 10px
 
           &.first
             clear: left
@@ -192,11 +195,11 @@
             +clearfix
             text-align: center
             font-size: 12px
-            margin: 4px 0 5px
+            margin: 7px 0 8px
 
           .contest_work_vk_like_on_list
             text-align: center
-            margin: 4px 0 5px
+            margin-top: 7px
 
           .author
             font-size: 12px
@@ -241,3 +244,31 @@
         margin-top: 15px
         p
           margin-bottom: 10px
+
+.ui-dialog .ui-dialog-content.liked_box
+  +clearfix
+  max-height: 415px !important
+  padding: 10px
+  width: 510px !important
+
+  .liked
+    +clearfix
+
+    li
+      float: left
+      margin: 10px
+      width: 65px
+
+      .user_item
+        img
+          display: block
+          width: 50px
+          margin: 0 auto
+
+      .name
+        display: block
+        font-size: 11px
+        line-height: 16px
+        margin: 10px 0 0 0
+        text-align: center
+        width: 50px
