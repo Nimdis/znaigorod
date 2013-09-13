@@ -1,0 +1,35 @@
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'public/application', :media => 'all' %>
+<% end %>
+
+<% content_for :javascripts do %>
+  <%= javascript_include_tag 'http://userapi.com/js/api/openapi.js?52' %>
+  <%= javascript_include_tag 'public/application' %>
+<% end %>
+
+<% content_for :metrics do %>
+  <%= render :partial => 'commons/google_analytics' if Rails.env.production? %>
+<% end %>
+
+<%= content_for :flash_messages do %>
+  <div class='message_wrapper'></div>
+<% end %>
+
+<%= content_for :content do %>
+  <div class='alternative_election'>
+    <div class='alternative_election_header'>
+      <a href='#' class='arms'>Алтернативные выборы мэра г. Томска</a>
+      <a href='#' class='slogan'>Алтернативные выборы мэра г. Томска</a>
+    </div>
+    <div class='alternative_election_cotent'>
+      <%= render :partial => 'commons/public_header' %>
+      <%= render :partial => 'commons/public_content' %>
+    </div>
+  </div>
+  <%= render :partial => 'commons/public_footer' %>
+  <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
+  <%= yield :yandex_map_scripts %>
+  <%= yield :two_gis_map_scripts %>
+<% end %>
+
+<%= render :template => 'layouts/application' %>
