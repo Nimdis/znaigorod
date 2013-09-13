@@ -1,9 +1,18 @@
-<h3><%= @invitation.kind_text %></h3>
+<div class="invite_form_wrapper">
+  <div class="left">
+    <h3><%= @invitation.kind_text %></h3>
 
-<%= simple_form_for [parent, @invitation] do |f| %>
-  <%= f.input :kind, :as => :hidden %>
-  <%= f.input :gender %>
-  <%= f.input :description %>
+    <%= simple_form_for [parent, @invitation] do |f| %>
+      <%= f.input :kind, :as => :hidden %>
+      <%= f.input :gender,
+        :as => :radio_buttons,
+        :label => false,
+        :label_method => lambda { |item| t("enumerize.invitation.gender.form.#{@invitation.kind}.#{item.last}") } %>
+      <%= f.input :description %>
 
-  <%= f.submit @invitation.kind_text %>
-<% end %>
+      <div class="actions">
+        <%= f.submit @invitation.kind_text %>
+      </div>
+    <% end %>
+  </div>
+</div>
