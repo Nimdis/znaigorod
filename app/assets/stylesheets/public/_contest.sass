@@ -1,25 +1,17 @@
 =contest_work_like
-  +clearfix
   +border-radius(3px)
-  +background-image(linear-gradient(#dfd1e8, #cfb7db))
-  border: 1px solid #cfb6dd
+  +background-image(linear-gradient(#fff, #cfcfcf))
   width: 115px
 
   &:hover
     cursor: pointer
 
   .votes_wrapper
-    +clearfix
-    background: image_url('public/counter_bg.png') no-repeat right center
     float: none !important
-    padding: 0 33px 0 0
-
-    .cloud_wrapper
-      margin-top: 28px
 
     a
       border: none
-      color: #794391
+      color: #000
       height: 18px
       line-height: 18px
       padding: 0 0 0 5px
@@ -28,40 +20,67 @@
         padding: 0 0 0 5px
 
     .votes_counter
-      color: #fff
-      height: 18px
-      left: 86px
-      line-height: 18px
-      margin: 0 -28px 0 0
+      +background-image(linear-gradient(#ff9832, #fe6500))
+      +border-right-radius(2px)
+      border: 1px solid #fe6500
+      float: right
+      margin: 0
       padding: 0
       position: relative
       text-align: center
-      width: 28px
+      width: 30px
 
       a
         color: #fff
+        padding: 0
+        margin: 0
+
+    .votes_counter:after, .votes_counter:before
+      right: 100%
+      border: solid transparent
+      content: " "
+      height: 0
+      width: 0
+      position: absolute
+      pointer-events: none
+
+    .votes_counter:after
+      border-color: rgba(255, 152, 50, 0)
+      border-right-color: #ff9832
+      border-width: 5px
+      top: 50%
+      margin-top: -5px
+
+    .votes_counter:before
+      border-color: rgba(254, 101, 0, 0)
+      border-right-color: #fe6500
+      border-width: 6px
+      top: 50%
+      margin-top: -6px
 
     .user_like
       float: left
+      width: 83px
+      height: 20px
 
       &:hover
-        +background(image_url('public/counter_bg.png') no-repeat right center, linear-gradient(#b895ca, #9a68b3))
+        +background-image(linear-gradient(#ccc, #fcfcfc))
         cursor: pointer
 
         a
           &:hover
             color: #fff
 
+      &.liked
+        +background-image(linear-gradient(#fff, #ff9933))
+        +border-left-radius(2px)
+        color: #fff
+
+      &.dont_liked
+        +border-left-radius(2px)
+
       span
         display: none
-
-      .liked
-        +background(image_url('public/counter_bg.png') no-repeat right center, linear-gradient(#b895ca, #9a68b3))
-        color: #fff
-        width: 110px
-
-      .dont_liked
-        width: 110px
 
 .content
   .contest
@@ -198,13 +217,6 @@
           margin: 3px
       .contest_work_like
         +contest_work_like
-
-        .cloud_wrapper
-          margin-left: -79px !important
-          margin-top: 30px !important
-
-          .cloud_inner_wrapper
-            background-position: 120px top !important
 
       .author
         +clearfix
