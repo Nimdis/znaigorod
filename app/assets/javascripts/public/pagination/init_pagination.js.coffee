@@ -11,7 +11,8 @@
     '.content_wrapper .coupons_list,' +
     '.content_wrapper .accounts_list ul,' +
     '.content_wrapper .posts_list ul,' +
-    '.content_wrapper .organization_show .afisha_list ul'
+    '.content_wrapper .organization_show .afisha_list ul,' +
+    '.content_wrapper .contest .works ul'
   )
   first_item = $('li:first', list)
   return true unless first_item.length

@@ -11,6 +11,8 @@ class Contest < ActiveRecord::Base
 
   scope :ordered_by_starts_on, order('starts_on desc')
 
+  default_scope order('id DESC')
+
   friendly_id :title, use: :slugged
 
   def self.generate_vfs_path

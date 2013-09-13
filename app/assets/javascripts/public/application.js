@@ -73,7 +73,6 @@
  * = require ./swfkrpano
  * = require ./move_to_top
  * = require ./webcams
- * = require ./contest
  * = require ./menus
  * = require ./services
  * = require ./sms_claims

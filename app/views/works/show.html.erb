@@ -13,9 +13,9 @@
   <meta property='og:image' content='<%= @work.image_url.gsub(/\/\d+-\d+\//, '/100-63!n/') %>' />
 <% end %>
 
-<h1><%= @work.contest.title.excerpt %></h1>
-
 <div class='contest'>
+  <h1><%= @work.contest.title.excerpt %></h1>
+
   <div class='description'>
     <%= @work.contest.description.as_html %>
   </div>
