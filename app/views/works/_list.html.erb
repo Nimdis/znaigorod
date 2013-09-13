@@ -1,15 +1,21 @@
 <% @works.each do |work| %>
   <li class='<%= cycle('first', 'second', 'third', 'fourth') %>'>
+    <div class='title'>
+      <% if work.title.present? %>
+        <%= link_to(work.title, contest_work_path(@contest, work)) %>
+      <% else %>
+        &nbsp;
+      <% end %>
+    </div>
     <div class='image'>
-      <%= link_to(image_tag(work.image_url.gsub(/\/\d+-\d+\//, '/265-200!n/')), contest_work_path(@contest, work)) %>
+      <%= link_to contest_work_path(@contest, work) do %>
+        <%= image_tag(resized_image_url(work.image_url, 278, 210), :siza => '278x210', :alt => work.title) %>
+      <% end %>
     </div>
     <% contest_description = work.author_info
        contest_description += '. ' + work.description.squish if work.description.present?
        contest_description = truncate(contest_description, :length => 140)
     %>
-    <div class='title'>
-      <%= link_to(work.title, contest_work_path(@contest, work)) %>
-    </div>
     <% if @contest.ends_on >= Date.today %>
       <div class='contest_work_like'>
         <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => work } %>
@@ -17,6 +23,5 @@
     <% else %>
       <div class='contest_work_vk_like_on_list'><%= t 'contest.votes', :count => work.contest_id < 4 ? work.vk_likes.to_i : work.votes.liked.count %></div>
     <% end %>
-    <div class='author'><%= work.author_info %></div>
   </li>
 <% end %>

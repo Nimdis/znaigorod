@@ -97,10 +97,16 @@
 .content
   .contest
     font-size: 12px
-    margin: 0 10px 20px 10px
+    margin: 0 10px
 
     h1
       font-size: 22px
+      margin-bottom: 10px
+
+    h2
+      font-size: 14px
+      background-color: #e8e8e8
+      padding: 1px 10px 2px
       margin-bottom: 10px
 
     .description
@@ -138,7 +144,7 @@
               left: 8px
         ul
           +clearfix
-          margin-left: 380px
+          margin-left: 370px
 
           li
             font-size: 14px
@@ -152,54 +158,48 @@
             .important
               color: #f60
 
-      .details
-        +clearfix
-        background-color: #f8f8f8
-        padding: 10px 15px 0
-        +border-radius
-        position: relative
-        margin-top: 15px
-        .toggler
-          font-size: 17px
-          margin-bottom: 10px
-        .toggable
-          display: none
+        .details
+          +clearfix
+          margin-left: 370px
+
           p
             margin-bottom: 10px
 
     .works
-      margin: 20px 0
       h2
-        font-size: 20px
-        margin-bottom: 15px
+        margin: 5px 0 15px 0
       ul
         +clearfix
         li
+          border: 1px solid #ccc
           float: left
-          margin-bottom: 20px
-          margin-right: 21px
+          margin: 0 20px 20px 0
+
           &.first
             clear: left
+
           &.fourth
             margin-right: 0
 
           .image
             img
-              border: 4px solid #fff
-              +border-radius
-              +box-shadow(#aaa 0 0 3px)
-              margin: 3px
+              display: block
+              width: 278px
+              height: 210px
+
           .title
             +clearfix
             text-align: center
             font-size: 12px
-            margin-bottom: 3px
-            .contest_work_vk_like_on_list
-              width: 100px
-              float: right
-              margin: 0 0 0 10px
+            margin: 4px 0 5px
+
+          .contest_work_vk_like_on_list
+            text-align: center
+            margin: 4px 0 5px
+
           .author
             font-size: 12px
+
           .contest_work_like
             +contest_work_like
             float: none
@@ -213,7 +213,6 @@
         font-size: 17px
         margin: 2px 0 15px 20px
       h2
-        font-size: 20px
         margin-bottom: 15px
       .image
         text-align: center
