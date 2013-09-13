@@ -9,7 +9,12 @@ class Account < ActiveRecord::Base
   has_many :votes,           through: :users, order: 'votes.id DESC'
   has_many :visits,          through: :users, order: 'visits.created_at DESC'
   has_many :page_visits,     through: :users
+
   has_many :invitations,     dependent: :destroy
+  has_many :invite_messages,              order: 'messages.created_at DESC', :through => :invitations
+
+  has_many :received_invitations, :class_name => 'Invitation', :foreign_key => :invited_id
+  has_many :received_invite_messages, :source => :invite_messages, order: 'messages.created_at DESC', :through => :received_invitations
 
   has_many :friends
   has_many :events,          through: :users, order: 'afisha.created_at DESC'
@@ -17,8 +22,6 @@ class Account < ActiveRecord::Base
   has_many :messages,                     order: 'messages.created_at DESC'
   has_many :notification_messages,        order: 'messages.created_at DESC'
   has_many :private_messages,             order: 'messages.created_at DESC'
-  has_many :invite_messages,              order: 'messages.created_at DESC'
-  has_many :produced_invite_messages,     as: :producer, class_name: 'InviteMessage'
   has_many :produced_messages,            as: :producer, class_name: 'PrivateMessage'
 
   has_many :payments, through: :users

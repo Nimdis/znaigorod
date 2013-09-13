@@ -1,9 +1,11 @@
 class InvitationsStuff < ActiveRecord::Migration
   def up
+    Invitation.skip_callback :create, :after
+
     InviteMessage.all.each do |invite_message|
       invitation = Invitation.new do |invitation|
-        invitation.account    = invite_message.producer
         invitation.inviteable = invite_message.messageable
+        invitation.account_id = invite_message.producer_id
         invitation.invited_id = invite_message.account_id
         invitation.kind       = invite_message.invite_kind
       end
