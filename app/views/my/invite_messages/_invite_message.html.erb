@@ -17,10 +17,10 @@
       <%= link_to "К диалогу", my_dialog_path(invite_message.opponent_of(current_user.account)), class: "to_dialog dialog_#{invite_message.opponent_of(current_user.account).id}", remote: true %>
 
       <div>
-        <%= t "invite_message.#{invite_message.relation_at(current_user.account)}.#{invite_message.opponent_of(current_user.account).gender}.#{invite_message.invite_kind}" %> 
-        на 
-        <%= link_to invite_message.messageable,
-            invite_message.messageable.is_a?(Afisha) ? afisha_show_path(invite_message.messageable) : organization_path(invite_message.messageable) %>
+        <%= t "invite_message.#{invite_message.relation_at(current_user.account)}.#{invite_message.opponent_of(current_user.account).gender}.#{invite_message.messageable.kind}" %>
+        на
+        <%= link_to invite_message.messageable.inviteable,
+            invite_message.messageable.inviteable.is_a?(Afisha) ? afisha_show_path(invite_message.messageable.inviteable) : organization_path(invite_message.messageable.inviteable) %>
       </div>
 
       <div class='invite_message_actions'>

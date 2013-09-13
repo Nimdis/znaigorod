@@ -48,8 +48,8 @@
 
       <div class="invitations list">
         <ul class="inviter">
-          <% if @account.invitations.inviter.any? %>
-            <%= render @account.invitations.inviter %>
+          <% if @account.invitations.inviter.without_invited.any? %>
+            <%= render @account.invitations.inviter.without_invited %>
           <% else %>
             <li class="empty">Нет приглашений</li>
           <% end %>
@@ -67,8 +67,8 @@
 
       <div class="invitations list">
         <ul class="invited">
-          <% if @account.invitations.invited.any? %>
-            <%= render @account.invitations.invited %>
+          <% if @account.invitations.invited.without_invited.any? %>
+            <%= render @account.invitations.invited.without_invited %>
           <% else %>
             <li class="empty">Нет приглашений</li>
           <% end %>

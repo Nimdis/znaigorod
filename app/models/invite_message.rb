@@ -1,15 +1,19 @@
 # encoding: utf-8
 
 class InviteMessage < Message
-  attr_accessible :agreement, :account_id, :messageable_id, :messageable_type, :producer_id, :invite_kind, :producer_type, :state, :kind
+  attr_accessible :agreement, :messageable_id, :messageable_type, :invite_kind, :state, :kind
   enumerize :invite_kind, in: [:inviter, :invited], predicates: true
   enumerize :agreement, :in => [:agree, :disagree], :predicates => true
   before_update :process_message, :if => ->(m) { m.changes.keys.include?('agreement') }
 
+  has_many :notification_messages, :as => :messageable, :dependent => :destroy
+
+  delegate :account, :invited, :to => :messageable
+
   def relation_at(account_obj)
-    if account_obj.id == account_id
+    if account_obj.id == invited.id
       'inbox'
-    elsif account_obj.id == producer_id
+    elsif account_obj.id == account.id
       'sended'
     else
       'undefined'
@@ -18,16 +22,16 @@ class InviteMessage < Message
 
   def opponent_of(account_obj)
     if relation_at(account_obj) == 'inbox'
-      producer
-    elsif relation_at(account_obj) == 'sended'
       account
+    elsif relation_at(account_obj) == 'sended'
+      invited
     end
   end
 
 private
   def process_message
     self.state = :read
-    NotificationMessage.create :producer => account, :account => producer, :messageable => self, :kind => "#{self.agreement}d_invite"
+    notification_messages.create :producer => invited, :account => account, :kind => "#{self.agreement}d_invite"
   end
 end
 
