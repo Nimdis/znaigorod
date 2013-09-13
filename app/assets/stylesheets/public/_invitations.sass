@@ -1,4 +1,6 @@
 .invitations
+  font-size: 12px
+
   &.header
     line-height: 24px
     margin: 0 !important
@@ -28,5 +30,61 @@
       float: right
       margin: 0 7px 0 0
 
-.new_invitation
-  background: #e8e8e8
+  &.list
+    margin: 10px 0 0 0
+
+    ul
+      padding: 0 0 0 10px
+
+      li
+        &.empty
+          background: none
+
+        background: image_url('public/bullet.png') no-repeat left center
+        float: none
+        padding: 0 0 0 15px
+        width: auto
+
+        .description
+          color: #999999
+
+        .delete_invitation
+          color: #ff6501
+          font-size: 11px
+
+.invitation_form_dialog
+  .invite_form_wrapper
+    margin: 0 auto
+    width: 580px
+
+    .left
+      background: #e8e8e8
+      float: none
+      height: auto
+      padding-bottom: 10px
+      width: auto
+
+      .radio_buttons
+        border-bottom: 1px solid #ccc
+
+      div.check_boxes
+        margin: 0 0 10px 0
+
+        .checkbox
+          display: inline-block
+          width: 130px
+
+      .error
+        font-size: 8px
+        font-style: italic
+        color: #880000
+
+      textarea.text
+        width: 532px
+
+      .actions
+        margin: 5px 0 0 0
+        text-align: center
+
+        .button
+          +button_style
