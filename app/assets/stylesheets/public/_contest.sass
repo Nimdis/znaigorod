@@ -9,12 +9,15 @@
   .votes_wrapper
     float: none !important
 
+    .like_box
+      margin-top: -70px
+
     a
       border: none
-      color: #000
+      color: #333
       height: 18px
       line-height: 18px
-      padding: 0 0 0 5px
+      padding: 3px 0 3px 5px
 
       &:hover
         padding: 0 0 0 5px
@@ -45,14 +48,14 @@
       pointer-events: none
 
     .votes_counter:after
-      border-color: rgba(255, 152, 50, 0)
-      border-right-color: #ff9832
+      border-color: rgba(247, 17, 11, 0)
+      border-right-color: #ff811b
       border-width: 5px
       top: 50%
       margin-top: -5px
 
     .votes_counter:before
-      border-color: rgba(254, 101, 0, 0)
+      border-color: rgba(230, 80, 0, 0)
       border-right-color: #fe6500
       border-width: 6px
       top: 50%
@@ -60,24 +63,33 @@
 
     .user_like
       float: left
-      width: 83px
-      height: 20px
-
-      &:hover
-        +background-image(linear-gradient(#ccc, #fcfcfc))
-        cursor: pointer
-
-        a
-          &:hover
-            color: #fff
+      height: 18px
+      width: 82px
 
       &.liked
         +background-image(linear-gradient(#fff, #ff9933))
         +border-left-radius(2px)
+        border: 1px solid #ff9933
+        border-right: none
         color: #fff
 
       &.dont_liked
+        +background-image(linear-gradient(#fff, #cfcfcf))
         +border-left-radius(2px)
+        border: 1px solid #ccc
+        border-right: none
+
+      &.liked, &.dont_liked
+        &:hover
+          +background-image(linear-gradient(#ccc, #fff))
+          border: 1px solid #ccc
+          border-right: none
+          cursor: pointer
+
+          a
+            text-decoration: none
+            &:hover
+              text-decoration: none
 
       span
         display: none
