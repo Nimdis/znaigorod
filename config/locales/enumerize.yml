@@ -140,9 +140,31 @@ ru:
 
     invitation:
       gender:
-        all: Девушку или парня
+        all: Неважно
         male: Парня
         female: Девушку
+
+        form:
+          inviter:
+            all: Неважно
+            male: Парня
+            female: Девушку
+
+          invited:
+            all: Неважно
+            male: Парня
+            female: Девушки
+
+        custom:
+          inviter:
+            all: Парня или девушку
+            male: Парня
+            female: Девушку
+
+          invited:
+            all: От парня или девушки
+            male: От парня
+            female: От девушки
 
       kind:
         inviter: Пригласить
