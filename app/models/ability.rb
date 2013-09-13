@@ -24,7 +24,7 @@ class Ability
     end
 
     can :manage, InviteMessage do |invite_message|
-      user.persisted? && (invite_message.producer == user.account || invite_message.account == user.account)
+      user.persisted? && (invite_message.invited == user.account || invite_message.account == user.account)
     end
 
     case namespace

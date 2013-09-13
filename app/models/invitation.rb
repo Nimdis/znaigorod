@@ -6,9 +6,14 @@ class Invitation < ActiveRecord::Base
   attr_accessible :category, :category_list, :description, :kind, :gender
 
   belongs_to :account
+  belongs_to :invited, :class_name => 'Account'
   belongs_to :inviteable, :polymorphic => true
 
+  has_many :invite_messages, :as => :messageable, :dependent => :destroy
+
   validates_presence_of :kind
+
+  after_create :create_invite_message, :if => :invited_id?
 
   enumerize :gender, :in => [:all, :male, :female], :default => :all, :predicates => true
   enumerize :kind, :in => [:inviter, :invited], :scope => true
@@ -19,4 +24,11 @@ class Invitation < ActiveRecord::Base
 
   scope :inviter, -> { with_kind :inviter }
   scope :invited, -> { with_kind :invited }
+  scope :without_invited, -> { where :invited_id => nil }
+
+  private
+
+  def create_invite_message
+    invite_messages.create!
+  end
 end
