@@ -29,7 +29,7 @@ init_dialog = () ->
         $(event.target).html(jqXHR.responseText)
     ).dialog('open')
 
-  $('.works').on 'ajax:success', (evt, response, status, jqXHR) ->
+  $('.ajaxed_voteable').on 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target)
 
     if $('.social_signin_links', $(response)).length

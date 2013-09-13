@@ -5,7 +5,7 @@
     <%= @contest.description.as_html %>
   </div>
   <% if @works.any? %>
-    <div class='works'>
+    <div class='works ajaxed_voteable'>
       <h2>Участники</h2>
       <ul>
         <%= render :partial => 'list' %>

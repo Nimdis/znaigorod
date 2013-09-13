@@ -19,7 +19,7 @@
   <div class='description'>
     <%= @work.contest.description.as_html %>
   </div>
-  <div class='work'>
+  <div class='work ajaxed_voteable'>
     <%= link_to 'Все участники конкурса', contest_path(@work.contest), :class => :link_to_contest %>
     <%= content_tag :h2, @work.title if @work.title.present? %>
     <div class='image'>
