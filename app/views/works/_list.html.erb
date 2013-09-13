@@ -9,7 +9,7 @@
     </div>
     <div class='image'>
       <%= link_to contest_work_path(@contest, work) do %>
-        <%= image_tag(resized_image_url(work.image_url, 278, 210), :siza => '278x210', :alt => work.title) %>
+        <%= image_tag(resized_image_url(work.image_url, 278, 278), :siza => '278x278', :alt => work.title) %>
       <% end %>
     </div>
     <% contest_description = work.author_info
