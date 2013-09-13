@@ -28,9 +28,8 @@ init_dialog = () ->
         $(event.target).html(jqXHR.responseText)
     ).dialog('open')
 
-  links = $('.votes_wrapper .user_like a').not('.charged')
-  link = links.addClass('charged').on 'ajax:success', (evt, response, status, jqXHR) ->
-    target = $(evt.target).closest('.votes_wrapper')
+  $('.works').on 'ajax:success', (evt, response, status, jqXHR) ->
+    target = $(evt.target)
 
     if $('.social_signin_links', $(response)).length
       $('.cloud_wrapper', target.closest('.social_actions')).remove()
@@ -53,6 +52,8 @@ init_dialog = () ->
 
       return false
 
-    target.html(jqXHR.responseText)
-    init_auth()
-    init_votes()
+    if target.hasClass('change_vote')
+      target.closest('.votes_wrapper').html(jqXHR.responseText)
+
+    if target.hasClass('who_liked')
+      init_dialog()
