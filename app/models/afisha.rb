@@ -107,7 +107,7 @@ class Afisha < ActiveRecord::Base
 
     state :published do
       validates_presence_of :poster_url
-      validates_presence_of :showings, :unless => Proc.new { |afisha| afisha.movie? }
+      validates_presence_of :showings, :if => Proc.new { |afisha| !afisha.movie? && !afisha.affiche_schedule.present? }
     end
   end
 

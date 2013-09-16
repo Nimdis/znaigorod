@@ -35,8 +35,9 @@ class Manage::AfishasController < Manage::ApplicationController
 
   def fire_state_event
     fire_state_event! {
-      resource.fire_state_event params[:event] if resource.state_events.include?(params[:event].to_sym)
+      resource.fire_state_event(params[:event]) if resource.state_events.include?(params[:event].to_sym)
 
+      redirect_to manage_afisha_show_path(resource.id), :notice => resource.errors.full_messages and return unless resource.errors.messages.empty?
       redirect_to manage_afisha_show_path(resource) and return
     }
   end

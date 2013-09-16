@@ -20,7 +20,7 @@
       </span>
       <%= render :partial => 'state_actions' %>
     </div>
-
+    <%= content_tag :div, flash[:notice].join(', '), :class => 'error' if flash[:notice] %>
     <div>
       <span class="label">
         Билеты
