@@ -189,7 +189,7 @@ class Afisha < ActiveRecord::Base
 
     return tickets.pluck(:price).min if tickets.any?
 
-    showings.actual.pluck(:price_min).min || 0
+    showings.actual.pluck(:price_min).compact.min || 0
   end
   # <<<<<<<<<<<< Auction <<<<<<<<<<<
 
