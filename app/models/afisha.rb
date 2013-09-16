@@ -252,8 +252,8 @@ class Afisha < ActiveRecord::Base
     visits.find_by_user_id(user)
   end
 
-  def has_invitation_for?(user, kind)
-    invitations.send(kind).where(:account_id => user.account).any?
+  def has_invitation_for?(account, invited, kind)
+    invitations.send(kind).where(:account_id => account, :invited_id => invited).any?
   end
 
   def invitation_for(user, kind)

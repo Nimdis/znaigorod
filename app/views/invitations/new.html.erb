@@ -15,4 +15,36 @@
       </div>
     <% end %>
   </div>
+
+  <div class="right">
+    <div class='search_form'>
+      <%= form_tag accounts_search_path, :method => :get do %>
+        <%= hidden_field_tag :parent, "#{parent.class.name.underscore}_#{parent.id}" %>
+        <%= hidden_field_tag 'invitation[kind]', @invitation.kind %>
+        <%= text_field_tag :q, params[:q], :placeholder => 'Найти...' %>
+        <%= submit_tag 'Найти', :class => :submit %>
+      <% end %>
+    </div>
+
+    <ul class='filter'>
+      <li<%= " class='selected'".html_safe if params[:only_friends].blank? %>>
+        <%= link_to "Все пользователи (#{Account.count})",
+          accounts_search_path(:q => params[:q],
+          :acts_as_inviter => params[:acts_as_inviter],
+          :acts_as_invited => params[:acts_as_invited],
+          :parent => "#{parent.class.name.underscore}_#{parent.id}") %>
+      </li>
+
+      <li<%= " class='selected'".html_safe if params[:only_friends].present? %>>
+        <%= link_to "Мои друзья (#{current_user.account.friends.count})",
+          accounts_search_path(:only_friends => true,
+          :q => params[:q],
+          :acts_as_inviter => params[:acts_as_inviter],
+          :acts_as_invited => params[:acts_as_invited],
+          :parent => "#{parent.class.name.underscore}_#{parent.id}") %>
+      </li>
+    </ul>
+
+    <%= render :partial => 'accounts/list' %>
+  </div>
 </div>

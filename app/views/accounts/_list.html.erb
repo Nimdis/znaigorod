@@ -1,17 +1,25 @@
 <ul class='accounts_list'>
   <% @accounts.each do |account| %>
     <li>
-      <div class='avatar'>
-        <%= link_to account do %>
-          <%= image_tag(resized_image_url(account.avatar.url, 70, 70), :size => '70x70', :title => account, :alt => account) %>
+      <% if parent.has_invitation_for?(current_user.account, account, params[:invitation][:kind]) %>
+        уже
+      <% else %>
+        <%= simple_form_for [parent, parent.invitations.new] do |f| %>
+          <div class='avatar'>
+            <%= link_to account do %>
+              <%= image_tag(resized_image_url(account.avatar.url, 70, 70), :size => '70x70', :title => account, :alt => account) %>
+            <% end %>
+          </div>
+          <div class='details'>
+            <%= link_to(account, account, :class => :name) %>
+            <div class="wanted">
+              <%= f.input :kind, :as => :hidden, :input_html => { :value => params[:invitation][:kind] } %>
+              <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
+              <%= f.submit %>
+            </div>
+          </div>
         <% end %>
-      </div>
-      <div class='details'>
-        <%= link_to(account, account, :class => :name) %>
-        <div class="wanted">
-          <%= render partial: 'invites/link', locals: { account: account, acts_as: params[:acts_as_inviter] ? :inviter : :invited } %>
-        </div>
-      </div>
+      <% end %>
     </li>
   <% end %>
 </ul>
