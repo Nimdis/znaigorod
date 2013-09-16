@@ -170,6 +170,30 @@ class Account < ActiveRecord::Base
     dialogs = PrivateMessage.from(self).order('id DESC').map(&:account_id) + PrivateMessage.to(self).order('id DESC').map(&:producer_id)
     Account.where(id: dialogs.uniq)
   end
+
+  def has_invitation_for?(invitable, kind)
+    invitations.send(kind).where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name).any?
+  end
+
+  def invitation_for(user, kind)
+    invitations.send(kind).find_by_account_id(user.account)
+  end
+
+  def invites_somebody_on?(inviteable)
+    invitations.inviter.where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name).any?
+  end
+
+  def invites_account_on?(invited, inviteable)
+    invitations.inviter.where(:invited_id => invited, :inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name).any?
+  end
+
+  def waiting_for_invitation_from_somebody_on?(inviteable)
+    invitations.invited.where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name).any?
+  end
+
+  def waiting_for_invitation_from_account_on?(account, inviteable)
+    invitations.invited.where(:invited_id => account, :inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name).any?
+  end
 end
 
 # == Schema Information
