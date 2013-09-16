@@ -6,7 +6,7 @@
     .ticket_info
       +clearfix
       border-bottom: 1px dotted #cbcbcb
-      padding: 20px 20px 15px 20px
+      padding: 15px 20px
 
       .ticket_prices
         float: left
@@ -55,21 +55,23 @@
             font-weight: bold
 
     .ticket_payment_instruction
-      border-bottom: 1px dotted #cbcbcb
-      padding: 15px 20px
+      +clearfix
+      width: 570px
+      height: 120px
+      background: transparent image_url('public/ticket_payment_instruction.png') no-repeat center center
+      padding: 15px 0
+      margin: 0 auto
 
       li
-        color: #707070
-        line-height: 1.6
-        list-style: decimal
-        margin-left: 20px
-
-        .alert
-          color: #885050
-          font-weight: bold
+        width: 160px
+        float: left
+        font-size: 11px
+        line-height: 1.5
+        text-align: center
+        padding: 70px 15px 0 15px
 
     form
-      margin: 15px 20px 20px 20px
+      margin: 15px 20px
 
       abbr
         display: none
@@ -135,12 +137,8 @@
 
     .service_payment_wrapper
 
-      h1
-        font-size: 18px
-        margin: 15px 20px 5px 20px
-
       p
-        margin: 0 20px
+        margin: 15px 20px 0
 
       form
 

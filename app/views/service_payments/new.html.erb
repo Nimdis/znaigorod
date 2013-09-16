@@ -1,6 +1,4 @@
 <div class='service_payment_wrapper'>
-  <h1>Оплата услуг</h1>
-
   <p><%= 'Для оплаты размещения анонса мероприятия укажите в поле "Сумма платежа" оговоренную с менеджером сумму, в поле "Назначение платежа" название мероприятия.'.gilensize %></p>
   <%= simple_form_for @service_payment do |f| %>
     <%= f.input :amount, autofocus: true %>

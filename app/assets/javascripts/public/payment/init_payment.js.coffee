@@ -8,9 +8,11 @@
         url: link.attr('href')
         success: (data, textStatus, jqXHR) ->
           container = $('<div class="payment_form_wrapper" />').appendTo('body').hide().html(data)
+          title = 'Форма заказа'
+          title = 'Оплата услуг' if $('#service_payment_details', container).length
           container.dialog
             width: 640
-            title: 'Форма заказа'
+            title: title
             modal: true
             resizable: false
             open: ->
