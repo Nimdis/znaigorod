@@ -78,12 +78,17 @@
         margin-bottom: 5px
 
         select,
-        input
+        input,
+        textarea
           font-size: 12px
           font-family: Arial, Verdana, Tahoma, sans-serif
+          resize: none
+          outline: none
           border: 1px solid #bfbfbf
           background-color: #fff
           padding: 2px 3px
+          &:focus
+            background-color: #fffbef
 
         input
           width: 110px
@@ -127,3 +132,32 @@
               +text-shadow(none)
             &:active
               padding: 4px 15px 5px
+
+    .service_payment_wrapper
+
+      h1
+        font-size: 18px
+        margin: 15px 20px 5px 20px
+
+      p
+        margin: 0 20px
+
+      form
+
+        label
+          display: block
+          margin-bottom: 5px
+
+        abbr
+          color: #f60
+          display: inline
+
+        .input
+          input,
+          textarea
+            line-height: 1.5
+            margin: 0
+
+          textarea
+            width: 583px
+            height: 100px

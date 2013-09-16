@@ -30,6 +30,7 @@
     $('a.payment_link:first').click()
 
 @init_actions_handler = ->
+
   $('.payment_form_wrapper form input[type=submit]').attr('disabled', 'disabled').addClass('disabled')
 
   $('.payment_form_wrapper form #copy_payment_phone').inputmask 'mask',
@@ -57,6 +58,20 @@
       $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
       return false
     if $('.payment_form_wrapper #copy_payment_phone').inputmask 'isComplete'
+      $('input[type=submit]', $(this).closest('form')).removeAttr('disabled').removeClass('disabled')
+    else
+      $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
+    true
+
+  $('.payment_form_wrapper #service_payment_amount').keyup ->
+    if $(this).val() && $('.payment_form_wrapper #service_payment_details').val()
+      $('input[type=submit]', $(this).closest('form')).removeAttr('disabled').removeClass('disabled')
+    else
+      $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
+    true
+
+  $('.payment_form_wrapper #service_payment_details').keyup ->
+    if $(this).val() && $('.payment_form_wrapper #service_payment_amount').val()
       $('input[type=submit]', $(this).closest('form')).removeAttr('disabled').removeClass('disabled')
     else
       $('input[type=submit]', $(this).closest('form')).attr('disabled', 'disabled').addClass('disabled')
