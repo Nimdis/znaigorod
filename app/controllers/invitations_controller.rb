@@ -10,8 +10,16 @@ class InvitationsController < ApplicationController
 
   layout false
 
+  def new
+    new! {
+      @accounts = Account.search { paginate :page => 1, :per_page => 10 }.results
+    }
+  end
+
   def create
-    create! { render :partial => 'invitation', :locals => { :inviteable => parent, :kind => @invitation.kind } and return }
+    create! {
+      render :partial => 'invitation', :locals => { :inviteable => parent, :kind => @invitation.kind } and return
+    }
   end
 
   def destroy
