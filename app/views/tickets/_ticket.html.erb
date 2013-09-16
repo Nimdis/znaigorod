@@ -1,7 +1,7 @@
-<ol class='ticket_payment_instruction <%= @ticket.organization.slug %>'>
+<ol class='ticket_payment_instruction <%= @ticket.organization.slug if @ticket.organization.present? %>'>
   <li>Выбери количество и укажи номер сотового телефона</li>
   <li>Оплати наиболее удобным для тебя способом, мы пришлем SMS с кодами</li>
-  <% if %w[bolshoy-kontsertnyy-zal-bkz organnyy-kontsertnyy-zal].include?(@ticket.organization.slug) %>
+  <% if @ticket.organization.present? && %w[bolshoy-kontsertnyy-zal-bkz organnyy-kontsertnyy-zal].include?(@ticket.organization.slug) %>
     <li>Эти коды показать в кассе и получить билеты в день проведения</li>
   <% else %>
     <li>Эти коды и есть входные билеты, просто покажи это SMS на входе</li>
