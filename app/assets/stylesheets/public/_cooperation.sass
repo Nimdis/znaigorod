@@ -1,0 +1,63 @@
+.cooperation
+  font-size: 14px
+  margin: 0 10px 5px
+
+  h1
+    font-size: 22px
+    margin-bottom: 10px
+
+  h2
+    color: #f60
+    font-size: 22px
+    margin-bottom: 10px
+
+  p
+    margin-bottom: 10px
+
+  ol
+    margin-bottom: 5px
+
+    li
+      width: 100%
+      height: 60px
+      display: table
+      background-color: #e8e8e8
+      margin-bottom: 10px
+      +border-radius(30px)
+      &:before
+        float: left
+        display: block
+        width: 40px
+        height: 40px
+        font-size: 24px
+        font-weight: bold
+        color: #fff
+        content: '+'
+        text-align: center
+        background-color: #009bdb
+        +border-radius(30px)
+        padding: 10px
+
+      @for $i from 1 through 9
+        &:nth-child(#{$i})
+          &:before
+            content: '+#{$i}'
+
+      p
+        width: 100%
+        display: table-cell
+        vertical-align: middle
+        margin-bottom: 10px
+        padding-left: 15px
+
+  .service_payment_link
+    a
+      +inline-block
+
+    .payment_link
+      +button_style
+      margin-right: 15px
+
+    .icon_pdf_small
+      background: transparent image_url('public/icon_pdf_small.png') no-repeat left center
+      padding-left: 21px
