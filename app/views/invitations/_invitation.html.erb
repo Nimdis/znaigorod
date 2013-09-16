@@ -1,7 +1,13 @@
-<li <%= 'class="selected"'.html_safe if inviteable.invitation_for(current_user, kind) %>>
-  <% if inviteable.invitation_for(current_user, kind) %>
-    <%= link_to t("enumerize.invitation.kind.#{kind}"), [inviteable, inviteable.invitation_for(current_user, kind)], :method => :delete, :remote => true, :class => 'acts_as_inviter' %>
-  <% else %>
-    <%= link_to t("enumerize.invitation.kind.#{kind}"), polymorphic_path([:new, inviteable, :invitation], 'invitation[kind]' => kind), :remote => true, :class => 'acts_as_inviter' %>
-  <% end %>
-</li>
+<% if current_user.account.has_invitation_for?(inviteable, kind) %>
+  <li class="selected">
+    <% if current_user.has_invitation_without_invited_for?(inviteable) %>
+      <%= link_to t("enumerize.invitation.kind.#{kind}"), [:edit, inviteable, inviteable.invitation_for(current_user, kind)], :remote => true %>
+    <% else %>
+      <%= link_to t("enumerize.invitation.kind.#{kind}"), polymorphic_path([:new, inviteable, :invitation], 'invitation[kind]' => kind), :remote => true %>
+    <% end %>
+  </li>
+<% else %>
+  <li>
+    <%= link_to t("enumerize.invitation.kind.#{kind}"), polymorphic_path([:new, inviteable, :invitation], 'invitation[kind]' => kind), :remote => true %>
+  </li>
+<% end %>
