@@ -32,16 +32,17 @@ SimpleNavigation::Configuration.run do |navigation|
 
   # Define the primary navigation
   navigation.items do |primary|
-    primary.item :afisha, 'Афиша', root_path, highlights_on: lambda { params[:controller] == 'afishas' }
+    primary.item :afisha, 'Афиша', root_path, highlights_on: -> { params[:controller] == 'afishas' }
     primary.item :organizations, 'Заведения', organizations_path,
       highlights_on: -> { %w[organizations suborganizations saunas].include? controller.class.name.underscore.split("_").first }
     primary.item :posts, 'Обзоры', posts_path, highlights_on: -> { params[:controller] == 'posts' }
     primary.item :accounts, 'Люди', accounts_path, highlights_on: -> { params[:controller] == 'accounts' }
     primary.item :more, 'Ещё &#9662;', '#', :link => { :class => :disabled },
       highlights_on: -> { %w[contests webcams cooperation].include?(params[:controller]) } do |more|
+      more.item :tickets, 'Распродажа билетов', afisha_index_path(:has_tickets => true, :period => :all), highlights_on: -> { params[:controller] == nil }
       more.item :contests, 'Конкурсы', contests_path, highlights_on: -> { params[:controller] == 'contests' }
       more.item :webcams, 'Веб-камеры', webcams_path, highlights_on: -> { params[:controller] == 'webcams' }
-      more.item :cooperation, 'Размещение информации', cooperation_path, highlights_on: -> { params[:controller] == 'cooperation' }
+      more.item :cooperation, 'Услуги и цены ЗнайГород', cooperation_path, highlights_on: -> { params[:controller] == 'cooperation' }
     end
 
     # Add an item to the primary navigation. The following params apply:
