@@ -29,6 +29,7 @@
   <%= render :partial => 'commons/public_footer' %>
   <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
   <%= yield :yandex_map_scripts %>
+  <%= render :partial => 'commons/public_reformal' %>
 <% end %>
 
 <%= render :template => 'layouts/application' %>
