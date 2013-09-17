@@ -25,7 +25,7 @@ Znaigorod::Application.routes.draw do
     resources :comments, :only => [:new, :show, :create]
     resources :visits, :only => [:create, :show, :destroy]
 
-    resources :invitations, :only => [:new, :create, :destroy]
+    resources :invitations, :only => [:new, :create, :destroy, :show]
 
     get 'liked'        => 'votes#liked',         :as => :liked
     get 'photogallery' => 'afisha#photogallery', :as => :photogallery
@@ -70,7 +70,7 @@ Znaigorod::Application.routes.draw do
 
     resources :comments, :only => [:new, :create, :show]
     resources :visits
-    resources :invitations, :only => [:new, :create, :destroy]
+    resources :invitations, :only => [:new, :create, :destroy, :show]
 
     resources :user_ratings, :only => [:new, :create, :edit, :update, :show]
   end

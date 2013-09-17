@@ -139,7 +139,7 @@
         draggable: false
         modal: true
         resizable: false
-        title: $('h2', container).text()
+        title: target.data('title')
         width: 780
         create: (event, ui) ->
           $('body').css
