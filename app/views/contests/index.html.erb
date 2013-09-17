@@ -1,5 +1,8 @@
-<h1>Наши конкурсы</h1>
+<% content_for :page_title, 'Конкурсы Томска' %>
+
 <div class='contest'>
+  <h1>Наши конкурсы</h1>
+
   <ul class='contests_list'>
     <% @contests.each do |contest| %>
       <li><%= link_to contest.title, contest %></li>
