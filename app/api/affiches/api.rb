@@ -2,14 +2,14 @@
 
 module Affiches
   module Entities
-    class Affiche < Grape::Entity
-      expose (:title)       { |model, options| model.title.gsub(/\u00AD+/,'') }
-      expose (:date)        { |model, options| model.human_when.gsub(/\u00AD+/,'') }
-      expose (:price)       { |model, options| model.human_price.gsub(/\u00AD+/,'') }
-      expose (:place)       { |model, options| model.place.gsub(/\u00AD+/,'') }
-      expose (:kind)        { |model, options| model.human_kind.gsub(/\u00AD+/,'') }
-      expose (:url)         { |model, options| model.kind_affiche_url :host => Settings['app.host']}
-      expose (:poster_url)  { |model, options| model.resized_poster_url(290, 390, true) }
+    class Afisha < Grape::Entity
+      expose (:title)       { |model, options| AfishaDecorator.new(model).title.gsub(/\u00AD+/,'') }
+      expose (:date)        { |model, options| AfishaDecorator.new(model).human_when.gsub(/\u00AD+/,'') }
+      expose (:price)       { |model, options| AfishaDecorator.new(model).human_price.gsub(/\u00AD+/,'') }
+      expose (:place)       { |model, options| AfishaDecorator.new(model).place.gsub(/\u00AD+/,'') }
+      expose (:kind)        { |model, options| AfishaDecorator.new(model).kind.map(&:text).join(', ').gsub(/\u00AD+/,'') }
+      expose (:url)         { |model, options| "#{Settings['app.host']}/afisha/#{model.slug}" }
+      expose (:poster_url)  { |model, options| AfishaDecorator.new(model).resized_image_url(model.poster_image_url, 290, 390) }
     end
   end
 
@@ -19,7 +19,7 @@ module Affiches
 
     resource :popular do
       get do
-        present AfficheCollection.new("kind"=>"affiches", "period"=>"all", "list_settings" => '{ "presentation": "3dtour" }').affiches, :with => Entities::Affiche
+        present HasSearcher.searcher(:showings).order_by_rating.actual.results.map(&:afisha).first(6), :with => Entities::Afisha
       end
     end
   end
