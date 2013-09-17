@@ -44,7 +44,7 @@
           last_item = first_item.siblings().last()
           last_item_top = last_item.position().top
           page += 1
-          busy = false unless data.length
+          busy = false unless data.trim().isBlank()
           init_photogallery() if $('.content_wrapper .was_in_city_photos li').length && data.length
           init_payment() if $('.content_wrapper .tickets_list li').length && data.length
           init_sms_claims() if $('.content_wrapper .sms_claims li').length && data.length
