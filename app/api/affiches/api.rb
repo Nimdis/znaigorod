@@ -8,7 +8,7 @@ module Affiches
       expose (:price)       { |model, options| AfishaDecorator.new(model).human_price.gsub(/\u00AD+/,'') }
       expose (:place)       { |model, options| AfishaDecorator.new(model).place.gsub(/\u00AD+/,'') }
       expose (:kind)        { |model, options| AfishaDecorator.new(model).kind.map(&:text).join(', ').gsub(/\u00AD+/,'') }
-      expose (:url)         { |model, options| "#{Settings['app.host']}/afisha/#{model.slug}" }
+      expose (:url)         { |model, options| "#{Settings['app.url']}/afisha/#{model.slug}" }
       expose (:poster_url)  { |model, options| AfishaDecorator.new(model).resized_image_url(model.poster_image_url, 290, 390) }
     end
   end
