@@ -25,6 +25,14 @@ ru:
         invited: Запрос отправлен
         inviter: Приглашена
 
+  self_invitation:
+    inviter:
+      afisha: Приглашаю посетить
+      organization: Приглашаю посетить
+    invited:
+      afisha: Жду приглашения на
+      organization: Жду приглашения в
+
   invitation:
     inviter:
       afisha: Приглашаю тебя посетить
