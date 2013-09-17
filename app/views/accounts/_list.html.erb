@@ -1,25 +1,32 @@
 <ul class='accounts_list'>
   <% @accounts.each do |account| %>
     <li>
-      <% if parent.has_invitation_for?(current_user.account, account, params[:invitation][:kind]) %>
-        уже
-      <% else %>
-        <%= simple_form_for [parent, parent.invitations.new] do |f| %>
-          <div class='avatar'>
-            <%= link_to account do %>
-              <%= image_tag(resized_image_url(account.avatar.url, 70, 70), :size => '70x70', :title => account, :alt => account) %>
+      <div class='avatar'>
+        <%= link_to account do %>
+          <%= image_tag(resized_image_url(account.avatar.url, 70, 70), :size => '70x70', :title => account, :alt => account) %>
+        <% end %>
+      </div>
+
+      <div class='details'>
+        <%= link_to(account, account, :class => :name) %>
+        <% if current_user.account.invites?(parent, account, kind) %>
+          <div class="wanted">
+            <span class="sended">
+              <%= I18n.t("invite.sended.#{account.gender}.#{kind}") %>
+            </span>
+          </div>
+        <% else %>
+
+          <div class="wanted">
+            <%= simple_form_for [parent, parent.invitations.new] do |f| %>
+              <%= f.input :kind, :as => :hidden, :input_html => { :value => kind } %>
+              <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
+
+              <%= f.submit t("enumerize.invitation.kind.#{kind}"), :class => 'submit_dialog' %>
             <% end %>
           </div>
-          <div class='details'>
-            <%= link_to(account, account, :class => :name) %>
-            <div class="wanted">
-              <%= f.input :kind, :as => :hidden, :input_html => { :value => params[:invitation][:kind] } %>
-              <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
-              <%= f.submit %>
-            </div>
-          </div>
         <% end %>
-      <% end %>
+      </div>
     </li>
   <% end %>
 </ul>

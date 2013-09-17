@@ -3,7 +3,7 @@ class InvitationsController < ApplicationController
 
   load_and_authorize_resource
 
-  actions :new, :create, :destroy
+  actions :new, :create, :destroy, :show
 
   belongs_to :afisha, :optional => true
   belongs_to :organization, :optional => true
@@ -19,6 +19,14 @@ class InvitationsController < ApplicationController
   def create
     create! {
       render :partial => 'invitation', :locals => { :inviteable => parent, :kind => @invitation.kind } and return
+    }
+  end
+
+  def show
+    show! {
+      @accounts = Account.search { paginate :page => 1, :per_page => 10 }.results
+
+      render :new and return
     }
   end
 

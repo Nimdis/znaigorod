@@ -23,10 +23,7 @@ class AccountsSearchController < ApplicationController
       }.results
     end
 
-    acts_as = :invited if params[:acts_as_invited]
-    acts_as = :inviter if params[:acts_as_inviter]
-
-    render partial: 'accounts/list', :locals => { :acts_as => acts_as } and return
+    render partial: 'accounts/list', :locals => { :kind => params[:kind] } and return
   end
 
   def parent

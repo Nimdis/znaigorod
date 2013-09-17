@@ -36,8 +36,6 @@
         list = $('.accounts_list', this)
         $('li .details form', list).live 'submit', ->
           invite_form = $(this)
-          console.log target.hasClass('acts_as_inviter')
-          console.log target.hasClass('acts_as_invited')
           $.ajax
             type: 'POST'
             url: invite_form.attr('action')
@@ -141,7 +139,7 @@
         draggable: false
         modal: true
         resizable: false
-        title: $('h2', container).text()
+        title: target.data('title')
         width: 780
         create: (event, ui) ->
           $('body').css

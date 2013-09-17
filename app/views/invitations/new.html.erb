@@ -30,8 +30,7 @@
       <li<%= " class='selected'".html_safe if params[:only_friends].blank? %>>
         <%= link_to "Все пользователи (#{Account.count})",
           accounts_search_path(:q => params[:q],
-          :acts_as_inviter => params[:acts_as_inviter],
-          :acts_as_invited => params[:acts_as_invited],
+          :kind => @invitation.kind,
           :parent => "#{parent.class.name.underscore}_#{parent.id}") %>
       </li>
 
@@ -39,12 +38,11 @@
         <%= link_to "Мои друзья (#{current_user.account.friends.count})",
           accounts_search_path(:only_friends => true,
           :q => params[:q],
-          :acts_as_inviter => params[:acts_as_inviter],
-          :acts_as_invited => params[:acts_as_invited],
+          :kind => @invitation.kind,
           :parent => "#{parent.class.name.underscore}_#{parent.id}") %>
       </li>
     </ul>
 
-    <%= render :partial => 'accounts/list' %>
+    <%= render :partial => 'accounts/list', :locals => { :kind => @invitation.kind } %>
   </div>
 </div>
