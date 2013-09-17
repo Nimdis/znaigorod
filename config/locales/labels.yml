@@ -171,12 +171,6 @@ ru:
     many:  "%{count} комментариев"
     other: "%{count} комментария"
 
-  account_events:
-    one:   "%{count} афишу"
-    few:   "%{count} афиши"
-    many:  "%{count} афиш"
-    other: "%{count} афиш"
-
   draft:
     one:   "Черновики (%{count})"
     few:   "Черновики (%{count})"

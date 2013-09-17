@@ -28,7 +28,7 @@
   <div class="right">
     <% if @visits.any? %>
       <div class="visits header">
-        Хочет посетить/посетил
+        <%= t "account.wants_to_visit.#{@account.gender}" %>
       </div>
       <div class="visits list">
         <%= render 'accounts/visits' %>
@@ -46,7 +46,9 @@
 
     <% if @events.published.any? %>
       <div class="events header">
-        <%= "#{@account.first_name}" "#{@account.male? ? ' добавил ' : ' добавила '}" "#{t('account_events', count: @account.afisha.published.count)}" %>
+        <%= @account.first_name %>
+        <%= t "account.add_afisha.#{@account.gender}" %>
+        <%= t 'account.events', count: @account.afisha.published.count %>
       </div>
       <div class="events list">
         <%= render partial: 'events/account_events', locals: { collection: @events.published, state: :published } %>

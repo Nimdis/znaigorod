@@ -28,7 +28,7 @@
 
     <% if @visits.any? %>
       <div class="visits header">
-        Хочу посетить/посещал
+        <%= t "account.want_to_visit.#{@account.gender}" %>
       </div>
       <div class="visits list">
         <%= render 'accounts/visits' %>

@@ -1,0 +1,22 @@
+ru:
+  account:
+    wants_to_visit:
+      undefined: Хочет посетить/посетил
+      male: Хочет посетить/посетил
+      female: Хочет посетить/посетила
+
+    want_to_visit:
+      undefined: Хочу посетить/посещал
+      male: Хочу посетить/посещал
+      female: Хочу посетить/посещала
+
+    add_afisha:
+      undefined: добавил
+      male: добавил
+      female: добавила
+
+    events:
+      one:   "%{count} афишу"
+      few:   "%{count} афиши"
+      many:  "%{count} афиш"
+      other: "%{count} афиш"
