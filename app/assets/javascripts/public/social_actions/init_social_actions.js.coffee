@@ -29,10 +29,8 @@
 
       $.fn.initialize_invite = () ->
         list = $('.accounts_list', this)
-        $('li .details form', list).live 'submit', ->
+        $('li .details form', list).unbind('submit').submit ->
           invite_form = $(this)
-          console.log target.hasClass('acts_as_inviter')
-          console.log target.hasClass('acts_as_invited')
           $.ajax
             type: 'POST'
             url: invite_form.attr('action')
