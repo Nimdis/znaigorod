@@ -16,7 +16,9 @@
   <div class='filters organization'>
     <div class='by_categories'>
       <ul>
+        <% more_is_selected = true %>
         <% @presenter.categories_links.take(8).each do |category_link| %>
+          <% more_is_selected = false if category_link[:selected] %>
           <li class='<%= category_link[:klass] %><%= ' selected' if category_link[:selected] %>'>
             <%= link_to send(category_link[:url], category_link[:parameters]) do %>
               <%= content_tag :span, category_link[:title], class: :name %>
@@ -25,7 +27,7 @@
           </li>
         <% end %>
         <% if @presenter.categories_links.count > 9 %>
-          <li class='more_link'>
+          <li class='more_link<%= ' selected' if more_is_selected %>'>
             <a href='#'>&darr; Ещё заведения</a>
           </li>
         <% end %>

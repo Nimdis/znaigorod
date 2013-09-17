@@ -2,22 +2,22 @@ $main_menu_margin_top: 50px
 
 .header_wrapper
   .main_menu
-    +clearfix
     width: 75%
+    height: 77px
     margin: 0 auto
 
-    ul
+    > ul
       margin-top: $main_menu_margin_top
       float: left
-      +clearfix
       width: 80%
 
-      li
+      > li
         background-color: #fff
         float: left
+        width: 23%
         width: percentage(1/4)
 
-        a
+        > a
           color: #000
           display: block
           font-size: 14px
@@ -35,12 +35,34 @@ $main_menu_margin_top: 50px
           &:active
             padding: 4px 10px 2px
 
-        &:last-child a
-          margin-right: 4px
-
-        &.selected a
+        &.selected > a
           color: #fff
           background-color: #f60
+
+        &:nth-child(5)
+          width: 8%
+          position: relative
+
+          > a
+            background-color: #fff
+            margin-right: 2px
+            padding: 3px
+
+          ul
+            display: none
+            position: absolute
+            background-color: #fff
+            z-index: 1
+
+            li
+              white-space: nowrap
+
+          &:hover ul
+            display: block
+
+          &.selected > a
+            color: #f60
+            background-color: #fff
 
     .search_form
       float: left

@@ -1,16 +1,28 @@
-@init_more_main_menu = () ->
-  link = $('.filters .by_categories .more_link')
+@init_more_categories_menu = () ->
+  link = $('.filters .by_categories .more_link a')
   block = $('.filters_wrapper .more')
 
-  link.addClass('selected') if $('.selected', block).length
-
   block.css
-    left: link.position().left - link.outerWidth(true, true) + 15
-    top: link.position().top + link.outerHeight() - 20
+    left: link.position().left + link.outerWidth(true, true) - block.outerWidth(true, true)
+    top: link.position().top + link.outerHeight()
 
   link.click ->
-    block.toggle()
-    block.addClass('need_close_by_click')
     false
+
+  link.mouseenter ->
+    block.show()
+    true
+
+  link.mouseleave ->
+    block.hide()
+    true
+
+  block.mouseenter ->
+    block.show()
+    true
+
+  block.mouseleave ->
+    block.hide()
+    true
 
   true
