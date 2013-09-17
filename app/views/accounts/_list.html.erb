@@ -22,7 +22,12 @@
               <%= f.input :kind, :as => :hidden, :input_html => { :value => kind } %>
               <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
 
-              <%= f.submit t("enumerize.invitation.kind.#{kind}"), :class => 'submit_dialog' %>
+              <%= f.submit t("enumerize.invitation.kind.#{kind}"),
+                  :class => 'submit_dialog',
+                  :onClick => 'share_on_click(this);',
+                  'data-owner_id' => account.users.first.try(:vk_uid),
+                  'data-message' => "#{t("invitation.#{kind}.#{parent.class.name.underscore}")} \"#{parent}\"",
+                  'data-attachments' => "#{parent.is_a?(Afisha) ? afisha_show_url(parent) : organization_url(parent)}" %> 
             <% end %>
           </div>
         <% end %>
