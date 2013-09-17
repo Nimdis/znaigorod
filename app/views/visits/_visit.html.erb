@@ -2,6 +2,14 @@
   <% if visitable.has_visit_for?(current_user) %>
     <%= link_to 'Я пойду', [visitable, visitable.visit_for(current_user)], :method => :delete, :remote => true, :class => 'change_visit' %>
   <% else %>
-    <%= link_to 'Я пойду', [visitable, :visits], :method => :post, :remote => true, :class => 'change_visit' %>
+    <%= link_to 'Я пойду',
+                      [visitable, :visits],
+                      :method => :post,
+                      :remote => true,
+                      :class => 'share_to_vk change_visit',
+                      :onClick => 'share_on_click(this);',
+                      'data-owner_id' => current_user.try(:vk_uid),
+                      'data-message' => "Собираюсь посетить \"#{visitable}\"",
+                      'data-attachments' => "#{visitable.is_a?(Afisha) ? afisha_show_url(visitable) : organization_url(visitable)}" %> 
   <% end %>
 </li>
