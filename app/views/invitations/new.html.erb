@@ -25,6 +25,12 @@
             'data-additinal_message' => '.additional_message' %>
       </div>
     <% end %>
+
+    <div class="remove_invitation">
+      <% if @invitation.persisted? %>
+        <%= link_to 'Удалить', [parent, @invitation], :method => :delete, :remote => true %>
+      <% end %>
+    </div>
   </div>
 
   <div class="right">
