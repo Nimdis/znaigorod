@@ -1,15 +1,6 @@
 <h1>Постер</h1>
 
 <% if resource.poster_image_url? %>
-  <%= simple_form_for resource, as: :afisha, url: manage_afisha_show_path(resource.id) do |f| %>
-    <%= hidden_field_tag :crop, true %>
-    <%= f.input :poster_image, label: 'Выберите изображение', required: true, class: :button %>
-    <%= f.error :poster_image_content_type %>
-    <div class='submit'>
-      <%= link_to 'Отмена', manage_afisha_show_path(resource) %>
-    </div>
-  <% end %>
-
   <% crop_opt = resource.poster_url ? resource.poster_url.match(/(?<=\/region\/)\w+\/\w+\/\w+\/\w+/).to_s.split('/').map{|o| (o.to_i/resource.resize_factor).round} : [] %>
   <% crop_width, crop_height, crop_x, crop_y = crop_opt.any? ? crop_opt : [resource.poster_image_resized_dimensions[:width] / resource.resize_factor, resource.poster_image_resized_dimensions[:height] , 0, 0] %>
 

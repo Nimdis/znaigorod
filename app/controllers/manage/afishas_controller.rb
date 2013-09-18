@@ -47,7 +47,7 @@ class Manage::AfishasController < Manage::ApplicationController
       resource.poster_url = nil
       resource.poster_image.destroy
       resource.poster_image_url = nil
-      resource.save
+      resource.save(:validate => false)
       redirect_to poster_manage_afisha_path(resource) and return
     }
   end

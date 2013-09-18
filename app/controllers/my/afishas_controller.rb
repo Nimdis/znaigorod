@@ -65,7 +65,7 @@ class My::AfishasController < My::ApplicationController
     @afisha.poster_url = nil
     @afisha.poster_image.destroy
     @afisha.poster_image_url = nil
-    @afisha.save
+    @afisha.save(:validate => false)
     redirect_to edit_step_my_afisha_path(@afisha.id, :step => :second)
   end
 
