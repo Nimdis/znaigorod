@@ -24,7 +24,7 @@ class Organization < ActiveRecord::Base
 
   has_many :activities, :dependent => :destroy
   has_many :contacts,   :dependent => :destroy
-  has_many :comments, :as => :commentable, :dependent => :destroy
+  has_many :comments, :dependent => :destroy, :as => :commentable
   has_many :slave_organizations, :class_name => 'Organization', :foreign_key => 'primary_organization_id'
 
   has_many :gallery_images, :as => :attachable, :dependent => :destroy
@@ -32,6 +32,7 @@ class Organization < ActiveRecord::Base
 
   has_many :page_visits, :as => :page_visitable, :dependent => :destroy
   has_many :invitations, :as => :inviteable, :dependent => :destroy
+  has_many :visits, :dependent => :destroy, :as => :visitable
 
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :non_cooperation], default: :fresh, predicates: true
@@ -185,17 +186,22 @@ class Organization < ActiveRecord::Base
     self.votes.liked.count
   end
 
-  # TODO: выпилить этот метод
-  def visit_for_user(user)
-    self.visits.find_by_user_id(user.id)
-  end
-
   def has_visit_for?(user)
     visits.where(:user_id => user).any?
   end
 
   def visit_for(user)
     visits.find_by_user_id(user)
+  end
+
+  def invitations_and_visits_grouped_by_account
+    {}.tap do |hash|
+      visits.each do |visit|
+        hash[visit.user.account] = {}
+        hash[visit.user.account][:visit] = visit
+        hash[visit.user.account][:invitations] = visit.user.account.invitations.where(:inviteable_type => self.class.name, :inviteable_id => id)
+      end
+    end
   end
 
   def create_page_visit(session, user_agent, user)

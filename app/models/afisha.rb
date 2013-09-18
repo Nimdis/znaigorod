@@ -239,11 +239,6 @@ class Afisha < ActiveRecord::Base
     self.class.name.underscore
   end
 
-  # TODO: выпилить этот метод
-  def visit_for_user(user)
-    self.visits.find_by_user_id(user.id)
-  end
-
   def has_visit_for?(user)
     visits.where(:user_id => user).any?
   end
