@@ -2,9 +2,9 @@
 
 class AfishaObserver < ActiveRecord::Observer
   def after_approve(afisha, transition)
-    MyMailer.delay.mail_new_published_afisha(afisha) unless afisha.user.is_admin? || afisha.user.email.blank?
+    MyMailer.delay(:queue => 'mailer').mail_new_published_afisha(afisha) unless afisha.user.is_admin? || afisha.user.email.blank?
     if afisha.user.present? && !afisha.user.is_admin?
-      NotificationMessage.delay.create(
+      NotificationMessage.delay(:queue => 'critical').create(
         account: afisha.user.account,
         kind: :afisha_published,
         messageable: afisha)
@@ -13,12 +13,12 @@ class AfishaObserver < ActiveRecord::Observer
   end
 
   def after_pending(afisha, transition)
-    MyMailer.delay.mail_new_pending_afisha(afisha) unless afisha.user.is_admin?
+    MyMailer.delay(:queue => 'mailer').mail_new_pending_afisha(afisha) unless afisha.user.is_admin?
   end
 
   def after_send_to_author(afisha, transition)
     if afisha.user.present?
-      NotificationMessage.delay.create(
+      NotificationMessage.delay(:queue => 'mailer').create(
         account: afisha.user.account,
         kind: :afisha_returned,
         messageable: afisha) unless afisha.user.is_admin?
@@ -28,7 +28,7 @@ class AfishaObserver < ActiveRecord::Observer
   def before_save(afisha)
     if afisha.published? && afisha.change_versionable?
       afisha.save_version
-      MyMailer.delay.send_afisha_diff(afisha.versions.last) if afisha.versions.last.present?
+      MyMailer.delay(:queue => 'mailer').send_afisha_diff(afisha.versions.last) if afisha.versions.last.present?
     end
   end
 

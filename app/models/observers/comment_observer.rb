@@ -4,7 +4,7 @@ class CommentObserver < ActiveRecord::Observer
   def after_create(comment)
     # уведомление об ответе на комментарий
     if comment.parent.present? && comment.user != comment.parent.user
-      NotificationMessage.delay.create(
+      NotificationMessage.delay(:queue => 'critical').create(
         account: comment.parent.user.account,
         producer: comment.user.account,
         body: comment.body,
@@ -13,7 +13,7 @@ class CommentObserver < ActiveRecord::Observer
     end
     # уведомление автору афиши о комментариях
     if comment.commentable.is_a?(Afisha) && comment.commentable.user && comment.commentable.user != comment.user
-      NotificationMessage.delay.create(
+      NotificationMessage.delay(:queue => 'critical').create(
         account: comment.commentable.user.account,
         producer: comment.user.account,
         body: comment.body,
