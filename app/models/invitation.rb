@@ -26,6 +26,10 @@ class Invitation < ActiveRecord::Base
   scope :invited, -> { with_kind :invited }
   scope :without_invited, -> { where :invited_id => nil }
 
+  def opposite_kind
+    (self.class.kind.values - [kind]).join
+  end
+
   private
 
   def create_invite_message
