@@ -133,6 +133,17 @@ class Account < ActiveRecord::Base
     User.find_by_uid(uid).account
   end
 
+  def link_to_social
+    link = ''
+    auth = users.first.auth_raw_info
+    return link if auth.blank? || auth.is_a?(String)
+    ["Facebook", "Mailru", "Odnoklassniki", "Twitter", "Vkontakte"].each do |provider|
+      link = auth.info.urls.send(provider) if auth.info.urls.respond_to?(provider)
+    end
+
+    link
+  end
+
   def update_rating
     update_attribute(:rating,
                      0.5*payments.approved.where(:type=>'CopyPayment').map(&:copies).flatten.count +

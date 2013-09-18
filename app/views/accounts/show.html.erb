@@ -4,6 +4,11 @@
       <%= image_tag(resized_image_url(@account.avatar.url, 200, 200), size: '200x200', title: @account.title, alt: @account.title) %>
     </div>
     <h1><%= @account.title %></h1>
+    <% if current_user && @account.link_to_social.present? %>
+      <div class='link_to_social'>
+        <%= link_to('профиль в социальной сети', @account.link_to_social, :rel => 'nofollow', :target => '_blank') %>
+      </div>
+    <% end %>
 
     <div class="social_actions">
       <% if current_user.nil? || (current_user.account != @account.model) %>
