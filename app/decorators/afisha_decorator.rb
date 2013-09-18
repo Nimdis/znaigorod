@@ -23,7 +23,11 @@ class AfishaDecorator < ApplicationDecorator
 
   def poster_with_link(width, height)
     h.link_to h.afisha_show_path(afisha) do
-      h.image_tag(h.resized_image_url(afisha.poster_url, width, height, { crop: '!', orientation: 'n' }), size: "#{width}x#{height}", alt: afisha.title)
+      if afisha.poster_url.present?
+        h.image_tag(h.resized_image_url(afisha.poster_url, width, height, { crop: '!', orientation: 'n' }), size: "#{width}x#{height}", alt: afisha.title)
+      else
+        h.image_tag('public/stub_poster.png', size: '178x240', alt: :poster)
+      end
     end
   end
 
