@@ -132,6 +132,7 @@ HasSearcher.create_searcher :similar_afisha do
 
   scope do
     with(:last_showing_time).greater_than HasSearcher.cacheable_now
+    with(:state, :published)
   end
 
   scope :with_images do
