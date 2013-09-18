@@ -80,7 +80,7 @@ GEM
     auto_html (1.6.0)
       redcarpet (~> 2.0)
       rinku (~> 1.5.0)
-    backports (2.6.5)
+    backports (3.3.4)
     bcrypt-ruby (3.0.1)
     brakeman (2.1.0)
       erubis (~> 2.6)
@@ -138,6 +138,7 @@ GEM
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.0)
     default_value_for (2.0.3)
+    descendants_tracker (0.0.1)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -161,13 +162,13 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fabrication (2.5.0)
-    faraday (0.8.4)
-      multipart-post (~> 1.1)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
-    faraday_middleware-parse_oj (0.1)
+    faraday_middleware-parse_oj (0.2.1)
       faraday_middleware (~> 0.8)
-      oj (~> 1.2)
+      oj (~> 2.0)
     fastercsv (1.5.5)
     fastimage (1.5.0)
     fattr (2.2.1)
@@ -177,21 +178,25 @@ GEM
     friendly_id (4.0.9)
     fssm (0.2.10)
     gilenson (1.2.2)
-    grape (0.2.2)
+    grape (0.6.0)
       activesupport
-      hashie (~> 1.2)
+      builder
+      hashie (>= 1.2.0)
       multi_json (>= 1.3.2)
-      multi_xml
-      rack
+      multi_xml (>= 0.5.2)
+      rack (>= 1.3.0)
       rack-accept
       rack-mount
       virtus
+    grape-entity (0.3.0)
+      activesupport
+      multi_json (>= 1.3.2)
     haml (4.0.3)
       tilt
     has_scope (0.5.1)
     has_searcher (0.0.97)
       rails (~> 3.2.3)
-    hashie (1.2.0)
+    hashie (2.0.5)
     highline (1.6.19)
     hike (1.2.3)
     hirb (0.7.0)
@@ -212,8 +217,8 @@ GEM
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
     json (1.8.0)
-    jwt (0.1.5)
-      multi_json (>= 1.0)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -233,14 +238,14 @@ GEM
     mainsms_api (0.0.2)
       active_attr (~> 0.7)
       activesupport (~> 3.1)
-      hashie (~> 1.2)
+      hashie (~> 2.0.5)
       httparty (~> 0.10)
     mime-types (1.23)
     money (5.1.1)
       i18n (~> 0.6.0)
-    multi_json (1.7.9)
-    multi_xml (0.5.1)
-    multipart-post (1.1.5)
+    multi_json (1.8.0)
+    multi_xml (0.5.5)
+    multipart-post (1.2.0)
     nested_form (0.3.1)
     net-scp (1.1.0)
       net-ssh (>= 2.6.5)
@@ -251,15 +256,15 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.5.9)
     oauth (0.4.7)
-    oauth2 (0.8.0)
+    oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    oj (1.4.5)
+    oj (2.1.4)
     omniauth (1.1.1)
-      hashie (~> 1.2)
+      hashie (~> 2.0.5)
       rack
     omniauth-facebook (1.4.1)
       omniauth-oauth2 (~> 1.1.0)
@@ -459,13 +464,14 @@ GEM
       rack
       raindrops (~> 0.7)
     validates_email_format_of (1.5.3)
-    virtus (0.5.2)
-      backports (~> 2.6.1)
-    vkontakte_api (1.0.4)
+    virtus (0.5.5)
+      backports (~> 3.3)
+      descendants_tracker (~> 0.0.1)
+    vkontakte_api (1.2)
       faraday (~> 0.8)
       faraday_middleware (~> 0.8)
-      faraday_middleware-parse_oj (~> 0.1)
-      hashie (~> 1.2)
+      faraday_middleware-parse_oj (~> 0.2)
+      hashie (~> 2.0)
       oauth2 (~> 0.8)
     warden (1.2.1)
       rack (>= 1.0)
@@ -505,10 +511,11 @@ DEPENDENCIES
   freeze_time
   friendly_id
   gilenson
-  grape
+  grape (~> 0.6.0)
+  grape-entity
   has_scope
   has_searcher
-  hashie
+  hashie (~> 2.0.5)
   hirb
   htmldiff
   inherited_resources!

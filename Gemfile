@@ -31,10 +31,11 @@ group :default do
   gem 'fastimage'
   gem 'friendly_id'
   gem 'gilenson'
-  gem 'grape'
+  gem 'grape',                      '~> 0.6.0'
+  gem 'grape-entity'
   gem 'has_scope'
   gem 'has_searcher'
-  gem 'hashie'
+  gem 'hashie',                     '~> 2.0.5'
   gem 'htmldiff'
   gem 'inherited_resources',        :git => 'git://github.com/DouweM/inherited_resources', :branch => 'nested-singletons' # NOTE: https://github.com/josevalim/inherited_resources/pull/194
   gem 'jquery-rails',               '2.0.3'
