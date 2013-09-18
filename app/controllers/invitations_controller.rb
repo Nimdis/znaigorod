@@ -12,7 +12,7 @@ class InvitationsController < ApplicationController
 
   def new
     new! {
-      @accounts = Account.search { paginate :page => 1, :per_page => 10 }.results
+      @accounts = Account.search { paginate :page => params[:page], :per_page => 10 }.results
     }
   end
 
@@ -24,7 +24,7 @@ class InvitationsController < ApplicationController
 
   def show
     show! {
-      @accounts = Account.search { paginate :page => 1, :per_page => 10 }.results
+      @accounts = Account.search { paginate :page => params[:page], :per_page => 10 }.results
 
       render :new and return
     }
