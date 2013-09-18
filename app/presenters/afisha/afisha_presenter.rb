@@ -53,20 +53,13 @@ class AfishaPresenter
   end
 
   def collection
-    if @collection
-      return @collection
-    else
-      @collection = searcher.group(:afisha_id_str).groups
-      #@collection = Afisha.published.includes(:showings)
-      #@collection = @period_filter.scopes(@collection)
-      #@collection = @categories_filter.scopes(@collection)
-    end
+    @collection ||= searcher.group(:afisha_id_str).groups
   end
 
   def decorated_collection
     collection.map do |group|
       afisha = Afisha.find(group.value)
-      showings = group.hits.map(&:result)
+      showings = group.hits.map(&:result).compact
 
       AfishaDecorator.new(afisha, ShowingDecorator.decorate(showings))
     end
