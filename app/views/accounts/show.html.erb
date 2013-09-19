@@ -40,6 +40,36 @@
       </div>
     <% end %>
 
+    <div class="invitations_wrapper">
+      <div class="invitations header">
+        <h3>Приглашаю</h3>
+      </div>
+
+      <div class="invitations list">
+        <ul class="inviter">
+          <% if @account.invitations.inviter.without_invited.any? %>
+            <%= render :collection => @account.invitations.inviter.without_invited, :partial => 'my/invitations/invitation' %>
+          <% else %>
+            <li class="empty">Нет приглашений</li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="invitations header">
+        <h3>Жду приглашения</h3>
+      </div>
+
+      <div class="invitations list">
+        <ul class="invited">
+          <% if @account.invitations.invited.without_invited.any? %>
+            <%= render :collection => @account.invitations.inviter.without_invited, :partial => 'my/invitations/invitation' %>
+          <% else %>
+            <li class="empty">Нет приглашений</li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
     <% if @votes.any? %>
       <div class="votes header">
         Нравится
