@@ -28,7 +28,7 @@
 
     <div class="remove_invitation">
       <% if @invitation.persisted? %>
-        <%= link_to 'Удалить', [parent, @invitation], :method => :delete, :remote => true %>
+        <%= link_to 'Удалить', [parent, @invitation], :method => :delete, :remote => true, :class => 'remove_invitation_link' %>
       <% end %>
     </div>
   </div>
