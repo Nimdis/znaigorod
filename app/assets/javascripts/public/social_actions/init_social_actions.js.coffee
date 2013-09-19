@@ -1,6 +1,5 @@
 @init_social_actions = () ->
-  social_actions = $('.social_actions')
-  social_actions.on 'ajax:success', (evt, response, status, jqXHR) ->
+  $('.left', '.afisha_show, .organization_show').on 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target)
 
     if $('.social_signin_links', $(response)).length
@@ -23,12 +22,7 @@
       return false
 
     if target.hasClass('change_visit')
-      visit = $(response).closest('li')
-      target.closest('li').replaceWith(visit)
-
-      visitors = $(response).closest('.list')
-      $('<div class="list"/>').appendTo(social_actions) unless $('.list', social_actions).length
-      $('.social_actions .list').replaceWith(visitors)
+      $('.social_actions').replaceWith(response)
 
     if target.hasClass('acts_as_inviter') || target.hasClass('acts_as_invited')
 

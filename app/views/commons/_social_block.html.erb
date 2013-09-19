@@ -1,60 +1,62 @@
-<ul class='user_actions'>
-  <%= render :partial => 'visits/visit', :locals => { :visitable => inviteable } %>
-  <%= render :partial => 'invitations/invitation', :locals => { :inviteable => inviteable, :kind => :inviter } %>
-  <%= render :partial => 'invitations/invitation', :locals => { :inviteable => inviteable, :kind => :invited } %>
-</ul>
+<div class="social_actions">
+  <ul class='user_actions'>
+    <%= render :partial => 'visits/visit', :locals => { :visitable => inviteable } %>
+    <%= render :partial => 'invitations/invitation', :locals => { :inviteable => inviteable, :kind => :inviter } %>
+    <%= render :partial => 'invitations/invitation', :locals => { :inviteable => inviteable, :kind => :invited } %>
+  </ul>
 
-<div class='visits_counter'>
-  <%= content_tag :div, I18n.t("visit.#{inviteable.class.name.underscore}"), class: :floatl %>
-  <div class='floatr'><%= t('afisha.visitors', :count => inviteable.visits.count) %></div>
-</div>
+  <div class='visits_counter'>
+    <%= content_tag :div, I18n.t("visit.#{inviteable.class.name.underscore}"), class: :floatl %>
+    <div class='floatr'><%= t('afisha.visitors', :count => inviteable.visits.count) %></div>
+  </div>
 
-<div class='visitors list'>
-  <ul class='avatars'>
-    <% inviteable.invitations_and_visits_grouped_by_account.each do |account, hash| %>
-      <li>
-        <div class='avatar'>
-          <%= link_to account do %>
-            <%= image_tag resized_image_url(account.avatar.url, 35, 35), :size => '35x35', :alt => account %>
-          <% end%>
-        </div>
+  <div class='visitors list'>
+    <ul class='avatars'>
+      <% inviteable.invitations_and_visits_grouped_by_account.each do |account, hash| %>
+        <li>
+          <div class='avatar'>
+            <%= link_to account do %>
+              <%= image_tag resized_image_url(account.avatar.url, 35, 35), :size => '35x35', :alt => account %>
+            <% end%>
+          </div>
 
-        <div class='details'>
-          <%= link_to(account, account, :class => :name) %>
+          <div class='details'>
+            <%= link_to(account, account, :class => :name) %>
 
-          <% if hash[:visit].actual? %>
-            <div class="wanted">
-              <div class="info">
-                <% hash[:invitations].each do |invitation| %>
-                  <div>
-                    <% if hash[:visit].user == current_user %>
-                      <span><%= invitation.kind_text %> <%= t("enumerize.invitation.gender.custom.#{invitation.kind}.#{invitation.gender}").mb_chars.downcase %></span>
+            <% if hash[:visit].actual? %>
+              <div class="wanted">
+                <div class="info">
+                  <% hash[:invitations].each do |invitation| %>
+                    <div>
+                      <% if hash[:visit].user == current_user %>
+                        <span><%= invitation.kind_text %> <%= t("enumerize.invitation.gender.custom.#{invitation.kind}.#{invitation.gender}").mb_chars.downcase %></span>
 
-                      <% if invitation.description? %>
-                        <abbr title="<%= invitation.description %>" class="show_tipsy"><%= image_tag 'public/icon_question.png' %></abbr>
-                      <% end %>
-                    <% else %>
-                      <span><%= t("account_acts_as.#{invitation.kind}") %> <%= t("enumerize.invitation.gender.custom.#{invitation.kind}.#{invitation.gender}").mb_chars.downcase %></span>
+                        <% if invitation.description? %>
+                          <abbr title="<%= invitation.description %>" class="show_tipsy"><%= image_tag 'public/icon_question.png' %></abbr>
+                        <% end %>
+                      <% else %>
+                        <span><%= t("account_acts_as.#{invitation.kind}") %> <%= t("enumerize.invitation.gender.custom.#{invitation.kind}.#{invitation.gender}").mb_chars.downcase %></span>
 
-                      <% if invitation.description? %>
-                        <abbr title="<%= invitation.description %>" class="show_tipsy"><%= image_tag 'public/icon_question.png' %></abbr>
-                      <% end %>
+                        <% if invitation.description? %>
+                          <abbr title="<%= invitation.description %>" class="show_tipsy"><%= image_tag 'public/icon_question.png' %></abbr>
+                        <% end %>
 
-                      <% if user_signed_in? && !current_user.account.reacts_to?(invitation)%>
-                        <%= simple_form_for [inviteable, inviteable.invitations.new], :remote => true do |f| %>
-                          <%= f.input :kind, :as => :hidden, :input_html => { :value => invitation.opposite_kind } %>
-                          <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
-                          <%= f.submit t("invite.#{invitation.opposite_kind}"), :class => 'submit_dialog' %>
+                        <% if user_signed_in? && !current_user.account.reacts_to?(invitation)%>
+                          <%= simple_form_for [inviteable, inviteable.invitations.new], :remote => true do |f| %>
+                            <%= f.input :kind, :as => :hidden, :input_html => { :value => invitation.opposite_kind } %>
+                            <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
+                            <%= f.submit t("invite.#{invitation.opposite_kind}"), :class => 'submit_dialog' %>
+                          <% end %>
                         <% end %>
                       <% end %>
-                    <% end %>
-                  </div>
-                <% end %>
+                    </div>
+                  <% end %>
+                </div>
               </div>
-            </div>
-          <% end %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
