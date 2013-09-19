@@ -1,5 +1,5 @@
 <ul>
-  lll
+  <%= render partial: 'visits/account_visits', locals: { collection: @visits } %>
 </ul>
 
 <% unless @visits.first_page? && @visits.last_page? %>
