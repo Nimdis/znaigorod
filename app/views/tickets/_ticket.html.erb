@@ -1,10 +1,14 @@
-<ol class='ticket_payment_instruction <%= @ticket.organization.slug if @ticket.organization.present? %>'>
+<ol class='ticket_payment_instruction<%= " #{@ticket.organization.slug}" if @ticket.organization.present? %><%= ' has_organization_price' if @ticket.organization_price? %>'>
   <li>Выбери количество и укажи номер сотового телефона</li>
   <li>Оплати наиболее удобным для тебя способом, мы пришлем SMS с кодами</li>
-  <% if @ticket.organization.present? && %w[bolshoy-kontsertnyy-zal-bkz organnyy-kontsertnyy-zal].include?(@ticket.organization.slug) %>
-    <li>Эти коды показать в кассе и получить билеты в день проведения</li>
+  <% if @ticket.organization_price? %>
+    <li>Эти коды покажи в кассе и купи билеты в кассе со скидкой</li>
   <% else %>
-    <li>Эти коды и есть входные билеты, просто покажи это SMS на входе</li>
+    <% if @ticket.organization.present? && %w[bolshoy-kontsertnyy-zal-bkz organnyy-kontsertnyy-zal].include?(@ticket.organization.slug) %>
+      <li>Эти коды покажи в кассе и получи билеты в день проведения</li>
+    <% else %>
+      <li>Эти коды и есть входные билеты, просто покажи это SMS на входе</li>
+    <% end %>
   <% end %>
 </ol>
 <div class='ticket_info'>
@@ -16,9 +20,9 @@
   </div>
   <div class='ticket_description_and_tickets'>
     <div class='ticket_description'><%= @ticket.description.as_html %></div>
-    <% if @ticket.organization_price %>
+    <% if @ticket.organization_price? %>
       <p class='ticket_reservation'>
-        Назови слово "ЗнайГород", покажи код, полученный по SMS и <span class='ticket_price'>заплати всего <%= t('ticket_price', count: @ticket.organization_price.to_i) %> </span> в кассе заведения. Кроме того, ты можешь быть уверен, что билет на выбранное место будет забронирован за тобой.
+        Назови слово &laquo;ЗнайГород&raquo;, покажи код, полученный по SMS и <span class='ticket_price'>заплати всего <%= t('ticket_price', count: @ticket.organization_price.to_i) %> </span> в кассе заведения. Кроме того, ты можешь быть уверен, что билет на выбранное место будет забронирован за тобой.
       </p>
     <% end %>
     <p class='ticket_for_sale'><%= t 'copy.for_sale', count: @ticket.copies_for_sale.count %></p>

@@ -10,11 +10,11 @@
 
       .ticket_prices
         float: left
-        margin-right: 30px
+        margin-right: 20px
 
         .ticket_original_price
           margin-bottom: 10px
-          color: #a9a9a9
+          color: #707070
 
           .stroke
             +inline-block
@@ -27,16 +27,13 @@
               left: -10%
               top: 50%
               right: 0
-              border-top: 1px solid
-              border-color: #f93
+              border-top: 1px solid #f93
               +rotate(-15deg)
 
         .ticket_price
-          color: #fff
-          font-size: 20px
-          +text-shadow(#555 0 1px 2px)
-          background-color: #f60
-          padding: 10px
+          color: #f60
+          font-size: 28px
+          font-weight: bold
 
       .ticket_description_and_tickets
         +clearfix
@@ -54,6 +51,10 @@
             font-size: 14px
             font-weight: bold
 
+        .ticket_for_sale
+          padding-left: 17px
+          background: transparent image_url('public/icon_ticket_for_sale.png') no-repeat left center
+
     .ticket_payment_instruction
       +clearfix
       width: 570px
@@ -62,9 +63,10 @@
       padding: 15px 0
       margin: 0 auto
 
+      &.has_organization_price,
       &.bolshoy-kontsertnyy-zal-bkz,
       &.organnyy-kontsertnyy-zal
-        background: transparent image_url('public/ticket_payment_instruction_bkz.png') no-repeat center center
+        background-image: image_url('public/ticket_payment_instruction_bkz.png')
 
       li
         width: 160px
@@ -110,7 +112,7 @@
 
           li
             float: left
-            margin-right: 10px
+            margin-right: 8px
             width: 140px
 
             label
