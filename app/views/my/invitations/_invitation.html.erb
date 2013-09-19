@@ -6,6 +6,7 @@
   <% end %>
 
   <% if invitation.inviteable %>
+    <%= invitation.inviteable.is_a?(Afisha) ? 'на' : 'в' %>
     <%= link_to invitation.inviteable.title, invitation.inviteable %>
   <% end %>
 
