@@ -18,7 +18,7 @@ class InvitationsController < ApplicationController
 
   def create
     create! {
-      render :partial => 'invitation', :locals => { :inviteable => parent, :kind => @invitation.kind } and return
+      render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return
     }
   end
 
@@ -26,18 +26,26 @@ class InvitationsController < ApplicationController
     show! {
       @accounts = Account.search { paginate :page => params[:page], :per_page => 10 }.results
 
-      render :new and return
+      render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return
+    }
+  end
+
+  def edit
+    edit! {
+      @accounts = Account.search { paginate :page => params[:page], :per_page => 10 }.results
     }
   end
 
   def update
     update! {
-      render :partial => 'invitation', :locals => { :inviteable => parent, :kind => @invitation.kind } and return
+      render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return
     }
   end
 
   def destroy
-    destroy! { render :partial => 'invitation', :locals => { :inviteable => parent, :kind => @invitation.kind } and return }
+    destroy! {
+      render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return
+    }
   end
 
   protected

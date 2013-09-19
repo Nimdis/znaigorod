@@ -5,6 +5,7 @@ class InviteMessage < Message
   enumerize :invite_kind, in: [:inviter, :invited], predicates: true
   enumerize :agreement, :in => [:agree, :disagree], :predicates => true
   before_update :process_message, :if => ->(m) { m.changes.keys.include?('agreement') }
+  after_update :create_visit, :if => :agree?
 
   has_many :notification_messages, :as => :messageable, :dependent => :destroy
 
@@ -32,6 +33,10 @@ private
   def process_message
     self.state = :read
     notification_messages.create :producer => invited, :account => account, :kind => "#{self.agreement}d_invite"
+  end
+
+  def create_visit
+    messageable.inviteable.visits.find_or_create_by_user_id invited.id
   end
 end
 

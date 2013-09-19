@@ -29,6 +29,10 @@
                   <div>
                     <% if hash[:visit].user == current_user %>
                       <span><%= invitation.kind_text %> <%= t("enumerize.invitation.gender.custom.#{invitation.kind}.#{invitation.gender}").mb_chars.downcase %></span>
+
+                      <% if invitation.description? %>
+                        <abbr title="<%= invitation.description %>" class="show_tipsy"><%= image_tag 'public/icon_question.png' %></abbr>
+                      <% end %>
                     <% else %>
                       <span><%= t("account_acts_as.#{invitation.kind}") %> <%= t("enumerize.invitation.gender.custom.#{invitation.kind}.#{invitation.gender}").mb_chars.downcase %></span>
 
@@ -36,8 +40,8 @@
                         <abbr title="<%= invitation.description %>" class="show_tipsy"><%= image_tag 'public/icon_question.png' %></abbr>
                       <% end %>
 
-                      <% if user_signed_in? %>
-                        <%= simple_form_for [inviteable, inviteable.invitations.new] do |f| %>
+                      <% if user_signed_in? && !current_user.account.reacts_to?(invitation)%>
+                        <%= simple_form_for [inviteable, inviteable.invitations.new], :remote => true do |f| %>
                           <%= f.input :kind, :as => :hidden, :input_html => { :value => invitation.opposite_kind } %>
                           <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
                           <%= f.submit t("invite.#{invitation.opposite_kind}"), :class => 'submit_dialog' %>
