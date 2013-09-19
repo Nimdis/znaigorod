@@ -1,11 +1,33 @@
+class InviterCategoriesFilter
+  attr_accessor :categories
+
+  def initialize(categories)
+    @categories ||= []
+    @categories = @categories.delete_if(&:blank?)
+  end
+
+  def used?
+    categories.any?
+  end
+
+  def available_values
+    Values.instance.invitation.categories
+  end
+end
+
 class AccountPresenter
-  attr_accessor :gender_filter, :kind_filter, :acts_as_filter, :sorting_filter
+  attr_accessor :gender_filter, :kind_filter, :acts_as_filter, :inviter_categoires, :invited_categoires
+
+  attr_accessor :inviter_categories_filter
 
   def initialize(params)
     @kind_filter = AccountKindFilter.new(params['kind'])
     @gender_filter = AccountGenderFilter.new(params['gender'])
     @sorting_filter = AccountSortingFilter.new(params['order_by'])
     @acts_as_filter = AccountActsAsFilter.new(params['acts_as'])
+
+    @inviter_categories_filter = InviterCategoriesFilter.new(params['inviter_categories'])
+
     @page = params['page'] || 1
   end
 

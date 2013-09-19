@@ -57,6 +57,9 @@ class Account < ActiveRecord::Base
     string :search_kind
     string(:kind, :multiple => true) { indexing_kinds }
     string(:acts_as, :multiple => true) { acts_as }
+
+    string(:inviter_categories, :multiple => true) { invitations.inviter.with_categories.flat_map(&:categories).uniq }
+    string(:invited_categories, :multiple => true) { invitations.invited.with_categories.flat_map(&:categories).uniq }
   end
 
   def sended_invite_message(messageable, account_id, invite)
