@@ -14,6 +14,7 @@ class Invitation < ActiveRecord::Base
   validates_presence_of :kind
 
   after_create :create_invite_message, :if => :invited_id?
+  after_create :create_visit, :if => :inviteable_type?
 
   enumerize :gender, :in => [:all, :male, :female], :default => :all, :predicates => true
   enumerize :kind, :in => [:inviter, :invited], :scope => true
@@ -34,5 +35,9 @@ class Invitation < ActiveRecord::Base
 
   def create_invite_message
     invite_messages.create!
+  end
+
+  def create_visit
+    inviteable.visits.find_or_create_by_user_id account.users.first.id
   end
 end
