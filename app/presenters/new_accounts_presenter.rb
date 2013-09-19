@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class InviterCategoriesFilter
   attr_accessor :selected, :available
 
@@ -8,6 +10,30 @@ class InviterCategoriesFilter
 
   def used?
     selected.any?
+  end
+end
+
+class NewAccountKindFilter
+  attr_accessor :selected, :available, :kind
+
+  def initialize(kind = 'all')
+    @kind = kind
+  end
+
+  def values
+    { :all => 'Все', :male => 'Парни', :female => 'Девушки' }
+  end
+
+  def all_selected?
+    kind == 'all'
+  end
+
+  def male_selected?
+    kind == 'male'
+  end
+
+  def female_selected?
+    kind == 'female'
   end
 end
 
@@ -32,8 +58,9 @@ class NewAccountsPresenter
 
   def initialize_filters
     @inviter_categories_filter ||= InviterCategoriesFilter.new(inviter_categories)
+    @kind_filter ||= NewAccountKindFilter.new(kind)
   end
-  attr_reader :inviter_categories_filter
+  attr_reader :inviter_categories_filter, :kind_filter
 
   def collection
     searcher.results
