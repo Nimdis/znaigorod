@@ -11,11 +11,15 @@ class VisitsController < ApplicationController
   layout false
 
   def create
-    create! { render 'visit_with_visitors' and return }
+    create! {
+      render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return
+    }
   end
 
   def destroy
-    destroy! { render 'visit_with_visitors' and return }
+    destroy! {
+      render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return
+    }
   end
 
   protected

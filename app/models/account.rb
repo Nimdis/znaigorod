@@ -201,6 +201,10 @@ class Account < ActiveRecord::Base
       .where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name)
       .where(:invited_id => invited).any?
   end
+
+  def reacts_to?(invitation)
+    invitations.where(:inviteable_type => invitation.inviteable.class.name, :inviteable_id => invitation.inviteable.id, :kind => invitation.opposite_kind, :invited_id => invitation.account.id).any?
+  end
 end
 
 # == Schema Information

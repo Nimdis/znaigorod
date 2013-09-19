@@ -1,0 +1,65 @@
+<div class="invite_form_wrapper">
+  <div class="left">
+    <h3><%= @invitation.kind_text %></h3>
+
+    <%= simple_form_for [parent, @invitation] do |f| %>
+      <%= f.input :kind, :as => :hidden %>
+      <%= f.input :gender,
+        :as => :radio_buttons,
+        :label => false,
+        :label_method => lambda { |item| t("enumerize.invitation.gender.form.#{@invitation.kind}.#{item.last}") } %>
+      <%= f.input :description,
+          input_html: { placeholder: 'Здесь вы можете указать дополнительную информацию'},
+          autofocus: true,
+          label: false,
+          :input_html => { :class => 'additional_message' } %>
+
+      <div class="actions">
+        <%= f.submit @invitation.kind_text,
+            :onClick => 'share_on_click(this);',
+            'data-owner_id' => current_user.try(:vk_uid),
+            'data-message' => "Жду приглашения %text% посетить \"#{parent}\"",
+            'data-message' => "#{t("self_invitation.#{@invitation.kind}.#{parent.class.name.underscore}")} \"#{parent}\"",
+            'data-attachments' => "#{parent.is_a?(Afisha) ? afisha_show_url(parent) : organization_url(parent)}",
+            'data-insert_to_message' => 'input.radio_buttons:checked',
+            'data-additinal_message' => '.additional_message' %>
+      </div>
+    <% end %>
+
+    <div class="remove_invitation">
+      <% if @invitation.persisted? %>
+        <%= link_to 'Удалить', [parent, @invitation], :method => :delete, :remote => true %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class='search_form'>
+      <%= form_tag accounts_search_path, :method => :get do %>
+        <%= hidden_field_tag :parent, "#{parent.class.name.underscore}_#{parent.id}" %>
+        <%= hidden_field_tag :kind, @invitation.kind %>
+        <%= text_field_tag :q, params[:q], :placeholder => 'Найти...' %>
+        <%= submit_tag 'Найти', :class => :submit %>
+      <% end %>
+    </div>
+
+    <ul class='filter'>
+      <li<%= " class='selected'".html_safe if params[:only_friends].blank? %>>
+        <%= link_to "Все пользователи (#{Account.count})",
+          accounts_search_path(:q => params[:q],
+          :kind => @invitation.kind,
+          :parent => "#{parent.class.name.underscore}_#{parent.id}") %>
+      </li>
+
+      <li<%= " class='selected'".html_safe if params[:only_friends].present? %>>
+        <%= link_to "Мои друзья (#{current_user.account.friends.count})",
+          accounts_search_path(:only_friends => true,
+          :q => params[:q],
+          :kind => @invitation.kind,
+          :parent => "#{parent.class.name.underscore}_#{parent.id}") %>
+      </li>
+    </ul>
+
+    <%= render :partial => 'accounts/list', :locals => { :kind => @invitation.kind } %>
+  </div>
+</div>

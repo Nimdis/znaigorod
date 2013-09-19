@@ -252,7 +252,7 @@ class Afisha < ActiveRecord::Base
       visits.each do |visit|
         hash[visit.user.account] = {}
         hash[visit.user.account][:visit] = visit
-        hash[visit.user.account][:invitations] = visit.user.account.invitations.where(:inviteable_type => self.class.name, :inviteable_id => id)
+        hash[visit.user.account][:invitations] = visit.user.account.invitations.without_invited.where(:inviteable_type => self.class.name, :inviteable_id => id)
       end
     end
   end
