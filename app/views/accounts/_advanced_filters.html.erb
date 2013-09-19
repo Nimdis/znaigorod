@@ -1,0 +1,38 @@
+<div class='advanced <%= params[:utf8].present? ? 'opened' : 'closed' %>'>
+  <%= form_tag accounts_path, :method => :get do %>
+    <%= hidden_field_tag :gender, :male %>
+    <%= hidden_field_tag :kind, nil %>
+
+    <div class='filter <%= @presenter.inviter_categories_filter.used? ? 'show' : 'hide' %>' id='inviter_categories'>
+      <%= link_to 'убрать', '#', :class => 'remove_filter_link' %>
+      <div class='filter_label'>Приглашаю</div>
+      <div class='filter_checkboxes'>
+        <% @presenter.inviter_categories_filter.available.each_with_index do |value, index| %>
+          <div class='checkbox'>
+            <%= check_box_tag 'inviter_categories[]',
+              value,
+              (@presenter.inviter_categories_filter.selected.include?(value)),
+              :id => "inviter_category_#{index}" %>
+
+            <%= label_tag "inviter_category_#{index}", value %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='criteria_list'>
+      <div class='criteria_label'>Добавить критерии:</div>
+      <ul>
+        <li>
+          <%= link_to 'Приглашают', '#', :class => 'inviter_categories' %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="submit_action">
+      <div class="submit_wrapper">
+        <%= submit_tag 'Применить фильтр', :class => 'submit' %>
+      </div>
+    </div>
+  <% end %>
+</div>

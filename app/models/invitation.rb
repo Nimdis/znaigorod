@@ -26,6 +26,7 @@ class Invitation < ActiveRecord::Base
   scope :inviter, -> { with_kind :inviter }
   scope :invited, -> { with_kind :invited }
   scope :without_invited, -> { where :invited_id => nil }
+  scope :with_categories, -> { without_invited.where 'category IS NOT NULL' }
 
   def opposite_kind
     (self.class.kind.values - [kind]).join

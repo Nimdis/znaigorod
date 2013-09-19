@@ -6,7 +6,8 @@ class AccountsController < ApplicationController
 
   def index
     index! {
-      @presenter = AccountPresenter.new(params)
+      #@presenter = AccountPresenter.new(params)
+      @presenter = NewAccountsPresenter.new(params)
       render partial: 'accounts/account_posters', layout: false and return if request.xhr?
     }
   end
