@@ -42,6 +42,7 @@
           $('#sms_claim_name').focus()
           $('#sms_claim_phone').inputmask 'mask',
             'mask': '+7-(999)-999-9999'
+          $('#sms_claim_details').unbind('limit').limit('220','#chars_left')
         else
           $('.sms_claim_form_wrapper').dialog('close')
           alert("Ваша заявка принята!\nСотрудник заведения свяжется с Вами.\nСпасибо за использования сервиса.")

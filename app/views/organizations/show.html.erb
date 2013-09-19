@@ -24,8 +24,19 @@
   </div>
 
   <div class='right'>
-    <div class='wrapper'>
 
+    <% if @organization.sms_claimable? %>
+      <ul class='sms_claims'>
+        <% @organization.suborganizations.each do |suborganization| %>
+          <li>
+            <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title").html_safe,
+                        send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <div class='wrapper'>
       <% if @organization.has_tour? %>
         <div class='virtual_tour'>
           <%= link_to('#', :class => :virtual_tour_link, :'data-link' => @organization.virtual_tour.link, title: '3D-тур') do %>
@@ -48,12 +59,6 @@
             data-id='<%= @organization.id %>'>
           </div>
         </div>
-      <% end %>
-
-      <% if @organization.sms_claimable? %>
-        <% @organization.suborganizations.each do |suborganization| %>
-          <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
-        <% end %>
       <% end %>
 
       <% if @organization.similar_organizations.present? %>
@@ -140,16 +145,6 @@
         <span class='visits'><%= @organization.page_visits.count %></span>
       </div>
     </div>
-
-    <% if @organization.sms_claimable? %>
-      <ul class='sms_claims'>
-        <% @organization.claimable_suborganizations.each do |suborganization| %>
-          <li>
-            <%= link_to t("sms_claim.#{suborganization.class.name.underscore}.link_title"), send("new_#{suborganization.class.name.underscore}_sms_claim_path", suborganization) %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
 
     <% @organization.decorated_suborganizations.each do |suborganization| %>
       <%= render suborganization if suborganization.viewable? %>
