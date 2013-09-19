@@ -126,6 +126,14 @@
 
         true
 
+      $.fn.initialize_remove_invitation = (container) ->
+        $('.invite_form_wrapper .remove_invitation').on 'ajax:success', (evt, response, status, jqXHR) ->
+          target = $(evt.target)
+
+          if target.hasClass('remove_invitation_link')
+            container.dialog('close')
+            $('.social_actions').replaceWith(response)
+
       container = $('<div class="invite_form_wrapper" />').appendTo('body').hide().html(response)
 
       container.dialog
@@ -145,6 +153,7 @@
           block.initialize_filter()
           block.initialize_search()
           block.initialize_invite()
+          block.initialize_remove_invitation(container)
           true
         beforeClose: (event, ui) ->
           $("body").css
@@ -276,3 +285,4 @@
     false
 
   true
+
