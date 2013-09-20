@@ -27,7 +27,10 @@
       <ul>
         <% @presenter.kind_filter.available_values.each do |value, text| %>
           <li class='<%= value %><%= " selected".html_safe if @presenter.kind_filter.send("#{value}_selected?") %>'>
-            <%= link_to text, accounts_path(@presenter.link_params.merge(:kind => value)) %>
+            <%= link_to accounts_path(@presenter.link_params.merge(:kind => value))  do %>
+              <span class='name'><%= text %></span>
+              <span class='count'><%= @presenter.count(:kind => value, :gender => @presenter.gender_filter.gender) %></span>
+            <% end %>
           </li>
         <% end %>
       </ul>
