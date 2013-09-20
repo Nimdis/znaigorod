@@ -16,6 +16,11 @@
 
     <div class="by_acts_as">
       <ul>
+        <% @presenter.acts_as_filter.available_values.each do |value, text| %>
+          <li class='<%= value %><%= " selected".html_safe if @presenter.acts_as_filter.send("#{value}_selected?") %>'>
+            <%= link_to text, accounts_path(@presenter.link_params.merge(:acts_as => value)) %>
+          </li>
+        <% end %>
       </ul>
     </div>
 
@@ -27,9 +32,9 @@
       <ul>
         <% @presenter.kind_filter.available_values.each do |value, text| %>
           <li class='<%= value %><%= " selected".html_safe if @presenter.kind_filter.send("#{value}_selected?") %>'>
-            <%= link_to accounts_path(@presenter.link_params.merge(:kind => value))  do %>
+            <%= link_to accounts_path(@presenter.link_params.merge(:kind => value)) do %>
               <span class='name'><%= text %></span>
-              <span class='count'><%= @presenter.count(:kind => value, :gender => @presenter.gender_filter.gender) %></span>
+              <span class='count'><%= @presenter.count(:kind => value, :gender => @presenter.gender_filter.gender, :acts_as => @presenter.acts_as_filter.acts_as) %></span>
             <% end %>
           </li>
         <% end %>
