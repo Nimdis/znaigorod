@@ -31,7 +31,7 @@ class AccountsPresenter
     end
 
     def self.available_values
-      { 'undefined' => 'Все', 'male' => 'Парни', 'female' => 'Девушки' }
+      { 'undefined' => 'Все', 'female' => 'Девушки', 'male' => 'Парни' }
     end
 
     def available_values
