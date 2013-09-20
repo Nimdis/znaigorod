@@ -6,7 +6,7 @@ HasSearcher.create_searcher :accounts do
   end
 
   property :kind do |search|
-    search.with(:kind, search_object.kind) if search_object.kind.try(:present?) unless search_object.kind == 'all'
+    search.with(:kind, search_object.kind) if search_object.kind.try(:present?)
   end
 
   property :acts_as do |search|
