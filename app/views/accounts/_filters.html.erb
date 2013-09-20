@@ -8,7 +8,7 @@
       <ul>
         <% @presenter.gender_filter.available_values.each do |value, text| %>
           <li <%= "class='selected'".html_safe if @presenter.gender_filter.send("#{value}_selected?") %>>
-            <%= link_to text, accounts_path(:gender => value) %>
+            <%= link_to text, accounts_path(@presenter.link_params.merge(:gender => value)) %>
           </li>
         <% end %>
       </ul>
@@ -27,7 +27,7 @@
       <ul>
         <% @presenter.kind_filter.available_values.each do |value, text| %>
           <li <%= "class='selected'".html_safe if @presenter.kind_filter.send("#{value}_selected?") %>>
-            <%= link_to text, accounts_path(:kind => value) %>
+            <%= link_to text, accounts_path(@presenter.link_params.merge(:kind => value)) %>
           </li>
         <% end %>
       </ul>
