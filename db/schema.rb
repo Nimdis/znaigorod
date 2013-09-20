@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20130913052848) do
     t.integer  "fb_likes"
     t.integer  "odn_likes"
     t.boolean  "allow_auction"
+    t.string   "poster_vk_id"
   end
 
   add_index "afisha", ["slug"], :name => "index_affiches_on_slug", :unique => true
