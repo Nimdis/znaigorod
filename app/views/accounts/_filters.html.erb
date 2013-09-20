@@ -6,8 +6,8 @@
   <div class="filters account">
     <div class="by_gender">
       <ul>
-        <% @presenter.kind_filter.values.each do |value, text| %>
-          <li <%= "class='selected'".html_safe if @presenter.kind_filter.send("#{value}_selected?") %>>
+        <% @presenter.gender_filter.available_values.each do |value, text| %>
+          <li <%= "class='selected'".html_safe if @presenter.gender_filter.send("#{value}_selected?") %>>
             <%= link_to text, accounts_path(:gender => value) %>
           </li>
         <% end %>
