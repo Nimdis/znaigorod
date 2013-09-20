@@ -10,7 +10,7 @@ HasSearcher.create_searcher :accounts do
   end
 
   property :acts_as do |search|
-    search.with(:acts_as, search_object.acts_as) if search_object.acts_as.try(:present?) unless search_object.acts_as == 'all'
+    search.with(:acts_as, search_object.acts_as) if search_object.acts_as.try(:present?)
   end
 
   property :inviter_categories do |search|

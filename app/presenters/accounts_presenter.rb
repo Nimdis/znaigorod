@@ -45,6 +45,33 @@ class AccountsPresenter
     end
   end
 
+  class ActsAsFilter
+    attr_accessor :acts_as
+
+    def initialize(acts_as)
+      @acts_as = acts_as
+    end
+
+    def self.available_values
+      { 'inviter' => 'Приглашают', 'invited' => 'Ждут приглашения' }
+    end
+
+    def available_values
+      self.class.available_values
+    end
+
+    available_values.each do |value, _|
+      define_method "#{value}_selected?" do
+        acts_as == value
+      end
+    end
+
+    def used?
+      acts_as.present?
+    end
+  end
+
+
   class CategoriesFilter
     attr_accessor :selected, :available
 
@@ -60,12 +87,11 @@ class AccountsPresenter
 
   include ActiveAttr::MassAssignment
 
-  attr_accessor :gender, :kind,
+  attr_accessor :gender, :kind, :acts_as,
                 :inviter_categories, :invited_categories,
-                :invites, :waiting_invitation,
                 :order_by, :page, :per_page
 
-  attr_reader :kind_filter, :gender_filter,
+  attr_reader :kind_filter, :gender_filter, :acts_as_filter,
     :inviter_categories_filter, :invited_categories_filter
 
   def initialize(args)
@@ -76,7 +102,7 @@ class AccountsPresenter
   end
 
   def link_params
-    { :kind => kind_filter.kind, :gender => gender_filter.gender }
+    { :kind => kind_filter.kind, :gender => gender_filter.gender, :acts_as => acts_as_filter.acts_as }
   end
 
   def collection
@@ -102,6 +128,7 @@ class AccountsPresenter
   def initialize_filters
     @kind_filter               ||= KindFilter.new(kind)
     @gender_filter             ||= GenderFilter.new(gender)
+    @acts_as_filter            ||= ActsAsFilter.new(acts_as)
     @inviter_categories_filter ||= CategoriesFilter.new(inviter_categories)
     @invited_categories_filter ||= CategoriesFilter.new(invited_categories)
   end
@@ -110,6 +137,7 @@ class AccountsPresenter
     @searcher_params ||= {}.tap do |params|
       params[:kind]               = kind_filter.kind unless kind_filter.all_selected?
       params[:gender]             = gender_filter.gender unless gender_filter.undefined_selected?
+      params[:acts_as]            = acts_as_filter.acts_as if acts_as_filter.used?
       params[:inviter_categories] = inviter_categories_filter.selected
     end
   end

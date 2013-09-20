@@ -80,10 +80,7 @@ class Account < ActiveRecord::Base
   end
 
   def acts_as
-    @acts_as ||= [].tap do |array|
-      array << :inviter if visits.inviter.select {|v| v.actual?}.any?
-      array << :invited if visits.invited.select {|v| v.actual?}.any?
-    end
+    invitations.without_invited.pluck(:kind).uniq
   end
 
   def title
