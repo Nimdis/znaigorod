@@ -71,7 +71,6 @@ class AccountsPresenter
     end
   end
 
-
   class CategoriesFilter
     attr_accessor :selected, :available
 
@@ -101,8 +100,14 @@ class AccountsPresenter
     initialize_filters
   end
 
-  def link_params
-    { :kind => kind_filter.kind, :gender => gender_filter.gender, :acts_as => acts_as_filter.acts_as }
+  def link_params(acts_as = nil)
+    { :kind => kind_filter.kind, :gender => gender_filter.gender }.tap { |hash|
+      if acts_as_filter.used?
+        hash[:acts_as] = acts_as if acts_as_filter.acts_as != acts_as
+      else
+        hash[:acts_as] = acts_as
+      end
+    }
   end
 
   def collection
