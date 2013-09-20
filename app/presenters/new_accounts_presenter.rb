@@ -1,40 +1,60 @@
 # encoding: utf-8
 
 class NewAccountsPresenter
+  class KindFilter
+    attr_accessor :kind
+
+    def initialize(kind)
+      @kind = available_values.keys.include?(kind) ? kind : available_values.keys.first
+    end
+
+    def self.available_values
+      { 'all' => 'Все', 'admin' => 'Администраторы', 'afisha_editor' => 'Авторы афиш' }
+    end
+
+    def available_values
+      self.class.available_values
+    end
+
+    available_values.each do |value, _|
+      define_method "#{value}_selected?" do
+        kind == value
+      end
+    end
+  end
+
+  class GenderFilter
+    attr_accessor :gender
+
+    def initialize(gender)
+      @gender = available_values.keys.include?(gender) ? gender : available_values.keys.first
+    end
+
+    def self.available_values
+      { 'undefined' => 'Все', 'male' => 'Парни', 'female' => 'Девушки' }
+    end
+
+    def available_values
+      self.class.available_values
+    end
+
+    available_values.each do |value, _|
+      define_method "#{value}_selected?" do
+        gender == value
+      end
+    end
+  end
+
   class CategoriesFilter
     attr_accessor :selected, :available
 
-    def initialize(categories, hidden = false)
+    def initialize(categories)
       @available = Values.instance.invitation.categories
       @selected  = (categories || []).delete_if(&:blank?) & @available
     end
 
     def used?
       selected.any?
-    end
-  end
-
-  class GenderFilter
-    attr_accessor :selected, :available, :gender
-
-    def initialize(gender)
-      @gender = available_values.keys.map(&:to_s).include?(gender) ? gender : available_values.keys.first.to_s
-    end
-
-    def available_values
-      { :undefined => 'Все', :male => 'Парни', :female => 'Девушки' }
-    end
-
-    def undefined_selected?
-      gender == 'undefined'
-    end
-
-    def male_selected?
-      gender == 'male'
-    end
-
-    def female_selected?
-      gender == 'female'
     end
   end
 
@@ -45,8 +65,8 @@ class NewAccountsPresenter
                 :invites, :waiting_invitation,
                 :order_by, :page, :per_page
 
-  attr_reader :inviter_categories_filter, :invited_categories_filter,
-    :gender_filter
+  attr_reader :kind_filter, :gender_filter,
+    :inviter_categories_filter, :invited_categories_filter
 
   def initialize(args)
     super(args)
@@ -70,15 +90,17 @@ class NewAccountsPresenter
   end
 
   def initialize_filters
+    @kind_filter               ||= KindFilter.new(kind)
+    @gender_filter             ||= GenderFilter.new(gender)
     @inviter_categories_filter ||= CategoriesFilter.new(inviter_categories)
     @invited_categories_filter ||= CategoriesFilter.new(invited_categories)
-    @gender_filter             ||= GenderFilter.new(gender)
   end
 
   def searcher_params
     @searcher_params ||= {}.tap do |params|
-      params[:kind] = 'KIND' if false
-      params[:gender] = gender_filter.gender
+      p kind_filter
+      params[:kind]               = kind_filter.kind unless kind_filter.all_selected?
+      params[:gender]             = gender_filter.gender
       params[:inviter_categories] = inviter_categories_filter.selected
     end
   end
