@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class NewAccountsPresenter
+class AccountsPresenter
   class KindFilter
     attr_accessor :kind
 
@@ -81,6 +81,13 @@ class NewAccountsPresenter
 
   def collection
     searcher.results
+  end
+
+  def count(params)
+    params.delete(:kind) if params[:kind] == 'all'
+    params.delete(:gender) if params[:gender] == 'undefined'
+
+    HasSearcher.searcher(:accounts, params).total
   end
 
   private
