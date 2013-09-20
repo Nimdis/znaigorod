@@ -25,7 +25,11 @@
   <div class="filters account">
     <div class="by_kind">
       <ul>
-
+        <% @presenter.kind_filter.available_values.each do |value, text| %>
+          <li <%= "class='selected'".html_safe if @presenter.kind_filter.send("#{value}_selected?") %>>
+            <%= link_to text, accounts_path(:kind => value) %>
+          </li>
+        <% end %>
       </ul>
     </div>
 

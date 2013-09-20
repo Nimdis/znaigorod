@@ -1,7 +1,7 @@
 <div class='advanced <%= params[:utf8].present? ? 'opened' : 'closed' %>'>
   <%= form_tag accounts_path, :method => :get do %>
     <%= hidden_field_tag :gender, @presenter.gender_filter.gender %>
-    <%= hidden_field_tag :kind, nil %>
+    <%= hidden_field_tag :kind, @presenter.kind_filter.kind %>
 
     <div class='filter <%= @presenter.inviter_categories_filter.used? ? 'show' : 'hide' %>' id='inviter_categories'>
       <%= link_to 'убрать', '#', :class => 'remove_filter_link' %>
