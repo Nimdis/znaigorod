@@ -14,5 +14,7 @@
     <span class="description">&mdash; <%= invitation.description %></span>
   <% end %>
 
-  <%= link_to 'Удалить', my_invitation_path(invitation), :method => :delete, :class => 'delete_invitation', :remote => true %>
+  <% if can? :destroy, invitation %>
+    <%= link_to 'Удалить', my_invitation_path(invitation), :method => :delete, :class => 'delete_invitation', :remote => true %>
+  <% end %>
 </li>

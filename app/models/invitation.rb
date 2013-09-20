@@ -16,6 +16,9 @@ class Invitation < ActiveRecord::Base
   after_create :create_invite_message, :if => :invited_id?
   after_create :create_visit, :if => :inviteable_type?
 
+  delegate :index, :to => :account, :prefix => true
+  after_save :account_index
+
   enumerize :gender, :in => [:all, :male, :female], :default => :all, :predicates => true
   enumerize :kind, :in => [:inviter, :invited], :scope => true
 
@@ -30,6 +33,12 @@ class Invitation < ActiveRecord::Base
 
   def opposite_kind
     (self.class.kind.values - [kind]).join
+  end
+
+  def actual?
+    return inviteable.actual? if inviteable.is_a?(Afisha)
+
+    true
   end
 
   private

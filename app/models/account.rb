@@ -58,12 +58,12 @@ class Account < ActiveRecord::Base
     string(:kind, :multiple => true) { indexing_kinds }
     string(:acts_as, :multiple => true) { acts_as }
 
-    string(:inviter_categories, :multiple => true) { invitations.inviter.with_categories.flat_map(&:categories).uniq }
-    string(:invited_categories, :multiple => true) { invitations.invited.with_categories.flat_map(&:categories).uniq }
+    string(:inviter_categories, :multiple => true) { invitations.inviter.with_categories.select(&:actual?).flat_map(&:categories).uniq }
+    string(:invited_categories, :multiple => true) { invitations.invited.with_categories.select(&:actual?).flat_map(&:categories).uniq }
   end
 
   def sended_invite_message(messageable, account_id, invite)
-    self.produced_invite_messages.where(messageable_id: messageable.id,
+    self.invite_messages.where(messageable_id: messageable.id,
                                  messageable_type: messageable.class.name,
                                  account_id: account_id,
                                  invite_kind: invite).any?
@@ -80,7 +80,7 @@ class Account < ActiveRecord::Base
   end
 
   def acts_as
-    invitations.without_invited.pluck(:kind).uniq
+    invitations.without_invited.select(&:actual?).map(&:kind).uniq
   end
 
   def title
