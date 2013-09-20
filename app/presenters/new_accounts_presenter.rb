@@ -1,43 +1,43 @@
 # encoding: utf-8
 
-class InvitationCategoriesFilter
-  attr_accessor :selected, :available
-
-  def initialize(categories, hidden = false)
-    @available = Values.instance.invitation.categories
-    @selected  = (categories || []).delete_if(&:blank?) & @available
-  end
-
-  def used?
-    selected.any?
-  end
-end
-
-class NewAccountGenderFilter
-  attr_accessor :selected, :available, :gender
-
-  def initialize(gender)
-    @gender = available_values.keys.map(&:to_s).include?(gender) ? gender : available_values.keys.first.to_s
-  end
-
-  def available_values
-    { :undefined => 'Все', :male => 'Парни', :female => 'Девушки' }
-  end
-
-  def undefined_selected?
-    gender == 'undefined'
-  end
-
-  def male_selected?
-    gender == 'male'
-  end
-
-  def female_selected?
-    gender == 'female'
-  end
-end
-
 class NewAccountsPresenter
+  class CategoriesFilter
+    attr_accessor :selected, :available
+
+    def initialize(categories, hidden = false)
+      @available = Values.instance.invitation.categories
+      @selected  = (categories || []).delete_if(&:blank?) & @available
+    end
+
+    def used?
+      selected.any?
+    end
+  end
+
+  class GenderFilter
+    attr_accessor :selected, :available, :gender
+
+    def initialize(gender)
+      @gender = available_values.keys.map(&:to_s).include?(gender) ? gender : available_values.keys.first.to_s
+    end
+
+    def available_values
+      { :undefined => 'Все', :male => 'Парни', :female => 'Девушки' }
+    end
+
+    def undefined_selected?
+      gender == 'undefined'
+    end
+
+    def male_selected?
+      gender == 'male'
+    end
+
+    def female_selected?
+      gender == 'female'
+    end
+  end
+
   include ActiveAttr::MassAssignment
 
   attr_accessor :gender, :kind,
@@ -60,14 +60,6 @@ class NewAccountsPresenter
     searcher.results
   end
 
-  def searcher_params
-    @searcher_params ||= {}.tap do |params|
-      params[:kind] = 'KIND' if false
-      params[:gender] = gender_filter.gender
-      params[:inviter_categories] = inviter_categories_filter.selected
-    end
-  end
-
   private
 
   def normalize_args
@@ -78,9 +70,17 @@ class NewAccountsPresenter
   end
 
   def initialize_filters
-    @inviter_categories_filter ||= InvitationCategoriesFilter.new(inviter_categories)
-    @invited_categories_filter ||= InvitationCategoriesFilter.new(invited_categories)
-    @gender_filter             ||= NewAccountGenderFilter.new(gender)
+    @inviter_categories_filter ||= CategoriesFilter.new(inviter_categories)
+    @invited_categories_filter ||= CategoriesFilter.new(invited_categories)
+    @gender_filter             ||= GenderFilter.new(gender)
+  end
+
+  def searcher_params
+    @searcher_params ||= {}.tap do |params|
+      params[:kind] = 'KIND' if false
+      params[:gender] = gender_filter.gender
+      params[:inviter_categories] = inviter_categories_filter.selected
+    end
   end
 
   def searcher
