@@ -229,8 +229,7 @@
             .handle1
               background: image_url('public/range_right_handle.png') no-repeat
 
-      .filter.hide
-        display: none
+      .filter.hide, .filter.show
         +clearfix
         border-bottom: 1px solid #ccc
         margin-bottom: 10px
@@ -256,6 +255,9 @@
             input,
             label
               +inline-block
+
+      .filter.hide
+        display: none
 
       .criteria_list
         +clearfix
