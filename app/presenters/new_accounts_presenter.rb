@@ -75,6 +75,9 @@ class NewAccountsPresenter
     initialize_filters
   end
 
+  def link_params
+    { :kind => kind_filter.kind, :gender => gender_filter.gender }
+  end
 
   def collection
     searcher.results
@@ -98,9 +101,8 @@ class NewAccountsPresenter
 
   def searcher_params
     @searcher_params ||= {}.tap do |params|
-      p kind_filter
       params[:kind]               = kind_filter.kind unless kind_filter.all_selected?
-      params[:gender]             = gender_filter.gender
+      params[:gender]             = gender_filter.gender unless gender_filter.undefined_selected?
       params[:inviter_categories] = inviter_categories_filter.selected
     end
   end
