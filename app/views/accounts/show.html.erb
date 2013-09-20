@@ -62,7 +62,7 @@
       <div class="invitations list">
         <ul class="invited">
           <% if @account.invitations.invited.without_invited.any? %>
-            <%= render :collection => @account.invitations.inviter.without_invited, :partial => 'my/invitations/invitation' %>
+            <%= render :collection => @account.invitations.invited.without_invited, :partial => 'my/invitations/invitation' %>
           <% else %>
             <li class="empty">Нет приглашений</li>
           <% end %>

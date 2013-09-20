@@ -9,7 +9,7 @@
     <% if current_user.account.sended_invite_message(visit.visitable, visit.user.account.id, :inviter) %>
       <span class='sended'><%= I18n.t("invite.sended.#{visit.user.account.gender}.inviter") %></span>
     <% else %>
-      <%= simple_form_for current_user.account.produced_invite_messages.build, :url => my_invite_messages_path,
+      <%= simple_form_for current_user.account.invite_messages.build, :url => my_invite_messages_path,
                           :html => { :remote => true, :id => :new_inviter_message, :class => :new_inviter_message } do |f| %>
         <%= f.input :account_id, as: :hidden, :input_html => { :value => visit.user.account.id } %>
         <%= f.input :messageable_id, as: :hidden, :input_html => { :value => visit.visitable.id } %>
@@ -20,27 +20,3 @@
     <% end %>
   <% end %>
 <% end %>
-
-<% if visit.acts_as_inviter?  %>
-  <div class='info'>
-    <span>Приглашает <%= I18n.t("visit.inviter.#{visit.inviter_gender}") unless visit.inviter_gender.all? %></span>
-    <% unless visit.inviter_description.blank? %>
-      <abbr title='<%= visit.inviter_description %>' class='show_tipsy'><%= image_tag 'public/icon_question.png' %></abbr>
-    <% end %>
-  </div>
-  <% if current_user %>
-    <% if current_user.account.sended_invite_message(visit.visitable, visit.user.account.id, :invited) %>
-      <span class='sended'><%= I18n.t("invite.sended.#{visit.user.account.gender}.invited") %></span>
-    <% else %>
-      <%= simple_form_for current_user.account.produced_invite_messages.build, :url => my_invite_messages_path,
-        :html => { :remote => true, :id => :new_invited_message, :class => :new_invited_message } do |f| %>
-        <%= f.input :account_id, as: :hidden, :input_html => { :value => visit.user.account.id } %>
-        <%= f.input :messageable_id, as: :hidden, :input_html => { :value => visit.visitable.id } %>
-        <%= f.input :messageable_type, as: :hidden, :input_html => { :value => visit.visitable.class.name } %>
-        <%= f.input :invite_kind, as: :hidden, :input_html => { :value => :invited } %>
-        <%= f.submit t("invite.invited"), class: 'submit_dialog' %>
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %>
-

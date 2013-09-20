@@ -14,6 +14,28 @@ class InvitationsStuff < ActiveRecord::Migration
       invite_message.messageable = invitation
       invite_message.save!
     end
+
+    Visit.inviter.each do |visit|
+      invitation = Invitation.new do |invitation|
+        invitation.account    = visit.user.account
+        invitation.inviteable = visit.visitable
+        invitation.gender     = visit.inviter_gender
+        invitation.kind       = :inviter
+      end
+
+      invitation.save!
+    end
+
+    Visit.invited.each do |visit|
+      invitation = Invitation.new do |invitation|
+        invitation.account    = visit.user.account
+        invitation.inviteable = visit.visitable
+        invitation.gender     = visit.invited_gender
+        invitation.kind       = :invited
+      end
+
+      invitation.save!
+    end
   end
 
   def down
