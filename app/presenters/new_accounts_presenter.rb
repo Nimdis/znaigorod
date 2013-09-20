@@ -4,8 +4,8 @@ class InviterCategoriesFilter
   attr_accessor :selected, :available
 
   def initialize(categories, hidden = false)
-    @available   = Values.instance.invitation.categories
-    @selected    = (categories || []).delete_if(&:blank?) & @available
+    @available = Values.instance.invitation.categories
+    @selected  = (categories || []).delete_if(&:blank?) & @available
   end
 
   def used?
@@ -13,27 +13,27 @@ class InviterCategoriesFilter
   end
 end
 
-class NewAccountKindFilter
-  attr_accessor :selected, :available, :kind
+class NewAccountGenderFilter
+  attr_accessor :selected, :available, :gender
 
-  def initialize(kind = 'all')
-    @kind = kind
+  def initialize(gender)
+    @gender = available_values.keys.map(&:to_s).include?(gender) ? gender : available_values.keys.first.to_s
   end
 
-  def values
-    { :all => 'Все', :male => 'Парни', :female => 'Девушки' }
+  def available_values
+    { :undefined => 'Все', :male => 'Парни', :female => 'Девушки' }
   end
 
-  def all_selected?
-    kind == 'all'
+  def undefined_selected?
+    gender == 'undefined'
   end
 
   def male_selected?
-    kind == 'male'
+    gender == 'male'
   end
 
   def female_selected?
-    kind == 'female'
+    gender == 'female'
   end
 end
 
@@ -58,9 +58,9 @@ class NewAccountsPresenter
 
   def initialize_filters
     @inviter_categories_filter ||= InviterCategoriesFilter.new(inviter_categories)
-    @kind_filter ||= NewAccountKindFilter.new(kind)
+    @gender_filter ||= NewAccountGenderFilter.new(gender)
   end
-  attr_reader :inviter_categories_filter, :kind_filter
+  attr_reader :inviter_categories_filter, :gender_filter
 
   def collection
     searcher.results
@@ -69,7 +69,7 @@ class NewAccountsPresenter
   def searcher_params
     @searcher_params ||= {}.tap do |params|
       params[:kind] = 'KIND' if false
-      params[:gender] = 'GENDER' if false
+      params[:gender] = gender_filter.gender
       params[:inviter_categories] = inviter_categories_filter.selected
     end
   end
