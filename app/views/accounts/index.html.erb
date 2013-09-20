@@ -1,16 +1,4 @@
-<div class='presentation_filters account'>
-  <div class='order_by'>
-    <p>Сортировать по:</p>
-    <ul>
-      <% @presenter.sortings_links.each do |sortings_link| %>
-        <li<%= " class=selected" if sortings_link[:selected] %>>
-          <%= link_to sortings_link[:title],
-            accounts_path(sortings_link[:parameters]),
-            :class => sortings_link[:parameters][:order_by] %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+<div class="presentation_filters accounts">
 </div>
 
 <div class="accounts_list">
