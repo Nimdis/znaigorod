@@ -5,54 +5,37 @@
       $("<div id='webcam_dialog' />").appendTo("body")
     $("#webcam_dialog")
 
-  render_swfobject_dialog = (width, height, file_hash, dialog_title) ->
+  render_jwobject_dialog = (width, height, file, dialog_title) ->
     webcam_dialog = init_webcam_dialog()
     webcam_dialog.html("").hide()
-    $("<center><div id='swfobject_container' /></center>").appendTo(webcam_dialog)
-    conf = swf_config(width, height, file_hash)
-    swfobject.embedSWF(
-      conf.swfUrl,
-      conf.id,
-      conf.width,
-      conf.height,
-      conf.version,
-      conf.expressInstallSwfurl,
-      conf.flashvars,
-      conf.params,
-      conf.attributes
-    )
+    html = "" +
+      "<center>" +
+      "<div id='jwplayer_container'>" +
+      "<video src='#{file} width=#{width} height=#{height} /></video>" +
+      "</div>" +
+      "</center>"
+    $(html).appendTo(webcam_dialog)
     webcam_dialog.dialog
       title: dialog_title
       modal: true
       width: width.toNumber() + 36
       height: height.toNumber() + 46
       resizable: false
+      open: (event, ui) ->
+        jwplayer.key = 'SZeRfk9B2yiaCiIDORB62cYchqlDqQok9qZQCr1qkNg='
+        jwplayer('jwplayer_container').setup
+          autostart: true
+          file: file
+          flashplayer: '/assets/jwplayer.swf'
+          width: width
+          height: height
+          fallback: false
+        true
       close: (event, ui) ->
         $(this).dialog('destroy')
         $(this).remove()
         true
     true
-
-  swf_config = (width, height, file_hash) ->
-    "swfUrl": "/assets/player.swf"
-    "id": "swfobject_container"
-    "width": width.toNumber()
-    "height": height.toNumber()
-    "version": "9.0.115"
-    "expressInstallSwfurl": "/assets/exp_inst.swf"
-    "flashvars":
-      "file": file_hash
-      "vast_preroll": "/assets/vastconverter.xml"
-      "vast_overlay": "/assets/vastconverter.xml"
-      "st": "/assets/webcam.txt"
-    "params":
-      "bgcolor": "#ffffff"
-      "allowFullScreen": "true"
-      "allowScriptAccess": "always"
-      "wmode": "opaque"
-    "attributes":
-      "id":"swfobject_container"
-      "name":"swfobject_container"
 
   $(".webcams_list .webcam_jw").each (index, item) ->
     block = $(this)
@@ -60,9 +43,9 @@
     link.click (event) ->
       width = block.attr("data-width")
       height = block.attr("data-height")
-      file_hash = block.attr("data-file")
+      file = block.attr("data-file")
       dialog_title = "#{link.text()}. #{link.next("p").text()}"
-      render_swfobject_dialog(width, height, file_hash, dialog_title)
+      render_jwobject_dialog(width, height, file, dialog_title)
       false
     true
   true
