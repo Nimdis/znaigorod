@@ -16,7 +16,7 @@ class Afisha < ActiveRecord::Base
                   :distribution_starts_on, :distribution_ends_on,
                   :original_title, :trailer_code, :vk_aid, :yandex_fotki_url, :constant,
                   :age_min, :age_max, :state_event, :state, :user_id, :kind, :vk_event_url,
-                  :fb_likes, :odn_likes, :vkontakte_likes
+                  :fb_likes, :odn_likes, :vkontakte_likes, :poster_vk_id
 
   belongs_to :user
 
@@ -32,7 +32,7 @@ class Afisha < ActiveRecord::Base
   has_many :tickets, :dependent => :destroy
   has_many :copies, :through => :tickets
 
-  has_many :versions, :as => :versionable, :dependent => :destroy
+  has_many :versions, :as => :versionable, :dependent => :destroy, :order => 'id ASC'
   has_many :visits, :as => :visitable, :dependent => :destroy, order: 'acts_as_inviter, acts_as_invited'
   has_many :votes, :as => :voteable, :dependent => :destroy
   has_many :page_visits, :as => :page_visitable, :dependent => :destroy
@@ -182,6 +182,53 @@ class Afisha < ActiveRecord::Base
   has_many :bets, :dependent => :destroy, :order => 'bets.id DESC'
 
   default_value_for :allow_auction, false
+
+  def check_poster_changed?
+    version = JSON.parse(self.versions.last.body) if self.versions.any?
+
+    return true if version && version.has_key?('poster_url')
+
+    false
+  end
+
+  def vk_client
+    VkontakteApi::Client.new(User.find(132).token)
+  end
+
+  def vk_album_id(client)
+    album_title = "Афиши #{I18n.l(Time.zone.today, :format => '%B-%Y')}"
+    album_id = nil
+    album = client.photos.get_albums(owner_id: -58652180).select{|g| g.title == album_title}
+
+    if album.one?
+      album_id = album.first.aid
+    else
+      album_id = create_vk_album(client)
+    end
+
+    album_id
+  end
+
+  def create_vk_album(client)
+    album = client.photos.create_album(title: "Афиши #{I18n.l(Time.zone.today, :format => '%B-%Y')}", group_id: 58652180, comment_privacy: 1, privacy: 1)
+    album.aid
+  end
+
+  def upload_poster_to_vk
+    client = vk_client
+    begin
+      album_id = vk_album_id(client)
+      up_serv = client.photos.get_upload_server(aid: album_id, group_id: 58652180)
+      file = Tempfile.new([poster_image_file_name,'.jpg'])
+      file.binmode
+      file.write open(poster_url).read
+      upload = VkontakteApi.upload(url: up_serv.upload_url, photo: [file.path, 'image/jpeg'])
+      photo = client.photos.save(upload)
+      file.close!
+      self.update_column(:poster_vk_id, photo.first.id)
+    rescue VkontakteApi::Error => e
+    end
+  end
 
   def price_min
     return 0 if showings.actual.empty?
