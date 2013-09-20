@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class InviterCategoriesFilter
+class InvitationCategoriesFilter
   attr_accessor :selected, :available
 
   def initialize(categories, hidden = false)
@@ -41,26 +41,20 @@ class NewAccountsPresenter
   include ActiveAttr::MassAssignment
 
   attr_accessor :gender, :kind,
-                :inviter_categories, :invited_categoires,
+                :inviter_categories, :invited_categories,
                 :invites, :waiting_invitation,
                 :order_by, :page, :per_page
 
+  attr_reader :inviter_categories_filter, :invited_categories_filter,
+    :gender_filter
+
   def initialize(args)
     super(args)
-    self.inviter_categories ||= []
-    self.invited_categoires ||= []
 
-    @page ||= 1
-    @per_page   = 18
-
+    normalize_args
     initialize_filters
   end
 
-  def initialize_filters
-    @inviter_categories_filter ||= InviterCategoriesFilter.new(inviter_categories)
-    @gender_filter ||= NewAccountGenderFilter.new(gender)
-  end
-  attr_reader :inviter_categories_filter, :gender_filter
 
   def collection
     searcher.results
@@ -75,6 +69,19 @@ class NewAccountsPresenter
   end
 
   private
+
+  def normalize_args
+    @inviter_categories ||= []
+    @invited_categoires ||= []
+    @page               ||= 1
+    @per_page           = 18
+  end
+
+  def initialize_filters
+    @inviter_categories_filter ||= InvitationCategoriesFilter.new(inviter_categories)
+    @invited_categories_filter ||= InvitationCategoriesFilter.new(invited_categories)
+    @gender_filter             ||= NewAccountGenderFilter.new(gender)
+  end
 
   def searcher
     @searcher ||= HasSearcher.searcher(:accounts, searcher_params).tap { |s|
