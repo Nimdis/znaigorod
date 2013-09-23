@@ -51,3 +51,21 @@ class Invitation < ActiveRecord::Base
     inviteable.visits.find_or_create_by_user_id account.users.first.id
   end
 end
+
+# == Schema Information
+#
+# Table name: invitations
+#
+#  id              :integer          not null, primary key
+#  inviteable_id   :integer
+#  inviteable_type :string(255)
+#  account_id      :integer
+#  kind            :string(255)
+#  category        :string(255)
+#  description     :text
+#  gender          :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  invited_id      :integer
+#
+
