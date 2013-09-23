@@ -182,53 +182,6 @@ class Afisha < ActiveRecord::Base
 
   default_value_for :allow_auction, false
 
-  def check_poster_changed?
-    version = JSON.parse(self.versions.last.body) if self.versions.any?
-
-    return true if version && version.has_key?('poster_url')
-
-    false
-  end
-
-  def vk_client
-    VkontakteApi::Client.new(User.find(132).token)
-  end
-
-  def vk_album_id(client)
-    album_title = "Афиши #{I18n.l(Time.zone.today, :format => '%B-%Y')}"
-    album_id = nil
-    album = client.photos.get_albums(owner_id: -58652180).select{|g| g.title == album_title}
-
-    if album.one?
-      album_id = album.first.aid
-    else
-      album_id = create_vk_album(client)
-    end
-
-    album_id
-  end
-
-  def create_vk_album(client)
-    album = client.photos.create_album(title: "Афиши #{I18n.l(Time.zone.today, :format => '%B-%Y')}", group_id: 58652180, comment_privacy: 1, privacy: 1)
-    album.aid
-  end
-
-  def upload_poster_to_vk
-    client = vk_client
-    begin
-      album_id = vk_album_id(client)
-      up_serv = client.photos.get_upload_server(aid: album_id, group_id: 58652180)
-      file = Tempfile.new([poster_image_file_name,'.jpg'])
-      file.binmode
-      file.write open(poster_url).read
-      upload = VkontakteApi.upload(url: up_serv.upload_url, photo: [file.path, 'image/jpeg'])
-      photo = client.photos.save(upload)
-      file.close!
-      self.update_column(:poster_vk_id, photo.first.id)
-    rescue VkontakteApi::Error => e
-    end
-  end
-
   def price_min
     return 0 if showings.actual.empty?
 
@@ -453,6 +406,57 @@ class Afisha < ActiveRecord::Base
   def save_version
     self.versions.create!(:body => self.changes.to_json(:except => ignore_fields))
   end
+
+  # >>>>>>>>>>>> Poster to VK >>>>>>>>>>>
+  def check_poster_changed?
+    version = JSON.parse(self.versions.last.body) if self.versions.any?
+
+    return true if version && version.has_key?('poster_url')
+
+    false
+  end
+
+  def vk_client
+    VkontakteApi::Client.new(User.find(132).token)
+  end
+
+  def vk_album_id(client)
+    album_title = "Афиши #{I18n.l(Time.zone.today, :format => '%B-%Y')}"
+    album_id = nil
+    album = client.photos.get_albums(owner_id: -58652180).select{|g| g.title == album_title}
+
+    if album.one?
+      album_id = album.first.aid
+    else
+      album_id = create_vk_album(client)
+    end
+
+    album_id
+  end
+
+  def create_vk_album(client)
+    album = client.photos.create_album(title: "Афиши #{I18n.l(Time.zone.today, :format => '%B-%Y')}", group_id: 58652180, comment_privacy: 1, privacy: 1)
+    album.aid
+  end
+
+  def upload_poster_to_vk
+    client = vk_client
+    begin
+      album_id = vk_album_id(client)
+      up_serv = client.photos.get_upload_server(aid: album_id, group_id: 58652180)
+      file = Tempfile.new([self.slug,'.jpg'])
+      file.binmode
+      file.write open(poster_url).read
+      upload = VkontakteApi.upload(url: up_serv.upload_url, photo: [file.path, 'image/jpeg'])
+      photo = client.photos.save(upload)
+      file.close!
+      self.update_column(:poster_vk_id, photo.first.id)
+      photo = photo.first.id.gsub(/photo\d+_/, '')
+      client.photos.edit(oid: -58652180, photo_id: photo, caption: self.title)
+    rescue VkontakteApi::Error => e
+    end
+  end
+  # <<<<<<<<<<<< Poster to VK <<<<<<<<<<<
 
   private
 
