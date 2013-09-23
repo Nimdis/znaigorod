@@ -417,7 +417,7 @@ class Afisha < ActiveRecord::Base
   end
 
   def vk_client
-    VkontakteApi::Client.new(User.find(132).token)
+    VkontakteApi::Client.new(User.find(9).token)
   end
 
   def vk_album_id(client)
@@ -450,9 +450,9 @@ class Afisha < ActiveRecord::Base
       upload = VkontakteApi.upload(url: up_serv.upload_url, photo: [file.path, 'image/jpeg'])
       photo = client.photos.save(upload)
       file.close!
-      self.update_column(:poster_vk_id, photo.first.id)
-      photo = photo.first.id.gsub(/photo\d+_/, '')
-      client.photos.edit(oid: -58652180, photo_id: photo, caption: self.title)
+      photo_vk_id = "photo#{photo.first.owner_id}_#{photo.first.pid}"
+      self.update_column(:poster_vk_id, photo_vk_id)
+      client.photos.edit(oid: photo.first.owner_id, photo_id: photo.first.pid, caption: self.title)
     rescue VkontakteApi::Error => e
     end
   end
