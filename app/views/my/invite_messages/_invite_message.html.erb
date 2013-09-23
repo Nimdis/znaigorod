@@ -4,7 +4,7 @@
   data-account_id="<%= invite_message.account_id %>"
   data-notification_counter="<%= current_user.account.notification_messages.unread.count %>"
   data-dialog_counter="<%= current_user.account.private_messages.unread.count %>"
-  data-invite_counter="<%= current_user.account.invite_messages.unread.count %>">
+  data-invite_counter="<%= current_user.account.received_invite_messages.unread.count %>">
 
   <div class="item <%= invite_message.relation_at(current_user.account) %>">
     <div class="avatar">

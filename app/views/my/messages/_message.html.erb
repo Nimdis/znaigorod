@@ -3,7 +3,7 @@
   data-counter="<%= current_user.account.messages.unread.count %>"
   data-messages="<%= current_user.account.messages.count %>"
   data-dialog_counter="<%= current_user.account.private_messages.unread.count %>"
-  data-invite_counter="<%= current_user.account.invite_messages.unread.count %>"
+  data-invite_counter="<%= current_user.account.received_invite_messages.unread.count %>"
   data-notification_counter="<%= current_user.account.notification_messages.unread.count %>">
 
   <%= render :partial => "my/messages/#{message.messageable.class.name.underscore}_message",
