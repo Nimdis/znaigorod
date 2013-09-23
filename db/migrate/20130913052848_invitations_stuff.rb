@@ -1,6 +1,6 @@
 class InvitationsStuff < ActiveRecord::Migration
   def up
-    Invitation.skip_callback :create, :after
+    Invitation.skip_callback :create, :after, :create_invite_message
 
     InviteMessage.all.each do |invite_message|
       invitation = Invitation.new do |invitation|
