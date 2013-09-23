@@ -968,14 +968,8 @@ ActiveRecord::Schema.define(:version => 20131004094925) do
     t.integer  "user_id"
     t.integer  "visitable_id"
     t.string   "visitable_type"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-    t.boolean  "acts_as_inviter"
-    t.boolean  "acts_as_invited"
-    t.text     "inviter_description"
-    t.text     "invited_description"
-    t.string   "invited_gender"
-    t.string   "inviter_gender"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "visits", ["user_id"], :name => "index_visits_on_user_id"
