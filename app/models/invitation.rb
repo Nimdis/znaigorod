@@ -3,7 +3,8 @@ class Invitation < ActiveRecord::Base
 
   include PresentsAsCheckboxes
 
-  attr_accessible :category, :category_list, :description, :kind, :gender, :invited_id
+  attr_accessible :category, :category_list, :description, :kind, :gender, :invited_id,
+    :category
 
   belongs_to :account
   belongs_to :invited, :class_name => 'Account'
