@@ -1,0 +1,310 @@
+<% content_for :page_title, t('cooperation.service.title', :default => '') %>
+<% content_for :meta_keywords, t('cooperation.service.keywords', :default => '') %>
+<% content_for :meta_description, t('cooperation.service.description', :default => '') %>
+
+<div class='cooperation'>
+
+  <h1>Услуги и цены ЗнайГород</h1>
+
+  <div class='service_left'>
+    <div class='service_payment_wrapper'>
+      <h2>Оплата услуг</h2>
+      <p><%= 'Для оплаты размещения анонса мероприятия укажите в поле "Сумма платежа" оговоренную с менеджером сумму, в поле "Назначение платежа" название мероприятия.'.gilensize %></p>
+      <%= simple_form_for @service_payment do |f| %>
+        <%= f.input :amount %>
+        <%= f.input :details %>
+        <div class='submit'>
+          <%= f.submit 'Оплатить' %>
+        </div>
+      <% end %>
+    </div>
+    <div class='information'>
+      Все услуги возможно оплачивать по бартеру, условия обсуждаются в индивидуальном порядке. При бартере идет повышение +30%.
+    </div>
+  </div>
+
+  <div class='service_right'>
+
+    <div class='toggable'>
+      <div class='toggler'>
+        <a href='#'>&uarr; свернуть</a>
+        <h2>Рекламное размещение (банерная сеть)</h2>
+      </div>
+      <div class='info'>
+        <table>
+          <tr>
+            <th class='center'>Наименование услуги</th>
+            <th class='center'>Период размещения</th>
+            <th class='center'>Цена, руб.</th>
+          </tr>
+          <tr>
+            <td class='black'>1.1 Брендирование</td>
+            <td class='center'>неделя</td>
+            <td class='center'>7000</td>
+          </tr>
+          <tr>
+            <td class='violet'>2.1 Размещение банера 1180 x 100</td>
+            <td class='center'>неделя</td>
+            <td class='center'>3000</td>
+          </tr>
+          <tr>
+            <td class='green'>3.1 Размещение банера 180 x 304</td>
+            <td class='center'>неделя</td>
+            <td class='center'>500</td>
+          </tr>
+          <tr>
+            <td class='red'>3.2 Размещение банера 380 x 304</td>
+            <td class='center'>неделя</td>
+            <td class='center'>950</td>
+          </tr>
+          <tr>
+            <td class='black'>3.3 Размещение банера 580 x 304</td>
+            <td class='center'>неделя</td>
+            <td class='center'>1500</td>
+          </tr>
+          <tr>
+            <td class='orange'>4.1 Размещение банера 180 x 628</td>
+            <td class='center'>неделя</td>
+            <td class='center'>950</td>
+          </tr>
+          <tr>
+            <td class='blue'>4.2 Размещение банера 380 x 628</td>
+            <td class='center'>неделя</td>
+            <td class='center'>1950</td>
+          </tr>
+          <tr>
+            <td class='black'>Индивидуальное изготовление банера</td>
+            <td></td>
+            <td class='center'>от 500</td>
+          </tr>
+        </table>
+        <p>Схема банеров на портале ЗнайГород. Обычное и зеркальное расположение.</p>
+        <p>
+          <%= link_to image_tag('public/cooperation/schema-1.png', :size => '455x409'), asset_path('public/cooperation/schema-1-big.png') %>
+          <%= link_to image_tag('public/cooperation/schema-2.png', :size => '455x409'), asset_path('public/cooperation/schema-2-big.png') %>
+        </p>
+      </div>
+    </div>
+
+    <div class='toggable'>
+      <div class='toggler'>
+        <a href='#'>&darr; развернуть</a>
+        <h2>Информационное размещение</h2>
+      </div>
+      <div class='info'>
+        <table>
+          <tr>
+            <th class='center'>Наименование услуги</th>
+            <th class='center'>Период размещения</th>
+            <th class='center'>Цена, руб.</th>
+          </tr>
+          <tr>
+            <td><strong>Размещение афиши, анонса на портале «ЗнайГород» самостоятельно</strong></td>
+            <td class='center'>постоянно</td>
+            <td class='center'>бесплатно</td>
+          </tr>
+          <tr>
+            <td><strong>Размещение афиши, анонса на портале «ЗнайГород» с помощью менеджера</strong></td>
+            <td class='center'>постоянно</td>
+            <td class='center'>200</td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Размещение новости (обзора)</strong></p>
+              <p class='small'>Объём текста до 2000 знаков; количество фото и видео иллюстраций не ограниченно.</p>
+            </td>
+            <td class='center'>постоянно</td>
+            <td class='center'>900</td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Создание и размещение новости (обзора)</strong></p>
+              <p class='small'>Объём до 2000 знаков, количество фото и видео иллюстраций не ограниченно.</p>
+            </td>
+            <td class='center'>постоянно</td>
+            <td class='center'>1900</td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Размещение статьи (рецензии)</strong></p>
+              <p class='small'>Объём до 10000 знаков; количество фото и видео иллюстраций не ограниченно</p>
+            </td>
+            <td class='center'>постоянно</td>
+            <td class='center'>2500</td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Создание и размещение статьи (рецензии)</strong></p>
+              <p class='small'>Объём до 10000 знаков, количество фото и видео иллюстраций не ограниченно</p>
+            </td>
+            <td class='center'>постоянно</td>
+            <td class='center'>6500</td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Проведение конкурса. Пакет Стандарт</strong></p>
+              <p class='small'>Размещение анонса на портале и в социальных группах ВК, Одноклассники, Facebook, Twitter; анализ ответов; публикация итогов.</p>
+              <p class='small'>Предоставление площадки для индивидуального, личного оформления конкурса.</p>
+            </td>
+            <td class='center'>день</td>
+            <td class='center'>100</td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Проведение конкурса. Пакет Премиум</strong></p>
+              <p class='small'>Разработка концепции конкурса, размещение анонса на портале, в социальных группах ВК, Одноклассники, Facebook, Twitter. Регулярное освещение конкурса на портале и в социальных сетях (не менее 3 раз)</p>
+              <p class='small'>Брендирование портала ЗнайГород в фирменных цветах заказчика. Создание отдельного мероприятия (встречи) в ВК. Ведение встречи, новости, комментарии, ответы, фотографии и видео, тестовые посты (от 2 раз в день). Организация массовой рассылки приглашений на встречу, мероприятие в «В Контакте» (потенциал до 100 000 человек). Платные посты (от 4шт) о конкурсе на сторонних площадках в социальных сетях.</p>
+              <p class='small'>Создание и размещение платной статьи на сторонних тематических ресурсах.</p>
+              <p class='small'>Организация продаж билетов, услуг, товаров и купонов.</p>
+              <p class='small'>Анализ и публикация итогов</p>
+            </td>
+            <td class='center'>от 10 дней</td>
+            <td class='center'>20000</td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Проведение конкурса. Пакет Уникум.</strong></p>
+              <p>Все условия обсуждаются с персональным менеджером.</p>
+            </td>
+            <td class='center'>постоянно</td>
+            <td class='center'>&mdash;</td>
+          </tr>
+          <tr>
+            <td><strong>Проведение интерактивного голосования или опроса.</strong></td>
+            <td class='center'>неделя</td>
+            <td class='center'>500</td>
+          </tr>
+          <tr>
+            <td><strong>Продажа билетов, купонов, услуг и товаров через интернет-портал «ЗнайГород».</strong></td>
+            <td class='center'>постоянно</td>
+            <td class='center'>
+              <p class='nobr'>от 30 рублей,</p>
+              <p class='nobr'>или от 10%</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class='toggable'>
+      <div class='toggler'>
+        <a href='#'>&darr; развернуть</a>
+        <h2>Другие услуги</h2>
+      </div>
+      <div class='info'>
+        <table>
+          <tr>
+            <th class='center'>Наименование услуги</th>
+            <th class='center'>Период размещения</th>
+            <th class='center'>Цена, руб.</th>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Сайт-визитка (или персональная страница)</strong></p>
+              <p class='small'>подробное описание специфики заведения и предоставляемых услуг, особое внимание уникальным особенностям, фото и видео интерьера, 3Д виртуальный тур, новости или афиша заведения, цены, специальные акции, продажа услуг, товаров, билетов или купонов. Услуга Смс- Клиент.</p>
+              <p class='small'>При размещении более 1 заведения скидка от 25%</p>
+            </td>
+            <td class='center'>
+              <p class='nobr'>год</p>
+              <p class='nobr'>6 месяцев</p>
+            </td>
+            <td class='center'>
+              <p class='nobr'>3900</p>
+              <p class='nobr'>2500</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Индивидуальный дизайн и уникальное доменное имя на интернет-портале ЗнайГород.</strong></p>
+              <p class='small'>Пример: заведение.знайгород.рф и zavedenie.znaigorod.ru.</p>
+            </td>
+            <td class='center nobr'>год</td>
+            <td class='center nobr'>1200</td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Услуга «СМС-Клиент».</strong></p>
+              <p class='small'>В каталоге заведений, на персональной странице заведений посредством кнопки «Заказ» на контактный мобильный номер отправляется СМС, с указанием контакта, имени и цели заказа и прочей требуемой информации).</p>
+              <p class='small'>(Примеры названий: «Бронирование столика бесплатно», «Заказать Тур» или «Запись на автомойку»)</p>
+            </td>
+            <td class='center nobr'>&mdash;</td>
+            <td class='center nobr'>от 3руб. за СМС</td>
+          </tr>
+          <tr>
+            <td><strong>Рекламный пост в группе «В Контакте»</strong> <a href='http://vk.com/znaigorod'>http://vk.com/znaigorod</a></td>
+            <td class='center nobr'>&mdash;</td>
+            <td class='center nobr'>250</td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Рекламный пост в группе «В Контакте»</strong> <a href='http://vk.com/znaigorod'>http://vk.com/znaigorod</a></p>
+              <p class='small'>(закрепление в шапке группы на сутки)</p>
+            </td>
+            <td class='center nobr'>сутки</td>
+            <td class='center nobr'>450</td>
+          </tr>
+          <tr>
+            <td><strong>Рекламный пост в группе ЗнайГород в социальной сети «Одноклассники»</strong> <a href='http://odoklassniki.ru/znaigorod'>http://odoklassniki.ru/znaigorod</a></td>
+            <td class='center nobr'>постоянно</td>
+            <td class='center nobr'>150</td>
+          </tr>
+          <tr>
+            <td><strong>Организация рассылки приглашений (более 13 тыс. человек) на мероприятие (встречу) «В Контакте»</strong></td>
+            <td class='center nobr'>неделя</td>
+            <td class='center nobr'>750</td>
+          </tr>
+          <tr>
+            <td><strong>Изготовление виртуального 3Д тура</strong></td>
+            <td class='center nobr'>постоянно</td>
+            <td class='center nobr'>650/точка обзора</td>
+          </tr>
+          <tr>
+            <td><strong>Профессиональная фотосъемка интерьера. До 100 фотографий.</strong></td>
+            <td class='center nobr'>постоянно</td>
+            <td class='center nobr'>1500</td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Установка видеокамеры и организация круглосуточной трансляции с записью видеопотоков, включая рекламный баннер и фирменный логотип.</strong></p>
+              <ul>
+                <li class='small'>Абонентская плата (сервис,  профилактика)</li>
+              </ul>
+            </td>
+            <td class='center'>
+              <p class='nobr'>постоянно</p>
+              <p class='nobr'>год</p>
+            </td>
+            <td class='center'>
+              <p class='nobr'>от 7000</p>
+              <p class='nobr'>от 700</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Установка наружной видеокамеры и интеграция в существующую web-сеть дорожного движения Томска,</strong> <a href='http://znaigorod.ru/webcams'>http://znaigorod.ru/webcams</a><strong>, включая рекламный баннер и фирменный логотип</strong></p>
+              <ul>
+                <li class='small'>Абонентская плата (сервис, профилактика)</li>
+                <li class='small'>Реклама на разделе «Web-камере». Подробности: <a href='http://znaigorod.ru/webcams'>http://znaigorod.ru/webcams</a></li>
+                <li class='small'>Предоставление записи с уличных web-камер</li>
+              </ul>
+            </td>
+            <td class='center'>
+              <p class='nobr'>постоянно</p>
+              <p class='nobr'>год</p>
+              <p class='nobr'>месяц</p>
+              <p class='nobr'>разово</p>
+            </td>
+            <td class='center'>
+              <p class='nobr'>от 12 500</p>
+              <p class='nobr'>от 900</p>
+              <p class='nobr'>500</p>
+              <p class='nobr'>1900</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</div>

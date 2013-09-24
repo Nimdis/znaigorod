@@ -27,6 +27,7 @@ $ ->
   init_poster() if $('.content .left .image a img').length
   init_distribution() if $('.content .distribution').length
   init_galleria() if $('.content .gallery_container').length
+  init_cooperation() if $('.cooperation').length
   init_coupon_colorbox() if $('.coupon .info .left_part a img').length
   init_menu_colorbox() if $('.menus .info .details a img').length
   init_filters_toggler() if $('.need_toggler li').length

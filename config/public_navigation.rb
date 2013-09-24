@@ -31,6 +31,7 @@ SimpleNavigation::Configuration.run do |navigation|
   # navigation.auto_highlight = false
 
   # Define the primary navigation
+
   navigation.items do |primary|
     primary.item :afisha, 'Афиша', root_path, highlights_on: -> { params[:controller] == 'afishas' }
     primary.item :organizations, 'Заведения', organizations_path,
@@ -42,7 +43,7 @@ SimpleNavigation::Configuration.run do |navigation|
       more.item :tickets, 'Распродажа билетов', afisha_index_path(:has_tickets => true, :period => :all), highlights_on: -> { params[:controller] == nil }
       more.item :contests, 'Конкурсы', contests_path, highlights_on: -> { params[:controller] == 'contests' }
       more.item :webcams, 'Веб-камеры', webcams_path, highlights_on: -> { params[:controller] == 'webcams' }
-      more.item :cooperation, 'Услуги и цены ЗнайГород', cooperation_path, highlights_on: -> { params[:controller] == 'cooperation' }
+      more.item :cooperation, 'Реклама', services_path, highlights_on: -> { params[:controller] == 'cooperation' }
     end
 
     # Add an item to the primary navigation. The following params apply:

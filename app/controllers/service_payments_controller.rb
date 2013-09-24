@@ -11,6 +11,7 @@ class ServicePaymentsController < ApplicationController
 
         redirect_to "#{integration_module.service_url}?#{integration_helper.form_fields.to_query}"
       end
+      failure.html { redirect_to cooperation_path }
     end
   end
 end

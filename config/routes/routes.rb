@@ -12,33 +12,38 @@ Znaigorod::Application.routes.draw do
     delete '/users/sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
   end
 
+  %w[services benefit statistics our_customers].each do |method|
+    get method => "cooperation##{method}"
+  end
+
+  get '/cooperation' => redirect('/services')
+
   get 'accounts_search' => 'accounts_search#show',         :as => :accounts_search
-  get 'cooperation'     => 'cooperation#index'
-  get 'geocoder'        => 'geocoder#get_coordinates'
-  get 'search'          => 'search#search',                :as => :search
-  get 'webcams'         => 'webcams#index'
-  get 'yamp_geocoder'   => 'geocoder#get_yamp_coordinates'
+  get 'geocoder' => 'geocoder#get_coordinates'
+  get 'search' => 'search#search',                :as => :search
+  get 'webcams' => 'webcams#index'
+  get 'yamp_geocoder' => 'geocoder#get_yamp_coordinates'
 
   resources :afisha, :only => [], :controller => 'afishas' do
     resources :comments, :only => [:new, :show, :create]
     resources :visits
 
-    get 'liked'        => 'votes#liked',         :as => :liked
+    get 'liked' => 'votes#liked', :as => :liked
     get 'photogallery' => 'afisha#photogallery', :as => :photogallery
-    get 'trailer'      => 'afisha#trailer',      :as => :trailer
+    get 'trailer' => 'afisha#trailer', :as => :trailer
 
-    put 'change_vote'    => 'votes#change_vote',     :as => :change_vote
+    put 'change_vote' => 'votes#change_vote', :as => :change_vote
     put 'destroy_visits' => 'visits#destroy_visits', :as => :destroy_visits
   end
 
   get '/afisha' => 'afishas#index', :as => :afisha_index, :controller => 'afishas'
   get '/afisha/:id' => 'afishas#show', :as => :afisha_show, :controller => 'afishas'
 
-  resources :saunas,   :only => :index
+  resources :saunas, :only => :index
 
   get '/tickets' => redirect('/afisha?has_tickets=true')
 
-  resources :coupons,  :only => [:index, :show] do
+  resources :coupons, :only => [:index, :show] do
     get 'page/:page', :action => :index, :on => :collection
     put 'change_vote' => 'votes#change_vote', :as => :change_vote
     put 'liked' => 'votes#liked', :as => :liked

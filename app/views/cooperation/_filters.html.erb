@@ -1,0 +1,15 @@
+<div class='filters_wrapper'>
+  <div class='filters cooperation'>
+    <div class='by_kind'>
+      <ul>
+        <% %w[services benefit statistics our_customers].each do |item| %>
+          <li class='<%= item %><%= ' selected' if params[:action] == item %>'>
+            <%= link_to item do %>
+              <%= content_tag :span, t("cooperation.#{item}.link"), class: :name %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

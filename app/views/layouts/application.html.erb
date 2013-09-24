@@ -7,9 +7,21 @@
     <meta name='yandex-verification' content='6f2efa53b5d49370' />
     <meta name='verify-reformal' content='de04fd7b8e7499f228171212' />
     <meta property='fb:app_id' content='131807160304776'/>
-    <title><%= content_for?(:page_title) ? "#{yield(:page_title)}".squish.html_safe : I18n.t('meta.default.title').squish.html_safe %></title>
-    <meta name='keywords' content='<%= content_for?(:meta_keywords) ? "#{yield(:meta_keywords)}, #{I18n.t('meta.default.keywords')}".squish.html_safe : I18n.t('meta.default.keywords') %>' />
-    <meta name='description' content='<%= content_for?(:meta_description) ? "#{yield(:meta_description)}. #{I18n.t('meta.default.description')}".squish.html_safe : I18n.t('meta.default.description') %>' />
+    <% if content_for?(:page_title) %>
+      <title><%= yield(:page_title).squish.html_safe %></title>
+    <% else %>
+      <title><%= I18n.t('meta.default.title', :default => '').squish.html_safe %></title>
+    <% end %>
+    <% if content_for?(:meta_keywords) %>
+      <meta name='keywords' content='<%= "#{yield(:meta_keywords)}, #{I18n.t('meta.default.keywords', :default => '')}".squish.html_safe %>' />
+    <% else %>
+      <meta name='keywords' content='<%= I18n.t('meta.default.keywords', :default => '') %>' />
+    <% end %>
+    <% if content_for?(:meta_description) %>
+      <meta name='description' content='<%= "#{yield(:meta_description)}. #{I18n.t('meta.default.description', :default => '')}".squish.html_safe %>' />
+    <% else %>
+      <meta name='description' content='<%= I18n.t('meta.default.description', :default => '') %>' />
+    <% end %>
     <%= yield(:extra_meta) %>
     <%= favicon_link_tag %>
     <%= yield(:stylesheets) %>

@@ -40,6 +40,7 @@
  * = require ./preload_images
  * = require ./show_tipsy
  * = require ./more_main_menu
+ * = require ./cooperation
  * = require ./comments
  * = require ./votes
  * = require ./jscrollpane
