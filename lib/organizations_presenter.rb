@@ -133,6 +133,13 @@ module OrganizationsPresenter
     searcher.results
   end
 
+  def selected_category
+    @selected_category ||= "".tap do |str|
+      str << (categories_filter[:selected].first || pluralized_kind)
+      str.replace Russian.translit(str).gsub(" ", "_")
+    end
+  end
+
   def kinds_links
     @kinds_links ||= [].tap do |kinds_links|
       self.class.suborganization_kinds.map(&:name).map(&:underscore).each do |suborganization_kind|
