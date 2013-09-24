@@ -6,6 +6,19 @@
     font-size: 22px
     margin-bottom: 10px
 
+  p
+    margin-bottom: 10px
+
+  table
+    width: 100%
+    margin-bottom: 10px
+
+    p
+      margin-bottom: 0
+
+  img
+    border: 1px solid #ccc
+
   .service_left
     width: 250px
     float: left
@@ -81,16 +94,14 @@
           font-size: 14px
 
         a
+          display: none
           float: right
           margin-top: 2px
 
       .info
-        display: none
         position: relative
 
         table
-          width: 100%
-          margin-bottom: 10px
 
           th,
           td
@@ -100,9 +111,6 @@
 
           th
             color: #999
-
-          td p
-            margin-bottom: 0
 
           .small
             font-size: 11px
@@ -134,8 +142,68 @@
           .blue
             color: #009ad8
 
-        p
-          margin-bottom: 10px
+  .benefit_left
+    width: 630px
+    float: left
 
-        img
-          border: 1px solid #ccc
+    table
+
+      th
+        text-align: center
+        padding: 0 0 10px 0
+
+      td
+        width: 13%
+        height: 45px
+        text-align: center
+        padding: 5px 0
+        text-transform: uppercase
+        border-top: 1px solid #ccc
+        border-bottom: 1px solid #ccc
+
+        &:first-child
+          width: 35%
+          text-align: left
+          text-transform: none
+          border-left: 1px solid #ccc
+          border-right: 1px solid #ccc
+          padding: 5px 10px
+
+        &:last-child
+          border-right: 1px solid #ccc
+
+        span
+          +inline-block
+
+          &.neutral
+            color: #999
+
+          &.negative,
+          &.positive
+            overflow: hidden
+            width: 24px
+            height: 18px
+            text-indent: -9999em
+            background: transparent image_url('public/positive_negative_factor_sprite.png') no-repeat center center
+
+          &.positive
+            background-position: center 0
+
+          &.negative
+            background-position: center -33px
+
+          &.low
+            color: #009ad8
+
+          &.middle
+            color: #999
+
+          &.high
+            color: #f60
+
+  .benefit_right
+    margin: 35px 0 0 650px
+
+    h3
+      font-weight: bold
+      margin-bottom: 5px
