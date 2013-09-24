@@ -316,7 +316,7 @@ GEM
     paperclip-elvfs (0.0.5.2)
       curb
       paperclip
-    pg (0.14.1)
+    pg (0.17.0)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
     progress_bar (0.4.0)
