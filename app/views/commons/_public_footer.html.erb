@@ -20,13 +20,21 @@
     </div>
     <div class='counters'>
       <% if Rails.env.production? %>
+
         <!-- Yandex.Metrika informer -->
         <a class='inline_block' href="http://metrika.yandex.ru/stat/?id=14923525&amp;from=informer"
           target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/14923525/3_0_20BBFBFF_009BDBFF_1_pageviews"
           style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:14923525,lang:'ru'});return false}catch(e){}"/></a>
         <!-- /Yandex.Metrika informer -->
-        <a class='inline_block' href='http://region70.ru/' target='_blank' title='Сайты Томска'><img src='http://region70.ru/get88x31/' width='88' height='31' border='0'></a>
+
+        <!-- TBE informer -->
         <span class='inline_block' id='tbec'><script type='text/javascript'>setTimeout('var tbex=document.createElement("SCRIPT");tbex.type="text/javascript";tbex.src="http://c.tbex.ru/z/a!8831!znaigorod.ru!c.js?rev=2"+String.fromCharCode(38)+"rnd="+(new Date().getTime());(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(tbex)',1)</script></span><noscript><a href="http://tbe.tom.ru/site/znaigorod.ru/"><img src='http://c.tbex.ru/z/a!8831!znaigorod.ru!c.gif' alt='TBE' /></a></noscript>
+        <!-- /TBE informer -->
+
+        <!-- Region70 -->
+        <a class='inline_block' href='http://region70.ru/' target='_blank' title='Сайты Томска'><img src='http://region70.ru/get88x31/' width='88' height='31' border='0'></a>
+        <!-- /Region70 -->
+
       <% end %>
     </div>
   </div>
