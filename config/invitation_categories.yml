@@ -1,0 +1,72 @@
+'в кино':
+  afisha:
+    kinds:
+      - movie
+
+  organization:
+    suborganizations:
+      - entertainment
+    categories:
+      - кинотеатры
+
+'на вечеринку':
+  afisha:
+    kinds:
+      - party
+
+  organization:
+    suborganizations:
+      - entertainment
+
+    categories:
+      - ночные клубы
+
+'на концерт':
+  afisha:
+    kinds:
+      - concert
+
+  organization:
+    suborganizations:
+      - entertainment
+
+    categories:
+      - филармонии
+      - ночные клубы
+      - театры
+      - бары
+
+'в сауну':
+  afisha:
+    kinds: []
+
+  organization:
+    suborganizations:
+      - sauna
+
+    categories: []
+
+'в театр':
+  afisha:
+    kinds:
+      - spectacle
+
+  organization:
+    suborganizations:
+      - entertainment
+
+    categories:
+      - театры
+
+'на выставку':
+  afisha:
+    kinds:
+      - exhibition
+
+  organization:
+    suborganizations:
+      - culture
+
+    categories:
+      - музеи
+
