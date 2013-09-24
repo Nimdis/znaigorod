@@ -206,9 +206,10 @@ class Afisha < ActiveRecord::Base
     float :age_min
     float :age_max
 
-    string :state
-    string(:kind, :multiple => true) { kind.map(&:value) }
     string :search_kind
+    string :state
+    string(:invitation_categories, :multiple => true) { InvitationCategories.instance.categories_for_afisha self }
+    string(:kind, :multiple => true) { kind.map(&:value) }
 
     text :title,                :boost => 1.0 * 1.2
     text :title_ru,             :boost => 1.0,        :more_like_this => true

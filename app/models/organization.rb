@@ -155,10 +155,11 @@ class Organization < ActiveRecord::Base
 
     latlon(:location) { Sunspot::Util::Coordinates.new(latitude, longitude) }
 
-    string :status
-    string(:suborganizations, :multiple => true) { suborganizations.map(&:class).map(&:name).map(&:underscore) }
-    string(:kind, :multiple => true) { ['organization'] }
     string :search_kind
+    string :status
+    string(:invitation_categories, :multiple => true) { InvitationCategories.instance.categories_for_organization self }
+    string(:kind, :multiple => true) { ['organization'] }
+    string(:suborganizations, :multiple => true) { suborganizations.map(&:class).map(&:name).map(&:underscore) }
 
     text :title,                :boost => 1.0 * 1.2
     text :title_ru,             :boost => 1.0,              :more_like_this => true
