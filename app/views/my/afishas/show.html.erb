@@ -92,6 +92,12 @@
           <p><span class='alert'>Нет</span> описания</p>
         <% end %>
         <p><%= link_to 'изменить описание', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %></p>
+        <% if @afisha.vk_event_url? %>
+          <%= link_to "Страница события ВКонтакте", @afisha.vk_event_url %>
+        <% else %>
+          <p><span class='alert'>Нет</span> ссылки на событие ВКонтакте</p>
+        <% end %>
+        <p><%= link_to 'изменить ссылку', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %></p>
         <% if @afisha.html_attachments.present? %>
           <%= @afisha.html_attachments %>
         <% else %>

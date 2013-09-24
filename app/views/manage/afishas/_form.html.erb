@@ -5,6 +5,7 @@
 <%= f.input :title %>
 <%= f.input :original_title %>
 <%= f.input :description, :input_html => { :class => 'description' } %>
+<%= f.input :vk_event_url %>
 <%= f.input :tag %>
 <%= f.input :allow_auction %>
 <%= f.input :trailer_code %>
@@ -15,7 +16,6 @@
 <%= f.input :constant %>
 <%= f.input :age_min %>
 <%= f.input :age_max %>
-<%= f.input :vk_event_url %>
 
 <% unless f.object.affiche_schedule.try :persisted? %>
   <div class="showings_fields">
