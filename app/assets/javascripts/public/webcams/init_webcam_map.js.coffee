@@ -33,9 +33,13 @@
         iconImageSize: [37, 42]
 
       point.events.add 'click', (event) ->
+        hash = event.get('target').properties.get('id')
+        window.location.hash = hash
         link.click()
 
       map.geoObjects.add point
+
+      link.click() if window.location.hash.length && window.location.hash.substring(1) == id
 
       true
 
