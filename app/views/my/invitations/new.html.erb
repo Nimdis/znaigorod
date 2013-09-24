@@ -11,7 +11,7 @@
 
   <% unless @invitation.inviteable %>
     <%= f.input :category, :collection => InvitationCategories.instance.invitation_categories.keys, :include_blank => false %>
-    <%= link_to 'уточнить', '#' %>
+    <%= link_to 'уточнить', invitation_categories_search_path(:invitation_category => 'в кино'), :remote => true %>
   <% end %>
 
   <%= f.input :description %>
