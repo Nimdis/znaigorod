@@ -24,6 +24,12 @@
     <%= f.input :messageable_id, as: :hidden, :input_html => { :value => parent.id } %>
     <%= f.input :messageable_type, as: :hidden, :input_html => { :value => parent.class.name } %>
     <%= f.input :invite_kind, as: :hidden, :input_html => { :value => acts_as } %>
-    <%= f.submit t("invite.#{acts_as}"), class: 'submit_dialog' %>
+    <%= f.submit t("invite.#{acts_as}"),
+                 class: 'submit_dialog',
+                 :onClick => 'share_on_click(this);',
+                 'data-owner_id' => account.users.first.try(:vk_uid),
+                 'data-message' => "#{t("invitation.#{acts_as}.#{parent.class.name.underscore}")} \"#{parent}\"",
+                 'data-attachments' => data_attachments(parent),
+                 'data-additinal_message' => '.additional_message' %>
   <% end %>
 <% end %>

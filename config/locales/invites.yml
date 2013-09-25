@@ -25,6 +25,14 @@ ru:
         invited: Запрос отправлен
         inviter: Приглашена
 
+  invitation:
+    inviter:
+      afisha: Приглашаю тебя посетить
+      organization: Приглашаю тебя посетить
+    invited:
+      afisha: Пригласи меня на
+      organization: Пригласи меня в
+
   visit:
     afisha: Участники
     organization: Посетители
