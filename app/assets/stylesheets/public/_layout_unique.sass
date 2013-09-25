@@ -64,6 +64,52 @@
 
   +unique_content_style
 
+.lazertag_content_wrapper
+  background: #1c272b image_url('public/lazertag/bg.jpg') no-repeat center top
+
+  .lazertag_logo
+    width: 1300px
+    height: 110px
+    background: transparent image_url('public/lazertag/logo.png') no-repeat center top
+    margin: 0 auto
+
+  +unique_content_style
+
+  .content
+    background: transparent image_url('public/lazertag/content_bg.png') repeat left top
+    color: #fff
+
+    a
+      color: #3ebcee
+
+    .organization_show
+      .left
+        border: 1px solid #3fbbee
+
+        .user_actions
+          border-bottom: 1px solid #3fbbee
+
+      .center
+        .phone_wrapper
+          background: transparent image_url('public/lazertag/icon_phone.png') no-repeat 0 4px
+
+        .comment_form
+          div.text
+            border: none !important
+            padding: 0
+
+        .comment_item
+          .comment_wrapper
+            &:hover, &.active
+              background: none
+
+      .right
+        .wrapper
+          border: 1px solid #3fbbee
+
+          .yandex_map
+            background: transparent
+
 .lovekafe_content_wrapper
   background-color: #fff
   +background(linear-gradient(top, #fff, #f76663))
