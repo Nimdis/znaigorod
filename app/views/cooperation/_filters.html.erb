@@ -4,9 +4,7 @@
       <ul>
         <% %w[services benefit statistics our_customers].each do |item| %>
           <li class='<%= item %><%= ' selected' if params[:action] == item %>'>
-            <%= link_to item do %>
-              <%= content_tag :span, t("cooperation.#{item}.link"), class: :name %>
-            <% end %>
+            <%= link_to content_tag(:span, t("cooperation.#{item}.link"), class: :name), item %>
           </li>
         <% end %>
       </ul>

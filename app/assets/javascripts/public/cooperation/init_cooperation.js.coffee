@@ -16,7 +16,8 @@
 
   poster = $('.cooperation a img')
   poster.each (index, item) ->
-    $(item).closest('a').colorbox
+    return true if $(this).closest('.statistics').length
+    $(this).closest('a').colorbox
       'close': 'закрыть'
       'current': '{current} / {total}'
       'maxHeight': '98%'
