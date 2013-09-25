@@ -21,7 +21,7 @@ Znaigorod::Application.routes.draw do
   get 'webcams'         => 'webcams#index'
   get 'yamp_geocoder'   => 'geocoder#get_yamp_coordinates'
 
-  get 'invitation_categories_search' => 'invitation_categories_search#show'
+  get 'inviteables_search' => 'inviteables_search#show'
 
   resources :afisha, :only => [], :controller => 'afishas' do
     resources :comments, :only => [:new, :show, :create]

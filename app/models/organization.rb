@@ -157,7 +157,7 @@ class Organization < ActiveRecord::Base
 
     string :search_kind
     string :status
-    string(:invitation_categories, :multiple => true) { InvitationCategories.instance.categories_for_organization self }
+    string(:inviteable_categories, :multiple => true) { Inviteables.instance.categories_for_organization self }
     string(:kind, :multiple => true) { ['organization'] }
     string(:suborganizations, :multiple => true) { suborganizations.map(&:class).map(&:name).map(&:underscore) }
 

@@ -208,7 +208,7 @@ class Afisha < ActiveRecord::Base
 
     string :search_kind
     string :state
-    string(:invitation_categories, :multiple => true) { InvitationCategories.instance.categories_for_afisha(self) if actual? }
+    string(:inviteable_categories, :multiple => true) { Inviteables.instance.categories_for_afisha(self) if actual? }
     string(:kind, :multiple => true) { kind.map(&:value) }
 
     text :title,                :boost => 1.0 * 1.2
