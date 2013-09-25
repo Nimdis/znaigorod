@@ -4,7 +4,7 @@ class OrganizationsCatalogPresenter
   include ActiveAttr::MassAssignment
   attr_accessor :categories,
                 :lat, :lon, :radius,
-                :page, :per_page
+                :page, :per_page, :only_clients
 
   include Rails.application.routes.url_helpers
 
@@ -19,6 +19,12 @@ class OrganizationsCatalogPresenter
 
   def categories_filter
     Hashie::Mash.new :selected => [], :available => []
+  end
+
+  def searcher_params
+    search_params = super
+    search_params.merge!({:status => 'client'}) if @only_clients
+    search_params
   end
 
   def categories_links

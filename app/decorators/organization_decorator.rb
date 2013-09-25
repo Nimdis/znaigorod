@@ -80,7 +80,7 @@ class OrganizationDecorator < ApplicationDecorator
   end
 
   def decorated_phones
-    return if phone.blank?
+    return h.content_tag :div, "&nbsp;".html_safe, class: 'phone' if phone.blank?
     phones = phone.squish.split(', ')
     return h.content_tag :div, phones.first, class: 'phone' if phones.one?
     return h.content_tag :div, "#{phones.first}&hellip;".html_safe, class: 'phone many', title: phones.join(', ') if phones.many?

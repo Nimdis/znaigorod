@@ -55,6 +55,7 @@ end
 
 HasSearcher.create_searcher :organizations do
   models :organization
+  property :status
 
   property :location do |search|
     search.with(:location).in_bounding_box(

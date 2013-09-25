@@ -3,7 +3,7 @@
     <%= post.truncated_title_link(50) %>
   </div>
 
-  <%= post.annotation_image(215, 164) if post.annotation_image? %>
+  <%= post.annotation_image(218, 166) if post.annotation_image? %>
   <div class="<%= post.annotation_image? ? 'text_with_image' : 'text' %>">
     <%= link_to post.truncated_description(180), post_path(post) %>
 

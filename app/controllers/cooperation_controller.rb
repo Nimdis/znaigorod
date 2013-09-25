@@ -1,11 +1,19 @@
 class CooperationController < ApplicationController
 
-  %w[benefit statistics our_customers].each do |method|
-    define_method(method){}
+  def benefit
+  end
+
+  def statistics
   end
 
   def services
     @service_payment = ServicePayment.new
+  end
+
+  def our_customers
+    @presenter = OrganizationsCatalogPresenter.new(params.merge(:only_clients => true))
+
+    render partial: 'organizations/organizations_posters', layout: false and return if request.xhr?
   end
 
 end
