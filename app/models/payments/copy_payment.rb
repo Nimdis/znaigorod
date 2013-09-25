@@ -68,7 +68,7 @@ class CopyPayment < Payment
 
   def send_emails
     paymentable.emails.each do |email|
-      CopyPaymentMailer.notification(email, self).deliver
+      CopyPaymentMailer.delay(:queue => 'mailer').notification(email, self)
     end
   end
 end
