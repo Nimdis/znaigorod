@@ -214,10 +214,6 @@ class AfishaDecorator < ApplicationDecorator
     simple_format
   end
 
-  auto_html_for :description do
-    link :target => '_blank', :rel => 'nofollow'
-  end
-
   def distribution_movie_grouped_showings
     {}.tap do |hash|
       showings.group_by(&:starts_on).each do |date, showings|

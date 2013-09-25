@@ -335,6 +335,10 @@ class Afisha < ActiveRecord::Base
     @html_description ||= description.to_s.as_html
   end
 
+  auto_html_for :description do
+    redcloth :target => '_blank', :rel => 'nofollow'
+  end
+
   def text_description
     @text_description ||= html_description.as_text
   end
@@ -387,7 +391,7 @@ class Afisha < ActiveRecord::Base
   def save_version
     self.versions.create!(:body => self.changes.to_json(:except => ignore_fields))
   end
-  
+
   #>>>>>>>>>>>> Poster to VK >>>>>>>>>>>
   def check_poster_changed?
     version = JSON.parse(self.versions.last.body) if self.versions.any?
