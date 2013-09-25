@@ -1,6 +1,7 @@
 ru:
   afisha:
     join: "Я пойду"
+    went: "Я ходил"
     acts_as_inviter: "Пригласить"
     acts_as_invited: "Жду приглашения"
     visitors:

@@ -75,7 +75,7 @@ class AfishaDecorator < ApplicationDecorator
   end
 
   def afisha_actual?
-    afisha.showings.actual.count > 0
+    @actual ||= afisha.showings.actual.count > 0
   end
 
   def human_distribution
