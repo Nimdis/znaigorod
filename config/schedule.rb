@@ -40,3 +40,7 @@ end
 every 5.minutes do
   rake 'refresh_copies'
 end
+
+every :day, :at => '8:00 am' do
+  rake 'send_ticket_statistics'
+end
