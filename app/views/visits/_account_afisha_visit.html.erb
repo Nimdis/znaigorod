@@ -15,14 +15,5 @@
     <div class="kind">
       <%= visit.visitable.kind.map(&:text).join(', ') %>
     </div>
-    <% if visit.inviting? && visit.actual? %>
-      <div class="wanted">
-        <% if current_user == visit.user %>
-          <%= render partial: 'visits/self_invite_links', locals: { visit: visit } %>
-        <% else %>
-          <%= render partial: 'visits/invite_links', locals: { visit: visit } %>
-        <% end %>
-      </div>
-    <% end %>
   </div>
 </div>
