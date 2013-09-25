@@ -54,19 +54,21 @@
 
 .invitation_form_dialog
   .invite_form_wrapper
-    +clearfix
     margin: 0 auto
     width: 640px
 
-    .left
-      //background: #e8e8e8
-      float: none
-      height: auto
-      padding-bottom: 10px
-      width: auto
+    .left, .right
+      background: #e8e8e8
+      float: left
+      width: 304px  
+      padding: 7px
 
-      .radio_buttons
-        border-bottom: 1px solid #ccc
+      label 
+        font-weight: bold
+        padding-right: 3px
+
+      .select
+        margin: 0 0 7px 0
 
       div.check_boxes
         margin: 0 0 10px 0
@@ -83,9 +85,26 @@
       textarea.text
         width: 280px
 
-      .actions
-        margin: 5px 0 0 0
-        text-align: center
+    .left
+      border-right: 1px solid #ccc
 
-        .button
-          +button_style
+  .forml, .formr
+    float: left
+    width: 309px
+    min-height: 420px
+    padding: 5px
+  .forml
+    border-right: 1px solid #ccc
+
+  .form_footer 
+    float: left
+    background: #e8e8e8
+    width: 640px
+    padding: 7px 0
+    .actions
+      text-align: center
+
+    .button
+      +button_style
+    .cancel
+      +grey-button-style
