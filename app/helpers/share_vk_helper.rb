@@ -5,7 +5,7 @@ module ShareVkHelper
     if item.is_a?(Afisha)
       "#{item.poster_vk_id},#{afisha_show_url(item)}"
     elsif item.is_a?(Organization)
-      "#{oganization_url(item)}"
+      "#{organization_url(item)}"
     end
   end
 end
