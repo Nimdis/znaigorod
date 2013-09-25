@@ -15,12 +15,12 @@
     <% if content_for?(:meta_keywords) %>
       <meta name='keywords' content='<%= "#{yield(:meta_keywords)}, #{I18n.t('meta.default.keywords', :default => '')}".squish.html_safe %>' />
     <% else %>
-      <meta name='keywords' content='<%= I18n.t('meta.default.keywords', :default => '') %>' />
+      <meta name='keywords' content='<%= I18n.t('meta.default.keywords', :default => '').squish.html_safe %>' />
     <% end %>
     <% if content_for?(:meta_description) %>
       <meta name='description' content='<%= "#{yield(:meta_description)}. #{I18n.t('meta.default.description', :default => '')}".squish.html_safe %>' />
     <% else %>
-      <meta name='description' content='<%= I18n.t('meta.default.description', :default => '') %>' />
+      <meta name='description' content='<%= I18n.t('meta.default.description', :default => '').squish.html_safe %>' />
     <% end %>
     <%= yield(:extra_meta) %>
     <%= favicon_link_tag %>
