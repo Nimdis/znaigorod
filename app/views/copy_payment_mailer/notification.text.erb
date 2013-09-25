@@ -1,0 +1,8 @@
+Продан(ы) <%= I18n.t('bet.tickets', :count => @copy_payment.copies.count) %> по цене <%= @copy_payment.paymentable.price %> руб.
+Мероприятие: "<%= @copy_payment.paymentable.afisha.title %>" (<%= afisha_show_url(@copy_payment.paymentable.afisha) %>)
+Место проведения: <%= @copy_payment.paymentable.afisha.place %>
+
+Коды для входа:
+<% @copy_payment.copies.each do |copy| %>
+  * <%= copy.code %>
+<% end %>

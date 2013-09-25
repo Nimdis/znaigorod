@@ -30,6 +30,7 @@ class CopyPayment < Payment
     super
     copies.map(&:sell!)
     create_sms! :phone => phone, :message => message
+    send_emails if paymentable.emails.any?
   end
 
   def cancel_and_release_tickets!
@@ -63,6 +64,12 @@ class CopyPayment < Payment
 
   def message
     "#{paymentable.description}. " << (copies.many? ? 'Коды: ' : 'Код: ') << copies.pluck(:code).join(', ')
+  end
+
+  def send_emails
+    paymentable.emails.each do |email|
+      CopyPaymentMailer.notification(email, self).deliver
+    end
   end
 end
 

@@ -875,7 +875,7 @@ ActiveRecord::Schema.define(:version => 20130925071426) do
     t.text     "description"
     t.datetime "stale_at"
     t.float    "organization_price"
-    t.text     "emails"
+    t.text     "email_addressess"
   end
 
   add_index "tickets", ["afisha_id"], :name => "index_ticket_infos_on_affiche_id"

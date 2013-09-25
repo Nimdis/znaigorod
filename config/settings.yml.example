@@ -61,6 +61,9 @@ mail:
   to:                   user@host
   to_afisha:            user@host
 
+postmark:
+  api_key:              key
+
 recaptcha:
   public:               token
   private:              token

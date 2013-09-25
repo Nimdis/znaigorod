@@ -407,7 +407,7 @@ ru:
 
       ticket:
         description:        Описание
-        emails:             Адреса email
+        email_addressess:   Адреса email
         number:             Количество
         organization_price: Сколько заплатит заведению
         original_price:     Цена заведения
