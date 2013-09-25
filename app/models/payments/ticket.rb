@@ -3,9 +3,11 @@
 class Ticket < ActiveRecord::Base
   include Copies
 
-  attr_accessible :number, :original_price, :price, :description, :stale_at, :organization_price
+  attr_accessible :number, :original_price, :price, :description, :stale_at, :organization_price, :emails
 
   belongs_to :afisha
+
+  validate :check_emails, :if => :emails?
 
   validates_presence_of :number, :original_price, :price, :description, :stale_at
 
@@ -25,6 +27,13 @@ class Ticket < ActiveRecord::Base
     ((original_price - (organization_price.to_f + price)) * 100 / original_price).round
   end
 
+  private
+
+  def check_emails
+    emails.split(',').map(&:squish).delete_if(&:blank?).each do |email|
+      errors.add(:emails, "#{email} - неверный адрес") if ValidatesEmailFormatOf::validate_email_format(email)
+    end
+  end
 end
 
 # == Schema Information

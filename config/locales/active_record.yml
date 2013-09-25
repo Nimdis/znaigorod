@@ -406,12 +406,13 @@ ru:
         max_value:  Максимальная цена
 
       ticket:
-        number:         Количество
-        original_price: Цена заведения
-        price:          Цена со скидкой
+        description:        Описание
+        emails:             Адреса email
+        number:             Количество
         organization_price: Сколько заплатит заведению
-        description:    Описание
-        stale_at:       Актуально до
+        original_price:     Цена заведения
+        price:              Цена со скидкой
+        stale_at:           Актуально до
 
       copy:
         row:           Ряд
