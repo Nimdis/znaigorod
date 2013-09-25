@@ -19,14 +19,14 @@
     <% end %>
     <%= link_to afisha_show_path(afisha), class: :details do %>
       <span class='first_line'>
-        <span class='to_go'><%= afisha.visits.count %></span>
-        <span class='wait_invite'><%= afisha.visits.invited.count %></span>
-        <span class='comments'><%= afisha.comments.count %></span>
+        <span class='show_tipsy to_go' title='Участники'><%= afisha.visits.count %></span>
+        <span class='show_tipsy wait_invite' title='Приглашения'><%= afisha.visits.invited.count %></span>
+        <span class='show_tipsy comments' title='Комментарии'><%= afisha.comments.count %></span>
       </span>
       <span class='second_line'>
-        <span class='likes'><%= afisha.likes_count %></span>
-        <span class='visits'><%= afisha.page_visits.count %></span>
-        <%= content_tag :span, "#{afisha.age_min.to_i}+", class: :minimal_age if afisha.age_min.present? %>
+        <span class='show_tipsy likes' title='Понравилось'><%= afisha.likes_count %></span>
+        <span class='show_tipsy visits' title='Просмотры'><%= afisha.page_visits.count %></span>
+        <%= content_tag :span, "#{afisha.age_min.to_i}+", title: 'Возростное ограничение', class: 'show_tipsy minimal_age' if afisha.age_min.present? %>
       </span>
     <% end %>
   </div>

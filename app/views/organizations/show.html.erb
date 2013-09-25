@@ -138,11 +138,11 @@
         <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
       </ul>
       <div class='details'>
-        <span class='to_go'><%= @organization.visits.count %></span>
-        <span class='wait_invite'>0</span>
-        <span class='comments'><%= @organization.comments.count %></span>
-        <span class='likes'><%= @organization.likes_count %></span>
-        <span class='visits'><%= @organization.page_visits.count %></span>
+        <span class='show_tipsy to_go' title='Участники'><%= @organization.visits.count %></span>
+        <span class='show_tipsy wait_invite' title='Приглашения'>0</span> <!-- TODO change this -->
+        <span class='show_tipsy comments' title='Комментарии'><%= @organization.comments.count %></span>
+        <span class='show_tipsy likes' title='Понравилось'><%= @organization.likes_count %></span>
+        <span class='show_tipsy visits' title='Просмотры'><%= @organization.page_visits.count %></span>
       </div>
     </div>
 

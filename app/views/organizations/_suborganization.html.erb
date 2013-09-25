@@ -12,13 +12,13 @@
     <% end %>
     <%= link_to organization_path(suborganization.organization), class: :details do %>
       <span class='first_line'>
-        <span class='to_go'><%= suborganization.organization.visits.count %></span>
-        <span class='wait_invite'>0</span>
-        <span class='comments'><%= suborganization.organization.comments.count %></span>
+        <span class='show_tipsy to_go' title='Участники'><%= suborganization.organization.visits.count %></span>
+        <span class='show_tipsy wait_invite' title='Приглашения'>0</span>
+        <span class='show_tipsy comments' title='Комментарии'><%= suborganization.organization.comments.count %></span>
       </span>
       <span class='second_line'>
-        <span class='likes'><%= suborganization.organization.likes_count %></span>
-        <span class='visits'><%= suborganization.organization.page_visits.count %></span>
+        <span class='show_tipsy likes' title='Понравилось'><%= suborganization.organization.likes_count %></span>
+        <span class='show_tipsy visits' title='Просмотры'><%= suborganization.organization.page_visits.count %></span>
       </span>
     <% end %>
   </div>

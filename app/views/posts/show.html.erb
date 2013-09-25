@@ -16,26 +16,26 @@
         <%= render :partial => 'share_this' %>
       </div>
 
-      <div class="tags_and_visits">
+      <div class='tags_and_visits'>
         <% if @post.tags.any? %>
-          <ul class="tags">
+          <ul class='tags'>
             <% @post.tags.each do |tag| %>
               <li><%= tag %></li>
             <%end%>
           </ul>
         <%end%>
 
-        <span class="details">
-          <span class='comments'><%= @post.comments.count %></span>
-          <span class='likes'><%= @post.likes_count %></span>
-          <span class="visits"><%= @post.page_visits.count %></span>
+        <span class='details'>
+          <span class='show_tipsy comments' title='Комментарии'><%= @post.comments.count %></span>
+          <span class='show_tipsy likes' title='Понравилось'><%= @post.likes_count %></span>
+          <span class='show_tipsy visits' title='Просмотры'><%= @post.page_visits.count %></span>
         </span>
       </div>
     </div>
 
     <% if @post.images.many? %>
-      <div class="photogallery_header">Фотографии</div>
-      <div class="photogallery">
+      <div class='photogallery_header'>Фотографии</div>
+      <div class='photogallery'>
         <ul>
           <% @post.images.each do |image| %>
             <%= render :partial => image.partial_for_render_object, :object => image, :locals => { :rel => "post_images_gallery_#{@post.id}" } %>

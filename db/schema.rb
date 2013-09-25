@@ -376,22 +376,6 @@ ActiveRecord::Schema.define(:version => 20130925020213) do
 
   add_index "hotels", ["organization_id"], :name => "index_hotels_on_organization_id"
 
-  create_table "invitations", :force => true do |t|
-    t.integer  "inviteable_id"
-    t.string   "inviteable_type"
-    t.integer  "account_id"
-    t.string   "kind"
-    t.string   "category"
-    t.text     "description"
-    t.string   "gender"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.integer  "invited_id"
-  end
-
-  add_index "invitations", ["inviteable_id"], :name => "index_invitations_on_inviteable_id"
-  add_index "invitations", ["invited_id"], :name => "index_invitations_on_invited_id"
-
   create_table "meals", :force => true do |t|
     t.text     "category"
     t.text     "feature"

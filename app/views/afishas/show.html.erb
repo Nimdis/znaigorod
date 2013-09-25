@@ -186,12 +186,12 @@
         </ul>
       <%end%>
       <div class='details'>
-        <span class='to_go'><%= @afisha.visits.count %></span>
-        <span class='wait_invite'>0</span>
-        <span class='comments'><%= @afisha.comments.count %></span>
-        <span class='likes'><%= @afisha.likes_count %></span>
-        <span class='visits'><%= @afisha.page_visits.count %></span>
-        <%= content_tag :span, "#{@afisha.age_min.to_i}+", class: :minimal_age if @afisha.age_min.present? %>
+        <span class='show_tipsy to_go' title='Участники'><%= @afisha.visits.count %></span>
+        <span class='show_tipsy wait_invite' title='Приглашения'>0</span> <!-- TODO change this -->
+        <span class='show_tipsy comments' title='Комментарии'><%= @afisha.comments.count %></span>
+        <span class='show_tipsy likes' title='Понравилось'><%= @afisha.likes_count %></span>
+        <span class='show_tipsy visits' title='Просмотры'><%= @afisha.page_visits.count %></span>
+        <%= content_tag :span, "#{@afisha.age_min.to_i}+", title: 'Возростное ограничение', class: 'show_tipsy minimal_age' if @afisha.age_min.present? %>
       </div>
     </div>
 
