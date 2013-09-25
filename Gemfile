@@ -53,7 +53,6 @@ group :default do
   gem 'openteam-commons'
   gem 'paperclip-elvfs'
   gem 'pg',                         :require => false
-  gem 'postmark-rails'
   gem 'progress_bar'
   gem 'rails'
   gem 'recaptcha',                  :require => 'recaptcha/rails'

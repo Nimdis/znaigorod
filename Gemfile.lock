@@ -318,12 +318,6 @@ GEM
       paperclip
     pg (0.17.0)
     polyglot (0.3.3)
-    postmark (1.0.1)
-      json
-      rake
-    postmark-rails (0.5.2)
-      actionmailer (>= 3.0.0)
-      postmark (~> 1.0)
     pr_geohash (1.0.0)
     progress_bar (0.4.0)
       highline (~> 1.6.1)
@@ -545,7 +539,6 @@ DEPENDENCIES
   openteam-commons
   paperclip-elvfs
   pg
-  postmark-rails
   progress_bar
   quiet_assets
   rails
