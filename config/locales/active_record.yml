@@ -77,7 +77,7 @@ ru:
         birthday: Дата рождения
 
       invitation:
-        category:      Категория
+        category:      Куда
         category_list: Категория
         description:   Дополнительно
         gender:        Пол

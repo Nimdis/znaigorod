@@ -47,7 +47,7 @@ init_gender_radio_buttons = (form) ->
   $('.invitations_wrapper').on 'ajax:success', (evt, response) ->
     target = $(evt.target)
     if target.hasClass('invitation_link')
-      dialog = init_form_dialog('invitation', target.data('title'), $(target.data('target')), 585).html(response)
+      dialog = init_form_dialog('invitation', target.data('title'), $(target.data('target')), 650).html(response)
 
       init_gender_radio_buttons $('.left form', dialog)
 

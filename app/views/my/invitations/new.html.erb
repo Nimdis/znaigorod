@@ -1,28 +1,29 @@
 <div class="invite_form_wrapper">
   <div class="left">
-
     <%= simple_form_for [:my, @invitation], :remote => true do |f| %>
       <%= f.input :kind, :as => :hidden %>
 
-      <% unless @invitation.invited %>
-        <%= f.input :gender,
-          :as => :radio_buttons,
-          :label => false,
-          :label_method => lambda { |item| t("enumerize.invitation.gender.form.#{@invitation.kind}.#{item.last}") } %>
-        <%= link_to 'уточнить', '#' %>
-      <% end %>
+      <div class="floatl">
+        <% unless @invitation.inviteable %>
+          <%= f.input :category, :collection => Inviteables.instance.categories.keys, :include_blank => false %>
+          <%= link_to 'уточнить', inviteables_search_path, :remote => true %>
+        <% end %>
 
-      <% unless @invitation.inviteable %>
-        <%= f.input :category, :collection => Inviteables.instance.categories.keys, :include_blank => false %>
-        <%= link_to 'уточнить', inviteables_search_path, :remote => true %>
-      <% end %>
-
-      <%= f.input :description %>
-
-
-      <div class="actions">
-        <%= f.submit 'Сохранить', :class => 'button' %>
+        <div class="description">
+          <%= f.input :description, :label => false %>
+          <div class="actions">
+            <%= f.submit 'Сохранить', :class => 'button' %>
+          </div>
+        </div>
       </div>
+
+      <div class="floatl">
+        <% unless @invitation.invited %>
+          <%= f.input :gender %>
+          <%= link_to 'уточнить', '#' %>
+        <% end %>
+      </div>
+
     <% end %>
   </div>
 </div>
