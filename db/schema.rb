@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130913031156) do
+ActiveRecord::Schema.define(:version => 20130925020213) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20130913031156) do
     t.integer  "fb_likes"
     t.integer  "odn_likes"
     t.boolean  "allow_auction"
+    t.string   "poster_vk_id"
   end
 
   add_index "afisha", ["slug"], :name => "index_affiches_on_slug", :unique => true
@@ -374,6 +375,22 @@ ActiveRecord::Schema.define(:version => 20130913031156) do
   end
 
   add_index "hotels", ["organization_id"], :name => "index_hotels_on_organization_id"
+
+  create_table "invitations", :force => true do |t|
+    t.integer  "inviteable_id"
+    t.string   "inviteable_type"
+    t.integer  "account_id"
+    t.string   "kind"
+    t.string   "category"
+    t.text     "description"
+    t.string   "gender"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "invited_id"
+  end
+
+  add_index "invitations", ["inviteable_id"], :name => "index_invitations_on_inviteable_id"
+  add_index "invitations", ["invited_id"], :name => "index_invitations_on_invited_id"
 
   create_table "meals", :force => true do |t|
     t.text     "category"
