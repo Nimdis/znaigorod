@@ -8,4 +8,10 @@ class CopyPaymentMailer < ActionMailer::Base
 
     mail(:to => email, :subject => 'На сайте znaigorod.ru проданы билеты')
   end
+
+  def report(email, ticket)
+    @ticket = ticket
+
+    mail(:to => email, :subject => 'На сайте znaigorod.ru завершилась продажа билетов')
+  end
 end

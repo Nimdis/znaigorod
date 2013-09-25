@@ -14,6 +14,10 @@ class Ticket < ActiveRecord::Base
 
   before_validation :normalize_email_addressess
 
+  scope :stale, -> { where 'stale_at <= ?', Time.zone.today }
+  scope :without_report, -> { where :report_sended => false }
+  scope :with_emails, -> { where 'email_addressess IS NOT NULL' }
+
   def organization
     afisha(:include => { :showings => :organizatiob }).showings.first.organization
   end
