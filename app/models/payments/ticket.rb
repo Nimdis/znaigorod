@@ -4,7 +4,7 @@ class Ticket < ActiveRecord::Base
   include Copies
 
   attr_accessible :number, :original_price, :price, :description,
-    :stale_at, :organization_price, :email_addressess
+    :stale_at, :organization_price, :email_addressess, :undertow
 
   belongs_to :afisha
 

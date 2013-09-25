@@ -413,6 +413,7 @@ ru:
         original_price:     Цена заведения
         price:              Цена со скидкой
         stale_at:           Актуально до
+        undertow:           Откат заведению
 
       copy:
         row:           Ряд
