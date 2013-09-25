@@ -32,7 +32,7 @@ class Afisha < ActiveRecord::Base
   has_many :tickets, :dependent => :destroy
   has_many :copies, :through => :tickets
 
-  has_many :versions, :as => :versionable, :dependent => :destroy
+  has_many :versions, :as => :versionable, :dependent => :destroy, :order => 'id ASC'
   has_many :visits, :as => :visitable, :dependent => :destroy, order: 'acts_as_inviter, acts_as_invited'
   has_many :votes, :as => :voteable, :dependent => :destroy
   has_many :page_visits, :as => :page_visitable, :dependent => :destroy
