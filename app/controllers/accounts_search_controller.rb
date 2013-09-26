@@ -1,35 +1,42 @@
 class AccountsSearchController < ApplicationController
   layout false
 
-  helper_method :parent
+  #helper_method :parent
 
   def show
-    page = params[:page].to_i.zero? ? 1 : params[:page]
-    per_page = 10
+    @accounts = Account.search {
+      keywords params[:q]
+      paginate :page => params[:page] || 1, :per_page => 5
+    }.results
 
-    if params[:only_friends]
-      friends = Friend.search {
-        keywords params[:q]
-        with :account_id, current_user.account.id
-        paginate :page => page, :per_page => per_page
-      }.results
+    render :partial => 'results' and return if params[:only_results]
 
-      @accounts = Account.where(:id => friends.map(&:friendable_id)).page(page).per(per_page)
-    else
-      @accounts = Account.search {
-        keywords params[:q]
-        without current_user.account
-        paginate :page => page, :per_page => per_page
-      }.results
-    end
+    #page = params[:page].to_i.zero? ? 1 : params[:page]
+    #per_page = 10
 
-    render partial: 'accounts/list', :locals => { :kind => params[:kind] } and return
+    #if params[:only_friends]
+      #friends = Friend.search {
+        #keywords params[:q]
+        #with :account_id, current_user.account.id
+        #paginate :page => page, :per_page => per_page
+      #}.results
+
+      #@accounts = Account.where(:id => friends.map(&:friendable_id)).page(page).per(per_page)
+    #else
+      #@accounts = Account.search {
+        #keywords params[:q]
+        #without current_user.account
+        #paginate :page => page, :per_page => per_page
+      #}.results
+    #end
+
+    #render partial: 'accounts/list', :locals => { :kind => params[:kind] } and return
   end
 
-  def parent
-    klass, id = params[:parent].split('_')
-    klass = %w[afisha organization].include?(klass) ? klass : 'afisha'
+  #def parent
+    #klass, id = params[:parent].split('_')
+    #klass = %w[afisha organization].include?(klass) ? klass : 'afisha'
 
-    @parent = klass.classify.constantize.find(id)
-  end
+    #@parent = klass.classify.constantize.find(id)
+  #end
 end
