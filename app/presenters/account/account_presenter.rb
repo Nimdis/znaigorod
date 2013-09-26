@@ -1,9 +1,10 @@
 class AccountPresenter
-  attr_accessor :gender_filter, :kind_filter, :acts_as_filter
+  attr_accessor :gender_filter, :kind_filter, :acts_as_filter, :sorting_filter
 
   def initialize(params)
     @kind_filter = AccountKindFilter.new(params['kind'])
     @gender_filter = AccountGenderFilter.new(params['gender'])
+    @sorting_filter = AccountSortingFilter.new(params['order_by'])
     @acts_as_filter = AccountActsAsFilter.new(params['acts_as'])
     @page = params['page'] || 1
   end
@@ -15,8 +16,10 @@ class AccountPresenter
           title: I18n.t("account_kinds.#{kind}"),
           klass: kind,
           parameters: {
+            gender: @gender_filter.gender,
             kind: kind,
-            gender: @gender_filter.gender
+            acts_as: @acts_as_filter.acts_as,
+            order_by: @sorting_filter.order_by
           },
           current: kind == @kind_filter.kind,
           count: AccountCounter.new(self, kind).count
@@ -33,9 +36,28 @@ class AccountPresenter
           klass: gender,
           parameters: {
             gender: gender == 'all' ? nil : gender,
-            kind: kind_filter.kind
+            kind: @kind_filter.kind,
+            acts_as: @acts_as_filter.acts_as,
+            order_by: @sorting_filter.order_by
           },
           current: gender == @gender_filter.gender,
+        }
+      end
+    }
+  end
+
+  def sortings_links
+    @sortings_links ||= [].tap { |array|
+      @sorting_filter.available_sortings_values.each do |sorting_value|
+        array << {
+          title: I18n.t("account.sort.#{sorting_value}"),
+          parameters: {
+            gender: @gender_filter.gender,
+            kind: @kind_filter.kind,
+            acts_as: @acts_as_filter.acts_as,
+            order_by: sorting_value
+          },
+          selected: @sorting_filter.order_by == sorting_value
         }
       end
     }
@@ -48,9 +70,10 @@ class AccountPresenter
           title: I18n.t("account_acts_as.#{acts_as}"),
           klass: acts_as,
           parameters: {
-            kind: @kind_filter.kind,
             gender: @gender_filter.gender,
+            kind: @kind_filter.kind,
             acts_as: acts_as == @acts_as_filter.acts_as ? nil : acts_as,
+            order_by: @sorting_filter.order_by
           },
           current: acts_as == @acts_as_filter.acts_as,
         }
@@ -67,7 +90,7 @@ class AccountPresenter
   end
 
   def collection
-    HasSearcher.searcher(:accounts, searcher_params).paginate(:page => @page, :per_page => 18)
+    HasSearcher.searcher(:accounts, searcher_params).send("order_by_#{@sorting_filter.order_by}").paginate(:page => @page, :per_page => 18)
   end
 end
 
@@ -130,6 +153,31 @@ class AccountGenderFilter
     define_method "search_#{gender}?" do
       gender == gender
     end
+  end
+end
+
+class AccountSortingFilter
+  def initialize(sorting)
+    @order_by = sorting
+  end
+
+  def self.available_sortings_values
+    %w[creation friendable activity]
+  end
+
+  def available_sortings_values
+    self.class.available_sortings_values
+  end
+
+  available_sortings_values.each do |sorting|
+    define_method "sort_by_#{sorting}?" do
+      @order_by == sorting
+    end
+  end
+
+  def order_by
+    @order_by = available_sortings_values.include?(@order_by) ? @order_by : available_sortings_values.first
+    @order_by
   end
 end
 

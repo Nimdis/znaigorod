@@ -11,6 +11,8 @@ class Account < ActiveRecord::Base
   has_many :page_visits,     through: :users
 
   has_many :friends
+  has_many :friendable,      as: :friendable, class_name: 'Friend'
+
   has_many :events,          through: :users, order: 'afisha.created_at DESC'
 
   has_many :messages,                     order: 'messages.created_at DESC'
@@ -44,6 +46,8 @@ class Account < ActiveRecord::Base
 
     string :gender
     float :rating,   :trie => true
+    time :created_at, :trie => true
+    integer(:friendable) { friendable.count }
     string :search_kind
     string(:kind, :multiple => true) { indexing_kinds }
     string(:acts_as, :multiple => true) { acts_as }

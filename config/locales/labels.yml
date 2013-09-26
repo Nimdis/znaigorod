@@ -108,6 +108,12 @@ ru:
     inviter: Приглашает
     invited: Ждет приглашения
 
+  account:
+    sort:
+      creation: Новизне
+      friendable: Популярности
+      activity: Активности
+
   account_genders:
     all: Все
     male: Парни
