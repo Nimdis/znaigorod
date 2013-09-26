@@ -27,8 +27,16 @@
       title: dialog_title
       modal: true
       width: width.toNumber() + 36
-      height: height.toNumber() + 46
+      height: height.toNumber() + 49
       resizable: false
+      create: (event, ui) ->
+        $('body').css
+          overflow: 'hidden'
+        true
+      beforeClose: (event, ui) ->
+        $("body").css
+          overflow: 'inherit'
+        true
       close: (event, ui) ->
         $(this).dialog('destroy')
         $(this).remove()

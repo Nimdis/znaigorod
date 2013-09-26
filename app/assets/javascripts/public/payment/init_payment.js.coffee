@@ -15,6 +15,14 @@
             title: title
             modal: true
             resizable: false
+            create: (event, ui) ->
+              $('body').css
+                overflow: 'hidden'
+              true
+            beforeClose: (event, ui) ->
+              $("body").css
+                overflow: 'inherit'
+            true
             open: ->
               init_actions_handler()
               true

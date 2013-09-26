@@ -8,13 +8,32 @@
   render_jwobject_dialog = (width, height, file, dialog_title) ->
     webcam_dialog = init_webcam_dialog()
     webcam_dialog.html("").hide()
-    html = "" +
-      "<center>" +
-      "<div id='jwplayer_container'>" +
-      "<video src='#{file} width=#{width} height=#{height} /></video>" +
-      "</div>" +
-      "</center>"
-    $(html).appendTo(webcam_dialog)
+    if FlashDetect && FlashDetect.installed
+      html = "" +
+        "<center>" +
+        "<div id='jwplayer_container'>" +
+        "<video src='#{file} width=#{width} height=#{height} /></video>" +
+        "</div>" +
+        "</center>"
+      $(html).appendTo(webcam_dialog)
+    else
+      html = "" +
+        "<center>" +
+        "<div id='jwplayer_container'>" +
+        "</div>" +
+        "</center>"
+      $(html).appendTo(webcam_dialog)
+      $('#jwplayer_container').html('<p>Для воспроизведения видео требуется проигрыватель Adobe Flash.</p><p><a href="http://get.adobe.com/ru/flashplayer/">Загрузить последнюю версию</a></p>')
+      $('#jwplayer_container').css
+        'color': '#fff'
+        'background-color': '#000'
+        'display': 'table-cell'
+        'height': height
+        'vertical-align': 'middle'
+        'width': width
+        'margin': '0 auto'
+      $('#jwplayer_container a').css
+        'color': '#bdf'
     webcam_dialog.dialog
       title: dialog_title
       modal: true
@@ -30,6 +49,14 @@
           width: width
           height: height
           fallback: false
+        true
+      create: (event, ui) ->
+        $('body').css
+          overflow: 'hidden'
+        true
+      beforeClose: (event, ui) ->
+        $("body").css
+          overflow: 'inherit'
         true
       close: (event, ui) ->
         $(this).dialog('destroy')

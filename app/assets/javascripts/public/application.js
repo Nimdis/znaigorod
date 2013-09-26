@@ -18,6 +18,7 @@
  * = require autosuggest_handler
  * = require datetime_picker
  * = require file_upload
+ * = require flash_detect
  * = require crop
  * = require ajax_delete
  * = require ./share_to_vk_wall
