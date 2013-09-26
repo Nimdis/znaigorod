@@ -9,7 +9,7 @@ namespace :update_rating do
 
   desc "Обновление рейтинга афиши"
   task :afisha => :environment do
-    Afisha.actual.readonly(false).map(&:update_rating)
+    Afisha.actual.published.map(&:update_rating)
   end
 
   desc "Обновление рейтинга организаций"
