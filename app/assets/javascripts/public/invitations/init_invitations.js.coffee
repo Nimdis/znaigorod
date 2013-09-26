@@ -69,9 +69,22 @@ handle_inviteables_search_close = ->
 
 handle_inviteables_search_click = ->
   $('.inviteables_search_wrapper ul').on 'click', (evt) ->
-    url = $(evt.target).closest('li').data('url')
-
+    li = $(evt.target).closest('li')
+    url = li.data('url')
     $('.new_invitation').attr('action', url)
+    $('.search_form').remove()
+    $('.selected_result').append(li)
+    $('.results').remove()
+    $('.pagination').remove()
+
+    handle_remove_selected_result()
+
+    false
+
+handle_remove_selected_result = ->
+  $('.remove_item').on 'click', ->
+    $(this).closest('.selected_result').empty()
+    $('.inviteables_search_open').click()
 
     false
 
