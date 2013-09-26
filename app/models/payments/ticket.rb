@@ -2,9 +2,10 @@
 
 class Ticket < ActiveRecord::Base
   include Copies
+  extend Enumerize
 
   attr_accessible :number, :original_price, :price, :description,
-    :stale_at, :organization_price, :email_addressess, :undertow
+    :stale_at, :organization_price, :email_addressess, :undertow, :state
 
   belongs_to :afisha
 
@@ -14,20 +15,31 @@ class Ticket < ActiveRecord::Base
 
   before_validation :normalize_email_addressess
 
-  scope :stale, -> { where 'stale_at <= ?', Time.zone.today }
+  scope :for_stale, -> { where "stale_at <= ? AND (state = 'for_sale' OR state IS NULL)", Time.zone.now }
+  scope :stale,    -> { by_state 'stale' }
   scope :without_report, -> { where :report_sended => false }
   scope :with_emails, -> { where 'email_addressess IS NOT NULL' }
 
   def organization
-    afisha(:include => { :showings => :organizatiob }).showings.first.organization
+    afisha(:include => { :showings => :organizatiob }).showings.first.try(:organization)
   end
 
   delegate :title, :to => :afisha, :prefix => true
   delegate :title, :to => :organization, :prefix => true, :allow_nil => true
 
+  enumerize :state,
+    :in => [:for_sale, :stale],
+    :default => :for_sale,
+    :predicates => true
+
   searchable do
     text :afisha_title
     text :organization_title
+  end
+
+  def stale!
+    update_attributes :state => 'stale'
+    copies.map(&:stale!)
   end
 
   def discount
@@ -43,7 +55,7 @@ class Ticket < ActiveRecord::Base
   private
 
   def normalize_email_addressess
-    self.email_addressess = email_addressess.split(',').map(&:squish).delete_if(&:blank?).join(', ')
+    self.email_addressess = email_addressess.split(',').map(&:squish).delete_if(&:blank?).join(', ') if email_addressess
   end
 
   def check_email_addressess

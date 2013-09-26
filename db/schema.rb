@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925095020) do
+ActiveRecord::Schema.define(:version => 20130926024849) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -878,6 +878,7 @@ ActiveRecord::Schema.define(:version => 20130925095020) do
     t.text     "email_addressess"
     t.integer  "undertow"
     t.boolean  "report_sended",      :default => false
+    t.string   "state"
   end
 
   add_index "tickets", ["afisha_id"], :name => "index_ticket_infos_on_affiche_id"
