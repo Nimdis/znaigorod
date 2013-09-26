@@ -46,9 +46,20 @@ module Znaigorod
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
     # Activate observers that should always be running.
-    config.active_record.observers = :feedback_observer, :comment_observer, :visit_observer, :vote_observer, :afisha_observer,
-                                     :friend_observer, :page_visit_observer, :showing_observer, :user_observer, :copy_observer, :payment_observer,
-                                     :organization_observer, :suborganization_observer
+    config.active_record.observers = :afisha_observer,
+                                     :comment_observer,
+                                     :copy_observer,
+                                     :feedback_observer,
+                                     :friend_observer,
+                                     :organization_observer,
+                                     :page_visit_observer,
+                                     :payment_observer,
+                                     :showing_observer,
+                                     :suborganization_observer,
+                                     :ticket_observer,
+                                     :user_observer,
+                                     :visit_observer,
+                                     :vote_observer,
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
