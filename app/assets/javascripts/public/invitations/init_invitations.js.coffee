@@ -22,35 +22,47 @@ init_delete_invitation = (elem) ->
       ul.append('<li class="empty">Нет приглашений</li>')
 
 handle_new_invitaion_link = (target, response) ->
-  console.log 'new inv'
   dialog = init_form_dialog('invitation', target.data('title'), $(target.data('target')), 650).html(response)
 
+  handle_inviteables_search_close()
+  $('#invitation_category').change ->
+    category = encodeURIComponent($(this).val())
+    link = $('.inviteables_search_open')
+    href = link.attr('href').replace /category=(.*)/, "category=#{category}"
+    link.attr('href', href)
+
+    unless $('.inviteables_search_open').is(':visible')
+      $('.inviteables_search_open').click()
+
+
   dialog.on 'ajax:success', (evt, response) ->
-    if $(response).find('form').length
-      $(this).html(response)
+    #if $(response).find('form').length
+      #$(this).html(response)
 
-    if $(response).is('ul')
-      target = $(evt.target)
-
-      target.html('Скрыть &uarr;').addClass('open')
+    if $(response).hasClass('inviteables_search_wrapper')
       $('.info').hide()
-      $('.forml').append(response)
+      $('.inviteables_search_open').hide()
+      $('.inviteables_search_close').show()
+      $('.inviteables_search_wrapper').replaceWith(response)
 
-      close_handler()
 
-    if $(response).is('li')
-      $(this).dialog('destroy').remove()
-      li = $(response)
-      init_delete_invitation li
-      target.parent().next('.list').find('ul').append(li).find('.empty').remove()
+    #if $(response).is('li')
+      #$(this).dialog('destroy').remove()
+      #li = $(response)
+      #init_delete_invitation li
+      #target.parent().next('.list').find('ul').append(li).find('.empty').remove()
 
 handle_inviteable_search = ->
   console.log 'search'
 
-close_handler = ->
-  $('.close').on 'click', ->
-    $('.forml').replaceWith('jopa')
-  false
+handle_inviteables_search_close = ->
+  $('.inviteables_search_close').on 'click', ->
+    $('.inviteables_search_close').hide()
+    $('.inviteables_search_open').show()
+    $('.info').show()
+    $('.inviteables_search_wrapper').empty()
+
+    false
 
 @init_invitations = ->
   $('.invitations_wrapper').on 'ajax:success', (evt, response) ->
