@@ -7,6 +7,8 @@ ru:
     afisha:             Мои афиши
     send_to_moderation: Отправить на модерацию
     send_to_public:     Опубликовать
+    send_to_draft:      Вернуть в черновики
+    destroy_afisha:     Удалить
     add_showing:        Добавление расписания
     edit_showing:       Изменение расписания
     archive:            Прошедшие мероприятия

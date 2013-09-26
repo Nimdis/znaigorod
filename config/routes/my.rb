@@ -29,6 +29,7 @@ Znaigorod::Application.routes.draw do
       put 'social_gallery' => 'afishas#social_gallery', :on => :member, :as => :social_gallery
       put 'moderate' => 'afishas#send_to_moderation', :on => :member, :as => :moderate
       put 'publish'  => 'afishas#send_to_published', :on => :member, :as => :publish
+      put 'draft' => 'afishas#send_to_draft', :on => :member, :as => :draft
 
       delete 'destroy_image', :on => :member, :as => :destroy_image
 

@@ -46,8 +46,12 @@ class Ability
         afisha.state != 'pending' && afisha.user == user
       end
 
-      can [:destroy, :send_to_moderation], Afisha do |afisha|
+      can [:destroy, :send_to_moderation, :send_to_published], Afisha do |afisha|
         afisha.draft? && afisha.user == user
+      end
+
+      can [:send_to_draft], Afisha do |afisha|
+        afisha.published? && afisha.user == user
       end
 
       can :show, Afisha do |afisha|

@@ -3,13 +3,13 @@
 class AfishaObserver < ActiveRecord::Observer
   def after_approve(afisha, transition)
     MyMailer.delay(:queue => 'mailer').mail_new_published_afisha(afisha) unless afisha.user.is_admin? || afisha.user.email.blank?
-    if afisha.user.present? && !afisha.user.is_admin?
-      NotificationMessage.delay(:queue => 'critical').create(
-        account: afisha.user.account,
-        kind: :afisha_published,
-        messageable: afisha)
-      #afisha.user.account.delay.update_rating if afisha.user.present?
-    end
+    #if afisha.user.present? && !afisha.user.is_admin?
+      #NotificationMessage.delay(:queue => 'critical').create(
+        #account: afisha.user.account,
+        #kind: :afisha_published,
+        #messageable: afisha)
+      ##afisha.user.account.delay.update_rating if afisha.user.present?
+    #end
   end
 
   def after_pending(afisha, transition)

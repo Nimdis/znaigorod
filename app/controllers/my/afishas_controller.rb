@@ -83,6 +83,13 @@ class My::AfishasController < My::ApplicationController
     redirect_to my_root_path, :notice => "Афиша «#{@afisha.title}» опубликована."
   end
 
+  def send_to_draft
+    @afisha = current_user.afisha.available_for_edit.find(params[:id])
+    @afisha.send_to_author!
+
+    redirect_to [:my, @afisha], :notice => "Афиша «#{@afisha.title}» возвращена в черновики."
+  end
+
   def social_gallery
     @afisha = current_user.afisha.available_for_edit.find(params[:id])
     gallery_url = params[:afisha][:social_gallery_url]

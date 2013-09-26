@@ -105,21 +105,29 @@
         &.disabled
           background: image_url('public/afisha_step_unfilled.png') no-repeat 3px center
 
-    a
+    a.enabled
       font-size: 12px
       +inline-block
       +button_style
       padding: 3px 15px 4px
+
       &:active
         padding: 4px 15px 3px
-      &.disabled
-        cursor: default
-        +background(linear-gradient(top, #ccc, #999))
-        border-color: #999
-        &:hover
-          +text-shadow(none)
-        &:active
-          padding: 3px 15px 4px
+
+    a.disabled
+      cursor: default
+      +background(linear-gradient(top, #ccc, #999))
+      border-color: #999
+
+      &:hover
+        +text-shadow(none)
+
+      &:active
+        padding: 3px 15px 4px
+
+    a.destroy
+      +inline-block
+      margin-left: 20px
 
   .afisha_show
     .tags
