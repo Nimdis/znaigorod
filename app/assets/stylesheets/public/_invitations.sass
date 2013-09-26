@@ -70,6 +70,10 @@
       .select
         margin: 0 0 7px 0
 
+        select
+          background: #fff
+          border: 1px solid #ccc
+
       .error
         color: #880000
         font-size: 8px
@@ -93,6 +97,36 @@
 
   .forml
     border-right: 1px solid #ccc
+
+    .inviteables_search_wrapper
+      .search_form
+        border-bottom: 1px solid #ccc
+        padding: 5px
+
+        form
+          input
+            border: 1px solid #ccc
+            padding: 5px
+            outline: none
+
+          .submit
+            +inline-block
+            width: 16px
+            height: 17px
+            cursor: pointer
+            outline: none
+            overflow: hidden
+            border: none
+            text-indent: -9999em
+            background: #fff image_url('public/search_submit.png') no-repeat center top
+            margin: 0 3px 0 0
+            padding: 0
+
+            &:hover
+              background-position: center -64px
+
+            &:active
+              background-position: center -63px
 
     ul.selected_result
       li

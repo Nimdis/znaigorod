@@ -41,7 +41,7 @@ handle_new_invitaion_link = (target, response) ->
       #$(this).html(response)
 
     if $(response).hasClass('inviteables_search_wrapper')
-      $('.info').hide()
+      $('.forml .info').hide()
       $('.inviteables_search_open').hide()
       $('.inviteables_search_close').show()
       $('.inviteables_search_wrapper').replaceWith(response)
@@ -64,14 +64,14 @@ handle_inviteables_search_close = ->
   $('.inviteables_search_close').on 'click', ->
     $('.inviteables_search_close').hide()
     $('.inviteables_search_open').show()
-    $('.info').show()
+    $('.forml .info').show()
     $('.inviteables_search_wrapper').empty()
 
     false
 
 # уточнить
 handle_inviteables_search_click = ->
-  $('.inviteables_search_wrapper ul').on 'click', (evt) ->
+  $('.inviteables_search_wrapper .results_wrapper').on 'click', (evt) ->
     li = $(evt.target).closest('li')
     url = li.data('url')
     $('.new_invitation').attr('action', url)

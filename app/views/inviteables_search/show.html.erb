@@ -2,8 +2,8 @@
   <div class="search_form">
     <%= form_tag inviteables_search_path(:category => params[:category]), :remote => true, :method => :get do %>
       <%= hidden_field_tag :only_results, true %>
-      <%= text_field_tag :q, params[:q], :id => 'inviteables_search_q' %>
-      <%= submit_tag 'Найти' %>
+      <%= text_field_tag :q, params[:q], :id => 'inviteables_search_q', :placeholder => 'Найти...' %>
+      <%= submit_tag 'Найти', :class => 'submit' %>
     <% end %>
   </div>
 
