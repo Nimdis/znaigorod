@@ -1,9 +1,18 @@
-<ul>
-  <% @results.each do |result| %>
-    <li>
-      <%= render :partial => "#{result.class.name.underscore}", :locals => { "#{result.class.name.underscore}".to_sym => result } %>
-    </li>
-  <% end %>
-</ul>
+<div class="inviteables_search_wrapper">
+  <div>
+    <%= form_tag inviteables_search_path(:category => params[:category]) do %>
+      <%= text_field_tag :q %>
+      <%= submit_tag 'Найти' %>
+    <% end %>
+  </div>
 
-<%= paginate @results %>
+  <ul>
+    <% @results.each do |result| %>
+      <li>
+        <%= render :partial => "#{result.class.name.underscore}", :locals => { "#{result.class.name.underscore}".to_sym => result } %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= paginate @results %>
+</div>
