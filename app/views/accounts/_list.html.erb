@@ -1,33 +1,36 @@
-<ul class='accounts_list'>
-  <% @accounts.each do |account| %>
-    <li>
-      <div class='avatar'>
-        <%= link_to account do %>
-          <%= image_tag(resized_image_url(account.avatar.url, 70, 70), :size => '70x70', :title => account, :alt => account) %>
-        <% end %>
-      </div>
+<% if false %>
+  <ul class='accounts_list'>
+    <% @accounts.each do |account| %>
+      <li>
+        <div class='avatar'>
+          <%= link_to account do %>
+            <%= image_tag(resized_image_url(account.avatar.url, 70, 70), :size => '70x70', :title => account, :alt => account) %>
+          <% end %>
+        </div>
 
-      <div class='details'>
-        <%= link_to(account, account, :class => :name) %>
-        <% if current_user.account.invites?(parent, account, kind) %>
-          <div class="wanted">
-            <span class="sended">
-              <%= I18n.t("invite.sended.#{account.gender}.#{kind}") %>
-            </span>
-          </div>
-        <% else %>
 
-          <div class="wanted">
-            <%= simple_form_for [parent, parent.invitations.new] do |f| %>
-              <%= f.input :kind, :as => :hidden, :input_html => { :value => kind } %>
-              <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
 
-              <%= f.submit t("enumerize.invitation.kind.#{kind}"),
-                  :class => 'submit_dialog',
-                  :onClick => 'share_on_click(this);',
-                  'data-owner_id' => account.users.first.try(:vk_uid),
-                  'data-message' => "#{t("invitation.#{kind}.#{parent.class.name.underscore}")} \"#{parent}\"",
-                  'data-attachments' => "#{parent.is_a?(Afisha) ? afisha_show_url(parent) : organization_url(parent)}" %> 
+        <div class='details'>
+          <%= link_to(account, account, :class => :name) %>
+          <% if current_user.account.invites?(parent, account, kind) %>
+            <div class="wanted">
+              <span class="sended">
+                <%= I18n.t("invite.sended.#{account.gender}.#{kind}") %>
+              </span>
+            </div>
+          <% else %>
+
+            <div class="wanted">
+              <%= simple_form_for [parent, parent.invitations.new] do |f| %>
+                <%= f.input :kind, :as => :hidden, :input_html => { :value => kind } %>
+                <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
+
+                <%= f.submit t("enumerize.invitation.kind.#{kind}"),
+                :class => 'submit_dialog',
+                :onClick => 'share_on_click(this);',
+                'data-owner_id' => account.users.first.try(:vk_uid),
+                'data-message' => "#{t("invitation.#{kind}.#{parent.class.name.underscore}")} \"#{parent}\"",
+                'data-attachments' => "#{parent.is_a?(Afisha) ? afisha_show_url(parent) : organization_url(parent)}" %>
             <% end %>
           </div>
         <% end %>
@@ -37,3 +40,4 @@
 </ul>
 
 <%= paginate @accounts %>
+      <% end %>

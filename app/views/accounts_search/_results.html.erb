@@ -1,0 +1,13 @@
+<ul class="results" data-target=".accounts_search_results_wrapper">
+  <% @accounts.each do |account| %>
+    <li>
+      <div class='avatar'>
+        <%= link_to account do %>
+          <%= image_tag(resized_image_url(account.avatar.url, 70, 70), :size => '70x70', :title => account, :alt => account) %>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @accounts %>

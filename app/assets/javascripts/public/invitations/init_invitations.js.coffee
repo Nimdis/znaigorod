@@ -37,29 +37,36 @@ handle_new_invitaion_link = (target, response) ->
 
 
   dialog.on 'ajax:success', (evt, response) ->
-    #if $(response).find('form').length
-      #$(this).html(response)
-
+    # 1
     if $(response).hasClass('inviteables_search_wrapper')
       $('.forml .info').hide()
       $('.inviteables_search_open').hide()
       $('.inviteables_search_close').show()
       $('.inviteables_search_wrapper').replaceWith(response)
 
-      handle_results_search()
+      handle_inviteables_results_search()
       handle_inviteables_search_click()
 
-    if $(response).is('ul')
-      $('.results_wrapper').html(response)
+    # 1
+    if $(response).hasClass('accounts_search_wrapper')
+      $('.formr .info').hide()
+      $('.accounts_search_open').hide()
+      $('.accounts_search_close').show()
+      $('.accounts_search_wrapper').replaceWith(response)
 
+      handle_accounts_results_search()
 
-    #if $(response).is('li')
-      #$(this).dialog('destroy').remove()
-      #li = $(response)
-      #init_delete_invitation li
-      #target.parent().next('.list').find('ul').append(li).find('.empty').remove()
+    if $(response).hasClass('results')
+      target = $(response).data('target')
+      $(target).html(response)
 
-# скрыть
+    if $(response).is('li')
+      $(this).dialog('destroy').remove()
+      li = $(response)
+      init_delete_invitation li
+      target.parent().next('.list').find('ul').append(li).find('.empty').remove()
+
+# куда пригласить: скрыть
 handle_inviteables_search_close = ->
   $('.inviteables_search_close').on 'click', ->
     $('.inviteables_search_close').hide()
@@ -69,9 +76,9 @@ handle_inviteables_search_close = ->
 
     false
 
-# уточнить
+# куда пригласить: уточнить
 handle_inviteables_search_click = ->
-  $('.inviteables_search_wrapper .results_wrapper').on 'click', (evt) ->
+  $('.inviteables_search_results_wrapper').on 'click', (evt) ->
     li = $(evt.target).closest('li')
     url = li.data('url')
     $('.new_invitation').attr('action', url)
@@ -84,7 +91,7 @@ handle_inviteables_search_click = ->
 
     false
 
-# закрыть выбранный резалт
+# куда пригласть: закрыть выбранный результат
 handle_remove_selected_result = ->
   $('.remove_item').on 'click', ->
     $(this).closest('.selected_result').empty()
@@ -92,11 +99,15 @@ handle_remove_selected_result = ->
 
     false
 
-# поиск по результатам
-handle_results_search = ->
+# куда пригласить: поиск по результатам
+handle_inviteables_results_search = ->
   $('#inviteables_search_q').keyup ->
-    console.log $(this).val()
-    console.log $(this).closest('form').submit()
+    $(this).closest('form').submit()
+
+# кого пригласить: поиск по результатам
+handle_accounts_results_search = ->
+  $('#accounts_search_q').keyup ->
+    $(this).closest('form').submit()
 
 @init_invitations = ->
   $('.invitations_wrapper').on 'ajax:success', (evt, response) ->
