@@ -1,21 +1,15 @@
 <div class="inviteables_search_wrapper">
   <div class="search_form">
-    <%= form_tag inviteables_search_path(:category => params[:category]) do %>
-      <%= text_field_tag :q %>
+    <%= form_tag inviteables_search_path(:category => params[:category]), :remote => true, :method => :get do %>
+      <%= hidden_field_tag :only_results, true %>
+      <%= text_field_tag :q, params[:q], :id => 'inviteables_search_q' %>
       <%= submit_tag 'Найти' %>
     <% end %>
   </div>
 
   <ul class="selected_result"></ul>
 
-  <ul class="results">
-    <% @results.each do |result| %>
-      <li data-url="<%= polymorphic_path [result, :invitations] %>">
-        <span class="remove_item"></span>
-        <%= render :partial => "#{result.class.name.underscore}", :locals => { "#{result.class.name.underscore}".to_sym => result } %>
-      </li>
-    <% end %>
-  </ul>
-
-  <%= paginate @results %>
+  <div class="results_wrapper">
+    <%= render :partial => 'results' %>
+  </div>
 </div>
