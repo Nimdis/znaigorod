@@ -46,7 +46,11 @@ handle_new_invitaion_link = (target, response) ->
       $('.inviteables_search_close').show()
       $('.inviteables_search_wrapper').replaceWith(response)
 
+      handle_results_search()
       handle_inviteables_search_click()
+
+    if $(response).is('ul')
+      $('.results_wrapper').html(response)
 
 
     #if $(response).is('li')
@@ -55,9 +59,7 @@ handle_new_invitaion_link = (target, response) ->
       #init_delete_invitation li
       #target.parent().next('.list').find('ul').append(li).find('.empty').remove()
 
-handle_inviteable_search = ->
-  console.log 'search'
-
+# скрыть
 handle_inviteables_search_close = ->
   $('.inviteables_search_close').on 'click', ->
     $('.inviteables_search_close').hide()
@@ -67,6 +69,7 @@ handle_inviteables_search_close = ->
 
     false
 
+# уточнить
 handle_inviteables_search_click = ->
   $('.inviteables_search_wrapper ul').on 'click', (evt) ->
     li = $(evt.target).closest('li')
@@ -81,12 +84,19 @@ handle_inviteables_search_click = ->
 
     false
 
+# закрыть выбранный резалт
 handle_remove_selected_result = ->
   $('.remove_item').on 'click', ->
     $(this).closest('.selected_result').empty()
     $('.inviteables_search_open').click()
 
     false
+
+# поиск по результатам
+handle_results_search = ->
+  $('#inviteables_search_q').keyup ->
+    console.log $(this).val()
+    console.log $(this).closest('form').submit()
 
 @init_invitations = ->
   $('.invitations_wrapper').on 'ajax:success', (evt, response) ->
