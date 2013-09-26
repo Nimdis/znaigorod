@@ -1,2 +1,8 @@
-<%= organization.title %>
-<%= organization.logotype_url %>
+<div class="item">
+  <div class="poster">
+    <%= link_to(image_tag(resized_image_url(organization.logotype_url, 66, 66), size: '66x66', alt: organization.title), organization.logotype_url) %>
+  </div>
+  <div class="title">
+    <%= link_to organization.title, organization_path(organization) %>
+  </div>
+</div>
