@@ -1,45 +1,41 @@
 <div class="invite_form_wrapper">
-  
   <div class="left">
     <%= simple_form_for [:my, @invitation], :remote => true do |f| %>
-      
       <%= f.input :kind, :as => :hidden %>
-
       <div class="floatl">
-      
         <% unless @invitation.inviteable %>
           <%= f.input :category, :collection => Inviteables.instance.categories.keys, :include_blank => false %>
-          <%= link_to 'Уточнить', inviteables_search_path, :remote => true %>
+          <%= link_to "Уточнить &darr;".html_safe, inviteables_search_path, :remote => true, :class => 'inviteables_search close' %>
         <% end %>
-      
       </div>
+    </div>
 
-  </div>
-  
-  <div class="right">
+    <div class="right">
       <div class="floatl">
         <% unless @invitation.invited %>
           <%= f.input :gender %>
-          <%= link_to 'Уточнить', '#' %>
+          <%= link_to "Уточнить &darr;".html_safe, '#' %>
         <% end %>
-      </div>  
-  </div>
-
-  <div class="forml">
-    Нажав "Уточнить", вы можете выбрать конкретное мероприятие или заведение.
-  </div>
-
-  <div class="formr">
-    Нажав "Уточнить", вы можете выбрать конкретное мероприятие или заведение.
-  </div>
-
-  <div class="form_footer">
-    <div class="actions">
-      <%= f.submit 'Готово', :class => 'button' %>
-      <%= link_to 'Отмена', root_path, :class => 'cancel' %>
+      </div>
     </div>
-  </div>
-  
+
+    <div class="forml">
+      <div class="info">
+        Нажав "Уточнить", вы можете выбрать конкретное мероприятие или заведение.
+      </div>
+    </div>
+
+    <div class="formr">
+      <div class="info">
+        Нажав "Уточнить", вы можете выбрать конкретное мероприятие или заведение.
+      </div>
+    </div>
+
+    <div class="form_footer">
+      <div class="actions">
+        <%= f.submit 'Готово', :class => 'button' %>
+        <%= link_to 'Отмена', root_path, :class => 'cancel' %>
+      </div>
+    </div>
   <% end %>
-  
 </div>

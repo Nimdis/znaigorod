@@ -60,27 +60,20 @@
     .left, .right
       background: #e8e8e8
       float: left
-      width: 304px  
       padding: 7px
+      width: 304px
 
-      label 
+      label
         font-weight: bold
         padding-right: 3px
 
       .select
         margin: 0 0 7px 0
 
-      div.check_boxes
-        margin: 0 0 10px 0
-
-        .checkbox
-          display: inline-block
-          width: 130px
-
       .error
+        color: #880000
         font-size: 8px
         font-style: italic
-        color: #880000
 
       textarea.text
         width: 280px
@@ -90,13 +83,29 @@
 
   .forml, .formr
     float: left
-    width: 309px
     min-height: 420px
     padding: 5px
+    width: 308px
+
   .forml
     border-right: 1px solid #ccc
 
-  .form_footer 
+    ul
+      li
+        +clearfix
+        padding: 5px
+
+        &:hover
+          background: #e8e8e8
+
+        .item
+          .title
+            margin: 0 0 0 65px
+          .poster
+            float: left
+            margin: 0 10px 0 0
+
+  .form_footer
     float: left
     background: #e8e8e8
     width: 640px
