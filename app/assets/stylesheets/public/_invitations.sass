@@ -94,6 +94,19 @@
   .forml
     border-right: 1px solid #ccc
 
+    ul.selected_result
+      li
+        +clearfix
+        background: #e8e8e8
+
+        .remove_item
+          background: image_url('public/close.png') no-repeat left center
+          float: right
+          height: 10px
+          width: 10px
+
+          &:hover
+            cursor: pointer
 
     ul
       li
