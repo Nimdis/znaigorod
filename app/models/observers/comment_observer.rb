@@ -21,7 +21,5 @@ class CommentObserver < ActiveRecord::Observer
         messageable: comment
       )
     end
-    #comment.user.account.delay.update_rating
-    #comment.commentable.delay.update_rating if comment.commentable.is_a?(Post)
   end
 end

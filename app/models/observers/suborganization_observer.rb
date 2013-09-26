@@ -5,7 +5,6 @@ class SuborganizationObserver < ActiveRecord::Observer
     :creation, :culture, :entertainment, :hotel, :meal, :salon_center, :sauna,
     :sport, :travel
   def after_save(record)
-    record.organization.delay.update_rating
     record.organization.delay.update_slave_organization_statuses
     record.organization.delay.index_suborganizations
   end
