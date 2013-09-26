@@ -71,8 +71,8 @@ class Afisha < ActiveRecord::Base
   scope :draft,                 -> { with_state(:draft) }
   scope :published,             -> { with_state(:published) }
   scope :pending,               -> { with_state(:pending) }
-  scope :actual,                -> { joins(:showings).where('showings.starts_at >= ? OR (showings.ends_at is not null AND showings.ends_at > ?)', DateTime.now.beginning_of_day, Time.zone.now) }
-  scope :archive,               -> { joins(:showings).where('showings.starts_at < ? OR (showings.ends_at is not null AND showings.ends_at < ?)', DateTime.now.beginning_of_day, Time.zone.now) }
+  scope :actual,                -> { joins(:showings).where('showings.starts_at >= ? OR (showings.ends_at is not null AND showings.ends_at > ?)', DateTime.now.beginning_of_day, Time.zone.now).uniq }
+  scope :archive,               -> { joins(:showings).where('showings.starts_at < ? OR (showings.ends_at is not null AND showings.ends_at < ?)', DateTime.now.beginning_of_day, Time.zone.now).uniq }
 
   friendly_id :title, use: :slugged
   normalize_attribute :image_url
@@ -165,7 +165,7 @@ class Afisha < ActiveRecord::Base
   def set_poster_url
     if poster_image_url?
       rpl = 'region/' << [crop_width, crop_height, crop_x, crop_y].map(&:to_f).map { |v| v * resize_factor }.map(&:round).join('/')
-      self.poster_url = poster_image_url.gsub /\/\d+-\d+\//, "/#{rpl}/"
+      self.poster_url = poster_image_url.gsub(/\/\d+-\d+\//, "/#{rpl}/")
     end
   end
   private :set_poster_url
@@ -393,14 +393,6 @@ class Afisha < ActiveRecord::Base
   end
 
   #>>>>>>>>>>>> Poster to VK >>>>>>>>>>>
-  def check_poster_changed?
-    version = JSON.parse(self.versions.last.body) if self.versions.any?
-
-    return true if version && version.has_key?('poster_url')
-
-    false
-  end
-
   def vk_client
     VkontakteApi::Client.new(User.find(9).token)
   end
@@ -408,7 +400,7 @@ class Afisha < ActiveRecord::Base
   def vk_album_id(client)
     album_title = "Афиши #{I18n.l(Time.zone.today, :format => '%B-%Y')}"
     album_id = nil
-    album = client.photos.get_albums(owner_id: -58652180).select{|g| g.title == album_title}
+    album = client.photos.get_albums(owner_id: "-#{Settings[:vk][:group_id]}").select{|g| g.title == album_title}
 
     if album.one?
       album_id = album.first.aid
@@ -420,7 +412,7 @@ class Afisha < ActiveRecord::Base
   end
 
   def create_vk_album(client)
-    album = client.photos.create_album(title: "Афиши #{I18n.l(Time.zone.today, :format => '%B-%Y')}", group_id: 58652180, comment_privacy: 1, privacy: 1)
+    album = client.photos.create_album(title: "Афиши #{I18n.l(Time.zone.today, :format => '%B-%Y')}", group_id: Settings[:vk][:group_id], comment_privacy: 1, privacy: 1)
     album.aid
   end
 
@@ -428,7 +420,7 @@ class Afisha < ActiveRecord::Base
     client = vk_client
     begin
       album_id = vk_album_id(client)
-      up_serv = client.photos.get_upload_server(aid: album_id, group_id: 58652180)
+      up_serv = client.photos.get_upload_server(aid: album_id, group_id: Settings[:vk][:group_id])
       file = Tempfile.new([self.slug,'.jpg'])
       file.binmode
       file.write open(poster_url).read

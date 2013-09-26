@@ -28,7 +28,7 @@ namespace :afisha do
   desc 'Upload posters to vkontakte'
   task :posters_to_vk => :environment do
     puts 'Upload afishas posters to vkontakte'
-    afishas = Afisha.with_showings.published
+    afishas = Afisha.actual.published
     bar = ProgressBar.new(afishas.count)
     afishas.each do |afisha|
       afisha.upload_poster_to_vk
