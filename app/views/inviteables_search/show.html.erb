@@ -8,7 +8,7 @@
 
   <ul>
     <% @results.each do |result| %>
-      <li>
+      <li data-url="<%= polymorphic_path [result, :invitations] %>">
         <%= render :partial => "#{result.class.name.underscore}", :locals => { "#{result.class.name.underscore}".to_sym => result } %>
       </li>
     <% end %>

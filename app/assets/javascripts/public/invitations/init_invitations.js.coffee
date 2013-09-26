@@ -25,6 +25,7 @@ handle_new_invitaion_link = (target, response) ->
   dialog = init_form_dialog('invitation', target.data('title'), $(target.data('target')), 650).html(response)
 
   handle_inviteables_search_close()
+
   $('#invitation_category').change ->
     category = encodeURIComponent($(this).val())
     link = $('.inviteables_search_open')
@@ -45,6 +46,8 @@ handle_new_invitaion_link = (target, response) ->
       $('.inviteables_search_close').show()
       $('.inviteables_search_wrapper').replaceWith(response)
 
+      handle_inviteables_search_click()
+
 
     #if $(response).is('li')
       #$(this).dialog('destroy').remove()
@@ -61,6 +64,14 @@ handle_inviteables_search_close = ->
     $('.inviteables_search_open').show()
     $('.info').show()
     $('.inviteables_search_wrapper').empty()
+
+    false
+
+handle_inviteables_search_click = ->
+  $('.inviteables_search_wrapper ul').on 'click', (evt) ->
+    url = $(evt.target).closest('li').data('url')
+
+    $('.new_invitation').attr('action', url)
 
     false
 
