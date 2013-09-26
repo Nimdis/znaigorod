@@ -10,16 +10,6 @@ init_form_dialog = (id, title, target, width = 300) ->
     close: (event, ui) ->
       $(this).dialog('destroy').remove()
 
-  dialog.on 'ajax:success', (evt, response) ->
-    if $(response).find('form').length
-      $(this).html(response)
-      init_gender_radio_buttons $('.left form', dialog)
-    else
-      $(this).dialog('destroy').remove()
-      li = $(response)
-      init_delete_invitation li
-      target.append(li).find('.empty').remove()
-
   dialog
 
 init_delete_invitation = (elem) ->
@@ -31,24 +21,45 @@ init_delete_invitation = (elem) ->
     unless ul.children().length
       ul.append('<li class="empty">Нет приглашений</li>')
 
-init_gender_radio_buttons = (form) ->
-  radio_buttons_block = $('div.radio_buttons', form)
+handle_new_invitaion_link = (target, response) ->
+  console.log 'new inv'
+  dialog = init_form_dialog('invitation', target.data('title'), $(target.data('target')), 650).html(response)
 
-  $('label', radio_buttons_block).each ->
-    $(this).addClass($('input', this).attr('id'))
-    $(this).addClass('checked') if $('input', this).is(':checked')
-    $(this).click ->
-      return false if $(this).hasClass('checked')
+  dialog.on 'ajax:success', (evt, response) ->
+    if $(response).find('form').length
+      $(this).html(response)
 
-      $('label', radio_buttons_block).removeClass('checked')
-      $(this).addClass('checked') if $('input', this).is(':checked')
+    if $(response).is('ul')
+      target = $(evt.target)
+
+      target.html('Скрыть &uarr;').addClass('open')
+      $('.info').hide()
+      $('.forml').append(response)
+
+      close_handler()
+
+    if $(response).is('li')
+      $(this).dialog('destroy').remove()
+      li = $(response)
+      init_delete_invitation li
+      target.parent().next('.list').find('ul').append(li).find('.empty').remove()
+
+handle_inviteable_search = ->
+  console.log 'search'
+
+close_handler = ->
+  $('.close').on 'click', ->
+    $('.forml').replaceWith('jopa')
+  false
 
 @init_invitations = ->
   $('.invitations_wrapper').on 'ajax:success', (evt, response) ->
     target = $(evt.target)
-    if target.hasClass('invitation_link')
-      dialog = init_form_dialog('invitation', target.data('title'), $(target.data('target')), 650).html(response)
 
-      init_gender_radio_buttons $('.left form', dialog)
+    if target.hasClass('invitation_link')
+      handle_new_invitaion_link(target, response)
+
+    if target.hasClass('inviteables_search')
+      handle_inviteable_search()
 
   init_delete_invitation $('.delete_invitation')
