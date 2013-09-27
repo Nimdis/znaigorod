@@ -25,6 +25,7 @@ handle_new_invitaion_link = (target, response) ->
   dialog = init_form_dialog('invitation', target.data('title'), $(target.data('target')), 650).html(response)
 
   handle_inviteables_search_close()
+  handle_accounts_search_close()
 
   $('#invitation_category').change ->
     category = encodeURIComponent($(this).val())
@@ -104,10 +105,21 @@ handle_inviteables_results_search = ->
   $('#inviteables_search_q').keyup ->
     $(this).closest('form').submit()
 
+
 # кого пригласить: поиск по результатам
 handle_accounts_results_search = ->
   $('#accounts_search_q').keyup ->
     $(this).closest('form').submit()
+
+# кого пригласить: скрыть
+handle_accounts_search_close = ->
+  $('.accounts_search_close').on 'click', ->
+    $('.accounts_search_close').hide()
+    $('.accounts_search_open').show()
+    $('.formr .info').show()
+    $('.accounts_search_wrapper').empty()
+
+    false
 
 @init_invitations = ->
   $('.invitations_wrapper').on 'ajax:success', (evt, response) ->
