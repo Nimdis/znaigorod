@@ -100,10 +100,7 @@
     padding: 5px
     width: 308px
 
-  .forml
-    border-right: 1px solid #ccc
-
-    .inviteables_search_wrapper
+    .inviteables_search_wrapper, .accounts_search_wrapper
       .search_form
         border-bottom: 1px solid #ccc
         padding: 5px
@@ -133,6 +130,8 @@
             &:active
               background-position: center -63px
 
+  .forml, .formr
+
     ul.selected_result
       li
         +clearfix
@@ -152,15 +151,20 @@
         +clearfix
         padding: 5px
 
-        &:hover
-          background: #e8e8e8
-
         .item
           .title
             margin: 0 0 0 65px
-          .poster
+          .avatar, .poster
             float: left
             margin: 0 10px 0 0
+
+  .forml
+    border-right: 1px solid #ccc
+
+    ul
+      li
+        &:hover
+          background: #e8e8e8
 
   .form_footer
     float: left
