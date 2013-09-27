@@ -1,10 +1,15 @@
 <ul class="results" data-target=".accounts_search_results_wrapper">
   <% @accounts.each do |account| %>
     <li>
-      <div class='avatar'>
-        <%= link_to account do %>
-          <%= image_tag(resized_image_url(account.avatar.url, 70, 70), :size => '70x70', :title => account, :alt => account) %>
-        <% end %>
+      <div class="item">
+        <div class="avatar">
+          <%= link_to account do %>
+            <%= image_tag(resized_image_url(account.avatar.url, 66, 66), :size => '66x66', :title => account, :alt => account) %>
+          <% end %>
+        </div>
+        <div class="title">
+          <%= link_to account.title, account_path(account) %>
+        </div>
       </div>
     </li>
   <% end %>
