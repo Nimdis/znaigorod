@@ -52,27 +52,30 @@
           color: #ff6501
           font-size: 11px
 
+.invitation_form_dialog.ui-dialog-content
+  padding: 0 !important
+
 .invitation_form_dialog
   .invite_form_wrapper
     margin: 0 auto
-    width: 640px
+    width: 650px
 
     .left, .right
       background: #e8e8e8
       float: left
-      padding: 7px
-      width: 304px
+      width: 324px
 
       label
         font-weight: bold
         padding-right: 3px
 
       .select
-        margin: 0 0 7px 0
+        margin: 5px 0 5px 5px
 
         select
           background: #fff
           border: 1px solid #ccc
+          outline: none
 
       .error
         color: #880000
@@ -82,23 +85,24 @@
       textarea.text
         width: 280px
 
+      .floatl
+        a
+          padding: 5px 10px
+
+        .inviteables_search_close, .accounts_search_close
+          background: #fff
+          display: none
+
     .left
       border-right: 1px solid #ccc
-
-      .floatl
-        .inviteables_search_close
-          display: none
-
-    .right
-      .floatl
-        .accounts_search_close
-          display: none
 
   .forml, .formr
     float: left
     min-height: 420px
-    padding: 5px
-    width: 308px
+    width: 324px
+
+    .info
+      padding: 7px
 
     .inviteables_search_wrapper, .accounts_search_wrapper
       .search_form
@@ -133,6 +137,8 @@
   .forml, .formr
 
     ul.selected_result
+      padding: 7px
+
       li
         +clearfix
         background: #e8e8e8
@@ -166,15 +172,20 @@
         &:hover
           background: #e8e8e8
 
+  .formr
+    .accounts_search_results_wrapper
+      padding: 10px 0 0 0
+
   .form_footer
     float: left
     background: #e8e8e8
-    width: 640px
+    width: 650px
     padding: 7px 0
     .actions
       text-align: center
 
     .button
       +button_style
+
     .cancel
       +grey-button-style
