@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130926024849) do
+ActiveRecord::Schema.define(:version => 20130927030606) do
 
   create_table "accounts", :force => true do |t|
     t.string   "first_name"
@@ -479,6 +479,7 @@ ActiveRecord::Schema.define(:version => 20130926024849) do
     t.float    "balance"
     t.integer  "fb_likes"
     t.integer  "odn_likes"
+    t.string   "poster_vk_id"
   end
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true
