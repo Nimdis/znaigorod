@@ -20,3 +20,9 @@ ru:
       few:   "%{count} афиши"
       many:  "%{count} афиш"
       other: "%{count} афиш"
+
+    events_without_genger:
+      one:   "Добавлена %{count} афиша"
+      few:   "Добавлено %{count} афиши"
+      many:  "Добавлено %{count} афиш"
+      other: "Добавлено%{count} афиш"

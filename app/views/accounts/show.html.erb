@@ -51,9 +51,13 @@
 
     <% if @events.published.any? %>
       <div class="events header">
-        <%= @account.first_name %>
-        <%= t "account.add_afisha.#{@account.gender}" %>
-        <%= t 'account.events', count: @account.afisha.published.count %>
+        <% if @account.gender? %>
+          <%= @account.first_name %>
+          <%= t "account.add_afisha.#{@account.gender}" %>
+          <%= t 'account.events', count: @account.afisha.published.count %>
+        <% else %>
+          <%= t 'account.events_without_genger', count: @account.afisha.published.count %>
+        <% end %>
       </div>
       <div class="events list">
         <%= render partial: 'events/account_events', locals: { collection: @events.published, state: :published } %>
