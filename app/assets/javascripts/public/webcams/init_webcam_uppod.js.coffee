@@ -40,13 +40,8 @@
       width: width.toNumber() + 36
       height: height.toNumber() + 49
       resizable: false
-      create: (event, ui) ->
-        $('body').css
-          overflow: 'hidden'
-        true
-      beforeClose: (event, ui) ->
-        $("body").css
-          overflow: 'inherit'
+      open: (event, ui) ->
+        webcam_dialog.append(share_webcam_block())
         true
       close: (event, ui) ->
         $(this).dialog('destroy')
