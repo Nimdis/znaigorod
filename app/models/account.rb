@@ -196,10 +196,13 @@ class Account < ActiveRecord::Base
       .where(:invited_id => nil).first
   end
 
-  def invites?(inviteable, invited, kind)
-    invitations.send(kind)
-      .where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name)
-      .where(:invited_id => invited).any?
+  #def invites?(inviteable, invited, kind)
+    #invitations.send(kind)
+      #.where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name)
+      #.where(:invited_id => invited).any?
+  #end
+
+  def invites?(account, kind, category, inviteable)
   end
 
   def reacts_to?(invitation)
