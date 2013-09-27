@@ -1,0 +1,7 @@
+<div class='<%= webcam_jw.kind %>'
+     data-width='<%= webcam_jw.width %>'
+     data-height='<%= webcam_jw.height %>'
+     data-file='<%= webcam_jw.url %>'>
+  <%= link_to webcam_jw.title, webcam_jw %>
+  <%= content_tag :p, webcam_jw.address, :'data-latitude' => webcam_jw.latitude, :'data-longitude' => webcam_jw.longitude %>
+</div>

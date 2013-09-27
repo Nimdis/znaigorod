@@ -2,9 +2,9 @@
 
 <% content_for :page_title, 'Вебкамеры Томска' %>
 
-<div class="webcams">
+<div class='webcams'>
 
-  <h1><span class="strong">Вебкамеры</span> Томска</h1>
+  <h1>Вебкамеры Томска</h1>
 
   <div class="webcam_map" data-latitude="56.495116" data-longitude="84.972128"></div>
 
@@ -150,5 +150,8 @@
       <%= render :partial => 'commons/share_this', :locals => { :url => :webcam_url } %>
     </div>
 
+    <%# collection.published.ordered.each do |resource| %>
+      <%#= render :partial => resource.kind, :object => resource %>
+    <%# end %>
   </div>
 </div>
