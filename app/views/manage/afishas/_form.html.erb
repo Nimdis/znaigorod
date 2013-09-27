@@ -35,7 +35,7 @@
       <%= showing.input :hall %>
       <%= showing.link_to_remove t('remove_showing') %>
     <% end %>
-    <%= f.link_to_add t('add_showing'), :showings %>
+    <%= f.link_to_add t('add_showing'), :showings, :onclick => 'init_choose_coordinate()' %>
   </div>
 <% end %>
 
