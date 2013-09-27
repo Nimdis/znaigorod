@@ -37,5 +37,6 @@ end
 #  balance                       :float
 #  fb_likes                      :integer
 #  odn_likes                     :integer
+#  poster_vk_id                  :string(255)
 #
 

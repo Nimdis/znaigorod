@@ -516,5 +516,6 @@ end
 #  fb_likes                  :integer
 #  odn_likes                 :integer
 #  allow_auction             :boolean
+#  poster_vk_id              :string(255)
 #
 

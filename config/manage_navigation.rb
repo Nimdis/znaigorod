@@ -52,6 +52,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :tickets, 'Билеты', manage_tickets_path
     primary.item :payments, 'Платежи', manage_payments_path
+    primary.item :payments, 'Вебкамеры', manage_webcams_path
 
     primary.dom_class = 'navigation'
   end

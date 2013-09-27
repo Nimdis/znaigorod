@@ -428,6 +428,20 @@ ru:
         amount: Сумма платежа
         details: Назначение платежа
 
+      webcam:
+        <<: *common_attributes
+        kind: Тип камеры
+        slug: Slug
+        url: Ccылка на поток
+        parameters: Параметры
+        cab: Сылка на cab-file
+        width: Ширина
+        height: Высота
+        address: Физический адрес
+        latitude: Широта
+        longitude: Долгота
+        state: Опубликована
+
     state_machines:
       afisha:
         state:

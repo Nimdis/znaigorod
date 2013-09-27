@@ -1,0 +1,17 @@
+<%= simple_form_for [:manage, @webcam] do |f| %>
+  <%= f.input :kind, placeholder: 'тут выбрать надо...' %>
+  <%= f.input :title, as: :string, placeholder: 'Музей истории Томска' %>
+  <%= f.input :url, as: :string, placeholder: 'http://cam.tomsk.ru/stream.cgi' %>
+  <%= f.input :parameters, as: :string, placeholder: 'rate=0&user=user&pwd=pwd' %>
+  <%= f.input :cab, as: :string, placeholder: 'http://cam.tomsk.ru/control.cab' %>
+  <%= f.input :width, placeholder: '640' %>
+  <%= f.input :height, placeholder: '480' %>
+  <%= f.input :address, as: :string, placeholder: 'ул. Бакунина, 3' %>
+  <%= f.input :latitude, placeholder: '56.488746' %>
+  <%= f.input :longitude, placeholder: '84.954833' %>
+  <%= f.input :state %>
+  <div class='published actions'>
+    <%= f.submit "Сохранить" %>
+    <%= link_to 'Удалить'.html_safe, resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
+  </div>
+<% end %>

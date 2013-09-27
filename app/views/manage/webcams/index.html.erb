@@ -1,0 +1,19 @@
+<div class="new_link">
+  <%= link_to "Добавить новую вебкамеру", new_manage_webcam_path, :class => 'new_resource' %>
+</div>
+
+<div class="clearfix"></div>
+
+<ul class="collection">
+  <% @webcams.ordered.each do |webcam| %>
+    <li>
+      <span class="title">
+        <%= link_to webcam.title, manage_webcam_path(webcam) %>
+        (<%= "#{webcam.width}x#{webcam.height} #{webcam.kind}" %>)
+      </span>
+      <span class="status">
+        <%= webcam.state? ? 'Опубликована' : 'Не опубликована' %>
+      </span>
+    </li>
+  <% end %>
+</ul>

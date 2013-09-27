@@ -1,0 +1,15 @@
+<div class="show">
+  <p><%= link_to "Перейти к списку вебкамер", manage_webcams_path %></p>
+  <h1>
+    <%= resource.title %>
+    <%= link_to "Редактировать вебкамеру", edit_manage_webcam_path, :class => 'edit_link' %>
+  </h1>
+
+  <% resource.attributes.keys.delete_if{|key| %w[id created_at updated_at].include?(key)}.each do |attribute| %>
+    <div class="<%= attribute %>">
+      <span class="label"><%= I18n.t("activerecord.attributes.webcam.#{attribute}") %></span>
+      <span class="value"><%= resource.send(attribute) %></span>
+    </div>
+  <% end %>
+
+</div>

@@ -24,5 +24,9 @@ end
 #  description        :text
 #  stale_at           :datetime
 #  organization_price :float
+#  email_addressess   :text
+#  undertow           :integer
+#  report_sended      :boolean          default(FALSE)
+#  state              :string(255)
 #
 

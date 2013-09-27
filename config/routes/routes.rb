@@ -21,7 +21,6 @@ Znaigorod::Application.routes.draw do
   get 'accounts_search' => 'accounts_search#show',         :as => :accounts_search
   get 'geocoder' => 'geocoder#get_coordinates'
   get 'search' => 'search#search',                :as => :search
-  get 'webcams' => 'webcams#index'
   get 'yamp_geocoder' => 'geocoder#get_yamp_coordinates'
 
   resources :afisha, :only => [], :controller => 'afishas' do
@@ -105,6 +104,8 @@ Znaigorod::Application.routes.draw do
     resources :votes, :only => :index
     resources :visits, :only => :index
   end
+
+  resources :webcams, :only => [:index, :show]
 
   get 'feedback' => 'feedback#new', :as => :new_feedback
   post 'feedback' => 'feedback#create', :as => :create_feedback
