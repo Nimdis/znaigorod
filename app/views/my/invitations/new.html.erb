@@ -15,7 +15,10 @@
       <div class="floatl">
         <% unless @invitation.invited %>
           <%= f.input :gender %>
-          <%= link_to "Уточнить &darr;".html_safe, accounts_search_path, :remote => true, :class => 'accounts_search_open' %>
+          <%= link_to "Уточнить &darr;".html_safe,
+            accounts_search_path(:category => Inviteables.instance.categories.keys.first, :kind => @invitation.kind),
+            :remote => true,
+            :class => 'accounts_search_open' %>
           <%= link_to "Скрыть &uarr;".html_safe, '#', :class => 'accounts_search_close' %>
         <% end %>
       </div>
