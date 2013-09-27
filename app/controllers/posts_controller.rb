@@ -15,9 +15,7 @@ class PostsController < ApplicationController
   def show
     @presenter = PostPresenter.new(params)
     @post = PostDecorator.new(Post.find(params[:id]))
-    if request.session_options[:id].present? && !request.user_agent.match(/\(.*https?:\/\/.*\)/)
-      @post.delay(:queue => 'critical').create_page_visit(request.session_options[:id], request.user_agent, current_user)
-    end
+    @post.delay(:queue => 'critical').create_page_visit(request.session_options[:id], request.user_agent, current_user)
   end
 
 end

@@ -29,9 +29,7 @@ class OrganizationsController < ApplicationController
     else
       @organization = Organization.find_by_subdomain(request.subdomain)
     end
-    if request.session_options[:id].present? && !request.user_agent.match(/\(.*https?:\/\/.*\)/)
-      @organization.delay(:queue => 'critical').create_page_visit(request.session_options[:id], request.user_agent, current_user)
-    end
+    @organization.delay(:queue => 'critical').create_page_visit(request.session_options[:id], request.user_agent, current_user)
 
     @organization = OrganizationDecorator.decorate @organization
     @visits = @organization.visits.page(1).per(5)
