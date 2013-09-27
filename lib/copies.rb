@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Copies
   extend ActiveSupport::Concern
 

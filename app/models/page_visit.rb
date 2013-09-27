@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class PageVisit < ActiveRecord::Base
   attr_accessible :session, :user_agent, :user
 

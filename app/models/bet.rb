@@ -1,4 +1,4 @@
-#encoding: utf-8
+# encoding: utf-8
 
 class Bet < ActiveRecord::Base
   attr_accessible :amount, :number

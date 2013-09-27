@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SocialLikes
 
   def initialize
@@ -52,7 +54,7 @@ class SocialLikes
         end
         item_like_count = item.votes.source(:vk).without_user.count
         change_votes(item, likes['count'] - count, item_like_count, :vk)
-      rescue VkontakteApi::Error => e 
+      rescue VkontakteApi::Error => e
         return
       end
     end

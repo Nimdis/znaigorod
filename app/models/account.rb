@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Account < ActiveRecord::Base
   attr_accessible :avatar, :birthday, :email, :first_name, :gender, :last_name, :patronymic, :rating, :nickname, :location, :created_at
 
