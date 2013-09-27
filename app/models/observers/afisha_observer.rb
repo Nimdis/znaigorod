@@ -36,6 +36,6 @@ class AfishaObserver < ActiveRecord::Observer
   def after_save(afisha)
     return unless afisha.published?
     afisha.delay.reindex_showings
-    afisha.delay.upload_poster_to_vk if (afisha.poster_vk_id.nil? || afisha.poster_url_changed?) && afisha.poster_url?
+    afisha.delay(:queue => 'critical').upload_poster_to_vk if (afisha.poster_vk_id.nil? || afisha.poster_url_changed?) && afisha.poster_url?
   end
 end
