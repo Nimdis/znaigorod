@@ -21,6 +21,17 @@ init_delete_invitation = (elem) ->
     unless ul.children().length
       ul.append('<li class="empty">Нет приглашений</li>')
 
+replace_param_value = (url, param, value) ->
+  params = {}
+  parser = document.createElement('a')
+  parser.href = url
+  parser.search.replace('?', '').split('&').each (s) ->
+    params[s.split('=')[0]] = s.split('=')[1]
+  params[param] = value
+  parser.search = "?#{$.param(params)}"
+
+  parser
+
 handle_new_invitaion_link = (target, response) ->
   dialog = init_form_dialog('invitation', target.data('title'), $(target.data('target')), 650).html(response)
 
@@ -28,13 +39,20 @@ handle_new_invitaion_link = (target, response) ->
   handle_accounts_search_close()
 
   $('#invitation_category').change ->
-    category = encodeURIComponent($(this).val())
+    category = $(this).val()
     link = $('.inviteables_search_open')
     href = link.attr('href').replace /category=(.*)/, "category=#{category}"
     link.attr('href', href)
 
     unless $('.inviteables_search_open').is(':visible')
       $('.inviteables_search_open').click()
+
+    link = $('.accounts_search_open')
+    href = replace_param_value(link.attr('href'), 'category', category)
+    link.attr('href', href)
+
+    unless $('.accounts_search_open').is(':visible')
+      $('.accounts_search_open').click()
 
 
   dialog.on 'ajax:success', (evt, response) ->
@@ -90,7 +108,12 @@ handle_inviteables_search_click = ->
 
     handle_remove_selected_result()
 
+    link = $('.accounts_search_open')
+    href = link.attr('href')
+    link.attr('href', href)
+
     false
+
 
 # куда пригласть: закрыть выбранный результат
 handle_remove_selected_result = ->
