@@ -108,6 +108,9 @@ handle_inviteables_search_click = ->
 
     handle_remove_selected_result()
 
+    unless $('.accounts_search_open').is(':visible')
+      $('.accounts_search_open').click()
+
     link = $('.accounts_search_open')
     href = link.attr('href')
     link.attr('href', href)
