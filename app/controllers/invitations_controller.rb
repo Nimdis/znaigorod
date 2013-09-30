@@ -12,8 +12,16 @@ class InvitationsController < ApplicationController
 
   def create
     create! do
-      render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return if @invitation.inviteable
-      render :nothing => true and return if @invitation.invited
+      case params[:render]
+      when 'nothing'
+        render :nothing => true
+      when 'show'
+        render :show
+      when 'social'
+        render :partial => 'commons/social_block', :locals => { :inviteable => parent }
+      end
+
+      return
     end
   end
 

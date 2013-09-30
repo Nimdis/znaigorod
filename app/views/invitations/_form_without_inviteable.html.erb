@@ -1,6 +1,7 @@
 <div class="invite_form_wrapper">
   <div class="left">
     <%= simple_form_for @invitation, :remote => true do |f| %>
+      <%= hidden_field_tag :render, 'show' %>
       <%= f.input :kind, :as => :hidden %>
       <div class="floatl">
         <% unless @invitation.inviteable %>

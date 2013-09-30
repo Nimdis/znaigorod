@@ -15,9 +15,11 @@
           приглашен
         <% else %>
           <%= simple_form_for :invitation, :url => parent ? [parent, :invitations] : [current_user.account.invitations.build], :remote => true do |f| %>
+            <%= hidden_field_tag :render, 'nothing' %>
             <%= f.input :category, :as => :hidden, :input_html => { :value => category } %>
             <%= f.input :kind, :as => :hidden, :input_html => { :value => kind } %>
             <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
+
             <%= f.submit t("invite.#{kind}") %>
           <% end %>
         <% end %>
