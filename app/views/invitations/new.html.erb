@@ -1,1 +1,3 @@
-<%= render 'form' %>
+<div class="invite_form_wrapper">
+  <%= render @invitation.inviteable ? 'form_with_inviteable' : 'form_without_inviteable' %>
+</div>
