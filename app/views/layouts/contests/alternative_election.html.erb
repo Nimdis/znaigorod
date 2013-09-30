@@ -23,6 +23,7 @@
     </div>
     <div class='alternative_election_cotent'>
       <%= render :partial => 'commons/public_header' %>
+      <%= render :partial => 'commons/advertisement' if DateTime.now <= DateTime.new(2013, 10, 12, 00, 00, 00, '+7') %>
       <%= render :partial => 'commons/public_content' %>
     </div>
   </div>
