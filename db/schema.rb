@@ -895,7 +895,6 @@ ActiveRecord::Schema.define(:version => 20130927030606) do
     t.text     "email_addressess"
     t.integer  "undertow"
     t.boolean  "report_sended",      :default => false
-    t.string   "state"
   end
 
   add_index "tickets", ["afisha_id"], :name => "index_ticket_infos_on_affiche_id"

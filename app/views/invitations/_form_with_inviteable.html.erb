@@ -4,7 +4,7 @@
       <%= f.input :kind, :as => :hidden %>
       <div class="floatl">
         <%= f.input :category, :collection => Inviteables.instance.categories.keys, :include_blank => false, :disabled => true %>
-        <%= link_to "Уточнить &darr;".html_safe, inviteables_search_path(:category => Inviteables.instance.categories.keys.first), :remote => true, :class => 'inviteables_search_open disabled' %>
+        <span class="disabled">Уточнить &darr;</span>
       </div>
     </div>
 

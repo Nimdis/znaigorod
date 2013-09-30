@@ -154,7 +154,6 @@ handle_accounts_search_close = ->
     target = $(evt.target)
 
     if target.hasClass('invitation_link')
-      console.log 'jopa'
       handle_new_invitaion_link(target, response)
 
     if target.hasClass('inviteables_search')
