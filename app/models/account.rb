@@ -196,20 +196,14 @@ class Account < ActiveRecord::Base
       .where(:invited_id => nil).first
   end
 
-  #def invites?(inviteable, invited, kind)
-    #invitations.send(kind)
-      #.where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name)
-      #.where(:invited_id => invited).any?
-  #end
-
-  def invited?(account, kind, category, inviteable)
+  def invitation_for(account, kind, category, inviteable)
     relation = invitations.send(kind).where(:category => category)
       .where(:invited_id => account.id)
       .joins(:invite_messages).where('messages.agreement IS NULL')
 
     relation = relation.where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name) if inviteable
 
-    relation.any?
+    relation.first
   end
 
   def reacts_to?(invitation)
