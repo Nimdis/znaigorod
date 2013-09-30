@@ -146,6 +146,7 @@ class Account < ActiveRecord::Base
     ["Facebook", "Mailru", "Odnoklassniki", "Twitter", "Vkontakte"].each do |provider|
       link = auth.info.urls.send(provider) if auth.info.urls.respond_to?(provider)
     end
+    link = "#{link}id#{auth.uid}" if link == 'http://vk.com/'
 
     link
   end
