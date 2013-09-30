@@ -8,13 +8,13 @@
     else
       false
 
-  no_changes = () ->
+  changed = () ->
     unless (typeof(window.localStorage) == 'undefined')
-      parseInt(window.localStorage.getItem('closed_at'))/1000 > parseInt(timestamp)
+      parseInt(window.localStorage.getItem('closed_at'))/1000 < parseInt(timestamp)
     else
       false
 
-  return if (is_closed() && no_changes()) || !not_answered_invitations.length || not_answered_invitations.find('li').length
+  return if (is_closed() && !changed()) || !(not_answered_invitations.length && not_answered_invitations.find('li').length)
 
   dialog = init_form_dialog('not_answered_invitations', 'Новые приглашения', null, 650, 386).html(not_answered_invitations.show())
 
