@@ -3,7 +3,10 @@
     <%= simple_form_for [:my, @invitation], :remote => true do |f| %>
       <%= f.input :kind, :as => :hidden %>
       <div class="floatl">
-        <% unless @invitation.inviteable %>
+        <% if @invitation.inviteable %>
+          <%= f.input :category, :collection => Inviteables.instance.categories.keys, :include_blank => false, :disabled => true %>
+          <%= link_to "Уточнить &darr;".html_safe, inviteables_search_path(:category => Inviteables.instance.categories.keys.first), :remote => true, :class => 'inviteables_search_open disabled' %>
+        <% else %>
           <%= f.input :category, :collection => Inviteables.instance.categories.keys, :include_blank => false %>
           <%= link_to "Уточнить &darr;".html_safe, inviteables_search_path(:category => Inviteables.instance.categories.keys.first), :remote => true, :class => 'inviteables_search_open' %>
           <%= link_to "Скрыть &uarr;".html_safe, '#', :class => 'inviteables_search_close' %>
@@ -25,11 +28,15 @@
     </div>
 
     <div class="forml">
-      <div class="info">
-        Нажав "Уточнить", вы можете выбрать конкретное мероприятие или заведение.
-      </div>
+      <% unless @invitation.inviteable %>
+        <div class="info">
+          Нажав "Уточнить", вы можете выбрать конкретное мероприятие или заведение.
+        </div>
+      <% end %>
 
-      <div class="inviteables_search_wrapper"></div>
+      <div class="inviteables_search_wrapper">
+        <%= render :partial => 'inviteables_search/results', :locals => { :results => [@invitation.inviteable] } if @invitation.inviteable %>
+      </div>
     </div>
 
     <div class="formr">

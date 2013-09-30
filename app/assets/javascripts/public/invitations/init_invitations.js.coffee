@@ -146,10 +146,11 @@ handle_accounts_search_close = ->
     false
 
 @init_invitations = ->
-  $('.invitations_wrapper').on 'ajax:success', (evt, response) ->
+  $('.invitations_wrapper, .user_actions').on 'ajax:success', (evt, response) ->
     target = $(evt.target)
 
     if target.hasClass('invitation_link')
+      console.log 'jopa'
       handle_new_invitaion_link(target, response)
 
     if target.hasClass('inviteables_search')

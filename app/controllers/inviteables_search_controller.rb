@@ -8,6 +8,6 @@ class InviteablesSearchController < ApplicationController
       paginate :page => params[:page] || 1, :per_page => 5
     }.results
 
-    render :partial => 'results' and return if params[:only_results]
+    render :partial => 'results', :locals => { :results => @results } and return if params[:only_results]
   end
 end

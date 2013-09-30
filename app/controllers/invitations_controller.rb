@@ -12,7 +12,8 @@ class InvitationsController < ApplicationController
 
   def new
     new! {
-      @accounts = Account.search { paginate :page => params[:page], :per_page => 10 }.results
+      #@accounts = Account.search { paginate :page => params[:page], :per_page => 10 }.results
+      render 'my/invitations/new' and return
     }
   end
 
