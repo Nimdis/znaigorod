@@ -10,6 +10,6 @@
   <ul class="selected_result"></ul>
 
   <div class="inviteables_search_results_wrapper">
-    <%= render :partial => 'results' %>
+    <%= render :partial => 'results', :locals => { :results => @results } %>
   </div>
 </div>
