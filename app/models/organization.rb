@@ -244,6 +244,10 @@ class Organization < ActiveRecord::Base
     @text_description ||= html_description.as_text
   end
 
+  auto_html_for :description do
+    redcloth :target => '_blank', :rel => 'nofollow'
+  end
+
   def self.inherited_suborganization_kinds
     available_suborganization_kinds.map(&:classify).map(&:constantize).flat_map(&:descendants).map(&:name).map(&:downcase)
   end
