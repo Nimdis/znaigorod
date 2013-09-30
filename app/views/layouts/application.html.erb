@@ -34,5 +34,6 @@
   <body>
     <%= yield(:flash_messages) %>
     <%= yield(:content) %>
+    <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\A(crm|manage|my)\//) %>
   </body>
 </html>
