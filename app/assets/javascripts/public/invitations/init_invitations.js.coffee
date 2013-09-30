@@ -26,9 +26,9 @@ replace_param_value = (url, param, value) ->
   parser = document.createElement('a')
   parser.href = url
   parser.search.replace('?', '').split('&').each (s) ->
-    params[s.split('=')[0]] = s.split('=')[1]
+    params[s.split('=')[0]] = decodeURIComponent(s.split('=')[1]).replace('+', ' ')
   params[param] = value
-  parser.search = "?#{$.param(params)}"
+  parser.search = "?#{$.param(params, false)}"
 
   parser
 
@@ -41,7 +41,8 @@ handle_new_invitaion_link = (target, response) ->
   $('#invitation_category').change ->
     category = $(this).val()
     link = $('.inviteables_search_open')
-    href = link.attr('href').replace /category=(.*)/, "category=#{category}"
+
+    href = replace_param_value(link.attr('href'), 'category', category)
     link.attr('href', href)
 
     unless $('.inviteables_search_open').is(':visible')
@@ -53,7 +54,6 @@ handle_new_invitaion_link = (target, response) ->
 
     unless $('.accounts_search_open').is(':visible')
       $('.accounts_search_open').click()
-
 
   dialog.on 'ajax:success', (evt, response) ->
     # 1
@@ -85,7 +85,7 @@ handle_new_invitaion_link = (target, response) ->
       init_delete_invitation li
       target.parent().next('.list').find('ul').append(li).find('.empty').remove()
 
-# куда пригласить: скрыть
+# КУДА: скрыть
 handle_inviteables_search_close = ->
   $('.inviteables_search_close').on 'click', ->
     $('.inviteables_search_close').hide()
@@ -95,7 +95,7 @@ handle_inviteables_search_close = ->
 
     false
 
-# куда пригласить: уточнить
+# КУДА: выбрать конкретное мероприятие или заведение
 handle_inviteables_search_click = ->
   $('.inviteables_search_results_wrapper').on 'click', (evt) ->
     li = $(evt.target).closest('li')
@@ -108,17 +108,16 @@ handle_inviteables_search_click = ->
 
     handle_remove_selected_result()
 
+    link = $('.accounts_search_open')
+    href = replace_param_value(link.attr('href'), 'parent', li.data('parent'))
+    link.attr('href', href)
+
     unless $('.accounts_search_open').is(':visible')
       $('.accounts_search_open').click()
 
-    link = $('.accounts_search_open')
-    href = link.attr('href')
-    link.attr('href', href)
-
     false
 
-
-# куда пригласть: закрыть выбранный результат
+# КУДА: закрыть выбранный результат
 handle_remove_selected_result = ->
   $('.remove_item').on 'click', ->
     $(this).closest('.selected_result').empty()
@@ -126,18 +125,17 @@ handle_remove_selected_result = ->
 
     false
 
-# куда пригласить: поиск по результатам
+# КУДА: поиск по результатам
 handle_inviteables_results_search = ->
   $('#inviteables_search_q').keyup ->
     $(this).closest('form').submit()
 
-
-# кого пригласить: поиск по результатам
+# КОГО: поиск по результатам
 handle_accounts_results_search = ->
   $('#accounts_search_q').keyup ->
     $(this).closest('form').submit()
 
-# кого пригласить: скрыть
+# КОГО: скрыть
 handle_accounts_search_close = ->
   $('.accounts_search_close').on 'click', ->
     $('.accounts_search_close').hide()
