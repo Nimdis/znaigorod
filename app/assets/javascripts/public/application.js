@@ -82,5 +82,6 @@
  * = require ./my_afisha
  * = require ./select_tags
  * = require ./invitations
+ * = require ./invitation_list_popup
  * = require ./main
  */

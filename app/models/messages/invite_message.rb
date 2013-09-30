@@ -7,6 +7,8 @@ class InviteMessage < Message
   before_update :process_message, :if => ->(m) { m.changes.keys.include?('agreement') }
   after_update :create_visit, :if => :agree?
 
+  scope :not_answered, -> { where('agreement is NULL') }
+
   has_many :notification_messages, :as => :messageable, :dependent => :destroy
 
   delegate :account, :invited, :to => :messageable

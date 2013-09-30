@@ -1,4 +1,4 @@
-init_form_dialog = (id, title, target, width = 300) ->
+@init_form_dialog = (id, title, target, width = 300, height = 'auto') ->
   dialog = $("<div class='" + id + "_form_dialog'/>").dialog
     draggable: false
     height: 'auto'
@@ -6,8 +6,12 @@ init_form_dialog = (id, title, target, width = 300) ->
     position: ['center', 50]
     resizable: false
     title: title
+    height: height
     width: width
+    open: (evt, ui) ->
+      $('body').css('overflow', 'hidden')
     close: (event, ui) ->
+      $('body').css('overflow', 'auto')
       $(this).dialog('destroy').remove()
 
   dialog

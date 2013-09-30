@@ -1,0 +1,7 @@
+<% if user_signed_in? %>
+  <div class="not_answered_invitations">
+    <ul>
+      <%= render :partial => 'my/invite_messages/invite_message', :collection => current_user.account.received_invite_messages.not_answered.includes(:messageable) %>
+    </ul>
+  </div>
+<% end %>

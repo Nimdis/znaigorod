@@ -18,7 +18,7 @@ class My::InviteMessagesController < My::ApplicationController
   end
 
   def collection
-    @invite_messages = Kaminari.paginate_array([super, begin_of_association_chain.invite_messages].flatten.sort_by(&:created_at).reverse!).page(params[:page]).per(5)
+    @invite_messages = Kaminari.paginate_array([super, begin_of_association_chain.received_invite_messages].flatten.sort_by(&:created_at).reverse!).page(params[:page]).per(5)
   end
 
   def begin_of_association_chain
