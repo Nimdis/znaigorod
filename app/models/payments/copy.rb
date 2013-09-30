@@ -66,7 +66,7 @@ class Copy < ActiveRecord::Base
   def copyable_description
     case copyable
     when Ticket
-      "#{copyable.afisha.showings.last.organization.try(:title)} #{copyable.afisha.title}"
+      "#{copyable.afisha.showings.last.try(:organization).try(:title)} #{copyable.try(:afisha).try(:title)}"
     when Coupon
     end
   end
