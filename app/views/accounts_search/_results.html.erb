@@ -10,6 +10,11 @@
         <div class="title">
           <%= link_to account.title, account_path(account) %>
         </div>
+
+        <% if current_user.account.invited?(account, kind, category, parent) %>
+          приглашен
+        <% else %>
+        <% end %>
       </div>
     </li>
   <% end %>

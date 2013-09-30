@@ -1,7 +1,7 @@
 class AccountsSearchController < ApplicationController
-  layout false
+  helper_method :kind, :category, :parent
 
-  #helper_method :parent
+  layout false
 
   def show
     @accounts = Account.search {
@@ -10,33 +10,24 @@ class AccountsSearchController < ApplicationController
     }.results
 
     render :partial => 'results' and return if params[:only_results]
-
-    #page = params[:page].to_i.zero? ? 1 : params[:page]
-    #per_page = 10
-
-    #if params[:only_friends]
-      #friends = Friend.search {
-        #keywords params[:q]
-        #with :account_id, current_user.account.id
-        #paginate :page => page, :per_page => per_page
-      #}.results
-
-      #@accounts = Account.where(:id => friends.map(&:friendable_id)).page(page).per(per_page)
-    #else
-      #@accounts = Account.search {
-        #keywords params[:q]
-        #without current_user.account
-        #paginate :page => page, :per_page => per_page
-      #}.results
-    #end
-
-    #render partial: 'accounts/list', :locals => { :kind => params[:kind] } and return
   end
 
-  #def parent
-    #klass, id = params[:parent].split('_')
-    #klass = %w[afisha organization].include?(klass) ? klass : 'afisha'
+  private
 
-    #@parent = klass.classify.constantize.find(id)
-  #end
+  def kind
+    @kind = params[:kind]
+  end
+
+  def category
+    @category = params[:category]
+  end
+
+  def parent
+    return nil if params[:parent].blank?
+
+    klass, id = params[:parent].split('_')
+    klass = %w[afisha organization].include?(klass) ? klass : 'afisha'
+
+    @parent = klass.classify.constantize.find(id)
+  end
 end
