@@ -6,6 +6,15 @@
 
 <div class="search_results">
   <% if @search_presenter.hits? %>
+    <% if @search_presenter.render_addresses?%>
+      <ul class="addresses_list">
+        <% @search_presenter.ya_addresses_search.collection[0..([@search_presenter.ya_addresses_search.total, 3].min-1)].each do |address| %>    
+          <li>
+            <%= address %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
     <ul class="items_list">
       <%= render :partial => "search_results_list" %>
     </ul>

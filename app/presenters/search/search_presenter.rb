@@ -1,7 +1,7 @@
 class SearchPresenter
 
   attr_accessor :params
-  attr_reader :kind_filter, :query, :page, :per_page
+  attr_reader :kind_filter, :query, :page, :per_page, :ya_addresses_search
 
   def initialize(params)
     @kind_filter = KindFilter.new(params['search_kind'])
@@ -9,6 +9,7 @@ class SearchPresenter
     @page = params['page']
     @page ||= 1
     @per_page = 10
+    @ya_addresses_search = YandexAddressesSearch.new(params['q'], @page)
   end
 
   def searcher
@@ -23,19 +24,23 @@ class SearchPresenter
   end
 
   def collection
-    @collection ||= searcher.paginate(page: page, per_page: per_page)
+    @collection ||= searcher.paginate(page: page, per_page: per_page)  
   end
 
   def paginated_collection
-    collection.results
+    @kind_filter.search_address? ? @ya_addresses_search.collection : collection.results
   end
 
   def hits
-    HitDecorator.decorate(collection.hits).select { |h| h.result && (!h.organization? || h.raw_suborganization) }
+    HitDecorator.decorate(collection.hits).select { |h| h.result && (!h.organization? || h.raw_suborganization) } 
   end
 
   def hits?
-    collection.any?
+    collection.any? || @ya_addresses_search.collection.any?
+  end
+
+  def render_addresses?
+    @ya_addresses_search.collection.any? && @kind_filter.search_all?
   end
 
   def kinds_links
@@ -49,10 +54,10 @@ class SearchPresenter
             search_kind: kind
           },
           current: kind == @kind_filter.search_kind,
-          count: SearchCounter.new(self, kind).count
+          count: SearchCounter.new(self, kind, @query).count
         }
       end
-    }
+   }
   end
 end
 
@@ -66,7 +71,7 @@ class KindFilter
   end
 
   def self.available_kind_values
-    %w[all afisha organization post account]
+    %w[all afisha organization post account address]
   end
 
   def available_kind_values
@@ -87,13 +92,41 @@ end
 class SearchCounter
   attr_accessor :presenter, :search_kind
 
-  def initialize(presenter, search_kind)
+  def initialize(presenter, search_kind, query)
     @presenter = presenter
     @search_kind = search_kind
     @search_kind = nil if search_kind == 'all'
+    @query = query if query != nil
   end
 
   def count
-    HasSearcher.searcher(:global, presenter.searcher_parameters.merge(:search_kind => search_kind)).total
+    case search_kind
+    when 'address'
+      YandexAddressesSearch.new(@query, 1).total
+    when nil
+      YandexAddressesSearch.new(@query, 1).total + HasSearcher.searcher(:global, presenter.searcher_parameters.merge(:search_kind => search_kind)).total
+    else
+      HasSearcher.searcher(:global, presenter.searcher_parameters.merge(:search_kind => search_kind)).total
+    end
   end
 end
+
+class YandexAddressesSearch
+  attr_accessor :query, :collection, :total
+
+  def initialize(query, page)
+    @query = query
+    @page = page
+    @per_page = 15
+  end
+
+  def total
+    @total ||= YampGeocoder.get_addresses_count(@query)
+  end
+
+  def collection
+    @addresses ||= YampGeocoder.get_addresses(@query)
+    Kaminari.paginate_array(@addresses).page(@page).per(@per_page)
+  end
+end
+

@@ -1,5 +1,13 @@
-<% @search_presenter.hits.each do |item| %>
-  <li>
-    <%= render item %>
-  </li>
+<% if @search_presenter.kind_filter.search_address? %>
+  <% @search_presenter.ya_addresses_search.collection.each do |item| %>
+    <li>
+      <%= item %>
+    </li>
+  <% end %>
+<% else %>
+  <% @search_presenter.hits.each do |item| %>
+    <li>
+      <%= render item %>
+    </li>
+  <% end %>
 <% end %>
