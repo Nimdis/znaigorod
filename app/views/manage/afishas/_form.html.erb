@@ -21,8 +21,8 @@
   <div class="showings_fields">
     <h3>Сеансы:</h3>
     <%= f.simple_fields_for :showings do |showing| %>
-      <%= showing.input :starts_at, :as => :date_picker %>
-      <%= showing.input :ends_at, :as => :date_picker %>
+      <%= showing.input :starts_at, :as => :datetime_picker %>
+      <%= showing.input :ends_at, :as => :datetime_picker %>
       <%= showing.input :price_min %>
       <%= showing.input :price_max %>
       <%= showing.input :organization_id, :as => :hidden, :input_html => { :class => 'autosuggest_target' } %>
