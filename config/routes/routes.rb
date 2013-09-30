@@ -23,6 +23,8 @@ Znaigorod::Application.routes.draw do
 
   get 'inviteables_search' => 'inviteables_search#show'
 
+  resources :invitations, :only => [:new, :create, :show, :destroy]
+
   resources :afisha, :only => [], :controller => 'afishas' do
     resources :comments, :only => [:new, :show, :create]
     resources :visits, :only => [:create, :show, :destroy]

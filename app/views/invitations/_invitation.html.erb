@@ -1,25 +1,20 @@
-<% if current_user.account.has_invitation?(inviteable, kind) %>
-  <li class="selected">
-    <% if current_user.account.has_invitation_without_invited?(inviteable, kind) %>
-      <%= link_to t("enumerize.invitation.kind.#{kind}"),
-                  polymorphic_path([:edit, inviteable, current_user.account.invitation_without_invited(inviteable, kind)], 'invitation[kind]' => kind),
-                  :class => "invitation_link",
-                  'data-title' => t("enumerize.invitation.kind.#{kind}"),
-                  :remote => true %>
-    <% else %>
-      <%= link_to t("enumerize.invitation.kind.#{kind}"),
-                  polymorphic_path([:new, inviteable, :invitation], 'invitation[kind]' => kind),
-                  :class => "invitation_link",
-                  'data-title' => t("enumerize.invitation.kind.#{kind}"),
-                  :remote => true %>
-    <% end %>
-  </li>
-<% else %>
-  <li>
-    <%= link_to t("enumerize.invitation.kind.#{kind}"),
-                polymorphic_path([:new, inviteable, :invitation], 'invitation[kind]' => kind),
-                :class => "invitation_link",
-                'data-title' => t("enumerize.invitation.kind.#{kind}"),
-                :remote => true %>
-  </li>
-<% end %>
+<li>
+  <%= t "enumerize.invitation.gender.custom.#{invitation.kind}.#{invitation.gender}" %>
+
+  <% invitation.categories.each do |category| %>
+    <%= link_to category %>
+  <% end %>
+
+  <% if invitation.inviteable %>
+    <%= invitation.inviteable.is_a?(Afisha) ? 'на' : 'в' %>
+    <%= link_to invitation.inviteable.title, invitation.inviteable %>
+  <% end %>
+
+  <% if invitation.description? %>
+    <span class="description">&mdash; <%= invitation.description %></span>
+  <% end %>
+
+  <% if can? :destroy, invitation %>
+    <%= link_to 'Удалить', invitation_path(invitation), :method => :delete, :class => 'delete_invitation', :remote => true %>
+  <% end %>
+</li>

@@ -1,6 +1,6 @@
 <div class="invite_form_wrapper">
   <div class="left">
-    <%= simple_form_for [:my, @invitation], :remote => true do |f| %>
+    <%= simple_form_for @invitation, :remote => true do |f| %>
       <%= f.input :kind, :as => :hidden %>
       <div class="floatl">
         <% unless @invitation.inviteable %>

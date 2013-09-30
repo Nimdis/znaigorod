@@ -3,50 +3,22 @@ class InvitationsController < ApplicationController
 
   load_and_authorize_resource
 
-  actions :all
+  actions :new, :create, :show, :destroy
 
   belongs_to :afisha, :optional => true
   belongs_to :organization, :optional => true
 
   layout false
 
-  def new
-    new! {
-      #@accounts = Account.search { paginate :page => params[:page], :per_page => 10 }.results
-      render 'my/invitations/new' and return
-    }
-  end
-
   def create
-    create! {
-      render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return
-    }
-  end
-
-  def show
-    show! {
-      @accounts = Account.search { paginate :page => params[:page], :per_page => 10 }.results
-
-      render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return
-    }
-  end
-
-  def edit
-    edit! {
-      @accounts = Account.search { paginate :page => params[:page], :per_page => 10 }.results
-    }
-  end
-
-  def update
-    update! {
-      render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return
-    }
+    create! do
+      render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return if @invitation.inviteable
+      render :nothing => true and return if @invitation.invited
+    end
   end
 
   def destroy
-    destroy! {
-      render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return
-    }
+    destroy! { render :nothing => true and return }
   end
 
   protected

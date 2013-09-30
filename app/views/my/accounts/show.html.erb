@@ -39,7 +39,7 @@
     <div class="invitations_wrapper">
       <div class="invitations header">
         <%= link_to 'Добавить',
-          new_my_invitation_path('invitation[kind]' => :inviter),
+          new_invitation_path('invitation[kind]' => :inviter),
           :remote => true,
           :class => 'invitation_link',
           :data => { :title => 'Хочу пригласить', :target => '.inviter' } %>
@@ -49,7 +49,9 @@
       <div class="invitations list">
         <ul class="inviter">
           <% if @account.invitations.inviter.without_invited.any? %>
-            <%= render @account.invitations.inviter.without_invited %>
+            <% @account.invitations.inviter.without_invited.each do |invitation| %>
+              <%= render :partial => 'invitations/invitation', :locals => { :invitation => invitation } %>
+            <% end %>
           <% else %>
             <li class="empty">Нет приглашений</li>
           <% end %>
@@ -58,7 +60,7 @@
 
       <div class="invitations header">
         <%= link_to 'Добавить',
-          new_my_invitation_path('invitation[kind]' => :invited),
+          new_invitation_path('invitation[kind]' => :invited),
           :remote => true,
           :class => 'invitation_link',
           :data => { :title => 'Жду приглашения от', :target => '.invited' } %>

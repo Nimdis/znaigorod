@@ -1,8 +1,8 @@
 <div class="social_actions">
   <ul class='user_actions'>
     <%= render :partial => 'visits/visit', :locals => { :visitable => inviteable } %>
-    <%= render :partial => 'invitations/invitation', :locals => { :inviteable => inviteable, :kind => :inviter } %>
-    <%= render :partial => 'invitations/invitation', :locals => { :inviteable => inviteable, :kind => :invited } %>
+    <%= render :partial => 'invitations/invitation_link', :locals => { :inviteable => inviteable, :kind => :inviter } %>
+    <%= render :partial => 'invitations/invitation_link', :locals => { :inviteable => inviteable, :kind => :invited } %>
   </ul>
 
   <div class='visits_counter'>
