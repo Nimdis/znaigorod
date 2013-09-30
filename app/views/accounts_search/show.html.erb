@@ -1,6 +1,9 @@
 <div class="accounts_search_wrapper">
   <div class="search_form">
     <%= form_tag accounts_search_path, :remote => true, :method => :get do %>
+      <%= hidden_field_tag :kind, kind %>
+      <%= hidden_field_tag :category, category %>
+      <%= hidden_field_tag :parent, "#{parent.class.name.underscore}_#{parent.id}" if parent %>
       <%= hidden_field_tag :only_results, true %>
       <%= text_field_tag :q, params[:q], :id => 'accounts_search_q', :placeholder => 'Найти...' %>
       <%= submit_tag 'Найти', :class => 'submit' %>

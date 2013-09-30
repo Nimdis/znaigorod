@@ -11,9 +11,15 @@
           <%= link_to account.title, account_path(account) %>
         </div>
 
-        <% if current_user.account.invited?(account, kind, category, parent) %>
+        <% if current_user.account.invitation_for(account, kind, category, parent) %>
           приглашен
         <% else %>
+          <%= simple_form_for :invitation, :url => parent ? [parent, :invitations] : [:my, current_user.account.invitations.build] do |f| %>
+            <%= f.input :category, :as => :hidden, :input_html => { :value => category } %>
+            <%= f.input :kind, :as => :hidden, :input_html => { :value => kind } %>
+            <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
+            <%= f.submit t("invite.#{kind}") %>
+          <% end %>
         <% end %>
       </div>
     </li>
