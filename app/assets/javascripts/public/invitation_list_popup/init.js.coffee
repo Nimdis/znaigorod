@@ -14,10 +14,20 @@
     else
       false
 
-  return if (is_closed() && no_changes()) || !not_answered_invitations.length
+  return if (is_closed() && no_changes()) || !not_answered_invitations.length || not_answered_invitations.find('li').length
 
   dialog = init_form_dialog('not_answered_invitations', 'Новые приглашения', null, 650, 386).html(not_answered_invitations.show())
+
+  $('.to_dialog', dialog).remove()
 
   dialog.on 'dialogclose', ->
     unless (typeof(window.localStorage) == 'undefined')
       window.localStorage.setItem('closed_at', (new Date).getTime())
+
+  dialog.on 'ajax:success', (evt, response) ->
+    target = $(evt.target)
+    if target.hasClass('agreement')
+      invite_counter = $(response).data('invite_counter')
+      target.closest('li').replaceWith(response)
+      init_messages_counters(response)
+      $('.to_dialog', dialog).remove()
