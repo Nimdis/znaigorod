@@ -59,7 +59,7 @@
   <div>
     <span class="label">Поддомен:</span>
     <% if resource.subdomain.present? %>
-      <span class="value"><%= resource.subdomain %></span>
+      <span class="value"><%= link_to "http://#{resource.subdomain}.znaigorod.ru", "http://#{resource.subdomain}.znaigorod.ru", :target => '_blank' %></span>
     <% else %>
       <span class="blank">Не указано</span>
     <% end %>
