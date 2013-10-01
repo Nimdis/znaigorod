@@ -15,6 +15,10 @@
         <% if @invitation.invited %>
           <%= f.input :gender, :disabled => true %>
           <span class="disabled">Уточнить &darr;</span>
+          <%= link_to "Уточнить &darr;".html_safe,
+            accounts_search_path(:category => Inviteables.instance.categories.keys.first, :kind => @invitation.kind, :account_id => @invitation.invited.id),
+            :remote => true,
+            :class => 'accounts_search_open hidden' %>
 
         <% else %>
           <%= f.input :gender %>
