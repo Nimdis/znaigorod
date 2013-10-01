@@ -45,7 +45,12 @@
                           <%= simple_form_for [inviteable, inviteable.invitations.new], :remote => true do |f| %>
                             <%= f.input :kind, :as => :hidden, :input_html => { :value => invitation.opposite_kind } %>
                             <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
-                            <%= f.submit t("invite.#{invitation.opposite_kind}"), :class => 'submit_dialog' %>
+                            <%= f.submit t("invite.#{invitation.opposite_kind}"),
+                                  :class => 'submit_dialog',
+                                  :onClick => 'share_on_click(this);',
+                                  'data-owner_id' => (account.users.first.try(:vk_uid) if current_user.provider == 'vkontakte'),
+                                  'data-message' => "#{I18n.t("invitation.#{invitation.opposite_kind}.#{inviteable.class.name.underscore}")} \"#{inviteable}\"",
+                                  'data-attachments' => data_attachments(inviteable) %>
                           <% end %>
                         <% end %>
                       <% end %>
