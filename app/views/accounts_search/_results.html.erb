@@ -29,5 +29,5 @@
 </ul>
 
 <% if accounts.many? %>
-  <%= paginate accounts, :remote => true %>
+  <%= paginate accounts, :remote => true, :params => { :q => params[:q] } %>
 <% end %>
