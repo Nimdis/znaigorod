@@ -14,6 +14,20 @@
       <% if current_user.nil? || (current_user.account != @account.model) %>
         <ul class="user_actions">
           <li><%= link_to t('new_message'), new_my_private_message_path(account_id: @account.id), class: 'add_private_message', remote: true %></li>
+          <li>
+            <%= link_to t("enumerize.invitation.kind.inviter"),
+              polymorphic_path([:new, :invitation], 'invitation[kind]' => :inviter, 'invitation[invited_id]' => @account.id),
+              :class => "invitation_link",
+              'data-title' => t("enumerize.invitation.kind.inviter"),
+              :remote => true %>
+          </li>
+          <li>
+            <%= link_to t("enumerize.invitation.kind.invited"),
+              polymorphic_path([:new, :invitation], 'invitation[kind]' => :invited, 'invitation[invited_id]' => @account.id),
+              :class => "invitation_link",
+              'data-title' => t("enumerize.invitation.kind.invited"),
+              :remote => true %>
+          </li>
           <%= render 'friends/friendship' %>
         </ul>
       <% end %>

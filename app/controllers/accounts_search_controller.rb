@@ -9,7 +9,7 @@ class AccountsSearchController < ApplicationController
       paginate :page => params[:page] || 1, :per_page => 5
     }.results
 
-    render :partial => 'results' and return if params[:only_results]
+    render :partial => 'results', :locals => { :accounts => @accounts } and return if params[:only_results]
   end
 
   private

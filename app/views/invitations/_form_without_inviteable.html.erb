@@ -4,17 +4,19 @@
       <%= hidden_field_tag :render, 'show' %>
       <%= f.input :kind, :as => :hidden %>
       <div class="floatl">
-        <% unless @invitation.inviteable %>
-          <%= f.input :category, :collection => Inviteables.instance.categories.keys, :include_blank => false %>
-          <%= link_to "Уточнить &darr;".html_safe, inviteables_search_path(:category => Inviteables.instance.categories.keys.first), :remote => true, :class => 'inviteables_search_open' %>
-          <%= link_to "Скрыть &uarr;".html_safe, '#', :class => 'inviteables_search_close' %>
-        <% end %>
+        <%= f.input :category, :collection => Inviteables.instance.categories.keys, :include_blank => false %>
+        <%= link_to "Уточнить &darr;".html_safe, inviteables_search_path(:category => Inviteables.instance.categories.keys.first), :remote => true, :class => 'inviteables_search_open' %>
+        <%= link_to "Скрыть &uarr;".html_safe, '#', :class => 'inviteables_search_close' %>
       </div>
     </div>
 
     <div class="right">
       <div class="floatl">
-        <% unless @invitation.invited %>
+        <% if @invitation.invited %>
+          <%= f.input :gender, :disabled => true %>
+          <span class="disabled">Уточнить &darr;</span>
+
+        <% else %>
           <%= f.input :gender %>
           <%= link_to "Уточнить &darr;".html_safe,
             accounts_search_path(:category => Inviteables.instance.categories.keys.first, :kind => @invitation.kind),
@@ -34,11 +36,17 @@
     </div>
 
     <div class="formr">
-      <div class="info">
-        Нажав "Уточнить", вы можете выбрать конкретное мероприятие или заведение.
-      </div>
+      <% unless @invitation.invited %>
+        <div class="info">
+          Нажав "Уточнить", вы можете выбрать конкретное мероприятие или заведение.
+        </div>
+      <% end %>
 
-      <div class="accounts_search_wrapper"></div>
+      <div class="accounts_search_wrapper">
+        <% if @invitation.invited %>
+          <%= render :partial => 'accounts_search/results', :locals => { :accounts => [@invitation.invited], :kind => @invitation.kind, :category => Inviteables.instance.categories.keys.first } %>
+        <% end %>
+      </div>
     </div>
 
     <div class="form_footer">
