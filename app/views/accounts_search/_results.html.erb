@@ -1,5 +1,5 @@
 <ul class="results" data-target=".accounts_search_results_wrapper">
-  <% @accounts.each do |account| %>
+  <% accounts.each do |account| %>
     <li>
       <div class="item">
         <div class="avatar">
@@ -27,7 +27,3 @@
     </li>
   <% end %>
 </ul>
-
-<% if @accounts.any? %>
-  <%= paginate @accounts, :remote => true %>
-<% end %>

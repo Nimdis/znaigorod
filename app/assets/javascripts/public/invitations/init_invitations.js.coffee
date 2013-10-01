@@ -109,13 +109,14 @@ handle_inviteables_search_click = ->
     $('.new_invitation').attr('action', url)
     $('.search_form').remove()
     $('.selected_result').append(li)
-    $('.results').remove()
+    $('.results', '.inviteables_search_results_wrapper').remove()
     $('.pagination').remove()
 
     handle_remove_selected_result()
 
     link = $('.accounts_search_open')
     href = replace_param_value(link.attr('href'), 'parent', li.data('parent'))
+    href = replace_param_value(href, 'category', '')
     link.attr('href', href)
 
     unless $('.accounts_search_open').is(':visible')
@@ -128,6 +129,15 @@ handle_remove_selected_result = ->
   $('.remove_item').on 'click', ->
     $(this).closest('.selected_result').empty()
     $('.inviteables_search_open').click()
+
+    category = $('#invitation_category').val()
+    link = $('.accounts_search_open')
+    href = replace_param_value(link.attr('href'), 'parent', '')
+    href = replace_param_value(href, 'category', category)
+    link.attr('href', href)
+
+    unless $('.accounts_search_open').is(':visible')
+      $('.accounts_search_open').click()
 
     false
 
