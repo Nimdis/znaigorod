@@ -14,21 +14,9 @@
       <% if current_user.nil? || (current_user.account != @account.model) %>
         <ul class="user_actions">
           <li><%= link_to t('new_message'), new_my_private_message_path(account_id: @account.id), class: 'add_private_message', remote: true %></li>
-          <li>
-            <%= link_to t("enumerize.invitation.kind.inviter"),
-              polymorphic_path([:new, :invitation], 'invitation[kind]' => :inviter, 'invitation[invited_id]' => @account.id),
-              :class => "invitation_link",
-              'data-title' => t("enumerize.invitation.kind.inviter"),
-              :remote => true %>
-          </li>
-          <li>
-            <%= link_to t("enumerize.invitation.kind.invited"),
-              polymorphic_path([:new, :invitation], 'invitation[kind]' => :invited, 'invitation[invited_id]' => @account.id),
-              :class => "invitation_link",
-              'data-title' => t("enumerize.invitation.kind.invited"),
-              :remote => true %>
-          </li>
           <%= render 'friends/friendship' %>
+          <%= render :partial => 'invitations/account_link', :locals => { :kind => :inviter, :invited_id => @account.id } %>
+          <%= render :partial => 'invitations/account_link', :locals => { :kind => :invited, :invited_id => @account.id } %>
         </ul>
       <% end %>
 
@@ -45,10 +33,10 @@
   </div>
 
   <div class="right">
+    <div class="visits header">
+      <%= t "account.wants_to_visit.#{@account.gender}" %>
+    </div>
     <% if @visits.any? %>
-      <div class="visits header">
-        <%= t "account.wants_to_visit.#{@account.gender}" %>
-      </div>
       <div class="visits list">
         <%= render 'accounts/visits' %>
       </div>
@@ -62,7 +50,7 @@
       <div class="invitations list">
         <ul class="inviter">
           <% if @account.invitations.inviter.without_invited.any? %>
-            <%= render :collection => @account.invitations.inviter.without_invited, :partial => 'my/invitations/invitation' %>
+            <%= render :collection => @account.invitations.inviter.without_invited, :partial => 'invitations/invitation' %>
           <% else %>
             <li class="empty">Нет приглашений</li>
           <% end %>
@@ -76,7 +64,7 @@
       <div class="invitations list">
         <ul class="invited">
           <% if @account.invitations.invited.without_invited.any? %>
-            <%= render :collection => @account.invitations.invited.without_invited, :partial => 'my/invitations/invitation' %>
+            <%= render :collection => @account.invitations.invited.without_invited, :partial => 'invitations/invitation' %>
           <% else %>
             <li class="empty">Нет приглашений</li>
           <% end %>
