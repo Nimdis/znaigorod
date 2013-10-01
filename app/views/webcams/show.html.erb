@@ -1,0 +1,11 @@
+<% content_for :page_title, "#{resource.title}. #{resource.address}. Вебкамеры Томска" %>
+
+<div class='webcams'>
+
+  <h1><%= resource.title %>. <%= resource.address %></h1>
+
+  <div class='webcam_show'>
+    <%= render :partial => resource.kind, :object => resource %>
+  </div>
+
+</div>

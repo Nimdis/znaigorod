@@ -5,7 +5,7 @@
 <div class="clearfix"></div>
 
 <ul class="collection">
-  <% @webcams.ordered.each do |webcam| %>
+  <% @webcams.each do |webcam| %>
     <li>
       <span class="title">
         <%= link_to webcam.title, manage_webcam_path(webcam) %>

@@ -21,6 +21,7 @@
  * = require flash_detect
  * = require crop
  * = require ajax_delete
+ * = require popup_window
  * = require ./share_to_vk_wall
  * = require ./auth
  * = require ./md5

@@ -13,7 +13,7 @@
   </div>
 
   <div class='webcams_list'>
-    <% collection.published.ordered.each do |resource| %>
+    <% collection.each do |resource| %>
       <%= render :partial => resource.kind, :object => resource %>
     <% end %>
   </div>

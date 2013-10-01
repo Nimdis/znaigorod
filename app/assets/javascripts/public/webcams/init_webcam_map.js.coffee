@@ -1,13 +1,3 @@
-@share_webcam_block = () ->
-  block = $('.webcams .webcams_list .share_webcam').clone()
-  $('.share', block).html(
-    "<div class='title'>Поделиться:</div>" +
-    "<script type='text/javascript' src='//yandex.st/share/share.js' charset='utf-8'></script>" +
-    "<div class='yashare-auto-init' data-yashareL10n='ru' data-yashareType='none' data-yashareQuickServices='yaru,vkontakte,facebook,twitter,odnoklassniki,lj,gplus'></div>"
-  )
-  block = $('<div />').append(block).html()
-  block.replace(/webcam_url/g, window.location.href)
-
 @init_webcam_map = () ->
 
   ymaps.ready ->
@@ -44,12 +34,9 @@
 
       point.events.add 'click', (event) ->
         hash = event.get('target').properties.get('id')
-        window.location.hash = hash
         link.click()
 
       map.geoObjects.add point
-
-      link.click() if window.location.hash.length && window.location.hash.substring(1) == id
 
       true
 

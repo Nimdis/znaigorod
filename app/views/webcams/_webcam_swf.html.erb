@@ -2,6 +2,6 @@
      data-width='<%= webcam_swf.width %>'
      data-height='<%= webcam_swf.height %>'
      data-file='<%= webcam_swf.url %>'>
-  <%= link_to webcam_swf.title, webcam_swf %>
+  <%= link_to webcam_swf.title, webcam_url(webcam_swf) %>
   <%= content_tag :p, webcam_swf.address, :'data-latitude' => webcam_swf.latitude, :'data-longitude' => webcam_swf.longitude %>
 </div>

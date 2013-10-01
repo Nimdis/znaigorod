@@ -4,6 +4,6 @@
      data-cgi='<%= webcam_axis.url %>'
      data-params='<%= webcam_axis.parameters %>'
      data-cab='<%= webcam_axis.cab %>'>
-  <%= link_to webcam_axis.title, webcam_axis %>
+  <%= link_to webcam_axis.title, webcam_url(webcam_axis) %>
   <%= content_tag :p, webcam_axis.address, :'data-latitude' => webcam_axis.latitude, :'data-longitude' => webcam_axis.longitude %>
 </div>

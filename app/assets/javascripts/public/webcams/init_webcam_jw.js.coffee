@@ -41,7 +41,6 @@
       height: height.toNumber() + 46
       resizable: false
       open: (event, ui) ->
-        webcam_dialog.append(share_webcam_block())
         jwplayer.key = 'SZeRfk9B2yiaCiIDORB62cYchqlDqQok9qZQCr1qkNg='
         jwplayer('jwplayer_container').setup
           autostart: true
