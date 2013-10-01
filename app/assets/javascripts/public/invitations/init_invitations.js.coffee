@@ -41,6 +41,7 @@ handle_new_invitaion_link = (target, response) ->
 
   handle_inviteables_search_close()
   handle_accounts_search_close()
+  handle_close_click()
 
   $('#invitation_category').change ->
     category = $(this).val()
@@ -146,6 +147,12 @@ handle_accounts_search_close = ->
     $('.accounts_search_open').show()
     $('.formr .info').show()
     $('.accounts_search_wrapper').empty()
+
+    false
+
+handle_close_click = ->
+  $('.cancel', '.invite_form_wrapper').on 'click', ->
+    $('.invitation_form_dialog').dialog('close')
 
     false
 
