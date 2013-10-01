@@ -9,4 +9,3 @@ module ShareVkHelper
     end
   end
 end
-
