@@ -97,6 +97,9 @@ handle_new_invitaion_link = (target, response) ->
       $('.social_actions').replaceWith(response)
       $('.invitation_form_dialog').dialog('close')
 
+    if $(response).hasClass('invitation_status')
+      $(evt.target).replaceWith(response)
+
 
 # КУДА: скрыть
 handle_inviteables_search_close = ->
