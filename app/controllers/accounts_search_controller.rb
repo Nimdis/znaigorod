@@ -6,6 +6,7 @@ class AccountsSearchController < ApplicationController
   def show
     @accounts = Account.search {
       keywords params[:q]
+      with(Account.find(params[:account_id])) if params[:account_id]
       paginate :page => params[:page] || 1, :per_page => 5
     }.results
 
