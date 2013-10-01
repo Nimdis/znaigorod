@@ -11,8 +11,6 @@ class Visit < ActiveRecord::Base
   validate :authenticated_user
 
   scope :rendereable,       -> { where(:visitable_type => ['Afisha', 'Organization']) }
-  scope :inviter,           -> { where('acts_as_inviter IS NOT NULL') }
-  scope :invited,           -> { where('acts_as_invited IS NOT NULL') }
 
   def actual?
     if self.visitable.is_a?(Afisha)
