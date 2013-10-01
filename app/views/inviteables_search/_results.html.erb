@@ -7,3 +7,6 @@
   <% end %>
 </ul>
 
+<% if results.many? %>
+  <%= paginate results, :remote => true %>
+<% end %>

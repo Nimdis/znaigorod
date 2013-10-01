@@ -28,4 +28,6 @@
   <% end %>
 </ul>
 
-<%= paginate @accounts %>
+<% if @accounts.any? %>
+  <%= paginate @accounts, :remote => true %>
+<% end %>
