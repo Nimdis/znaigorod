@@ -25,7 +25,6 @@
 <% end %>
 
 <div class='afisha_show'>
-
   <div class='left'>
     <div class='image'>
       <% if @afisha.poster_url.present? %>
@@ -35,9 +34,8 @@
       <% end %>
       <%= content_tag(:div, 'Премьера', class: :ribbon) if @afisha.premiere? %>
     </div>
-    <div class='social_actions'>
-      <%= render :partial => 'commons/social_block', :locals => { :inviteable => @afisha.model } %>
-    </div>
+
+    <%= render :partial => 'commons/social_block', :locals => { :inviteable => @afisha.model } %>
   </div>
 
   <div class='right'>

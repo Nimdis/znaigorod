@@ -180,7 +180,9 @@ handle_close_click = ->
 @init_invitations = ->
   $('.invitations_wrapper, .content .left').on 'ajax:success', (evt, response) ->
     target = $(evt.target)
-
-    handle_new_invitaion_link(target, response)
+    if target.hasClass('change_visit')
+      $('.social_actions').replaceWith(response)
+    else
+      handle_new_invitaion_link(target, response)
 
   init_delete_invitation $('.delete_invitation')

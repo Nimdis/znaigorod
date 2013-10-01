@@ -9,7 +9,6 @@
 <% end %>
 
 <div class='organization_show'>
-
   <div class='left'>
     <div class='image'>
       <% if @organization.logotype_url? %>
@@ -18,9 +17,8 @@
         <span class='stub_poster <%= @organization.priority_suborganization_kind %>'></span>
       <% end %>
     </div>
-    <div class='social_actions'>
-      <%= render :partial => 'commons/social_block', :locals => { :inviteable => @organization.model } %>
-    </div>
+
+    <%= render :partial => 'commons/social_block', :locals => { :inviteable => @organization.model } %>
   </div>
 
   <div class='right'>
