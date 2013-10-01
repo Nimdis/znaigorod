@@ -55,7 +55,7 @@ handle_new_invitaion_link = (target, response) ->
 
     link = $('.accounts_search_open')
     href = replace_param_value(link.attr('href'), 'category', category)
-    href = replace_param_value(link.attr('href'), 'parent', '')
+    href = replace_param_value(href, 'parent', '')
     link.attr('href', href)
 
     unless $('.accounts_search_open').is(':visible')
