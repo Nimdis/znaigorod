@@ -21,8 +21,8 @@
 
       return false
 
-    if target.hasClass('change_visit')
-      $('.social_actions').replaceWith(response)
+    #if target.hasClass('change_visit')
+      #$('.social_actions').replaceWith(response)
 
     if target.hasClass('acts_as_inviter') || target.hasClass('acts_as_invited')
 
