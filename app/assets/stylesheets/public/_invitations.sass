@@ -1,3 +1,13 @@
+#infscr-loading
+  text-align: center
+
+  img
+    margin: 0 auto
+    width: 102px
+
+  em
+    font-style: italic
+
 .invitations
   font-size: 12px
 
@@ -57,6 +67,7 @@
 
 .invitation_form_dialog
   .invite_form_wrapper
+    +clearfix
     margin: 0 auto
     width: 650px
 
@@ -107,13 +118,22 @@
 
   .forml, .formr
     float: left
-    min-height: 420px
+    height: 420px
     width: 324px
 
     .info
       padding: 7px
 
     .inviteables_search_wrapper, .accounts_search_wrapper
+      +clearfix
+
+      .inviteables_search_results_wrapper, .accounts_search_results_wrapper
+        height: 368px
+        overflow-y: auto !important
+
+      .pagination
+        display: none
+
       .search_form
         border-bottom: 1px solid #ccc
         padding: 5px

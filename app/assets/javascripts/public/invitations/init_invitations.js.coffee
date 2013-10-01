@@ -68,6 +68,7 @@ handle_new_invitaion_link = (target, response) ->
       $('.inviteables_search_open').hide()
       $('.inviteables_search_close').show()
       $('.inviteables_search_wrapper').replaceWith(response)
+      init_infinite_scroll('.inviteables_search_results_wrapper')
 
       handle_inviteables_results_search()
       handle_inviteables_search_click()
@@ -78,6 +79,7 @@ handle_new_invitaion_link = (target, response) ->
       $('.accounts_search_open').hide()
       $('.accounts_search_close').show()
       $('.accounts_search_wrapper').replaceWith(response)
+      init_infinite_scroll('.accounts_search_results_wrapper')
 
       handle_accounts_results_search()
 
