@@ -112,7 +112,7 @@ class SearchCounter
 end
 
 class YandexAddressesSearch
-  attr_accessor :query, :collection, :total
+  attr_accessor :query, :collection, :total, :address, :houses
 
   def initialize(query, page)
     @query = query
@@ -125,8 +125,10 @@ class YandexAddressesSearch
   end
 
   def collection
-    @addresses ||= YampGeocoder.get_addresses(@query)
-    Kaminari.paginate_array(@addresses).page(@page).per(@per_page)
+    result =  YampGeocoder.get_addresses(@query)
+    @houses ||= result[:houses]
+    @address ||= result[:address]
+    Kaminari.paginate_array(@houses).page(@page).per(@per_page)
   end
 end
 
