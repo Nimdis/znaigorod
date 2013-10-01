@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   private
 
   def resolve_layout
-    request.xhr? ? false : 'contests/alternative_election'
+    request.xhr? ? false : 'public'
   end
 
   def page
