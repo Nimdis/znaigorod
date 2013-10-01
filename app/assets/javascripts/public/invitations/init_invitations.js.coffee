@@ -86,6 +86,7 @@ handle_new_invitaion_link = (target, response) ->
     if $(response).hasClass('results')
       target = $(response).data('target')
       $(target).html(response)
+      init_infinite_scroll(target, 'update')
 
     if $(response).is('li')
       $(this).dialog('destroy').remove()
