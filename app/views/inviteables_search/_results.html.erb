@@ -8,5 +8,5 @@
 </ul>
 
 <% if results.many? %>
-  <%= paginate results, :remote => true %>
+  <%= paginate results, :remote => true, :params => { :q => params[:q] } %>
 <% end %>
