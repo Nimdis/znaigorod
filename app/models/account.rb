@@ -177,33 +177,20 @@ class Account < ActiveRecord::Base
     dialogs = (PrivateMessage.from(self).order('id DESC').map(&:account) + PrivateMessage.to(self).order('id DESC').map(&:producer)).uniq
   end
 
-  # есть ли приглашения вообще
-  def has_invitation?(inviteable, kind)
-    invitations.send(kind)
-      .where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name).any?
-  end
-
-  # есть ли приглашение парня девушки или кого угодно
-  def has_invitation_without_invited?(inviteable, kind)
-    invitations.send(kind)
-      .where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name)
-      .where(:invited_id => nil).any?
-  end
-
-  def invitation_without_invited(inviteable, kind)
-    invitations.send(kind)
-      .where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name)
-      .where(:invited_id => nil).first
-  end
-
   def invitation_for(account, kind, category, inviteable)
-    relation = invitations.send(kind).where(:category => category)
+    relation = invitations.send(kind)
       .where(:invited_id => account.id)
       .joins(:invite_messages).where('messages.agreement IS NULL')
 
+    relation = relation.where(:category => category) if category.present?
     relation = relation.where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name) if inviteable
 
     relation.first
+  end
+
+  def invitation_without_invited_for(inviteable, kind)
+    invitations.send(kind).where(:invited_id => nil)
+      .where(:inviteable_id => inviteable.id, :inviteable_type => inviteable.class.name).first
   end
 
   def reacts_to?(invitation)
