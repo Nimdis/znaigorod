@@ -15,7 +15,7 @@ class InvitationsStuff < ActiveRecord::Migration
       invite_message.save!
     end
 
-    Visit.inviter.each do |visit|
+    Visit.where('acts_as_inviter IS NOT NULL').each do |visit|
       invitation = Invitation.new do |invitation|
         invitation.account    = visit.user.account
         invitation.inviteable = visit.visitable
@@ -26,7 +26,7 @@ class InvitationsStuff < ActiveRecord::Migration
       invitation.save!
     end
 
-    Visit.invited.each do |visit|
+    Visit.where('acts_as_invited IS NOT NULL').each do |visit|
       invitation = Invitation.new do |invitation|
         invitation.account    = visit.user.account
         invitation.inviteable = visit.visitable
