@@ -8,7 +8,7 @@
     <%= link_to account_path(account), class: :details do %>
       <span class='first_line'>
         <span class='to_go'><%= account.friends.count %></span>
-        <span class='wait_invite'><%= account.visits.invited.count %></span>
+        <span class='wait_invite'><%= account.invitations.invited.count %></span>
         <span class='comments'><%= account.comments.count %></span>
       </span>
       <span class='second_line'>
