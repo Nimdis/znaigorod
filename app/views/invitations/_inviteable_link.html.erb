@@ -1,0 +1,17 @@
+<% if current_user.account.invitation_without_invited_for(inviteable, kind) %>
+  <li class="selected">
+    <%= link_to t("enumerize.invitation.kind.#{kind}"),
+                polymorphic_path([:edit, inviteable, current_user.account.invitation_without_invited_for(inviteable, kind)], 'invitation[kind]' => kind),
+                :class => "invitation_link",
+                'data-title' => t("enumerize.invitation.kind.#{kind}"),
+                :remote => true %>
+</li>
+<% else %>
+  <li>
+    <%= link_to t("enumerize.invitation.kind.#{kind}"),
+                polymorphic_path([:new, inviteable, :invitation], 'invitation[kind]' => kind),
+                :class => "invitation_link",
+                'data-title' => t("enumerize.invitation.kind.#{kind}"),
+                :remote => true %>
+  </li>
+<% end %>

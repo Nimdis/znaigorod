@@ -3,7 +3,7 @@ class InvitationsController < ApplicationController
 
   load_and_authorize_resource
 
-  actions :new, :create, :show, :destroy
+  actions :all
 
   belongs_to :afisha, :optional => true
   belongs_to :organization, :optional => true
