@@ -12,7 +12,7 @@
     <div class="right">
       <div class="floatl">
         <% unless @invitation.invited %>
-          <%= f.input :gender %>
+          <%= f.input :gender, :include_blank => false %>
           <%= link_to "Уточнить &darr;".html_safe,
             accounts_search_path(:category => Inviteables.instance.categories.keys.first, :kind => @invitation.kind, :parent => "#{@invitation.inviteable.class.name.underscore}_#{@invitation.inviteable.id}"),
             :remote => true,
