@@ -93,6 +93,11 @@ handle_new_invitaion_link = (target, response) ->
       init_delete_invitation li
       target.parent().next('.list').find('ul').append(li).find('.empty').remove()
 
+    if $(response).hasClass('social_actions')
+      $('.social_actions').replaceWith(response)
+      $('.invitation_form_dialog').dialog('close')
+
+
 # КУДА: скрыть
 handle_inviteables_search_close = ->
   $('.inviteables_search_close').on 'click', ->
@@ -170,13 +175,9 @@ handle_close_click = ->
     false
 
 @init_invitations = ->
-  $('.invitations_wrapper, .user_actions').on 'ajax:success', (evt, response) ->
+  $('.invitations_wrapper, .content .left').on 'ajax:success', (evt, response) ->
     target = $(evt.target)
 
-    if target.hasClass('invitation_link')
-      handle_new_invitaion_link(target, response)
-
-    if target.hasClass('inviteables_search')
-      handle_inviteable_search()
+    handle_new_invitaion_link(target, response)
 
   init_delete_invitation $('.delete_invitation')
