@@ -16,6 +16,7 @@
       true
 
   $('#afisha_poster_image').on 'change', ->
+    $(this).parents('form').append('<input id="crop" name="crop" type="hidden" value="true">').submit()
     $(this).parents('form').submit()
     true
 

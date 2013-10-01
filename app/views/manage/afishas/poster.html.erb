@@ -5,6 +5,8 @@
   <% crop_width, crop_height, crop_x, crop_y = crop_opt.any? ? crop_opt : [resource.poster_image_resized_dimensions[:width] / resource.resize_factor, resource.poster_image_resized_dimensions[:height] , 0, 0] %>
 
   <%= simple_form_for resource, as: :afisha, :url => manage_afisha_show_path(resource.id) do |f| %>
+    <%= f.input :poster_image, label: 'Выберите изображение', required: true, class: :button %>
+    <%= f.error :poster_image_content_type %>
     <div>
       <%= f.input :set_region, :as => :hidden, :input_html => { :value => true } %>
       <%= f.input :crop_x, :as => :hidden, :input_html => { :value => crop_x } %>
@@ -19,7 +21,6 @@
     <div class='submit'>
       <%= f.button :submit, 'Обрезать постер', class: :button %>
       <%= link_to 'Отмена', manage_afisha_show_path(resource) %>
-      <%= link_to 'Удалить постер', destroy_image_manage_afisha_path(resource.id), :method => :delete, :confirm => 'Вы уверены что хотите удалить?', class: :floatr %>
     </div>
   <% end %>
 <% else %>

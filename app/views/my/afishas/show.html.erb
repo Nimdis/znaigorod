@@ -44,11 +44,17 @@
             </ul>
 
             <% if can? :send_to_published, @afisha %>
-              <%= link_to t('my.send_to_public'), publish_my_afisha_path(@afisha), method: :put, class: "#{@afisha.ready_for_moderation? ? 'enabled' : 'disabled'}", confirm: 'Вы уверены? После публикации афишу, она будет доступна всем пользователям сайта!' %>
+
+              <% if @afisha.ready_for_moderation? %>
+                <%= link_to t('my.send_to_public'), publish_my_afisha_path(@afisha), method: :put, class: 'enabled', confirm: 'Вы уверены? После публикации афишу, она будет доступна всем пользователям сайта!' %>
+              <% else %>
+                <%= link_to t('my.send_to_public'), 'javascript: void(0)', class: 'disabled' %>
+              <% end %>
               <%= link_to t('my.destroy_afisha'), my_afisha_path(@afisha), method: :delete, class: :destroy, confirm: 'Вы уверены? Афиша будет удалена без возможности восстановления' %>
             <% end %>
           <% else %>
             <h2><%= t("enumerize.afisha.state.#{@afisha.state}") %></h2>
+            <%= content_tag :p, link_to('Посмотреть в публичном виде', afisha_show_path(@afisha), target: '_blank') %>
             <%= link_to t('my.send_to_draft'), draft_my_afisha_path(@afisha), method: :put, confirm: 'Вы уверены? После подтверждения афиша будет недоступна пользователям сайта!' %>
           <% end %>
         </div>
@@ -91,11 +97,11 @@
         <% end %>
         <p><%= link_to 'изменить описание', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %></p>
         <% if @afisha.vk_event_url? %>
-          <%= link_to "Страница события ВКонтакте", @afisha.vk_event_url %>
+          <p><%= link_to "Страница события ВКонтакте", @afisha.vk_event_url, target: '_blank', rel: 'nofollow' %></p>
         <% else %>
           <p><span class='alert'>Нет</span> ссылки на событие ВКонтакте</p>
         <% end %>
-        <p><%= link_to 'изменить ссылку', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %></p>
+        <p><%= link_to 'изменить ссылку на событие ВКонтакте', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %></p>
         <% if @afisha.html_attachments.present? %>
           <%= @afisha.html_attachments %>
         <% else %>

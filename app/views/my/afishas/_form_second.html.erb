@@ -9,6 +9,8 @@
 
   <%= simple_form_for @afisha, as: :afisha, :url => my_afisha_show_path(@afisha.id) do |f| %>
     <%= hidden_field_tag :step, @step %>
+    <%= f.input :poster_image, label: 'Выберите изображение', required: true, class: :button %>
+    <%= f.error :poster_image_content_type %>
     <div>
       <%= f.input :set_region, :as => :hidden, :input_html => { :value => true } %>
       <%= f.input :crop_x, :as => :hidden, :input_html => { :value => crop_x } %>
@@ -20,9 +22,8 @@
                                       @afisha.poster_image_resized_dimensions[:height]), :class => 'jcrop' %>
     </div>
     <div class='submit'>
-      <%= f.button :submit, 'Обрезать постер', class: :button %>
+      <%= f.button :submit, 'Сохранить', class: :button %>
       <%= link_to 'Отмена', my_afisha_show_path(@afisha) %>
-      <%= link_to 'Удалить постер', destroy_image_my_afisha_path(@afisha.id), :method => :delete, :confirm => 'Вы уверены что хотите удалить?', class: :floatr %>
     </div>
   <% end %>
 <% else %>

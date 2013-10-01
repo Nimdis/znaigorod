@@ -105,7 +105,8 @@
         &.disabled
           background: image_url('public/afisha_step_unfilled.png') no-repeat 3px center
 
-    a.enabled
+    a.enabled,
+    a.disabled
       font-size: 12px
       +inline-block
       +button_style
@@ -120,14 +121,17 @@
       border-color: #999
 
       &:hover
+        +background(linear-gradient(top, #ccc, #999))
         +text-shadow(none)
 
       &:active
+        +background(linear-gradient(top, #ccc, #999))
+        +text-shadow(none)
         padding: 3px 15px 4px
 
     a.destroy
       +inline-block
-      margin-left: 20px
+      margin-left: 5px
 
   .afisha_show
     .tags

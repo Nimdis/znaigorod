@@ -159,8 +159,11 @@
       <% else %>
         <p>Нет описания</p>
       <% end %>
+      <% if @afisha.vk_event_url? %>
+        <p><%= link_to "Страница события ВКонтакте", @afisha.vk_event_url, target: '_blank', rel: 'nofollow' %></p>
+      <% end %>
       <%= @afisha.html_attachments %>
-      <% if @afisha.user.present? && ![4, 13, 2303].include?(@afisha.user.account.id) %>
+      <% if @afisha.user.present? && ![4, 13, 1936, 2303].include?(@afisha.user.account.id) %>
         <p class='afisha_owner'>
           <span>Автор:</span>
           <%= link_to(@afisha.user.account.title, @afisha.user.account) %>
