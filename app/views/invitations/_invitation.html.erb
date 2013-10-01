@@ -17,4 +17,14 @@
   <% if can? :destroy, invitation %>
     <%= link_to 'Удалить', invitation_path(invitation), :method => :delete, :class => 'delete_invitation', :remote => true %>
   <% end %>
+
+  <% if current_user.nil? || invitation.account != current_user.account %>
+    <%= simple_form_for :invitation, 
+      :url => invitation.inviteable ? [invitation.inviteable, :invitations] : [:invitations], :remote => true do |f| %>
+
+      <%= hidden_field_tag :render, 'status' %>
+      <%= f.input :kind, :as => :hidden, :input_html => { :value => invitation.opposite_kind } %>
+      <%= f.submit %>
+    <% end %>
+  <% end %>
 </li>
