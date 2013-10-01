@@ -9,6 +9,9 @@
 
   <%= simple_form_for @afisha, as: :afisha, :url => my_afisha_show_path(@afisha.id) do |f| %>
     <%= hidden_field_tag :step, @step %>
+    <div class='input'>
+      <p><strong>Для изменения постера &ndash; просто загрузите новый или измените область</strong></p>
+    </div>
     <%= f.input :poster_image, label: 'Выберите изображение', required: true, class: :button %>
     <%= f.error :poster_image_content_type %>
     <div>

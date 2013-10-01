@@ -5,6 +5,7 @@
   <% crop_width, crop_height, crop_x, crop_y = crop_opt.any? ? crop_opt : [resource.poster_image_resized_dimensions[:width] / resource.resize_factor, resource.poster_image_resized_dimensions[:height] , 0, 0] %>
 
   <%= simple_form_for resource, as: :afisha, :url => manage_afisha_show_path(resource.id) do |f| %>
+    <p><strong>Для изменения постера - просто загрузи новый или измени область!</strong></p>
     <%= f.input :poster_image, label: 'Выберите изображение', required: true, class: :button %>
     <%= f.error :poster_image_content_type %>
     <div>
