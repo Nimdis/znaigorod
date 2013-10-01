@@ -13,8 +13,8 @@ class InvitationsController < ApplicationController
   def create
     create! do
       case params[:render]
-      when 'nothing'
-        render :nothing => true
+      when 'status'
+        render :partial => 'status', :locals => { :kind => @invitation.kind }
       when 'show'
         render :show
       when 'social'
