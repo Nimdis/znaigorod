@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang='ru'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='google-site-verification' content='4WezRNvvwZCOYCxFNt9PKHdon29hbt-V7bMbhZhaMMk' />
+    <meta name='yandex-verification' content='6f2efa53b5d49370' />
+    <meta property='fb:app_id' content='131807160304776'/>
+    <title><%= yield(:page_title).squish.html_safe %></title>
+    <meta name='keywords' content='<%= "#{yield(:meta_keywords)}, #{I18n.t('meta.default.keywords', :default => '')}".squish.html_safe %>' />
+    <meta name='description' content='<%= "#{yield(:meta_description)}. #{I18n.t('meta.default.description', :default => '')}".squish.html_safe %>' />
+    <%= favicon_link_tag %>
+    <%= yield(:stylesheets) %>
+    <%= yield(:javascripts) %>
+    <%= csrf_meta_tags %>
+    <%= yield(:metrics) %>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

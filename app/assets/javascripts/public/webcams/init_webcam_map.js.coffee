@@ -16,9 +16,15 @@
       left: 5
 
     $('.webcams .webcams_list p').each (index, item) ->
-      link = $(item).prev('a')
-      title = "#{link.text().compact().normalize()}. #{$(item).text().compact().normalize()}"
-      id = URLify(link.text().compact().normalize())
+      link = $('a', item)
+      id = link.attr('id')
+      title = link.text()
+
+      link.popupWindow
+        windowURL: link.attr('href')
+        centerBrowser: 1
+        width: $(item).attr('data-width')
+        height: $(item).attr('data-height')
 
       point = new ymaps.GeoObject
         geometry:
@@ -33,8 +39,10 @@
         iconImageSize: [37, 42]
 
       point.events.add 'click', (event) ->
-        hash = event.get('target').properties.get('id')
+        link = $("##{event.get('target').properties.get('id')}")
         link.click()
+
+        true
 
       map.geoObjects.add point
 

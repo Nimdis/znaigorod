@@ -14,7 +14,9 @@
 
   <div class='webcams_list'>
     <% collection.each do |resource| %>
-      <%= render :partial => resource.kind, :object => resource %>
+      <p data-latitude='<%= resource.latitude %>' data-longitude='<%= resource.longitude %>' data-width='<%= resource.width %>' data-height='<%= resource.height %>'>
+        <%= link_to "#{resource.title}. #{resource.address}", webcam_url(resource), :id => resource.slug %>
+      </p>
     <% end %>
   </div>
 
