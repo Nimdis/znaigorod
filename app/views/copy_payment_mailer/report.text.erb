@@ -5,7 +5,7 @@
 
 Коды проданных билетов:
 <% @ticket.copies.sold.each do |copy| %>
-  * <%= copy.code %>
+  * <%= copy.to_s %>
 <% end %>
 
 Необходимо перечислить <%= number_to_currency @ticket.copies.sold.count * @ticket.undertow %>

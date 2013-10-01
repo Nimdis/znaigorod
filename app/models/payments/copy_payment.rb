@@ -63,7 +63,7 @@ class CopyPayment < Payment
   end
 
   def message
-    "#{paymentable.description}. " << (copies.many? ? 'Коды: ' : 'Код: ') << copies.pluck(:code).join(', ')
+    "#{paymentable.description}. " << (copies.many? ? 'Коды: ' : 'Код: ') << copies.join('; ')
   end
 
   def send_emails

@@ -4,7 +4,7 @@
 
 Коды для входа:
 <% @copy_payment.copies.each do |copy| %>
-  * <%= copy.code %>
+  * <%= copy.to_s %>
 <% end %>
 
 Необходимо перечислить <%= number_to_currency @copy_payment.copies.count * @copy_payment.paymentable.undertow %>

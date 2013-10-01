@@ -43,6 +43,12 @@ class Copy < ActiveRecord::Base
     update_attributes :state => 'reserved'
   end
 
+  def to_s
+    str = code
+    str << " (#{row} ряд, #{seat} место)" if seat?
+    str
+  end
+
   def sell!
     update_attributes :state => 'sold'
   end
