@@ -7,6 +7,7 @@
  * = require jquery-ui/jquery-ui-timepicker-addon.js
  * = require jquery-ui/jquery-ui-timepicker-ru.js
  * = require sugar
+ * = require infinitescroll.min
  * = require magicsuggest
  * = require inputmask
  * = require tipsy
@@ -83,5 +84,6 @@
  * = require ./select_tags
  * = require ./invitations
  * = require ./invitation_list_popup
+ * = require ./infinite_scroll
  * = require ./main
  */
