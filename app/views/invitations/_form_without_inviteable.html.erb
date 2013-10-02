@@ -47,14 +47,17 @@
 
       <div class="accounts_search_wrapper">
         <% if @invitation.invited %>
-          <%= render :partial => 'accounts_search/results', :locals => { :accounts => [@invitation.invited], :kind => @invitation.kind, :category => Inviteables.instance.categories.keys.first } %>
+          <div class="accounts_search_results_wrapper auto_accounts_search">
+          </div>
         <% end %>
       </div>
     </div>
 
     <div class="form_footer">
       <div class="actions">
-        <%= f.submit 'Готово', :class => 'button' %>
+        <% if @invitation.invited_id.blank? %>
+          <%= f.submit 'Готово', :class => 'button' %>
+        <% end %>
         <%= link_to 'Отмена', '#', :class => 'cancel' %>
       </div>
     </div>
