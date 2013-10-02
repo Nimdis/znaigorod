@@ -36,8 +36,8 @@ replace_param_value = (url, param, value) ->
 
   parser
 
-handle_new_invitaion_link = (target, response) ->
-  dialog = init_form_dialog('invitation', target.data('title'), $(target.data('target')), 650).html(response)
+handle_new_invitaion_link = (trgt, response) ->
+  dialog = init_form_dialog('invitation', trgt.data('title'), $(trgt.data('target')), 650).html(response)
 
   handle_inviteables_search_close()
   handle_accounts_search_close()
@@ -71,6 +71,7 @@ handle_new_invitaion_link = (target, response) ->
       init_infinite_scroll('.inviteables_search_results_wrapper')
 
       handle_inviteables_results_search()
+      handle_inviteables_search_click()
 
     # 1
     if $(response).hasClass('accounts_search_wrapper')
@@ -89,10 +90,10 @@ handle_new_invitaion_link = (target, response) ->
       init_infinite_scroll(target, 'update')
 
     if $(response).is('li')
-      $(this).dialog('destroy').remove()
+      $(this).dialog('close')
       li = $(response)
-      init_delete_invitation li
-      target.parent().next('.list').find('ul').append(li).find('.empty').remove()
+      init_delete_invitation(li)
+      trgt.parent().next('.list').find('ul').append(li).find('.empty').remove()
 
     if $(response).hasClass('social_actions')
       $('.social_actions').replaceWith(response)
@@ -186,6 +187,7 @@ handle_accounts_search_filter_links = ->
 @init_invitations = ->
   $('.invitations_wrapper, .content .left').on 'ajax:success', (evt, response) ->
     target = $(evt.target)
+
     if target.hasClass('change_visit')
       $('.social_actions').replaceWith(response)
     else
