@@ -190,12 +190,11 @@ handle_accounts_search_filter_links = ->
     init_infinite_scroll('.accounts_search_results_wrapper', 'update')
 
 @init_invitations = ->
+  init_delete_invitation $('.delete_invitation')
+
   $('.invitations_wrapper, .content .left').on 'ajax:success', (evt, response) ->
     target = $(evt.target)
 
-    if target.hasClass('change_visit')
-      $('.social_actions').replaceWith(response)
-    else
-      handle_new_invitaion_link(target, response)
+    $('.social_actions').replaceWith(response) if target.hasClass('change_visit')
+    handle_new_invitaion_link(target, response) unless target.hasClass('delete_invitation')
 
-  init_delete_invitation $('.delete_invitation')
