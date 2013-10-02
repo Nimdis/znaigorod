@@ -43,6 +43,8 @@ handle_new_invitaion_link = (trgt, response) ->
   handle_accounts_search_close()
   handle_close_click()
 
+  $('.accounts_search_open').click() if $('.auto_accounts_search').length
+
   $('#invitation_category').change ->
     category = $(this).val()
 
