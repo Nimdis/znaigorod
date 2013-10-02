@@ -91,7 +91,7 @@ class YampGeocoder
   def self.get_house_photo(coords)
     parameters = {
       lang: 'ru-RU',
-      ll: '84.94967, 56.482697',
+      ll: coords,
       l: 'hph',
       results: '10',
       origin: 'maps-nav'
