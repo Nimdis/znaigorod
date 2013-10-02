@@ -161,6 +161,7 @@ handle_inviteables_results_search = ->
 # КОГО: поиск по результатам
 handle_accounts_results_search = ->
   $('#accounts_search_q').keyup ->
+    $('.filter li').removeClass('selected')
     $(this).closest('form').submit()
 
 # КОГО: скрыть
@@ -181,7 +182,9 @@ handle_close_click = ->
 
 handle_accounts_search_filter_links = ->
   $('.filter', '.accounts_search_wrapper').on 'click', (evt) ->
-    $(this).children('li').toggleClass('selected not_selected')
+    $(this).children('li').removeClass('selected')
+    $(evt.target).closest('li').addClass('selected')
+    $('#accounts_search_q').val('')
     init_infinite_scroll('.accounts_search_results_wrapper', 'update')
 
 @init_invitations = ->
