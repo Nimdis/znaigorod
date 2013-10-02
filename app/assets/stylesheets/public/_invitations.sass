@@ -127,8 +127,12 @@
     .inviteables_search_wrapper, .accounts_search_wrapper
       +clearfix
 
-      .inviteables_search_results_wrapper, .accounts_search_results_wrapper
+      .inviteables_search_results_wrapper
         height: 368px
+        overflow-y: auto !important
+
+      .accounts_search_results_wrapper
+        height: 337px
         overflow-y: auto !important
 
       .pagination
@@ -137,6 +141,17 @@
       .search_form
         border-bottom: 1px solid #ccc
         padding: 5px
+
+        .filter
+          +clearfix
+
+          li
+            +toggable-links
+            float: left
+            font-size: 11px
+
+            &:last-child
+              margin-right: 0
 
         form
           input

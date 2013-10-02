@@ -9,7 +9,13 @@
         <%= text_field_tag :q, params[:q], :id => 'accounts_search_q', :placeholder => 'Найти...' %>
         <%= submit_tag 'Найти', :class => 'submit' %>
       <% end %>
+
+      <ul class="filter">
+        <li class="selected"><%= link_to 'Все пользователи', accounts_search_path(:kind => kind, :only_results => true), :remote => true %></li>
+        <li class="not_selected"><%= link_to 'Мои друзья', accounts_search_path(:kind => kind, :only_friends => true, :only_results => true), :remote => true %></li>
+      </ul>
     </div>
+
   <% end %>
 
   <div class="accounts_search_results_wrapper">

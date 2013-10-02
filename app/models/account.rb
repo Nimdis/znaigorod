@@ -57,6 +57,7 @@ class Account < ActiveRecord::Base
     string :search_kind
     string(:kind, :multiple => true) { indexing_kinds }
     string(:acts_as, :multiple => true) { acts_as }
+    string(:friend_ids, :multiple => true) { friendable }
 
     string(:inviter_categories, :multiple => true) { invitations.inviter.with_categories.select(&:actual?).flat_map(&:categories).uniq }
     string(:invited_categories, :multiple => true) { invitations.invited.with_categories.select(&:actual?).flat_map(&:categories).uniq }
@@ -171,6 +172,10 @@ class Account < ActiveRecord::Base
 
   def friends_with?(account)
     self.friends.where(friendable_id: account.id, friendly: true).any?
+  end
+
+  def friendable
+    Friend.where(:friendable_id => self.id).pluck(:account_id)
   end
 
   def dialogs

@@ -71,7 +71,6 @@ handle_new_invitaion_link = (target, response) ->
       init_infinite_scroll('.inviteables_search_results_wrapper')
 
       handle_inviteables_results_search()
-      handle_inviteables_search_click()
 
     # 1
     if $(response).hasClass('accounts_search_wrapper')
@@ -82,6 +81,7 @@ handle_new_invitaion_link = (target, response) ->
       init_infinite_scroll('.accounts_search_results_wrapper')
 
       handle_accounts_results_search()
+      handle_accounts_search_filter_links()
 
     if $(response).hasClass('results')
       target = $(response).data('target')
@@ -177,6 +177,11 @@ handle_close_click = ->
     $('.invitation_form_dialog').dialog('close')
 
     false
+
+handle_accounts_search_filter_links = ->
+  $('.filter', '.accounts_search_wrapper').on 'click', (evt) ->
+    $(this).children('li').toggleClass('selected not_selected')
+    init_infinite_scroll('.accounts_search_results_wrapper', 'update')
 
 @init_invitations = ->
   $('.invitations_wrapper, .content .left').on 'ajax:success', (evt, response) ->
