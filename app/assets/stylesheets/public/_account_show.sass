@@ -1,4 +1,6 @@
 .account_show
+  +clearfix
+
   h1
     font-size: 16px
     line-height: 24px
@@ -108,7 +110,13 @@
       +avatar-list-style
 
   .right
-    margin: 0 0 0 220px
+    +clearfix
+    float: left
+    margin: 0 0 0 10px
+    width: 980px
+
+    .invitations_wrapper
+      +clearfix
 
     .header
       background-color: #e8e8e8
@@ -124,6 +132,9 @@
 
     .visits.list
       height: 93px
+
+      ul
+        +clearfix
 
       .item
         .item_info
