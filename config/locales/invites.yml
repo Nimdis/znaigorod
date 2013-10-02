@@ -38,6 +38,9 @@ ru:
       organization: Жду приглашения в
 
   invitation:
+    without_inviteable:
+      inviter: Приглашаю тебя
+      invited: Пригласи меня
     inviter:
       afisha: Приглашаю тебя посетить
       organization: Приглашаю тебя посетить
