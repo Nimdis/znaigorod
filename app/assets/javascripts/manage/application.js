@@ -26,5 +26,6 @@
  * = require ./address
  * = require ./curtail
  * = require ./coupon
+ * = require ./webcam
  * = require ./main
  */

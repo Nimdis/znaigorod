@@ -1,7 +1,6 @@
 <div class='<%= webcam_uppod.kind %>'
      data-width='<%= webcam_uppod.width %>'
      data-height='<%= webcam_uppod.height %>'
-     data-file='<%= webcam_uppod.url %>'>
-  <%= link_to webcam_uppod.title, webcam_url(webcam_uppod) %>
-  <%= content_tag :p, webcam_uppod.address, :'data-latitude' => webcam_uppod.latitude, :'data-longitude' => webcam_uppod.longitude %>
+     data-file='<%= webcam_uppod.url %>'
+     style='height: <%= webcam_uppod.height %>px'>
 </div>

@@ -15,6 +15,7 @@ $ ->
   init_file_upload() if $('.file_upload').length
   init_ajax_delete() if $('.ajax_delete').length
   init_crop()
+  init_webcam() if $('#webcam_snapshot_image').length
 
 $(window).load ->
   init_organization_map() if $('.edit_organization, .new_organization').length

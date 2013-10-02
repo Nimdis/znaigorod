@@ -1,0 +1,68 @@
+@import 'compass/reset'
+@import 'compass/utilities'
+@import 'compass/css3'
+
+body
+  color: #000
+  background-color: #fff
+  font-size: 12px
+  font-family: Verdana, Tahoma, sans-serif
+  line-height: 1.5
+
+  a
+    color: #06c
+    outline: none
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+
+  strong, b
+    font-weight: bold
+
+  em, i
+    font-style: italic
+
+  .webcams
+    margin: 10px auto
+    padding: 0 10px
+
+    h1
+      font-size: 18px
+      text-align: center
+      margin-bottom: 10px
+
+    .webcam_show
+      border: 1px solid #ccc
+
+    .share_and_likes
+      min-height: 30px
+      margin-top: 10px
+
+      .share
+        float: left
+        width: 50%
+        margin-bottom: 5px
+
+        .title
+          +inline-block
+
+        .yashare-auto-init
+          +inline-block
+
+      .likes
+        float: right
+        width: 50%
+        margin-bottom: 5px
+        margin-top: 4px
+
+        .vk_like
+          float: right
+          clear: none !important
+
+        .fb_like
+          float: right
+          margin-right: 20px
+
+        .ok_like
+          float: right
+

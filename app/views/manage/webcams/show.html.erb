@@ -1,14 +1,22 @@
-<div class="show">
-  <p><%= link_to "Перейти к списку вебкамер", manage_webcams_path %></p>
+<div class='show'>
+  <p><%= link_to 'Перейти к списку вебкамер', manage_webcams_path %></p>
   <h1>
     <%= resource.title %>
-    <%= link_to "Редактировать вебкамеру", edit_manage_webcam_path, :class => 'edit_link' %>
+    <%= link_to 'Редактировать вебкамеру', edit_manage_webcam_path, :class => 'edit_link' %>
   </h1>
 
+  <div class='snapshot'>
+    <p><%= image_tag(resized_image_url(resource.snapshot_href, 320, 240), size: '320x240') %></p>
+    <%= simple_form_for resource, as: :webcam, url: manage_webcam_path(resource.id) do |f| %>
+      <%= f.input :snapshot_image, label: 'Выберите изображение', required: true, class: :button %>
+      <%= f.error :snapshot_image_content_type %>
+    <% end %>
+  </div>
+
   <% resource.attributes.keys.delete_if{|key| %w[id created_at updated_at].include?(key)}.each do |attribute| %>
-    <div class="<%= attribute %>">
-      <span class="label"><%= I18n.t("activerecord.attributes.webcam.#{attribute}") %></span>
-      <span class="value"><%= resource.send(attribute) %></span>
+    <div class='<%= attribute %>'>
+      <span class='label'><%= I18n.t("activerecord.attributes.webcam.#{attribute}") %></span>
+      <span class='value'><%= resource.send(attribute) %></span>
     </div>
   <% end %>
 

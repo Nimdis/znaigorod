@@ -8,16 +8,15 @@
   <meta property='og:title' content='Вебкамеры Томска. ЗнайГород' />
   <meta property='og:description' content='Веб-камеры Томска на интерактивной карте города' />
   <meta property='og:url' content='<%= webcams_url %>' />
-  <% stone_url = 'http://storage.openteam.ru/files/38622/250-250/stone.jpg' %>
-  <meta property='og:image' content='<%= stone_url %>' />
-  <meta name='image' content='<%= stone_url %>' />
-  <link rel='image_src' href='<%= stone_url %>' />
+  <meta property='og:image' content='<%= Webcam.snapshot_href_for_index %>' />
+  <meta name='image' content='<%= Webcam.snapshot_href_for_index %>' />
+  <link rel='image_src' href='<%= Webcam.snapshot_href_for_index %>' />
   <meta name='twitter:card' content='summary'>
   <meta name='twitter:site' content='@znaigorod'/>
   <meta name='twitter:url' content='<%= webcams_url %>'/>
   <meta name='twitter:title' content='Вебкамеры Томска. ЗнайГород'/>
   <meta name='twitter:description' content='Веб-камеры Томска на интерактивной карте города'/>
-  <meta name='twitter:image' content='<%= stone_url %>'/>
+  <meta name='twitter:image' content='<%= Webcam.snapshot_href_for_index %>'/>
 <% end %>
 
 <div class='webcams'>

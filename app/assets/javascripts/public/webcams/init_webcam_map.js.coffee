@@ -23,8 +23,8 @@
       link.popupWindow
         windowURL: link.attr('href')
         centerBrowser: 1
-        width: $(item).attr('data-width')
-        height: $(item).attr('data-height')
+        width: $(item).attr('data-width').toNumber() + 40
+        height: $(item).attr('data-height').toNumber() + 130
 
       point = new ymaps.GeoObject
         geometry:

@@ -1,14 +1,25 @@
 @init_webcam_swf = () ->
 
-  init_webcam_dialog = () ->
-    unless $("#webcam_dialog").length
-      $("<div id='webcam_dialog' />").appendTo("body")
-    $("#webcam_dialog")
+  conteainer = $(".webcam_show .webcam_swf")
+  width      = conteainer.attr("data-width")
+  height     = conteainer.attr("data-height")
+  file       = conteainer.attr("data-file")
+  html       = ''
 
-  render_swfobject_dialog = (width, height, file, dialog_title) ->
-    webcam_dialog = init_webcam_dialog()
-    webcam_dialog.html("").hide()
-    html = "<center>" +
+  if FlashDetect && !FlashDetect.installed
+    html = '<p>Для воспроизведения видео требуется проигрыватель Adobe Flash.</p><p><a href="http://get.adobe.com/ru/flashplayer/">Загрузить последнюю версию</a></p>'
+    conteainer.css
+      'color': '#fff'
+      'background-color': '#000'
+      'display': 'table-cell'
+      'height': height
+      'vertical-align': 'middle'
+      'width': width
+      'margin': '0 auto'
+    $('a', conteainer).css
+      'color': '#bdf'
+  else
+    html =
       "<object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' width='#{width}' height='#{height}' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0'>" +
       "<param name='allowFullScreen' value='true' />" +
       "<param name='allowScriptAccess' value='always' />" +
@@ -20,32 +31,8 @@
       "<param name='src' value='#{file}' />" +
       "<param name='wmode' value='opaque' />" +
       "<embed type='application/x-shockwave-flash' width='#{width}' height='#{height}' allowFullScreen'true' allowScriptAccess='always' bgcolor='#ffffff' data='#{file}' quality='high' salign='t' scale='showall' src='#{file}' wmode='opaque' />" +
-      "</object>" +
-      "</center>"
-    $(html).appendTo(webcam_dialog)
-    webcam_dialog.dialog
-      title: dialog_title
-      modal: true
-      width: width.toNumber() + 36
-      height: height.toNumber() + 49
-      resizable: false
-      open: (event, ui) ->
-        true
-      close: (event, ui) ->
-        $(this).dialog('destroy')
-        $(this).remove()
-        true
-    true
+      "</object>"
 
-  $(".webcams_list .webcam_swf").each (index, item) ->
-    block = $(this)
-    link = $("a", block)
-    link.click (event) ->
-      width = block.attr("data-width")
-      height = block.attr("data-height")
-      file_hash = block.attr("data-file")
-      dialog_title = "#{link.text()}. #{link.next("p").text()}"
-      render_swfobject_dialog(width, height, file_hash, dialog_title)
-      false
-    true
+  conteainer.html(html)
+
   true

@@ -7,6 +7,7 @@
 <ul class="collection">
   <% @webcams.each do |webcam| %>
     <li>
+      <%= image_tag(resized_image_url(webcam.snapshot_href, 64, 48), size: '64x48') %>
       <span class="title">
         <%= link_to webcam.title, manage_webcam_path(webcam) %>
         (<%= "#{webcam.width}x#{webcam.height} #{webcam.kind}" %>)

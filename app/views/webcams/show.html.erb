@@ -6,16 +6,16 @@
   <meta property='og:title' content='<%= "#{resource.title}. Вебкамера Томска. ЗнайГород" %>' />
   <meta property='og:description' content='<%= "#{resource.title}, веб-камера расположена по адресу #{resource.address}" %>' />
   <meta property='og:url' content='<%= webcam_url(resource) %>' />
-  <% stone_url = 'http://storage.openteam.ru/files/38622/250-250/stone.jpg' %>
-  <meta property='og:image' content='<%= stone_url %>' />
-  <meta name='image' content='<%= stone_url %>' />
-  <link rel='image_src' href='<%= stone_url %>' />
+  <% snapshot_url = resized_image_url(resource.snapshot_href, 250, 187) %>
+  <meta property='og:image' content='<%= snapshot_url %>' />
+  <meta name='image' content='<%= snapshot_url %>' />
+  <link rel='image_src' href='<%= snapshot_url %>' />
   <meta name='twitter:card' content='summary'>
   <meta name='twitter:site' content='@znaigorod' />
   <meta name='twitter:url' content='<%= webcam_url(resource) %>' />
   <meta name='twitter:title' content='<%= "#{resource.title}. Вебкамера Томска. ЗнайГород" %>' />
   <meta name='twitter:description' content='<%= "#{resource.title}, веб-камера расположена по адресу #{resource.address}" %>' />
-  <meta name='twitter:image' content='<%= stone_url %>' />
+  <meta name='twitter:image' content='<%= snapshot_url %>' />
 <% end %>
 
 <% content_for :stylesheets do %>
@@ -27,9 +27,9 @@
   <%= javascript_include_tag 'webcams/application' %>
 <% end %>
 
-<div class='webcams'>
+<div class='webcams' style='width: <%= resource.width + 2 %>px; height:'>
 
-  <h1><%= resource.title %>. <%= resource.address %></h1>
+  <h1><%= resource.title %><br /><%= resource.address %></h1>
 
   <div class='webcam_show'>
     <%= render :partial => resource.kind, :object => resource %>

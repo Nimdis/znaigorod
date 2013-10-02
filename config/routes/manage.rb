@@ -102,7 +102,10 @@ Znaigorod::Application.routes.draw do
       post "users/mass_update" => 'users#mass_update', :as => 'user/mass_update'
     end
 
-    resources :webcams
+    resources :webcams do
+      get 'snapshot' => 'afishas#snapshot', :on => :member, :as => :snapshot
+      put 'snapshot' => 'afishas#snapshot', :on => :member, :as => :snapshot
+    end
 
     root :to => 'organizations#index'
   end

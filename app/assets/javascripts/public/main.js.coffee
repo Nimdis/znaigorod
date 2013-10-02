@@ -54,11 +54,6 @@ $ ->
   init_sms_claims() if $('.sms_claims li').length
   init_swfkrpano() if $('#krpano').length
   init_trailers() if $('.afisha_show .trailer p').length
-  init_webcam_axis() if $('.webcams_list .webcam_axis').length
-  init_webcam_jw() if $('.webcams_list .webcam_jw').length
-  init_webcam_uppod() if $('.webcams_list .webcam_uppod').length
-  init_webcam_swf() if $('.webcams_list .webcam_swf').length
-  init_webcam_mjpeg() if $('.webcams_list .webcam_mjpeg').length
   init_webcam_map() if $('.webcams .webcam_map').length
   init_my_afisha() if $('.my_afisha_wrapper')
   init_file_upload() if $('.file_upload').length
