@@ -20,7 +20,7 @@
             :remote => true,
             :class => 'accounts_search_open hidden' %>
         <% else %>
-          <%= f.input :gender, :include_blank => false %>
+          <%= f.input :gender, :include_blank => false, :label_method => -> (item) { t "enumerize.invitation.gender.custom.#{@invitation.kind}.#{item.last}" } %>
           <%= link_to "Уточнить &darr;".html_safe,
             accounts_search_path(:category => Inviteables.instance.categories.keys.first, :kind => @invitation.kind),
             :remote => true,
@@ -56,7 +56,15 @@
     <div class="form_footer">
       <div class="actions">
         <% if @invitation.invited_id.blank? %>
-          <%= f.submit 'Готово', :class => 'button' %>
+          <%= f.submit 'Готово', :class => 'button',
+            :onClick => 'share_on_click(this);',
+            'data-owner_id' => current_user.try(:vk_uid),
+            'data-gender' => t("enumerize.invitation.gender.custom.#{@invitation.kind}.all").mb_chars.downcase,
+            'data-category' => Inviteables.instance.categories.keys.first,
+            'data-link' => 'http://znaigorod.ru',
+            'data-poster' => '',
+            'data-action' => t("enumerize.invitation.kind.#{@invitation.kind}")
+            %>
         <% end %>
         <%= link_to 'Отмена', '#', :class => 'cancel' %>
       </div>
