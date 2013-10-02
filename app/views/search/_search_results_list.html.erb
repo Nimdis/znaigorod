@@ -4,10 +4,10 @@
       <ul class="result_list">
         <% @search_presenter.ya_addresses_search.collection.each do |item| %>
           <li>
-            <span class="yandex_addresses">
+            <span class="yandex_addresses_side_map">
               <%  add = @search_presenter.ya_addresses_search.address + ', ' + item['name']
               coords = item['geometry']['coordinates'] %>
-              <a href="#" class="show_map_link" data-hint="<%= add %>" data-latitude="<%= coords[1] %>" data-longitude="<%= coords[0] %>" title="Показать на карте" ><%= add %></a>
+              <a href="#" class="show_map_link_side_map" data-hint="<%= add %>" data-latitude="<%= coords[1] %>" data-longitude="<%= coords[0] %>" title="Показать на карте" ><%= add %></a>
             </span>
           </li>
         <% end %>
