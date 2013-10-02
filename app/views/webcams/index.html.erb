@@ -1,12 +1,30 @@
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.33/?load=package.full&lang=ru-RU') %>
 
-<% content_for :page_title, 'Вебкамеры Томска' %>
+<% content_for :page_title, 'Вебкамеры Томска. ЗнайГород' %>
+<% content_for :meta_keywords, "вебкамеры, томск, карта, интерактив" %>
+<% content_for :meta_description, "Веб-камеры Томска, расположенные на интерактивной карте города" %>
+<% content_for :extra_meta do %>
+  <meta property='og:site_name' content='Афиша Томска, кафе, рестораны, бары, сауны, театры, клубы, знакомства - ЗнайГород' />
+  <meta property='og:title' content='Вебкамеры Томска. ЗнайГород' />
+  <meta property='og:description' content='Веб-камеры Томска на интерактивной карте города' />
+  <meta property='og:url' content='<%= webcams_url %>' />
+  <% stone_url = 'http://storage.openteam.ru/files/38622/250-250/stone.jpg' %>
+  <meta property='og:image' content='<%= stone_url %>' />
+  <meta name='image' content='<%= stone_url %>' />
+  <link rel='image_src' href='<%= stone_url %>' />
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:site' content='@znaigorod'/>
+  <meta name='twitter:url' content='<%= webcams_url %>'/>
+  <meta name='twitter:title' content='Вебкамеры Томска. ЗнайГород'/>
+  <meta name='twitter:description' content='Веб-камеры Томска на интерактивной карте города'/>
+  <meta name='twitter:image' content='<%= stone_url %>'/>
+<% end %>
 
 <div class='webcams'>
 
   <h1>Вебкамеры Томска</h1>
 
-  <div class='webcam_map' data-latitude='56.495116' data-longitude='84.972128'></div>
+  <div class='webcam_map' data-latitude='56.493246' data-longitude='84.982112'></div>
 
   <div class='share_and_likes'>
     <%= render :partial => 'commons/share_this', :locals => { :url => webcams_url } %>

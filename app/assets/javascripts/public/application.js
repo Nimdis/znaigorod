@@ -6,6 +6,7 @@
  * = require jquery-ui/jquery.ui.datepicker-ru.js
  * = require jquery-ui/jquery-ui-timepicker-addon.js
  * = require jquery-ui/jquery-ui-timepicker-ru.js
+ * = require sugar
  * = require magicsuggest
  * = require inputmask
  * = require tipsy
@@ -31,7 +32,6 @@
  * = require ./colorbox
  * = require ./carousel
  * = require ./scroll_to
- * = require ./sugar
  * = require ./swfobject
  * = require ./jwplayer
  * = require ./limit

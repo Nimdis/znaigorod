@@ -1,4 +1,31 @@
-<% content_for :page_title, "#{resource.title}. #{resource.address}. Вебкамеры Томска" %>
+<% content_for :page_title, "#{resource.title}. #{resource.address}. Вебкамера Томска. ЗнайГород" %>
+<% content_for :meta_keywords, "вебкамера, томск" %>
+<% content_for :meta_description, "#{resource.title}, веб-камера расположена расположена по адресу #{resource.address}" %>
+<% content_for :extra_meta do %>
+  <meta property='og:site_name' content='Афиша Томска, кафе, рестораны, бары, сауны, театры, клубы, знакомства - ЗнайГород' />
+  <meta property='og:title' content='<%= "#{resource.title}. Вебкамера Томска. ЗнайГород" %>' />
+  <meta property='og:description' content='<%= "#{resource.title}, веб-камера расположена по адресу #{resource.address}" %>' />
+  <meta property='og:url' content='<%= webcam_url(resource) %>' />
+  <% stone_url = 'http://storage.openteam.ru/files/38622/250-250/stone.jpg' %>
+  <meta property='og:image' content='<%= stone_url %>' />
+  <meta name='image' content='<%= stone_url %>' />
+  <link rel='image_src' href='<%= stone_url %>' />
+  <meta name='twitter:card' content='summary'>
+  <meta name='twitter:site' content='@znaigorod' />
+  <meta name='twitter:url' content='<%= webcam_url(resource) %>' />
+  <meta name='twitter:title' content='<%= "#{resource.title}. Вебкамера Томска. ЗнайГород" %>' />
+  <meta name='twitter:description' content='<%= "#{resource.title}, веб-камера расположена по адресу #{resource.address}" %>' />
+  <meta name='twitter:image' content='<%= stone_url %>' />
+<% end %>
+
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'webcams/application', :media => 'all' %>
+<% end %>
+
+<% content_for :javascripts do %>
+  <%= javascript_include_tag 'http://userapi.com/js/api/openapi.js?52' %>
+  <%= javascript_include_tag 'webcams/application' %>
+<% end %>
 
 <div class='webcams'>
 
@@ -6,6 +33,10 @@
 
   <div class='webcam_show'>
     <%= render :partial => resource.kind, :object => resource %>
+  </div>
+
+  <div class='share_and_likes'>
+    <%= render :partial => 'commons/share_this', :locals => { :url => webcam_url(resource) } %>
   </div>
 
 </div>

@@ -7,6 +7,8 @@ class WebcamsController < ApplicationController
   has_scope :published, :type => :boolean, :default => true
   has_scope :ordered, :default => 'title'
 
-  layout 'webcam', :only => :show
+  def show
+    show! { render :layout => 'webcam' and return }
+  end
 
 end
