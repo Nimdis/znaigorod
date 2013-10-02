@@ -8,8 +8,19 @@
   em
     font-style: italic
 
+.invitation_status
+  color: #ff6501
+
 .invitations
   font-size: 12px
+
+  form
+    +inline-block
+
+    .gray_button
+      +grey-button-style
+
+
 
   &.header
     line-height: 24px
@@ -220,9 +231,6 @@
     .accounts_search_results_wrapper
       padding: 10px 0 0 0
 
-    .invitation_status
-      color: #ff6501
-
   .form_footer
     float: left
     background: #e8e8e8
@@ -239,5 +247,4 @@
 
 .visitors
   .invitation_status
-    color: #ff6501
     display: block
