@@ -194,7 +194,7 @@ handle_reply_invitation = (target, response)->
 @init_invitations = ->
   init_delete_invitation $('.delete_invitation')
 
-  $('.invitations_wrapper, .content .left').on 'ajax:success', (evt, response) ->
+  $('.invitations_wrapper, .content .left, .accounts_list').on 'ajax:success', (evt, response) ->
     target = $(evt.target)
 
     $('.social_actions').replaceWith(response) if target.hasClass('change_visit')

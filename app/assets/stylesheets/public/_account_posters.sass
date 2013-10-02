@@ -56,11 +56,31 @@
               &.visits
                 background-position: 6px -77px
 
+          .inviter_button,
+          .invited_button
+            +button-style
+            display: none
+            position: absolute
+            font-size: 12px
+            padding: 2px 15.5px 3px
+            &:active
+              padding: 3px 15.5px 2px
+
+          .inviter_button
+            top: 35px
+            left: 39px
+
+          .invited_button
+            top: 70px
+            left: 27px
+
           &:hover
             img
               +opacity(0.15)
             .first_line,
-            .second_line
+            .second_line,
+            .inviter_button,
+            .invited_button
               display: block
 
         .badges

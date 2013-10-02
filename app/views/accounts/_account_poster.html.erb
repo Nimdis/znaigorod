@@ -5,6 +5,8 @@
 
   <div class="image">
     <%= link_to image_tag(resized_image_url(account.avatar.url, 178, 178), size: '178x178', title: account, alt: account), account_path(account) %>
+    <%= render :partial => 'accounts/account_poster_link', :locals => { :kind => :inviter, :invited_id => account.id } %>
+    <%= render :partial => 'accounts/account_poster_link', :locals => { :kind => :invited, :invited_id => account.id } %>
     <%= link_to account_path(account), class: :details do %>
       <span class='first_line'>
         <span class='to_go'><%= account.friends.count %></span>
