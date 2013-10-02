@@ -43,6 +43,7 @@
 
                         <% if user_signed_in? && !current_user.account.reacts_to?(invitation)%>
                           <%= simple_form_for [inviteable, inviteable.invitations.new], :remote => true do |f| %>
+                            <%= hidden_field_tag :render, 'status' %>
                             <%= f.input :kind, :as => :hidden, :input_html => { :value => invitation.opposite_kind } %>
                             <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
                             <%= f.submit t("invite.#{invitation.opposite_kind}"),
@@ -52,6 +53,8 @@
                                   'data-message' => "#{I18n.t("invitation.#{invitation.opposite_kind}.#{inviteable.class.name.underscore}")} \"#{inviteable}\"",
                                   'data-attachments' => data_attachments(inviteable) %>
                           <% end %>
+                        <% else %>
+                          <%= render :partial => 'invitations/status', :locals => { :kind => invitation.opposite_kind } %>
                         <% end %>
                       <% end %>
                     </div>
