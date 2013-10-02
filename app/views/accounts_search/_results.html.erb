@@ -20,7 +20,11 @@
             <%= f.input :kind, :as => :hidden, :input_html => { :value => kind } %>
             <%= f.input :invited_id, :as => :hidden, :input_html => { :value => account.id } %>
 
-            <%= f.submit t("invite.#{kind}") %>
+            <%= f.submit t("invite.#{kind}"),
+                  :onClick => 'share_on_click(this);',
+                  'data-owner_id' => (account.users.first.try(:vk_uid) if current_user.provider == 'vkontakte'),
+                  'data-message' => parent ? "#{I18n.t("invitation.#{kind}.#{parent.class.name.underscore}")} \"#{parent}\"" : "#{I18n.t("invitation.without_inviteable.#{kind}")} #{category}",
+                  'data-attachments' => parent ? data_attachments(parent) : account_url(current_user.account) %>
           <% end %>
         <% end %>
       </div>
