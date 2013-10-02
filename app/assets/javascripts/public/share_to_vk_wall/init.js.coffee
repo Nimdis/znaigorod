@@ -8,5 +8,20 @@
 @share_on_click = (target) ->
   $this = $(target)
   return unless $this.data('owner_id')
-  message = $this.data('message')
-  init_share_to_vk_wall($this.data('owner_id'), message, $this.data('attachments'))
+
+  if $this.data('message')?
+    message = $this.data('message')
+  else
+    action = $this.data('action')
+    gender = $this.data('gender')
+    category = $this.data('category')
+    message = "#{action} #{gender} #{category}"
+
+  if $this.data('attachments')?
+    attachments = $this.data('attachments')
+  else
+    poster = $this.data('poster')
+    link = $this.data('link')
+    attachments = "#{poster},#{link}"
+
+  init_share_to_vk_wall($this.data('owner_id'), message, attachments)
