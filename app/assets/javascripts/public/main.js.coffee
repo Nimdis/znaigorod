@@ -60,6 +60,7 @@ $ ->
   init_ajax_delete() if $('.ajax_delete').length
   init_select_tags() if $('.select_tags').length
   init_afisha_tabs() if $('#events_filter').length
+  init_addresses_pagination() if $('.results_with_map')
 
   true
 

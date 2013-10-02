@@ -22,6 +22,7 @@ Znaigorod::Application.routes.draw do
   get 'geocoder' => 'geocoder#get_coordinates'
   get 'search' => 'search#search',                :as => :search
   get 'yamp_geocoder' => 'geocoder#get_yamp_coordinates'
+  get 'yamp_geocoder_photo' => 'geocoder#get_yamp_house_photo'
 
   resources :afisha, :only => [], :controller => 'afishas' do
     resources :comments, :only => [:new, :show, :create]

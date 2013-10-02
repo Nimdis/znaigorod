@@ -117,7 +117,7 @@ class YandexAddressesSearch
   def initialize(query, page)
     @query = query
     @page = page
-    @per_page = 15
+    @per_page = 20
   end
 
   def total

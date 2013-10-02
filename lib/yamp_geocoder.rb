@@ -62,11 +62,14 @@ class YampGeocoder
           else
             geometry = result['InternalToponymInfo']['Point']
             name = result['AddressDetails']['Country']['AddressLine'].split(',').last()
+            address =  result['AddressDetails']['Country']['AddressLine'].split(',')
+            address.delete_at(address.rindex(address.last))
+            address = address.join(", ")
             result = {
               address: address,
               houses:[{
-                name: name,
-                geometry: geometry
+                "name" => name,
+                "geometry" =>  geometry
               }]
             }
           end
@@ -83,6 +86,33 @@ class YampGeocoder
 
   def self.get_addresses(query)
     get_houses(query)
+  end
+
+  def self.get_house_photo(coords)
+    parameters = {
+      lang: 'ru-RU',
+      ll: '84.94967, 56.482697',
+      l: 'hph',
+      results: '10',
+      origin: 'maps-nav'
+    }
+    photos= []
+    result = {}
+    c = Curl::Easy.new("http://maps.yandex.ru/services/photos/1.x/photos.json?#{parameters.to_query}") do |curl|
+      curl.on_success do |easy|
+        result = JSON.parse(easy.body_str)
+        result['entries'].each do |photo|
+          p photo['img']
+          photos.push photo['img']
+        end
+        result = photos
+      end
+    end
+    begin
+      c.perform 
+    rescue Exception => e
+    end
+    result
   end
 
   def self.get_addresses_count(query)

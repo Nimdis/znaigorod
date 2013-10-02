@@ -1,0 +1,11 @@
+<ul class="items_list">
+  <% @search_presenter.ya_addresses_search.collection[0..([@search_presenter.ya_addresses_search.total, 3].min-1)].each do |address| %>
+    <li>
+      <span class="yandex_addresses">
+        <%  add = @search_presenter.ya_addresses_search.address + ', ' + address['name']
+        coords = address['geometry']['coordinates'] %>
+        <a href="#" class="show_map_link" data-hint="<%= add %>" data-latitude="<%= coords[1] %>" data-longitude="<%= coords[0] %>" title="Показать на карте" ><%= add %></a>
+      </span>
+    </li>
+  <% end %>
+</ul>

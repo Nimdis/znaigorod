@@ -8,7 +8,7 @@
       ul
         +clearfix
         li
-          width: percentage(1/5)
+          width: percentage(1/6)
           float: left
           text-align: center
           a
@@ -76,6 +76,16 @@
                 background-position: -266px -49px
 
           &.account
+            a
+              background-position: -356px -1px
+              &:hover
+                background-position: -356px -49px
+            &.selected a
+              background-position: -356px -101px
+              &:hover
+                background-position: -356px -49px
+
+          &.address
             a
               background-position: -356px -1px
               &:hover

@@ -1,0 +1,30 @@
+.search_results
+  .results_with_map
+    +clearfix
+    .results,.yandex_side_map
+      float: left
+      width: 50%
+
+    .results
+      //overflow-y: scroll
+
+      em
+        font-style: normal
+        background: #019bdb
+        color: #fff
+        padding: 2px 4px
+
+      ul.result_list
+        height: 500px
+        li
+          border-bottom: 1px solid #ccc
+          padding-bottom: 10px
+          margin-bottom: 10px
+          &:last-child
+            border: none
+
+          .yandex_addresses
+            background: transparent url(/assets/public/icon_address.png) no-repeat 2px 2px
+            padding-left: 13px
+
+    .yandex_side_map

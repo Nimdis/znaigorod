@@ -3,24 +3,12 @@
 <% content_for :extra_meta do %>
   <meta name='description' content='<%= I18n.t("meta_description.search_results") %> <%= I18n.t("meta_description.main_page") %>' />
 <% end %>
-
 <div class="search_results">
   <% if @search_presenter.hits? %>
-    <% if @search_presenter.render_addresses?%>
-      <ul class="addresses_list">
-        <% @search_presenter.ya_addresses_search.collection[0..([@search_presenter.ya_addresses_search.total, 3].min-1)].each do |address| %>    
-          <li>
-            <%= address %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-    <ul class="items_list">
+      <%= render :partial => "search_addresses_list_short" if @search_presenter.render_addresses? %>
       <%= render :partial => "search_results_list" %>
-    </ul>
   <% else %>
     <div class="empty">По запросу &laquo;<%= params[:q] %>&raquo; ничего не найдено ;(</div>
   <% end %>
+  <%= paginate @search_presenter.paginated_collection %>
 </div>
-
-<%= paginate @search_presenter.paginated_collection %>

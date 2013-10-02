@@ -1,13 +1,28 @@
 <% if @search_presenter.kind_filter.search_address? %>
-  <% @search_presenter.ya_addresses_search.collection.each do |item| %>
-    <li>
-      <%= item %>
-    </li>
-  <% end %>
+  <div class="results_with_map">
+    <div class="results">
+      <ul class="result_list">
+        <% @search_presenter.ya_addresses_search.collection.each do |item| %>
+          <li>
+            <span class="yandex_addresses">
+              <%  add = @search_presenter.ya_addresses_search.address + ', ' + item['name']
+              coords = item['geometry']['coordinates'] %>
+              <a href="#" class="show_map_link" data-hint="<%= add %>" data-latitude="<%= coords[1] %>" data-longitude="<%= coords[0] %>" title="Показать на карте" ><%= add %></a>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="yandex_side_map">
+    </div>
+  <%= paginate @search_presenter.paginated_collection %>
+  </div>
 <% else %>
-  <% @search_presenter.hits.each do |item| %>
-    <li>
+  <ul class="items_list">
+    <% @search_presenter.hits.each do |item| %>
+      <li>
       <%= render item %>
-    </li>
-  <% end %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
