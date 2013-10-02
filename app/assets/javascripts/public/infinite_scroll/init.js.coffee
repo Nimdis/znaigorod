@@ -2,7 +2,6 @@
   list = $(element)
 
   if option == 'update'
-    console.log 'update'
     list.infinitescroll('destroy')
     list.data('infinitescroll', null)
     list.infinitescroll
@@ -16,7 +15,6 @@
         finishedMsg: '<em>Поздравляем, вы достигли конца интернета!</em>'
         msgText: '<em>Загрузка следущей страницы</em>'
   else
-    console.log 'new'
     list.infinitescroll
       behavior: 'local'
       binder: list

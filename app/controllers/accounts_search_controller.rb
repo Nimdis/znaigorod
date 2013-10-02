@@ -4,10 +4,14 @@ class AccountsSearchController < ApplicationController
   layout false
 
   def show
+    page = params[:page] || 1
+    per_page = 5
+
     @accounts = Account.search {
       keywords params[:q]
+      with(:friend_ids, current_user.account.id) if params[:only_friends]
       with(Account.find(params[:account_id])) if params[:account_id]
-      paginate :page => params[:page] || 1, :per_page => 5
+      paginate :page => page, :per_page => per_page
     }.results
 
     render :partial => 'results', :locals => { :accounts => @accounts } and return if params[:only_results]
