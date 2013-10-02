@@ -19,12 +19,19 @@
   <% end %>
 
   <% if current_user.nil? || invitation.account != current_user.account %>
-    <%= simple_form_for :invitation, 
-      :url => invitation.inviteable ? [invitation.inviteable, :invitations] : [:invitations], :remote => true do |f| %>
+    <% if current_user.account.reacts_to?(invitation) %>
+      <%= render :partial => 'invitations/status', :locals => { :kind => invitation.opposite_kind } %>
+    <% else %>
+      <%= simple_form_for :invitation,
+        :url => invitation.inviteable ? [invitation.inviteable, :invitations] : [:invitations],
+        :remote => true,
+        :html => { :class => 'new_invitation' } do |f| %>
 
-      <%= hidden_field_tag :render, 'status' %>
-      <%= f.input :kind, :as => :hidden, :input_html => { :value => invitation.opposite_kind } %>
-      <%= f.submit %>
+        <%= hidden_field_tag :render, 'status' %>
+        <%= f.input :kind, :as => :hidden, :input_html => { :value => invitation.opposite_kind } %>
+        <%= f.input :invited_id, :as => :hidden, :input_html => { :value => invitation.account.id } %>
+        <%= f.submit t("invite.#{invitation.opposite_kind}").mb_chars.capitalize, :class => 'gray_button' %>
+      <% end %>
     <% end %>
   <% end %>
 </li>
