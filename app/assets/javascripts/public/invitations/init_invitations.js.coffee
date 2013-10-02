@@ -45,8 +45,8 @@ handle_new_invitaion_link = (target, response) ->
 
   $('#invitation_category').change ->
     category = $(this).val()
-    link = $('.inviteables_search_open')
 
+    link = $('.inviteables_search_open')
     href = replace_param_value(link.attr('href'), 'category', category)
     link.attr('href', href)
 
