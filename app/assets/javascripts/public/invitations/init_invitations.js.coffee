@@ -94,7 +94,7 @@ handle_new_invitaion_link = (trgt, response) ->
     if $(response).is('li')
       $(this).dialog('close')
       li = $(response)
-      init_delete_invitation(li)
+      init_delete_invitation li
       trgt.parent().next('.list').find('ul').append(li).find('.empty').remove()
 
     if $(response).hasClass('social_actions')
@@ -103,7 +103,6 @@ handle_new_invitaion_link = (trgt, response) ->
 
     if $(response).hasClass('invitation_status')
       $(evt.target).replaceWith(response)
-
 
 # КУДА: скрыть
 handle_inviteables_search_close = ->
@@ -189,6 +188,9 @@ handle_accounts_search_filter_links = ->
     $('#accounts_search_q').val('')
     init_infinite_scroll('.accounts_search_results_wrapper', 'update')
 
+handle_reply_invitation = (target, response)->
+  target.replaceWith response
+
 @init_invitations = ->
   init_delete_invitation $('.delete_invitation')
 
@@ -196,5 +198,8 @@ handle_accounts_search_filter_links = ->
     target = $(evt.target)
 
     $('.social_actions').replaceWith(response) if target.hasClass('change_visit')
-    handle_new_invitaion_link(target, response) unless target.hasClass('delete_invitation')
+    handle_new_invitaion_link(target, response) if target.hasClass('invitation_link')
+    handle_reply_invitation(target, response) if target.hasClass('new_invitation')
+
+
 
