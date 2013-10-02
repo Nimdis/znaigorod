@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
               when 2 || 'male'
                 gender = :male
               else
-                gender = nil
+                gender = :undefined
               end
   end
 
