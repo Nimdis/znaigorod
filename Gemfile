@@ -52,7 +52,7 @@ group :default do
   gem 'omniauth-yandex'
   gem 'openteam-commons'
   gem 'paperclip-elvfs'
-  gem 'pg',                         :require => false
+  gem 'pg'
   gem 'progress_bar'
   gem 'rails'
   gem 'recaptcha',                  :require => 'recaptcha/rails'
@@ -77,7 +77,6 @@ group :development do
   gem 'brakeman'
   gem 'capistrano-db-tasks',        :git => 'git://github.com/sgruhier/capistrano-db-tasks'
   gem 'capistrano-unicorn'
-  gem 'debugger'
   gem 'hirb'
   gem 'letter_opener'
   gem 'openteam-capistrano'

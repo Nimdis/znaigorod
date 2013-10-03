@@ -101,7 +101,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.5.0)
-    columnize (0.3.6)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -114,12 +113,6 @@ GEM
     connection_pool (1.1.0)
     curb (0.8.3)
     daemons (1.1.9)
-    debugger (1.5.0)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.0)
-    debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.0)
     default_value_for (2.0.3)
     descendants_tracker (0.0.1)
     devise (2.2.3)
@@ -489,7 +482,6 @@ DEPENDENCIES
   compass-rails
   curb
   daemons
-  debugger
   default_value_for
   devise
   devise-russian
