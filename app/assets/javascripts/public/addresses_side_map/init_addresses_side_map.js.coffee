@@ -42,7 +42,7 @@
       success: (response, textStatus, jqXHR) ->
         if response.length > 0
           if $(content).length == 0
-            content = "<img src='#{response[0].XXXS.href}' />" + "<br />" + content
+            content = "<center><img src='#{response[0].S.href}' /></center>" + content
         else
           content = content # somebody should add here an unfound image
         point.properties.singleSet('balloonContent', content)
@@ -50,12 +50,17 @@
 
 
   add_events_to_list = (point) ->
+
     data_hint = point.properties.get('hintContent')
-    elem = $(".yandex_addresses_side_map [data-hint='#{data_hint}']")
+    elem = $(".yandex_addresses_side_map [data-hint='#{data_hint}']").parent().parent()
 
     elem.mouseenter () ->
-      elem.css({'background': '#ccc'})
-      point.options.set('preset', 'twirl#redIcon')
+      if !elem.hasClass("clicked")
+        elem.css({'background': '#f5f3f3'})
+        point.options.set('preset', 'twirl#redIcon')
+        if (map.getZoom() < 17)
+          map.geoObjects.remove(point)
+          map.geoObjects.add(point)
 
     elem.mouseleave () ->
       if !elem.hasClass("clicked")
@@ -63,30 +68,42 @@
         point.options.set('preset', 'twirl#blueIcon')
 
     elem.click () ->
-      elem.css({'background': '#ccc'})
-      $('.result_list .clicked').removeClass("clicked")
-      elem.addClass("clicked")
-      set_photos_to_balloon(point)
-      point.balloon.open()
+      if elem.hasClass("clicked")
+        elem.removeClass("clicked")
+        elem.css({'background': '#fff'})
+        point.balloon.close()
+      else
+        map.setCenter(point.geometry.getCoordinates())
+        map.setZoom(17) if map.getZoom() != 17
+        elem.css({'background': '#e3e3e3'})
+        $('.result_list .clicked').removeClass("clicked")
+        elem.addClass("clicked")
+        set_photos_to_balloon(point)
+        point.balloon.open()
       false
 
   add_events_on_map = (point) ->
+
+    data_hint = point.properties.get('hintContent')
+    elem = $(".yandex_addresses_side_map [data-hint='#{data_hint}']").parent().parent()
+
     point.events.add 'mouseenter', (event) ->
-      data_hint = event.get('target').properties.get('hintContent')
       point.options.set('preset', 'twirl#redIcon')
-      $(".yandex_addresses_side_map [data-hint='#{data_hint}']").css({'background': '#ccc'})
+      elem.css({'background': '#f5f3f3'})
 
     point.events.add 'mouseleave', (event) ->
-      data_hint = event.get('target').properties.get('hintContent')
       point.options.set('preset', 'twirl#blueIcon')
-      $(".yandex_addresses_side_map [data-hint='#{data_hint}']").css({'background': '#fff'})
+      elem.css({'background': '#fff'})
 
     point.balloon.events.add 'close', (event) ->
-      data_hint = $(item).attr('data-hint')
       point.options.set('preset', 'twirl#blueIcon')
-      $(".yandex_addresses_side_map [data-hint='#{data_hint}']").css({'background': '#fff'})
+      elem.css({'background': '#fff'})
+      elem.removeClass("clicked")
 
     point.events.add 'click', (event) ->
+      elem.css({'background': '#e3e3e3'})
+      $('.result_list .clicked').removeClass("clicked")
+      elem.addClass("clicked")
       set_photos_to_balloon(event.get('target'))
 
   point = new ymaps.GeoObject
@@ -115,7 +132,7 @@
     $map = $('.results_with_map .yandex_side_map')
 
     map = new ymaps.Map $map[0],
-      center: [56.482697, 84.94967] #should give coordinates for this block
+      center: [56.482697, 84.94967] 
       zoom: 12
       behaviors: ['drag', 'scrollZoom']
     ,
