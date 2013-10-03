@@ -24,12 +24,14 @@ class VisitsController < ApplicationController
 
   def create
     create! {
+      @visits = parent.visits.page(1)
       render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return
     }
   end
 
   def destroy
     destroy! {
+      @visits = parent.visits.page(1)
       render :partial => 'commons/social_block', :locals => { :inviteable => parent } and return
     }
   end
