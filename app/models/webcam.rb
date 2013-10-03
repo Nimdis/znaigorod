@@ -9,7 +9,7 @@ class Webcam < ActiveRecord::Base
   validates_presence_of :kind, :title, :url, :width, :height,
                         :address, :latitude, :longitude
 
-  scope :ordered, -> order_by { order order_by }
+  scope :ordered, -> { order('title') }
 
   scope :published, -> { where(:state => true) }
 
