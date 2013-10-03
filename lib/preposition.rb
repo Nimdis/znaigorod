@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Preposition
   def initialize(item)
     @item = item
