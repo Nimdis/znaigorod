@@ -118,17 +118,24 @@ class YandexAddressesSearch
     @query = query
     @page = page
     @per_page = 20
+    @result =  YampGeocoder.get_addresses(@query)
+    @houses ||= @result[:houses]
+    @address ||= @result[:address]
   end
 
   def total
-    @total ||= YampGeocoder.get_addresses_count(@query)
+    if @result[:houses].present?
+      @total ||= @result[:houses].size()
+    else
+      @total ||= 0
+    end
   end
 
   def collection
-    result =  YampGeocoder.get_addresses(@query)
-    @houses ||= result[:houses]
-    @address ||= result[:address]
-    Kaminari.paginate_array(@houses).page(@page).per(@per_page)
+    if @houses.present? && @address.present?
+      return Kaminari.paginate_array(@houses).page(@page).per(@per_page)
+    end
+    return {}
   end
 end
 

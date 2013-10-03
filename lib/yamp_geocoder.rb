@@ -54,6 +54,10 @@ class YampGeocoder
           result = JSON.parse(easy.body_str)
           result = result['vpage']['data']['locations']['GeoObjectCollection']['features'][0]['properties']['GeocoderMetaData']
           address = result['text']
+          address = address.split(',')
+          address.delete_at(0)
+          address.delete_at(0)
+          address = address.join(', ')
           if result['InternalToponymInfo']['houses'] != 0
             result = {
               address: address,
@@ -63,6 +67,8 @@ class YampGeocoder
             geometry = result['InternalToponymInfo']['Point']
             name = result['AddressDetails']['Country']['AddressLine'].split(',').last()
             address =  result['AddressDetails']['Country']['AddressLine'].split(',')
+            address.delete_at(0)
+            address.delete_at(0)
             address.delete_at(address.rindex(address.last))
             address = address.join(", ")
             result = {
@@ -77,15 +83,11 @@ class YampGeocoder
         end
       end
       begin
-        c.perform 
-      rescue Exception => e
+        c.perform if query.present?
+      rescue
+        return { response_code: 500 }
       end
       result
-  end
-  #should rewrite
-
-  def self.get_addresses(query)
-    get_houses(query)
   end
 
   def self.get_house_photo(coords)
@@ -109,15 +111,15 @@ class YampGeocoder
       end
     end
     begin
-      c.perform 
-    rescue Exception => e
+      c.perform if coords.present?
+    rescue
+      return { response_code: 500 }
     end
     result
   end
 
-  def self.get_addresses_count(query)
-    result = get_houses(query)
-    result[:houses].size()
+  def self.get_addresses(query)
+    get_houses(query)
   end
 
 end

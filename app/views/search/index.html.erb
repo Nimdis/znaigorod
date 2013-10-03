@@ -7,8 +7,8 @@
   <% if @search_presenter.hits? %>
       <%= render :partial => "search_addresses_list_short" if @search_presenter.render_addresses? %>
       <%= render :partial => "search_results_list" %>
+      <%= paginate @search_presenter.paginated_collection %>
   <% else %>
     <div class="empty">По запросу &laquo;<%= params[:q] %>&raquo; ничего не найдено ;(</div>
   <% end %>
-  <%= paginate @search_presenter.paginated_collection %>
 </div>
