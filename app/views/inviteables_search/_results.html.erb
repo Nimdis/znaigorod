@@ -1,6 +1,13 @@
 <ul class="results inviteables_search_results" data-target=".inviteables_search_results_wrapper">
   <% results.each do |result| %>
-    <li data-url="<%= polymorphic_path [result, :invitations] %>" data-parent=<%= "#{result.class.name.underscore}_#{result.id}" %>>
+    <li data-url="<%= polymorphic_path [result, :invitations] %>"
+      data-parent=<%= "#{result.class.name.underscore}_#{result.id}" %>
+      data-link="<%= polymorphic_url(result) %>"
+      data-poster="<%= result.poster_vk_id %>"
+      data-category="<%= params[:category]  %>"
+      data-gender="<%= params[:gender_value] %>"
+      data-preposition="<%= Preposition.new(result).value %>"
+      data-inviteable_title="<%= result.title %>">
       <span class="remove_item"></span>
       <%= render :partial => "inviteables_search/#{result.class.name.underscore}", :locals => { "#{result.class.name.underscore}".to_sym => result } %>
     </li>

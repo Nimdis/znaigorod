@@ -157,14 +157,14 @@ ru:
 
         custom:
           inviter:
-            all: Парня или девушку
-            male: Парня
-            female: Девушку
+            all: парня или девушку
+            male: парня
+            female: девушку
 
           invited:
-            all: От парня или девушки
-            male: От парня
-            female: От девушки
+            all: от парня или девушки
+            male: от парня
+            female: от девушки
 
       kind:
         inviter: Приглашаю
