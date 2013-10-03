@@ -1,11 +1,14 @@
 <div class="invite_form_wrapper">
-  <div class="left">
-    <%= simple_form_for @invitation, :remote => true do |f| %>
+  <%= simple_form_for @invitation, :remote => true, :html => { :class => 'need_attributes' } do |f| %>
+    <div class="left">
       <%= hidden_field_tag :render, 'show' %>
       <%= f.input :kind, :as => :hidden %>
       <div class="floatl">
         <%= f.input :category, :collection => Inviteables.instance.categories.keys, :include_blank => false %>
-        <%= link_to "Уточнить &darr;".html_safe, inviteables_search_path(:category => Inviteables.instance.categories.keys.first), :remote => true, :class => 'inviteables_search_open' %>
+        <%= link_to "Уточнить &darr;".html_safe,
+          inviteables_search_path(:category => Inviteables.instance.categories.keys.first, :gender_value => t("enumerize.invitation.gender.custom.#{@invitation.kind}.all")),
+          :remote => true,
+          :class => 'inviteables_search_open' %>
         <%= link_to "Скрыть &uarr;".html_safe, '#', :class => 'inviteables_search_close' %>
       </div>
     </div>
@@ -57,7 +60,7 @@
       <div class="actions">
         <% if @invitation.invited_id.blank? %>
           <%= f.submit 'Готово', :class => 'button',
-            :onClick => 'share_on_click(this);',
+            :onClick => 'set_data_attributes_for_vk(this);share_on_click(this);',
             'data-owner_id' => current_user.try(:vk_uid),
             'data-gender' => t("enumerize.invitation.gender.custom.#{@invitation.kind}.all").mb_chars.downcase,
             'data-category' => Inviteables.instance.categories.keys.first,
@@ -66,10 +69,10 @@
             'data-action' => t("enumerize.invitation.kind.#{@invitation.kind}"),
             'data-inviteable_title' => '',
             'data-preposition' => ''
-            %>
-        <% end %>
-        <%= link_to 'Отмена', '#', :class => 'cancel' %>
-      </div>
+          %>
+      <% end %>
+      <%= link_to 'Отмена', '#', :class => 'cancel' %>
     </div>
-  <% end %>
+  </div>
+<% end %>
 </div>

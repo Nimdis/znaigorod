@@ -10,20 +10,16 @@
   return unless $this.data('owner_id')
 
   if $this.data('message')?
-    message = $this.data('message')
+    message = $this.data('message') || ''
   else
-    action = $this.data('action')
-    gender = $this.data('gender')
-
-    if $this.data('category')
-      category = $this.data('category')
-    else
-      category = ''
+    action = $this.data('action') || ''
+    gender = $this.data('gender') || ''
+    category = $this.data('category') || ''
 
     if $this.data('inviteable_title')
-      title = $this.data('inviteable_title')
-      preposition = $this.data('preposition')
-      message = "#{action} #{gender} #{category} #{preposition} #{title}"
+      title = $this.data('inviteable_title') || ''
+      preposition = $this.data('preposition') || ''
+      message = "#{action} #{gender} #{preposition} \"#{title}\""
     else
       message = "#{action} #{gender} #{category}"
 

@@ -1,3 +1,21 @@
+@set_data_attributes_for_vk = (target) ->
+  submit = $(target)
+
+  if $('.selected_result').length
+    li = $('li:first', '.selected_result')
+
+    submit.data('link', li.data('link'))
+    submit.data('poster', li.data('poster'))
+    submit.data('gender', li.data('gender'))
+    submit.data('preposition', li.data('preposition'))
+    submit.data('inviteable_title', li.data('inviteable_title'))
+  else
+    category = $('#invitation_category').children(':selected').text()
+    gender = $('#invitation_gender').children(':selected').text()
+
+    submit.data('link', category)
+    submit.data('poster', gender)
+
 @init_form_dialog = (id, title, target, width = 300, height = 'auto') ->
   dialog = $("<div class='" + id + "_form_dialog'/>").dialog
     draggable: false
@@ -45,11 +63,13 @@ handle_new_invitaion_link = (trgt, response) ->
 
   $('.accounts_search_open').click() if $('.auto_accounts_search').length
 
-  $('#invitation_category').change ->
-    category = $(this).val()
+  $('#invitation_category, #invitation_gender').change ->
+    category = $('#invitation_category').val()
+    gender = $('#invitation_gender').children(':selected').text().toLocaleLowerCase()
 
     link = $('.inviteables_search_open')
     href = replace_param_value(link.attr('href'), 'category', category)
+    href = replace_param_value(href, 'gender_value', gender)
     link.attr('href', href)
 
     unless $('.inviteables_search_open').is(':visible')
@@ -200,6 +220,3 @@ handle_reply_invitation = (target, response)->
     $('.social_actions').replaceWith(response) if target.hasClass('change_visit')
     handle_new_invitaion_link(target, response) if target.hasClass('invitation_link')
     handle_reply_invitation(target, response) if target.hasClass('new_invitation')
-
-
-
