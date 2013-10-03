@@ -19,7 +19,7 @@
       <% if resource.send(attribute).is_a?(Date) || resource.send(attribute).is_a?(Time) || resource.send(attribute).is_a?(DateTime) %>
         <span class='value'><%= l resource.send(attribute) %></span>
       <% else %>
-        <span class='value'><%= resource.send(attribute) %></span>
+        <span class='value'><%= auto_html(resource.send(attribute).to_s) { link(:target => 'blank') } %></span>
       <% end %>
     </div>
   <% end %>
