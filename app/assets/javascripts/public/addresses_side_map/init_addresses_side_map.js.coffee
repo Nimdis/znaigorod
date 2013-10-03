@@ -34,20 +34,53 @@
 
 @add_point_on_side_map = (item, map) ->
 
+  init_gallery = () ->
+    $('.balloon_photos a').colorbox
+      close: 'закрыть'
+      current: '{current} из {total}'
+      maxHeight: '98%'
+      maxWidth: '90%'
+      next: 'следующая'
+      opacity: '0.5'
+      photo: 'true'
+      previous: 'предыдущая'
+
+    true
+
   set_photos_to_balloon = (point) ->
     content = point.properties.get('balloonContent')
     coordinates = point.geometry.getCoordinates()
-    $.ajax
-      url: '/yamp_geocoder_photo?coords=' + coordinates[1] + ', ' + coordinates[0]
-      success: (response, textStatus, jqXHR) ->
-        if response.length > 0
-          if $(content).length == 0
-            content = "<center><img src='#{response[0].S.href}' /></center>" + content
-        else
-          content = content # somebody should add here an unfound image
-        point.properties.singleSet('balloonContent', content)
-        true
 
+    wrapped_content = $("<div>#{content}</div>")
+    unless $('.balloon_photos', wrapped_content).length
+      $.ajax
+        url: "/yamp_geocoder_photo?coords=#{coordinates[1]},#{coordinates[0]}"
+        success: (response, textStatus, jqXHR) ->
+          text = content.compact()
+          if response.length
+            content = "" +
+              "<div class='balloon_photos'>" +
+              "<center>" +
+              "<a href='#{response[0].L.href}' class='balloon' title='#{text}' " +
+              "rel='photos_#{coordinates[1].replace('.', '')}#{coordinates[0].replace('.', '')}'>" +
+              "<img src='#{response[0].S.href}' width='#{response[0].S.width}' height='#{response[0].S.height}' />" +
+              "</a><br />#{text}" +
+              "</center>"
+            response.each (elem) ->
+              content += "" +
+                "<a href='#{elem.L.href}' class='balloon' title='#{text}' " +
+                "rel='photos_#{coordinates[1].replace('.', '')}#{coordinates[0].replace('.', '')}'>" +
+                "<img src='#{elem.S.href}' width='0' height='0' />" +
+                "</a>"
+                true
+            , 1
+            content += "</div>"
+            point.properties.singleSet('balloonContent', content)
+            init_gallery()
+
+          true
+
+    true
 
   add_events_to_list = (point) ->
 
@@ -94,6 +127,9 @@
     point.events.add 'mouseleave', (event) ->
       point.options.set('preset', 'twirl#blueIcon')
       elem.css({'background': '#fff'})
+
+    point.balloon.events.add 'open', (event) ->
+      init_gallery()
 
     point.balloon.events.add 'close', (event) ->
       point.options.set('preset', 'twirl#blueIcon')
