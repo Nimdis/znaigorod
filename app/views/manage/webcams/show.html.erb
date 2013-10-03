@@ -13,10 +13,14 @@
     <% end %>
   </div>
 
-  <% resource.attributes.keys.delete_if{|key| %w[id created_at updated_at].include?(key)}.each do |attribute| %>
+  <% resource.attributes.keys.delete_if{|key| %w[id snapshot_url created_at updated_at].include?(key)}.each do |attribute| %>
     <div class='<%= attribute %>'>
       <span class='label'><%= I18n.t("activerecord.attributes.webcam.#{attribute}") %></span>
-      <span class='value'><%= resource.send(attribute) %></span>
+      <% if resource.send(attribute).is_a?(Date) || resource.send(attribute).is_a?(Time) || resource.send(attribute).is_a?(DateTime) %>
+        <span class='value'><%= l resource.send(attribute) %></span>
+      <% else %>
+        <span class='value'><%= resource.send(attribute) %></span>
+      <% end %>
     </div>
   <% end %>
 

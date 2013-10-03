@@ -441,6 +441,12 @@ ru:
         latitude: Широта
         longitude: Долгота
         state: Опубликована
+        snapshot_url:
+        snapshot_image_file_name: snapshot_image_file_name
+        snapshot_image_content_type: snapshot_image_content_type
+        snapshot_image_file_size: snapshot_image_file_size
+        snapshot_image_updated_at: snapshot_image_updated_at
+        snapshot_image_url: snapshot_image_url
 
     state_machines:
       afisha:
