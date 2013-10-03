@@ -3,12 +3,25 @@ class VisitsController < ApplicationController
 
   load_and_authorize_resource
 
-  actions :create, :show, :destroy
+  actions :index, :create, :show, :destroy
 
   belongs_to :afisha, :optional => true
   belongs_to :organization, :optional => true
+  belongs_to :account, :optional => true
+
+  has_scope :page, :default => 1
 
   layout false
+
+  def index
+    index! {
+      render partial: 'afishas/visits', locals: { visits: @visits }, layout: false and return if @afisha
+      render partial: 'organizations/visits', locals: { visits: @visits }, layout: false and return if @organization
+
+      @account ||= current_user.account
+      render partial: 'accounts/visits', locals: { visits: @visits }, layout: false and return
+    }
+  end
 
   def create
     create! {
