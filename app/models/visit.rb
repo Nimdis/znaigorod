@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class Visit < ActiveRecord::Base
+  paginates_per 3
   attr_accessible :user_id
 
   belongs_to :visitable, :polymorphic => true
