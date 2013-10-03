@@ -14,10 +14,14 @@
   else
     action = $this.data('action')
     gender = $this.data('gender')
-    category = $this.data('category')
 
-    if $this.data('title')
-      title = $this.data('title')
+    if $this.data('category')
+      category = $this.data('category')
+    else
+      category = ''
+
+    if $this.data('inviteable_title')
+      title = $this.data('inviteable_title')
       preposition = $this.data('preposition')
       message = "#{action} #{gender} #{category} #{preposition} #{title}"
     else
