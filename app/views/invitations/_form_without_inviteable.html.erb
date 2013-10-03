@@ -63,7 +63,9 @@
             'data-category' => Inviteables.instance.categories.keys.first,
             'data-link' => 'http://znaigorod.ru',
             'data-poster' => '',
-            'data-action' => t("enumerize.invitation.kind.#{@invitation.kind}")
+            'data-action' => t("enumerize.invitation.kind.#{@invitation.kind}"),
+            'data-title' => '',
+            'data-preposition' => ''
             %>
         <% end %>
         <%= link_to 'Отмена', '#', :class => 'cancel' %>

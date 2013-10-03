@@ -15,7 +15,13 @@
     action = $this.data('action')
     gender = $this.data('gender')
     category = $this.data('category')
-    message = "#{action} #{gender} #{category}"
+
+    if $this.data('title')
+      title = $this.data('title')
+      preposition = $this.data('preposition')
+      message = "#{action} #{gender} #{category} #{preposition} #{title}"
+    else
+      message = "#{action} #{gender} #{category}"
 
   if $this.data('attachments')?
     attachments = $this.data('attachments')
