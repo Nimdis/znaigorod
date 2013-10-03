@@ -32,7 +32,7 @@ class OrganizationsController < ApplicationController
     @organization.delay(:queue => 'critical').create_page_visit(request.session_options[:id], request.user_agent, current_user)
 
     @organization = OrganizationDecorator.decorate @organization
-    @visits = @organization.visits.page(1).per(5)
+    @visits = @organization.visits.page(1)
 
     case @organization.priority_suborganization_kind
     when 'sauna'

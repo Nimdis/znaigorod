@@ -1,0 +1,25 @@
+<ul class='avatars'>
+  <% @visits.each do |visit| %>
+    <li>
+      <div class="avatar">
+        <%= link_to visit.user.account do %>
+          <%= image_tag resized_image_url(visit.user.account.avatar.url, 35, 35), :size => '35x35', :alt => visit.user.account %>
+        <% end%>
+      </div>
+      <div class="details">
+        <%= link_to(visit.user.account, visit.user.account, :class => :name) %>
+        <div class="wanted">
+          <div class="info">
+            <%= visit.user.account.invitations.where(:inviteable_id => visit.visitable_id, :inviteable_type => visit.visitable_type).inspect %>
+          </div>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>
+<% unless @visits.first_page? && @visits.last_page? %>
+  <div class="pagination">
+    <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if @visits.first_page? }" %>
+    <%= link_to '&darr;'.html_safe, polymorphic_path([@afisha || @organization, :visits], :page => @visits.current_page + 1), :class => "next_page #{ 'disabled' if @visits.last_page? }" %>
+  </div>
+<% end %>

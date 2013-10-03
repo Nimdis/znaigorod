@@ -27,7 +27,7 @@ Znaigorod::Application.routes.draw do
 
   resources :afisha, :only => [], :controller => 'afishas' do
     resources :comments, :only => [:new, :show, :create]
-    resources :visits, :only => [:create, :show, :destroy]
+    resources :visits, :only => [:index, :create, :show, :destroy]
 
     resources :invitations
 
