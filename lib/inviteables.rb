@@ -11,8 +11,14 @@ class Inviteables
 
   def categories_for_organization(organization)
     categories.select { |key, value|
-      (value.organization.suborganizations & organization.suborganizations.map(&:class).map(&:name).map(&:underscore)).any? &&
-        (value.organization.categories.map(&:mb_chars).map(&:downcase).map(&:to_s) & [*organization.category].map(&:mb_chars).map(&:downcase).map(&:to_s)).any?
+      value_organization_categories = value.organization.categories.map(&:mb_chars).map(&:downcase).map(&:to_s)
+
+      if value_organization_categories.any?
+        (value.organization.suborganizations & organization.suborganizations.map(&:class).map(&:name).map(&:underscore)).any? &&
+          (value_organization_categories & [*organization.category].map(&:mb_chars).map(&:downcase).map(&:to_s)).any?
+      else
+        (value.organization.suborganizations & organization.suborganizations.map(&:class).map(&:name).map(&:underscore)).any?
+      end
     }.keys
   end
 
