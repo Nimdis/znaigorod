@@ -8,7 +8,7 @@ class WebcamsController < ApplicationController
 
   def show
     show! {
-      if request.referrer.match(root_url) &&
+      if request.referrer.present? && request.referrer.match(root_url) &&
         Rails.application.routes.recognize_path(request.referrer)[:controller] == 'webcams' &&
         Rails.application.routes.recognize_path(request.referrer)[:action] == 'index'
         @layout_name = 'webcam'
