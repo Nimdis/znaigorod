@@ -1,6 +1,6 @@
 <% content_for :page_title, "#{resource.title}. #{resource.address}. Вебкамера Томска. ЗнайГород" %>
 <% content_for :meta_keywords, "вебкамера, томск" %>
-<% content_for :meta_description, "#{resource.title}, веб-камера расположена расположена по адресу #{resource.address}" %>
+<% content_for :meta_description, "#{resource.title}, вебкамера расположена расположена по адресу #{resource.address}" %>
 <% content_for :extra_meta do %>
   <meta property='og:site_name' content='Афиша Томска, кафе, рестораны, бары, сауны, театры, клубы, знакомства - ЗнайГород' />
   <meta property='og:title' content='<%= "#{resource.title}. Вебкамера Томска. ЗнайГород" %>' />
@@ -14,7 +14,7 @@
   <meta name='twitter:site' content='@znaigorod' />
   <meta name='twitter:url' content='<%= webcam_url(resource) %>' />
   <meta name='twitter:title' content='<%= "#{resource.title}. Вебкамера Томска. ЗнайГород" %>' />
-  <meta name='twitter:description' content='<%= "#{resource.title}, веб-камера расположена по адресу #{resource.address}" %>' />
+  <meta name='twitter:description' content='<%= "#{resource.title}, вебкамера расположена по адресу #{resource.address}" %>' />
   <meta name='twitter:image' content='<%= snapshot_url %>' />
 <% end %>
 
@@ -28,6 +28,10 @@
 <% end %>
 
 <div class='webcams' style='width: <%= resource.width + 2 %>px; height:'>
+
+  <% if @layout_name == 'public' %>
+    <p class='to_webcams_list'><%= link_to 'Карта вебкамер Томска', webcams_path %></p>
+  <% end %>
 
   <h1><%= resource.title %><br /><%= resource.address %></h1>
 

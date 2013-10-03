@@ -1,7 +1,7 @@
 $ ->
 
   if typeof VK != 'undefined'
-    init_vk_like() if $('#vk_like').length
+    init_vk_like() if $('#vk_like').length && !$('#vk_like').closest('.content_wrapper').length
 
   init_webcam_axis()  if $('.webcam_show .webcam_axis').length
   init_webcam_jw()    if $('.webcam_show .webcam_jw').length
