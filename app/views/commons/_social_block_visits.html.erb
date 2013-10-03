@@ -10,7 +10,36 @@
         <%= link_to(visit.user.account, visit.user.account, :class => :name) %>
         <div class="wanted">
           <div class="info">
-            <%= visit.user.account.invitations.where(:inviteable_id => visit.visitable_id, :inviteable_type => visit.visitable_type).inspect %>
+            <% visit.user.account.invitations.where(:inviteable_id => visit.visitable_id, :inviteable_type => visit.visitable_type).each do |invitation| %>
+              <div>
+                <% if invitation.account == current_user.account %>
+                  <span><%= invitation.kind_text %> <%= t("enumerize.invitation.gender.custom.#{invitation.kind}.#{invitation.gender}").mb_chars.downcase %></span>
+                  <% if invitation.description? %>
+                    <abbr title="<%= invitation.description %>" class="show_tipsy"><%= image_tag 'public/icon_question.png' %></abbr>
+                  <% end %>
+                <% else %>
+                  <span><%= t("account_acts_as.#{invitation.kind}") %> <%= t("enumerize.invitation.gender.custom.#{invitation.kind}.#{invitation.gender}").mb_chars.downcase %></span>
+                  <% if invitation.description? %>
+                    <abbr title="<%= invitation.description %>" class="show_tipsy"><%= image_tag 'public/icon_question.png' %></abbr>
+                  <% end %>
+                  <% if user_signed_in? && !current_user.account.reacts_to?(invitation)%>
+                    <%= simple_form_for [invitation.inviteable, invitation.inviteable.invitations.new], :remote => true do |f| %>
+                      <%= hidden_field_tag :render, 'status' %>
+                      <%= f.input :kind, :as => :hidden, :input_html => { :value => invitation.opposite_kind } %>
+                      <%= f.input :invited_id, :as => :hidden, :input_html => { :value => visit.user.account.id } %>
+                      <%= f.submit t("invite.#{invitation.opposite_kind}"),
+                            :class => 'submit_dialog',
+                            :onClick => 'share_on_click(this);',
+                            'data-owner_id' => (visit.user.account.users.first.try(:vk_uid) if current_user.provider == 'vkontakte'),
+                            'data-message' => "#{I18n.t("invitation.#{invitation.opposite_kind}.#{invitation.inviteable.class.name.underscore}")} \"#{invitation.inviteable}\"",
+                            'data-attachments' => data_attachments(invitation.inviteable) %>
+                    <% end %>
+                  <% else %>
+                    <%= render :partial => 'invitations/status', :locals => { :kind => invitation.opposite_kind } %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
