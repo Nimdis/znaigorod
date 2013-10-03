@@ -442,11 +442,11 @@ ru:
         longitude: Долгота
         state: Опубликована
         snapshot_url:
-        snapshot_image_file_name: snapshot_image_file_name
-        snapshot_image_content_type: snapshot_image_content_type
-        snapshot_image_file_size: snapshot_image_file_size
-        snapshot_image_updated_at: snapshot_image_updated_at
-        snapshot_image_url: snapshot_image_url
+        snapshot_image_file_name: Snapshot image_file_name
+        snapshot_image_content_type: Snapshot image_content_type
+        snapshot_image_file_size: Snapshot image_file_size
+        snapshot_image_updated_at: Snapshot image_updated_at
+        snapshot_image_url: Snapshot image_url
 
     state_machines:
       afisha:
