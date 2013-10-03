@@ -37,7 +37,7 @@ group :default do
   gem 'has_searcher'
   gem 'hashie',                     '~> 2.0.5'
   gem 'htmldiff'
-  gem 'inherited_resources'
+  gem 'inherited_resources',        '1.4.1'
   gem 'jquery-rails',               '2.0.3'
   gem 'kaminari'
   gem 'koala', "~> 1.7.0rc1"
