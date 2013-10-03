@@ -34,7 +34,7 @@ class OrganizationsController < ApplicationController
     end
 
     @organization = OrganizationDecorator.decorate @organization
-    @visits = @organization.visits.page(1).per(5)
+    @visits = @organization.visits.page(1)
 
     case @organization.priority_suborganization_kind
     when 'sauna'

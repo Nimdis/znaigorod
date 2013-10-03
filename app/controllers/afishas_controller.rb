@@ -21,7 +21,7 @@ class AfishasController < ApplicationController
     if request.session_options[:id].present? && !request.user_agent.match(/\(.*https?:\/\/.*\)/)
       @afisha.delay(:queue => 'critical').create_page_visit(request.session_options[:id], request.user_agent, current_user)
     end
-    @visits = @afisha.visits.page(1).per(5)
+    @visits = @afisha.visits.page(1)
     @bet = @afisha.bets.build
   end
 end

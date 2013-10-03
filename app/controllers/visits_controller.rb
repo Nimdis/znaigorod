@@ -15,8 +15,7 @@ class VisitsController < ApplicationController
 
   def index
     index! {
-      render partial: 'afishas/visits', locals: { visits: @visits }, layout: false and return if @afisha
-      render partial: 'organizations/visits', locals: { visits: @visits }, layout: false and return if @organization
+      render partial: 'commons/social_block_visits', locals: { visits: @visits }, layout: false and return if @afisha || @organization
 
       @account ||= current_user.account
       render partial: 'accounts/visits', locals: { visits: @visits }, layout: false and return
