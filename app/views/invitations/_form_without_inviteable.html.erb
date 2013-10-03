@@ -20,7 +20,7 @@
             :remote => true,
             :class => 'accounts_search_open hidden' %>
         <% else %>
-          <%= f.input :gender, :include_blank => false, :label_method => -> (item) { t "enumerize.invitation.gender.custom.#{@invitation.kind}.#{item.last}" } %>
+          <%= f.input :gender, :include_blank => false, :label_method => ->(item) { t "enumerize.invitation.gender.custom.#{@invitation.kind}.#{item.last}" } %>
           <%= link_to "Уточнить &darr;".html_safe,
             accounts_search_path(:category => Inviteables.instance.categories.keys.first, :kind => @invitation.kind),
             :remote => true,
