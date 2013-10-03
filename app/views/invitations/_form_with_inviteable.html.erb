@@ -45,7 +45,7 @@
             'data-category' => '',
             'data-action' => t("enumerize.invitation.kind.#{@invitation.kind}"),
             'data-attachments' => data_attachments(@invitation.inviteable),
-            'data-title' => @invitation.inviteable,
+            'data-inviteable_title' => @invitation.inviteable,
             'data-preposition' =>  Preposition.new(@invitation.inviteable).value
             %>
         <%= link_to 'Отмена', '#', :class => 'cancel' %>
