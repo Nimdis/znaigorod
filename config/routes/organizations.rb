@@ -16,47 +16,60 @@ Znaigorod::Application.routes.draw do
   resources :saunas, :only => :index
 
   Organization.basic_suborganization_kinds.each do |kind|
-    get "/#{kind.pluralize}" => 'suborganizations#index', :as => kind.pluralize, :constraints => { :kind => kind }, :defaults => { :kind => kind }
-  end
-  get '/entertainments' => 'suborganizations#index', :as => :billiards, :constraints => { :kind => 'entertainments' }, :defaults => { :kind => 'entertainments' }
+    # redirects from /kind?categories[]=...
+    get "/#{kind.pluralize}",
+      :constraints => lambda { |req| req.query_parameters.has_key?('categories') },
+      :to =>  redirect { |params, req|
+        category = req.query_parameters['categories'].first.mb_chars.downcase
+        other_parameters = req.query_parameters.to_h
+        other_parameters.delete('categories')
+        parameter_string = other_parameters.to_param
+        parameter_string.insert(0, "?") unless parameter_string.empty?
+        "/#{kind.pluralize}/#{Russian.translit(category).gsub(' ', '_')}" + parameter_string
 
-  Organization.available_suborganization_kinds.each do |kind|
-    resources kind.pluralize, :only => [:new, :create] do
+      }
+
+    # short categories urls
+    HasSearcher.searcher(kind.pluralize.to_sym).facet("#{kind}_category").rows.map do |row|
+      get "/#{kind.pluralize}/#{Russian.translit(row.value).gsub(" ", "_")}" => 'suborganizations#index',
+      :constraints => {:kind => kind},
+      :defaults => {:kind => kind, :categories => [row.value]}
+    end
+    get "/#{kind.pluralize}" => 'suborganizations#index', :as => kind.pluralize, :constraints => { :kind => kind }, :defaults => { :kind => kind }
+
+    # from legacy
+    get "/#{kind.pluralize}/(:category)/(*query)",
+      :to => redirect { |params, req|
+        url = "/#{kind.pluralize}"
+        if params[:category] == 'all'
+          parameters = {}
+          parameters.tap do |hash|
+            keyword = ''
+            params[:query].split('/').each do |word|
+              keyword = word and hash[keyword] ||= [] and next if ['categories'].include?(word)
+              hash[keyword] << word if hash[keyword]
+            end
+          end
+          parameters['categories'] ||= []
+          if parameters['categories'] == ['сауны']
+            url = '/saunas'
+          else
+            url += "/#{Russian.translit(parameters['categories'].first).gsub(" ", "_")}" if parameters['categories'].any?
+          end
+        else
+          if params[:category] == 'сауны'
+            url = '/saunas'
+          else
+            url += "/#{Russian.translit(params[:category]).gsub(" ", "_")}"
+          end
+        end
+        URI.encode(url)
+    }
+
+    resources kind.pluralize, :only => [] do
       resources :sms_claims, :only => [:new, :create]
     end
   end
-
-  # from legacy
-  get ':organization_class/(:category)/(*query)',
-    :organization_class => /meals|entertainments|cultures|sports|creations|saunas/,
-    :to => redirect { |params, req|
-      url = "/#{params[:organization_class]}?order_by=popularity"
-      if params[:category] == 'all'
-        parameters = {}
-        parameters.tap do |hash|
-          keyword = ''
-          params[:query].split('/').each do |word|
-            keyword = word and hash[keyword] ||= [] and next if ['categories'].include?(word)
-            hash[keyword] << word if hash[keyword]
-          end
-        end
-        parameters['categories'] ||= []
-        if parameters['categories'] == ['сауны']
-          url = '/saunas'
-        else
-          parameters['categories'].each do |cat|
-            url += "&categories[]=#{cat}"
-          end
-        end
-      else
-        if params[:category] == 'сауны'
-          url = '/saunas'
-        else
-          url += "&categories[]=#{params[:category]}"
-        end
-      end
-      URI.encode(url)
-  }
 
   get 'organizations/:id/affiche/all' => redirect { |params, req|
     o = Organization.find(params[:id])
