@@ -1,10 +1,12 @@
 <div class='advertisement domru'>
-  <object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0' width='780' height='100' align='middle'>
-    <param name='allowScriptAccess' value='sameDomain'>
-    <param name='movie' value='<%= asset_path('public/advertisement/domru.swf') %>'>
-    <param name='quality' value='high'>
-    <param name='width' value='468'>
-    <param name='height' value='60'>
-    <embed src='<%= asset_path('public/advertisement/domru.swf') %>' quality='high' name='domru' align='middle' allowscriptaccess='sameDomain' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer' width='780' height='100'>
-  </object>
+  <% if Rails.env.production? %>
+    <object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0' width='780' height='100' align='middle'>
+      <param name='allowScriptAccess' value='sameDomain'>
+      <param name='movie' value='<%= asset_path('public/domru/domru.swf') %>'>
+      <param name='quality' value='high'>
+      <param name='width' value='468'>
+      <param name='height' value='60'>
+      <embed src='<%= asset_path('public/domru/domru.swf') %>' quality='high' name='domru' align='middle' allowscriptaccess='sameDomain' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer' width='780' height='100'>
+      </object>
+    <% end %>
 </div>
