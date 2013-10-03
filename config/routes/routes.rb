@@ -38,8 +38,6 @@ Znaigorod::Application.routes.draw do
   get '/afisha' => 'afishas#index', :as => :afisha_index, :controller => 'afishas'
   get '/afisha/:id' => 'afishas#show', :as => :afisha_show, :controller => 'afishas'
 
-  resources :saunas, :only => :index
-
   get '/tickets' => redirect('/afisha?has_tickets=true')
 
   resources :coupons, :only => [:index, :show] do

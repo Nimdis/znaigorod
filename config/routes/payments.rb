@@ -12,10 +12,4 @@ Znaigorod::Application.routes.draw do
     post 'success' => 'robokassa#success'
     post 'fail'    => 'robokassa#fail'
   end
-
-  Organization.available_suborganization_kinds.each do |kind|
-    resources kind.pluralize, :only => [:new, :create] do
-      resources :sms_claims, :only => [:new, :create]
-    end
-  end
 end
