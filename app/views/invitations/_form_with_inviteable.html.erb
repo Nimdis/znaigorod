@@ -12,7 +12,7 @@
     <div class="right">
       <div class="floatl">
         <% unless @invitation.invited %>
-          <%= f.input :gender, :include_blank => false, :label_method => -> (item) { t "enumerize.invitation.gender.custom.#{@invitation.kind}.#{item.last}" } %>
+          <%= f.input :gender, :include_blank => false, :label_method => ->(item) { t "enumerize.invitation.gender.custom.#{@invitation.kind}.#{item.last}" } %>
           <%= link_to "Уточнить &darr;".html_safe,
             accounts_search_path(:kind => @invitation.kind, :parent => "#{@invitation.inviteable.class.name.underscore}_#{@invitation.inviteable.id}"),
             :remote => true,
@@ -39,15 +39,14 @@
     <div class="form_footer">
       <div class="actions">
         <%= f.submit 'Готово', :class => 'button',
-            :onClick => 'share_on_click(this);',
-            'data-owner_id' => current_user.try(:vk_uid),
-            'data-gender' => t("enumerize.invitation.gender.custom.#{@invitation.kind}.all").mb_chars.downcase,
-            'data-category' => '',
-            'data-action' => t("enumerize.invitation.kind.#{@invitation.kind}"),
-            'data-attachments' => data_attachments(@invitation.inviteable),
-            'data-inviteable_title' => @invitation.inviteable,
-            'data-preposition' =>  Preposition.new(@invitation.inviteable).value
-            %>
+          :onClick => 'share_on_click(this);',
+          'data-owner_id' => current_user.try(:vk_uid),
+          'data-gender' => t("enumerize.invitation.gender.custom.#{@invitation.kind}.all").mb_chars.downcase,
+          'data-category' => '',
+          'data-action' => t("enumerize.invitation.kind.#{@invitation.kind}"),
+          'data-attachments' => data_attachments(@invitation.inviteable),
+          'data-inviteable_title' => @invitation.inviteable,
+          'data-preposition' =>  Preposition.new(@invitation.inviteable).value %>
         <%= link_to 'Отмена', '#', :class => 'cancel' %>
       </div>
     </div>

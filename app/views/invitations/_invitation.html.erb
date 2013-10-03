@@ -28,19 +28,21 @@
         :html => { :class => 'new_invitation' } do |f| %>
 
         <%= hidden_field_tag :render, 'status' %>
+        <%= f.input :category, :as => :hidden, :input_html => { :value => invitation.category } %>
         <%= f.input :kind, :as => :hidden, :input_html => { :value => invitation.opposite_kind } %>
         <%= f.input :invited_id, :as => :hidden, :input_html => { :value => invitation.account.id } %>
+
         <%= f.submit t("invite.#{invitation.opposite_kind}").mb_chars.capitalize,
-        :class => 'gray_button',
-        :onClick => 'share_on_click(this);',
-        'data-owner_id' => (invitation.account.users.first.try(:vk_uid) if current_user.provider == 'vkontakte'),
-        'data-action' => t("invitation.without_inviteable.#{invitation.opposite_kind}"),
-        'data-category' => (invitation.category unless invitation.inviteable),
-        'data-preposition' => (Preposition.new(invitation.inviteable).value if invitation.inviteable),
-        'data-attachments' => (data_attachments(invitation.inviteable) if invitation.inviteable),
-        'data-inviteable_title' => (invitation.inviteable if invitation.inviteable),
-        'data-link' => 'http://znaigorod.ru',
-        'data-gender' => ''
+          :class => 'gray_button',
+          :onClick => 'share_on_click(this);',
+          'data-owner_id' => (invitation.account.users.first.try(:vk_uid) if current_user.provider == 'vkontakte'),
+          'data-action' => t("invitation.without_inviteable.#{invitation.opposite_kind}"),
+          'data-category' => (invitation.category unless invitation.inviteable),
+          'data-preposition' => (Preposition.new(invitation.inviteable).value if invitation.inviteable),
+          'data-attachments' => (data_attachments(invitation.inviteable) if invitation.inviteable),
+          'data-inviteable_title' => (invitation.inviteable if invitation.inviteable),
+          'data-link' => 'http://znaigorod.ru',
+          'data-gender' => ''
         %>
       <% end %>
     <% end %>
