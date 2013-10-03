@@ -136,7 +136,7 @@ module OrganizationsPresenter
   def selected_category
     @selected_category ||= "".tap do |str|
       str << (categories_filter[:selected].first || pluralized_kind)
-      str.replace Russian.translit(str).gsub(" ", "_")
+      str.replace FromRussianToParam.convert(str)
     end
   end
 
@@ -159,11 +159,9 @@ module OrganizationsPresenter
       HasSearcher.searcher(pluralized_kind.to_sym).facet("#{kind}_category").rows.map do |row|
         array << {
           title: row.value.mb_chars.capitalize,
-          klass: Russian.translit(row.value).gsub(" ", "_"),
-          url: "#{pluralized_kind}_path",
-          parameters: {
-            categories: [row.value.mb_chars.downcase]
-          },
+          klass: FromRussianToParam.convert(row.value),
+          url: "#{kind.pluralize}_#{FromRussianToParam.convert(row.value).pluralize}_path",
+          parameters: {},
           selected: categories_filter[:selected].include?(row.value.mb_chars.downcase),
           count: row.count
         }
@@ -186,9 +184,8 @@ module OrganizationsPresenter
       self.class.available_sortings_without_nearness.each do |sorting_value|
         array << {
           title: I18n.t("organization.sort.#{sorting_value}"),
-          url: "#{pluralized_kind}_path",
+          url: pluralized_kind == selected_category.pluralize ? "#{pluralized_kind}_path" : "#{pluralized_kind}_#{selected_category.pluralize}_path",
           parameters: {
-            :categories => categories_filter.selected,
             :order_by => sorting_value
           },
           selected: order_by == sorting_value

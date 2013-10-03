@@ -49,13 +49,12 @@ class OrganizationsCatalogPresenter
       ].each do |item|
         kind = item[0]
         category = item[1]
-        parameters = excluded_categories.include?(category) ? nil : { :categories => [category] }
         searcher_parameter = excluded_categories.include?(category) ? {} : { "#{kind}_category".to_sym => [category] }
         array << {
           title: category.mb_chars.capitalize,
-          klass: Russian.translit(category).gsub(" ", "_"),
-          url: "#{kind.pluralize}_path",
-          parameters: parameters,
+          klass: FromRussianToParam.convert(category),
+          url: excluded_categories.include?(category) ? "#{kind.pluralize}_path" :  "#{kind.pluralize}_#{FromRussianToParam.convert(category).pluralize}_path",
+          parameters: {},
           selected: categories_filter[:selected].include?(category),
           count: HasSearcher.searcher(kind.pluralize.to_sym, searcher_parameter).total
         }

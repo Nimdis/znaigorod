@@ -25,13 +25,14 @@ Znaigorod::Application.routes.draw do
         other_parameters.delete('categories')
         parameter_string = other_parameters.to_param
         parameter_string.insert(0, "?") unless parameter_string.empty?
-        "/#{kind.pluralize}/#{Russian.translit(category).gsub(' ', '_')}" + parameter_string
+        "/#{kind.pluralize}/#{FromRussianToParam.convert(category)}" + parameter_string
 
       }
 
     # short categories urls
     HasSearcher.searcher(kind.pluralize.to_sym).facet("#{kind}_category").rows.map do |row|
-      get "/#{kind.pluralize}/#{Russian.translit(row.value).gsub(" ", "_")}" => 'suborganizations#index',
+      get "/#{kind.pluralize}/#{FromRussianToParam.convert(row.value)}" => 'suborganizations#index',
+      :as => "#{kind.pluralize}_#{FromRussianToParam.convert(row.value).pluralize}".to_sym,
       :constraints => {:kind => kind},
       :defaults => {:kind => kind, :categories => [row.value]}
     end
@@ -54,13 +55,13 @@ Znaigorod::Application.routes.draw do
           if parameters['categories'] == ['сауны']
             url = '/saunas'
           else
-            url += "/#{Russian.translit(parameters['categories'].first).gsub(" ", "_")}" if parameters['categories'].any?
+            url += "/#{FromRussianToParam.convert(parameters['categories'].first)}" if parameters['categories'].any?
           end
         else
           if params[:category] == 'сауны'
             url = '/saunas'
           else
-            url += "/#{Russian.translit(params[:category]).gsub(" ", "_")}"
+            url += "/#{FromRussianToParam.convert(params[:category]).gsub(" ", "_")}"
           end
         end
         URI.encode(url)
