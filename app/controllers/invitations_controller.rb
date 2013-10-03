@@ -18,6 +18,7 @@ class InvitationsController < ApplicationController
       when 'show'
         render :show
       when 'social'
+        @visits = parent.visits.page(1)
         render :partial => 'commons/social_block', :locals => { :inviteable => parent }
       end
 
