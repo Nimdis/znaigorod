@@ -50,13 +50,23 @@
   set_photos_to_balloon = (point) ->
     content = point.properties.get('balloonContent')
     coordinates = point.geometry.getCoordinates()
+    text = content.compact()
 
     wrapped_content = $("<div>#{content}</div>")
+
     unless $('.balloon_photos', wrapped_content).length
       $.ajax
         url: "/yamp_geocoder_photo?coords=#{coordinates[1]},#{coordinates[0]}"
+        beforeSend: () ->
+          content = ""+
+          "<div class='balloon_photos'>" +
+          "<center>" +
+          "<img style='padding: 59px;' src='/assets/public/colorbox_loading.gif' />" +
+          "<br />#{text}" +
+          "</center>" +
+          "</div>"
+          point.properties.singleSet('balloonContent', content)
         success: (response, textStatus, jqXHR) ->
-          text = content.compact()
           if response.length
             content = "" +
               "<div class='balloon_photos'>" +
@@ -77,6 +87,17 @@
             content += "</div>"
             point.properties.singleSet('balloonContent', content)
             init_gallery()
+          else
+            content = ""+
+            "<div class='balloon_photos'>" +
+            "<center>" +
+            "<div style='display:table;border:solid 1px; min-width: 150px; min-hight: 150px;'>" +
+            "<p style='padding-top:60px;padding-bottom:60px;'>Нет фотографии</p>" +
+            "</div>" +
+            "<br />#{text}" +
+            "</center>" +
+            "</div>"
+            point.properties.singleSet('balloonContent', content)
 
           true
 
