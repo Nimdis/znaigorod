@@ -10,7 +10,7 @@
         <%= link_to(visit.user.account, visit.user.account, :class => :name) %>
         <div class="wanted">
           <div class="info">
-            <% visit.user.account.invitations.where(:inviteable_id => visit.visitable_id, :inviteable_type => visit.visitable_type).each do |invitation| %>
+            <% visit.user.account.invitations.without_invited.where(:inviteable_id => visit.visitable_id, :inviteable_type => visit.visitable_type).each do |invitation| %>
               <div>
                 <% if user_signed_in? && invitation.account == current_user.account %>
                   <span><%= invitation.kind_text %> <%= t("enumerize.invitation.gender.custom.#{invitation.kind}.#{invitation.gender}").mb_chars.downcase %></span>

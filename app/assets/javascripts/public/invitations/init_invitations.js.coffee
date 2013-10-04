@@ -75,12 +75,15 @@ handle_new_invitaion_link = (trgt, response) ->
     href = replace_param_value(href, 'gender_value', gender)
     link.attr('href', href)
 
-    unless $('.inviteables_search_open').is(':visible')
+    $('.selected_result li').data('gender', gender)
+
+    if !$('.inviteables_search_open').is(':visible') && !$('.selected_result li').length
       $('.inviteables_search_open').click()
 
+    parent = $('.selected_result li:first').data('parent') || ''
     link = $('.accounts_search_open')
     href = replace_param_value(link.attr('href'), 'category', category)
-    href = replace_param_value(href, 'parent', '')
+    href = replace_param_value(href, 'parent', parent)
     link.attr('href', href)
 
     unless $('.accounts_search_open').is(':visible')
