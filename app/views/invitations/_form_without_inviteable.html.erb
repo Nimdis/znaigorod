@@ -1,5 +1,5 @@
 <div class="invite_form_wrapper">
-  <%= simple_form_for @invitation, :remote => true, :html => { :class => 'need_attributes' } do |f| %>
+  <%= simple_form_for @invitation, :remote => true do |f| %>
     <div class="left">
       <%= hidden_field_tag :render, 'show' %>
       <%= f.input :kind, :as => :hidden %>
