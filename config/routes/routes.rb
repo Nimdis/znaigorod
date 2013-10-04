@@ -53,24 +53,6 @@ Znaigorod::Application.routes.draw do
     put 'liked' => 'votes#liked', :as => :liked
   end
 
-  resources :organizations, :only => [:index, :show] do
-    get :in_bounding_box, :on => :collection
-    get :details_for_balloon, :on => :member
-    put 'change_vote' => 'votes#change_vote', :as => :change_vote
-    put 'destroy_visits' => 'visits#destroy_visits', :as => :destroy_visits
-    get 'liked' => 'votes#liked', :as => :liked
-
-    resources :comments, :only => [:new, :create, :show]
-    resources :visits
-
-    resources :user_ratings, :only => [:new, :create, :edit, :update, :show]
-  end
-
-  Organization.basic_suborganization_kinds.each do |kind|
-    get "/#{kind.pluralize}" => 'suborganizations#index', :as => kind.pluralize, :constraints => { :kind => kind }, :defaults => { :kind => kind }
-  end
-  get '/entertainments' => 'suborganizations#index', :as => :billiards, :constraints => { :kind => 'entertainments' }, :defaults => { :kind => 'entertainments' }
-
   resources :posts, :only => [:index, :show] do
     get :draft, :on => :collection, :as => :draft
 
