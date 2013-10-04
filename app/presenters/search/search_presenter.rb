@@ -54,7 +54,7 @@ class SearchPresenter
             search_kind: kind
           },
           current: kind == @kind_filter.search_kind,
-          count: SearchCounter.new(self, kind, @query).count
+          count: SearchCounter.new(self, kind, @query).count(@ya_addresses_search)
         }
       end
    }
@@ -99,12 +99,12 @@ class SearchCounter
     @query = query if query != nil
   end
 
-  def count
+  def count ya_addresses_search
     case search_kind
     when 'address'
-      YandexAddressesSearch.new(@query, 1).total
+      ya_addresses_search.total
     when nil
-      YandexAddressesSearch.new(@query, 1).total + HasSearcher.searcher(:global, presenter.searcher_parameters.merge(:search_kind => search_kind)).total
+      ya_addresses_search.total + HasSearcher.searcher(:global, presenter.searcher_parameters.merge(:search_kind => search_kind)).total
     else
       HasSearcher.searcher(:global, presenter.searcher_parameters.merge(:search_kind => search_kind)).total
     end
@@ -129,6 +129,7 @@ class YandexAddressesSearch
     else
       @total ||= 0
     end
+    return @total
   end
 
   def collection
