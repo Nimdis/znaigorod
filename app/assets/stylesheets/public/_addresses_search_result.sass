@@ -8,20 +8,20 @@
     .results
 
       em
-        font-style: normal
         background: #019bdb
         color: #fff
+        font-style: normal
         padding: 2px 4px
 
       ul.result_list
         height: 500px
         li
           border-bottom: 1px solid #ccc
-          padding-bottom: 7px
-          width: 584px
-          height: 25px
-          padding-top: 12px
           cursor: pointer
+          height: 25px
+          padding-bottom: 7px
+          padding-top: 12px
+          width: 584px
           &:last-child
             border: none
 
@@ -31,3 +31,77 @@
 
     .yandex_side_map
       height: 500px
+
+      .zoom
+        +border-radius(0.5em)
+        +box-shadow(rgba(0, 0, 0, 0.2) 0 1px 2px)
+        +background-image(image_url('/assets/public/addresses_image_zoom.png'))
+        background-color: #fff
+        background-position: 6px
+        background-repeat: no-repeat
+        border: solid 1px #b7b7b7
+        cursor: pointer
+        height: 28px
+        left: 12px
+        position: absolute
+        top: 20px
+        width: 28px
+
+        &:hover
+          background-color: #ededed
+          +background-image(image_url('/assets/public/addresses_image_zoom.png'))
+
+        &:active
+          +background-image(image_url('/assets/public/addresses_image_zoom.png'))
+          margin-top: 1px
+          margin-left: 1px
+
+      .balloon_photos
+        .loading_photo
+          padding: 64px 59px 59px 59px
+        .not_found
+          +clearfix
+          +border-radius(0.5em)
+          border: solid 1px
+          border-color: #ff6600
+          display: table
+          min-width: 150px
+          min-height: 150px
+          margin-top: 4px
+
+          p
+            padding-top: 60px
+            padding-bottom: 60px
+
+.addresses_items_list
+  border-bottom: solid 1px #cccccc
+  margin-bottom: 8px
+  padding-bottom: 40px
+  width: 100%
+
+  .goto_map
+    +button-style
+    +border-radius(0px)
+    cursor: pointer
+    font-size: 13px
+    float: right
+    margin-right: 10px
+
+  li
+    +border-radius(5px)
+    background-color: #e8e8e8
+    display: block
+    float: left
+    padding: 3px
+    margin-left: 12px
+    &:hover
+      background-color: #e0e0e0
+    .goto_map_button
+      color: #fff
+      &:hover
+        text-decoration: none
+
+    .yandex_addresses
+      background: transparent url(/assets/public/icon_address.png) no-repeat 2px 2px
+      padding-left: 15px
+      font-size: 1.2em

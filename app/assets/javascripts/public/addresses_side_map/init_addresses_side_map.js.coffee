@@ -58,10 +58,10 @@
       $.ajax
         url: "/yamp_geocoder_photo?coords=#{coordinates[1]},#{coordinates[0]}"
         beforeSend: () ->
-          content = ""+
+          content = "" +
           "<div class='balloon_photos'>" +
           "<center>" +
-          "<img style='padding: 59px;' src='/assets/public/colorbox_loading.gif' />" +
+          "<img class='loading_photo' src='/assets/public/colorbox_loading.gif' />" +
           "<br />#{text}" +
           "</center>" +
           "</div>"
@@ -73,13 +73,16 @@
               "<center>" +
               "<a href='#{response[0].L.href}' class='balloon' title='#{text}' " +
               "rel='photos_#{coordinates[1].replace('.', '')}#{coordinates[0].replace('.', '')}'>" +
-              "<img src='#{response[0].S.href}' width='#{response[0].S.width}' height='#{response[0].S.height}' />" +
+              "<img src='#{response[0].S.href}' width='#{response[0].S.width}' height='#{response[0].S.height}'" +
+              " style='padding-top: 5px' />" +
+              "<div class='zoom'></div>" +
               "</a><br />#{text}" +
               "</center>"
             response.each (elem) ->
               content += "" +
                 "<a href='#{elem.L.href}' class='balloon' title='#{text}' " +
-                "rel='photos_#{coordinates[1].replace('.', '')}#{coordinates[0].replace('.', '')}'>" +
+                "rel='photos_#{coordinates[1].replace('.', '')}#{coordinates[0].replace('.', '')}'" +
+                "style='display:none' >" +
                 "<img src='#{elem.S.href}' width='0' height='0' />" +
                 "</a>"
                 true
@@ -91,8 +94,8 @@
             content = ""+
             "<div class='balloon_photos'>" +
             "<center>" +
-            "<div style='display:table;border:solid 1px; min-width: 150px; min-hight: 150px;'>" +
-            "<p style='padding-top:60px;padding-bottom:60px;'>Нет фотографии</p>" +
+            "<div class='not_found'>" +
+            "<p>Нет фотографии</p>" +
             "</div>" +
             "<br />#{text}" +
             "</center>" +
@@ -111,7 +114,7 @@
     elem.mouseenter () ->
       if !elem.hasClass("clicked")
         elem.css({'background': '#f5f3f3'})
-        point.options.set('preset', 'twirl#redIcon')
+        point.options.set('iconImageHref', '/assets/public/side_map_icon_h.png')
         if (map.getZoom() < 17)
           map.geoObjects.remove(point)
           map.geoObjects.add(point)
@@ -119,7 +122,7 @@
     elem.mouseleave () ->
       if !elem.hasClass("clicked")
         elem.css({'background': '#fff'})
-        point.options.set('preset', 'twirl#blueIcon')
+        point.options.set('iconImageHref', '/assets/public/side_map_icon.png')
 
     elem.click () ->
       if elem.hasClass("clicked")
@@ -142,18 +145,18 @@
     elem = $(".yandex_addresses_side_map [data-hint='#{data_hint}']").parent().parent()
 
     point.events.add 'mouseenter', (event) ->
-      point.options.set('preset', 'twirl#redIcon')
+      point.options.set('iconImageHref', '/assets/public/side_map_icon_h.png')
       elem.css({'background': '#f5f3f3'})
 
     point.events.add 'mouseleave', (event) ->
-      point.options.set('preset', 'twirl#blueIcon')
+      point.options.set('iconImageHref', '/assets/public/side_map_icon.png')
       elem.css({'background': '#fff'})
 
     point.balloon.events.add 'open', (event) ->
       init_gallery()
 
     point.balloon.events.add 'close', (event) ->
-      point.options.set('preset', 'twirl#blueIcon')
+      point.options.set('iconImageHref', '/assets/public/side_map_icon.png')
       elem.css({'background': '#fff'})
       elem.removeClass("clicked")
 
@@ -171,9 +174,11 @@
       hintContent: $(item).attr('data-hint')
       balloonContent: "#{$(item).attr('data-hint')} "
       openBalloonOnClick: true
-  ,
+    ,
+      iconImageHref: '/assets/public/side_map_icon.png'
+      iconImageOffset: [-15, -40]
+      iconImageSize: [37, 42]
 
-  preset: 'twirl#blueIcon'
 
   add_events_on_map(point)
 
