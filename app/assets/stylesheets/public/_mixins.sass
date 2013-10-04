@@ -25,20 +25,29 @@ $desktop_default_width: 1200px
       @content
 
 /* button style */
-=button-style
+=button-style($image: false)
   color: #fff
   background-color: #ff7f1a
-  +background(linear-gradient(top, #f93, #f60))
+  @if $image
+    +background($image, linear-gradient(top, #f93, #f60))
+  @else
+    +background(linear-gradient(top, #f93, #f60))
   border: 1px solid #f60
   padding: 1px 8px 2px
   &:hover
     +text-shadow(#f60 1px 1px 1px)
     text-decoration: none
-    background: none
-    background-color: #f93
+    @if $image
+      background: #f93 $image
+    @else
+      background: none
+      background-color: #f93
   &:active
     background-color: #ff7f1a
-    +background(linear-gradient(top, #f60, #f93))
+    @if $image
+      +background($image, linear-gradient(top, #f60, #f93))
+    @else
+      +background(linear-gradient(top, #f60, #f93))
     padding: 2px 8px 1px
 
 =grey-button-style
