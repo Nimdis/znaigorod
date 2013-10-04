@@ -57,6 +57,7 @@
     </li>
   <% end %>
 </ul>
+
 <% unless @visits.first_page? && @visits.last_page? %>
   <div class="pagination">
     <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if @visits.first_page? }" %>

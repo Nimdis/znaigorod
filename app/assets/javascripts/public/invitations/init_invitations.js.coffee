@@ -142,6 +142,7 @@ handle_inviteables_search_click = ->
   $('.inviteables_search_results_wrapper').on 'click', (evt) ->
     li = $(evt.target).closest('li')
     url = li.data('url')
+
     $('.new_invitation').attr('action', url)
     $('.search_form').remove()
     $('.selected_result').append(li)
