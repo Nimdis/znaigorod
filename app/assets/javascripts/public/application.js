@@ -64,7 +64,6 @@
  * = require ./filters_toggler
  * = require ./filter_handler
  * = require ./organization_extend
- * = require ./introduction
  * = require ./sauna_advanced_filter
  * = require ./sauna_halls_scroll
  * = require ./iconize_info
