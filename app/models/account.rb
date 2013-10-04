@@ -200,10 +200,8 @@ class Account < ActiveRecord::Base
 
   def reacts_to?(invitation)
     relation = invitations.send(invitation.opposite_kind).where(:invited_id => invitation.account.id)
-    relation.where(:inviteable_type => invitation.inviteable.class.name, :inviteable_id => invitation.inviteable.id) if invitation.inviteable_type?
-    relation = relation.where(:category => invitation.category) if invitation.category.present?
-
-    puts relation.to_sql
+    relation = relation.where(:inviteable_type => invitation.inviteable.class.name, :inviteable_id => invitation.inviteable.id) if invitation.inviteable
+    relation = relation.where(:category => invitation.category).where(:inviteable_type => nil) if invitation.category.present?
 
     relation.any?
   end
