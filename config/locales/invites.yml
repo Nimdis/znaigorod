@@ -15,8 +15,8 @@ ru:
       zero: "Еще нет"
 
   invite:
-    invited: Пригласи меня
     inviter: Пригласить
+    invited: Пригласи меня
 
     sended:
       undefined:
