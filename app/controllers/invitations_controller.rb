@@ -33,7 +33,7 @@ class InvitationsController < ApplicationController
   protected
 
   def build_resource
-    super.account = current_user.account
+    super.account = current_user.account if current_user
 
     @invitation
   end

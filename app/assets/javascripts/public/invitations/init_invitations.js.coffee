@@ -13,8 +13,8 @@
     category = $('#invitation_category').children(':selected').text()
     gender = $('#invitation_gender').children(':selected').text()
 
-    submit.data('link', category)
-    submit.data('poster', gender)
+    submit.data('category', category)
+    submit.data('gender', gender)
 
 @init_form_dialog = (id, title, target, width = 300, height = 'auto') ->
   dialog = $("<div class='" + id + "_form_dialog'/>").dialog
@@ -215,6 +215,8 @@ handle_reply_invitation = (target, response)->
   init_delete_invitation $('.delete_invitation')
 
   $('.invitations_wrapper, .content .left, .accounts_list').on 'ajax:success', (evt, response) ->
+    return false if $(response).hasClass('cloud_wrapper')
+
     target = $(evt.target)
 
     $('.social_actions').replaceWith(response) if target.hasClass('change_visit')
