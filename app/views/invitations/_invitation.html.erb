@@ -19,9 +19,7 @@
   <% end %>
 
   <% if current_user.nil? || invitation.account != current_user.account %>
-    <% if current_user && current_user.account.reacts_to?(invitation) %>
-      <%= render :partial => 'invitations/status', :locals => { :kind => invitation.opposite_kind } %>
-    <% else %>
+    <% if current_user %>
       <%= simple_form_for :invitation,
         :url => invitation.inviteable ? [invitation.inviteable, :invitations] : [:invitations],
         :remote => true,

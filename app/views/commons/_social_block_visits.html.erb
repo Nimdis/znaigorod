@@ -25,20 +25,16 @@
                   <% end %>
 
                   <% if user_signed_in? %>
-                    <% unless current_user.account.reacts_to?(invitation) %>
-                      <%= simple_form_for [invitation.inviteable, invitation.inviteable.invitations.new], :remote => true do |f| %>
-                        <%= hidden_field_tag :render, 'status' %>
-                        <%= f.input :kind, :as => :hidden, :input_html => { :value => invitation.opposite_kind } %>
-                        <%= f.input :invited_id, :as => :hidden, :input_html => { :value => visit.user.account.id } %>
-                        <%= f.submit t("invite.#{invitation.opposite_kind}"),
-                        :class => 'submit_dialog',
-                          :onClick => 'share_on_click(this);',
-                          'data-owner_id' => (visit.user.account.users.first.try(:vk_uid) if current_user.provider == 'vkontakte'),
-                          'data-message' => "#{I18n.t("invitation.#{invitation.opposite_kind}.#{invitation.inviteable.class.name.underscore}")} \"#{invitation.inviteable}\"",
+                    <%= simple_form_for [invitation.inviteable, invitation.inviteable.invitations.new], :remote => true do |f| %>
+                      <%= hidden_field_tag :render, 'status' %>
+                      <%= f.input :kind, :as => :hidden, :input_html => { :value => invitation.opposite_kind } %>
+                      <%= f.input :invited_id, :as => :hidden, :input_html => { :value => visit.user.account.id } %>
+                      <%= f.submit t("invite.#{invitation.opposite_kind}"),
+                      :class => 'submit_dialog',
+                        :onClick => 'share_on_click(this);',
+                        'data-owner_id' => (visit.user.account.users.first.try(:vk_uid) if current_user.provider == 'vkontakte'),
+                        'data-message' => "#{I18n.t("invitation.#{invitation.opposite_kind}.#{invitation.inviteable.class.name.underscore}")} \"#{invitation.inviteable}\"",
                         'data-attachments' => data_attachments(invitation.inviteable) %>
-                      <% end %>
-                    <% else %>
-                      <%= render :partial => 'invitations/status', :locals => { :kind => invitation.opposite_kind } %>
                     <% end %>
                   <% else %>
                     <%= simple_form_for [invitation.inviteable, invitation.inviteable.invitations.new], :remote => true do |f| %>
