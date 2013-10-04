@@ -32,7 +32,13 @@
           :remote => true,
           :class => 'invitation_link',
           :data => { :title => 'Хочу пригласить', :target => '.inviter' } %>
-        <h3>Приглашаю</h3>
+        <h3>
+          <%= link_to 'Хочу пригласить',
+              new_invitation_path('invitation[kind]' => :inviter),
+              :remote => true,
+              :class => 'invitation_link',
+              :data => { :title => 'Хочу пригласить', :target => '.inviter' } %>
+        </h3>
       </div>
 
       <div class="invitations list">
@@ -53,7 +59,13 @@
           :remote => true,
           :class => 'invitation_link',
           :data => { :title => 'Жду приглашения', :target => '.invited' } %>
-        <h3>Жду приглашения</h3>
+        <h3>
+          <%= link_to 'Жду приглашения',
+              new_invitation_path('invitation[kind]' => :invited),
+              :remote => true,
+              :class => 'invitation_link',
+              :data => { :title => 'Жду приглашения', :target => '.invited' } %>
+        </h3>
       </div>
 
       <div class="invitations list">
