@@ -67,7 +67,7 @@ ru:
 
   invite_message:
     inbox:
-      commoni_inbox: &common_inbox
+      common_inbox: &common_inbox
         invited: ждет вашего приглашения
         inviter: приглашает вас
       undefined:
