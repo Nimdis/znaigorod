@@ -61,6 +61,9 @@ handle_new_invitaion_link = (trgt, response) ->
   handle_accounts_search_close()
   handle_close_click()
 
+  $('.accounts_search_open').on 'click', ->
+    $('#invitation_gender').prop('disabled', true)
+
   $('.accounts_search_open').click() if $('.auto_accounts_search').length
 
   $('#invitation_category, #invitation_gender').change ->
@@ -188,6 +191,7 @@ handle_accounts_results_search = ->
 # КОГО: скрыть
 handle_accounts_search_close = ->
   $('.accounts_search_close').on 'click', ->
+    $('#invitation_gender').prop('disabled', false)
     $('.accounts_search_close').hide()
     $('.accounts_search_open').show()
     $('.formr .info').show()
@@ -212,7 +216,7 @@ handle_reply_invitation = (target, response)->
   target.replaceWith response
 
 @init_invitations = ->
-  init_delete_invitation $('.delete_invitation')
+  #init_delete_invitation $('.delete_invitation')
 
   $('.invitations_wrapper, .content .left, .accounts_list').on 'ajax:success', (evt, response) ->
     return false if $(response).hasClass('cloud_wrapper')
