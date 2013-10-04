@@ -51,8 +51,8 @@ ru:
       afisha: Пригласи меня на
       organization: Пригласи меня в
     whom:
-      inviter: Кого
-      invited: От кого
+      inviter: 'Кого:'
+      invited: 'От кого:'
 
   visit:
     afisha: Участники
