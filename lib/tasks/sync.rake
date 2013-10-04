@@ -85,6 +85,7 @@ class MovieSyncer
       title.gsub!('Мальчишник: часть 3', 'Мальчишник: часть III')
       title.gsub!('Гагарин.Первый в космосе', 'Гагарин. Первый в космосе')
       title.gsub!(/Университет монстро$/, 'Университет монстров')
+      title.gsub!('Околофутбола', 'Около футбола')
       similar_movies = Afisha.search{fulltext(title){fields(:title)}}.results
       if similar_movies.one?
         puts "Найден похожий фильм '#{title}' -> '#{similar_movies.first.title}'"
