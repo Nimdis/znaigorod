@@ -193,9 +193,14 @@
   ymaps.ready ->
     $map = $('.results_with_map .yandex_side_map')
 
+    addresses = $('.results_with_map .result_list .show_map_link_side_map')
+
+    long = addresses.first().data('longitude')
+    lat = addresses.first().data('latitude')
+
     map = new ymaps.Map $map[0],
-      center: [56.482697, 84.94967] 
-      zoom: 12
+      center: [lat, long] 
+      zoom: 17
       behaviors: ['drag', 'scrollZoom']
     ,
       maxZoom: 23
@@ -205,7 +210,7 @@
       top: 5
       left: 5
 
-    $('.results_with_map .result_list .show_map_link_side_map').each (index, item) ->
+    addresses.each (index, item) ->
 
       add_point_on_side_map(item, map)
 

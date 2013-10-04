@@ -1,14 +1,15 @@
+<h4>Найдено в адресах</h4>
 <ul class="addresses_items_list">
   <% @search_presenter.ya_addresses_search.collection[0..([@search_presenter.ya_addresses_search.total, 3].min-1)].each do |address| %>
     <li>
       <span class="yandex_addresses">
         <%  add = @search_presenter.ya_addresses_search.address + ', ' + address['name']
         coords = address['geometry']['coordinates'] %>
-        <a href="#" class="goto_map_link" data-hint="<%= add %>" data-latitude="<%= coords[1] %>" data-longitude="<%= coords[0] %>" title="Показать на карте" ><%= add %></a>
+        <%= link_to add, search_path(:q => add, :search_kind => :address), :data => { :hint => add }, :class => 'goto_map_link' %>
       </span>
     </li>
   <% end %>
   <li class='goto_map'>
-    <%= link_to 'Перейти на карту', '#', :class => 'goto_map_button' %>
+    <%= link_to 'Перейти на карту', search_path(@search_presenter.kinds_links.last[:parameters]), :class => 'goto_map_button' %>
   </li>
 </ul>
