@@ -101,13 +101,13 @@ class AccountsPresenter
   end
 
   def link_params(acts_as = nil)
-    { :kind => kind_filter.kind, :gender => gender_filter.gender }.tap { |hash|
+    { :kind => kind_filter.kind, :gender => gender_filter.gender }.tap do |hash|
       if acts_as_filter.used?
         hash[:acts_as] = acts_as if acts_as_filter.acts_as != acts_as
       else
         hash[:acts_as] = acts_as
       end
-    }
+    end
   end
 
   def collection
