@@ -25,18 +25,6 @@
   <div class="right">
     <%= render 'messages' if @notification_messages.any? || @dialogs.any? || @invite_messages.any? %>
 
-    <%= render 'accounts/events' %>
-
-
-    <% if @visits.any? %>
-      <div class="visits header">
-        <%= t "account.want_to_visit.#{@account.gender}" %>
-      </div>
-      <div class="visits list">
-        <%= render 'accounts/visits' %>
-      </div>
-    <% end %>
-
     <div class="invitations_wrapper">
       <div class="invitations header">
         <%= link_to 'Добавить',
@@ -80,6 +68,18 @@
         </ul>
       </div>
     </div>
+
+    <%= render 'accounts/events' %>
+
+
+    <% if @visits.any? %>
+      <div class="visits header">
+        <%= t "account.want_to_visit.#{@account.gender}" %>
+      </div>
+      <div class="visits list">
+        <%= render 'accounts/visits' %>
+      </div>
+    <% end %>
 
     <% if @votes.any? %>
       <div class="votes header">
