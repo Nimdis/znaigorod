@@ -38,7 +38,9 @@ private
   end
 
   def create_visit
-    messageable.inviteable.visits.find_or_create_by_user_id invited.id
+    if messageable.inviteable
+      messageable.inviteable.visits.find_or_create_by_user_id invited.id
+    end
   end
 end
 
