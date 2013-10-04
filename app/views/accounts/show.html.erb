@@ -33,14 +33,6 @@
   </div>
 
   <div class="right">
-    <div class="visits header">
-      <%= t "account.wants_to_visit.#{@account.gender}" %>
-    </div>
-    <% if @visits.any? %>
-      <div class="visits list">
-        <%= render 'accounts/visits' %>
-      </div>
-    <% end %>
 
     <div class="invitations_wrapper">
       <div class="invitations header">
@@ -71,6 +63,15 @@
         </ul>
       </div>
     </div>
+
+    <div class="visits header">
+      <%= t "account.wants_to_visit.#{@account.gender}" %>
+    </div>
+    <% if @visits.any? %>
+      <div class="visits list">
+        <%= render 'accounts/visits' %>
+      </div>
+    <% end %>
 
     <% if @votes.any? %>
       <div class="votes header">
