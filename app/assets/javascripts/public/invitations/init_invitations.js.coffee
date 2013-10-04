@@ -143,6 +143,8 @@ handle_inviteables_search_close = ->
 # КУДА: выбрать конкретное мероприятие или заведение
 handle_inviteables_search_click = ->
   $('.inviteables_search_results_wrapper').on 'click', (evt) ->
+    $(this).infinitescroll('destroy')
+
     li = $(evt.target).closest('li')
     url = li.data('url')
 
