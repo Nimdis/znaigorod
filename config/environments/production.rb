@@ -45,6 +45,8 @@ Znaigorod::Application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
 
+  config.action_controller.page_cache_directory = Rails.root.join('public/cache/')
+
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( manage/info_plugin/info_plugin.js )
 

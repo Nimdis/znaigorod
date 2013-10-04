@@ -6,6 +6,8 @@ class WebcamsController < ApplicationController
 
   has_scope :published, :type => :boolean, :default => true
 
+  caches_page :index
+
   def show
     show! {
       if request.referrer.present? && request.referrer.match(root_url) &&
