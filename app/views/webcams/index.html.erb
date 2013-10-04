@@ -1,11 +1,11 @@
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.33/?load=package.full&lang=ru-RU') %>
 
-<% content_for :page_title, 'Вебкамеры Томска. ЗнайГород' %>
-<% content_for :meta_keywords, "вебкамеры, томск, карта, интерактив" %>
+<% content_for :page_title, 'Веб-камеры Томска. ЗнайГород' %>
+<% content_for :meta_keywords, "веб-камеры, томск, карта, интерактив" %>
 <% content_for :meta_description, "Веб-камеры Томска, расположенные на интерактивной карте города" %>
 <% content_for :extra_meta do %>
   <meta property='og:site_name' content='Афиша Томска, кафе, рестораны, бары, сауны, театры, клубы, знакомства - ЗнайГород' />
-  <meta property='og:title' content='Вебкамеры Томска. ЗнайГород' />
+  <meta property='og:title' content='Веб-камеры Томска. ЗнайГород' />
   <meta property='og:description' content='Веб-камеры Томска на интерактивной карте города' />
   <meta property='og:url' content='<%= webcams_url %>' />
   <meta property='og:image' content='<%= Webcam.snapshot_href_for_index %>' />
@@ -14,14 +14,14 @@
   <meta name='twitter:card' content='summary'>
   <meta name='twitter:site' content='@znaigorod'/>
   <meta name='twitter:url' content='<%= webcams_url %>'/>
-  <meta name='twitter:title' content='Вебкамеры Томска. ЗнайГород'/>
+  <meta name='twitter:title' content='Веб-камеры Томска. ЗнайГород'/>
   <meta name='twitter:description' content='Веб-камеры Томска на интерактивной карте города'/>
   <meta name='twitter:image' content='<%= Webcam.snapshot_href_for_index %>'/>
 <% end %>
 
 <div class='webcams'>
 
-  <h1>Вебкамеры Томска</h1>
+  <h1>Веб-камеры Томска</h1>
 
   <div class='webcam_map' data-latitude='56.493246' data-longitude='84.982112'></div>
 
