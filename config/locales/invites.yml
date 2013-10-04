@@ -38,6 +38,9 @@ ru:
       organization: Жду приглашения в
 
   invitation:
+    kind:
+      inviter: Приглашаю
+      invited: Пригласи меня
     without_inviteable:
       inviter: Приглашаю тебя
       invited: Пригласи меня

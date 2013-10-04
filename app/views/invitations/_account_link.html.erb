@@ -1,7 +1,7 @@
 <li>
-  <%= link_to t("invite.#{kind}"),
+  <%= link_to t("invitation.kind.#{kind}"),
     polymorphic_path([:new, :invitation], 'invitation[kind]' => kind, 'invitation[invited_id]' => invited_id),
     :class => "invitation_link",
-    'data-title' => t("invite.#{kind}"),
+    'data-title' => t("invitation.kind.#{kind}"),
     :remote => true %>
 </li>
