@@ -9,7 +9,13 @@
     <%= link_to message.producer, message.producer %>
     <span><%= t "notification_message.#{message.kind}.#{message.producer.gender}" %></span>
 
-    <%= link_to(message.messageable.messageable.inviteable.title, message.messageable.messageable.inviteable.is_a?(Afisha) ? polymorphic_path([message.messageable.messageable.inviteable, :show]) : message.messageable.messageable.inviteable) %>
+    <% if message.messageable.messageable.inviteable %>
+    <span><%= t "notification_message.action" %></span>
+      <%= link_to(message.messageable.messageable.inviteable.title,
+                  message.messageable.messageable.inviteable.is_a?(Afisha) ? polymorphic_path([message.messageable.messageable.inviteable, :show]) : message.messageable.messageable.inviteable) %>
+    <% else %>
+      <%= link_to message.messageable.messageable.category %>
+    <% end %>
 
     <div class="date">
       <%= time_ago_in_words(message.created_at) %> назад
