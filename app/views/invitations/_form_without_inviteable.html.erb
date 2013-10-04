@@ -41,21 +41,6 @@
       <div class="inviteables_search_wrapper"></div>
     </div>
 
-    <div class="formr">
-      <% unless @invitation.invited %>
-        <div class="info">
-          Нажав "Уточнить", вы можете выбрать конкретное мероприятие или заведение.
-        </div>
-      <% end %>
-
-      <div class="accounts_search_wrapper">
-        <% if @invitation.invited %>
-          <div class="accounts_search_results_wrapper auto_accounts_search">
-          </div>
-        <% end %>
-      </div>
-    </div>
-
     <div class="form_footer">
       <div class="actions">
         <% if @invitation.invited_id.blank? %>
@@ -75,4 +60,19 @@
     </div>
   </div>
 <% end %>
+
+<div class="formr">
+  <% unless @invitation.invited %>
+    <div class="info">
+      Нажав "Уточнить", вы можете выбрать конкретное мероприятие или заведение.
+    </div>
+  <% end %>
+
+  <div class="accounts_search_wrapper">
+    <% if @invitation.invited %>
+      <div class="accounts_search_results_wrapper auto_accounts_search">
+      </div>
+    <% end %>
+  </div>
+</div>
 </div>
