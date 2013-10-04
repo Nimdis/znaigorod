@@ -1,5 +1,6 @@
 @set_data_attributes_for_vk = (target) ->
   submit = $(target)
+  $('#invitation_gender').prop('disabled', false)
 
   if $('.selected_result').length
     li = $('li:first', '.selected_result')
