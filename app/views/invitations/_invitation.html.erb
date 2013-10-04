@@ -35,6 +35,7 @@
         <%= f.submit t("invite.#{invitation.opposite_kind}").mb_chars.capitalize,
           :class => 'gray_button',
           :onClick => 'share_on_click(this);',
+          'data-owner_id' => (invitation.account.users.first.try(:vk_uid) if current_user.provider == 'vkontakte'),
           'data-action' => t("invitation.without_inviteable.#{invitation.opposite_kind}"),
           'data-category' => (invitation.category unless invitation.inviteable),
           'data-preposition' => (Preposition.new(invitation.inviteable).value if invitation.inviteable),
