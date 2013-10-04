@@ -1,4 +1,4 @@
-@init_addresses_pagination = (map) ->
+init_addresses_pagination = (map) ->
   busy = false
   list = $('.result_list')
   pagination = $('.pagination')
@@ -32,7 +32,7 @@
         true
     true
 
-@add_point_on_side_map = (item, map) ->
+add_point_on_side_map = (item, map) ->
 
   init_gallery = () ->
     $('.balloon_photos a').colorbox
@@ -217,6 +217,9 @@
       true
 
     init_addresses_pagination(map)
+
+    if addresses.length == 1
+      addresses.click()
 
     true
 
