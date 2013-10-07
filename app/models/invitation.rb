@@ -19,6 +19,7 @@ class Invitation < ActiveRecord::Base
 
   delegate :index, :to => :account, :prefix => true
   after_save :account_index
+  after_destroy :account_index
 
   enumerize :gender, :in => [:all, :male, :female], :default => :all, :predicates => true
   enumerize :kind, :in => [:inviter, :invited], :scope => true
