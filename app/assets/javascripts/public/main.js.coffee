@@ -61,13 +61,13 @@ $ ->
   init_select_tags() if $('.select_tags').length
   init_afisha_tabs() if $('#events_filter').length
   init_addresses_side_map() if $('.results_with_map').length
+  init_votes() if $('.votes_wrapper').length
 
   true
 
 $(window).load ->
   init_comments() if $('.comments').length
   init_auth() if ('.auth_links').length
-  init_votes() if $('.votes_wrapper').length
   init_votes() if $('.user_actions').length
 
   init_3dtourme_stat() if $('a.3dtourme').length
