@@ -6,7 +6,7 @@
   <div class="inner_wrapper">
     <div class="top_wrapper">
       <p>Ты можешь найти компанию для любого мероприятия и времяпрепровождения.</p>
-      <p>Посмотри, сколько людей <%= link_to 'приглашают', '#' %> сходить куда-нибудь, а сколько <%= link_to "ждут приглашения", '#' %>!</p>
+      <p>Посмотри, сколько людей <%= link_to 'приглашают', accounts_path(:acts_as => :inviter) %> сходить куда-нибудь, а сколько <%= link_to "ждут приглашения", accounts_path(:acts_as => :invited) %>!</p>
     </div>
     <div class="middle_wrapper">
       <div class="first">Кто-то приглянулся? Отправь ему личное приглашение или попроси, чтобы тебя пригласили.</div>
@@ -15,8 +15,17 @@
   </div>
   <div class="bottom_wrapper">
     Воспользуйся функцией "Ищу компанию"!
-    <%= link_to "Пригласить", '#', :class => 'grey_button' %>
-    <%= link_to "Жду приглашения", '#', :class => 'grey_button' %>
+    <%= link_to 'Пригласить',
+        new_invitation_path('invitation[kind]' => :inviter),
+        :remote => true,
+        :class => 'invitation_link grey_button',
+        :data => { :title => 'Пригласить', :target => '.invited' } %>
+
+    <%= link_to 'Жду приглашения',
+        new_invitation_path('invitation[kind]' => :invited),
+        :remote => true,
+        :class => 'invitation_link grey_button',
+        :data => { :title => 'Жду приглашения', :target => '.invited' } %>
   </div>
 </div>
 

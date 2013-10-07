@@ -5,15 +5,24 @@
   <div class="first">Хочешь в кино или на вечеринку, но не с кем пойти?</div>
   <div class="second">Хочешь собрать друзей на отличную тусовку?</div>
   <div class="third">Хочешь найти девушку? Не прочь познакомиться с парнем?</div>
-  <div class="fourth">Посмотри, сколько людей <%= link_to 'приглашают', '#' %> сходить куда-нибудь, а сколько <%= link_to 'ждут приглашения', '#' %>!</div>
-  <div class="fifth"><div>Воспользуйся и ты новой функцией ЗнайГород &mdash; &laquo;Ищу компанию&raquo;!</div><%= link_to 'КАК?', '#' %></div>
+  <div class="fourth">Посмотри, сколько людей <%= link_to 'приглашают', accounts_path(:acts_as => :inviter) %> сходить куда-нибудь, а сколько <%= link_to 'ждут приглашения', accounts_path(:acts_as => :invited) %>!</div>
+  <div class="fifth"><div>Воспользуйся и ты новой функцией ЗнайГород &mdash; &laquo;Ищу компанию&raquo;!</div><%= link_to 'КАК?', accounts_path(:anchor => 'add_info') %></div>
   <div class="sixth">Хочешь найти компанию, чтобы сходить на любое мероприятие или в заведение, жми кнопку "Пригласить" или "Жду приглашения".</div>
   <div class="seventh">Кто-то приглянулся? Отправь ему личное приглашение или попроси, чтобы тебя пригласили.</div>
   <div class="eighth">Просто ищешь компанию? Укажи, чья компания тебя интересует &mdash; мужская или женская и куда хотел бы сходить. Все это отразится в твоем профиле.</div>
   <div class="nineth">
     Удачных свиданий и веселых тусовок!
-    <%= link_to "Пригласить", '#' %>
-    <%= link_to "Жду приглашения", '#' %>
+    <%= link_to 'Пригласить',
+        new_invitation_path('invitation[kind]' => :inviter),
+        :remote => true,
+        :class => 'invitation_link',
+        :data => { :title => 'Пригласить', :target => '.invited' } %>
+
+    <%= link_to 'Жду приглашения',
+        new_invitation_path('invitation[kind]' => :invited),
+        :remote => true,
+        :class => 'invitation_link',
+        :data => { :title => 'Жду приглашения', :target => '.invited' } %>
   </div>
   <div class="slide_up"><span class='slide_up_icon'></span>Свернуть</div>
 </div>
