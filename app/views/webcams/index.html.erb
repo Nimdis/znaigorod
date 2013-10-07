@@ -38,7 +38,10 @@
 
   <div class='webcams_list'>
     <% @webcams.each do |resource| %>
-      <p data-latitude='<%= resource.latitude %>' data-longitude='<%= resource.longitude %>' data-width='<%= resource.width %>' data-height='<%= resource.height %>'>
+      <p data-latitude='<%= resource.latitude %>' data-longitude='<%= resource.longitude %>'
+         data-width='<%= resource.width %>' data-height='<%= resource.height %>'
+         data-title='<%= resource.title %>' data-address='<%= resource.address %>'
+         data-image='<%= resized_image_url(resource.snapshot_href, 200, 150) %>'>
         <%= link_to "#{resource.title}. #{resource.address}", webcam_url(resource), :id => resource.slug %>
       </p>
     <% end %>

@@ -33,7 +33,7 @@
     <p class='to_webcams_list'><%= link_to 'Карта веб-камер Томска', webcams_path %></p>
   <% end %>
 
-  <h1><%= resource.title %><br /><%= resource.address %></h1>
+  <h1><%= resource.title %></h1>
 
   <div class='clearfix'>
     <div class='left'>
@@ -61,9 +61,10 @@
       <% end %>
     </div>
     <div class='center'>
-      <div class='webcam_show' style='width: <%= resource.width %>px'>
+      <div class='webcam_show' style='width:<%= resource.width %>px;'>
         <%= render :partial => resource.kind, :object => resource %>
       </div>
+      <h2><%= resource.address %></h2>
       <div class='share_and_likes' style='width: <%= resource.width + 2 %>px'>
         <%= render :partial => 'commons/share_this', :locals => { :url => webcam_url(resource) } %>
       </div>

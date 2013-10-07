@@ -32,19 +32,40 @@
           type: 'Point'
           coordinates: [$(item).attr('data-latitude'), $(item).attr('data-longitude')]
         properties:
-          id: id
+          balloonContentHeader: "" +
+            "<center style='margin-bottom:5px;font-size:12px;'>" +
+            "<a href='#{link.attr('href')}' class='balloon_link' data-id='balloon_link_id_#{id}'>" +
+            $(item).attr('data-title') +
+            "</a>" +
+            "</center>"
+          balloonContentBody: "" +
+            "<center>" +
+            "<a href='#{link.attr('href')}' class='balloon_link' data-id='balloon_link_id_#{id}'>" +
+            "<img width='200' height='150' src='#{$(item).attr('data-image')}' />" +
+            "</a>" +
+            "<br />" +
+            "<a href='#{link.attr('href')}' class='balloon_link' data-id='balloon_link_id_#{id}'>" +
+            $(item).attr('data-address') +
+            "</a>" +
+            "</center>"
           hintContent: title
+          id: id
       ,
         iconImageHref: '/assets/public/icon_map_webcam.png'
         iconImageOffset: [-15, -40]
         iconImageSize: [37, 42]
 
-      point.events.add 'click', (event) ->
-        link = $("##{event.get('target').properties.get('id')}")
-        if navigator.appName == 'Microsoft Internet Explorer' && navigator.platform != 'MacPPC' && navigator.platform != 'Mac68k'
-          $.cookie('_show_webcam_in_ie', 'true')
-        link.click()
+      point.events.add 'mouseenter', (event) ->
+        point.balloon.open()
+        true
 
+      point.balloon.events.add 'open', (event) ->
+        $('a.balloon_link').unbind('click').click ->
+          link = $("##{$(this).attr('data-id').replace('balloon_link_id_', '')}")
+          if navigator.appName == 'Microsoft Internet Explorer' && navigator.platform != 'MacPPC' && navigator.platform != 'Mac68k'
+            $.cookie('_show_webcam_in_ie', 'true')
+          link.click()
+          false
         true
 
       map.geoObjects.add point
