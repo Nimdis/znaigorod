@@ -1,7 +1,8 @@
 class My::DialogsController < My::ApplicationController
   skip_authorization_check
+
   def index
-    @dialogs = current_user.account.dialogs.page(params[:page]).per(3)
+    @dialogs = current_user.account.dialogs.page(params[:page]).per(5)
     render partial: 'my/dialogs/messages'
   end
 

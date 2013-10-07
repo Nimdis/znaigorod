@@ -9,7 +9,7 @@
     <li><%= link_to t('notifications', count: current_user.account.notification_messages.unread.count), '#notifications', class: 'notifications' %></li>
   </ul>
 
-  <div id="dialogs">
+  <div id="dialogs" class="list">
     <%= render partial: 'my/dialogs/messages', locals: { collection: @dialogs } %>
   </div>
 

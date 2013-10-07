@@ -3,3 +3,10 @@
     <%= render partial: 'my/dialogs/message', locals: { with_account: with_account } %>
   <% end %>
 </ul>
+
+<% unless collection.first_page? && collection.last_page? %>
+  <div class="pagination">
+    <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if collection.first_page? }" %>
+    <%= link_to '&darr;'.html_safe, my_dialogs_path(collection, :page => collection.current_page + 1), :class => "next_page #{ 'disabled' if collection.last_page? }" %>
+  </div>
+<% end %>

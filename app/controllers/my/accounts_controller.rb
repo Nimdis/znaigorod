@@ -22,7 +22,7 @@ class My::AccountsController < My::ApplicationController
     @notification_messages = @account.notification_messages.page(1).per(5)
     @votes = @account.votes.rendereable.page(1).per(3)
     @visits = @account.visits.rendereable.page(1).per(3)
-    @dialogs = @account.dialogs
+    @dialogs = @account.dialogs.page(1).per(5)
     @invite_messages = Kaminari.paginate_array([@account.produced_invite_messages, @account.invite_messages].flatten.sort_by(&:created_at).reverse!).page(1).per(5)
   end
 
