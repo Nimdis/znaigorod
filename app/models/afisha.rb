@@ -10,6 +10,7 @@ class Afisha < ActiveRecord::Base
   include VkUpload
   include AutoHtml
   include HasVirtualTour
+  include MakePageVisit
 
   attr_accessible :description, :poster_url, :image_url, :showings_attributes,
                   :tag, :title, :vfs_path, :affiche_schedule_attributes,
@@ -266,13 +267,6 @@ class Afisha < ActiveRecord::Base
 
   def get_vk_event_id
     self.vk_event_url.split('/').last.gsub(/event/, '')
-  end
-
-  def create_page_visit(session, user_agent, user)
-    page_visit = self.page_visits.new
-    page_visit.user_agent = user_agent.to_s.encode('UTF-8', :undef => :replace, :invalid => :replace, :replace => '')
-    page_visit.user = user
-    page_visit.save
   end
 
   def update_rating

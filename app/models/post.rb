@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class Post < ActiveRecord::Base
+  include MakePageVisit
   extend FriendlyId
 
   attr_accessible :content, :poster_url, :status, :title, :vfs_path, :rating, :tag, :kind
@@ -65,13 +66,6 @@ class Post < ActiveRecord::Base
 
   def likes_count
     self.votes.liked.count
-  end
-
-  def create_page_visit(session, user_agent, user)
-    page_visit = self.page_visits.new
-    page_visit.user_agent = user_agent.to_s.encode('UTF-8', :undef => :replace, :invalid => :replace, :replace => '')
-    page_visit.user = user
-    page_visit.save
   end
 
   def update_rating
