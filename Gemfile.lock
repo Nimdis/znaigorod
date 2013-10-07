@@ -501,11 +501,7 @@ DEPENDENCIES
   hashie (~> 2.0.5)
   hirb
   htmldiff
-<<<<<<< HEAD
-  inherited_resources
-=======
   inherited_resources (= 1.4.1)
->>>>>>> update inherited_resources like as master branch
   jcrop-rails
   jquery-fileupload-rails
   jquery-rails (= 2.0.3)

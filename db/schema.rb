@@ -887,8 +887,8 @@ ActiveRecord::Schema.define(:version => 20131004094925) do
     t.integer  "number"
     t.float    "original_price"
     t.float    "price"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.text     "description"
     t.datetime "stale_at"
     t.float    "organization_price"

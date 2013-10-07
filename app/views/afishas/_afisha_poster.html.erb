@@ -20,7 +20,7 @@
     <%= link_to afisha_show_path(afisha), class: :details do %>
       <span class='first_line'>
         <span class='show_tipsy to_go' title='Участники'><%= afisha.visits.count %></span>
-        <span class='show_tipsy wait_invite' title='Приглашения'><%= afisha.visits.invited.count %></span>
+        <span class='show_tipsy wait_invite' title='Приглашения'><%= afisha.invitations.inviter.without_invited.count %></span>
         <span class='show_tipsy comments' title='Комментарии'><%= afisha.comments.count %></span>
       </span>
       <span class='second_line'>
