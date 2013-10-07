@@ -61,6 +61,8 @@ class Account < ActiveRecord::Base
 
     string(:inviter_categories, :multiple => true) { invitations.inviter.with_categories.select(&:actual?).flat_map(&:categories).uniq }
     string(:invited_categories, :multiple => true) { invitations.invited.with_categories.select(&:actual?).flat_map(&:categories).uniq }
+
+    text :title, :as => :term_text
   end
 
   def sended_invite_message(messageable, account_id, invite)

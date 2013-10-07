@@ -230,6 +230,8 @@ class Afisha < ActiveRecord::Base
 
     time :last_showing_time,  :trie => true
     date :created_at
+
+    text :title, :as => :term_text
   end
 
   def actual?

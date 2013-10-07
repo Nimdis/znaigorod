@@ -180,7 +180,10 @@ class Organization < ActiveRecord::Base
     text :description_ru,       :boost => 0.1,                                        :stored => true   do text_description end
 
     text(:services_info) { services.map { |s| "#{s.title} #{s.description} #{s.category} #{s.feature}" }.join(' ') }
+
     text :term
+
+    text :title, :as => :term_text
   end
 
   def likes_count
