@@ -17,7 +17,6 @@
 
 <%= content_for :content do %>
   <div class='unique_header_wrapper'>
-    <%= render :partial => 'commons/public_promo' %>
     <%= render :partial => 'commons/public_header' %>
   </div>
   <%= render :partial => 'commons/advertisement' if DateTime.now <= DateTime.new(2013, 10, 10, 22, 00, 00, '+7') %>
