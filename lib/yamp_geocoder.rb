@@ -36,60 +36,62 @@ class YampGeocoder
   end
 
   def self.get_houses(query)
-    cache = call_cache query
-    if cache.nil?
-      address = ["Россия", "Томск", query].join(', ')
-      coords = [84.94817, 56.490594].join(', ')
-      parameters = {
-        text: address,
-        sll: coords,
-        vrb: '1',
-        perm: '1',
-        source: 'houses',
-        output: 'json'
-      }
-      address = ''
-      result = {}
-        c = Curl::Easy.new("http://maps.yandex.ru/?#{parameters.to_query}") do |curl|
-          curl.on_success do |easy|
-            result = JSON.parse(easy.body_str)
-            result = result['vpage']['data']['locations']['GeoObjectCollection']['features'][0]['properties']['GeocoderMetaData']
-            address = result['text']
-            address = address.split(',')
-            address.delete_at(0)
-            address.delete_at(0)
-            address = address.join(', ')
-            if result['InternalToponymInfo']['houses'] != 0
-              result = {
-                address: address,
-                houses: result['InternalToponymInfo']['Houses']
-              }
-            else
-              geometry = result['InternalToponymInfo']['Point']
-              name = result['AddressDetails']['Country']['AddressLine'].split(',').last()
-              address =  result['AddressDetails']['Country']['AddressLine'].split(',')
+    result = {}
+    unless query.empty?
+      cache = call_cache query
+      if cache.nil?
+        address = ["Россия", "Томск", query].join(', ')
+        coords = [84.94817, 56.490594].join(', ')
+        parameters = {
+          text: address,
+          sll: coords,
+          vrb: '1',
+          perm: '1',
+          source: 'houses',
+          output: 'json'
+        }
+        address = ''
+          c = Curl::Easy.new("http://maps.yandex.ru/?#{parameters.to_query}") do |curl|
+            curl.on_success do |easy|
+              result = JSON.parse(easy.body_str)
+              result = result['vpage']['data']['locations']['GeoObjectCollection']['features'][0]['properties']['GeocoderMetaData']
+              address = result['text']
+              address = address.split(',')
               address.delete_at(0)
-              address.delete_at(address.rindex(address.last))
-              address = address.join(", ")
-              result = {
-                address: address,
-                houses:[{
-                  "name" => name,
-                  "geometry" =>  geometry
-                }]
-              }
-            end
+              address.delete_at(0)
+              address = address.join(', ')
+              if result['InternalToponymInfo']['houses'] != 0
+                result = {
+                  address: address,
+                  houses: result['InternalToponymInfo']['Houses']
+                }
+              else
+                geometry = result['InternalToponymInfo']['Point']
+                name = result['AddressDetails']['Country']['AddressLine'].split(',').last()
+                address =  result['AddressDetails']['Country']['AddressLine'].split(',')
+                address.delete_at(0)
+                address.delete_at(address.rindex(address.last))
+                address = address.join(", ")
+                result = {
+                  address: address,
+                  houses:[{
+                    "name" => name,
+                    "geometry" =>  geometry
+                  }]
+                }
+              end
 
+            end
           end
-        end
-        begin
-          c.perform if query.present?
-        rescue
-          return { response_code: 500 }
-        end
-      write_cache query, result
-    else
-      result = cache
+          begin
+            c.perform if query.present?
+          rescue
+            return { response_code: 500 }
+          end
+        write_cache query, result
+      else
+        result = cache
+      end
     end
     result
   end
@@ -103,35 +105,37 @@ class YampGeocoder
   end
 
   def self.get_house_photo(coords)
-    key = coords.gsub(',','').gsub('.','')
-    cache = call_cache key
-    if cache.nil?
-      parameters = {
-        lang: 'ru-RU',
-        ll: coords,
-        l: 'hph',
-        results: '10',
-        origin: 'maps-nav'
-      }
-      photos= []
-      result = {}
-      c = Curl::Easy.new("http://maps.yandex.ru/services/photos/1.x/photos.json?#{parameters.to_query}") do |curl|
-        curl.on_success do |easy|
-          result = JSON.parse(easy.body_str)
-          result['entries'].each do |photo|
-            photos.push photo['img']
+    result = {}
+    unless coords.empty?
+      key = coords.gsub(',','').gsub('.','')
+      cache = call_cache key
+      if cache.nil?
+        parameters = {
+          lang: 'ru-RU',
+          ll: coords,
+          l: 'hph',
+          results: '10',
+          origin: 'maps-nav'
+        }
+        photos= []
+        c = Curl::Easy.new("http://maps.yandex.ru/services/photos/1.x/photos.json?#{parameters.to_query}") do |curl|
+          curl.on_success do |easy|
+            result = JSON.parse(easy.body_str)
+            result['entries'].each do |photo|
+              photos.push photo['img']
+            end
+            result = photos
           end
-          result = photos
         end
+        begin
+          c.perform if coords.present?
+        rescue
+          return { response_code: 500 }
+        end
+        write_cache key, result
+      else
+        result = cache
       end
-      begin
-        c.perform if coords.present?
-      rescue
-        return { response_code: 500 }
-      end
-      write_cache key, result
-    else
-      result = cache
     end
     result
   end
