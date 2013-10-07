@@ -14,15 +14,36 @@ Znaigorod::Application.routes.draw do
     put 'destroy_visits' => 'visits#destroy_visits', :as => :destroy_visits
   end
 
+  get "/afisha",
+  :constraints => lambda { |req| req.query_parameters.has_key?('has_tickets') },
+  :to =>  redirect { |params, req|
+    other_parameters = req.query_parameters.to_h
+    other_parameters.delete('has_tickets')
+    parameter_string = other_parameters.to_param
+    parameter_string.insert(0, "?") unless parameter_string.empty?
+    "/bilety" + parameter_string
+  }
+  get '/tickets', :to => redirect("/bilety")
+
   get '/afisha' => 'afishas#index', :as => :afisha_index, :controller => 'afishas'
   get '/afisha/:id' => 'afishas#show', :as => :afisha_show, :controller => 'afishas'
 
-  get '/tickets' => redirect('/afisha?has_tickets=true')
-
   get '/affiches', :to => redirect('/afisha')
 
+  get "/bilety" => 'afishas#index', :as => :tickets, :defaults => {:has_tickets => true}
+
   Afisha.kind.values.map(&:pluralize).each do |kind|
+    get "/#{kind}",
+      :constraints => lambda { |req| req.query_parameters.has_key?('has_tickets') },
+      :to =>  redirect { |params, req|
+        other_parameters = req.query_parameters.to_h
+        other_parameters.delete('has_tickets')
+        parameter_string = other_parameters.to_param
+        parameter_string.insert(0, "?") unless parameter_string.empty?
+        "/#{kind.pluralize}/bilety" + parameter_string
+      }
     get kind => 'afishas#index', :as => "#{kind}_index", :defaults => { :categories => [kind.singularize], :hide_categories => true }
+    get "/#{kind}/bilety" => 'afishas#index', :as => "#{kind}_with_tickets_index", :defaults => { :categories => [kind.singularize], :hide_categories => true, :has_tickets => true }
     match "/#{kind}/all" => redirect("/#{kind}")
   end
 
