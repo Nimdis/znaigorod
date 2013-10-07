@@ -9,6 +9,9 @@ class Values
 
   def initialize
     @values = Hashie::Mash.new(YAML.load_file(Rails.root.join('config', 'values.yml')))
+
+    @values[:invitation] = {}
+    @values[:invitation][:categories] = Hashie::Mash.new(YAML.load_file(Rails.root.join('config', 'inviteables.yml'))).keys
   end
 
   delegate *Organization.available_suborganization_kinds, to: :values
