@@ -21,6 +21,8 @@ HasSearcher.create_searcher :accounts do
     search.with(:invited_categories, search_object.invited_categories) if search_object.invited_categories.try(:any?)
   end
 
+  property :with_avatar
+
   scope do
     order_by(:rating, :desc)
   end

@@ -45,6 +45,11 @@
       </ul>
     </div>
 
+    <div class="with_avatar">
+      <%= check_box_tag :with_avatar, true, params[:with_avatar].present? %>
+      <%= label_tag :with_avatar, 'Только с фото' %>
+    </div>
+
     <div class="submit_action">
       <div class="submit_wrapper">
         <%= submit_tag 'Применить фильтр', :class => 'submit' %>

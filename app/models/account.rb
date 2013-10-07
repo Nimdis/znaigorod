@@ -43,6 +43,8 @@ class Account < ActiveRecord::Base
   enumerize :gender, in: [:undefined, :male, :female], default: :undefined, predicates: true
 
   searchable do
+    boolean(:with_avatar) { avatar_url? }
+
     text :first_name
     text :last_name
     text :patronymic

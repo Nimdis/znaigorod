@@ -88,6 +88,7 @@ class AccountsPresenter
 
   attr_accessor :gender, :kind, :acts_as,
                 :inviter_categories, :invited_categories,
+                :with_avatar,
                 :order_by, :page, :per_page
 
   attr_reader :kind_filter, :gender_filter, :acts_as_filter,
@@ -102,6 +103,8 @@ class AccountsPresenter
 
   def link_params(acts_as = nil)
     { :kind => kind_filter.kind, :gender => gender_filter.gender }.tap do |hash|
+      hash.merge!(:with_avatar => true) if with_avatar.present?
+
       if acts_as_filter.used?
         hash[:acts_as] = acts_as if acts_as_filter.acts_as != acts_as
       else
@@ -117,6 +120,7 @@ class AccountsPresenter
   def count(params)
     params.delete(:kind) if params[:kind] == 'all'
     params.delete(:gender) if params[:gender] == 'undefined'
+    params.merge!(:with_avatar => true) if with_avatar.present?
 
     HasSearcher.searcher(:accounts, params).total
   end
@@ -143,6 +147,7 @@ class AccountsPresenter
       params[:kind]               = kind_filter.kind unless kind_filter.all_selected?
       params[:gender]             = gender_filter.gender unless gender_filter.undefined_selected?
       params[:acts_as]            = acts_as_filter.acts_as if acts_as_filter.used?
+      params[:with_avatar]        = true if with_avatar.present?
       params[:inviter_categories] = inviter_categories_filter.selected
     end
   end
