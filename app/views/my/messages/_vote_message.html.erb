@@ -14,6 +14,8 @@
       <span>к </span>
       <% if message.messageable.voteable.commentable.is_a?(Afisha) %>
         <%= link_to(message.messageable.voteable.commentable.title, polymorphic_path([message.messageable.voteable.commentable, :show], anchor: "comment_#{message.messageable.voteable.id}")) %>
+      <% elsif message.messageable.voteable.commentable.is_a?(Work) %>
+        <%= link_to message.messageable.voteable.commentable.title, polymorphic_path([message.messageable.voteable.commentable.contest, message.messageable.voteable.commentable], anchor: "comment_#{message.messageable.voteable.id}") %>
       <% else %>
         <%= link_to(message.messageable.voteable.commentable.title, polymorphic_path(message.messageable.voteable.commentable, anchor: "comment_#{message.messageable.voteable.id}")) %>
       <% end %>

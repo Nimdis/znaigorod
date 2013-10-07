@@ -10,8 +10,13 @@
     <span><%= t "notification_message.#{message.kind}.#{message.producer.gender}" %>:</span>
     <%= message.messageable.parent.body if message.kind.reply_on_comment? %>
     <span>к
-      <%= link_to(message.messageable.commentable.title, polymorphic_path([message.messageable.commentable, :show], anchor: "comment_#{message.messageable.id}")) if message.messageable.commentable.is_a?(Afisha) %>
-      <%= link_to(message.messageable.commentable.title, polymorphic_path(message.messageable.commentable, anchor: "comment_#{message.messageable.id}")) if !message.messageable.commentable.is_a?(Afisha) %>
+      <% if message.messageable.commentable.is_a?(Afisha) %>
+        <%= link_to(message.messageable.commentable.title, polymorphic_path([message.messageable.commentable, :show], anchor: "comment_#{message.messageable.id}")) %>
+      <% elsif message.messageable.commentable.is_a?(Work) %>
+        <%= link_to message.messageable.commentable.title, polymorphic_path([message.messageable.commentable.contest, message.messageable.commentable], anchor: "comment_#{message.messageable.id}") %>
+      <% else %>
+        <%= link_to(message.messageable.commentable.title, polymorphic_path(message.messageable.commentable, anchor: "comment_#{message.messageable.id}")) %>
+      <% end %>
       <p><%= message.messageable.body %></p>
     </span>
 
