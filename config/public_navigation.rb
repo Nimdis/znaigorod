@@ -41,7 +41,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :more, 'Ещё &#9662;', '#', :link => { :class => :disabled },
       highlights_on: -> { %w[contests webcams cooperation].include?(params[:controller]) } do |more|
       more.item :tickets, 'Распродажа билетов', afisha_index_path(:has_tickets => true, :period => :all), highlights_on: -> { params[:controller] == nil }
-      more.item :contests, 'Конкурсы', contests_path, highlights_on: -> { params[:controller] == 'contests' }
+      more.item :contests, 'Конкурсы', contests_path, highlights_on: -> { %w[contests works].include? params[:controller] }
       more.item :webcams, 'Веб-камеры', webcams_path, highlights_on: -> { params[:controller] == 'webcams' }
       more.item :cooperation, 'Реклама', services_path, highlights_on: -> { params[:controller] == 'cooperation' }
     end
