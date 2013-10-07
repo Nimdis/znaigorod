@@ -31,14 +31,18 @@ Znaigorod::Application.routes.draw do
 
       }
 
-    # short categories urls
-    HasSearcher.searcher(kind.pluralize.to_sym).facet("#{kind}_category").rows.map do |row|
-      get "/#{kind.pluralize}/#{FromRussianToParam.convert(row.value)}" => 'suborganizations#index',
-      :as => "#{kind.pluralize}_#{FromRussianToParam.convert(row.value).pluralize}".to_sym,
-      :constraints => {:kind => kind},
-      :defaults => {:kind => kind, :categories => [row.value]}
-    end
-    get "/#{kind.pluralize}" => 'suborganizations#index', :as => kind.pluralize, :constraints => { :kind => kind }, :defaults => { :kind => kind }
+      # short categories urls
+      begin
+        HasSearcher.searcher(kind.pluralize.to_sym).facet("#{kind}_category").rows.map do |row|
+          get "/#{kind.pluralize}/#{FromRussianToParam.convert(row.value)}" => 'suborganizations#index',
+          :as => "#{kind.pluralize}_#{FromRussianToParam.convert(row.value).pluralize}".to_sym,
+          :constraints => {:kind => kind},
+          :defaults => {:kind => kind, :categories => [row.value]}
+        end
+      rescue Exception => e
+        p e
+      end
+      get "/#{kind.pluralize}" => 'suborganizations#index', :as => kind.pluralize, :constraints => { :kind => kind }, :defaults => { :kind => kind }
 
     # from legacy
     get "/#{kind.pluralize}/(:category)/(*query)",
