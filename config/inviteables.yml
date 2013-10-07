@@ -9,7 +9,33 @@
     categories:
       - кинотеатры
 
-'на вечеринку':
+'в кафе, бар, ресторан':
+  afisha:
+    kinds: []
+
+  organization:
+    suborganizations:
+      - meal
+
+    categories:
+      - кафе
+      - рестораны
+      - бары
+      - кофейни
+      - банкетные залы
+      - кондитерские
+
+'в сауну':
+  afisha:
+    kinds: []
+
+  organization:
+    suborganizations:
+      - sauna
+
+    categories: []
+
+'в ночной клуб':
   afisha:
     kinds:
       - party
@@ -20,6 +46,30 @@
 
     categories:
       - ночные клубы
+
+'в театр':
+  afisha:
+    kinds:
+      - spectacle
+
+  organization:
+    suborganizations:
+      - culture
+
+    categories:
+      - театры
+
+'в музей':
+  afisha:
+    kinds:
+      - exhibition
+
+  organization:
+    suborganizations:
+      - culture
+
+    categories:
+      - музеи
 
 'на концерт':
   afisha:
@@ -36,37 +86,112 @@
       - театры
       - бары
 
-'в сауну':
-  afisha:
-    kinds: []
-
-  organization:
-    suborganizations:
-      - sauna
-
-    categories: []
-
-'в театр':
+'поиграть в бильярд':
   afisha:
     kinds:
-      - spectacle
+      - sportsevent
 
   organization:
     suborganizations:
       - entertainment
 
     categories:
-      - театры
+      - бильярдные залы
 
-'на выставку':
+'играть в боулинг':
   afisha:
     kinds:
-      - exhibition
+      - sportsevent
 
   organization:
     suborganizations:
-      - culture
+      - entertainment
 
     categories:
-      - музеи
+      - боулинг
 
+'попеть караоке':
+  afisha:
+    kinds: []
+
+  organization:
+    suborganizations:
+      - meal
+      - entertainment
+
+    categories:
+      - бары
+      - рестораны
+      - караоке
+
+'заняться спортом':
+  afisha:
+    kinds:
+      - sportsevent
+
+  organization:
+    suborganizations:
+      - sport
+
+    categories:
+      - фитнес
+      - танцы
+      - тренажерные залы
+      - спортивные школы
+      - спортивные секции
+      - боевые искусства
+      - катки
+      - йога
+      - шахматные школы
+      - ипподромы
+      - стадионы
+      - конные клубы
+      - лыжные базы
+      - игровые виды спорта
+
+'учиться':
+  afisha:
+    kinds:
+      - masterclass
+
+  organization:
+    suborganizations:
+      - creation
+
+    categories:
+      - развивающие занятия
+      - мастерилки
+      - музыкальные студии
+      - иностранные языки
+      - изо студии 
+      - фотошколы
+      - театральные студии
+
+'прогуляться':
+  afisha:
+    kinds: []
+
+  organization:
+    suborganizations:
+      - entertainment
+
+    categories:
+      - аттракционы
+
+'за покупками':
+  afisha:
+    kinds: []
+
+  organization:
+    suborganizations: []
+
+    categories: []
+
+'покататься на машине':
+  afisha:
+    kinds: []
+
+  organization:
+    suborganizations: []
+
+    categories: []
