@@ -15,7 +15,7 @@
     false
 
 @init_account_social_actions = () ->
-  $('.account_show .left, .invitations_wrapper').on 'ajax:success', (evt, response, status, jqXHR) ->
+  $('.account_show .left, .invitations_wrapper, .accounts_list').on 'ajax:success', (evt, response, status, jqXHR) ->
     target = $(evt.target)
 
     if $('.social_signin_links', $(response)).length

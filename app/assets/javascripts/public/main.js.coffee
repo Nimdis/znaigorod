@@ -50,7 +50,7 @@ $ ->
   init_visitors_pagination() if $('.content .left .social_actions .pagination').length
   init_account_pagination() if $('.content .account_show .right').length
   init_account_extend() if $('.account_show').length
-  init_account_social_actions() if $('.account_show').length
+  init_account_social_actions() if $('.account_show, .accounts_list').length
   init_messages() if $('#messages_filter').length
   init_messages_tabs() if $('#messages_filter').length
   init_list_settings() if $('.content_wrapper .presentation_filters').length

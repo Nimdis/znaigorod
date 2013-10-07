@@ -223,7 +223,7 @@ handle_reply_invitation = (target, response)->
   target.replaceWith response
 
 @init_invitations = ->
-  #init_delete_invitation $('.delete_invitation')
+  init_delete_invitation $('.delete_invitation')
 
   $('.invitations_wrapper, .content .left, .accounts_list').on 'ajax:success', (evt, response) ->
     return false if $(response).hasClass('cloud_wrapper')
