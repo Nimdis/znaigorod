@@ -55,10 +55,6 @@
         iconImageOffset: [-15, -40]
         iconImageSize: [37, 42]
 
-      point.events.add 'mouseenter', (event) ->
-        point.balloon.open()
-        true
-
       point.balloon.events.add 'open', (event) ->
         $('a.balloon_link').unbind('click').click ->
           link = $("##{$(this).attr('data-id').replace('balloon_link_id_', '')}")
@@ -70,6 +66,18 @@
 
       map.geoObjects.add point
 
+      true
+
+    map.geoObjects.options.set
+      showHintOnHover: false
+
+    map.geoObjects.events.add 'mouseenter', (event) ->
+      geoObject = event.get('target')
+      position = event.get('globalPixelPosition')
+      balloon = geoObject.balloon.open(position)
+      balloon.events.add 'mouseleave', ->
+        balloon.close()
+        true
       true
 
     true
