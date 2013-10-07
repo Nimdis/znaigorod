@@ -15,8 +15,17 @@ Znaigorod::Application.routes.draw do
     resources :user_ratings, :only => [:new, :create, :edit, :update, :show]
   end
 
+  get "/saunas",
+  :constraints => lambda { |req| req.query_parameters.has_key?('categories') },
+  :to =>  redirect { |params, req|
+    category = req.query_parameters['categories'].first.mb_chars.downcase
+    other_parameters = req.query_parameters.to_h
+    other_parameters.delete('categories')
+    parameter_string = other_parameters.to_param
+    parameter_string.insert(0, "?") unless parameter_string.empty?
+    "/saunas" + parameter_string
+  }
   resources :saunas, :only => :index
-
   get '/saunas/sauny', :to => redirect('/saunas')
 
   Organization.basic_suborganization_kinds.each do |kind|
