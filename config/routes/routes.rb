@@ -1,8 +1,6 @@
 require 'sidekiq/web'
 
 Znaigorod::Application.routes.draw do
-  mount Affiches::API => '/'
-  mount Mobile::API => '/'
   mount ElVfsClient::Engine => '/'
   mount Sidekiq::Web, at: "/sidekiq"
 
@@ -23,23 +21,6 @@ Znaigorod::Application.routes.draw do
   get 'search' => 'search#search',                :as => :search
   get 'yamp_geocoder' => 'geocoder#get_yamp_coordinates'
   get 'yamp_geocoder_photo' => 'geocoder#get_yamp_house_photo'
-
-  resources :afisha, :only => [], :controller => 'afishas' do
-    resources :comments, :only => [:new, :show, :create]
-    resources :visits
-
-    get 'liked' => 'votes#liked', :as => :liked
-    get 'photogallery' => 'afisha#photogallery', :as => :photogallery
-    get 'trailer' => 'afisha#trailer', :as => :trailer
-
-    put 'change_vote' => 'votes#change_vote', :as => :change_vote
-    put 'destroy_visits' => 'visits#destroy_visits', :as => :destroy_visits
-  end
-
-  get '/afisha' => 'afishas#index', :as => :afisha_index, :controller => 'afishas'
-  get '/afisha/:id' => 'afishas#show', :as => :afisha_show, :controller => 'afishas'
-
-  get '/tickets' => redirect('/afisha?has_tickets=true')
 
   resources :coupons, :only => [:index, :show] do
     get 'page/:page', :action => :index, :on => :collection
