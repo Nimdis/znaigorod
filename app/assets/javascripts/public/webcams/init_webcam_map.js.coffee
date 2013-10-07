@@ -23,8 +23,9 @@
       link.popupWindow
         windowURL: link.attr('href')
         centerBrowser: 1
-        width: $(item).attr('data-width').toNumber() + 40
+        width: $(item).attr('data-width').toNumber() + 350
         height: $(item).attr('data-height').toNumber() + 130
+        location: 1
 
       point = new ymaps.GeoObject
         geometry:
@@ -40,6 +41,8 @@
 
       point.events.add 'click', (event) ->
         link = $("##{event.get('target').properties.get('id')}")
+        if navigator.appName == 'Microsoft Internet Explorer' && navigator.platform != 'MacPPC' && navigator.platform != 'Mac68k'
+          $.cookie('_show_webcam_in_ie', 'true')
         link.click()
 
         true

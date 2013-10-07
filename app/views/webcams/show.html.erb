@@ -27,7 +27,7 @@
   <%= javascript_include_tag 'webcams/application' %>
 <% end %>
 
-<div class='webcams' style='width: <%= resource.width + 2 %>px; height:'>
+<div class='webcams' style='width: <%= resource.width + 312 %>px'>
 
   <% if @layout_name == 'public' %>
     <p class='to_webcams_list'><%= link_to 'Карта веб-камер Томска', webcams_path %></p>
@@ -35,12 +35,44 @@
 
   <h1><%= resource.title %><br /><%= resource.address %></h1>
 
-  <div class='webcam_show'>
-    <%= render :partial => resource.kind, :object => resource %>
-  </div>
-
-  <div class='share_and_likes'>
-    <%= render :partial => 'commons/share_this', :locals => { :url => webcam_url(resource) } %>
+  <div class='clearfix'>
+    <div class='left'>
+      <% if @tickets.present? %>
+        <ul class='tickets'>
+          <% @tickets.each do |ticket| %>
+            <li>
+              <div class='title'><%= link_to ticket.afisha.title, afisha_show_path(ticket.afisha), :class => 'redirect_to_afisha' %></div>
+              <div class='ticket_prices'>
+                <% if ticket.original_price == ticket.price %>
+                  <div class='price'><%= ticket.price.to_i %>р.<%= "+#{ticket.organization_price.to_i}р." if ticket.organization_price %></div>
+                <% else %>
+                  <div class='original_price'><%= ticket.original_price.to_i %>р.</div>
+                  <div class='price'><%= ticket.price.to_i %>р.<%= "+#{ticket.organization_price.to_i}р." if ticket.organization_price %></div>
+                <% end %>
+              </div>
+              <div class='buy_ticket'>
+                <%= link_to 'Купить', afisha_show_path(ticket.afisha, anchor: :buy_ticket), :class => 'redirect_to_afisha button' %>
+              </div>
+          </li>
+          <% end %>
+        </ul>
+      <% else %>
+        &nbsp;
+      <% end %>
+    </div>
+    <div class='center'>
+      <div class='webcam_show' style='width: <%= resource.width %>px'>
+        <%= render :partial => resource.kind, :object => resource %>
+      </div>
+      <div class='share_and_likes' style='width: <%= resource.width + 2 %>px'>
+        <%= render :partial => 'commons/share_this', :locals => { :url => webcam_url(resource) } %>
+      </div>
+    </div>
+    <div class='right'>
+      <p>Здесь может быть ваша реклама</p>
+      <p>Заинтересованы?</p>
+      <p>Пишите нам <a href='mailto:office@znaigorod.ru'>office@znaigorod.ru</a></p>
+    </div>
   </div>
 
 </div>

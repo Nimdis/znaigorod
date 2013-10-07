@@ -1,6 +1,7 @@
 @import 'compass/reset'
 @import 'compass/utilities'
 @import 'compass/css3'
+@import '../public/mixins'
 
 body
   color: #000
@@ -22,6 +23,11 @@ body
   em, i
     font-style: italic
 
+  .button
+    font-size: 11px
+    +button-style
+    +inline-block
+
   .webcams
     margin: 10px auto
     padding: 0 10px
@@ -31,38 +37,92 @@ body
       text-align: center
       margin-bottom: 10px
 
-    .webcam_show
-      border: 1px solid #ccc
+    .clearfix
+      +clearfix
 
-    .share_and_likes
-      min-height: 30px
-      margin-top: 10px
-
-      .share
+      .left
+        width: 140px
         float: left
-        width: 50%
-        margin-bottom: 5px
+        margin-right: 10px
 
-        .title
-          +inline-block
+        li
+          border-bottom: 1px dashed #ccc
+          margin-bottom: 10px
+          padding-bottom: 10px
 
-        .yashare-auto-init
-          +inline-block
+          &:last-child
+            border-bottom: none
+            margin-bottom: 0
+            padding-bottom: 0
 
-      .likes
-        float: right
-        width: 50%
-        margin-bottom: 5px
-        margin-top: 4px
+          .ticket_prices
+            font-size: 11px
+            margin: 5px 0
 
-        .vk_like
-          float: right
-          clear: none !important
+            .original_price
+              +inline-block
+              color: #a9a9a9
+              position: relative
+              margin: 0 10px 0 5px
 
-        .fb_like
-          float: right
-          margin-right: 20px
+              &:before
+                position: absolute
+                content: ""
+                width: 120%
+                left: -10%
+                top: 50%
+                right: 0
+                border-top: 1px solid
+                border-color: #f93
+                +rotate(-15deg)
 
-        .ok_like
-          float: right
+            .price
+              +inline-block
 
+      .right
+        width: 140px
+        float: left
+        margin-left: 10px
+        text-align: center
+        margin-top: 10px
+
+        p
+          margin-bottom: 10px
+
+      .center
+        float: left
+
+        .webcam_show
+          border: 1px solid #ccc
+
+        .share_and_likes
+          +min-height(30px)
+          margin-top: 10px
+
+          .share
+            float: left
+            width: 50%
+            margin-bottom: 5px
+
+            .title
+              +inline-block
+
+            .yashare-auto-init
+              +inline-block
+
+          .likes
+            float: right
+            width: 50%
+            margin-bottom: 5px
+            margin-top: 4px
+
+            .vk_like
+              float: right
+              clear: none !important
+
+            .fb_like
+              float: right
+              margin-right: 20px
+
+            .ok_like
+              float: right
