@@ -82,8 +82,10 @@
  * = require ./sms_claims
  * = require ./my_afisha
  * = require ./select_tags
+ * = require ./features
  * = require ./invitations
  * = require ./invitation_list_popup
  * = require ./infinite_scroll
+ * = require ./additional_info
  * = require ./main
  */

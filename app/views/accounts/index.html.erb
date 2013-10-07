@@ -1,6 +1,25 @@
 <div class="presentation_filters accounts">
 </div>
 
+<div class="additional_info_wrapper">
+  <%= link_to "Подробнее", '#', :class => 'toggle_link' %>
+  <div class="inner_wrapper">
+    <div class="top_wrapper">
+      <p>Ты можешь найти компанию для любого мероприятия и времяпрепровождения.</p>
+      <p>Посмотри, сколько людей <%= link_to 'приглашают', '#' %> сходить куда-нибудь, а сколько <%= link_to "ждут приглашения", '#' %>!</p>
+    </div>
+    <div class="middle_wrapper">
+      <div class="first">Кто-то приглянулся? Отправь ему личное приглашение или попроси, чтобы тебя пригласили.</div>
+      <div class="second">Просто ищешь компанию? Укажи, чья компания тебя интересует &mdash; мужская или женская и куда хотел бы сходить. Все это отразится в твоем профиле.</div>
+    </div>
+  </div>
+  <div class="bottom_wrapper">
+    Воспользуйся функцией "Ищу компанию"!
+    <%= link_to "Пригласить", '#', :class => 'grey_button' %>
+    <%= link_to "Жду приглашения", '#', :class => 'grey_button' %>
+  </div>
+</div>
+
 <div class="accounts_list">
   <ul class="posters">
     <%= render :partial => 'accounts/account_posters', :locals => { collection: @presenter.collection } %>

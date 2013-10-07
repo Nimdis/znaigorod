@@ -32,8 +32,11 @@
     <%= yield(:metrics) %>
   </head>
   <body>
+    <% unless controller_path.match(/\A(crm|manage)\//) %>
+      <%= render :partial => 'commons/new_feature' %>
+      <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
+    <% end %>
     <%= yield(:flash_messages) %>
     <%= yield(:content) %>
-    <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\A(crm|manage|my)\//) %>
   </body>
 </html>
