@@ -49,7 +49,7 @@ replace_param_value = (url, param, value) ->
   parser = document.createElement('a')
   parser.href = url
   parser.search.replace('?', '').split('&').each (s) ->
-    params[s.split('=')[0]] = decodeURIComponent(s.split('=')[1]).replace('+', ' ')
+    params[s.split('=')[0]] = decodeURIComponent(s.split('=')[1]).replace(/\+/g, ' ')
   params[param] = value
   parser.search = "?#{$.param(params, false)}"
 
