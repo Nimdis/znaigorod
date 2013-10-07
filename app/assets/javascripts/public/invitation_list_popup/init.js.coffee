@@ -15,6 +15,7 @@
       false
 
   return if (is_closed() && !changed()) || !(not_answered_invitations.length && not_answered_invitations.find('li').length)
+  return if $('.feature_wrapper').is(':visible')
 
   dialog = init_form_dialog('not_answered_invitations', 'Новые приглашения', null, 650, 386).html(not_answered_invitations.show())
 

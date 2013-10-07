@@ -1,0 +1,75 @@
+.additional_info_wrapper
+  +border-radius(5px)
+  +clearfix
+  background: #fbceb1 image-url('add_info_bg.png') repeat
+  margin: 0 auto 17px
+  padding: 10px 20px
+  position: relative
+  width: 1140px
+
+  .toggle_link
+    position: absolute
+    right: 20px
+    top: 18px
+    z-index: 4
+
+  .inner_wrapper
+    display: none
+
+    .top_wrapper
+      font-size: 14px
+
+      a
+        +inline-block
+        background: #ff6600
+        color: #fff
+        height: 23px
+        line-height: 23px
+        padding: 0 5px
+        margin-bottom: 5px
+
+    .middle_wrapper
+      background: image-url('how_to_invitations.png') no-repeat center center
+      height: 335px
+      margin: 20px auto
+      position: relative
+      margin-bottom: -30px
+      width: 1140px
+      z-index: 2
+
+      .first
+        position: absolute
+        left: 15px
+        top: 12px
+        width: 135px
+
+      .second
+        position: absolute
+        left: 578px
+        top: 12px
+        width: 175px
+
+  .bottom_wrapper
+    +clearfix
+    font-size: 11px
+    line-height: 27px
+    position: relative
+    z-index: 3
+
+    .grey_button
+      +inline-block
+      +border-radius(5px)
+      background-color: #e8e8e8
+      border: 1px solid #cccccc
+      color: black
+      line-height: 16px
+      margin: 0 5px
+      padding: 4px 8px 5px
+      text-align: center
+
+      &:first-child
+        margin-left: 25px
+
+      &:hover
+        color: #ff6600
+        text-decoration: none

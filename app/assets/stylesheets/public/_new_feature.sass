@@ -1,0 +1,144 @@
+.new_feature
+  .top_headline
+    background: #019bdb
+    color: #fff
+    font-size: 14px
+    height: 35px
+    line-height: 35px
+    text-align: center
+    position: relative
+    z-index: 1000001
+
+    .gender_icon
+      +inline-block
+      background: image-url('features/gender_icon.png') no-repeat center center
+      height: 28px
+      margin: 0 0 7px 10px
+      width: 28px
+
+    &:hover
+      cursor: pointer
+
+  .new_feature_overlay
+    background: rgba(#ccc, 0.8)
+    bottom: 0
+    display: none
+    left: 0
+    position: absolute
+    right: 0
+    top: 0
+    z-index: 999999
+
+  .invites_feature
+    +border-bottom-left-radius(7px)
+    +border-bottom-right-radius(7px)
+    background: #fff image-url('features/invites_bg.png') no-repeat top center
+    display: none
+    height: 712px
+    margin-left: -471px
+    left: 50%
+    position: absolute
+    width: 942px
+    z-index: 1000000
+
+    .first, .second, .third
+      font-size: 16px
+      font-weight: bold
+      margin-bottom: 5px
+
+    .first
+      height: 51px
+      line-height: 51px
+      margin-left: 172px
+
+    .second
+      height: 54px
+      line-height: 54px
+      margin-left: 282px
+
+    .third
+      height: 53px
+      line-height: 53px
+      margin-left: 335px
+
+    .fourth
+      font-size: 14px
+      height: 82px
+      line-height: 82px
+      margin-left: 172px
+
+      a
+        +inline-block
+        background: #ff6600
+        color: #fff
+        height: 23px
+        line-height: 23px
+        padding: 0 5px
+        margin-bottom: 5px
+
+    .fifth
+      font-size: 16px
+      font-weight: bold
+      margin: 17px 0 25px 0
+      text-align: center
+
+      div
+        +inline-block
+        background: #fff
+        color: #ff6600
+        margin: 0 5px 0 0
+        padding: 0 3px
+
+      a
+        +inline-block
+        background: #ff6600
+        color: #fff
+        padding: 0 3px
+
+    .sixth, .seventh, .eighth
+      +clearfix
+      float: left
+      font-size: 12px
+      line-height: 20px
+      margin-left: 50px
+      width: 250px
+
+    .nineth
+      font-size: 12px
+      clear: both
+      margin: 0 0 0 650px
+      padding: 135px 0 0 0
+      width: 242px
+
+      a
+        +border-radius(5px)
+        background-color: #e8e8e8
+        border: 1px solid #cccccc
+        color: black
+        display: block
+        line-height: 16px
+        margin: 10px auto
+        padding: 4px 8px 5px
+        text-align: center
+        width: 170px
+
+        &:hover
+          color: #ff6600
+          text-decoration: none
+
+    .slide_up
+      font-size: 12px
+      height: 35px
+      line-height: 35px
+      margin-top: 47px
+      text-align: center
+
+      &:hover
+        cursor: pointer
+
+      .slide_up_icon
+        +inline-block
+        background: image-url('features/slide_up_icon.png') no-repeat center center
+        height: 14px
+        margin: 0 7px 0 0
+        width: 14px
