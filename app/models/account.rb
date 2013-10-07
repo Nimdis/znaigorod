@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class Account < ActiveRecord::Base
+
   attr_accessible :avatar, :birthday, :email, :first_name, :gender, :last_name, :patronymic, :rating, :nickname, :location, :created_at
 
   has_many :users,           order: 'id ASC'
@@ -11,6 +12,7 @@ class Account < ActiveRecord::Base
   has_many :votes,           through: :users, order: 'votes.id DESC'
   has_many :visits,          through: :users, order: 'visits.created_at DESC'
   has_many :page_visits,     through: :users
+  has_many :my_page_visits,  as: :page_visitable, class_name: PageVisit
 
   has_many :invitations,     dependent: :destroy
   has_many :invite_messages,              order: 'messages.created_at DESC', :through => :invitations
@@ -65,6 +67,13 @@ class Account < ActiveRecord::Base
     string(:invited_categories, :multiple => true) { invitations.invited.with_categories.select(&:actual?).flat_map(&:categories).uniq }
 
     text :title, :as => :term_text
+  end
+
+  def create_page_visit(session, user_agent, user)
+    my_page_visit = self.my_page_visits.new
+    my_page_visit.user_agent = user_agent.to_s.encode('UTF-8', :undef => :replace, :invalid => :replace, :replace => '')
+    my_page_visit.user = user
+    my_page_visit.save
   end
 
   def sended_invite_message(messageable, account_id, invite)
@@ -162,12 +171,13 @@ class Account < ActiveRecord::Base
 
   def update_rating
     update_attribute(:rating,
-                     0.5*payments.approved.where(:type=>'CopyPayment').map(&:copies).flatten.count +
-                     0.25*afisha.count +
-                     0.1*comments.count +
-                     0.1*visits.count +
-                     0.01*votes.liked.count +
-                     0.01*page_visits.count)
+                     0.5 * payments.approved.where(:type=>'CopyPayment').map(&:copies).flatten.count +
+                     0.25 * afisha.count +
+                     0.1 * comments.count +
+                     0.1 * visits.count +
+                     0.01 * votes.liked.count +
+                     0.01 * page_visits.count +
+                     0.01 * my_page_visits.count)
   end
 
   def friendly_for(account)

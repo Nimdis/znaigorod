@@ -20,6 +20,7 @@ class AccountsController < ApplicationController
       @events = @account.afisha.page(1).per(3)
       @votes = @account.votes.rendereable.page(1).per(3)
       @visits = @account.visits.rendereable.page(1).per(3)
+      @account.delay(:queue => 'critical').create_page_visit(request.session_options[:id], request.user_agent, current_user)
     }
   end
 end
