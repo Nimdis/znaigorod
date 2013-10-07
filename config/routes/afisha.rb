@@ -21,16 +21,17 @@ Znaigorod::Application.routes.draw do
     other_parameters.delete('has_tickets')
     parameter_string = other_parameters.to_param
     parameter_string.insert(0, "?") unless parameter_string.empty?
-    "/bilety" + parameter_string
+    "/afisha/bilety" + parameter_string
   }
-  get '/tickets', :to => redirect("/bilety")
+  get '/tickets', :to => redirect("/afisha/bilety")
 
   get '/afisha' => 'afishas#index', :as => :afisha_index, :controller => 'afishas'
-  get '/afisha/:id' => 'afishas#show', :as => :afisha_show, :controller => 'afishas'
+  get '/afisha/:id' => 'afishas#show', :as => :afisha_show, :controller => 'afishas',
+    :constraints => lambda {|request| request.fullpath !~ /^\/afisha\/bilety/ }
 
   get '/affiches', :to => redirect('/afisha')
 
-  get "/bilety" => 'afishas#index', :as => :tickets, :defaults => {:has_tickets => true}
+  get "/afisha/bilety" => 'afishas#index', :as => :afisha_with_tickets_index, :defaults => {:has_tickets => true}
 
   Afisha.kind.values.map(&:pluralize).each do |kind|
     get "/#{kind}",

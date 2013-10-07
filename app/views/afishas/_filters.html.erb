@@ -13,11 +13,10 @@
     <div class='by_tickets'>
       <ul>
         <li<%= " class=selected" if @presenter.has_tickets %>>
-          <a href='<%= send(@presenter.url, {
+          <a href='<%= send((@presenter.has_tickets ? @presenter.url.gsub("_with_tickets_", "_") : @presenter.url.sub("_", "_with_tickets_")), {
                       period: @presenter.period_filter.period,
                       on: @presenter.period_filter.date,
-                      order_by: @presenter.sorting_filter.order_by,
-                      has_tickets: @presenter.has_tickets ? nil : true
+                      order_by: @presenter.sorting_filter.order_by
           }) %>'>Только с билетами</a>
         </li>
       </ul>

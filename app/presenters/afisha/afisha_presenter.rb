@@ -45,7 +45,11 @@ class AfishaPresenter
     :price_filter, :tags_filter, :time_filter, :geo_filter, :sorting_filter, :has_tickets
 
   def url
-    @url ||= "#{(categories_filter.selected.first.try(:pluralize) || 'afisha')}_index_path"
+    @url ||= "".tap do |str|
+      str << "#{(categories_filter.selected.first.try(:pluralize) || 'afisha')}"
+      str << '_with_tickets' if has_tickets
+      str << "_index_path"
+    end
   end
 
   def kind
@@ -88,12 +92,11 @@ class AfishaPresenter
       array << {
         title: I18n.t('enumerize.afisha.kind.all'),
         klass: 'afisha',
-        url: 'afisha_index_path',
+        url: has_tickets ? 'afisha_with_tickets_index_path' : 'afisha_index_path',
         parameters: {
           period: @period_filter.all? ? nil : @period_filter.period,
           on: @period_filter.date,
           order_by: @sorting_filter.order_by,
-          has_tickets: has_tickets
         },
         current: kind == 'afisha',
         count: AfishaCounter.new(presenter: self).count
@@ -102,12 +105,11 @@ class AfishaPresenter
         array << {
           title: "#{kind.text}",
           klass: kind.pluralize,
-          url: "#{kind.pluralize}_index_path",
+          url: has_tickets ? "#{kind.pluralize}_with_tickets_index_path" : "#{kind.pluralize}_index_path",
           parameters: {
             period: period_filter.all? ? nil : period_filter.period,
             on: @period_filter.date,
             order_by: @sorting_filter.order_by,
-            has_tickets: has_tickets
           },
           current: categories.include?(kind),
           count: AfishaCounter.new(presenter: self, categories: [kind]).count
@@ -126,7 +128,6 @@ class AfishaPresenter
           parameters: {
             :period => period_value,
             :order_by => @sorting_filter.order_by,
-            has_tickets: has_tickets
           },
           selected: period_value == @period_filter.period
         }
@@ -138,7 +139,6 @@ class AfishaPresenter
           parameters: {
             :period => nil,
             :order_by => @sorting_filter.order_by,
-            has_tickets: has_tickets
           },
           selected: @period_filter.all?
 
@@ -156,7 +156,6 @@ class AfishaPresenter
             :period => @period_filter.period,
             :on => @period_filter.date,
             :order_by => sorting_value,
-            :has_tickets => has_tickets
           },
           selected: @sorting_filter.order_by == sorting_value
         }
