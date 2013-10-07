@@ -232,11 +232,13 @@ class OrganizationDecorator < ApplicationDecorator
     [].tap do |arr|
       suborganizations.each do |suborganization|
         suborganization.categories.each do |category|
-
-          options = category == I18n.t("organization.list_title.#{suborganization.class.name.underscore}") ? {} : { categories: [category.mb_chars.downcase]}
+          url = suborganization.need_categories? ?
+            "#{suborganization.class.name.underscore.pluralize}_#{FromRussianToParam.convert(category.mb_chars.downcase).pluralize}_path"
+          :
+            "#{suborganization.class.name.underscore.pluralize}_path"
           arr << Link.new(
             title: category,
-            url: h.send("#{suborganization.class.name.underscore.pluralize}_path", options)
+            url: h.send(url)
           )
         end
       end

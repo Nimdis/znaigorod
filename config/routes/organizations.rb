@@ -78,7 +78,7 @@ Znaigorod::Application.routes.draw do
     end
   end
 
-  get '/entertainments' => 'suborganizations#index', :as => :billiards, :constraints => { :kind => 'entertainments' }, :defaults => { :kind => 'entertainments' }
+  get '/entertainments/bilyardnye_zaly' => 'suborganizations#index', :as => :billiards, :constraints => { :kind => 'entertainments' }, :defaults => { :kind => 'entertainments' }
 
   get 'organizations/:id/affiche/all' => redirect { |params, req|
     o = Organization.find(params[:id])

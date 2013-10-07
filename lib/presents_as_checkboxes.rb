@@ -22,6 +22,10 @@ module PresentsAsCheckboxes
         end
       end
 
+      define_method "need_#{field.to_s.pluralize}?" do
+        self.send("available_#{field.to_s.pluralize}").many?
+      end
+
       define_method "normalize_#{field}_list" do
         self.send "#{field}_list=", [*options[:default_value]] if options[:default_value]
 
