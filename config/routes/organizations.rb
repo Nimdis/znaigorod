@@ -17,6 +17,8 @@ Znaigorod::Application.routes.draw do
 
   resources :saunas, :only => :index
 
+  get '/saunas/sauny', :to => redirect('/saunas')
+
   Organization.basic_suborganization_kinds.each do |kind|
     # redirects from /kind?categories[]=...
     get "/#{kind.pluralize}",
@@ -34,6 +36,7 @@ Znaigorod::Application.routes.draw do
       # short categories urls
       begin
         HasSearcher.searcher(kind.pluralize.to_sym).facet("#{kind}_category").rows.map do |row|
+          next if kind == 'sauna'
           get "/#{kind.pluralize}/#{FromRussianToParam.convert(row.value)}" => 'suborganizations#index',
           :as => "#{kind.pluralize}_#{FromRussianToParam.convert(row.value).pluralize}".to_sym,
           :constraints => {:kind => kind},
