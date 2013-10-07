@@ -170,8 +170,7 @@ class Account < ActiveRecord::Base
   end
 
   def dialogs
-    dialogs = PrivateMessage.from(self).order('id DESC').map(&:account_id) + PrivateMessage.to(self).order('id DESC').map(&:producer_id)
-    Account.where(id: dialogs.uniq)
+    dialogs = (PrivateMessage.from(self).order('id DESC').map(&:account) + PrivateMessage.to(self).order('id DESC').map(&:producer)).uniq
   end
 end
 
