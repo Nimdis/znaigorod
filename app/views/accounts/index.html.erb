@@ -1,6 +1,3 @@
-<div class="presentation_filters accounts">
-</div>
-
 <div class="additional_info_wrapper">
   <%= link_to "Подробнее", '#', :class => 'toggle_link' %>
   <div class="inner_wrapper">
@@ -26,6 +23,19 @@
         :remote => true,
         :class => 'invitation_link grey_button',
         :data => { :title => 'Жду приглашения', :target => '.invited' } %>
+  </div>
+</div>
+
+<div class="presentation_filters accounts">
+  <div class='order_by'>
+    <p>Сортировать по:</p>
+    <ul>
+      <% @presenter.order_by_filter.available_values.each do |value, title| %>
+        <li<%= " class=selected" if value == @presenter.order_by_filter.order_by %>>
+          <%= link_to title, accounts_path(:order_by => value) %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>
 

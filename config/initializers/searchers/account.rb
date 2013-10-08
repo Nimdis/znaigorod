@@ -23,7 +23,7 @@ HasSearcher.create_searcher :accounts do
 
   property :with_avatar
 
-  scope do
-    order_by(:rating, :desc)
-  end
+  scope(:order_by_activity)   { order_by(:rating, :desc) }
+  scope(:order_by_creation)   { order_by(:created_at, :desc) }
+  scope(:order_by_friendable) { order_by(:friendable, :desc) }
 end

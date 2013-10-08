@@ -84,6 +84,22 @@ class AccountsPresenter
     end
   end
 
+  class OrderByFilter
+    attr_accessor :order_by
+
+    def initialize(order_by)
+      @order_by = available_values.keys.include?(order_by) ? order_by : available_values.keys.first
+    end
+
+    def self.available_values
+      { 'creation' => 'Новизне', 'friendable' => 'Популярности', 'activity' => 'Активности' }
+    end
+
+    def available_values
+      self.class.available_values
+    end
+  end
+
   include ActiveAttr::MassAssignment
 
   attr_accessor :gender, :kind, :acts_as,
@@ -92,7 +108,7 @@ class AccountsPresenter
                 :order_by, :page, :per_page
 
   attr_reader :kind_filter, :gender_filter, :acts_as_filter,
-    :inviter_categories_filter, :invited_categories_filter
+    :inviter_categories_filter, :invited_categories_filter, :order_by_filter
 
   def initialize(args)
     super(args)
@@ -102,7 +118,7 @@ class AccountsPresenter
   end
 
   def link_params(acts_as = nil)
-    { :kind => kind_filter.kind, :gender => gender_filter.gender }.tap do |hash|
+    { :kind => kind_filter.kind, :gender => gender_filter.gender, :order_by => order_by_filter.order_by }.tap do |hash|
       hash.merge!(:with_avatar => true) if with_avatar.present?
 
       if acts_as_filter.used?
@@ -140,6 +156,7 @@ class AccountsPresenter
     @acts_as_filter            ||= ActsAsFilter.new(acts_as)
     @inviter_categories_filter ||= CategoriesFilter.new(inviter_categories)
     @invited_categories_filter ||= CategoriesFilter.new(invited_categories)
+    @order_by_filter           ||= OrderByFilter.new(order_by)
   end
 
   def searcher_params
@@ -154,6 +171,7 @@ class AccountsPresenter
 
   def searcher
     @searcher ||= HasSearcher.searcher(:accounts, searcher_params).tap { |s|
+      s.send "order_by_#{order_by_filter.order_by}"
       s.paginate(page: page, per_page: per_page)
     }
   end
