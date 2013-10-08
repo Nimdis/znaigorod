@@ -3,6 +3,7 @@
   overlay = $('.new_feature_overlay')
   top_headline = $('.top_headline')
   slide_up = $('.slide_up', invites_feature)
+  top_slide_up = $('.top_slide_up', invites_feature)
 
   is_closed = () ->
     unless (typeof(window.localStorage) == 'undefined')
@@ -10,7 +11,7 @@
     else
       false
 
-  slide_up.on 'click', ->
+  slide_up.add(top_slide_up).on 'click', ->
     invites_feature.slideUp()
     overlay.fadeOut()
     $('body').css('overflow', 'auto')
@@ -18,9 +19,12 @@
       window.localStorage.setItem('invite_feature_closed_at', (new Date).getTime())
 
   top_headline.on 'click', ->
-    $('body').css('overflow', 'hidden')
-    overlay.fadeIn()
-    invites_feature.slideDown()
+    if invites_feature.is(':visible')
+      slide_up.click()
+    else
+      $('body').css('overflow', 'hidden')
+      overlay.fadeIn()
+      invites_feature.slideDown()
 
   $('.invitation_link').on 'click', ->
     slide_up.click()
