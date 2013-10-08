@@ -49,11 +49,19 @@
         +inline-block
       .new_my_afisha
         margin: 0 10px 3px 0
+      .sign_in
+        +inline-block
+        background: transparent image_url('public/sign_in.png') no-repeat right center
+        margin: 0 5px 3px 0
+        padding-right: 18px
       .user
         .avatar img
           +border-radius
-        .logout
-          margin-left: 10px
+        .sign_out
+          border-left: 1px solid #000
+          background: transparent image_url('public/sign_out.png') no-repeat right center
+          margin-left: 5px
+          padding: 0 18px 0 5px
       .private
         margin-bottom: 3px
       .messages

@@ -10,7 +10,7 @@
             <%= image_tag(resized_image_url(current_user.account.avatar.url, 22, 22), size: '22x22', title: current_user.account, alt: current_user.account) %>
           <% end %>
           <%= link_to(current_user.account, my_root_path, class: :user_name) %>
-          <%= link_to('Выйти', destroy_user_session_path, method: :delete, class: :logout) %>
+          <%= link_to('Выйти', destroy_user_session_path, method: :delete, class: :sign_out) %>
         </p>
         <p class='private'><%= link_to('Личный кабинет', my_root_path) %></p>
         <p class='messages'>
@@ -22,10 +22,11 @@
         </p>
       <% else %>
         <%= link_to 'Добавить афишу', new_my_afisha_path, class: :new_my_afisha %>
+        <span class='sign_in'>Войти:</span>
         <%= render :partial => 'commons/social_auth' %>
       <% end %>
     </div>
-    <%= render :partial => "commons/public_menu" %>
+    <%= render :partial => 'commons/public_menu' %>
   </div>
 </div>
 
