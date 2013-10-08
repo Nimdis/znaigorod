@@ -42,7 +42,7 @@
         <ul class='tickets'>
           <% @tickets.each do |ticket| %>
             <li>
-              <div class='title'><%= link_to ticket.afisha.title, afisha_show_path(ticket.afisha), :class => 'redirect_to_afisha' %></div>
+              <div class='title'><%= link_to ticket.afisha.title.as_html, afisha_show_path(ticket.afisha), :class => 'redirect_to_afisha' %></div>
               <div class='ticket_prices'>
                 <% if ticket.original_price == ticket.price %>
                   <div class='price'><%= ticket.price.to_i %>р.<%= "+#{ticket.organization_price.to_i}р." if ticket.organization_price %></div>
