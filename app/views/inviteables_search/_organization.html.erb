@@ -1,6 +1,12 @@
 <div class="item">
   <div class="poster">
-    <%= link_to(image_tag(resized_image_url(organization.logotype_url, 66, 66), size: '66x66', alt: organization.title), organization.logotype_url) %>
+    <% if organization.logotype_url? %>
+      <%= link_to(image_tag(resized_image_url(organization.logotype_url, 66, 66), size: '66x66', alt: organization.title), organization.logotype_url) %>
+    <% else %>
+      <%= link_to organization_path(organization) do %>
+        <span class='stub_poster <%= organization.priority_suborganization_kind %>'></span>
+      <% end %>
+    <% end %>
   </div>
   <div class="title">
     <%= link_to organization.title, organization_path(organization) %>
