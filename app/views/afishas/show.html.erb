@@ -113,7 +113,7 @@
                       <%= image_tag resized_image_url(afisha.poster_url, 65, 87), :size => '65x87', :alt => afisha.title.text_gilensize %>
                     <% end %>
                   <% end %>
-                  <%= content_tag(:div, 'Премьера', class: :ribbon) if @afisha.premiere? %>
+                  <%= content_tag(:div, 'Премьера', class: :ribbon) if afisha.premiere? %>
                 </div>
                 <div class='clearfix'>
                   <div class='title'><%= link_to afisha.title.text_gilensize, afisha_show_path(afisha) %></div>
