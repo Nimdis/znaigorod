@@ -4,7 +4,7 @@
 
 <% unless @visits.first_page? && @visits.last_page? %>
   <div class="pagination">
-    <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if @visits.first_page? }" %>
-    <%= link_to '&darr;'.html_safe, account_visits_path(@account, :page => @visits.current_page + 1), :class => "next_page #{ 'disabled' if @visits.last_page? }" %>
+    <%= link_to '&uarr;'.html_safe, '#', :class => "toggler #{ 'disabled' if @visits.first_page? }", :remote => true %>
+    <%= link_to '&darr;'.html_safe, account_visits_path(@account, :page => @visits.current_page + 1), :class => "next_page #{ 'disabled' if @visits.last_page? }", :remote => true %>
   </div>
 <% end %>
