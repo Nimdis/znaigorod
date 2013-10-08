@@ -22,6 +22,12 @@
     </div>
     <%= content_tag :div, flash[:notice].join(', '), :class => 'error' if flash[:notice] %>
     <div>
+      <span class="label">Пользователь:</span>
+      <span class="value">
+        <%= resource.user.name if resource.user_id? %>
+      </span>
+    </div>
+    <div>
       <span class="label">
         Билеты
         <%= link_to 'Добавить', new_manage_afisha_ticket_path(resource) %>
