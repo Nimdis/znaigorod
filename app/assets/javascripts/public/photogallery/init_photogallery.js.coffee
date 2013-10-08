@@ -14,7 +14,7 @@
   $('.photogallery a').colorbox
     close: 'закрыть'
     current: '{current} из {total}'
-    maxHeight: '98%'
+    maxHeight: '90%'
     maxWidth: '90%'
     next: 'следующая'
     opacity: '0.5'
