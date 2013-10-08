@@ -19,8 +19,6 @@
   <%= render :partial => 'commons/public_header' %>
   <% if params[:controller] == 'webcams' %>
     <%= render :partial => 'commons/domru' %>
-  <% else %>
-    <%= render :partial => 'commons/advertisement' if DateTime.now <= DateTime.new(2013, 10, 12, 00, 00, 00, '+7') %>
   <% end %>
   <%= render :partial => 'commons/public_content' %>
   <%= render :partial => 'commons/public_footer' %>

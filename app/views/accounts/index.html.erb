@@ -1,4 +1,4 @@
-<div class="additional_info_wrapper">
+<div class="additional_info_wrapper collapsed">
   <%= link_to "Подробнее", '#', :class => 'toggle_link' %>
   <div class="inner_wrapper">
     <div class="top_wrapper">
@@ -6,12 +6,14 @@
       <p>Посмотри, сколько людей <%= link_to 'приглашают', accounts_path(:acts_as => :inviter) %> сходить куда-нибудь, а сколько <%= link_to "ждут приглашения", accounts_path(:acts_as => :invited) %>!</p>
     </div>
     <div class="middle_wrapper">
-      <div class="first">Кто-то приглянулся? Отправь ему личное приглашение или попроси, чтобы тебя пригласили.</div>
-      <div class="second">Просто ищешь компанию? Укажи, чья компания тебя интересует &mdash; мужская или женская и куда хотел бы сходить. Все это отразится в твоем профиле.</div>
+      <div class="middle_inner_wrapper">
+        <div class="first">Кто-то приглянулся? Отправь ему личное приглашение или попроси, чтобы тебя пригласили.</div>
+        <div class="second">Просто ищешь компанию? Укажи, чья компания тебя интересует &mdash; мужская или женская и куда хотел бы сходить. Все это отразится в твоем профиле.</div>
+      </div>
     </div>
   </div>
   <div class="bottom_wrapper">
-    Воспользуйся функцией "Ищу компанию"!
+    Найди свою компанию!
     <%= link_to 'Пригласить',
         new_invitation_path('invitation[kind]' => :inviter),
         :remote => true,

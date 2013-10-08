@@ -1,11 +1,13 @@
 .additional_info_wrapper
   +border-radius(5px)
-  +clearfix
   background: #fbceb1 image-url('add_info_bg.png') repeat
-  margin: 0 auto 17px
+  float: left
+  margin: 0 0 0 10px
   padding: 10px 20px
   position: relative
-  width: 1140px
+
+  &.collapsed
+    width: 770px
 
   .toggle_link
     position: absolute
@@ -29,13 +31,19 @@
         margin-bottom: 5px
 
     .middle_wrapper
-      background: image-url('how_to_invitations.png') no-repeat center center
-      height: 335px
-      margin: 20px auto
+      +border-radius(5px)
+      background: #fbceb1 image-url('add_info_bg.png') repeat
+      margin: -1px auto 20px
+      padding: 0 20px 0 0
       position: relative
-      margin-bottom: -30px
+      margin-bottom: -38px
       width: 1140px
       z-index: 2
+
+      .middle_inner_wrapper
+        background: image-url('how_to_invitations.png') no-repeat center center
+        height: 355px
+        width: 1140px
 
       .first
         position: absolute
