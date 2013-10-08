@@ -1,6 +1,6 @@
 <div class="item">
   <div class="poster">
-    <%= link_to(image_tag(resized_image_url(afisha.poster_url, 66, 87), size: '66x87', alt: afisha.title), afisha.poster_url) %>
+    <%= link_to(image_tag(resized_image_url(afisha.poster_url, 66, 87), size: '66x87', alt: afisha.title), afisha_show_path(afisha)) %>
   </div>
   <div class="title">
     <%= link_to afisha.title, afisha_show_path(afisha) %>
