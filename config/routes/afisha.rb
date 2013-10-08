@@ -2,6 +2,8 @@ Znaigorod::Application.routes.draw do
   mount Affiches::API => '/'
   mount Mobile::API => '/'
 
+  resources :afisha, :only => :show, :controller => :afishas
+
   resources :afisha, :only => [], :controller => 'afishas' do
     resources :comments, :only => [:new, :show, :create]
     resources :visits
