@@ -37,7 +37,7 @@ class YampGeocoder
 
   def self.get_houses(query)
     result = {}
-    unless query.empty?
+    unless query.nil? || query.empty?
       cache = call_cache query
       if cache.nil?
         address = ["Россия", "Томск", query].join(', ')
